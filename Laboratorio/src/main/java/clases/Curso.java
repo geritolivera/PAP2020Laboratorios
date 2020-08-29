@@ -13,6 +13,9 @@ public class Curso {
 	private Date fechaR;
 	private String url;
 	
+	//lista de cursos previos
+	private List<Curso> previas = new ArrayList<>();
+	
 	//lista de todos los programas de formacion
 	private List<ProgramaFormacion> programas = new ArrayList<>();
 	
