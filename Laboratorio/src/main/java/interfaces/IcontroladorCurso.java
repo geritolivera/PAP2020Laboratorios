@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import clases.Curso;
 import clases.EdicionCurso;
@@ -18,7 +19,7 @@ public interface IcontroladorCurso {
 	public void cancelarAlta();
 	
 	//5 - Consulta de Curso
-	public List<String> listarCursos(String nombreInstituto);
+	public ArrayList<String> listarCursos(String nombreInstituto);
 	public DTCurso verInfo(String nomCurso);
 	
 	//6 - Alta de Edicion de Curso
@@ -29,7 +30,7 @@ public interface IcontroladorCurso {
 	
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public String[] listarEdicones(String nomCurso);
+	public ArrayList<String> listarEdiciones(String nomCurso);
 	public DTEdicionCurso verInfoEdicion(String nomEdicion);
 	
 	//8 - Inscripcion a Edicion de Curso
@@ -43,7 +44,7 @@ public interface IcontroladorCurso {
 	//Se utiliza la mismas funcion cancelarAlta
 	
 	//10 - Agregar Curso a Programa de Formacion
-	public String[] listarProgramas();
+	public ArrayList<String> listarProgramas();
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion

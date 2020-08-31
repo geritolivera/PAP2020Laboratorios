@@ -1,12 +1,16 @@
 package datatypes;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DTProgramaFormacion {
 	private String nombre;
 	private String descripcion;
 	private Date fechaI;
 	private Date fechaF;
+	//private List<DTCurso> cursos = new ArrayList<>();
+	private ArrayList<String> cursos = new ArrayList<>();
 	
 	public DTProgramaFormacion() {
 		super();
@@ -45,5 +49,12 @@ public class DTProgramaFormacion {
 	}
 	public void setFechaF(Date fechaF) {
 		this.fechaF = fechaF;
+	}
+	
+	public void agregarCurso(String curso) {
+		cursos.add(curso);
+	}
+	public ArrayList<String> getCursos() {
+		return cursos;
 	}
 }

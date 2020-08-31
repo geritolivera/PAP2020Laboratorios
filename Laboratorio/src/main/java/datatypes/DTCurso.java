@@ -18,7 +18,21 @@ public class DTCurso {
 	public DTCurso() {
 		super();
 	}
+	
+	public DTCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.duracion = duracion;
+		this.cantHoras = cantHoras;
+		this.creditos = creditos;
+		this.fechaR = fechaR;
+		this.url = url;
+		this.instituto = instituto;
+	}
+	
 	public DTCurso(Curso curso) {
+		super();
 		this.nombre = curso.getNombre();
 		this.descripcion = curso.getDescripcion();
 		this.duracion = curso.getDuracion();

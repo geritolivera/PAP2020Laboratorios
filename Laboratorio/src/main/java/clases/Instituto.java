@@ -7,6 +7,7 @@ public class Instituto {
 	private String nombre;
 	//Lista de docentes del instituto
 	private List<Docente> docentes = new ArrayList<>();
+	private List<Curso> cursos = new ArrayList<>();
 	
 	public Instituto() {
 		super();
@@ -28,5 +29,12 @@ public class Instituto {
 	}
 	public List<Docente> getDocentes(){
 		return docentes;
+	}
+	
+	public void agregarCurso(Curso curso) {
+		cursos.add(curso);
+	}
+	public List<Curso> getCursos(){
+		return cursos;
 	}
 }

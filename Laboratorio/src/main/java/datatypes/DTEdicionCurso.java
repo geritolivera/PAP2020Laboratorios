@@ -3,6 +3,7 @@ package datatypes;
 import java.util.Date;
 
 import clases.EdicionCurso;
+import clases.Curso;
 
 public class DTEdicionCurso {
 	private String nombre;
@@ -15,6 +16,17 @@ public class DTEdicionCurso {
 	public DTEdicionCurso() {
 		super();
 	}
+	
+	public DTEdicionCurso(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String curso) {
+		super();
+		this.nombre = nombre;
+		this.fechaI = fechaI;
+		this.fechaF = fechaF;
+		this.cupo = cupo;
+		this.fechaPub = fechaPub;
+		this.curso = curso;
+	}
+	
 	public DTEdicionCurso(EdicionCurso edicion) {
 		super();
 		this.nombre = edicion.getNombre();

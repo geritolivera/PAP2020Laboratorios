@@ -3,15 +3,9 @@ package controladores;
 import java.util.List;
 import java.util.ArrayList;
 
-import clases.Curso;
-import clases.EdicionCurso;
-import clases.ProgramaFormacion;
-
-import datatypes.DTCurso;
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
-
-import manejadores.manejadorCurso;
+import clases.*;
+import datatypes.*;
+import manejadores.*;
 
 import interfaces.IcontroladorCurso;
 
@@ -38,14 +32,21 @@ public class controladorCurso implements IcontroladorCurso{
 	//5 - Consulta de Curso
 	@Override
 	public ArrayList<String> listarCursos(String nombreInstituto){
-		manejadorCurso mCurso = manejadorCurso.getInstancia(); 
-		List<String> list = new ArrayList<String>();  
-		return list;
+		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
+		Instituto inst = mInst.buscarInstituto(nombreInstituto);
+		List<Curso> cursos = inst.getCursos();
+		ArrayList<String> listCursos = new ArrayList<String>();
+		for(Curso c:cursos) {
+			listCursos.add(c.getNombre());
+		}
+		return listCursos;
 	}
 	
 	@Override
 	public DTCurso verInfo(String nomCurso) {
-		DTCurso dt = null;
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		Curso c = mCur.buscarCurso(nomCurso);
+		DTCurso dt = new DTCurso(c.getNombre(), c.getDescripcion(), c.getDuracion(), c.getCantHoras(), c.getCreditos(), c.getFechaR(), c.getUrl(), c.getNomInstituto());
 		return dt;
 	}
 	
@@ -66,14 +67,23 @@ public class controladorCurso implements IcontroladorCurso{
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public String[] listarEdicones(String nomCurso) {
-		String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
-		return cars;
+	public ArrayList<String> listarEdiciones(String nomCurso) {
+		//String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		Curso cur = mCur.buscarCurso(nomCurso);
+		List<EdicionCurso> ediciones = cur.getEdiciones();
+		ArrayList<String> listEdiciones = new ArrayList<>();
+		for (EdicionCurso e:ediciones) {
+			listEdiciones.add(e.getNombre());
+		}
+		return listEdiciones;
 	}
 	
 	@Override
 	public DTEdicionCurso verInfoEdicion(String nomEdicion) {
-		DTEdicionCurso dt = null;
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
+		DTEdicionCurso dt = new DTEdicionCurso(edi.getNombre(), edi.getFechaI(), edi.getFechaF(), edi.getCupo(), edi.getFechaPub(), edi.getNomCurso());
 		return dt;
 	}
 	
@@ -106,14 +116,26 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//10 - Agregar Curso a Programa de Formacion
 	@Override
-	public String[] listarProgramas(){
-		String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
-		return cars;
+	public ArrayList<String> listarProgramas(){
+		//String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		List<ProgramaFormacion> programas = mPro.getProgramas();
+		ArrayList<String> listProgramas = new ArrayList<>();
+		for(ProgramaFormacion p: programas) {
+			listProgramas.add(p.getNombre());
+		}
+		return listProgramas;
 	}
 	
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
-		DTProgramaFormacion dt = null;
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
+		List<Curso> cursos = p.getCursos();
+		DTProgramaFormacion dt = new DTProgramaFormacion(p.getNombre(), p.getDescripcion(), p.getFechaI(), p.getFechaF());
+		for(Curso c:cursos) {
+			dt.agregarCurso(c.getNombre());
+		}
 		return dt;
 	}
 		
