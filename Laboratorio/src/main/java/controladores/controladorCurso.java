@@ -11,6 +11,8 @@ import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
 
+import manejadores.manejadorCurso;
+
 import interfaces.IcontroladorCurso;
 
 public class controladorCurso implements IcontroladorCurso{
@@ -35,9 +37,10 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public List<String> listarCursos(String nombreInstituto){
-	List<String> list = new ArrayList<String>();  
-	return list;
+	public ArrayList<String> listarCursos(String nombreInstituto){
+		manejadorCurso mCurso = manejadorCurso.getInstancia(); 
+		List<String> list = new ArrayList<String>();  
+		return list;
 	}
 	
 	@Override

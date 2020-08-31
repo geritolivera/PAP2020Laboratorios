@@ -1,14 +1,16 @@
 package manejadores;
 
 import java.util.List;
-import java.util.ArrayList;
+
+import javax.persistence.EntityManager;
 
 import clases.Usuario;
+import conexion.Conexion;
 
 public class manejadorUsuario {
 	private static manejadorUsuario instancia = null;
 	
-	private List<Usuario> usuarios = new ArrayList<>();
+	//private List<Usuario> usuarios = new ArrayList<>();
 	
 	private manejadorUsuario(){}
 	
@@ -18,7 +20,32 @@ public class manejadorUsuario {
 		return instancia;
 	}
 	
-	public void addUsuario(Usuario u){
+	public void agregarUsuario(Usuario nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(nombre);
+		em.getTransaction().commit();
+	}
+	
+	public Usuario buscarUsuario(String nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(Usuario.class, nombre);
+	}
+	
+	public boolean existeUsuario(String nombre) {
+		return this.buscarUsuario(nombre) instanceof Usuario;
+	}
+	
+	public List<Usuario> getUsuarios(){
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		List<Usuario> usuarios = em.createQuery("SELECT u FROM Programa u", Usuario.class).getResultList();
+		return usuarios;
+	}
+	
+	/*public void addUsuario(Usuario u){
 		usuarios.add(u);
 	}
 	
@@ -53,5 +80,5 @@ public class manejadorUsuario {
 			usuBorrar = null;
 			System.gc();
 		}
-	}
+	}*/
 }

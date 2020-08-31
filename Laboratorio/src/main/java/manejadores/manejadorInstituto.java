@@ -1,30 +1,52 @@
 package manejadores;
 
 import java.util.List;
-import java.util.ArrayList;
+
+import javax.persistence.EntityManager;
 
 import clases.Instituto;
-import clases.ProgramaFormacion;
+import conexion.Conexion;
 
-public class manejadorInstitutoYProgForm {
-private static manejadorInstitutoYProgForm instancia = null;
+public class manejadorInstituto {
+private static manejadorInstituto instancia = null;
 	
-	private List<Instituto> institutos = new ArrayList<>();
-
-	private List<ProgramaFormacion> programas = new ArrayList<>();
+	//private List<Instituto> institutos = new ArrayList<>();
 	
-	private manejadorInstitutoYProgForm() {}
+	private manejadorInstituto() {}
 	
-	public static manejadorInstitutoYProgForm getInstancia() {
+	public static manejadorInstituto getInstancia() {
 		if(instancia == null) {
-			instancia = new manejadorInstitutoYProgForm();
+			instancia = new manejadorInstituto();
 		}
 		return instancia;
 	}
 	
-	//Metodos Instituto
+	public void agregarInstituto(Instituto nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(nombre);
+		em.getTransaction().commit();
+	}
 	
-	public void addInsituto(Instituto i) {
+	public Instituto buscarInstituto(String nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(Instituto.class, nombre);
+	}
+	
+	public boolean existeInstituto(String nombre) {
+		return this.buscarInstituto(nombre) instanceof Instituto;
+	}
+	
+	public List<Instituto> getInstituto(){
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		List<Instituto> institutos = em.createQuery("SELECT u FROM Programa u", Instituto.class).getResultList();
+		return institutos;
+	}
+	
+	/*public void addInsituto(Instituto i) {
 		institutos.add(i);
 	}
 	
@@ -98,6 +120,6 @@ private static manejadorInstitutoYProgForm instancia = null;
 			aBorrar = null;
 			System.gc();
 		}
-	}
+	}*/
 
 }

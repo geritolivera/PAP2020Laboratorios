@@ -1,30 +1,54 @@
 package manejadores;
 
 import java.util.List;
-import java.util.ArrayList;
 
-import clases.Curso;
+import javax.persistence.EntityManager;
+
 import clases.EdicionCurso;
+import conexion.Conexion;
 
-public class manejadorCursoYEdicionCurso {
-	private static manejadorCursoYEdicionCurso instancia = null;
+public class manejadorEdicion {
+	private static manejadorEdicion instancia = null;
 	
-	private List<Curso> cursos = new ArrayList<>();
-
-	private List<EdicionCurso> edicionesCurso = new ArrayList<>();
+	//private List<Curso> cursos = new ArrayList<>();
 	
-	private manejadorCursoYEdicionCurso() {}
+	private manejadorEdicion() {}
 	
-	public static manejadorCursoYEdicionCurso getInstancia() {
+	public static manejadorEdicion getInstancia() {
 		if(instancia == null) {
-			instancia = new manejadorCursoYEdicionCurso();
+			instancia = new manejadorEdicion();
 		}
 		return instancia;
+	}
+			
+	public void agregarEdicion(EdicionCurso nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(nombre);
+		em.getTransaction().commit();
+	}
+	
+	public EdicionCurso buscarEdicion(String nombre) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(EdicionCurso.class, nombre);
+	}
+	
+	public boolean existeEdicion(String nombre) {
+		return this.buscarEdicion(nombre) instanceof EdicionCurso;
+	}
+	
+	public List<EdicionCurso> getEdiciones(){
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		List<EdicionCurso> ediciones = em.createQuery("SELECT u FROM Programa u", EdicionCurso.class).getResultList();
+		return ediciones;
 	}
 	
 	//Metodos Edicion de Curso
 	
-	public void addEdicion(EdicionCurso edc) {
+	/*public void addEdicion(EdicionCurso edc) {
 		edicionesCurso.add(edc);
 	}
 	
@@ -98,5 +122,5 @@ public class manejadorCursoYEdicionCurso {
 			curDelete = null;
 			System.gc();
 		}
-	}
+	}*/
 }
