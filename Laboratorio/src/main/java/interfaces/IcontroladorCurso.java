@@ -13,7 +13,7 @@ import datatypes.DTProgramaFormacion;
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void nuevosDatosCurso(Curso datosCurso);
+	public void nuevosDatosCurso(DTCurso datosCurso);
 	public boolean confirmarAltaCurso(String nombre);
 	public void cancelarAlta();
 	
