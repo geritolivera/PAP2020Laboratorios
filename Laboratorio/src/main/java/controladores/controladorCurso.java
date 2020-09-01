@@ -7,8 +7,6 @@ import clases.*;
 import datatypes.*;
 import manejadores.*;
 
-import manejadores.*;
-
 import interfaces.IcontroladorCurso;
 
 public class controladorCurso implements IcontroladorCurso{
@@ -19,8 +17,8 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void nuevosDatosCurso(DTCurso datosCurso) throws cursoRepetidoException{
-		manejadorCursoYEdicionCurso mc = new manejadorCursoYEdicionCurso.getInstancia();
+	public void AltaCurso(DTCurso datosCurso) throws cursoRepetidoException{
+		manejadorCurso mc = new manejadorCurso.getInstancia();
 		if(mc.existeCurso(datosCurso.getNombre()))
 			throw new cursoRepetidoException("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
 		else {
@@ -28,15 +26,6 @@ public class controladorCurso implements IcontroladorCurso{
 			mc.addCurso(cursoNuevo);
 		}
 	}
-	
-	@Override //Funcion no necesaria
-	public boolean confirmarAltaCurso(String nombre) {
-	return true;
-	}
-	
-	@Override//Funcion no necesaria
-	public void cancelarAlta() {}
-
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso

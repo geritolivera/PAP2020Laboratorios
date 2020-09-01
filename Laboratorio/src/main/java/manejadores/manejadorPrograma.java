@@ -9,9 +9,7 @@ import conexion.Conexion;
 
 public class manejadorPrograma {
 private static manejadorPrograma instancia = null;
-	
-	//private List<ProgramaFormacion> programas = new ArrayList<>();
-	
+		
 	private manejadorPrograma() {}
 	
 	public static manejadorPrograma getInstancia() {
@@ -45,44 +43,4 @@ private static manejadorPrograma instancia = null;
 		List<ProgramaFormacion> programas = em.createQuery("SELECT u FROM Programa u", ProgramaFormacion.class).getResultList();
 		return programas;
 	}
-
-		
-	/*public void addProgramaFormacion(ProgramaFormacion pg) {
-		programas.add(pg);
-	}
-	
-	public ProgramaFormacion findPrograma(String nombre) {
-		ProgramaFormacion pgEnc = null;
-		for(ProgramaFormacion pg : programas) {
-			if(pg.getNombre().equals(nombre)) {
-				pgEnc = pg;
-			}
-		}
-		return pgEnc;
-	}
-	
-	public boolean existePrograma(String nombre) {
-		boolean existe = false;
-		for(ProgramaFormacion pg : programas) {
-			if(pg.getNombre().equals(nombre)) {
-				existe = true;
-			}
-		}
-		return existe;
-	}
-	
-	public void deletePrograma(String nombre) {
-		ProgramaFormacion aBorrar = null;
-		for(ProgramaFormacion pg : programas) {
-			if(pg.getNombre().equals(nombre)) {
-				aBorrar = pg;
-			}
-		}
-		if(aBorrar != null) {
-			aBorrar = null;
-			System.gc();
-		}
-	}*/
-	
-	
 }

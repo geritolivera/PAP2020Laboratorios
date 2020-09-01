@@ -14,9 +14,7 @@ import datatypes.DTProgramaFormacion;
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void nuevosDatosCurso(DTCurso datosCurso);
-	public boolean confirmarAltaCurso(String nombre);
-	public void cancelarAlta();
+	public void AltaCurso(DTCurso datosCurso);
 	
 	//5 - Consulta de Curso
 	public ArrayList<String> listarCursos(String nombreInstituto);
