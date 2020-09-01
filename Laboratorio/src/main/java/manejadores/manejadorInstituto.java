@@ -21,11 +21,11 @@ private static manejadorInstituto instancia = null;
 		return instancia;
 	}
 	
-	public void agregarInstituto(Instituto nombre) {
+	public void agregarInstituto(Instituto instituto) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(instituto);
 		em.getTransaction().commit();
 	}
 	

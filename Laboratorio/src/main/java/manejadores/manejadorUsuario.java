@@ -20,11 +20,11 @@ public class manejadorUsuario {
 		return instancia;
 	}
 	
-	public void agregarUsuario(Usuario nombre) {
+	public void agregarUsuario(Usuario usuario) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(usuario);
 		em.getTransaction().commit();
 	}
 	
@@ -34,8 +34,18 @@ public class manejadorUsuario {
 		return em.find(Usuario.class, nombre);
 	}
 	
-	public boolean existeUsuario(String nombre) {
-		return this.buscarUsuario(nombre) instanceof Usuario;
+	public Usuario buscarUsuarioCorreo(String correo) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(Usuario.class, correo);
+	}
+	
+	public boolean existeNickUsuario(String nick) {
+		return this.buscarUsuario(nick) instanceof Usuario;
+	}
+	
+	public boolean existeCorreoUsuario(String correo) {
+		return this.buscarUsuarioCorreo(correo) instanceof Usuario;
 	}
 	
 	public List<Usuario> getUsuarios(){

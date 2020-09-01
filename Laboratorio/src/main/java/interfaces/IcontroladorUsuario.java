@@ -9,9 +9,9 @@ import clases.EdicionCurso;
 public interface IcontroladorUsuario {
 	
 	//1 - Alta Usuario
-	public void ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente);
-	public boolean confirmarAltaUsuario(String nickname, String correo);
-	public void cancelarAlta();
+	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente);
+	/*public boolean confirmarAltaUsuario(String nickname, String correo);
+	public void cancelarAlta();*/
 	
 	//2 - Consulta de Usuario
 	public List<DTUsuario> listarUsuario();

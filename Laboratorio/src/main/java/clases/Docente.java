@@ -15,6 +15,10 @@ public class Docente extends Usuario{
 		super(nick, nombre, apellido, correo, fechaNac);
 	}
 	
+	public Docente(Usuario user) {
+		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac());
+	}
+	
 	public void setInstituto(Instituto instituto) {
 		this.instituto = instituto;
 	}

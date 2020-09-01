@@ -21,11 +21,11 @@ private static manejadorPrograma instancia = null;
 		return instancia;
 	}
 	
-	public void agregarPrograma(ProgramaFormacion nombre) {
+	public void agregarPrograma(ProgramaFormacion programa) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(programa);
 		em.getTransaction().commit();
 	}
 	

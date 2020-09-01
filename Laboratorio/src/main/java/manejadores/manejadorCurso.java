@@ -24,11 +24,11 @@ public class manejadorCurso {
 		return instancia;
 	}
 			
-	public void agregarCurso(Curso nombre) {
+	public void agregarCurso(Curso curso) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(curso);
 		em.getTransaction().commit();
 	}
 	

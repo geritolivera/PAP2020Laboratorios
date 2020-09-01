@@ -19,15 +19,50 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuario
 	@Override
-	public void ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente) {}
+	//por ahora funciona a base de 3 fabricas: una para usuarios, otra para docentes, y otra para estudiantes
+	//esto quiere decir que se repiten valores, ya que el usuario se registra dos veces, pero se puede cambiar despues
+	//es mas bien un prototipo que otra cosa
+	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
+		/*manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if(!mUsu.existeNickUsuario(nickname) && !mUsu.existeCorreoUsuario(correo)) {
+			Usuario user = new Usuario(nickname, nombre, apellido, correo, fechaNac);
+			mUsu.agregarUsuario(user);
+			if(esDocente) {
+				manejadorDocente mDoc = manejadorDocente.getInstancia();
+				Docente doc = new Docente(user);
+				mDoc.agregarDocente(doc);
+			}
+			else {
+				manejadorEstudiante mEst = manejadorEstudiante.getInstancia();
+				Estudiante est = new Estudiante(user);
+				mEst.agregarEstudiante(est);
+			}
+			return "Usuario creado!";
+		}
+		return "Nick o Email ya en uso. No se puede crear usuario";*/
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if(!mUsu.existeNickUsuario(nickname) && !mUsu.existeCorreoUsuario(correo)) {
+			if(esDocente) {
+				Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+				mUsu.agregarUsuario(doc);
+			}
+			else {
+				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
+				mUsu.agregarUsuario(est);
+			}
+			return "Usuario creado.";
+		}
+		return "Nick o Correo ya en uso.";
+		
+	}
 	
-	@Override
+	/*@Override
 	public boolean confirmarAltaUsuario(String nickname, String correo){
 		return true;
 	}
 	
 	@Override
-	public void cancelarAlta(){}
+	public void cancelarAlta(){}*/
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

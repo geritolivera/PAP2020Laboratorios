@@ -21,11 +21,11 @@ public class manejadorEdicion {
 		return instancia;
 	}
 			
-	public void agregarEdicion(EdicionCurso nombre) {
+	public void agregarEdicion(EdicionCurso edicion) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(edicion);
 		em.getTransaction().commit();
 	}
 	
