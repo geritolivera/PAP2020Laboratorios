@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import datatypes.DTUsuario;
-
-import clases.EdicionCurso;
+import manejadores.*;
+import datatypes.*;
+import clases.*;
 
 import interfaces.IcontroladorUsuario;
 
@@ -34,6 +34,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//2 - Consulta de Usuario
 	@Override
 	public List<DTUsuario> listarUsuario(){
+		//depende de como hacemos los usuarios
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		List<DTUsuario> list = new ArrayList<DTUsuario>();  
 		return list;
 	}
