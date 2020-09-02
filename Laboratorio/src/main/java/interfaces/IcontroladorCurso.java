@@ -3,21 +3,14 @@ package interfaces;
 import java.util.List;
 import java.util.ArrayList;
 
-import clases.Curso;
-import clases.EdicionCurso;
-import clases.ProgramaFormacion;
-
-import datatypes.DTCurso;
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
-import exepciones.CursoRepetidoExcepcion;
-
-
+import clases.*;
+import datatypes.*;
+import exepciones.*;
 
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void AltaCurso throws CursoRepetidoExcepcion(DTCurso datosCurso);//Falta añadir la excepcion en el import
+	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion;
 	
 	//5 - Consulta de Curso
 	public ArrayList<String> listarCursos(String nombreInstituto);
@@ -57,7 +50,7 @@ public interface IcontroladorCurso {
 	//Se utiliza la misma funcion listarCursos
 	
 	//12 - Alta de Instituto
-	public void AltaInstituto throws InstitutoRepetidoException(String nombre);//Falta añadir la excepcion en el import
+	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta añadir la excepcion en el import
 	
 
 }

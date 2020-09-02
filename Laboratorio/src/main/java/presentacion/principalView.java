@@ -55,10 +55,10 @@ public class principalView {
 		
 		
 		consultaUsuarioInternalFrame = new ConsultaUsuario();
+		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
+		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
-		consultaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		consultaUsuarioInternalFrame.setVisible(false);
-		frame.getContentPane().add(consultaUsuarioInternalFrame);
 		
 		modificarDatosUsuarioInternalFrame = new ModificarDatosUsuario();
 		jIternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();

@@ -6,7 +6,7 @@ import java.util.List;
 
 import manejadores.*;
 import datatypes.*;
-import exepciones.UsuarioRepetidoExcepcion;
+import exepciones.*;
 import clases.*;
 
 import interfaces.IcontroladorUsuario;
@@ -23,7 +23,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
 	 manejadorUsuario mU = manejadorUsuario.getInstancia();
-	 Usuario u;
+	 Usuario u = null;
 	 if (mU.existeUsuarioNick(usuario.getNick()))
 		 throw new UsuarioRepetidoExcepcion("El usuario con nickname "+ usuario.getNick() + " ya existe en uso");
 	 if (mU.existeUsuarioCorreo(usuario.getCorreo()))
@@ -49,8 +49,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 			return "Usuario agregado";
 		}
 		return "Nick o Correo ya en uso.";
-	}
-	
 	}
 	
 	
