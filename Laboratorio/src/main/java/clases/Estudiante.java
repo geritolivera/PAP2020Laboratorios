@@ -17,6 +17,10 @@ public class Estudiante extends Usuario{
 		super(nick, nombre, apellido, correo, fechaNac);
 	}
 	
+	public Estudiante(Usuario user) {
+		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac());
+	}
+	
 	public void agregarPrograma(ProgramaFormacion programa) {
 		programas.add(programa);
 	}

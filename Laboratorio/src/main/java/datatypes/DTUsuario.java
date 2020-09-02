@@ -12,6 +12,9 @@ public class DTUsuario {
 	private String correo;
 	private Date fechaNac;
 	
+	public DTUsuario() {
+		super();
+	}
 	public DTUsuario(String nick, String nombre, String apellido, String correo, Date fechaNac) {
 		super();
 		this.nick = nick;

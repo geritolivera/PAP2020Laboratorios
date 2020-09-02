@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.ProgramaFormacion;
+
 public class DTProgramaFormacion {
 	private String nombre;
 	private String descripcion;
@@ -21,6 +23,14 @@ public class DTProgramaFormacion {
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
+	}
+	
+	public DTProgramaFormacion(ProgramaFormacion programa) {
+		super();
+		this.nombre = programa.getNombre();
+		this.descripcion = programa.getDescripcion();
+		this.fechaI = programa.getFechaI();
+		this.fechaF = programa.getFechaF();
 	}
 	
 	public String getNombre() {

@@ -19,7 +19,21 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuario
 	@Override
-	public void ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente) {}
+	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
+			if(esDocente) {
+				Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+				mUsu.agregarUsuario(doc);
+			}
+			else {
+				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
+				mUsu.agregarUsuario(est);
+			}
+			return "Usuario agregado";
+		}
+		return "Nick o Correo ya en uso.";
+	}
 	
 	@Override
 	public boolean confirmarAltaUsuario(String nickname, String correo){
@@ -33,17 +47,66 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
 	@Override
-	public List<DTUsuario> listarUsuario(){
-		//depende de como hacemos los usuarios
+	public List<DTUsuario> listarDTUsuarios(){
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		List<DTUsuario> list = new ArrayList<DTUsuario>();  
-		return list;
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
+		for(Usuario u: usuarios) {
+			DTUsuario dt = new DTUsuario(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			listUsers.add(dt);
+		}
+		return listUsers;
+	}
+	
+	public ArrayList<String> listarUsuarios(){
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		ArrayList<String> listUsers = new ArrayList<>();
+		for(Usuario u: usuarios) {
+			listUsers.add(u.getNombre());
+		}
+		return listUsers;
 	}
 	
 	@Override
-	public DTUsuario verInfoUsuario(String nickname){
-		DTUsuario a = null;
-		return a;
+	public void verInfoUsuario(String nickname){
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		Usuario u = mUsu.buscarUsuario(nickname);
+		List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
+		List<ProgramaFormacion> programasDoc = new ArrayList<ProgramaFormacion>();
+		List<EdicionCurso> edicionesEst = new ArrayList<EdicionCurso>();
+		List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
+		//si el usuario es docente
+		if(u instanceof Docente) {
+			DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			edicionesDoc = ((Docente) u).getEdiciones();
+			for(EdicionCurso e: edicionesDoc) {
+				DTEdicionCurso dted = new DTEdicionCurso(e);
+				dtd.agregarEdicion(dted);
+				Curso ec = e.getCurso();
+				DTCurso dtcd = new DTCurso(ec);
+				dtd.agregarCurso(dtcd);
+				programasDoc = ec.getProgramas();
+				for(ProgramaFormacion p: programasDoc) {
+					DTProgramaFormacion dtpd = new DTProgramaFormacion(p);
+					dtd.agregarPrograma(dtpd);
+				}
+			}
+		}
+		//si el usuario es estudiante
+		else if (u instanceof Estudiante) {
+			DTEstudiante dte = new DTEstudiante(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			edicionesEst = ((Estudiante) u).getEdiciones();
+			for(EdicionCurso e: edicionesEst) {
+				DTEdicionCurso dtee = new DTEdicionCurso(e);
+				dte.agregarEdicion(dtee);
+				programasEst = e.getCurso().getProgramas();
+				for(ProgramaFormacion p: programasEst) {
+					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
+					dte.agregarPrograma(dtpe);
+				}
+			}
+		}
 	}
 	
 	

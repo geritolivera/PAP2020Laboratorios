@@ -20,11 +20,11 @@ public class manejadorUsuario {
 		return instancia;
 	}
 	
-	public void agregarUsuario(Usuario nombre) {
+	public void agregarUsuario(Usuario usuario) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		em.getTransaction().begin();
-		em.persist(nombre);
+		em.persist(usuario);
 		em.getTransaction().commit();
 	}
 	
@@ -34,51 +34,24 @@ public class manejadorUsuario {
 		return em.find(Usuario.class, nombre);
 	}
 	
-	public boolean existeUsuario(String nombre) {
-		return this.buscarUsuario(nombre) instanceof Usuario;
+	public Usuario buscarUsuarioCorreo(String correo) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(Usuario.class, correo);
+	}
+	
+	public boolean existeUsuarioNick(String nick) {
+		return this.buscarUsuario(nick) instanceof Usuario;
+	}
+	
+	public boolean existeUsuarioCorreo(String correo) {
+		return this.buscarUsuarioCorreo(correo) instanceof Usuario;
 	}
 	
 	public List<Usuario> getUsuarios(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<Usuario> usuarios = em.createQuery("SELECT u FROM Programa u", Usuario.class).getResultList();
+		List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
 		return usuarios;
 	}
-	
-	/*public void addUsuario(Usuario u){
-		usuarios.add(u);
-	}
-	
-	public Usuario findUsuario(String nickname) {
-		Usuario findU = null;
-		for(Usuario u : usuarios) {
-			if(u.getNick().equals(nickname)) {
-				findU = u;
-			}
-		}
-		return findU;
-	}
-	
-	public boolean existeUsuario(String nickname) {
-		boolean existe = false;
-		for(Usuario u : usuarios) {
-			if(u.getNick().equals(nickname)) {
-				existe = true;
-			}
-		}
-		return existe;
-	}
-	
-	public void deleteUsuario(String nickname) {
-		Usuario usuBorrar = null;
-		for(Usuario u : usuarios) {
-			if(u.getNick().equals(nickname)) {
-				usuBorrar = u;
-			}
-		}
-		if(usuBorrar != null) {
-			usuBorrar = null;
-			System.gc();
-		}
-	}*/
 }
