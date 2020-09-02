@@ -21,6 +21,7 @@ public class DTProgramaFormacion {
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
+		this.cursos = cursos;
 	}
 	
 	public String getNombre() {

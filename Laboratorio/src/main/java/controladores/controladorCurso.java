@@ -17,7 +17,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(DTCurso datosCurso) throws cursoRepetidoException{
+	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoException{
 		manejadorCurso mc = new manejadorCurso.getInstancia();
 		if(mc.existeCurso(datosCurso.getNombre()))
 			throw new cursoRepetidoException("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
@@ -127,6 +127,12 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
+	public void agregarCursoPrograma(String nomCur){}
+	
+	@Override
+	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
+	
+	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
@@ -143,27 +149,42 @@ public class controladorCurso implements IcontroladorCurso{
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
 	@Override
-	public void seleccionarPrograma(String nomP){}
+	public DTProgramaFormacion seleccionarPrograma(String nomP){
+		manejadorPrograma mp = manejadorPrograma.getInstancia();
+		ProgramaFormacion prog = mp.buscarPrograma(nomP);
+		if(prog != null) {
+			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog.getNombre(),prog.getDescripcion(),prog.getFechaI(),prog.getFechaF());
+			return dtProg;
+		} else {
+			return null;
+		}
+	}
 	
+	@Override
+	public DTCurso seleccionarCursoEnPrograma(String nomC) {
+		manejadorCurso mc = manejadorCurso.getInstancia();
+		Curso cur = mc.buscarCurso(nomC);
+		if(cur != null) {
+			DTCurso dtCur = new DTCurso(cur);
+			return dtCur;
+		} else {
+			return null;
+		}
+	}
 	//Se utiliza la misma funcion listarCursos
 	
-	@Override
-	public void agregarCursoPrograma(String nomCur){}
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
 		
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 	@Override
-	public void ingresarNuevoInstituto(String nombre){}
-	
-	@Override
-	public boolean confirmarAltaInstituto(String nombre){
-		return true;
+	public void AltaInstituto throws InstitutoRepetidoException(String nombre){
+		manejadorInstituto mi = manejadorInstituto.getInstancia();
+		Instituto nuevoI = mi.buscarInstituto(nombre);
+		if(nuevoI != null) {
+			throw new InstitutoRepetidoException("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+		} else {
+			mi.agregarInstituto(nuevoI);
+		}
 	}
-	
-	@Override
-	public void cancelarAltaInstituto(){}
 }
