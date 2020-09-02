@@ -4,14 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import datatypes.DTUsuario;
+import exepciones.UsuarioRepetidoExcepcion;
 import clases.EdicionCurso;
 
 public interface IcontroladorUsuario {
 	
 	//1 - Alta Usuario
-	public void ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente);
-	public boolean confirmarAltaUsuario(String nickname, String correo);
-	public void cancelarAlta();
+	public void ingresarUsuario(DTUsuario usuario) throws UsuarioRepetidoExcepcion ;
 	
 	//2 - Consulta de Usuario
 	public List<DTUsuario> listarUsuario();

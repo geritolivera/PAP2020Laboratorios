@@ -6,6 +6,7 @@ import java.util.List;
 
 import manejadores.*;
 import datatypes.*;
+import exepciones.UsuarioRepetidoExcepcion;
 import clases.*;
 
 import interfaces.IcontroladorUsuario;
@@ -17,17 +18,13 @@ public class controladorUsuario implements IcontroladorUsuario{
 	}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
-	//1 - Alta Usuario
+	//1 - Alta Usuarios
 	@Override
-	public void ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente) {}
+	public void ingresarUsuario(DTUsuario usuario) throws UsuarioRepetidoExcepcion{
 	
-	@Override
-	public boolean confirmarAltaUsuario(String nickname, String correo){
-		return true;
+	
 	}
 	
-	@Override
-	public void cancelarAlta(){}
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import clases.*;
 import datatypes.*;
+import exepciones.CursoRepetidoExcepcion;
 import manejadores.*;
 
 import interfaces.IcontroladorCurso;
@@ -17,7 +18,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void nuevosDatosCurso(Curso datosCurso) {}
+	public void nuevosDatosCurso(Curso datosCurso) throws CursoRepetidoExcepcion{}
 	
 	@Override
 	public boolean confirmarAltaCurso(String nombre) {

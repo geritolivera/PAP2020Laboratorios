@@ -10,11 +10,12 @@ import clases.ProgramaFormacion;
 import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
+import exepciones.CursoRepetidoExcepcion;
 
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void nuevosDatosCurso(Curso datosCurso);
+	public void nuevosDatosCurso(Curso datosCurso)throws CursoRepetidoExcepcion;
 	public boolean confirmarAltaCurso(String nombre);
 	public void cancelarAlta();
 	
