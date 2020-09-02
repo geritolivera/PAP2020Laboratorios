@@ -20,6 +20,8 @@ public class principalView {
 	private AltaUsuario altaUsuarioInternalFrame;
 	private ConsultaUsuario consultaUsuarioInternalFrame;
 	private ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
+	private CrearProgramaFormacion crearPDFInternalFrame;
+	private AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
 	
 	/**
 	 * Launch the application.
@@ -65,6 +67,18 @@ public class principalView {
 		modificarDatosUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		modificarDatosUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(modificarDatosUsuarioInternalFrame);
+		
+		crearPDFInternalFrame = new CrearProgramaFormacion();
+		jIternalFrameSize = crearPDFInternalFrame.getSize();
+		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		crearPDFInternalFrame.setVisible(false);
+		frame.getContentPane().add(crearPDFInternalFrame);
+		
+		agregarCusroPDFInternalFrame = new AgregarCursoPorgramaFormacion();
+		jIternalFrameSize = agregarCusroPDFInternalFrame.getSize();
+		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		agregarCusroPDFInternalFrame.setVisible(false);
+		frame.getContentPane().add(agregarCusroPDFInternalFrame);
 		
 		//Aca va todo la logica de los internal frames
 		
@@ -141,9 +155,19 @@ public class principalView {
 		menuBar.add(MenuProgramaFormacion);
 		
 		JMenuItem MenuItemCrearProgForm = new JMenuItem("Crear Programa de Formacion");
+		MenuItemCrearProgForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				crearPDFInternalFrame.setVisible(true);
+			}
+		});
 		MenuProgramaFormacion.add(MenuItemCrearProgForm);
 		
 		JMenuItem MenuItemCursoProgForm = new JMenuItem("Agregar Curso a Programa de Formacion");
+		MenuItemCursoProgForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				agregarCusroPDFInternalFrame.setVisible(true);
+			}
+		});
 		MenuProgramaFormacion.add(MenuItemCursoProgForm);
 		
 		JMenuItem MenuItemConsultaProgForm = new JMenuItem("Consulta de Programa de Formacion");
