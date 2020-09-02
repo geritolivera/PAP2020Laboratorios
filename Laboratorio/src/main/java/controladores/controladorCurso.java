@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import clases.*;
 import datatypes.*;
-import exepciones.CursoRepetidoExcepcion;
+import exepciones.*;
 import manejadores.*;
 
 import interfaces.IcontroladorCurso;
@@ -19,12 +19,13 @@ public class controladorCurso implements IcontroladorCurso{
 	//4 - Alta de Curso
 	@Override
 	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion{
-		manejadorCurso mc = new manejadorCurso.getInstancia();
+		manejadorCurso mc = manejadorCurso.getInstancia();
 		if(mc.existeCurso(datosCurso.getNombre()))
-			throw new cursoRepetidoException("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
+			throw new CursoRepetidoExcepcion("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
 		else {
-			Curso cursoNuevo = new Curso(datosCurso.getNombre(),datosCurso.getDescripcion(),datosCurso.getDuracion(),datosCurso.getCantHoras(),datosCurso.getCreditos(),datosCurso.getFechaR(),datosCurso.getUrl(),datosCurso.getInstituto());
-			mc.addCurso(cursoNuevo);
+			Instituto I = new Instituto(datosCurso.getNombre());
+			Curso cursoNuevo = new Curso(datosCurso.getNombre(),datosCurso.getDescripcion(),datosCurso.getDuracion(),datosCurso.getCantHoras(),datosCurso.getCreditos(),datosCurso.getFechaR(),datosCurso.getUrl(),I);
+			mc.agregarCurso(cursoNuevo);
 		}
 	}
 	
@@ -128,7 +129,7 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public void agregarCursoPrograma(String nomCur){}
+	public void agregarCursoPrograma(String nomCur){}//Revisar
 	
 	@Override
 	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
@@ -179,11 +180,11 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 	@Override
-	public void AltaInstituto throws InstitutoRepetidoException(String nombre){
+	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/{
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
 		Instituto nuevoI = mi.buscarInstituto(nombre);
 		if(nuevoI != null) {
-			throw new InstitutoRepetidoException("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+			//throw new InstitutoRepetidoException("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 		} else {
 			mi.agregarInstituto(nuevoI);
 		}
