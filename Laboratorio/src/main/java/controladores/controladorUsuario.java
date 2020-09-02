@@ -21,6 +21,20 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//1 - Alta Usuarios
 	@Override
 	
+	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
+	 manejadorUsuario mU = manejadorUsuario.getInstancia();
+	 Usuario u;
+	 if (mU.existeUsuarioNick(usuario.getNick()))
+		 throw new UsuarioRepetidoExcepcion("El usuario con nickname "+ usuario.getNick() + " ya existe en uso");
+	 if (mU.existeUsuarioCorreo(usuario.getCorreo()))
+		 throw new UsuarioRepetidoExcepcion("El usuario con el correo "+ usuario.getCorreo() + " ya existe en uso");
+	 if (usuario instanceof DTDocente)
+		 u = new Docente (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
+	 if (usuario instanceof DTEstudiante)
+		 u = new Estudiante (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
+	 mU.agregarUsuario(u);
+	}
+	
 	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
