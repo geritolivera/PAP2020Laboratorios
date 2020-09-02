@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import datatypes.DTUsuario;
 import clases.EdicionCurso;
@@ -9,13 +10,14 @@ import clases.EdicionCurso;
 public interface IcontroladorUsuario {
 	
 	//1 - Alta Usuario
-	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNaci, boolean esDocente);
-	/*public boolean confirmarAltaUsuario(String nickname, String correo);
-	public void cancelarAlta();*/
+	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente);
+	public boolean confirmarAltaUsuario(String nickname, String correo);
+	public void cancelarAlta();
 	
 	//2 - Consulta de Usuario
-	public List<DTUsuario> listarUsuario();
-	public DTUsuario verInfoUsuario(String nickname);
+	public ArrayList<String> listarUsuarios();
+	public List<DTUsuario> listarDTUsuarios();
+	public void verInfoUsuario(String nickname);
 	
 	//3 - Modificar Datos de Usuario
 	//Se utiliza la misma funcion listarUsuario
