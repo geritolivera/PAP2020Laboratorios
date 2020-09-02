@@ -11,7 +11,13 @@ import clases.EdicionCurso;
 public interface IcontroladorUsuario {
 	
 	//1 - Alta Usuario
+<<<<<<< HEAD
 	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente);
+	public boolean confirmarAltaUsuario(String nickname, String correo);
+	public void cancelarAlta();
+=======
+	public void ingresarUsuario(DTUsuario usuario) throws UsuarioRepetidoExcepcion ;
+>>>>>>> origin/anto
 	
 	//2 - Consulta de Usuario
 	public ArrayList<String> listarUsuarios();

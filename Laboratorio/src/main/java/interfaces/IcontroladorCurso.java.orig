@@ -17,7 +17,13 @@ import exepciones.CursoRepetidoExcepcion;
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void AltaCurso throws CursoRepetidoExcepcion(DTCurso datosCurso);//Falta añadir la excepcion en el import
+<<<<<<< HEAD
+	public void AltaCurso throws CursoRepetidoException(DTCurso datosCurso);//Falta añadir la excepcion en el import
+=======
+	public void nuevosDatosCurso(Curso datosCurso)throws CursoRepetidoExcepcion;
+	public boolean confirmarAltaCurso(String nombre);
+	public void cancelarAlta();
+>>>>>>> origin/anto
 	
 	//5 - Consulta de Curso
 	public ArrayList<String> listarCursos(String nombreInstituto);

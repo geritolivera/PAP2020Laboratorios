@@ -20,7 +20,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuarios
 	@Override
-	
+<<<<<<< HEAD
 	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
@@ -36,6 +36,10 @@ public class controladorUsuario implements IcontroladorUsuario{
 		}
 		return "Nick o Correo ya en uso.";
 	}
+=======
+	public void ingresarUsuario(DTUsuario usuario) throws UsuarioRepetidoExcepcion{
+	
+>>>>>>> origin/anto
 	
 	}
 	

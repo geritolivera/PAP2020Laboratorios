@@ -18,7 +18,8 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion{
+<<<<<<< HEAD
+	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoException{
 		manejadorCurso mc = new manejadorCurso.getInstancia();
 		if(mc.existeCurso(datosCurso.getNombre()))
 			throw new cursoRepetidoException("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
@@ -26,6 +27,13 @@ public class controladorCurso implements IcontroladorCurso{
 			Curso cursoNuevo = new Curso(datosCurso.getNombre(),datosCurso.getDescripcion(),datosCurso.getDuracion(),datosCurso.getCantHoras(),datosCurso.getCreditos(),datosCurso.getFechaR(),datosCurso.getUrl(),datosCurso.getInstituto());
 			mc.addCurso(cursoNuevo);
 		}
+=======
+	public void nuevosDatosCurso(Curso datosCurso) throws CursoRepetidoExcepcion{}
+	
+	@Override
+	public boolean confirmarAltaCurso(String nombre) {
+	return true;
+>>>>>>> origin/anto
 	}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
