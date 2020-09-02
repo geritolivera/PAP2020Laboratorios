@@ -8,10 +8,9 @@ import clases.EdicionCurso;
 import conexion.Conexion;
 
 public class manejadorEdicion {
+	
 	private static manejadorEdicion instancia = null;
-	
-	//private List<Curso> cursos = new ArrayList<>();
-	
+		
 	private manejadorEdicion() {}
 	
 	public static manejadorEdicion getInstancia() {

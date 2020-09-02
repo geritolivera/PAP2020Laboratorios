@@ -9,7 +9,11 @@ import conexion.Conexion;
 
 public class manejadorInstituto {
 private static manejadorInstituto instancia = null;
+<<<<<<< HEAD
 	
+=======
+		
+>>>>>>> GeroBranch
 	private manejadorInstituto() {}
 	
 	public static manejadorInstituto getInstancia() {

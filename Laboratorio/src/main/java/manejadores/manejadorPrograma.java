@@ -9,9 +9,7 @@ import conexion.Conexion;
 
 public class manejadorPrograma {
 private static manejadorPrograma instancia = null;
-	
-	//private List<ProgramaFormacion> programas = new ArrayList<>();
-	
+		
 	private manejadorPrograma() {}
 	
 	public static manejadorPrograma getInstancia() {

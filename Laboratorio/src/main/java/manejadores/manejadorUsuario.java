@@ -9,9 +9,7 @@ import conexion.Conexion;
 
 public class manejadorUsuario {
 	private static manejadorUsuario instancia = null;
-	
-	//private List<Usuario> usuarios = new ArrayList<>();
-	
+		
 	private manejadorUsuario(){}
 	
 	public static manejadorUsuario getInstancia() {
@@ -39,6 +37,7 @@ public class manejadorUsuario {
 		EntityManager em = con.getEntityManager();
 		return em.find(Usuario.class, correo);
 	}
+<<<<<<< HEAD
 	
 	public boolean existeUsuarioNick(String nick) {
 		return this.buscarUsuario(nick) instanceof Usuario;
@@ -54,4 +53,6 @@ public class manejadorUsuario {
 		List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
 		return usuarios;
 	}
+=======
+>>>>>>> GeroBranch
 }

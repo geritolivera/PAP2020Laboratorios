@@ -11,12 +11,12 @@ import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
 
+
+
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void nuevosDatosCurso(DTCurso datosCurso);
-	public boolean confirmarAltaCurso(String nombre);
-	public void cancelarAlta();
+	public void AltaCurso throws CursoRepetidoException(DTCurso datosCurso);//Falta añadir la excepcion en el import
 	
 	//5 - Consulta de Curso
 	public ArrayList<String> listarCursos(String nombreInstituto);
@@ -45,19 +45,18 @@ public interface IcontroladorCurso {
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
+	public void agregarCursoPrograma(String nomCur);
+	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
-	public void seleccionarPrograma(String nomP);
+	public DTProgramaFormacion seleccionarPrograma(String nomP);
+	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
-	public void agregarCursoPrograma(String nomCur);
-	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	
 	//12 - Alta de Instituto
-	public void ingresarNuevoInstituto(String nombre);
-	public boolean confirmarAltaInstituto(String nombre);
-	public void cancelarAltaInstituto();
+	public void AltaInstituto throws InstitutoRepetidoException(String nombre);//Falta añadir la excepcion en el import
 	
 
 }

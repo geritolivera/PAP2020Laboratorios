@@ -110,4 +110,12 @@ public class Curso {
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
 	}
+	
+	public void agregarPrevias(Curso previa) {
+		previas.add(previa);
+	}
+	
+	public List<Curso> getPrevias(){
+		return this.previas;
+	}
 }
