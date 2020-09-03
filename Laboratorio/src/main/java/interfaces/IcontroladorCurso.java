@@ -39,8 +39,7 @@ public interface IcontroladorCurso {
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
-	public void agregarCursoPrograma(String nomCur);
-	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
+	public void agregarCursoPrograma(String nomCur, String nomP);
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion
@@ -50,7 +49,7 @@ public interface IcontroladorCurso {
 	//Se utiliza la misma funcion listarCursos
 	
 	//12 - Alta de Instituto
-	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta añadir la excepcion en el import
+	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta aï¿½adir la excepcion en el import
 	
 
 }

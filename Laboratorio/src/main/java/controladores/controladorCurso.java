@@ -84,7 +84,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public DTEdicionCurso verInfoEdicion(String nomEdicion) {
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
-		DTEdicionCurso dt = new DTEdicionCurso(edi.getNombre(), edi.getFechaI(), edi.getFechaF(), edi.getCupo(), edi.getFechaPub(), edi.getNomCurso());
+		DTEdicionCurso dt = new DTEdicionCurso(edi);
 		return dt;
 	}
 	
@@ -129,17 +129,21 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public void agregarCursoPrograma(String nomCur){}//Revisar
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
-	
+	public void agregarCursoPrograma(String nomCur, String nomP){
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		Curso c = mCur.buscarCurso(nomCur);
+		ProgramaFormacion p = mPro.buscarPrograma(nomP);
+		p.agregarCurso(c);
+		c.agregarPrograma(p);
+	}//Revisar
+		
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
 		List<Curso> cursos = p.getCursos();
-		DTProgramaFormacion dt = new DTProgramaFormacion(p.getNombre(), p.getDescripcion(), p.getFechaI(), p.getFechaF());
+		DTProgramaFormacion dt = new DTProgramaFormacion(p);
 		for(Curso c:cursos) {
 			dt.agregarCurso(c.getNombre());
 		}
@@ -155,7 +159,7 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorPrograma mp = manejadorPrograma.getInstancia();
 		ProgramaFormacion prog = mp.buscarPrograma(nomP);
 		if(prog != null) {
-			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog.getNombre(),prog.getDescripcion(),prog.getFechaI(),prog.getFechaF());
+			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog);
 			return dtProg;
 		} else {
 			return null;

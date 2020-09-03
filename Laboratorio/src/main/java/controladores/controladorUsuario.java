@@ -61,7 +61,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
 		for(Usuario u: usuarios) {
-			DTUsuario dt = new DTUsuario(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			DTUsuario dt = new DTUsuario(u);
 			listUsers.add(dt);
 		}
 		return listUsers;
