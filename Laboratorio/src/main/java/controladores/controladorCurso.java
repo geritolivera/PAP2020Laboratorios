@@ -118,7 +118,6 @@ public class controladorCurso implements IcontroladorCurso{
 	//10 - Agregar Curso a Programa de Formacion
 	@Override
 	public ArrayList<String> listarProgramas(){
-		//String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		List<ProgramaFormacion> programas = mPro.getProgramas();
 		ArrayList<String> listProgramas = new ArrayList<>();
@@ -128,11 +127,6 @@ public class controladorCurso implements IcontroladorCurso{
 		return listProgramas;
 	}
 	
-	@Override
-	public void agregarCursoPrograma(String nomCur){}//Revisar
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
 	
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
@@ -162,6 +156,14 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 	}
 	
+	@Override //Agrega curso a programa de formacion
+	public void agregarCursoPrograma(String nomCur){}//Revisar
+	
+	@Override
+	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
+	
+	//Se utiliza la misma funcion listarCursos
+	
 	@Override
 	public DTCurso seleccionarCursoEnPrograma(String nomC) {
 		manejadorCurso mc = manejadorCurso.getInstancia();
@@ -173,18 +175,16 @@ public class controladorCurso implements IcontroladorCurso{
 			return null;
 		}
 	}
-	//Se utiliza la misma funcion listarCursos
-	
 		
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 	@Override
-	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/{
+	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
 		Instituto nuevoI = mi.buscarInstituto(nombre);
 		if(nuevoI != null) {
-			//throw new InstitutoRepetidoException("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+			throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 		} else {
 			mi.agregarInstituto(nuevoI);
 		}

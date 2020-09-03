@@ -22,7 +22,7 @@ public interface IcontroladorUsuario {
 	//3 - Modificar Datos de Usuario
 	//Se utiliza la misma funcion listarUsuario
 	public DTUsuario seleccionarUsuario(String nickname);
-	public void nuevosDatos(String nombre, String apellido, Date fechaNaci);
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
 	
 	//6 - Alta de Edicion de Curso
 	public void ingresarDocente(String nomDoc);

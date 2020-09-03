@@ -124,12 +124,26 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//Se utiliza la misma funcion listarUsuario
 	@Override
 	public DTUsuario seleccionarUsuario(String nickname){
-		DTUsuario a = null;
-		return a;
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuario(nickname);
+		if(u != null) {
+			DTUsuario dtU = new DTUsuario(u);
+			return dtU;
+		} else {
+		return null;
+		}
 	}
 	
 	@Override
-	public void nuevosDatos(String nombre, String apellido, Date fechaNaci){}
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuarioNickname(nickname);
+		if(u != null) {
+			u.setNombre(nombre);
+			u.setApellido(apellido);
+			u.setFechaNac(fechaNaci);
+		}
+	}
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

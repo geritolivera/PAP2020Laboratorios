@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
 
 public class DTEstudiante extends DTUsuario{
 	private List<DTEdicionCurso> ediciones = new ArrayList<>();
