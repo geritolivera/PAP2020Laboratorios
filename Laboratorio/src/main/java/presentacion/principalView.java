@@ -4,12 +4,12 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JLabel;
+
+import interfaces.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -44,6 +44,9 @@ public class principalView {
 	 */
 	public principalView() {
 		initialize();
+		
+		fabrica fab = fabrica.getInstancia();
+		IcontroladorUsuario iusu = fab.getIcontroladorUsuario();
 		
 		Dimension escritorioTam = frame.getSize();
 		Dimension jIternalFrameSize;

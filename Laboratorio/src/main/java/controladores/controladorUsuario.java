@@ -132,12 +132,26 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//Se utiliza la misma funcion listarUsuario
 	@Override
 	public DTUsuario seleccionarUsuario(String nickname){
-		DTUsuario a = null;
-		return a;
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuario(nickname);
+		if(u != null) {
+			DTUsuario dtU = new DTUsuario(u);
+			return dtU;
+		} else {
+		return null;
+		}
 	}
 	
 	@Override
-	public void nuevosDatos(String nombre, String apellido, Date fechaNaci){}
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuarioNickname(nickname);
+		if(u != null) {
+			u.setNombre(nombre);
+			u.setApellido(apellido);
+			u.setFechaNac(fechaNaci);
+		}
+	}
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -160,18 +174,16 @@ public class controladorUsuario implements IcontroladorUsuario{
 	@Override
 	public void agregarEdicionUsuario(EdicionCurso edV){}
 	
-	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
-	@Override
-	public void ingresarNuevoInstituto(String nombre){}
-	
-	@Override
-	public boolean confirmarAlta(String nombre){
-		return true;
-	}
-	
-	@Override
-	public void cancelarAltaInstituto(){}
-	
+		@Override
+		public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			Instituto nuevoI = mi.buscarInstituto(nombre);
+			if(nuevoI != null) {
+				throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+			} else {
+				mi.agregarInstituto(nuevoI);
+			}
+		}
 }

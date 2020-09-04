@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import datatypes.DTUsuario;
-import exepciones.UsuarioRepetidoExcepcion;
+import exepciones.*;
 import clases.EdicionCurso;
 
 public interface IcontroladorUsuario {
@@ -22,7 +22,7 @@ public interface IcontroladorUsuario {
 	//3 - Modificar Datos de Usuario
 	//Se utiliza la misma funcion listarUsuario
 	public DTUsuario seleccionarUsuario(String nickname);
-	public void nuevosDatos(String nombre, String apellido, Date fechaNaci);
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
 	
 	//6 - Alta de Edicion de Curso
 	public void ingresarDocente(String nomDoc);
@@ -34,8 +34,6 @@ public interface IcontroladorUsuario {
 	public void agregarEdicionUsuario(EdicionCurso edV);
 	
 	//12 - Alta de Instituto
-	public void ingresarNuevoInstituto(String nombre);
-	public boolean confirmarAlta(String nombre);
-	public void cancelarAltaInstituto();
+	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion;
 	
 }

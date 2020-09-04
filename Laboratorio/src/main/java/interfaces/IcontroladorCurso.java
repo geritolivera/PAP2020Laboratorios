@@ -34,23 +34,18 @@ public interface IcontroladorCurso {
 	public void cancelarInscripcion();
 	
 	//9 - Crear Programa de Formacion
-	public void altaProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF);
-	public boolean confirmarAlta(String nombre);
-	//Se utiliza la mismas funcion cancelarAlta
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionRepetidoExcepcion;
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
-	public void agregarCursoPrograma(String nomCur, String nomP);
+	
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
 	public DTProgramaFormacion seleccionarPrograma(String nomP);
+	public void agregarCursoPrograma(String nomCur);
+	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
-	
-	//12 - Alta de Instituto
-	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta a�adir la excepcion en el import
-	
-
 }
