@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.*;
 import datatypes.*;
@@ -33,9 +34,8 @@ public interface IcontroladorCurso {
 	public void cancelarInscripcion();
 	
 	//9 - Crear Programa de Formacion
-	public void altaProgramaFormacion(ProgramaFormacion datosPrograma);
-	public boolean confirmarAlta(String nombre);
-	//Se utiliza la mismas funcion cancelarAlta
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionRepetidoExcepcion;
+	
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
@@ -50,8 +50,7 @@ public interface IcontroladorCurso {
 	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
 	
-	//12 - Alta de Instituto
-	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion;
+	
 	
 
 }

@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.*;
 import datatypes.*;
@@ -105,13 +106,15 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	@Override
-	public void altaProgramaFormacion(ProgramaFormacion datosPrograma){}
-	
-	@Override
-	public boolean confirmarAlta(String nombre){
-		return true;
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionRepetidoExcepcion{	
+		manejadorPrograma mpf = manejadorPrograma.getInstancia();
+		if(mpf.existePrograma(nombre)) {
+			throw new ProgramaFormacionRepetidoExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
+		} else {
+			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fechaA);
+			mpf.agregarPrograma(nuevoProg);
+		}		
 	}
-	//Se utiliza la mismas funcion cancelarAlta
 	
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -178,15 +181,5 @@ public class controladorCurso implements IcontroladorCurso{
 		
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
-	//12 - Alta de Instituto
-	@Override
-	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
-		manejadorInstituto mi = manejadorInstituto.getInstancia();
-		Instituto nuevoI = mi.buscarInstituto(nombre);
-		if(nuevoI != null) {
-			throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
-		} else {
-			mi.agregarInstituto(nuevoI);
-		}
-	}
+	
 }

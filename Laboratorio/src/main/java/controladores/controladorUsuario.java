@@ -166,18 +166,16 @@ public class controladorUsuario implements IcontroladorUsuario{
 	@Override
 	public void agregarEdicionUsuario(EdicionCurso edV){}
 	
-	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
-	@Override
-	public void ingresarNuevoInstituto(String nombre){}
-	
-	@Override
-	public boolean confirmarAlta(String nombre){
-		return true;
-	}
-	
-	@Override
-	public void cancelarAltaInstituto(){}
-	
+		@Override
+		public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			Instituto nuevoI = mi.buscarInstituto(nombre);
+			if(nuevoI != null) {
+				throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+			} else {
+				mi.agregarInstituto(nuevoI);
+			}
+		}
 }
