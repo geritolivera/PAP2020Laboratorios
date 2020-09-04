@@ -35,16 +35,23 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 mU.agregarUsuario(u);
 	}*/
 	
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) throws UsuarioRepetidoExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioRepetidoExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
-			if(esDocente) {
-				Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
-				mUsu.agregarUsuario(doc);
-			}
-			else {
+			//si la string instituto no tiene nada
+			if(instituto.isEmpty()) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
+				
+			}
+			else {
+				if(mIns.existeInstituto(instituto)) {
+					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+					Instituto ins = mIns.buscarInstituto(instituto);
+					doc.setInstituto(ins);
+					mUsu.agregarUsuario(doc);
+				}
 			}
 		}
 		else {
