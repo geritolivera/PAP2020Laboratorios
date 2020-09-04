@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.*;
 import datatypes.*;
@@ -47,7 +48,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public DTCurso verInfo(String nomCurso) {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		Curso c = mCur.buscarCurso(nomCurso);
-		DTCurso dt = new DTCurso(c.getNombre(), c.getDescripcion(), c.getDuracion(), c.getCantHoras(), c.getCreditos(), c.getFechaR(), c.getUrl(), c.getNomInstituto());
+		DTCurso dt = new DTCurso(c);
 		return dt;
 	}
 	
@@ -56,7 +57,21 @@ public class controladorCurso implements IcontroladorCurso{
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public void nuevosDatosEdicion(EdicionCurso datosEdicion) {}
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionRepetidaExcepcion{
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if(mEdi.existeEdicion(nombre)) {
+			throw new EdicionRepetidaExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
+		}
+		else {
+			EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
+			for(String s: docentes) {
+				Docente d = (Docente) mUsu.buscarUsuario(s);
+				edi.agregarDocente(d);
+			}
+			mEdi.agregarEdicion(edi);
+		}
+	}
 	
 	@Override
 	public boolean confirmarAltaEdicion(String nombre) {
@@ -105,7 +120,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	@Override
-	public void altaProgramaFormacion(ProgramaFormacion datosPrograma){}
+	public void altaProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF){}
 	
 	@Override
 	public boolean confirmarAlta(String nombre){

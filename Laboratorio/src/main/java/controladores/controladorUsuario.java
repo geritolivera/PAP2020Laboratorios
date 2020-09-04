@@ -19,7 +19,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuarios
-	@Override
+	/*@Override
 	
 	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
 	 manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -33,9 +33,9 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 if (usuario instanceof DTEstudiante)
 		 u = new Estudiante (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
 	 mU.agregarUsuario(u);
-	}
+	}*/
 	
-	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
+	public void altaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) throws UsuarioRepetidoExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			if(esDocente) {
@@ -46,9 +46,10 @@ public class controladorUsuario implements IcontroladorUsuario{
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 			}
-			return "Usuario agregado";
 		}
-		return "Nick o Correo ya en uso.";
+		else {
+			throw new UsuarioRepetidoExcepcion("Nickname o correo ya en uso");
+		}
 	}
 	
 	
