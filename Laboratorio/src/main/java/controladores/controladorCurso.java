@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.*;
 import datatypes.*;
@@ -47,7 +48,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public DTCurso verInfo(String nomCurso) {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		Curso c = mCur.buscarCurso(nomCurso);
-		DTCurso dt = new DTCurso(c.getNombre(), c.getDescripcion(), c.getDuracion(), c.getCantHoras(), c.getCreditos(), c.getFechaR(), c.getUrl(), c.getNomInstituto());
+		DTCurso dt = new DTCurso(c);
 		return dt;
 	}
 	
@@ -56,7 +57,21 @@ public class controladorCurso implements IcontroladorCurso{
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public void nuevosDatosEdicion(EdicionCurso datosEdicion) {}
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionRepetidaExcepcion{
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if(mEdi.existeEdicion(nombre)) {
+			throw new EdicionRepetidaExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
+		}
+		else {
+			EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
+			for(String s: docentes) {
+				Docente d = (Docente) mUsu.buscarUsuario(s);
+				edi.agregarDocente(d);
+			}
+			mEdi.agregarEdicion(edi);
+		}
+	}
 	
 	@Override
 	public boolean confirmarAltaEdicion(String nombre) {
@@ -84,7 +99,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public DTEdicionCurso verInfoEdicion(String nomEdicion) {
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
-		DTEdicionCurso dt = new DTEdicionCurso(edi.getNombre(), edi.getFechaI(), edi.getFechaF(), edi.getCupo(), edi.getFechaPub(), edi.getNomCurso());
+		DTEdicionCurso dt = new DTEdicionCurso(edi);
 		return dt;
 	}
 	
@@ -105,7 +120,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	@Override
-	public void altaProgramaFormacion(ProgramaFormacion datosPrograma){}
+	public void altaProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF){}
 	
 	@Override
 	public boolean confirmarAlta(String nombre){
@@ -129,17 +144,21 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public void agregarCursoPrograma(String nomCur){}//Revisar
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
-	
+	public void agregarCursoPrograma(String nomCur, String nomP){
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		Curso c = mCur.buscarCurso(nomCur);
+		ProgramaFormacion p = mPro.buscarPrograma(nomP);
+		p.agregarCurso(c);
+		c.agregarPrograma(p);
+	}//Revisar
+		
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
 		List<Curso> cursos = p.getCursos();
-		DTProgramaFormacion dt = new DTProgramaFormacion(p.getNombre(), p.getDescripcion(), p.getFechaI(), p.getFechaF());
+		DTProgramaFormacion dt = new DTProgramaFormacion(p);
 		for(Curso c:cursos) {
 			dt.agregarCurso(c.getNombre());
 		}
@@ -155,7 +174,7 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorPrograma mp = manejadorPrograma.getInstancia();
 		ProgramaFormacion prog = mp.buscarPrograma(nomP);
 		if(prog != null) {
-			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog.getNombre(),prog.getDescripcion(),prog.getFechaI(),prog.getFechaF());
+			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog);
 			return dtProg;
 		} else {
 			return null;

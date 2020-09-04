@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.*;
 import datatypes.*;
@@ -18,7 +19,7 @@ public interface IcontroladorCurso {
 	
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public void nuevosDatosEdicion(EdicionCurso datosEdicion);
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionRepetidaExcepcion;
 	public boolean confirmarAltaEdicion(String nombre);
 	//Se utiliza la mismas funcion cancelarAlta
 	
@@ -33,14 +34,13 @@ public interface IcontroladorCurso {
 	public void cancelarInscripcion();
 	
 	//9 - Crear Programa de Formacion
-	public void altaProgramaFormacion(ProgramaFormacion datosPrograma);
+	public void altaProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF);
 	public boolean confirmarAlta(String nombre);
 	//Se utiliza la mismas funcion cancelarAlta
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
-	public void agregarCursoPrograma(String nomCur);
-	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
+	public void agregarCursoPrograma(String nomCur, String nomP);
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion
@@ -50,7 +50,7 @@ public interface IcontroladorCurso {
 	//Se utiliza la misma funcion listarCursos
 	
 	//12 - Alta de Instituto
-	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta añadir la excepcion en el import
+	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta aï¿½adir la excepcion en el import
 	
 
 }

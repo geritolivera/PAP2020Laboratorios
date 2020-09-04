@@ -19,7 +19,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuarios
-	@Override
+	/*@Override
 	
 	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
 	 manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -33,22 +33,30 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 if (usuario instanceof DTEstudiante)
 		 u = new Estudiante (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
 	 mU.agregarUsuario(u);
-	}
+	}*/
 	
-	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioRepetidoExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
-			if(esDocente) {
-				Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
-				mUsu.agregarUsuario(doc);
-			}
-			else {
+			//si la string instituto no tiene nada
+			if(instituto.isEmpty()) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
+				
 			}
-			return "Usuario agregado";
+			else {
+				if(mIns.existeInstituto(instituto)) {
+					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+					Instituto ins = mIns.buscarInstituto(instituto);
+					doc.setInstituto(ins);
+					mUsu.agregarUsuario(doc);
+				}
+			}
 		}
-		return "Nick o Correo ya en uso.";
+		else {
+			throw new UsuarioRepetidoExcepcion("Nickname o correo ya en uso");
+		}
 	}
 	
 	
@@ -61,7 +69,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
 		for(Usuario u: usuarios) {
-			DTUsuario dt = new DTUsuario(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			DTUsuario dt = new DTUsuario(u);
 			listUsers.add(dt);
 		}
 		return listUsers;
