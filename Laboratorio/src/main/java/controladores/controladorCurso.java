@@ -181,15 +181,7 @@ public class controladorCurso implements IcontroladorCurso{
 			return null;
 		}
 	}
-	
-	@Override //Agrega curso a programa de formacion
-	public void agregarCursoPrograma(String nomCur){}//Revisar
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
-	
-	//Se utiliza la misma funcion listarCursos
-	
+		
 	@Override
 	public DTCurso seleccionarCursoEnPrograma(String nomC) {
 		manejadorCurso mc = manejadorCurso.getInstancia();

@@ -41,11 +41,11 @@ public interface IcontroladorCurso {
 	
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
+	public void agregarCursoPrograma(String nomCur, String nomP);
+	
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
 	public DTProgramaFormacion seleccionarPrograma(String nomP);
-	public void agregarCursoPrograma(String nomCur);
-	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
 }
