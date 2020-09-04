@@ -1,10 +1,10 @@
-package presentacion;
+package presentacion.usuario;
 
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 
-public class ModificarDatosUsuario extends JInternalFrame {
+public class ConsultaUsuario extends JInternalFrame {
 
 	/**
 	 * Launch the application.
@@ -13,7 +13,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ModificarDatosUsuario frame = new ModificarDatosUsuario();
+					ConsultaUsuario frame = new ConsultaUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,8 +25,9 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModificarDatosUsuario() {
-		setBounds(100, 100, 450, 300);
+	public ConsultaUsuario() {
+		setBounds(100, 100, 513, 354);
+		getContentPane().setLayout(null);
 
 	}
 

@@ -17,11 +17,11 @@ import java.awt.event.ActionEvent;
 public class principalView {
 
 	private JFrame frame;
-	private AltaUsuario altaUsuarioInternalFrame;
-	private ConsultaUsuario consultaUsuarioInternalFrame;
-	private ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
-	private CrearProgramaFormacion crearPDFInternalFrame;
-	private AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
+	private presentacion.usuario.AltaUsuario altaUsuarioInternalFrame;
+	private presentacion.usuario.ConsultaUsuario consultaUsuarioInternalFrame;
+	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
+	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
+	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
 	
 	/**
 	 * Launch the application.
@@ -49,32 +49,32 @@ public class principalView {
 		Dimension jIternalFrameSize;
 		
 		
-		altaUsuarioInternalFrame = new AltaUsuario();
+		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario();
 		jIternalFrameSize = altaUsuarioInternalFrame.getSize();
 		altaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaUsuarioInternalFrame);
 		
 		
-		consultaUsuarioInternalFrame = new ConsultaUsuario();
+		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario();
 		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
 		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
 		consultaUsuarioInternalFrame.setVisible(false);
 		
-		modificarDatosUsuarioInternalFrame = new ModificarDatosUsuario();
+		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario();
 		jIternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();
 		modificarDatosUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		modificarDatosUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(modificarDatosUsuarioInternalFrame);
 		
-		crearPDFInternalFrame = new CrearProgramaFormacion();
+		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion();
 		jIternalFrameSize = crearPDFInternalFrame.getSize();
 		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		crearPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(crearPDFInternalFrame);
 		
-		agregarCusroPDFInternalFrame = new AgregarCursoPorgramaFormacion();
+		agregarCusroPDFInternalFrame = new presentacion.programaFormacion.AgregarCursoPorgramaFormacion();
 		jIternalFrameSize = agregarCusroPDFInternalFrame.getSize();
 		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		agregarCusroPDFInternalFrame.setVisible(false);
