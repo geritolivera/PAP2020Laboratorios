@@ -35,7 +35,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 mU.agregarUsuario(u);
 	}*/
 	
-	public void altaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) throws UsuarioRepetidoExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) throws UsuarioRepetidoExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			if(esDocente) {
