@@ -1,20 +1,21 @@
-package presentacion;
+package presentacion.programaFormacion;
 
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class CrearProgramaFormacion extends JInternalFrame {
 	private JTextField inputNombre;
 	private JTextField inputFechaInicio;
 	private JTextField inputFechaFin;
+	private JTextField inputDescripcion;
 
 	/**
 	 * Launch the application.
@@ -65,6 +66,11 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelarAltaProgramaFormacion(e);
+			}
+		});
 		btnCancelar.setBounds(231, 183, 115, 23);
 		getContentPane().add(btnCancelar);
 		
@@ -86,5 +92,17 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		ayudin.setBounds(10, 230, 156, 14);
 		getContentPane().add(ayudin);
 
+	}
+	protected void cancelarAltaProgramaFormacion(ActionEvent e) {
+		//PORQUE EXPLOTA?
+		//limpiarFormulario(); 
+		setVisible(false);
+	}
+
+	private void limpiarFormulario() {
+		inputNombre.setText("");
+		inputFechaInicio.setText("");
+		inputFechaFin.setText("");
+		inputDescripcion.setText("");
 	}
 }

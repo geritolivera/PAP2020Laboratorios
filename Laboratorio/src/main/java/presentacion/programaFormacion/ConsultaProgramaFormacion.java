@@ -1,10 +1,12 @@
-package presentacion;
+package presentacion.programaFormacion;
 
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Scrollbar;
+import javax.swing.JList;
 
 public class ConsultaProgramaFormacion extends JInternalFrame {
 
@@ -30,6 +32,10 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 	public ConsultaProgramaFormacion() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
+		
+		JList list = new JList();
+		list.setBounds(66, 77, 1, 1);
+		getContentPane().add(list);
 
 	}
 }
