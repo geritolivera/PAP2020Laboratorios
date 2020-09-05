@@ -19,14 +19,19 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
-		if(mc.existeCurso(datosCurso.getNombre()))
-			throw new CursoRepetidoExcepcion("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		if(mc.existeCurso(nombre))
+			throw new CursoExcepcion("La clase de Nombre " + nombre + "ya existe dentro del Sistema");
 		else {
-			Instituto I = new Instituto(datosCurso.getNombre());
-			Curso cursoNuevo = new Curso(datosCurso.getNombre(),datosCurso.getDescripcion(),datosCurso.getDuracion(),datosCurso.getCantHoras(),datosCurso.getCreditos(),datosCurso.getFechaR(),datosCurso.getUrl(),I);
-			mc.agregarCurso(cursoNuevo);
+			if(mI.existeInstituto(instituto)){
+				Instituto I = mI.buscarInstituto(instituto);
+				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
+				mc.agregarCurso(cursoNuevo);
+			}
+			else
+				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
 		}
 	}
 	
@@ -57,11 +62,11 @@ public class controladorCurso implements IcontroladorCurso{
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionRepetidaExcepcion{
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		if(mEdi.existeEdicion(nombre)) {
-			throw new EdicionRepetidaExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
+			throw new EdicionExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
 		}
 		else {
 			EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
@@ -108,10 +113,44 @@ public class controladorCurso implements IcontroladorCurso{
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) {
-		DTEdicionCurso dt = null;
-		return dt;
+	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		if(mCur.existeCurso(nomCurso)){
+			Curso c = mCur.buscarCurso(nomCurso);
+			List<EdicionCurso> ediciones = c.getEdiciones();
+			for(EdicionCurso e: ediciones){
+				//if(esVigente()){}  //como sabemos cual es vigente? 
+				DTEdicionCurso dte = new DTEdicionCurso(e);
+			}
+			return dte;
+		}
+		else
+			throw new CursoExcepcion("No existe el curso " + nomCurso);
 	}
+	
+	@Override
+	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion{
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		if(mUsu.existeUsuarioCorreo(nickUsuario)){
+			if(mEdi.existeEdicion(nomEdicion)){
+				Usuario u = mUsu.buscarUsuario(nickUsuario);
+				if(u instanceof Estudiante) {
+					EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
+					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion
+					((Estudiante) u).agregarInscripcion(fecha, e);
+					//funcion agregarEdicion tambien agrega al estudiante a la edicion
+					((Estudiante) u).agregarEdicion(e);
+				}
+				else
+					throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
+			}
+			else
+				throw new EdicionExcepcion("No existe edicion " + nomEdicion);
+		}
+		else
+			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
+	} 
 	
 	@Override
 	public void cancelarInscripcion() {}
@@ -120,10 +159,10 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	@Override
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionRepetidoExcepcion{	
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion{	
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
 		if(mpf.existePrograma(nombre)) {
-			throw new ProgramaFormacionRepetidoExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
+			throw new ProgramaFormacionExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
 		} else {
 			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fechaA);
 			mpf.agregarPrograma(nuevoProg);
@@ -152,8 +191,8 @@ public class controladorCurso implements IcontroladorCurso{
 		ProgramaFormacion p = mPro.buscarPrograma(nomP);
 		p.agregarCurso(c);
 		c.agregarPrograma(p);
-	}//Revisar
-		
+	}
+	
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
@@ -166,7 +205,6 @@ public class controladorCurso implements IcontroladorCurso{
 		return dt;
 	}
 		
-	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
@@ -202,7 +240,5 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 	}
 		
-	
-	/*-------------------------------------------------------------------------------------------------------------*/
-	
+
 }

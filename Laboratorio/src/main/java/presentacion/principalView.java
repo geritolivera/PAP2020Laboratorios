@@ -1,5 +1,7 @@
 package presentacion;
 
+import presentacion.usuario.*;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -9,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import interfaces.*;
+import presentacion.usuario.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,7 +68,7 @@ public class principalView {
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
 		consultaUsuarioInternalFrame.setVisible(false);
 		
-		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario();
+		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario(iusu);
 		jIternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();
 		modificarDatosUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		modificarDatosUsuarioInternalFrame.setVisible(false);

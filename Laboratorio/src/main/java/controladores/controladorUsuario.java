@@ -35,7 +35,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 mU.agregarUsuario(u);
 	}*/
 	
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioRepetidoExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
@@ -55,7 +55,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 			}
 		}
 		else {
-			throw new UsuarioRepetidoExcepcion("Nickname o correo ya en uso");
+			throw new UsuarioExcepcion("Nickname o correo ya en uso");
 		}
 	}
 	
@@ -177,13 +177,29 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 		@Override
-		public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
+		public void AltaInstituto(String nombre) throws InstitutoExcepcion{
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
 			Instituto nuevoI = mi.buscarInstituto(nombre);
 			if(nuevoI != null) {
-				throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+				throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 			} else {
 				mi.agregarInstituto(nuevoI);
 			}
 		}
+		
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Funciones auxiliares
+		@Override
+		public String[] listarInstituto() {
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			List<Instituto> listIn = mi.getInstituto();
+			String[] institutos = new String[listIn.size()];
+			int i = 0;
+			for(Instituto ins : listIn) {
+				institutos[i] = ins.getNombre();
+				i++;
+			}
+			return institutos;
+		}
+		
 }
