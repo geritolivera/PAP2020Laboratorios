@@ -19,8 +19,23 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuarios
-	@Override
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioRepetidoExcepcion {
+	/*@Override
+	
+	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
+	 manejadorUsuario mU = manejadorUsuario.getInstancia();
+	 Usuario u = null;
+	 if (mU.existeUsuarioNick(usuario.getNick()))
+		 throw new UsuarioRepetidoExcepcion("El usuario con nickname "+ usuario.getNick() + " ya existe en uso");
+	 if (mU.existeUsuarioCorreo(usuario.getCorreo()))
+		 throw new UsuarioRepetidoExcepcion("El usuario con el correo "+ usuario.getCorreo() + " ya existe en uso");
+	 if (usuario instanceof DTDocente)
+		 u = new Docente (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
+	 if (usuario instanceof DTEstudiante)
+		 u = new Estudiante (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
+	 mU.agregarUsuario(u);
+	}*/
+	
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
@@ -38,10 +53,9 @@ public class controladorUsuario implements IcontroladorUsuario{
 					mUsu.agregarUsuario(doc);
 				}
 			}
-		} else if(mUsu.existeUsuarioNick(nickname)){
-			throw new UsuarioRepetidoExcepcion("El Usuario con el nickname " + nickname + " ya existe en el Sistema");
-		}else if(mUsu.existeUsuarioNick(correo)){
-			throw new UsuarioRepetidoExcepcion("El Usuario con el correo " + correo + " ya existe en el Sistema");
+		}
+		else {
+			throw new UsuarioExcepcion("Nickname o correo ya en uso");
 		}
 	}
 	
@@ -163,11 +177,11 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 		@Override
-		public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion{
+		public void AltaInstituto(String nombre) throws InstitutoExcepcion{
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
 			Instituto nuevoI = mi.buscarInstituto(nombre);
 			if(nuevoI != null) {
-				throw new InstitutoRepetidoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+				throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 			} else {
 				mi.agregarInstituto(nuevoI);
 			}
