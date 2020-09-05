@@ -149,7 +149,7 @@ public class controladorCurso implements IcontroladorCurso{
 		return listProgramas;
 	}
 	
-	/*@Override
+	@Override
 	public void agregarCursoPrograma(String nomCur, String nomP){
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
@@ -159,9 +159,6 @@ public class controladorCurso implements IcontroladorCurso{
 		c.agregarPrograma(p);
 	}
 	
-	/*-------------------------------------------------------------------------------------------------------------*/
-	//11 - Consulta de Programa de Formacion
-	//Se utiliza la misma funcion de listarProgramas
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
@@ -174,7 +171,40 @@ public class controladorCurso implements IcontroladorCurso{
 		return dt;
 	}
 		
-	
 	/*-------------------------------------------------------------------------------------------------------------*/
+	//11 - Consulta de Programa de Formacion
+	//Se utiliza la misma funcion de listarProgramas
+	@Override
+	public DTProgramaFormacion seleccionarPrograma(String nomP){
+		manejadorPrograma mp = manejadorPrograma.getInstancia();
+		ProgramaFormacion prog = mp.buscarPrograma(nomP);
+		if(prog != null) {
+			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog);
+			return dtProg;
+		} else {
+			return null;
+		}
+	}
 	
+	@Override //Agrega curso a programa de formacion
+	public void agregarCursoPrograma(String nomCur){}//Revisar
+	
+	@Override
+	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
+	
+	//Se utiliza la misma funcion listarCursos
+	
+	@Override
+	public DTCurso seleccionarCursoEnPrograma(String nomC) {
+		manejadorCurso mc = manejadorCurso.getInstancia();
+		Curso cur = mc.buscarCurso(nomC);
+		if(cur != null) {
+			DTCurso dtCur = new DTCurso(cur);
+			return dtCur;
+		} else {
+			return null;
+		}
+	}
+		
+
 }
