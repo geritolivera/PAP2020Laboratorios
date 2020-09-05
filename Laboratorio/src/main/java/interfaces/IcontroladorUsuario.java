@@ -11,7 +11,7 @@ import clases.EdicionCurso;
 public interface IcontroladorUsuario {
 	
 	//1 - Alta Usuario
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioRepetidoExcepcion;
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion;
 	//public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion;
 	
 	//2 - Consulta de Usuario
@@ -34,6 +34,6 @@ public interface IcontroladorUsuario {
 	public void agregarEdicionUsuario(EdicionCurso edV);
 	
 	//12 - Alta de Instituto
-	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion;
+	public void AltaInstituto(String nombre) throws InstitutoExcepcion;
 	
 }

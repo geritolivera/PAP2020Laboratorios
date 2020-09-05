@@ -9,6 +9,8 @@ public class Estudiante extends Usuario{
 	private List<ProgramaFormacion> programas = new ArrayList<>();
 	//ediciones a las cuales se anota
 	private List<EdicionCurso> ediciones = new ArrayList<>();
+	//inscripciones a las ediciones
+	private List<Inscripcion> inscripciones = new ArrayList<>();
 	
 	public Estudiante() {
 		super();
@@ -39,6 +41,24 @@ public class Estudiante extends Usuario{
 	}
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
+	}
+	
+	public void agregarInscripcion(Date fecha, EdicionCurso edicion) {
+		Inscripcion ins = new Inscripcion(fecha, this, edicion);
+		inscripciones.add(ins);
+		edicion.agregarEstudiante(this);
+	}
+	public List<Inscripcion> getInscripciones(){
+		return inscripciones;
+	}
+	//prototipo de borrado de inscripcion
+	public void borrarInscripcion(Date fecha) {
+		List<Inscripcion> list = this.getInscripciones();
+		for(Inscripcion i : list) {
+			if(i.getFecha() == fecha) {
+				list.remove(i);
+			}
+		}
 	}
 	
 }
