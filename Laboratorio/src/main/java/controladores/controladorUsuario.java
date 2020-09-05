@@ -19,7 +19,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion, InstitutoExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
@@ -36,6 +36,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 					doc.setInstituto(ins);
 					mUsu.agregarUsuario(doc);
 				}
+				else 
+					throw new InstitutoExcepcion("El instituto " + instituto + " no existe");
 			}
 		}
 		else {
