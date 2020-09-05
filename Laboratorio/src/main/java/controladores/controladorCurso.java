@@ -25,9 +25,13 @@ public class controladorCurso implements IcontroladorCurso{
 		if(mc.existeCurso(nombre))
 			throw new CursoRepetidoExcepcion("La clase de Nombre " + nombre + "ya existe dentro del Sistema");
 		else {
-			Instituto I = mI.buscarInstituto(instituto);
-			Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
-			mc.agregarCurso(cursoNuevo);
+			if(mI.existeInstituto(instituto)){
+				Instituto I = mI.buscarInstituto(instituto);
+				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
+				mc.agregarCurso(cursoNuevo);
+			}
+			else
+				throw new CursoRepetidoExcepcion("El instituto " + instituto + "no existe");
 		}
 	}
 	
