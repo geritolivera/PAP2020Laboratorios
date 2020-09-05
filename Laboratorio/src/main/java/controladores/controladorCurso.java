@@ -144,7 +144,7 @@ public class controladorCurso implements IcontroladorCurso{
 		return listProgramas;
 	}
 	
-	@Override
+	/*@Override
 	public void agregarCursoPrograma(String nomCur, String nomP){
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
@@ -153,7 +153,7 @@ public class controladorCurso implements IcontroladorCurso{
 		p.agregarCurso(c);
 		c.agregarPrograma(p);
 	}//Revisar
-		
+		*/
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();

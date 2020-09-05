@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JInternalFrame;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 import exepciones.*;
 import interfaces.*;
@@ -31,7 +33,7 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField textFieldApellido;
 	private JTextField textFieldEmail;
 	private JDateChooser dateChooser;
-	private JTextField textFieldInstituto;
+	private JComboBox<String> institutoChoose;
 	
 
 	public AltaUsuario(IcontroladorUsuario icon) {
@@ -101,10 +103,9 @@ public class AltaUsuario extends JInternalFrame {
 		dateChooser.setBounds(165, 180, 130, 25);
 		getContentPane().add(dateChooser);
 		
-		textFieldInstituto = new JTextField();
-		textFieldInstituto.setColumns(10);
-		textFieldInstituto.setBounds(165, 220, 130, 25);
-		getContentPane().add(textFieldInstituto);
+		JComboBox comboBoxInstituto = new JComboBox<String>();
+		comboBoxInstituto.setBounds(165, 225, 130, 25);
+		getContentPane().add(comboBoxInstituto);
 
 		JButton ButtonAceptar = new JButton("Aceptar");
 		ButtonAceptar.setBounds(325, 70, 90, 25);
@@ -119,7 +120,6 @@ public class AltaUsuario extends JInternalFrame {
 		ButtonCancelar.setBounds(325, 140, 90, 25);
 		getContentPane().add(ButtonCancelar);
 		
-
 	}
 
 	protected void cancelarAltaUsuario(ActionEvent arg0) {
@@ -133,20 +133,27 @@ public class AltaUsuario extends JInternalFrame {
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
-		String instituto = this.textFieldInstituto.getText();
-		/*if(checkFormulario()) {
+		String instituto = this.institutoChoose.getSelectedItem().toString();
+		if(checkFormulario()) {
 			try {
 				if(!instituto.isEmpty()) {
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con éxito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 				} else {
 					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con éxito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
 				}
 			} catch(UsuarioRepetidoExcepcion u) {
 			JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
 		limpiarFormulario();
 		setVisible(false);
-		}*/
+		}
+	}
+	
+	public void iniciarlizarComboBoxes() {
+		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstituto());
+		institutoChoose.setModel(listInst);
 	}
 	
 	private boolean checkFormulario() {
@@ -178,6 +185,5 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNombre.setText("");
 		textFieldApellido.setText("");
 		dateChooser = null;
-		textFieldInstituto.setText("");
 	}
 }

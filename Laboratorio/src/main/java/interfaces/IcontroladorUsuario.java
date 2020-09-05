@@ -36,4 +36,6 @@ public interface IcontroladorUsuario {
 	//12 - Alta de Instituto
 	public void AltaInstituto(String nombre) throws InstitutoRepetidoExcepcion;
 	
+	//Funciones auxiliares
+	public String[] listarInstituto(); //Lista los usuarios
 }

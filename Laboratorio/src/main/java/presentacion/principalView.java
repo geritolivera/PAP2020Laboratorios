@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import interfaces.*;
+import presentacion.usuario.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -52,7 +53,7 @@ public class principalView {
 		Dimension jIternalFrameSize;
 		
 		
-		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario();
+		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario(iusu);
 		jIternalFrameSize = altaUsuarioInternalFrame.getSize();
 		altaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaUsuarioInternalFrame.setVisible(false);
@@ -65,7 +66,7 @@ public class principalView {
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
 		consultaUsuarioInternalFrame.setVisible(false);
 		
-		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario();
+		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario(iusu);
 		jIternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();
 		modificarDatosUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		modificarDatosUsuarioInternalFrame.setVisible(false);
