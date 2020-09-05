@@ -19,13 +19,14 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoRepetidoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
-		if(mc.existeCurso(datosCurso.getNombre()))
-			throw new CursoRepetidoExcepcion("La clase de Nombre " + datosCurso.getNombre() + "ya existe dentro del Sistema");
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		if(mc.existeCurso(nombre))
+			throw new CursoRepetidoExcepcion("La clase de Nombre " + nombre + "ya existe dentro del Sistema");
 		else {
-			Instituto I = new Instituto(datosCurso.getNombre());
-			Curso cursoNuevo = new Curso(datosCurso.getNombre(),datosCurso.getDescripcion(),datosCurso.getDuracion(),datosCurso.getCantHoras(),datosCurso.getCreditos(),datosCurso.getFechaR(),datosCurso.getUrl(),I);
+			Instituto I = mI.buscarInstituto(instituto);
+			Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
 			mc.agregarCurso(cursoNuevo);
 		}
 	}
@@ -152,8 +153,11 @@ public class controladorCurso implements IcontroladorCurso{
 		ProgramaFormacion p = mPro.buscarPrograma(nomP);
 		p.agregarCurso(c);
 		c.agregarPrograma(p);
-	}//Revisar
-		
+	}
+	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//11 - Consulta de Programa de Formacion
+	//Se utiliza la misma funcion de listarProgramas
 	@Override
 	public DTProgramaFormacion verInfoPrograma(String nombreProg){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
@@ -164,34 +168,6 @@ public class controladorCurso implements IcontroladorCurso{
 			dt.agregarCurso(c.getNombre());
 		}
 		return dt;
-	}
-		
-	
-	/*-------------------------------------------------------------------------------------------------------------*/
-	//11 - Consulta de Programa de Formacion
-	//Se utiliza la misma funcion de listarProgramas
-	@Override
-	public DTProgramaFormacion seleccionarPrograma(String nomP){
-		manejadorPrograma mp = manejadorPrograma.getInstancia();
-		ProgramaFormacion prog = mp.buscarPrograma(nomP);
-		if(prog != null) {
-			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog);
-			return dtProg;
-		} else {
-			return null;
-		}
-	}
-		
-	@Override
-	public DTCurso seleccionarCursoEnPrograma(String nomC) {
-		manejadorCurso mc = manejadorCurso.getInstancia();
-		Curso cur = mc.buscarCurso(nomC);
-		if(cur != null) {
-			DTCurso dtCur = new DTCurso(cur);
-			return dtCur;
-		} else {
-			return null;
-		}
 	}
 		
 	

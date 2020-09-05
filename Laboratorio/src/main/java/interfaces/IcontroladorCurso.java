@@ -11,7 +11,7 @@ import exepciones.*;
 public interface IcontroladorCurso {
 
 	//4 - Alta de Curso
-	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion;
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoRepetidoExcepcion;
 	
 	//5 - Consulta de Curso
 	public ArrayList<String> listarCursos(String nombreInstituto);
@@ -38,14 +38,10 @@ public interface IcontroladorCurso {
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
-	
-	public DTProgramaFormacion verInfoPrograma(String nombreProg);
-	
 	public void agregarCursoPrograma(String nomCur, String nomP);
 	
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
-	public DTProgramaFormacion seleccionarPrograma(String nomP);
-	public DTCurso seleccionarCursoEnPrograma(String nomC);
+	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	//Se utiliza la misma funcion listarCursos
 }
