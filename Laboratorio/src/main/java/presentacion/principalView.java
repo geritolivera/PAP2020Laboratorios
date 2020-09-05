@@ -52,7 +52,7 @@ public class principalView {
 		Dimension jIternalFrameSize;
 		
 		
-		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario();
+		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario(iusu);
 		jIternalFrameSize = altaUsuarioInternalFrame.getSize();
 		altaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaUsuarioInternalFrame.setVisible(false);
