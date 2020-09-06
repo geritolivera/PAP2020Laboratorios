@@ -143,7 +143,7 @@ public class AltaUsuario extends JInternalFrame {
 					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con éxito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
 				}
-			} catch(UsuarioRepetidoExcepcion u) {
+			} catch(UsuarioExcepcion u) {
 			JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
 		limpiarFormulario();

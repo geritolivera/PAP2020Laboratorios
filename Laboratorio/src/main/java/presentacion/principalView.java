@@ -25,6 +25,7 @@ public class principalView {
 	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
 	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
+	private presentacion.programaFormacion.ConsultaProgramaFormacion consultaProgramaFormacionInternalFrame;
 	
 	/**
 	 * Launch the application.
@@ -50,6 +51,7 @@ public class principalView {
 		
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario iusu = fab.getIcontroladorUsuario();
+		IcontroladorCurso icurso = fab.getIcontroladorCurso();
 		
 		Dimension escritorioTam = frame.getSize();
 		Dimension jIternalFrameSize;
@@ -74,13 +76,13 @@ public class principalView {
 		modificarDatosUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(modificarDatosUsuarioInternalFrame);
 		
-		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion();
+		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion(icurso);
 		jIternalFrameSize = crearPDFInternalFrame.getSize();
 		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		crearPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(crearPDFInternalFrame);
 		
-		agregarCusroPDFInternalFrame = new presentacion.programaFormacion.AgregarCursoPorgramaFormacion();
+		agregarCusroPDFInternalFrame = new presentacion.programaFormacion.AgregarCursoPorgramaFormacion(icurso);
 		jIternalFrameSize = agregarCusroPDFInternalFrame.getSize();
 		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		agregarCusroPDFInternalFrame.setVisible(false);
@@ -96,13 +98,13 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 700, 450);
+		frame.setBounds(100, 100, 900, 780);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 				
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 684, 21);
+		menuBar.setBounds(0, 0, 900, 21);
 		frame.getContentPane().add(menuBar);
 		
 		/*---------- Usuario ----------*/
@@ -170,13 +172,18 @@ public class principalView {
 		
 		JMenuItem MenuItemCursoProgForm = new JMenuItem("Agregar Curso a Programa de Formacion");
 		MenuItemCursoProgForm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				agregarCusroPDFInternalFrame.setVisible(true);
 			}
 		});
 		MenuProgramaFormacion.add(MenuItemCursoProgForm);
 		
 		JMenuItem MenuItemConsultaProgForm = new JMenuItem("Consulta de Programa de Formacion");
+		MenuItemConsultaProgForm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consultaProgramaFormacionInternalFrame.setVisible(true);
+			}
+		});
 		MenuProgramaFormacion.add(MenuItemConsultaProgForm);
 		
 		/*---------- Instituto ----------*/

@@ -39,7 +39,8 @@ public interface IcontroladorCurso {
 	
 	//10 - Agregar Curso a Programa de Formacion
 	public ArrayList<String> listarProgramas();
-	
+	public ArrayList<String> listarCursos();
+	void agregarCursoPrograma(String nomCur, String nomP);
 	public DTProgramaFormacion verInfoPrograma(String nombreProg);
 	
 	//11 - Consulta de Programa de Formacion
@@ -49,4 +50,8 @@ public interface IcontroladorCurso {
 	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
+
+	
+
+	
 }

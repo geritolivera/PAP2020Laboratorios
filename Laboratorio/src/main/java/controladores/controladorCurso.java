@@ -1,6 +1,7 @@
 package controladores;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -158,13 +159,12 @@ public class controladorCurso implements IcontroladorCurso{
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
-	@Override
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion{	
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
 		if(mpf.existePrograma(nombre)) {
 			throw new ProgramaFormacionExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
 		} else {
-			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fechaA);
+			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
 			mpf.agregarPrograma(nuevoProg);
 		}		
 	}
@@ -179,6 +179,17 @@ public class controladorCurso implements IcontroladorCurso{
 		ArrayList<String> listProgramas = new ArrayList<>();
 		for(ProgramaFormacion p: programas) {
 			listProgramas.add(p.getNombre());
+		}
+		return listProgramas;
+	}
+	
+	@Override
+	public ArrayList<String> listarCursos(){
+		manejadorCurso mCur = manejadorCurso.getInstancia();
+		List<Curso> cursos= mCur.getCursos();
+		ArrayList<String> listProgramas = new ArrayList<>();
+		for(Curso c: cursos) {
+			listProgramas.add(c.getNombre());
 		}
 		return listProgramas;
 	}

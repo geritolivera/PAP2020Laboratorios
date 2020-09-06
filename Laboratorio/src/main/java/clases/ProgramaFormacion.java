@@ -1,4 +1,5 @@
 package clases;
+import java.time.LocalDate;
 //Prueba
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,13 @@ public class ProgramaFormacion {
 	public ProgramaFormacion() {
 		super();
 	}
-	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) {
+	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
-		this.fechaA = fechaA;
+		this.fechaA = fActual;
 	}
 	
 	public String getNombre() {
