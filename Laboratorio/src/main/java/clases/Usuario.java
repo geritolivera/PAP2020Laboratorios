@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class Usuario {
@@ -8,7 +10,7 @@ public class Usuario {
 	private String apellido;
 	private String correo;
 	private Date fechaNac;
-	
+		
 	public Usuario() {
 		super();
 	}
@@ -55,4 +57,6 @@ public class Usuario {
 	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
 	} 
+	
+	
 }

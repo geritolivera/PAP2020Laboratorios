@@ -9,18 +9,20 @@ public class ProgramaFormacion {
 	private String descripcion;
 	private Date fechaI;
 	private Date fechaF;
+	private Date fechaA;
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	private List<Curso> cursos = new ArrayList<>();
 	
 	public ProgramaFormacion() {
 		super();
 	}
-	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF) {
+	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
+		this.fechaA = fechaA;
 	}
 	
 	public String getNombre() {
@@ -49,6 +51,13 @@ public class ProgramaFormacion {
 	}
 	public void setFechaF(Date fechaF) {
 		this.fechaF = fechaF;
+	}
+	
+	public Date getFechaA() {
+		return fechaA;
+	}
+	public void setFechaA(Date fechaA) {
+		this.fechaA = fechaA;
 	}
 	
 	public void agregarEstudiante(Estudiante estudiante) {

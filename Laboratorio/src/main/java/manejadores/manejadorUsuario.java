@@ -26,6 +26,12 @@ public class manejadorUsuario {
 		em.getTransaction().commit();
 	}
 	
+	public Usuario buscarUsuarioNickname(String nickname) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.find(Usuario.class, nickname);
+	}
+	
 	public Usuario buscarUsuario(String nombre) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();

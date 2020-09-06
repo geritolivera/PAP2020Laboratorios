@@ -19,7 +19,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuarios
-	@Override
+	/*@Override
 	
 	 public void AltaUsuario(DTUsuario usuario)throws UsuarioRepetidoExcepcion{
 	 manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -33,22 +33,30 @@ public class controladorUsuario implements IcontroladorUsuario{
 	 if (usuario instanceof DTEstudiante)
 		 u = new Estudiante (usuario.getNick(),usuario.getNombre(),usuario.getApellido(),usuario.getCorreo(),usuario.getFechaNac());
 	 mU.agregarUsuario(u);
-	}
+	}*/
 	
-	public String ingresarUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, boolean esDocente) {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
-			if(esDocente) {
-				Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
-				mUsu.agregarUsuario(doc);
-			}
-			else {
+			//si la string instituto no tiene nada
+			if(instituto.isEmpty()) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
+				
 			}
-			return "Usuario agregado";
+			else {
+				if(mIns.existeInstituto(instituto)) {
+					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+					Instituto ins = mIns.buscarInstituto(instituto);
+					doc.setInstituto(ins);
+					mUsu.agregarUsuario(doc);
+				}
+			}
 		}
-		return "Nick o Correo ya en uso.";
+		else {
+			throw new UsuarioExcepcion("Nickname o correo ya en uso");
+		}
 	}
 	
 	
@@ -61,7 +69,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
 		for(Usuario u: usuarios) {
-			DTUsuario dt = new DTUsuario(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			DTUsuario dt = new DTUsuario(u);
 			listUsers.add(dt);
 		}
 		return listUsers;
@@ -124,12 +132,26 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//Se utiliza la misma funcion listarUsuario
 	@Override
 	public DTUsuario seleccionarUsuario(String nickname){
-		DTUsuario a = null;
-		return a;
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuario(nickname);
+		if(u != null) {
+			DTUsuario dtU = new DTUsuario(u);
+			return dtU;
+		} else {
+		return null;
+		}
 	}
 	
 	@Override
-	public void nuevosDatos(String nombre, String apellido, Date fechaNaci){}
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		Usuario u = mu.buscarUsuarioNickname(nickname);
+		if(u != null) {
+			u.setNombre(nombre);
+			u.setApellido(apellido);
+			u.setFechaNac(fechaNaci);
+		}
+	}
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -152,18 +174,32 @@ public class controladorUsuario implements IcontroladorUsuario{
 	@Override
 	public void agregarEdicionUsuario(EdicionCurso edV){}
 	
-	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
-	@Override
-	public void ingresarNuevoInstituto(String nombre){}
-	
-	@Override
-	public boolean confirmarAlta(String nombre){
-		return true;
-	}
-	
-	@Override
-	public void cancelarAltaInstituto(){}
-	
+		@Override
+		public void AltaInstituto(String nombre) throws InstitutoExcepcion{
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			Instituto nuevoI = mi.buscarInstituto(nombre);
+			if(nuevoI != null) {
+				throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+			} else {
+				mi.agregarInstituto(nuevoI);
+			}
+		}
+		
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Funciones auxiliares
+		@Override
+		public String[] listarInstituto() {
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			List<Instituto> listIn = mi.getInstituto();
+			String[] institutos = new String[listIn.size()];
+			int i = 0;
+			for(Instituto ins : listIn) {
+				institutos[i] = ins.getNombre();
+				i++;
+			}
+			return institutos;
+		}
+		
 }

@@ -3,7 +3,6 @@ package datatypes;
 import java.util.Date;
 
 import clases.EdicionCurso;
-import clases.Curso;
 
 public class DTEdicionCurso {
 	private String nombre;

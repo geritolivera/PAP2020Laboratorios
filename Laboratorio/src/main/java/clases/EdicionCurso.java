@@ -13,6 +13,7 @@ public class EdicionCurso {
 	private Curso curso;
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	private List<Docente> docentes = new ArrayList<>();
+	private List<Inscripcion> inscripciones = new ArrayList<>();
 	
 	public EdicionCurso() {
 		super();
@@ -84,6 +85,23 @@ public class EdicionCurso {
 	}
 	public List<Docente> getDocentes() {
 		return docentes;
+	}
+	
+	public void agregarInscripcion(Date fecha, Usuario user) {
+		Inscripcion ins = new Inscripcion(fecha, user, this);
+		inscripciones.add(ins);
+	}
+	public List<Inscripcion> getInscripciones(){
+		return inscripciones;
+	}
+	//prototipo de borrado de inscripcion
+	public void borrarInscripcion(Date fecha) {
+		List<Inscripcion> list = this.getInscripciones();
+		for(Inscripcion i : list) {
+			if(i.getFecha() == fecha) {
+				list.remove(i);
+			}
+		}
 	}
 
 }
