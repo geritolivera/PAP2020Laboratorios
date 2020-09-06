@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JInternalFrame;
@@ -103,11 +102,16 @@ public class AltaUsuario extends JInternalFrame {
 		dateChooser.setBounds(165, 180, 130, 25);
 		getContentPane().add(dateChooser);
 		
-		JComboBox comboBoxInstituto = new JComboBox<String>();
-		comboBoxInstituto.setBounds(165, 225, 130, 25);
-		getContentPane().add(comboBoxInstituto);
+		institutoChoose = new JComboBox<String>();
+		institutoChoose.setBounds(165, 225, 130, 25);
+		getContentPane().add(institutoChoose);
 
 		JButton ButtonAceptar = new JButton("Aceptar");
+		ButtonAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaUsuarioActionPerformed(e);
+			}
+		});
 		ButtonAceptar.setBounds(325, 70, 90, 25);
 		getContentPane().add(ButtonAceptar);
 

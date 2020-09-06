@@ -1,21 +1,17 @@
 package presentacion.usuario;
 
-import java.awt.EventQueue;
-import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
-
-import interfaces.*;
-import javax.swing.JButton;
+import java.util.List;
 
 import com.toedter.calendar.JDateChooser;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JTable;
+
+import java.awt.*;
+
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import interfaces.*;
+import datatypes.*;
 
 public class ModificarDatosUsuario extends JInternalFrame {
 
@@ -28,6 +24,10 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	private JTextField NuevoNombre;
 	private JTextField textNickname;
 	private JTextField textCorreo;
+	private JList<String> nicknameUsu;
+	private List<DTUsuario> listaUsuarios;
+	private String[] correos;
+	private int contadorCorreo;
 	
 	public ModificarDatosUsuario(IcontroladorUsuario icon) {
 		this.icon = icon;
@@ -39,57 +39,66 @@ public class ModificarDatosUsuario extends JInternalFrame {
         setTitle("Modificar Datos de Usuario");
 		setBounds(100, 100, 570, 390);
 		getContentPane().setLayout(null);
-				
-		JButton ButtonSeleccionarUsu = new JButton("Seleccionar Usuario");
-		ButtonSeleccionarUsu.setBounds(340, 15, 130, 30);
-		getContentPane().add(ButtonSeleccionarUsu);
 		
+		
+		//Lista con usuarios
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(30, 60, 185, 240);
+		getContentPane().add(scrollPane);
+		nicknameUsu = new JList<String>();
+		nicknameUsu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(nicknameUsu);
+		
+		//Listar Usuario boton
 		JButton ButtonListarUsu = new JButton("Listar Usuarios");
-		ButtonListarUsu.setBounds(80, 15, 130, 30);
-		getContentPane().add(ButtonListarUsu);
-		
-		JTable tableUsu = new JTable(new DefaultTableModel(
-			new Object[][] {
-				{"hOLA", "hOLA", "hOLA", "hOLA", "hOLA"}
-			},
-			new String[] {
-				"Nombre", "Apellido", "Nickname", "Correo", "Fecha Nacimiento"
+		ButtonListarUsu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarUsuarios(e);
 			}
-		));
-		tableUsu.setRowSelectionAllowed(false);
-		tableUsu.setFillsViewportHeight(true);
-		tableUsu.setColumnSelectionAllowed(true);
-		tableUsu.setBounds(35, 55, 475, 105);
-		getContentPane().add(tableUsu);
+		});
+		ButtonListarUsu.setBounds(60, 20, 130, 30);
+		getContentPane().add(ButtonListarUsu);
+	
+		//Selecionar usuario boton
+		JButton ButtonSeleccionarUsu = new JButton("Seleccionar Usuario");
+		ButtonSeleccionarUsu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				seleccionarUsuario(e);
+			}
+		});
+		ButtonSeleccionarUsu.setBounds(60, 310, 130, 30);
+		getContentPane().add(ButtonSeleccionarUsu);		
 		
 		JLabel LabelDatosElegidos = new JLabel("Datos de Usuario elegido: ");
 		LabelDatosElegidos.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		LabelDatosElegidos.setBounds(35, 175, 195, 24);
+		LabelDatosElegidos.setBounds(305, 30, 195, 25);
 		getContentPane().add(LabelDatosElegidos);
 		
 		JLabel LabelNickname = new JLabel("Nickname");
 		LabelNickname.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelNickname.setBounds(35, 210, 63, 15);
+		LabelNickname.setBounds(285, 85, 63, 15);
 		getContentPane().add(LabelNickname);
 		
 		textNickname = new JTextField();
 		textNickname.setColumns(10);
-		textNickname.setBounds(110, 205, 130, 25);
+		textNickname.setBounds(360, 80, 150, 25);
 		getContentPane().add(textNickname);
 		
 		JLabel LabelCorreo = new JLabel("Correo");
 		LabelCorreo.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelCorreo.setBounds(35, 245, 45, 15);
+		LabelCorreo.setBounds(290, 135, 45, 15);
 		getContentPane().add(LabelCorreo);
 		
 		textCorreo = new JTextField();
 		textCorreo.setColumns(10);
-		textCorreo.setBounds(110, 240, 130, 25);
+		textCorreo.setBounds(360, 130, 150, 25);
 		getContentPane().add(textCorreo);
 
 		JLabel LabelNuevosDatos = new JLabel("Ingresar nuevos datos: ");
 		LabelNuevosDatos.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		LabelNuevosDatos.setBounds(305, 175, 178, 24);
+		LabelNuevosDatos.setBounds(305, 170, 178, 25);
 		getContentPane().add(LabelNuevosDatos);
 		
 		JLabel LabelNombre = new JLabel("Nombre");
@@ -123,12 +132,62 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		getContentPane().add(dateChooser);
 		
 		JButton ButtonAceptar = new JButton("Aceptar");
+		ButtonAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modificarDatos(e);
+			}
+		});
 		ButtonAceptar.setBounds(250, 310, 100, 30);
 		getContentPane().add(ButtonAceptar);
 		
 		JButton ButtonCancelar = new JButton("Cancelar");
+		ButtonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cancelarModificarDatos(arg0);
+			}
+		});
 		ButtonCancelar.setBounds(410, 310, 100, 30);
 		getContentPane().add(ButtonCancelar);	
-
+				
+		
+	}
+	
+	//Cancelar
+	protected void cancelarModificarDatos(ActionEvent arg0){
+		limpiarFormulario();
+		setVisible(false);
+	}
+	
+	//Retorna Nickname de Usuarios 
+	public void listarUsuarios(ActionEvent arg0) {
+		listaUsuarios = icon.listarDTUsuarios();
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		correos = new String[icon.listarDTUsuarios().size()];
+		contadorCorreo = 0;
+		for(DTUsuario s : listaUsuarios) {
+		 	correos[contadorCorreo] = s.getCorreo();
+			listModel.addElement(s.getNick());
+			contadorCorreo++;
+		}
+		nicknameUsu.setModel(listModel);
+	}
+	
+	public void seleccionarUsuario(ActionEvent arg0) {
+		this.textNickname.setText(nicknameUsu.getSelectedValue());
+		this.textCorreo.setText(correos[nicknameUsu.getSelectedIndex()]);
+	}
+	
+	public void modificarDatos(ActionEvent arg0) {
+		icon.nuevosDatos(nicknameUsu.getSelectedValue(),this.NuevoNombre.toString(),this.nuevoApellido.toString(),this.dateChooser.getDate());
+	}
+	
+	
+	//Limpia el formulario
+	private void limpiarFormulario() {
+		textCorreo.setText("");
+		textNickname.setText("");
+		NuevoNombre.setText("");
+		nuevoApellido.setText("");
+		dateChooser = null;
 	}
 }

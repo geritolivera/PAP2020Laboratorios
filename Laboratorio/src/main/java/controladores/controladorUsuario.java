@@ -80,7 +80,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		ArrayList<String> listUsers = new ArrayList<>();
 		for(Usuario u: usuarios) {
-			listUsers.add(u.getNombre());
+			listUsers.add(u.getNick());
 		}
 		return listUsers;
 	}
@@ -189,7 +189,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
-		@Override
+		@Override //Lista los nombres de los institutos
 		public String[] listarInstituto() {
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
 			List<Instituto> listIn = mi.getInstituto();

@@ -108,7 +108,7 @@ public class controladorCurso implements IcontroladorCurso{
 		return dt;
 	}
 	
-	
+	 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
