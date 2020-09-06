@@ -9,6 +9,7 @@ import exepciones.*;
 import manejadores.*;
 
 import interfaces.IcontroladorCurso;
+import logica.ManejadorSocio;
 
 public class controladorCurso implements IcontroladorCurso{
 	public controladorCurso() {
@@ -45,7 +46,6 @@ public class controladorCurso implements IcontroladorCurso{
 	
 	@Override
 	public DTCurso verInfo(String nomCurso) {
-		manejadorCurso mCur = manejadorCurso.getInstancia();
 		Curso c = mCur.buscarCurso(nomCurso);
 		DTCurso dt = new DTCurso(c.getNombre(), c.getDescripcion(), c.getDuracion(), c.getCantHoras(), c.getCreditos(), c.getFechaR(), c.getUrl(), c.getNomInstituto());
 		return dt;
@@ -189,4 +189,32 @@ public class controladorCurso implements IcontroladorCurso{
 			mi.agregarInstituto(nuevoI);
 		}
 	}
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Listados para comboBoxes
+	public String[] listarInstitutos() {
+		ArrayList<String> institutos;
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		institutos = mI.obtenerInstitutos();
+		String[] institutos_ret = new String[institutos.size()];
+        int i=0;
+        for(String in:institutos) {
+        	institutos_ret[i]=in;
+        	i++;
+        }
+        return institutos_ret;
+	}
+	
+	public String[] listarCursos(nombreInstituto) {
+		/*ArrayList<String> cursos;//ver que me devuelva los objetos del curso y buscar los que pertenecen a ese instituto
+		manejadorCurso mC = manejadorCurso.getInstancia();
+		cursos = mC.obtenerCursos(nombreInstituto);
+		String[] cursos_ret = new String[cursos.size()];
+        int i=0;
+        for(String c:cursos) {
+        	cursos_ret[i]=c;
+        	i++;
+        }
+        return cursos_ret;*/	
+	}
+	
 }

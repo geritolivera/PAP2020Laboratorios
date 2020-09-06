@@ -13,7 +13,7 @@ public interface IcontroladorCurso {
 	public void AltaCurso(DTCurso datosCurso) throws CursoRepetidoExcepcion;
 	
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto);
+	public String[] listarCursos(String nombreInstituto);
 	public DTCurso verInfo(String nomCurso);
 	
 	//6 - Alta de Edicion de Curso
@@ -52,5 +52,6 @@ public interface IcontroladorCurso {
 	//12 - Alta de Instituto
 	public void AltaInstituto(String nombre)/* throws InstitutoRepetidoException*/;//Falta añadir la excepcion en el import
 	
-
+	//public String[] listarCursos(nombreInstituto);
+	public String[] listarInstitutos();
 }
