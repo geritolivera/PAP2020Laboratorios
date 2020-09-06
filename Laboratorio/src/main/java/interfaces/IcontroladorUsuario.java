@@ -28,5 +28,5 @@ public interface IcontroladorUsuario {
 	public void AltaInstituto(String nombre) throws InstitutoExcepcion;
 	
 	//Funciones auxiliares
-	public ArrayList<String> listarInstituto();
+	public String[] listarInstituto() listarInstituto();
 }

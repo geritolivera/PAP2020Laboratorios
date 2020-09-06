@@ -116,7 +116,7 @@ public class controladorCurso implements IcontroladorCurso{
 			throw new EdicionExcepcion("La edicion " + nomEdicion + " no existe.");
 	}
 	
-	
+	 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos

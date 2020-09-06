@@ -1,21 +1,12 @@
 package presentacion;
 
-import presentacion.usuario.*;
+import java.awt.*;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import interfaces.*;
-import presentacion.usuario.*;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import java.awt.event.*;
 
 public class principalView {
 
@@ -54,26 +45,32 @@ public class principalView {
 		Dimension escritorioTam = frame.getSize();
 		Dimension jIternalFrameSize;
 		
+		//Aca va todo la logica de los internal frames
 		
+		/*----------------------------------------Usuario----------------------------------------*/
+		//Alta Usuario
 		altaUsuarioInternalFrame = new presentacion.usuario.AltaUsuario(iusu);
 		jIternalFrameSize = altaUsuarioInternalFrame.getSize();
 		altaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaUsuarioInternalFrame);
 		
-		
+		//Consulta de Usuario
 		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario();
 		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
 		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
 		consultaUsuarioInternalFrame.setVisible(false);
 		
+		//Modificar Datos de Usuario
 		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario(iusu);
 		jIternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();
 		modificarDatosUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		modificarDatosUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(modificarDatosUsuarioInternalFrame);
 		
+		/*----------------------------------------Programa de Formacion----------------------------------------*/
+		//Crear Programa de Formacion
 		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion();
 		jIternalFrameSize = crearPDFInternalFrame.getSize();
 		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
@@ -86,8 +83,9 @@ public class principalView {
 		agregarCusroPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
 		
-		//Aca va todo la logica de los internal frames
 		
+		/*------------------------------Instituto------------------------------*/
+		//Alta de Instituto
 		
 	}
 
