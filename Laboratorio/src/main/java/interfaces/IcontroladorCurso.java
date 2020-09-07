@@ -1,8 +1,6 @@
 package interfaces;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 import clases.*;
 import datatypes.*;

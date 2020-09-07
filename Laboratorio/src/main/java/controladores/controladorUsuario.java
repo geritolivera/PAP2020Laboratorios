@@ -19,7 +19,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion, InstitutoExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
@@ -28,20 +28,21 @@ public class controladorUsuario implements IcontroladorUsuario{
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
-			}
-			else {
+			}else {
 				if(mIns.existeInstituto(instituto)) {
 					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
 					Instituto ins = mIns.buscarInstituto(instituto);
 					doc.setInstituto(ins);
 					mUsu.agregarUsuario(doc);
 				}
-				else 
-					throw new InstitutoExcepcion("El instituto " + instituto + " no existe");
 			}
-		}
-		else {
-			throw new UsuarioExcepcion("Nickname o correo ya en uso");
+		} else {
+			if(mUsu.existeUsuarioNick(nickname)) {
+				throw new UsuarioExcepcion("El Nickname '" + nickname +"' ya existe en el sistema");
+			}
+			if(mUsu.existeUsuarioNick(correo)) {
+				throw new UsuarioExcepcion("El Correo '" + correo +"' ya existe en el sistema");
+			}
 		}
 	}
 	
@@ -136,7 +137,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	}*/
 	
 	@Override
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		if(mu.existeUsuarioNick(nickname)){
 			Usuario u = mu.buscarUsuarioNickname(nickname);
@@ -144,8 +145,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 			u.setApellido(apellido);
 			u.setFechaNac(fechaNaci);
 		}
-		else
-			throw new UsuarioExcepcion("El usuario " + nickname + " no existe");
 	}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
