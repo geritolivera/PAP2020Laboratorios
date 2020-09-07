@@ -55,4 +55,5 @@ public interface IcontroladorCurso {
 	public String[] listarCursosAux(String nombreInstiuto);
 	public String[] listarEdicionesAux(String nombreCurso);
 	public String[] listarDocentesAux(String nomEdicion);
+	public String[] listarDocentesInstituto(String nomInstituto);
 }

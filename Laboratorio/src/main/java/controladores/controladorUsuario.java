@@ -185,6 +185,19 @@ public class controladorUsuario implements IcontroladorUsuario{
 			}
 			return institutos;
 		}
+		public String[] listarEstudiantesAux(){
+			manejadorUsuario mU = manejadorUsuario.getInstancia();
+			List<Usuario> listUs = mU.getUsuarios();
+			String[] estudiantes = new String[listUs.size()];//ver esta funcion
+			int i=0;
+			for(Usuario us:listUs) {
+				if(us instanceof Estudiante) {
+					estudiantes[i]= us.getNick();
+					i++;
+				}
+			}
+			return estudiantes;
+		}
 	
 		
 }

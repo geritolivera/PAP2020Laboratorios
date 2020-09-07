@@ -280,5 +280,17 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return docente_ret; 
 	}
-		
+	
+	public String[] listarDocentesInstituto(String nomInstituto) {
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		Instituto inst = mI.buscarInstituto(nomInstituto);
+		List<Docente> docentes = inst.getDocentes();
+		String[] docentes_ret = new String[docentes.size()] ;
+		int i=0;
+		for(Docente d:docentes) {
+			docentes_ret[i]=d.getNick();
+			i++;
+		}
+		return docentes_ret;
+	}
 }

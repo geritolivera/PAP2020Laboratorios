@@ -41,5 +41,7 @@ public interface IcontroladorUsuario {
 	//Funciones auxiliares
 
 	public String[] listarInstituto();
+
+	public String[] listarEstudiantesAux();
 	
 }

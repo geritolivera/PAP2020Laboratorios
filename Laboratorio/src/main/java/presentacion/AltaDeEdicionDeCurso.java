@@ -151,11 +151,6 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		listaDocentes = new List();
-		listaDocentes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				listaDocentesActionPerformed(arg0);
-			}
-		});
 		listaDocentes.setEnabled(false);
 		scrollPane.setViewportView(listaDocentes);
 		listaDocentes.setMultipleSelections(false);
@@ -171,19 +166,16 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(comboBoxInstituto);
 		
 	}
-	//se inicializa desde el principal
 	public void inicializarComboBoxInstituto() {
 		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
 		comboBoxInstituto.setModel(modelInstitutos);
 	}
 	
-	//se inicializa dentro del cbinstitutoactionevent
 	protected void inicializarComboBoxCursos(String nombreInstituto) {
 		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
 		comboBoxCursos.setModel(modelCursos);
 	}
 	
-	//El us eligio un instituto, entonces le listo los cursos
 	protected void cbInstitutoActionPerformed(ActionEvent arg0) {
 		String nombreInstituto = this.comboBoxInstituto.getSelectedItem().toString();
 		if(nombreInstituto.isEmpty()) {
@@ -193,16 +185,14 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		}	
 	}
 	
-	private ArrayList<String> listaDocentesActionPerformed(ActionEvent arg0) {
-		return null;
+	protected void llenarLista() {//ver
+		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		String[] lisDocentes = iconC.listarDocentesInstituto(nomInstituto);
+		for(int i = 0;i < lisDocentes.length;i++) {
+	        listModel.addElement(lisDocentes[i]);
+	    }
 	}
-	
-	//llenarlistadedocentes
-	protected void llenarLista() {
-		
-		
-	}
-	//El us eligio un curso , habilito los campos para que ingrese datos, y ademas lleno la lista de docentes
 	protected void cbCursoActionPerformed(ActionEvent arg0) {
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		if (curso.isEmpty()) {
@@ -213,10 +203,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			listaDocentes.setEnabled(true);
 			dateInicio.setEnabled(true);
 			dateFin.setEnabled(true);
-			llenarLista();
+			//ver aca
 		}
 	}
-	//El usuario acepta los datos
 	
 	protected void altaEdAceptarActionPerformed(ActionEvent arg0){
 		String nomEd = this.tfNombreEd.getText();
@@ -225,10 +214,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String cupo = this.tfCupo.getText();
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		Date fechPubli = Calendar.getInstance().getTime();
-		ArrayList<String> listaDocentes = listaDocentesActionPerformed(arg0);
 		if(checkFormulario()) {
 			try{
-				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,listaDocentes);
+				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,listaDocentes);//vercon camilo
 				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso",
 	                        JOptionPane.INFORMATION_MESSAGE);
 			}catch(EdicionExcepcion e){
@@ -259,5 +247,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	private void limpiarFormulario() {
         tfNombreEd.setText("");
         tfCupo.setText("");
+        dateInicio = null;
+        dateFin = null;
 	}
 }

@@ -105,7 +105,7 @@ public class principalView {
 		consultaEdicionCursoInternalFrame.setVisible(false);
 		frame.getContentPane().add(consultaEdicionCursoInternalFrame);
 		
-		inscripcionEdicionCursoInternalFrame = new InscripcionEdicionCurso(iconC);
+		inscripcionEdicionCursoInternalFrame = new InscripcionEdicionCurso(iconC,iusu);
 		jIternalFrameSize = inscripcionEdicionCursoInternalFrame.getSize();
 		inscripcionEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		inscripcionEdicionCursoInternalFrame.setVisible(false);
