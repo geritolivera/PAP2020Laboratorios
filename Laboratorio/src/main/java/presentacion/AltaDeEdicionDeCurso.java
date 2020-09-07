@@ -2,21 +2,19 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-
 import com.toedter.calendar.JDateChooser;
-
-import datatypes.DTDocente;
+import exepciones.CursoExcepcion;
 import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
-import interfaces.IcontroladorUsuario;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,21 +24,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JScrollPane;
 
 import java.awt.EventQueue;
-import java.awt.List;
 import javax.swing.ScrollPaneConstants;
 
 public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 	private IcontroladorCurso iconC;
-	private IcontroladorUsuario iusu;
 	private JTextField tfNombreEd;
 	private JTextField tfCupo;
 	private JComboBox<String> comboBoxInstituto;
 	private JComboBox<String> comboBoxCursos;
 	private JDateChooser dateInicio;
 	private JDateChooser dateFin;
-	private List listaDocentes;
+	private JList<String> listaDocentes;
+	private String[] lisDocentes;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,9 +53,8 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaDeEdicionDeCurso(IcontroladorCurso iconC, IcontroladorUsuario iusu) {
+	public AltaDeEdicionDeCurso(IcontroladorCurso iconC) {
 		this.iconC = iconC;
-		this.iusu = iusu;
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -146,14 +142,14 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(lblDocentes);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(133, 210, 110, 50);
 		getContentPane().add(scrollPane);
 		
-		listaDocentes = new List();
-		listaDocentes.setEnabled(false);
+		listaDocentes = new JList<String>();
 		scrollPane.setViewportView(listaDocentes);
-		listaDocentes.setMultipleSelections(false);
+		listaDocentes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		listaDocentes.setEnabled(false);
 		
 		comboBoxInstituto = new JComboBox<String>();
@@ -184,15 +180,16 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			inicializarComboBoxCursos(nombreInstituto);
 		}	
 	}
-	
-	protected void llenarLista() {//ver
+	protected void llenarLista() {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
-		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		String[] lisDocentes = iconC.listarDocentesInstituto(nomInstituto);
+		DefaultListModel<String> modelDocentes = new DefaultListModel<String>();
+		lisDocentes = iconC.listarDocentesInstituto(nomInstituto);
 		for(int i = 0;i < lisDocentes.length;i++) {
-	        listModel.addElement(lisDocentes[i]);
+	        modelDocentes.addElement(lisDocentes[i]);
 	    }
+		listaDocentes.setModel(modelDocentes);
 	}
+
 	protected void cbCursoActionPerformed(ActionEvent arg0) {
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		if (curso.isEmpty()) {
@@ -203,7 +200,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			listaDocentes.setEnabled(true);
 			dateInicio.setEnabled(true);
 			dateFin.setEnabled(true);
-			//ver aca
+			llenarLista();
 		}
 	}
 	
@@ -214,14 +211,17 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String cupo = this.tfCupo.getText();
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		Date fechPubli = Calendar.getInstance().getTime();
+		ArrayList<String> docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		if(checkFormulario()) {
 			try{
-				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,listaDocentes);//vercon camilo
+				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,docentes);
 				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso",
 	                        JOptionPane.INFORMATION_MESSAGE);
 			}catch(EdicionExcepcion e){
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
-			}			
+			}catch(CursoExcepcion e){
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	

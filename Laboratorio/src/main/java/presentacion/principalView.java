@@ -90,7 +90,7 @@ public class principalView {
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
 		
 		
-		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC,iusu);
+		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC);
 		jIternalFrameSize = altaEdicionCursoInternalFrame.getSize();
 		altaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaEdicionCursoInternalFrame.setVisible(false);

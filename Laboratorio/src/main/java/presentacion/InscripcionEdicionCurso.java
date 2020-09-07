@@ -12,8 +12,6 @@ import interfaces.IcontroladorUsuario;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 import exepciones.EdicionExcepcion;
 import exepciones.UsuarioExcepcion;
@@ -99,11 +97,6 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		
 		cbEstudiantes = new JComboBox<String>();
 		cbEstudiantes.setEnabled(false);
-		cbEstudiantes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cbEstudianteActionPerformed(arg0);
-			}
-		});
 		cbEstudiantes.setBounds(232, 148, 102, 20);
 		getContentPane().add(cbEstudiantes);
 		
@@ -160,6 +153,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		}else {
 			tfEdVigente.setEnabled(true);
 			cbEstudiantes.setEnabled(true);
+			cbEstudiantes.setEnabled(true);
 			DefaultComboBoxModel<String> modelEstudiantes = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
 			cbEstudiantes.setModel(modelEstudiantes);
 		}
@@ -175,8 +169,9 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 				this.iconC.inscribirEstudianteEdicion(nomEdicion, nickEstudiante, fecha);
 			}catch(EdicionExcepcion e){//ver como se ponen dos excepciones
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Inscripcion a Edicion de Curso", JOptionPane.ERROR_MESSAGE);
-			
-			}	
+			}catch(UsuarioExcepcion e) {
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Inscripcion a Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	

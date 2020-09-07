@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import datatypes.DTEdicionCurso;
+import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
 import javax.swing.JTextPane;
 import javax.swing.DefaultComboBoxModel;
@@ -193,20 +194,23 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		if(nomEdicion.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Consulta de Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 		}else {
-			DTEdicionCurso infoEd = iconC.verInfoEdicion(nomEdicion);
-			tfNombre.setText(infoEd.getNombre());
-			SimpleDateFormat fechaI = new SimpleDateFormat("yyyy/MM/dd");
-			String fechaItext = fechaI.format(infoEd.getFechaI());
-			SimpleDateFormat fechaF = new SimpleDateFormat("yyyy/MM/dd");
-			String fechaFtext = fechaF.format(infoEd.getFechaF());
-			SimpleDateFormat fechaP = new SimpleDateFormat("yyyy/MM/dd");
-			String fechaPtext = fechaP.format(infoEd.getFechaPub());
-			tfFechaInicio.setText(fechaItext);
-			tfFechaFin.setText(fechaFtext);
-			tfPublicacion.setText(fechaPtext);
-			tfCupo.setText(Integer.toString(infoEd.getCupo()));
-			cargarDocentesDeEdicion(nomEdicion);
-			
+			try{
+				DTEdicionCurso infoEd = iconC.verInfoEdicion(nomEdicion);
+				tfNombre.setText(infoEd.getNombre());
+				SimpleDateFormat fechaI = new SimpleDateFormat("yyyy/MM/dd");
+				String fechaItext = fechaI.format(infoEd.getFechaI());
+				SimpleDateFormat fechaF = new SimpleDateFormat("yyyy/MM/dd");
+				String fechaFtext = fechaF.format(infoEd.getFechaF());
+				SimpleDateFormat fechaP = new SimpleDateFormat("yyyy/MM/dd");
+				String fechaPtext = fechaP.format(infoEd.getFechaPub());
+				tfFechaInicio.setText(fechaItext);
+				tfFechaFin.setText(fechaFtext);
+				tfPublicacion.setText(fechaPtext);
+				tfCupo.setText(Integer.toString(infoEd.getCupo()));
+				cargarDocentesDeEdicion(nomEdicion);
+			}catch(EdicionExcepcion e){
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Consulta de Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			}	
 		}
 	}
 	protected void cargarDocentesDeEdicion(String nomEdicion) {
