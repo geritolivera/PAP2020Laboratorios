@@ -21,9 +21,14 @@ public interface IcontroladorUsuario {
 	//public DTUsuario seleccionarUsuario(String nickname);
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
 	
+	
 	//12 - Alta de Instituto
 	public void AltaInstituto(String nombre) throws InstitutoExcepcion;
 	
 	//Funciones auxiliares
+
 	public String[] listarInstituto();
+
+	public String[] listarEstudiantesAux();
+	
 }

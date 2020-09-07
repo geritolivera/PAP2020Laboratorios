@@ -42,4 +42,11 @@ public interface IcontroladorCurso {
 	//Se utiliza la misma funcion de listarProgramas
 	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion;
 	
+	
+	//Funciones aux para comboBox de Edicion de cursos
+	public String[] listarInstitutos();
+	public String[] listarCursosAux(String nombreInstiuto);
+	public String[] listarEdicionesAux(String nombreCurso);
+	public String[] listarDocentesAux(String nomEdicion);
+	public String[] listarDocentesInstituto(String nomInstituto);
 }

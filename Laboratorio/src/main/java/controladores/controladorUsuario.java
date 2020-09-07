@@ -17,7 +17,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 		super();
 	}
 	
-	/*-------------------------------------------------------------------------------------------------------------*/
 	
 	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
@@ -61,6 +60,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		}
 		return listUsers;
 	}
+	
 	
 	public ArrayList<String> listarUsuarios(){
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
@@ -174,4 +174,18 @@ public class controladorUsuario implements IcontroladorUsuario{
 			}
 			return institutos;
 		}
+		public String[] listarEstudiantesAux(){
+			manejadorUsuario mU = manejadorUsuario.getInstancia();
+			List<Usuario> listUs = mU.getUsuarios();
+			String[] estudiantes = new String[listUs.size()];//ver esta funcion
+			int i=0;
+			for(Usuario us:listUs) {
+				if(us instanceof Estudiante) {
+					estudiantes[i]= us.getNick();
+					i++;
+				}
+			}
+			return estudiantes;
+		}
+	
 }

@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import interfaces.*;
 
+
 import java.awt.event.*;
 
 public class principalView {
@@ -16,6 +17,10 @@ public class principalView {
 	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
 	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
+	private AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
+	private ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
+	private InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
+	private AltaInstituto altaInstitutoInternalFrame;	
 	
 	/**
 	 * Launch the application.
@@ -40,6 +45,7 @@ public class principalView {
 		initialize();
 		
 		fabrica fab = fabrica.getInstancia();
+		IcontroladorCurso iconC = fab.getIcontroladorCurso();
 		IcontroladorUsuario iusu = fab.getIcontroladorUsuario();
 		
 		Dimension escritorioTam = frame.getSize();
@@ -82,6 +88,31 @@ public class principalView {
 		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		agregarCusroPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
+		
+		
+		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC);
+		jIternalFrameSize = altaEdicionCursoInternalFrame.getSize();
+		altaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		altaEdicionCursoInternalFrame.setVisible(false);
+		frame.getContentPane().add(altaEdicionCursoInternalFrame);
+		
+		consultaEdicionCursoInternalFrame = new ConsultaDeEdicionDeCurso(iconC);
+		jIternalFrameSize = consultaEdicionCursoInternalFrame.getSize();
+		consultaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		consultaEdicionCursoInternalFrame.setVisible(false);
+		frame.getContentPane().add(consultaEdicionCursoInternalFrame);
+		
+		inscripcionEdicionCursoInternalFrame = new InscripcionEdicionCurso(iconC,iusu);
+		jIternalFrameSize = inscripcionEdicionCursoInternalFrame.getSize();
+		inscripcionEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		inscripcionEdicionCursoInternalFrame.setVisible(false);
+		frame.getContentPane().add(inscripcionEdicionCursoInternalFrame);
+		
+		altaInstitutoInternalFrame = new AltaInstituto(iusu);
+		jIternalFrameSize = altaInstitutoInternalFrame.getSize();
+		altaInstitutoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		altaInstitutoInternalFrame.setVisible(false);
+		frame.getContentPane().add(altaInstitutoInternalFrame);
 		
 		
 		/*------------------------------Instituto------------------------------*/
@@ -146,12 +177,32 @@ public class principalView {
 		menuBar.add(MenuEdicionCurso);
 		
 		JMenuItem MenuItemAltaEdicionCurso = new JMenuItem("Alta de Edicion de Curso");
+		MenuItemAltaEdicionCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaEdicionCursoInternalFrame.inicializarComboBoxInstituto();
+				altaEdicionCursoInternalFrame.setVisible(true);
+			}
+		});
 		MenuEdicionCurso.add(MenuItemAltaEdicionCurso);
 		
 		JMenuItem MenuItemConsultaEdicionCurso = new JMenuItem("Consulta de Edicion de Curso");
+		MenuItemConsultaEdicionCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultaEdicionCursoInternalFrame.inicializarComboBoxInstituto();
+				consultaEdicionCursoInternalFrame.setVisible(true);
+			}
+		});
 		MenuEdicionCurso.add(MenuItemConsultaEdicionCurso);
 		
 		JMenuItem MenuItemInscripcionCurso = new JMenuItem("Inscripcion a Edicion de Curso");
+		MenuItemInscripcionCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inscripcionEdicionCursoInternalFrame.inicializarComboBoxInstituto();
+				inscripcionEdicionCursoInternalFrame.setVisible(true);
+			}
+		});
+		
+		
 		MenuEdicionCurso.add(MenuItemInscripcionCurso);
 		
 		/*---------- Programa de Formacion ----------*/
@@ -182,6 +233,11 @@ public class principalView {
 		menuBar.add(MenuInstituto);
 		
 		JMenuItem MenuItemAltaInstituto = new JMenuItem("Alta de Instituto");
+		MenuItemAltaInstituto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaInstitutoInternalFrame.setVisible(true);
+			}
+		});
 		MenuInstituto.add(MenuItemAltaInstituto);
 		
 	}

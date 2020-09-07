@@ -235,4 +235,56 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new ProgramaFormacionExcepcion("El programa " + nombreProg + " no existe.");
 	}
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Listados para comboBoxes
+	public String[] listarCursosAux(String nombreInstituto){
+		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
+		Instituto inst = mI.buscarInstituto(nombreInstituto);
+		List<Curso> cursos = inst.getCursos();
+		String[] cursos_ret = new String[cursos.size()] ;
+		int i=0;
+		for(Curso c:cursos) {
+			cursos_ret[i]=c.getNombre();
+			i++;
+		}
+		return cursos_ret;
+	}
+	public String[] listarEdicionesAux(String nomCurso) {
+		manejadorCurso mC = manejadorCurso.getInstancia();
+		Curso curso = mC.buscarCurso(nomCurso);
+		List<EdicionCurso> ediciones = curso.getEdiciones();
+		String[] ediciones_ret = new String[ediciones.size()];
+		int i=0;
+		for (EdicionCurso e:ediciones) {
+			ediciones_ret[i]=e.getNombre();
+			i++;
+		}
+		return ediciones_ret;
+	}
+
+	public String[] listarDocentesAux(String nomEdicion){
+		manejadorEdicion mE =manejadorEdicion.getInstancia();
+		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
+		List<Docente> docentes = edicion.getDocentes();
+		String[] docente_ret = new String[docentes.size()];
+		int i=0;
+		for (Docente d:docentes) {
+			docente_ret[i]=d.getNick();
+			i++;
+		}
+		return docente_ret; 
+	}
+	
+	public String[] listarDocentesInstituto(String nomInstituto) {
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		Instituto inst = mI.buscarInstituto(nomInstituto);
+		List<Docente> docentes = inst.getDocentes();
+		String[] docentes_ret = new String[docentes.size()] ;
+		int i=0;
+		for(Docente d:docentes) {
+			docentes_ret[i]=d.getNick();
+			i++;
+		}
+		return docentes_ret;
+	}
 }
