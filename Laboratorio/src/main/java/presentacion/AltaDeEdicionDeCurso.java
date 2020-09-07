@@ -12,8 +12,12 @@ import javax.swing.JFrame;
 
 import com.toedter.calendar.JDateChooser;
 
+import datatypes.DTDocente;
+import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
+import interfaces.IcontroladorUsuario;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -28,9 +32,10 @@ import javax.swing.ScrollPaneConstants;
 public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
+	private IcontroladorCurso iconC;
+	private IcontroladorUsuario iusu;
 	private JTextField tfNombreEd;
 	private JTextField tfCupo;
-	private IcontroladorCurso iconC;
 	private JComboBox<String> comboBoxInstituto;
 	private JComboBox<String> comboBoxCursos;
 	private JDateChooser dateInicio;
@@ -51,8 +56,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaDeEdicionDeCurso(IcontroladorCurso iconC) {
+	public AltaDeEdicionDeCurso(IcontroladorCurso iconC, IcontroladorUsuario iusu) {
 		this.iconC = iconC;
+		this.iusu = iusu;
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -145,6 +151,11 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(scrollPane);
 		
 		listaDocentes = new List();
+		listaDocentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listaDocentesActionPerformed(arg0);
+			}
+		});
 		listaDocentes.setEnabled(false);
 		scrollPane.setViewportView(listaDocentes);
 		listaDocentes.setMultipleSelections(false);
@@ -160,34 +171,38 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(comboBoxInstituto);
 		
 	}
-	
+	//se inicializa desde el principal
 	public void inicializarComboBoxInstituto() {
 		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
 		comboBoxInstituto.setModel(modelInstitutos);
 	}
 	
-	//inicializo comboBInstitutos
+	//se inicializa dentro del cbinstitutoactionevent
 	protected void inicializarComboBoxCursos(String nombreInstituto) {
-		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursos(nombreInstituto));
+		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
 		comboBoxCursos.setModel(modelCursos);
 	}
 	
-	//inicializo comboBCursos
+	//El us eligio un instituto, entonces le listo los cursos
 	protected void cbInstitutoActionPerformed(ActionEvent arg0) {
 		String nombreInstituto = this.comboBoxInstituto.getSelectedItem().toString();
 		if(nombreInstituto.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 		}else {
-			inicializarComboBoxCursos(nombreInstituto);	//cargo los cursos del instituto indicado
+			inicializarComboBoxCursos(nombreInstituto);
 		}	
 	}
 	
+	private ArrayList<String> listaDocentesActionPerformed(ActionEvent arg0) {
+		return null;
+	}
+	
 	//llenarlistadedocentes
-	/*protected void llenarLista() {
-		DefaultListModel<String> modelDocentes = new DefaultListModel<String>(iconC.listarDocentes());
-		listaDocentes.setModel(modelDocentes)
-	}*/
-	//aca ya seleccione un curso habilito los campos para ingresar los datos
+	protected void llenarLista() {
+		
+		
+	}
+	//El us eligio un curso , habilito los campos para que ingrese datos, y ademas lleno la lista de docentes
 	protected void cbCursoActionPerformed(ActionEvent arg0) {
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		if (curso.isEmpty()) {
@@ -198,30 +213,29 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			listaDocentes.setEnabled(true);
 			dateInicio.setEnabled(true);
 			dateFin.setEnabled(true);
-			//llenarLista();
+			llenarLista();
 		}
 	}
 	//El usuario acepta los datos
 	
-	/*protected void altaEdAceptarActionPerformed(ActionEvent arg0){
+	protected void altaEdAceptarActionPerformed(ActionEvent arg0){
 		String nomEd = this.tfNombreEd.getText();
 		Date dateI = this.dateInicio.getDate();
 		Date dateF = this.dateFin.getDate();
 		String cupo = this.tfCupo.getText();
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		Date fechPubli = Calendar.getInstance().getTime();
-		//ver lista
-		//ver curso
+		ArrayList<String> listaDocentes = listaDocentesActionPerformed(arg0);
 		if(checkFormulario()) {
 			try{
-				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,cupo,fechPubli,listaDocentes,curso);
+				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,listaDocentes);
 				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso",
 	                        JOptionPane.INFORMATION_MESSAGE);
-			}catch(EdicionRepetidaExcepcion e){
+			}catch(EdicionExcepcion e){
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			}			
 		}
-	}*/
+	}
 	
 	private boolean checkFormulario(){
 		String nomEd = this.tfNombreEd.getText();
@@ -232,7 +246,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		}try {
 			Integer.parseInt(cupo);
 		}catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "No Cupo deber ser un numero" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "El numero de cupo debe ser un numero" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;

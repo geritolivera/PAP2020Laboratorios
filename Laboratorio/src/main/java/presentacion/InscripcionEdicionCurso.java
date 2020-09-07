@@ -135,7 +135,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		if(nombreInstituto.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 		}else {
-			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursos(nombreInstituto));
+			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
 			comboBoxCurso.setModel(modelCursos);
 		}
 	}

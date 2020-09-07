@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import datatypes.DTDocente;
 import datatypes.DTUsuario;
 import exepciones.*;
 import clases.EdicionCurso;
@@ -33,9 +34,12 @@ public interface IcontroladorUsuario {
 	public void cancelarInscripcion();
 	public void agregarEdicionUsuario(EdicionCurso edV);
 	
+	
 	//12 - Alta de Instituto
 	public void AltaInstituto(String nombre) throws InstitutoExcepcion;
 	
 	//Funciones auxiliares
-	public String[] listarInstituto(); //Lista los usuarios
+
+	public String[] listarInstituto();
+	
 }

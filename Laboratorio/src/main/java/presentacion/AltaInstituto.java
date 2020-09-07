@@ -8,7 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import interfaces.IcontroladorCurso;
+import exepciones.InstitutoExcepcion;
+import interfaces.IcontroladorUsuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class AltaInstituto extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
-	private IcontroladorCurso iconC;
+	private IcontroladorUsuario iusu;
 	private JTextField tfNombreInstituto;
 
 	/**
@@ -38,8 +39,8 @@ public class AltaInstituto extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaInstituto(IcontroladorCurso iconC) {
-		this.iconC = iconC;
+	public AltaInstituto(IcontroladorUsuario iusu) {
+		this.iusu = iusu;
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -82,9 +83,9 @@ public class AltaInstituto extends JInternalFrame {
 		if (nombreInstituto.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Instituto",JOptionPane.ERROR_MESSAGE);
 		}try {
-			this.iconC.AltaInstituto(nombreInstituto);
+			this.iusu.AltaInstituto(nombreInstituto);
 			JOptionPane.showMessageDialog(this, "El instituto " + nombreInstituto + " se da de alta con exito " , "Alta Instituto",JOptionPane.INFORMATION_MESSAGE);
-		}catch(InstitutoRepetidoExcepcion e) {
+		}catch(InstitutoExcepcion e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Instituto", JOptionPane.ERROR_MESSAGE);
 		}
 		tfNombreInstituto.setText("");

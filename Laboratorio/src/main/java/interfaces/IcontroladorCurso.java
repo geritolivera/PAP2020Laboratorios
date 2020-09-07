@@ -49,6 +49,10 @@ public interface IcontroladorCurso {
 	public void agregarCursoPrograma(ProgramaFormacion p); //Revisar
 	public DTCurso seleccionarCursoEnPrograma(String nomC);
 	//Se utiliza la misma funcion listarCursos
-	//public String[] listarCursos(nombreInstituto);
+	
+	//Funciones aux para comboBox de Edicion de cursos
 	public String[] listarInstitutos();
+	public String[] listarCursosAux(String nombreInstiuto);
+	public String[] listarEdicionesAux(String nombreCurso);
+	public String[] listarDocentesAux(String nomEdicion);
 }

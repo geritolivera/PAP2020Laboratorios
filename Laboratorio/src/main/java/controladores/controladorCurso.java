@@ -243,30 +243,42 @@ public class controladorCurso implements IcontroladorCurso{
 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Listados para comboBoxes
-	public String[] listarInstitutos() {
-		ArrayList<String> institutos;
-		manejadorInstituto mI = manejadorInstituto.getInstancia();
-		institutos = mI.obtenerInstitutos();
-		String[] institutos_ret = new String[institutos.size()];
-        int i=0;
-        for(String in:institutos) {
-        	institutos_ret[i]=in;
-        	i++;
-        }
-        return institutos_ret;
+	public String[] listarCursosAux(String nombreInstituto){
+		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
+		Instituto inst = mI.buscarInstituto(nombreInstituto);
+		List<Curso> cursos = inst.getCursos();
+		String[] cursos_ret = new String[cursos.size()] ;
+		int i=0;
+		for(Curso c:cursos) {
+			cursos_ret[i]=c.getNombre();
+			i++;
+		}
+		return cursos_ret;
 	}
-	
-	public String[] listarCursos(nombreInstituto) {
-		/*ArrayList<String> cursos;//ver que me devuelva los objetos del curso y buscar los que pertenecen a ese instituto
+	public String[] listarEdicionesAux(String nomCurso) {
 		manejadorCurso mC = manejadorCurso.getInstancia();
-		cursos = mC.obtenerCursos(nombreInstituto);
-		String[] cursos_ret = new String[cursos.size()];
-        int i=0;
-        for(String c:cursos) {
-        	cursos_ret[i]=c;
-        	i++;
-        }
-        return cursos_ret;*/	
+		Curso curso = mC.buscarCurso(nomCurso);
+		List<EdicionCurso> ediciones = curso.getEdiciones();
+		String[] ediciones_ret = new String[ediciones.size()];
+		int i=0;
+		for (EdicionCurso e:ediciones) {
+			ediciones_ret[i]=e.getNombre();
+			i++;
+		}
+		return ediciones_ret;
 	}
-	
+
+	public String[] listarDocentesAux(String nomEdicion){
+		manejadorEdicion mE =manejadorEdicion.getInstancia();
+		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
+		List<Docente> docentes = edicion.getDocentes();
+		String[] docente_ret = new String[docentes.size()];
+		int i=0;
+		for (Docente d:docentes) {
+			docente_ret[i]=d.getNick();
+			i++;
+		}
+		return docente_ret; 
+	}
+		
 }
