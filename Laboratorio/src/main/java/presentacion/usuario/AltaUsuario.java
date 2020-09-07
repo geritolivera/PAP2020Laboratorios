@@ -141,10 +141,10 @@ public class AltaUsuario extends JInternalFrame {
 		if(checkFormulario()) {
 			try {
 				if(!instituto.isEmpty()) {
-					JOptionPane.showMessageDialog(this, "El Docente se ha creado con ï¿½xito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 				} else {
-					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con ï¿½xito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
 				}
 			} catch(UsuarioExcepcion u) {
@@ -169,7 +169,7 @@ public class AltaUsuario extends JInternalFrame {
 		String fechaString = dateChooser.toString();
 		Date todayDate = Calendar.getInstance().getTime();
 		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No puede haber campos vacï¿½os", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacïs", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		if(dateChooser.compareTo(todayDate) > 0) {

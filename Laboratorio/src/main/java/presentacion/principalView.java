@@ -56,7 +56,7 @@ public class principalView {
 		frame.getContentPane().add(altaUsuarioInternalFrame);
 		
 		//Consulta de Usuario
-		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario();
+		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario(iusu);
 		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
 		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
