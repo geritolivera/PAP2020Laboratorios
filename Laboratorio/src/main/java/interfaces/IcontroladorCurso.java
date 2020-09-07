@@ -2,7 +2,6 @@ package interfaces;
 
 import java.util.*;
 
-import clases.*;
 import datatypes.*;
 import exepciones.*;
 

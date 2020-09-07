@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import clases.Instituto;
 import conexion.Conexion;
-import logica.Socio;
 
 public class manejadorInstituto {
 	

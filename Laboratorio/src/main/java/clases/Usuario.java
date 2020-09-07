@@ -1,8 +1,6 @@
 package clases;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
 
 public class Usuario {
 	private String nick;

@@ -9,7 +9,7 @@ import datatypes.*;
 import exepciones.*;
 import manejadores.*;
 
-import interfaces.IcontroladorCurso;
+import interfaces.*;
 
 public class controladorCurso implements IcontroladorCurso{
 	public controladorCurso() {
