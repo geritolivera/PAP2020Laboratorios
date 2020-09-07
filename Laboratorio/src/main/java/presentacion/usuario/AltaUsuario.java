@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JInternalFrame;
@@ -103,11 +102,16 @@ public class AltaUsuario extends JInternalFrame {
 		dateChooser.setBounds(165, 180, 130, 25);
 		getContentPane().add(dateChooser);
 		
-		JComboBox comboBoxInstituto = new JComboBox<String>();
-		comboBoxInstituto.setBounds(165, 225, 130, 25);
-		getContentPane().add(comboBoxInstituto);
+		institutoChoose = new JComboBox<String>();
+		institutoChoose.setBounds(165, 225, 130, 25);
+		getContentPane().add(institutoChoose);
 
 		JButton ButtonAceptar = new JButton("Aceptar");
+		ButtonAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AltaUsuarioActionPerformed(e);
+			}
+		});
 		ButtonAceptar.setBounds(325, 70, 90, 25);
 		getContentPane().add(ButtonAceptar);
 
@@ -137,13 +141,13 @@ public class AltaUsuario extends JInternalFrame {
 		if(checkFormulario()) {
 			try {
 				if(!instituto.isEmpty()) {
-					JOptionPane.showMessageDialog(this, "El Docente se ha creado con éxito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 				} else {
-					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con éxito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
 				}
-			} catch(UsuarioRepetidoExcepcion u) {
+			} catch(UsuarioExcepcion u) {
 			JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
 		limpiarFormulario();
@@ -165,7 +169,7 @@ public class AltaUsuario extends JInternalFrame {
 		String fechaString = dateChooser.toString();
 		Date todayDate = Calendar.getInstance().getTime();
 		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacïs", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		if(dateChooser.compareTo(todayDate) > 0) {
@@ -173,7 +177,7 @@ public class AltaUsuario extends JInternalFrame {
             return false;
 		}
 		if(!email.contains("@")) {
-			JOptionPane.showMessageDialog(this, "Debe añadir una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe aï¿½adir una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		return true;

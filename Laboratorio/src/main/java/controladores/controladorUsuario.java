@@ -27,8 +27,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
-			}
-			else {
+			}else {
 				if(mIns.existeInstituto(instituto)) {
 					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
 					Instituto ins = mIns.buscarInstituto(instituto);
@@ -36,9 +35,13 @@ public class controladorUsuario implements IcontroladorUsuario{
 					mUsu.agregarUsuario(doc);
 				}
 			}
-		}
-		else {
-			throw new UsuarioExcepcion("Nickname o correo ya en uso");
+		} else {
+			if(mUsu.existeUsuarioNick(nickname)) {
+				throw new UsuarioExcepcion("El Nickname '" + nickname +"' ya existe en el sistema");
+			}
+			if(mUsu.existeUsuarioNick(correo)) {
+				throw new UsuarioExcepcion("El Correo '" + correo +"' ya existe en el sistema");
+			}
 		}
 	}
 	
@@ -64,57 +67,64 @@ public class controladorUsuario implements IcontroladorUsuario{
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		ArrayList<String> listUsers = new ArrayList<>();
 		for(Usuario u: usuarios) {
-			listUsers.add(u.getNombre());
+			listUsers.add(u.getNick());
 		}
 		return listUsers;
 	}
 	
 	@Override
-	public void verInfoUsuario(String nickname){
+	public void verInfoUsuario(String nickname) throws UsuarioExcepcion{
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		Usuario u = mUsu.buscarUsuario(nickname);
-		List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
-		List<ProgramaFormacion> programasDoc = new ArrayList<ProgramaFormacion>();
-		List<EdicionCurso> edicionesEst = new ArrayList<EdicionCurso>();
-		List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
-		//si el usuario es docente
-		if(u instanceof Docente) {
-			DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
-			edicionesDoc = ((Docente) u).getEdiciones();
-			for(EdicionCurso e: edicionesDoc) {
-				DTEdicionCurso dted = new DTEdicionCurso(e);
-				dtd.agregarEdicion(dted);
-				Curso ec = e.getCurso();
-				DTCurso dtcd = new DTCurso(ec);
-				dtd.agregarCurso(dtcd);
-				programasDoc = ec.getProgramas();
-				for(ProgramaFormacion p: programasDoc) {
-					DTProgramaFormacion dtpd = new DTProgramaFormacion(p);
-					dtd.agregarPrograma(dtpd);
+		if(mUsu.existeUsuarioNick(nickname)) {
+			Usuario u = mUsu.buscarUsuario(nickname);
+			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
+			List<ProgramaFormacion> programasDoc = new ArrayList<ProgramaFormacion>();
+			List<EdicionCurso> edicionesEst = new ArrayList<EdicionCurso>();
+			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
+			//si el usuario es docente
+			if(u instanceof Docente) {
+				DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+				edicionesDoc = ((Docente) u).getEdiciones();
+				for(EdicionCurso e: edicionesDoc) {
+					DTEdicionCurso dted = new DTEdicionCurso(e);
+					dtd.agregarEdicion(dted);
+					Curso ec = e.getCurso();
+					DTCurso dtcd = new DTCurso(ec);
+					dtd.agregarCurso(dtcd);
+					programasDoc = ec.getProgramas();
+					for(ProgramaFormacion p: programasDoc) {
+						DTProgramaFormacion dtpd = new DTProgramaFormacion(p);
+						dtd.agregarPrograma(dtpd);
+					}
+				}
+			}
+			//si el usuario es estudiante
+			else if (u instanceof Estudiante) {
+				DTEstudiante dte = new DTEstudiante(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+				edicionesEst = ((Estudiante) u).getEdiciones();
+				for(EdicionCurso e: edicionesEst) {
+					DTEdicionCurso dtee = new DTEdicionCurso(e);
+					dte.agregarEdicion(dtee);
+					programasEst = e.getCurso().getProgramas();
+					for(ProgramaFormacion p: programasEst) {
+						DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
+						dte.agregarPrograma(dtpe);
+					}
 				}
 			}
 		}
-		//si el usuario es estudiante
-		else if (u instanceof Estudiante) {
-			DTEstudiante dte = new DTEstudiante(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
-			edicionesEst = ((Estudiante) u).getEdiciones();
-			for(EdicionCurso e: edicionesEst) {
-				DTEdicionCurso dtee = new DTEdicionCurso(e);
-				dte.agregarEdicion(dtee);
-				programasEst = e.getCurso().getProgramas();
-				for(ProgramaFormacion p: programasEst) {
-					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
-					dte.agregarPrograma(dtpe);
-				}
-			}
-		}
+		else 
+			throw new UsuarioExcepcion("El usuario " + nickname + " no existe.");
 	}
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
 	//Se utiliza la misma funcion listarUsuario
-	@Override
+	
+	//es necesario esto? La funcion de abajo ya selecciona al usuario
+	
+	/*@Override
 	public DTUsuario seleccionarUsuario(String nickname){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		Usuario u = mu.buscarUsuario(nickname);
@@ -124,39 +134,18 @@ public class controladorUsuario implements IcontroladorUsuario{
 		} else {
 		return null;
 		}
-	}
+	}*/
 	
 	@Override
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		Usuario u = mu.buscarUsuarioNickname(nickname);
-		if(u != null) {
+		if(mu.existeUsuarioNick(nickname)){
+			Usuario u = mu.buscarUsuarioNickname(nickname);
 			u.setNombre(nombre);
 			u.setApellido(apellido);
 			u.setFechaNac(fechaNaci);
 		}
 	}
-	
-	
-	/*-------------------------------------------------------------------------------------------------------------*/
-	//6 - Alta de Edicion de Curso
-	@Override
-	public void ingresarDocente(String nomDoc){}
-	
-	
-	/*-------------------------------------------------------------------------------------------------------------*/
-	//8 - Inscripcion a Edicion de Curso
-	@Override
-	public void seleccionarEstudiante(String nickname){}
-	
-	@Override
-	public void confirmarInscripcion(String nickname, Date fechaInsc){}
-	
-	@Override
-	public void cancelarInscripcion(){}
-	
-	@Override
-	public void agregarEdicionUsuario(EdicionCurso edV){}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
@@ -173,7 +162,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
-		@Override
+		@Override //Lista los nombres de los institutos
 		public String[] listarInstituto() {
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
 			List<Instituto> listIn = mi.getInstituto();
@@ -199,5 +188,4 @@ public class controladorUsuario implements IcontroladorUsuario{
 			return estudiantes;
 		}
 	
-		
 }
