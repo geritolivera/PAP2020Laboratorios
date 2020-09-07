@@ -61,7 +61,6 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		inputNombre.setColumns(10);
 
 		inputDescripcion = new JTextArea();
-		inputDescripcion.setDropMode(DropMode.INSERT_ROWS);
 		inputDescripcion.setBounds(102, 128, 296, 57);
 		getContentPane().add(inputDescripcion);
 		

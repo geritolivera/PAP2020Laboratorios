@@ -2,11 +2,29 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.util.Date;
 
+@Entity
+@DiscriminatorValue("tipo_docente")
 public class Docente extends Usuario{
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
 	private Instituto instituto;
-	private List<EdicionCurso> ediciones = new ArrayList<>();
+	
+	@OneToMany (mappedBy = "docenteCreador", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Curso> cursosRegistrados = new ArrayList<>();
+	@OneToMany (mappedBy = "docenteCreador", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<EdicionCurso> edicionesRegistradas = new ArrayList<>();
+	@OneToMany (mappedBy = "docenteCreador", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ProgramaFormacion> programasRegistrados = new ArrayList<>();
 	
 	public Docente() {
 		super();
@@ -26,6 +44,7 @@ public class Docente extends Usuario{
 		return instituto;
 	}
 	
+	/*
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
 		edicion.agregarDocente(this);
@@ -34,8 +53,30 @@ public class Docente extends Usuario{
 		// - edicion.getDocentes().add(this) -
 		//notar que cuando usamos "this", nos referimos al objeto donde estamos trabajando
 		//en este caso, "this" se refiere a este docente específico
-}
+	}
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
 	}
+	
+	*/
+	public List<EdicionCurso> getEdicionesRegistradas() {
+		return edicionesRegistradas;
+	}
+	public List<ProgramaFormacion> getProgramasRegistrados() {
+		return programasRegistrados;
+	}
+	public List<Curso> getCursosRegistrados() {
+		return cursosRegistrados;
+	}
+	
+	public void agregarCursoRegistrado(Curso c) {
+		cursosRegistrados.add(c);
+	}
+	public void agregarEdicionRegistrada(EdicionCurso e) {
+		edicionesRegistradas.add(e);
+	}
+	public void agregarCursoRegistrado(ProgramaFormacion p) {
+		programasRegistrados.add(p);
+	}
+	
 }

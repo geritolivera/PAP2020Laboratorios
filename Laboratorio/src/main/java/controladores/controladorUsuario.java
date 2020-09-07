@@ -96,7 +96,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		//si el usuario es docente
 		if(u instanceof Docente) {
 			DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
-			edicionesDoc = ((Docente) u).getEdiciones();
+			edicionesDoc = ((Docente) u).getEdicionesRegistradas();
 			for(EdicionCurso e: edicionesDoc) {
 				DTEdicionCurso dted = new DTEdicionCurso(e);
 				dtd.agregarEdicion(dted);

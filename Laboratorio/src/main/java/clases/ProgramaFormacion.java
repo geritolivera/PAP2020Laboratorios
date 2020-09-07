@@ -1,18 +1,31 @@
 package clases;
-import java.time.LocalDate;
-//Prueba
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+
 import java.util.Date;
 
+@Entity
 public class ProgramaFormacion {
+	@Id
 	private String nombre;
 	private String descripcion;
 	private Date fechaI;
 	private Date fechaF;
 	private Date fechaA;
+	@ManyToMany (mappedBy="programas")
 	private List<Estudiante> estudiantes = new ArrayList<>();
+	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
+	private Docente docenteCreador;
 	
 	public ProgramaFormacion() {
 		super();
@@ -60,14 +73,14 @@ public class ProgramaFormacion {
 	public void setFechaA(Date fechaA) {
 		this.fechaA = fechaA;
 	}
-	
+	/*
 	public void agregarEstudiante(Estudiante estudiante) {
 		estudiantes.add(estudiante);
 	}
 	public List<Estudiante> getEstudiantes() {
 		return estudiantes;
 	}
-	
+	*/
 	public void agregarCurso(Curso curso) {
 		cursos.add(curso);
 	}

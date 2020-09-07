@@ -2,18 +2,34 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
+@Entity
 public class EdicionCurso {
+	@Id
 	private String nombre;
 	private Date fechaI;
 	private Date fechaF;
 	private int cupo;
 	private Date fechaPub;
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
 	private Curso curso;
+	@ManyToMany (mappedBy ="ediciones")
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	private List<Docente> docentes = new ArrayList<>();
 	private List<Inscripcion> inscripciones = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
+	private Curso docenteCreador;
 	
 	public EdicionCurso() {
 		super();

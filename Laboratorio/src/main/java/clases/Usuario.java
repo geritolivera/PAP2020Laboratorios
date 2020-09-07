@@ -1,10 +1,13 @@
 package clases;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 import java.util.Date;
 
-public class Usuario {
+@MappedSuperclass
+public abstract class Usuario {
+	@Id
 	private String nick;
 	private String nombre;
 	private String apellido;
