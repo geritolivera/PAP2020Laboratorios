@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.edicionCurso;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;

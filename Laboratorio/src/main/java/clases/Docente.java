@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue("tipo_docente")
+@DiscriminatorValue("tipoDocente")
 public class Docente extends Usuario{
 	@ManyToOne
 	@JoinColumn(insertable = false, updatable = false)

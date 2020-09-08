@@ -5,7 +5,9 @@ import java.awt.*;
 import javax.swing.*;
 
 import interfaces.*;
-
+import presentacion.edicionCurso.AltaDeEdicionDeCurso;
+import presentacion.edicionCurso.ConsultaDeEdicionDeCurso;
+import presentacion.edicionCurso.InscripcionEdicionCurso;
 
 import java.awt.event.*;
 
@@ -17,9 +19,10 @@ public class principalView {
 	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
 	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
-	private AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
-	private ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
-	private InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
+	private presentacion.programaFormacion.ConsultaProgramaFormacion consultaProgramaFormacionInternalFrame;
+	private presentacion.edicionCurso.AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
+	private presentacion.edicionCurso.ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
+	private presentacion.edicionCurso.InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
 	private AltaInstituto altaInstitutoInternalFrame;	
 	
 	/**
