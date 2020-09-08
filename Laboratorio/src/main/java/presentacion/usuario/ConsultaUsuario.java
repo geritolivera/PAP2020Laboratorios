@@ -5,15 +5,15 @@ import java.awt.*;
 import javax.swing.*;
 
 import interfaces.IcontroladorUsuario;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import javax.swing.border.TitledBorder;
+
+import datatypes.DTUsuario;
+
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class ConsultaUsuario extends JInternalFrame {
 
@@ -26,6 +26,16 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JTextField textFieldCorreo;
 	private JTextField textFieldFechaNac;
 	
+	private JComboBox<String> comboBoxProgForReg;
+	private JComboBox<String> comboBoxEdCurReg;
+	private JComboBox<String> comboBoxCursoReg;
+	private JComboBox<String> comboBoxInsEdCur;
+	private JComboBox<String> comboBoxProgForIns;
+	
+	private JList<String> ListaUsu;
+	
+	private List<DTUsuario> listaUsuarios;
+	
 	public ConsultaUsuario(IcontroladorUsuario icon) {
 
 		this.icon = icon;
@@ -35,26 +45,37 @@ public class ConsultaUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Consulta de Usuario");
-		setBounds(100, 100, 513, 354);
+		setBounds(100, 100, 518, 446);
 		getContentPane().setLayout(null);
 		
 		
 		//Lista los usuarios
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(20, 65, 120, 200);
+		scrollPane.setBounds(20, 65, 120, 245);
 		getContentPane().add(scrollPane);
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		ListaUsu = new JList<String>();
+		ListaUsu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(ListaUsu);
 		
 		//Boton Listar Usuarios
 		JButton ButtonListarUsuarios = new JButton("Listar Usuarios");
+		ButtonListarUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listarUsuarios(arg0);
+			}
+		});
 		ButtonListarUsuarios.setBounds(20, 20, 120, 25);
 		getContentPane().add(ButtonListarUsuarios);
 		
 		//Boton Seleccionar Usuarios
-		JButton ButtonSelccUsuario = new JButton("Seleccionar Usuario");
-		ButtonSelccUsuario.setBounds(20, 280, 120, 25);
+		JButton ButtonSelccUsuario = new JButton("Seleccionar");
+		ButtonSelccUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				seleccionarUsuario(e);
+			}
+		});
+		ButtonSelccUsuario.setBounds(20, 330, 120, 25);
 		getContentPane().add(ButtonSelccUsuario);
 		
 		//Panel datos Usuario
@@ -124,6 +145,95 @@ public class ConsultaUsuario extends JInternalFrame {
 		textFieldFechaNac.setBounds(120, 160, 180, 20);
 		DatosPanel.add(textFieldFechaNac);
 		
+		//Label Docente
+		JLabel LabelDocente = new JLabel("Usuario Docente");
+		LabelDocente.setFont(new Font("Tahoma", Font.BOLD, 13));
+		LabelDocente.setBounds(165, 210, 110, 15);
+		getContentPane().add(LabelDocente);
+		
+		//Label Curso Registrado
+		JLabel LabelCursosRegistrados = new JLabel("Curso Registrados:");
+		LabelCursosRegistrados.setBounds(165, 235, 100, 15);
+		getContentPane().add(LabelCursosRegistrados);
+		
+		//Label Ediciones de Curso Registrados
+		JLabel LabelEdiCurReg = new JLabel("Ediciones de Curso Registrados: ");
+		LabelEdiCurReg.setBounds(165, 260, 160, 15);
+		getContentPane().add(LabelEdiCurReg);
+		
+		//Label Programa de Formacion Registrados
+		JLabel LabelProgForm = new JLabel("Programa de Formacion Registrados:");
+		LabelProgForm.setBounds(165, 285, 185, 15);
+		getContentPane().add(LabelProgForm);
+		
+		comboBoxProgForReg = new JComboBox<String>();
+		comboBoxProgForReg.setBounds(350, 280, 140, 20);
+		getContentPane().add(comboBoxProgForReg);
+		
+		comboBoxEdCurReg = new JComboBox<String>();
+		comboBoxEdCurReg.setBounds(350, 255, 140, 20);
+		getContentPane().add(comboBoxEdCurReg);
+		
+		comboBoxCursoReg = new JComboBox<String>();
+		comboBoxCursoReg.setBounds(350, 230, 140, 20);
+		getContentPane().add(comboBoxCursoReg);
+		
+		//Label Usuario Estudiante
+		JLabel LabelEstudiante = new JLabel("Usuario Estudiante");
+		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
+		LabelEstudiante.setBounds(165, 315, 110, 15);
+		getContentPane().add(LabelEstudiante);
+		
+		//Label Inscripto en Edicion de Curso
+		JLabel lblCursoInscriptos = new JLabel("Inscripto en Edicion de Curso:");
+		lblCursoInscriptos.setBounds(165, 340, 160, 15);
+		getContentPane().add(lblCursoInscriptos);
+		
+		//Label Programa de Formacion inscripto
+		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
+		ProgramaInscriptos.setBounds(165, 365, 160, 15);
+		getContentPane().add(ProgramaInscriptos);
+		
+		comboBoxInsEdCur = new JComboBox<String>();
+		comboBoxInsEdCur.setBounds(350, 335, 140, 20);
+		getContentPane().add(comboBoxInsEdCur);
+		
+		comboBoxProgForIns = new JComboBox<String>();
+		comboBoxProgForIns.setBounds(350, 363, 140, 20);
+		getContentPane().add(comboBoxProgForIns);
+		
+		JButton ButtonCancelar = new JButton("Cancelar");
+		ButtonCancelar.setBounds(20, 375, 120, 25);
+		getContentPane().add(ButtonCancelar);		
+
+	}
+	
+	public void seleccionarUsuario(ActionEvent arg0){
+		String usuarioElegidoNick = ListaUsu.getSelectedValue();
+		listaUsuarios = icon.listarDTUsuarios();
+		DTUsuario u = null;
+		for(DTUsuario dtu : listaUsuarios) {
+			if(dtu.getNick().contentEquals(usuarioElegidoNick));
+			u = dtu;
+		}
+		this.textFieldNombre.setText(u.getNombre());
+		this.textFieldApellido.setText(u.getApellido());
+		this.textFieldNick.setText(usuarioElegidoNick);
+		this.textFieldCorreo.setText(u.getCorreo());
+		this.textFieldFechaNac.setText(u.getFechaNac().toString());
+	}
+	
+	public void listarUsuarios(ActionEvent arg0) {
+		listaUsuarios = icon.listarDTUsuarios();
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		for(DTUsuario s : listaUsuarios) {
+			listModel.addElement(s.getNick());
+		}
+		listModel.addElement("Gero");
+		ListaUsu.setModel(listModel);
+	}
+	
+	private void limpiarFormulario() {
 		
 	}
 }

@@ -63,10 +63,10 @@ public class principalView {
 		
 		//Consulta de Usuario
 		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario(iusu);
-		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
-		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
+		consultaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		consultaUsuarioInternalFrame.setVisible(false);
+		frame.getContentPane().add(consultaUsuarioInternalFrame);
 		
 		//Modificar Datos de Usuario
 		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario(iusu);
@@ -88,8 +88,7 @@ public class principalView {
 		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		agregarCusroPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
-		
-		
+				
 		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC);
 		jIternalFrameSize = altaEdicionCursoInternalFrame.getSize();
 		altaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
@@ -125,7 +124,7 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 700, 450);
+		frame.setBounds(100, 100, 795, 545);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		

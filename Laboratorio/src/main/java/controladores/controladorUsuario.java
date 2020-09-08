@@ -52,7 +52,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
 	
-	
 	public ArrayList<String> listarUsuarios(){
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		List<Usuario> usuarios = mUsu.getUsuarios();
