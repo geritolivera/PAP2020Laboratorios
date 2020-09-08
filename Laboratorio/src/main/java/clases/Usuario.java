@@ -1,9 +1,6 @@
 package clases;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-import java.util.Date;
+import java.util.*;
 
 @MappedSuperclass
 public abstract class Usuario {

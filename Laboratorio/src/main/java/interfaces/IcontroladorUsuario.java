@@ -1,12 +1,9 @@
 package interfaces;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
-import datatypes.DTUsuario;
+import datatypes.*;
 import exepciones.*;
-import clases.EdicionCurso;
 
 public interface IcontroladorUsuario {
 	
@@ -17,25 +14,21 @@ public interface IcontroladorUsuario {
 	//2 - Consulta de Usuario
 	public ArrayList<String> listarUsuarios();
 	public List<DTUsuario> listarDTUsuarios();
-	public void verInfoUsuario(String nickname);
+	public void verInfoUsuario(String nickname) throws UsuarioExcepcion;
 	
 	//3 - Modificar Datos de Usuario
 	//Se utiliza la misma funcion listarUsuario
-	public DTUsuario seleccionarUsuario(String nickname);
+	//public DTUsuario seleccionarUsuario(String nickname);
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
 	
-	//6 - Alta de Edicion de Curso
-	public void ingresarDocente(String nomDoc);
-	
-	//8 - Inscripcion a Edicion de Curso
-	public void seleccionarEstudiante(String nickname);
-	public void confirmarInscripcion(String nickname, Date fechaInsc);
-	public void cancelarInscripcion();
-	public void agregarEdicionUsuario(EdicionCurso edV);
 	
 	//12 - Alta de Instituto
 	public void AltaInstituto(String nombre) throws InstitutoExcepcion;
 	
 	//Funciones auxiliares
-	public String[] listarInstituto(); //Lista los usuarios
+
+	public String[] listarInstituto();
+
+	public String[] listarEstudiantesAux();
+	
 }

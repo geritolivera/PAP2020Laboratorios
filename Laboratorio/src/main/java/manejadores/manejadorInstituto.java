@@ -1,5 +1,6 @@
 package manejadores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,8 +10,8 @@ import conexion.Conexion;
 
 public class manejadorInstituto {
 	
-private static manejadorInstituto instancia = null;
-
+	private static manejadorInstituto instancia = null;
+	private List<Instituto> institutos = new ArrayList<>();
 	private manejadorInstituto() {}
 	
 	public static manejadorInstituto getInstancia() {
@@ -44,4 +45,14 @@ private static manejadorInstituto instancia = null;
 		List<Instituto> institutos = em.createQuery("SELECT u FROM Instituto i", Instituto.class).getResultList();
 		return institutos;
 	}
+	
+	public ArrayList<String> obtenerInstitutos(){
+		ArrayList<String> ret = new ArrayList<>();
+		for(Instituto i: institutos) {
+			ret.add(i.getNombre());
+		}
+		return ret;
+	}
+	
+	
 }

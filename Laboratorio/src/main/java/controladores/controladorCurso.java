@@ -10,7 +10,7 @@ import datatypes.*;
 import exepciones.*;
 import manejadores.*;
 
-import interfaces.IcontroladorCurso;
+import interfaces.*;
 
 public class controladorCurso implements IcontroladorCurso{
 	public controladorCurso() {
@@ -51,11 +51,15 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public DTCurso verInfo(String nomCurso) {
+	public DTCurso verInfo(String nomCurso) throws CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
-		Curso c = mCur.buscarCurso(nomCurso);
-		DTCurso dt = new DTCurso(c);
-		return dt;
+		if(mCur.existeCurso(nomCurso)) {
+			Curso c = mCur.buscarCurso(nomCurso);
+			DTCurso dtc = new DTCurso(c);
+			return dtc;
+		}
+		else
+			throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
 	}
 	
 	
@@ -63,27 +67,27 @@ public class controladorCurso implements IcontroladorCurso{
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, ArrayList<String> docentes) throws EdicionExcepcion{
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorCurso mCur = manejadorCurso.getInstancia();
 		if(mEdi.existeEdicion(nombre)) {
 			throw new EdicionExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
 		}
 		else {
-			EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
-			for(String s: docentes) {
-				Docente d = (Docente) mUsu.buscarUsuario(s);
-				edi.agregarDocente(d);
+			if(mCur.existeCurso(nomCurso)) {
+				Curso curso = mCur.buscarCurso(nomCurso);
+				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
+				for(String s: docentes) {
+					Docente d = (Docente) mUsu.buscarUsuario(s);
+					edi.agregarDocente(d);
+				}
+				mEdi.agregarEdicion(edi);
 			}
-			mEdi.agregarEdicion(edi);
+			else
+				throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
 		}
 	}
-	
-	@Override
-	public boolean confirmarAltaEdicion(String nombre) {
-		return true;
-	}
-	//Se utiliza la mismas funcion cancelarAlta
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
@@ -102,14 +106,18 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public DTEdicionCurso verInfoEdicion(String nomEdicion) {
+	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
-		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
-		DTEdicionCurso dt = new DTEdicionCurso(edi);
-		return dt;
+		if(mEdi.existeEdicion(nomEdicion)) {
+			EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
+			DTEdicionCurso dte = new DTEdicionCurso(edi);
+			return dte;
+		}
+		else
+			throw new EdicionExcepcion("La edicion " + nomEdicion + " no existe.");
 	}
 	
-	
+	 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
@@ -152,11 +160,7 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
 	} 
-	
-	@Override
-	public void cancelarInscripcion() {}
-	
-		
+			
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
@@ -182,74 +186,105 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return listProgramas;
 	}
-	
+	//es necesaria otra funcion para listarCursos 
 	@Override
 	public ArrayList<String> listarCursos(){
 		manejadorCurso mCur = manejadorCurso.getInstancia();
-		List<Curso> cursos= mCur.getCursos();
-		ArrayList<String> listProgramas = new ArrayList<>();
+		List<Curso> cursos = mCur.getCursos();
+		ArrayList<String> listCursos = new ArrayList<>();
 		for(Curso c: cursos) {
-			listProgramas.add(c.getNombre());
+			listCursos.add(c.getNombre());
 		}
-		return listProgramas;
+		return listCursos;
 	}
 	
 	@Override
-	public void agregarCursoPrograma(String nomCur, String nomP){
+	public void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
-		Curso c = mCur.buscarCurso(nomCur);
-		ProgramaFormacion p = mPro.buscarPrograma(nomP);
-		p.agregarCurso(c);
-		c.agregarPrograma(p);
-	}
-	
-	@Override
-	public DTProgramaFormacion verInfoPrograma(String nombreProg){
-		manejadorPrograma mPro = manejadorPrograma.getInstancia();
-		ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
-		List<Curso> cursos = p.getCursos();
-		DTProgramaFormacion dt = new DTProgramaFormacion(p);
-		for(Curso c:cursos) {
-			dt.agregarCurso(c.getNombre());
+		if(mCur.existeCurso(nomCur)) {
+			if(mPro.existePrograma(nomP)) {
+				Curso c = mCur.buscarCurso(nomCur);
+				ProgramaFormacion p = mPro.buscarPrograma(nomP);
+				p.agregarCurso(c);
+				c.agregarPrograma(p);
+			}
+			else
+				throw new ProgramaFormacionExcepcion("El programa " + nomP + " no existe.");
 		}
-		return dt;
+		else
+			throw new CursoExcepcion("El curso " + nomCur + "no existe.");
 	}
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
+	
 	@Override
-	public DTProgramaFormacion seleccionarPrograma(String nomP){
-		manejadorPrograma mp = manejadorPrograma.getInstancia();
-		ProgramaFormacion prog = mp.buscarPrograma(nomP);
-		if(prog != null) {
-			DTProgramaFormacion dtProg = new DTProgramaFormacion(prog);
-			return dtProg;
-		} else {
-			return null;
+	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion{
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		if(mPro.existePrograma(nombreProg)) {
+			ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
+			List<Curso> cursos = p.getCursos();
+			DTProgramaFormacion dt = new DTProgramaFormacion(p);
+			for(Curso c:cursos) {
+				dt.agregarCurso(c.getNombre());
+			}
+			return dt;
 		}
+		else
+			throw new ProgramaFormacionExcepcion("El programa " + nombreProg + " no existe.");
 	}
-	
-	@Override //Agrega curso a programa de formacion
-	public void agregarCursoPrograma(String nomCur){}//Revisar
-	
-	@Override
-	public void agregarCursoPrograma(ProgramaFormacion p){} //Revisar
-	
-	//Se utiliza la misma funcion listarCursos
-	
-	@Override
-	public DTCurso seleccionarCursoEnPrograma(String nomC) {
-		manejadorCurso mc = manejadorCurso.getInstancia();
-		Curso cur = mc.buscarCurso(nomC);
-		if(cur != null) {
-			DTCurso dtCur = new DTCurso(cur);
-			return dtCur;
-		} else {
-			return null;
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Listados para comboBoxes
+	public String[] listarCursosAux(String nombreInstituto){
+		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
+		Instituto inst = mI.buscarInstituto(nombreInstituto);
+		List<Curso> cursos = inst.getCursos();
+		String[] cursos_ret = new String[cursos.size()] ;
+		int i=0;
+		for(Curso c:cursos) {
+			cursos_ret[i]=c.getNombre();
+			i++;
 		}
+		return cursos_ret;
 	}
-		
+	public String[] listarEdicionesAux(String nomCurso) {
+		manejadorCurso mC = manejadorCurso.getInstancia();
+		Curso curso = mC.buscarCurso(nomCurso);
+		List<EdicionCurso> ediciones = curso.getEdiciones();
+		String[] ediciones_ret = new String[ediciones.size()];
+		int i=0;
+		for (EdicionCurso e:ediciones) {
+			ediciones_ret[i]=e.getNombre();
+			i++;
+		}
+		return ediciones_ret;
+	}
 
+	public String[] listarDocentesAux(String nomEdicion){
+		manejadorEdicion mE =manejadorEdicion.getInstancia();
+		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
+		List<Docente> docentes = edicion.getDocentes();
+		String[] docente_ret = new String[docentes.size()];
+		int i=0;
+		for (Docente d:docentes) {
+			docente_ret[i]=d.getNick();
+			i++;
+		}
+		return docente_ret; 
+	}
+	
+	public String[] listarDocentesInstituto(String nomInstituto) {
+		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		Instituto inst = mI.buscarInstituto(nomInstituto);
+		List<Docente> docentes = inst.getDocentes();
+		String[] docentes_ret = new String[docentes.size()] ;
+		int i=0;
+		for(Docente d:docentes) {
+			docentes_ret[i]=d.getNick();
+			i++;
+		}
+		return docentes_ret;
+	}
 }
