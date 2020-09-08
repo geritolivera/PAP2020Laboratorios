@@ -80,7 +80,7 @@ public class controladorCurso implements IcontroladorCurso{
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				for(String s: docentes) {
 					Docente d = (Docente) mUsu.buscarUsuario(s);
-					edi.agregarDocente(d);
+					d.agregarEdicion(edi);
 				}
 				mEdi.agregarEdicion(edi);
 			}
@@ -131,7 +131,7 @@ public class controladorCurso implements IcontroladorCurso{
 				//if(esVigente()){}  //como sabemos cual es vigente? 
 				DTEdicionCurso dte = new DTEdicionCurso(e);
 			}
-			return dte;
+			return null;
 		}
 		else
 			throw new CursoExcepcion("No existe el curso " + nomCurso);
@@ -262,19 +262,19 @@ public class controladorCurso implements IcontroladorCurso{
 		return ediciones_ret;
 	}
 
-	public String[] listarDocentesAux(String nomEdicion){
-		manejadorEdicion mE =manejadorEdicion.getInstancia();
-		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
-		List<Docente> docentes = edicion.getDocentes();
-		String[] docente_ret = new String[docentes.size()];
-		int i=0;
-		for (Docente d:docentes) {
-			docente_ret[i]=d.getNick();
-			i++;
-		}
-		return docente_ret; 
-	}
-	
+//	public String[] listarDocentesAux(String nomEdicion){
+//		manejadorEdicion mE =manejadorEdicion.getInstancia();
+//		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
+//		List<Docente> docentes = edicion.getDocentes();
+//		String[] docente_ret = new String[docentes.size()];
+//		int i=0;
+//		for (Docente d:docentes) {
+//			docente_ret[i]=d.getNick();
+//			i++;
+//		}
+//		return docente_ret; 
+//	}
+//	
 	public String[] listarDocentesInstituto(String nomInstituto) {
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
 		Instituto inst = mI.buscarInstituto(nomInstituto);
@@ -286,5 +286,17 @@ public class controladorCurso implements IcontroladorCurso{
 			i++;
 		}
 		return docentes_ret;
+	}
+
+	@Override
+	public String[] listarInstitutos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] listarDocentesAux(String nomEdicion) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.edicionCurso;
 
 import java.awt.EventQueue;
 

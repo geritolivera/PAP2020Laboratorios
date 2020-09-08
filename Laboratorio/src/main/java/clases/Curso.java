@@ -23,10 +23,7 @@ public class Curso {
 	private Date fechaR;
 	private String url;
 	
-	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
-	private Docente docenteCreador;
-	
+
 	//lista de cursos previos
 	@ManyToMany //es manytomany? como hago la autorelacion?
 	private List<Curso> previas = new ArrayList<>();
@@ -136,11 +133,5 @@ public class Curso {
 	
 	public List<Curso> getPrevias(){
 		return this.previas;
-	}
-	public Docente getDocenteCreador() {
-		return docenteCreador;
-	}
-	public void setDocenteCreador(Docente docenteCreador) {
-		this.docenteCreador = docenteCreador;
 	}
 }
