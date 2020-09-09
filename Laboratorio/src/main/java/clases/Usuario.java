@@ -1,8 +1,16 @@
 package clases;
 
 import java.util.*;
+import javax.persistence.InheritanceType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
 
-public class Usuario {
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Usuario {
+	@Id
 	private String nick;
 	private String nombre;
 	private String apellido;

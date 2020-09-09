@@ -2,9 +2,19 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.util.Date;
 
+@Entity
 public class Curso {
+	@Id
 	private String nombre;
 	private String descripcion;
 	private String duracion;
@@ -13,16 +23,22 @@ public class Curso {
 	private Date fechaR;
 	private String url;
 	
+
 	//lista de cursos previos
+	@ManyToMany //es manytomany? como hago la autorelacion?
 	private List<Curso> previas = new ArrayList<>();
 	
 	//lista de todos los programas de formacion
+	@ManyToMany
 	private List<ProgramaFormacion> programas = new ArrayList<>();
 	
 	//lista de todos las ediciones
+	@OneToMany (mappedBy = "curso")
 	private List<EdicionCurso> ediciones = new ArrayList<>();
 	
 	//el instituto donde reside el curso
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
 	private Instituto instituto;
 	
 	public Curso() {

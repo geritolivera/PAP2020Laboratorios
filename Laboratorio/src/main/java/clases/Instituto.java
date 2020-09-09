@@ -3,10 +3,19 @@ package clases;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Instituto {
+	@Id
 	private String nombre;
 	//Lista de docentes del instituto
+	@OneToMany(mappedBy = "instituto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Docente> docentes = new ArrayList<>();
+	@OneToMany(mappedBy = "instituto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Curso> cursos = new ArrayList<>();
 	
 	public Instituto() {

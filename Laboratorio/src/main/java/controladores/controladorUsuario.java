@@ -25,7 +25,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			//si la string instituto no tiene nada
-			if(instituto.isEmpty()) {
+			if(instituto==null) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
@@ -127,11 +127,12 @@ public class controladorUsuario implements IcontroladorUsuario{
 		@Override
 		public void AltaInstituto(String nombre) throws InstitutoExcepcion{
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			Instituto nuevoI = mi.buscarInstituto(nombre);
-			if(nuevoI != null) {
+			boolean existe = mi.existeInstituto(nombre);
+			if(existe) {
 				throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 			} else {
-				mi.agregarInstituto(nuevoI);
+				Instituto i  = new Instituto(nombre);
+				mi.agregarInstituto(i);
 			}
 		}
 		

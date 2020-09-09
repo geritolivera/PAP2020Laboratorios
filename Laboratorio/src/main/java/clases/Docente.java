@@ -1,11 +1,23 @@
 package clases;
 
-import java.util.ArrayList;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.List;
+
+import java.util.ArrayList;
 import java.util.Date;
 
+@Entity
+@DiscriminatorValue("tipoDocente")
 public class Docente extends Usuario{
+	@ManyToOne
+	@JoinColumn(insertable = false, updatable = false)
 	private Instituto instituto;
+	
+	@ManyToMany
 	private List<EdicionCurso> ediciones = new ArrayList<>();
 	
 	public Docente() {
@@ -25,17 +37,17 @@ public class Docente extends Usuario{
 	public Instituto getInstituto() {
 		return instituto;
 	}
-	
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
-		edicion.agregarDocente(this);
-		//esto agrega al docente a la edición a la cual se está inscribienedo
-		//alternativamente, se puede descartar la función agregarDocente completamente y usar
-		// - edicion.getDocentes().add(this) -
-		//notar que cuando usamos "this", nos referimos al objeto donde estamos trabajando
-		//en este caso, "this" se refiere a este docente específico
-}
-	public List<EdicionCurso> getEdiciones(){
+		edicion.getDocentes().add(this);
+	}
+	
+	 public void eliminarEdicion(EdicionCurso edicion) {
+		 this.ediciones.remove(edicion);
+		 edicion.getDocentes().remove(this);
+	 }
+	public List<EdicionCurso> getEdiciones() {
 		return this.ediciones;
 	}
+	
 }

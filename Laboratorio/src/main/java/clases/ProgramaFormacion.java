@@ -1,28 +1,35 @@
 package clases;
-//Prueba
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 import java.util.Date;
 
+@Entity
 public class ProgramaFormacion {
+	@Id
 	private String nombre;
 	private String descripcion;
 	private Date fechaI;
 	private Date fechaF;
 	private Date fechaA;
+	@ManyToMany (mappedBy="programas")
 	private List<Estudiante> estudiantes = new ArrayList<>();
+	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();
 	
 	public ProgramaFormacion() {
 		super();
 	}
-	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) {
+	public ProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
-		this.fechaA = fechaA;
+		this.fechaA = fActual;
 	}
 	
 	public String getNombre() {
@@ -59,14 +66,14 @@ public class ProgramaFormacion {
 	public void setFechaA(Date fechaA) {
 		this.fechaA = fechaA;
 	}
-	
+	/*
 	public void agregarEstudiante(Estudiante estudiante) {
 		estudiantes.add(estudiante);
 	}
 	public List<Estudiante> getEstudiantes() {
 		return estudiantes;
 	}
-	
+	*/
 	public void agregarCurso(Curso curso) {
 		cursos.add(curso);
 	}

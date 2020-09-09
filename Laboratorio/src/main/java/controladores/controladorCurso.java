@@ -1,6 +1,7 @@
 package controladores;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -79,7 +80,7 @@ public class controladorCurso implements IcontroladorCurso{
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				for(String s: docentes) {
 					Docente d = (Docente) mUsu.buscarUsuario(s);
-					edi.agregarDocente(d);
+					d.agregarEdicion(edi);
 				}
 				mEdi.agregarEdicion(edi);
 			}
@@ -130,7 +131,7 @@ public class controladorCurso implements IcontroladorCurso{
 				//if(esVigente()){}  //como sabemos cual es vigente? 
 				DTEdicionCurso dte = new DTEdicionCurso(e);
 			}
-			return dte;
+			return null;
 		}
 		else
 			throw new CursoExcepcion("No existe el curso " + nomCurso);
@@ -162,13 +163,12 @@ public class controladorCurso implements IcontroladorCurso{
 			
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
-	@Override
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion{	
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
 		if(mpf.existePrograma(nombre)) {
 			throw new ProgramaFormacionExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
 		} else {
-			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fechaA);
+			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
 			mpf.agregarPrograma(nuevoProg);
 		}		
 	}
@@ -268,19 +268,19 @@ public class controladorCurso implements IcontroladorCurso{
 		return ediciones_ret;
 	}
 
-	public String[] listarDocentesAux(String nomEdicion){
-		manejadorEdicion mE =manejadorEdicion.getInstancia();
-		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
-		List<Docente> docentes = edicion.getDocentes();
-		String[] docente_ret = new String[docentes.size()];
-		int i=0;
-		for (Docente d:docentes) {
-			docente_ret[i]=d.getNick();
-			i++;
-		}
-		return docente_ret; 
-	}
-	
+//	public String[] listarDocentesAux(String nomEdicion){
+//		manejadorEdicion mE =manejadorEdicion.getInstancia();
+//		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
+//		List<Docente> docentes = edicion.getDocentes();
+//		String[] docente_ret = new String[docentes.size()];
+//		int i=0;
+//		for (Docente d:docentes) {
+//			docente_ret[i]=d.getNick();
+//			i++;
+//		}
+//		return docente_ret; 
+//	}
+//	
 	public String[] listarDocentesInstituto(String nomInstituto) {
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
 		Instituto inst = mI.buscarInstituto(nomInstituto);
@@ -292,5 +292,17 @@ public class controladorCurso implements IcontroladorCurso{
 			i++;
 		}
 		return docentes_ret;
+	}
+
+	@Override
+	public String[] listarInstitutos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] listarDocentesAux(String nomEdicion) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
