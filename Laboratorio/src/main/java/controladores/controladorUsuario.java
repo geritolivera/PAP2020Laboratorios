@@ -23,7 +23,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			//si la string instituto no tiene nada
-			if(instituto.isEmpty()) {
+			if(instituto==null) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				

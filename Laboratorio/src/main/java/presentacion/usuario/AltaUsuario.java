@@ -137,10 +137,11 @@ public class AltaUsuario extends JInternalFrame {
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
-		String instituto = this.institutoChoose.getSelectedItem().toString();
+		Boolean institutoVacio = this.institutoChoose.getSelectedItem()== null	;
 		if(checkFormulario()) {
 			try {
-				if(!instituto.isEmpty()) {
+				if(!institutoVacio) {
+					String instituto = this.institutoChoose.getSelectedItem().toString();
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 				} else {
