@@ -27,6 +27,9 @@ public class EdicionCurso {
 	
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Docente> docentes = new ArrayList<>();
+	//private List<Inscripcion> inscripciones = new ArrayList<>();
+
+
 	
 	public EdicionCurso() {
 		super();
