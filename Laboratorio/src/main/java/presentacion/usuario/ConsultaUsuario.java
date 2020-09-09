@@ -25,9 +25,6 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JTextField textFieldNick;
 	private JTextField textFieldCorreo;
 	private JTextField textFieldFechaNac;
-	
-	private JComboBox<String> comboBoxProgForReg;
-	private JComboBox<String> comboBoxEdCurReg;
 	private JComboBox<String> comboBoxCursoReg;
 	private JComboBox<String> comboBoxInsEdCur;
 	private JComboBox<String> comboBoxProgForIns;
@@ -52,7 +49,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Lista los usuarios
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(20, 65, 120, 245);
+		scrollPane.setBounds(20, 65, 120, 280);
 		getContentPane().add(scrollPane);
 		ListaUsu = new JList<String>();
 		ListaUsu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -75,7 +72,7 @@ public class ConsultaUsuario extends JInternalFrame {
 				seleccionarUsuario(e);
 			}
 		});
-		ButtonSelccUsuario.setBounds(20, 330, 120, 25);
+		ButtonSelccUsuario.setBounds(20, 365, 120, 25);
 		getContentPane().add(ButtonSelccUsuario);
 		
 		//Panel datos Usuario
@@ -151,28 +148,10 @@ public class ConsultaUsuario extends JInternalFrame {
 		LabelDocente.setBounds(165, 210, 110, 15);
 		getContentPane().add(LabelDocente);
 		
-		//Label Curso Registrado
-		JLabel LabelCursosRegistrados = new JLabel("Curso Registrados:");
-		LabelCursosRegistrados.setBounds(165, 235, 100, 15);
-		getContentPane().add(LabelCursosRegistrados);
-		
 		//Label Ediciones de Curso Registrados
-		JLabel LabelEdiCurReg = new JLabel("Ediciones de Curso Registrados: ");
-		LabelEdiCurReg.setBounds(165, 260, 160, 15);
-		getContentPane().add(LabelEdiCurReg);
-		
-		//Label Programa de Formacion Registrados
-		JLabel LabelProgForm = new JLabel("Programa de Formacion Registrados:");
-		LabelProgForm.setBounds(165, 285, 185, 15);
-		getContentPane().add(LabelProgForm);
-		
-		comboBoxProgForReg = new JComboBox<String>();
-		comboBoxProgForReg.setBounds(350, 280, 140, 20);
-		getContentPane().add(comboBoxProgForReg);
-		
-		comboBoxEdCurReg = new JComboBox<String>();
-		comboBoxEdCurReg.setBounds(350, 255, 140, 20);
-		getContentPane().add(comboBoxEdCurReg);
+		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
+		LabelEdiCurAsc.setBounds(165, 235, 160, 15);
+		getContentPane().add(LabelEdiCurAsc);
 		
 		comboBoxCursoReg = new JComboBox<String>();
 		comboBoxCursoReg.setBounds(350, 230, 140, 20);
@@ -181,29 +160,29 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Usuario Estudiante
 		JLabel LabelEstudiante = new JLabel("Usuario Estudiante");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelEstudiante.setBounds(165, 315, 110, 15);
+		LabelEstudiante.setBounds(165, 270, 127, 15);
 		getContentPane().add(LabelEstudiante);
 		
 		//Label Inscripto en Edicion de Curso
 		JLabel lblCursoInscriptos = new JLabel("Inscripto en Edicion de Curso:");
-		lblCursoInscriptos.setBounds(165, 340, 160, 15);
+		lblCursoInscriptos.setBounds(165, 295, 160, 15);
 		getContentPane().add(lblCursoInscriptos);
 		
 		//Label Programa de Formacion inscripto
 		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(165, 365, 160, 15);
+		ProgramaInscriptos.setBounds(165, 320, 160, 15);
 		getContentPane().add(ProgramaInscriptos);
 		
 		comboBoxInsEdCur = new JComboBox<String>();
-		comboBoxInsEdCur.setBounds(350, 335, 140, 20);
+		comboBoxInsEdCur.setBounds(350, 290, 140, 20);
 		getContentPane().add(comboBoxInsEdCur);
 		
 		comboBoxProgForIns = new JComboBox<String>();
-		comboBoxProgForIns.setBounds(350, 363, 140, 20);
+		comboBoxProgForIns.setBounds(350, 320, 140, 20);
 		getContentPane().add(comboBoxProgForIns);
 		
 		JButton ButtonCancelar = new JButton("Cancelar");
-		ButtonCancelar.setBounds(20, 375, 120, 25);
+		ButtonCancelar.setBounds(260, 365, 120, 25);
 		getContentPane().add(ButtonCancelar);		
 
 	}
