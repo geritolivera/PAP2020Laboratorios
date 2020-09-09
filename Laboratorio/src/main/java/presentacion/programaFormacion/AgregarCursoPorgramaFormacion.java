@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import interfaces.IcontroladorCurso;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -31,6 +32,12 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	public AgregarCursoPorgramaFormacion(IcontroladorCurso iconCurso) {
 		
 		this.iconCurso = iconCurso;
+		setResizable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setClosable(true);
+        setTitle("Agregar Curso a Programa de Formacion");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		

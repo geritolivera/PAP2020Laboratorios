@@ -22,16 +22,17 @@ public class principalView {
 	
 	//JInternal Frame Curso
 	private presentacion.curso.AltaCurso altaCursoInternalFrame;
+	private presentacion.curso.ConsultaCurso consultaCursoInternalFrame;
+	
+	//JInternal Frame Edicion de Curso
+	private presentacion.edicionCurso.AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
+	private presentacion.edicionCurso.ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
+	private presentacion.edicionCurso.InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
 	
 	//JInternal Frame Programa Formacion
 	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
 	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
 	private presentacion.programaFormacion.ConsultaProgramaFormacion consultaProgramaFormacionInternalFrame;
-
-	//JInternal Frame Edicion de Curso
-	private presentacion.edicionCurso.AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
-	private presentacion.edicionCurso.ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
-	private presentacion.edicionCurso.InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
 
 	//JInternal Frame Instituto
 	private AltaInstituto altaInstitutoInternalFrame;	
@@ -98,49 +99,59 @@ public class principalView {
 		altaCursoInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaCursoInternalFrame);
 		
-				
-		/*----------------------------------------Programa de Formacion----------------------------------------*/
-		//Crear Programa de Formacion
-		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion();
-		jIternalFrameSize = crearPDFInternalFrame.getSize();
-		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
-		crearPDFInternalFrame.setVisible(false);
-		frame.getContentPane().add(crearPDFInternalFrame);
+		//Consulta Curso
+		consultaCursoInternalFrame = new presentacion.curso.ConsultaCurso(iconC);
+		jIternalFrameSize = consultaCursoInternalFrame.getSize();
+		consultaCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		consultaCursoInternalFrame.setVisible(false);
+		frame.getContentPane().add(consultaCursoInternalFrame);					
 		
-		agregarCusroPDFInternalFrame = new presentacion.programaFormacion.AgregarCursoPorgramaFormacion(icurso);
-		jIternalFrameSize = agregarCusroPDFInternalFrame.getSize();
-		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
-		agregarCusroPDFInternalFrame.setVisible(false);
-		frame.getContentPane().add(agregarCusroPDFInternalFrame);
-				
+		/*----------------------------------------Edicion de Curso----------------------------------------*/
+		//Alta de Edicion de Curso
 		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC);
 		jIternalFrameSize = altaEdicionCursoInternalFrame.getSize();
 		altaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaEdicionCursoInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaEdicionCursoInternalFrame);
 		
+		//Consulta de Edicion de Curso
 		consultaEdicionCursoInternalFrame = new ConsultaDeEdicionDeCurso(iconC);
 		jIternalFrameSize = consultaEdicionCursoInternalFrame.getSize();
 		consultaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		consultaEdicionCursoInternalFrame.setVisible(false);
 		frame.getContentPane().add(consultaEdicionCursoInternalFrame);
 		
+		//Inscripcion a edicion de Curso
 		inscripcionEdicionCursoInternalFrame = new InscripcionEdicionCurso(iconC,iusu);
 		jIternalFrameSize = inscripcionEdicionCursoInternalFrame.getSize();
 		inscripcionEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		inscripcionEdicionCursoInternalFrame.setVisible(false);
 		frame.getContentPane().add(inscripcionEdicionCursoInternalFrame);
 		
+		/*----------------------------------------Programa de Formacion----------------------------------------*/
+		//Crear Programa de Formacion
+		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion(icurso);
+		jIternalFrameSize = crearPDFInternalFrame.getSize();
+		crearPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		crearPDFInternalFrame.setVisible(false);
+		frame.getContentPane().add(crearPDFInternalFrame);
+		
+		//Agregar Curso a Programa de Formacion
+		agregarCusroPDFInternalFrame = new presentacion.programaFormacion.AgregarCursoPorgramaFormacion(icurso);
+		jIternalFrameSize = agregarCusroPDFInternalFrame.getSize();
+		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		agregarCusroPDFInternalFrame.setVisible(false);
+		frame.getContentPane().add(agregarCusroPDFInternalFrame);
+		
+		
+		/*------------------------------Instituto------------------------------*/
+		//Alta de Instituto
 		altaInstitutoInternalFrame = new AltaInstituto(iusu);
 		jIternalFrameSize = altaInstitutoInternalFrame.getSize();
 		altaInstitutoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaInstitutoInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaInstitutoInternalFrame);
-		
-		
-		/*------------------------------Instituto------------------------------*/
-		//Alta de Instituto
-		
+			
 	}
 
 	/**
@@ -197,6 +208,11 @@ public class principalView {
 		MenuCurso.add(MenuItemAltaCurso);
 		
 		JMenuItem MenuItemConsultaCurso = new JMenuItem("Consulta de Curso");
+		MenuItemConsultaCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultaCursoInternalFrame.setVisible(true);
+			}
+		});
 		MenuCurso.add(MenuItemConsultaCurso);
 		
 		/*---------- Edicion de Curso ----------*/

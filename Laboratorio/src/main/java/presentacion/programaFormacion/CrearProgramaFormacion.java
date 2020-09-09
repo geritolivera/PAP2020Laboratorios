@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -32,6 +33,12 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	public CrearProgramaFormacion(IcontroladorCurso iconCurso) {
 		
 		this.iconCurso = iconCurso;
+		setResizable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setClosable(true);
+        setTitle("Crear Programa de Formacion");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
