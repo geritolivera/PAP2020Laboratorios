@@ -69,7 +69,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 		if(mUsu.existeUsuarioNick(nickname)) {
 			Usuario u = mUsu.buscarUsuario(nickname);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
-			List<ProgramaFormacion> programasDoc = new ArrayList<ProgramaFormacion>();
 			List<EdicionCurso> edicionesEst = new ArrayList<EdicionCurso>();
 			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
 			//si el usuario es docente
@@ -80,28 +79,20 @@ public class controladorUsuario implements IcontroladorUsuario{
 				for(EdicionCurso e: edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
-					Curso ec = e.getCurso();
-					DTCurso dtcd = new DTCurso(ec);
-					dtd.agregarCurso(dtcd);
-					programasDoc = ec.getProgramas();
-					for(ProgramaFormacion p: programasDoc) {
-						DTProgramaFormacion dtpd = new DTProgramaFormacion(p);
-						dtd.agregarPrograma(dtpd);
-					}
 				}
 			}
 			//si el usuario es estudiante
 			else if (u instanceof Estudiante) {
 				DTEstudiante dte = new DTEstudiante(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
 				edicionesEst = ((Estudiante) u).getEdiciones();
+				programasEst = ((Estudiante) u).getProgramas();
 				for(EdicionCurso e: edicionesEst) {
 					DTEdicionCurso dtee = new DTEdicionCurso(e);
 					dte.agregarEdicion(dtee);
-					programasEst = e.getCurso().getProgramas();
-					for(ProgramaFormacion p: programasEst) {
-						DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
-						dte.agregarPrograma(dtpe);
-					}
+				}
+				for(ProgramaFormacion p: programasEst) {
+					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
+					dte.agregarPrograma(dtpe);
 				}
 			}
 		}
