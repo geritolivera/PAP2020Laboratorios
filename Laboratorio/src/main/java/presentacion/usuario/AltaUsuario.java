@@ -132,9 +132,8 @@ public class AltaUsuario extends JInternalFrame {
 		Boolean institutoVacio = this.institutoChoose.getSelectedItem()== null	;
 		if(checkFormulario()) {
 			try {
-
-				if(!instituto.isEmpty()) {
-					String instituto = this.institutoChoose.getSelectedItem().toString();
+				String instituto = this.institutoChoose.getSelectedItem().toString();
+				if(!institutoVacio) {
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 				} else {
@@ -145,7 +144,6 @@ public class AltaUsuario extends JInternalFrame {
 				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
 			limpiarFormulario();
-			JOptionPane.showMessageDialog(this, "limpito quedo eh", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 			setVisible(false);
 		}
 	}

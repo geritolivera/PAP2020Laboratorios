@@ -1,33 +1,29 @@
 package presentacion.curso;
 
-import java.awt.*;
-
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-
-import interfaces.IcontroladorCurso;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-
 import com.toedter.calendar.JDateChooser;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JButton;
+import interfaces.IcontroladorCurso;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AltaCurso extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 
 	private IcontroladorCurso icon;
+	private JComboBox<String> institutos;
 	private JTextField textNombreCur;
 	private JTextField textDescripcion;
 	private JTextField textCantCreditos;
 	private JTextField textURL;
 	private JDateChooser dateChooser;
-	
+	private Integer[] listDur = {1,2,3,4,5,6,7,8};
+	private Integer[] listMeses = {2,3,4,5,6,7,8,9,10,11,12};
+
 	public AltaCurso(IcontroladorCurso icon) {
 		
 		this.icon = icon;
@@ -45,9 +41,10 @@ public class AltaCurso extends JInternalFrame {
 		LabelSelIns.setBounds(20, 30, 120, 20);
 		getContentPane().add(LabelSelIns);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(155, 30, 200, 20);
-		getContentPane().add(comboBox);
+		institutos = new JComboBox<String>();
+		inicializarComboBoxInstituto();
+		institutos.setBounds(155, 30, 200, 20);
+		getContentPane().add(institutos);
 		
 		JLabel LabelNombreCurso = new JLabel("Nombre de Curso");
 		LabelNombreCurso.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -74,9 +71,9 @@ public class AltaCurso extends JInternalFrame {
 		LabelDur.setBounds(80, 210, 58, 20);
 		getContentPane().add(LabelDur);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(155, 210, 50, 20);
-		getContentPane().add(comboBox_1);
+		JComboBox<Integer> meses = new JComboBox<Integer>(listMeses);
+		meses.setBounds(155, 210, 50, 20);
+		getContentPane().add(meses);
 		
 		JLabel LabelMeses = new JLabel("Mes/Meses");
 		LabelMeses.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -87,10 +84,10 @@ public class AltaCurso extends JInternalFrame {
 		LabelCantHoras.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		LabelCantHoras.setBounds(25, 250, 118, 20);
 		getContentPane().add(LabelCantHoras);
-		
-		JComboBox comboBox_1_1 = new JComboBox();
-		comboBox_1_1.setBounds(155, 250, 50, 20);
-		getContentPane().add(comboBox_1_1);
+
+		JComboBox<Integer> duracion = new JComboBox<Integer>(listDur);
+		duracion.setBounds(155, 250, 50, 20);
+		getContentPane().add(duracion);
 		
 		JLabel LabelHoras = new JLabel("Por Dia");
 		LabelHoras.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -141,12 +138,88 @@ public class AltaCurso extends JInternalFrame {
 		scrollPane.setViewportView(list);
 		
 		JButton ButtonAceptar = new JButton("Aceptar");
+		ButtonAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aceptarAltaCurso(e);
+			}
+		});
 		ButtonAceptar.setBounds(70, 540, 100, 30);
 		getContentPane().add(ButtonAceptar);
 		
 		JButton ButtonCancelar = new JButton("Cancelar");
+		ButtonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cancelarAltaCurso(arg0);
+			}
+		});
 		ButtonCancelar.setBounds(270, 540, 100, 30);
 		getContentPane().add(ButtonCancelar);
 
 	}
+
+	private void aceptarAltaCurso(ActionEvent e) {
+		String nombreCurso = this.textNombreCur.getText();
+		String url = this.textURL.getText();
+
+		String cantCreditos = this.textCantCreditos.getText();
+		String descripcion = this.textDescripcion.getText();
+		Date dateChooser = this.dateChooser.getDate();
+		if(checkFormulario()){
+			/*try{
+				String curso = this.textNombreCur.getSelectedText();
+				if(!curso.isEmpty()){
+					//this.icon.AltaCurso(nombreCurso,descripcion,);
+				}
+			}catch(CursoExcepcion c){
+
+			}*/
+		}
+
+	}
+
+	public void inicializarComboBoxInstituto() {
+		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstitutos());
+		listInst.insertElementAt((new String("")),0);
+		institutos.setModel(listInst);
+		institutos.setSelectedIndex(0);
+	}
+
+	protected void cancelarAltaCurso(ActionEvent arg0) {
+		limpiarFormulario();
+		setVisible(false);
+	}
+
+	private void limpiarFormulario() {
+		inicializarComboBoxInstituto();
+		textCantCreditos.setText("");
+		textDescripcion.setText("");
+		textNombreCur.setText("");
+		textURL.setText("");
+		dateChooser = null;
+	}
+
+	private boolean checkFormulario() {
+		String nombre = this.textNombreCur.getText();
+		String desc = this.textDescripcion.getText();
+		String cantCred = this.textCantCreditos.getText();
+		String url = this.textURL.getText();
+		Date dateChooser = this.dateChooser.getDate();
+		String fechaString = dateChooser.toString();
+
+		Date today = Calendar.getInstance().getTime();
+		if(nombre.isEmpty() || desc.isEmpty() || cantCred.isEmpty() || url.isEmpty() || fechaString.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "No puede haber campos vac�s", "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(dateChooser.compareTo(today) > 0) {
+			JOptionPane.showMessageDialog(this, "Debe ingresar una fecha valida", "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!url.contains(".com")) {
+			JOptionPane.showMessageDialog(this, "Debe ingresar un url valido", "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+
 }

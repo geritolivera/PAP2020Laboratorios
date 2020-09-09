@@ -101,6 +101,18 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		getContentPane().add(tfCupo);
 		tfCupo.setColumns(10);
 
+
+		comboBoxInstituto = new JComboBox<String>();
+		inicializarComboBoxInstituto();
+		comboBoxInstituto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cbInstitutoActionPerformed(arg0);
+			}
+		});
+		comboBoxInstituto.setBounds(66, 32, 99, 20);
+		getContentPane().add(comboBoxInstituto);
+
+
 		comboBoxCursos = new JComboBox<String>();
 		comboBoxCursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -143,15 +155,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		listaDocentes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		listaDocentes.setEnabled(false);
 		
-		comboBoxInstituto = new JComboBox<String>();
-		inicializarComboBoxInstituto();
-		comboBoxInstituto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cbInstitutoActionPerformed(arg0);
-			}
-		});
-		comboBoxInstituto.setBounds(66, 32, 99, 20);
-		getContentPane().add(comboBoxInstituto);
+
 		
 	}
 	public void inicializarComboBoxInstituto() {
@@ -170,11 +174,12 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	
 	protected void cbInstitutoActionPerformed(ActionEvent arg0) {
 		String nombreInstituto = this.comboBoxInstituto.getSelectedItem().toString();
-		if(nombreInstituto.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
-		}else {
+		if(!nombreInstituto.isEmpty()) {
 			inicializarComboBoxCursos(nombreInstituto);
-		}	
+		}/*else {
+			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
+		}*/
+
 	}
 	protected void llenarLista() {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
@@ -187,10 +192,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	}
 
 	protected void cbCursoActionPerformed(ActionEvent arg0) {
+		inicializarComboBoxCursos(this.comboBoxInstituto.getSelectedItem().toString());
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
-		if (curso.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
-		}else {
+		if (!curso.isEmpty()) {
 			tfNombreEd.setEnabled(true);
 			tfCupo.setEnabled(true);
 			listaDocentes.setEnabled(true);
@@ -207,6 +211,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String cupo = this.tfCupo.getText();
 		String curso = this.comboBoxCursos.getSelectedItem().toString();
 		Date fechPubli = Calendar.getInstance().getTime();
+		String nomInst = this.comboBoxInstituto.getSelectedItem().toString();
 		ArrayList<String> docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		if(checkFormulario()) {
 			try{
@@ -219,6 +224,8 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+
+
 	}
 	
 	private boolean checkFormulario(){
@@ -241,6 +248,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	}
 	
 	private void limpiarFormulario() {
+		inicializarComboBoxInstituto();
         tfNombreEd.setText("");
         tfCupo.setText("");
         dateInicio = null;
