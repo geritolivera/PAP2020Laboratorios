@@ -6,11 +6,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import clases.*;
-import datatypes.*;
+import datatypes.DTCurso;
+import datatypes.DTEdicionCurso;
+import datatypes.DTProgramaFormacion;
 import exepciones.*;
+import interfaces.IcontroladorCurso;
 import manejadores.*;
 
-import interfaces.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class controladorCurso implements IcontroladorCurso{
 	public controladorCurso() {
@@ -124,12 +130,20 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
+		Date today = Calendar.getInstance().getTime();
 		if(mCur.existeCurso(nomCurso)){
 			Curso c = mCur.buscarCurso(nomCurso);
 			List<EdicionCurso> ediciones = c.getEdiciones();
-			for(EdicionCurso e: ediciones){
-				//if(esVigente()){}  //como sabemos cual es vigente? 
-				DTEdicionCurso dte = new DTEdicionCurso(e);
+			DTEdicionCurso dte = new DTEdicionCurso();
+			for(EdicionCurso e: ediciones) {
+				if (e.getFechaF().after(today)) {
+					dte.setNombre(e.getNombre());
+					dte.setFechaPub(e.getFechaPub());
+					dte.setFechaI(e.getFechaI());
+					dte.setFechaF(e.getFechaF());
+					dte.setCurso(e.getNomCurso());
+					dte.setCupo(e.getCupo());
+				}
 			}
 			return null;
 		}
@@ -159,8 +173,8 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
-	} 
-			
+	}
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
@@ -170,7 +184,7 @@ public class controladorCurso implements IcontroladorCurso{
 		} else {
 			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
 			mpf.agregarPrograma(nuevoProg);
-		}		
+		}
 	}
 	
 		
@@ -288,10 +302,17 @@ public class controladorCurso implements IcontroladorCurso{
 		return docentes_ret;
 	}
 
-	@Override
+
 	public String[] listarInstitutos() {
-		// TODO Auto-generated method stub
-		return null;
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			List<Instituto> listIn = mi.getInstituto();
+			String[] institutos = new String[listIn.size()];
+			int i = 0;
+			for(Instituto ins : listIn) {
+				institutos[i] = ins.getNombre();
+				i++;
+			}
+			return institutos;
 	}
 
 	@Override

@@ -1,27 +1,16 @@
 package presentacion.edicionCurso;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
+import exepciones.EdicionExcepcion;
+import exepciones.UsuarioExcepcion;
 import interfaces.IcontroladorCurso;
 import interfaces.IcontroladorUsuario;
 
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
-import exepciones.EdicionExcepcion;
-import exepciones.UsuarioExcepcion;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
-import java.awt.event.ActionEvent;
 
 public class InscripcionEdicionCurso extends JInternalFrame {
 
@@ -83,6 +72,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		getContentPane().add(cbCursos);
 		
 		cbInstituto = new JComboBox<String>();
+		inicializarComboBoxInstituto();
 		cbInstituto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbInstitutoActionPerformed(arg0);
@@ -131,9 +121,17 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 	}
 
 	public void inicializarComboBoxInstituto() {
-		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-		cbInstituto.setModel(modelInstitutos);
-		cbCursos.setEnabled(true);
+		DefaultComboBoxModel<String> listInsti = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
+		listInsti.insertElementAt((new String("")),0);
+		cbInstituto.setModel(listInsti);
+		cbInstituto.setSelectedIndex(0);
+	}
+
+	public void inicializarComboBoxEstudiantes(){
+		DefaultComboBoxModel<String> listEst = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
+		listEst.insertElementAt((new String("")),0);
+		cbEstudiantes.setModel(listEst);
+		cbEstudiantes.setSelectedIndex(0);
 	}
 	
 	protected void cbInstitutoActionPerformed(ActionEvent arg0) {

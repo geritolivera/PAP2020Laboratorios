@@ -1,19 +1,12 @@
 
 package presentacion.programaFormacion;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-
 import interfaces.IcontroladorCurso;
 
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class AgregarCursoPorgramaFormacion extends JInternalFrame {
@@ -75,7 +68,7 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 		 programa=(String) comboProgramasFormacion.getSelectedItem();
 		 curso = (String) comboCursos.getSelectedItem();
 	       
-	    if (programa.isBlank() || curso.isBlank())
+	    if (programa.isEmpty() || curso.isEmpty())
 	        JOptionPane.showMessageDialog(null, "Error campos vacios", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
 	    else 
 	        JOptionPane.showMessageDialog(null, "Agregado!", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE); 

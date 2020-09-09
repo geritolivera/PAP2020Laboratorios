@@ -1,15 +1,16 @@
 package controladores;
 
+import clases.*;
+import datatypes.*;
+import exepciones.InstitutoExcepcion;
+import exepciones.UsuarioExcepcion;
+import interfaces.IcontroladorUsuario;
+import manejadores.manejadorInstituto;
+import manejadores.manejadorUsuario;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import manejadores.*;
-import datatypes.*;
-import exepciones.*;
-import clases.*;
-
-import interfaces.IcontroladorUsuario;
 
 
 public class controladorUsuario implements IcontroladorUsuario{
@@ -23,7 +24,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			//si la string instituto no tiene nada
-			if(instituto.isEmpty()) {
+			if(instituto == null) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
@@ -83,7 +84,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
 			//si el usuario es docente
 			if(u instanceof Docente) {
-				DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+				DTDocente dtd;
+				dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
 				edicionesDoc = ((Docente) u).getEdicionesRegistradas();
 				for(EdicionCurso e: edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
@@ -140,10 +142,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		if(mu.existeUsuarioNick(nickname)){
-			Usuario u = mu.buscarUsuarioNickname(nickname);
-			u.setNombre(nombre);
-			u.setApellido(apellido);
-			u.setFechaNac(fechaNaci);
+			mu.modificarUsuario(nickname, nombre, apellido, fechaNaci);
 		}
 	}
 	

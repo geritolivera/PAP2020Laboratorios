@@ -1,9 +1,12 @@
 package interfaces;
 
-import java.util.*;
-
-import datatypes.*;
+import datatypes.DTCurso;
+import datatypes.DTEdicionCurso;
+import datatypes.DTProgramaFormacion;
 import exepciones.*;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public interface IcontroladorCurso {
 
@@ -40,9 +43,8 @@ public interface IcontroladorCurso {
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
 	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion;
-	
-	
-	//Funciones aux para comboBox de Edicion de cursos
+
+
 	public String[] listarInstitutos();
 	public String[] listarCursosAux(String nombreInstiuto);
 	public String[] listarEdicionesAux(String nombreCurso);

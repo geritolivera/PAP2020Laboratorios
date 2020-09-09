@@ -1,35 +1,24 @@
 package presentacion.edicionCurso;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import com.toedter.calendar.JDateChooser;
 import exepciones.CursoExcepcion;
 import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
+import interfaces.IcontroladorUsuario;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JScrollPane;
-
-import java.awt.EventQueue;
-import javax.swing.ScrollPaneConstants;
 
 public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 	private IcontroladorCurso iconC;
+	private IcontroladorUsuario iusu;
 	private JTextField tfNombreEd;
 	private JTextField tfCupo;
 	private JComboBox<String> comboBoxInstituto;
@@ -88,14 +77,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		lblCupo.setBounds(10, 190, 99, 14);
 		getContentPane().add(lblCupo);
 		
-		comboBoxCursos = new JComboBox<String>();
-		comboBoxCursos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cbCursoActionPerformed(arg0);
-			}
-		});
-		comboBoxCursos.setBounds(260, 32, 89, 20);
-		getContentPane().add(comboBoxCursos);
+
 		
 		tfNombreEd = new JTextField();
 		tfNombreEd.setEnabled(false);
@@ -118,6 +100,15 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		tfCupo.setBounds(133, 184, 110, 20);
 		getContentPane().add(tfCupo);
 		tfCupo.setColumns(10);
+
+		comboBoxCursos = new JComboBox<String>();
+		comboBoxCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cbCursoActionPerformed(arg0);
+			}
+		});
+		comboBoxCursos.setBounds(260, 32, 89, 20);
+		getContentPane().add(comboBoxCursos);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
@@ -153,6 +144,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		listaDocentes.setEnabled(false);
 		
 		comboBoxInstituto = new JComboBox<String>();
+		inicializarComboBoxInstituto();
 		comboBoxInstituto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbInstitutoActionPerformed(arg0);
@@ -163,13 +155,17 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		
 	}
 	public void inicializarComboBoxInstituto() {
-		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-		comboBoxInstituto.setModel(modelInstitutos);
+			DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
+			listInst.insertElementAt((new String("")),0);
+			comboBoxInstituto.setModel(listInst);
+			comboBoxInstituto.setSelectedIndex(0);
 	}
 	
 	protected void inicializarComboBoxCursos(String nombreInstituto) {
 		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
+		modelCursos.insertElementAt((new String("")),0);
 		comboBoxCursos.setModel(modelCursos);
+		comboBoxCursos.setSelectedIndex(0);
 	}
 	
 	protected void cbInstitutoActionPerformed(ActionEvent arg0) {

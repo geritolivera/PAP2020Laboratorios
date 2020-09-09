@@ -1,17 +1,15 @@
 package presentacion.usuario;
 
-import java.util.List;
-
 import com.toedter.calendar.JDateChooser;
-
-import java.awt.*;
-
-import java.awt.event.*;
+import datatypes.DTUsuario;
+import interfaces.IcontroladorUsuario;
 
 import javax.swing.*;
-
-import interfaces.*;
-import datatypes.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 
 public class ModificarDatosUsuario extends JInternalFrame {
 
@@ -133,9 +131,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		
 		JButton ButtonAceptar = new JButton("Aceptar");
 		ButtonAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				modificarDatos(e);
-			}
+			public void actionPerformed(ActionEvent e) { modificarDatos(e); }
 		});
 		ButtonAceptar.setBounds(250, 310, 100, 30);
 		getContentPane().add(ButtonAceptar);
@@ -178,7 +174,14 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	}
 	
 	public void modificarDatos(ActionEvent arg0) {
-		icon.nuevosDatos(nicknameUsu.getSelectedValue(),this.NuevoNombre.toString(),this.nuevoApellido.toString(),this.dateChooser.getDate());
+		String nick = nicknameUsu.getSelectedValue();
+		String newName = this.NuevoNombre.toString();
+		String newApellido = this.nuevoApellido.toString();
+		Date newBirthDay = this.dateChooser.getDate();
+		icon.nuevosDatos(nick, newName, newApellido, newBirthDay);
+		JOptionPane.showMessageDialog(this, "Se han modificado los datos con exito", "ModificarDatosUsuario", JOptionPane.INFORMATION_MESSAGE);
+		limpiarFormulario();
+		setVisible(false);
 	}
 	
 	

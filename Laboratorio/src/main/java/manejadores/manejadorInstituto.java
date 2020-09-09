@@ -1,12 +1,11 @@
 package manejadores;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import clases.Instituto;
 import conexion.Conexion;
+
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 
 public class manejadorInstituto {
 	
@@ -42,7 +41,8 @@ public class manejadorInstituto {
 	public List<Instituto> getInstituto(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<Instituto> institutos = em.createQuery("SELECT u FROM Instituto i", Instituto.class).getResultList();
+		@SuppressWarnings("unchecked")
+		List<Instituto> institutos = em.createQuery("FROM Instituto").getResultList();
 		return institutos;
 	}
 	

@@ -1,25 +1,15 @@
 package presentacion.usuario;
 
-import java.util.Date;
-import java.util.Calendar;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-
-import exepciones.*;
-import interfaces.*;
-
 import com.toedter.calendar.JDateChooser;
+import exepciones.UsuarioExcepcion;
+import interfaces.IcontroladorUsuario;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AltaUsuario extends JInternalFrame {
 	
@@ -38,6 +28,7 @@ public class AltaUsuario extends JInternalFrame {
 	public AltaUsuario(IcontroladorUsuario icon) {
 		
 		this.icon = icon;
+
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -101,8 +92,9 @@ public class AltaUsuario extends JInternalFrame {
 		dateChooser.setDateFormatString("dd-MM-yyyy");
 		dateChooser.setBounds(165, 180, 130, 25);
 		getContentPane().add(dateChooser);
-		
+
 		institutoChoose = new JComboBox<String>();
+		iniciarlizarComboBoxes();
 		institutoChoose.setBounds(165, 225, 130, 25);
 		getContentPane().add(institutoChoose);
 
@@ -141,23 +133,26 @@ public class AltaUsuario extends JInternalFrame {
 		if(checkFormulario()) {
 			try {
 				if(!instituto.isEmpty()) {
-					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
+					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
+					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch(UsuarioExcepcion u) {
-			JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
-		limpiarFormulario();
-		setVisible(false);
+			limpiarFormulario();
+			JOptionPane.showMessageDialog(this, "limpito quedo eh", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
 		}
 	}
 	
 	public void iniciarlizarComboBoxes() {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstituto());
+		listInst.insertElementAt((new String("")),0);
 		institutoChoose.setModel(listInst);
+		institutoChoose.setSelectedIndex(0);
 	}
 	
 	private boolean checkFormulario() {
@@ -169,7 +164,7 @@ public class AltaUsuario extends JInternalFrame {
 		String fechaString = dateChooser.toString();
 		Date todayDate = Calendar.getInstance().getTime();
 		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No puede haber campos vacïs", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacï¿½s", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		if(dateChooser.compareTo(todayDate) > 0) {
