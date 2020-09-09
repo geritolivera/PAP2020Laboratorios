@@ -12,14 +12,25 @@ import java.awt.event.*;
 public class principalView {
 
 	private JFrame frame;
+	
+	//JInternal Frame Usuario
 	private presentacion.usuario.AltaUsuario altaUsuarioInternalFrame;
 	private presentacion.usuario.ConsultaUsuario consultaUsuarioInternalFrame;
 	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
+	
+	//JInternal Frame Curso
+	private presentacion.curso.AltaCurso altaCursoInternalFrame;
+	
+	//JInternal Frame Programa Formacion
 	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
 	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
+	
+	//JInternal Frame Edicion de Curso
 	private AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
 	private ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
 	private InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
+	
+	//JInternal Frame Alta Instituto
 	private AltaInstituto altaInstitutoInternalFrame;	
 	
 	/**
@@ -63,10 +74,10 @@ public class principalView {
 		
 		//Consulta de Usuario
 		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario(iusu);
-		consultaUsuarioInternalFrame.setBounds(0, -55, 513, 354);
-		altaUsuarioInternalFrame.getContentPane().add(consultaUsuarioInternalFrame);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
+		consultaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		consultaUsuarioInternalFrame.setVisible(false);
+		frame.getContentPane().add(consultaUsuarioInternalFrame);
 		
 		//Modificar Datos de Usuario
 		modificarDatosUsuarioInternalFrame = new presentacion.usuario.ModificarDatosUsuario(iusu);
@@ -75,6 +86,15 @@ public class principalView {
 		modificarDatosUsuarioInternalFrame.setVisible(false);
 		frame.getContentPane().add(modificarDatosUsuarioInternalFrame);
 		
+		/*----------------------------------------Curso----------------------------------------*/
+		//Alta Curso
+		altaCursoInternalFrame = new presentacion.curso.AltaCurso(iconC);
+		jIternalFrameSize = altaCursoInternalFrame.getSize();
+		altaCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		altaCursoInternalFrame.setVisible(false);
+		frame.getContentPane().add(altaCursoInternalFrame);
+		
+				
 		/*----------------------------------------Programa de Formacion----------------------------------------*/
 		//Crear Programa de Formacion
 		crearPDFInternalFrame = new presentacion.programaFormacion.CrearProgramaFormacion();
@@ -88,8 +108,7 @@ public class principalView {
 		agregarCusroPDFInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		agregarCusroPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
-		
-		
+				
 		altaEdicionCursoInternalFrame = new AltaDeEdicionDeCurso(iconC);
 		jIternalFrameSize = altaEdicionCursoInternalFrame.getSize();
 		altaEdicionCursoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
@@ -125,7 +144,7 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 700, 450);
+		frame.setBounds(100, 100, 795, 545);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -167,6 +186,11 @@ public class principalView {
 		menuBar.add(MenuCurso);
 		
 		JMenuItem MenuItemAltaCurso = new JMenuItem("Alta Curso");
+		MenuItemAltaCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaCursoInternalFrame.setVisible(true);
+			}
+		});
 		MenuCurso.add(MenuItemAltaCurso);
 		
 		JMenuItem MenuItemConsultaCurso = new JMenuItem("Consulta de Curso");

@@ -18,6 +18,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 	}
 	
 	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Alta de Usuario
 	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
@@ -49,18 +51,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
-	@Override
-	public List<DTUsuario> listarDTUsuarios(){
-		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		List<Usuario> usuarios = mUsu.getUsuarios();
-		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
-		for(Usuario u: usuarios) {
-			DTUsuario dt = new DTUsuario(u);
-			listUsers.add(dt);
-		}
-		return listUsers;
-	}
-	
 	
 	public ArrayList<String> listarUsuarios(){
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
@@ -120,21 +110,6 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
-	//Se utiliza la misma funcion listarUsuario
-	
-	//es necesario esto? La funcion de abajo ya selecciona al usuario
-	
-	/*@Override
-	public DTUsuario seleccionarUsuario(String nickname){
-		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		Usuario u = mu.buscarUsuario(nickname);
-		if(u != null) {
-			DTUsuario dtU = new DTUsuario(u);
-			return dtU;
-		} else {
-		return null;
-		}
-	}*/
 	
 	@Override
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
@@ -162,6 +137,20 @@ public class controladorUsuario implements IcontroladorUsuario{
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
+		
+		@Override //Lista los DT Usuarios
+		public List<DTUsuario> listarDTUsuarios(){
+			manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+			List<Usuario> usuarios = mUsu.getUsuarios();
+			List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
+			for(Usuario u: usuarios) {
+				DTUsuario dt = new DTUsuario(u);
+				listUsers.add(dt);
+			}
+			return listUsers;
+		}
+		
+		
 		@Override //Lista los nombres de los institutos
 		public String[] listarInstituto() {
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
@@ -174,6 +163,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 			}
 			return institutos;
 		}
+		
+		@Override //Lista los nicknames de los estudiantes
 		public String[] listarEstudiantesAux(){
 			manejadorUsuario mU = manejadorUsuario.getInstancia();
 			List<Usuario> listUs = mU.getUsuarios();

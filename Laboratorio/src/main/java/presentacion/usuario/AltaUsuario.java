@@ -177,7 +177,7 @@ public class AltaUsuario extends JInternalFrame {
             return false;
 		}
 		if(!email.contains("@")) {
-			JOptionPane.showMessageDialog(this, "Debe a�adir una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe ingresar una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		return true;

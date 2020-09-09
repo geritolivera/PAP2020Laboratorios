@@ -235,8 +235,12 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new ProgramaFormacionExcepcion("El programa " + nombreProg + " no existe.");
 	}
+	
+	
 	/*-------------------------------------------------------------------------------------------------------------*/
-	//Listados para comboBoxes
+	
+	//Funciones Auxiliares
+	@Override //Listados para comboBoxes
 	public String[] listarCursosAux(String nombreInstituto){
 		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
 		Instituto inst = mI.buscarInstituto(nombreInstituto);
@@ -249,6 +253,8 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return cursos_ret;
 	}
+	
+	@Override
 	public String[] listarEdicionesAux(String nomCurso) {
 		manejadorCurso mC = manejadorCurso.getInstancia();
 		Curso curso = mC.buscarCurso(nomCurso);
