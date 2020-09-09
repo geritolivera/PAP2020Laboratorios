@@ -3,10 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
 
 import java.util.Date;
 
@@ -22,10 +19,6 @@ public class ProgramaFormacion {
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();
-	
-	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
-	private Docente docenteCreador;
 	
 	public ProgramaFormacion() {
 		super();

@@ -129,10 +129,12 @@ public class AltaUsuario extends JInternalFrame {
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
-		String instituto = this.institutoChoose.getSelectedItem().toString();
+		Boolean institutoVacio = this.institutoChoose.getSelectedItem()== null	;
 		if(checkFormulario()) {
 			try {
+
 				if(!instituto.isEmpty()) {
+					String instituto = this.institutoChoose.getSelectedItem().toString();
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 				} else {
@@ -172,7 +174,7 @@ public class AltaUsuario extends JInternalFrame {
             return false;
 		}
 		if(!email.contains("@")) {
-			JOptionPane.showMessageDialog(this, "Debe a�adir una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe ingresar una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		return true;

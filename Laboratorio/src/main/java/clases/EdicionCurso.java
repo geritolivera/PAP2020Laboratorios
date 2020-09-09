@@ -25,11 +25,11 @@ public class EdicionCurso {
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	
+	@ManyToMany (mappedBy ="ediciones")
+	private List<Docente> docentes = new ArrayList<>();
 	//private List<Inscripcion> inscripciones = new ArrayList<>();
 
-	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
-	private Curso docenteCreador;
+
 	
 	public EdicionCurso() {
 		super();
@@ -96,6 +96,14 @@ public class EdicionCurso {
 		return estudiantes;
 	}
 
+	public List<Docente> getDocentes() {
+		return docentes;
+	}
+
+	public void setDocentes(List<Docente> d) {
+		this.docentes = d;
+	}
+	
 //esto hay que cambiarlo
 //	public void agregarInscripcion(Date fecha, Estudiante est) {
 //		Inscripcion ins = new Inscripcion(fecha, est, this);
