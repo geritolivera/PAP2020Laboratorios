@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import manejadores.*;
 import datatypes.*;
 import exepciones.*;
 import clases.*;
-
+import conexion.Conexion;
 import interfaces.IcontroladorUsuario;
 
 
@@ -102,15 +104,26 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
 	
+	//usa listarUsuarios
+	//usa verInfoUsuario
 	@Override
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		if(mu.existeUsuarioNick(nickname)){
-			Usuario u = mu.buscarUsuarioNickname(nickname);
-			u.setNombre(nombre);
-			u.setApellido(apellido);
-			u.setFechaNac(fechaNaci);
+		if(mu.existeUsuarioNick(nickname)) {
+			Conexion con = Conexion.getInstancia();
+			EntityManager em = con.getEntityManager();
+			if(mu.existeUsuarioNick(nickname)){
+				Usuario u = mu.buscarUsuarioNickname(nickname);
+				u.setNombre(nombre);
+				u.setApellido(apellido);
+				u.setFechaNac(fechaNaci);
+				em.getTransaction().begin();
+				em.persist(u);
+				em.getTransaction().commit();
+			}
 		}
+		else
+			throw new UsuarioExcepcion("El usuario " + nickname + " no existe.");
 	}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
