@@ -1,10 +1,5 @@
 package controladores;
 
-import java.util.List;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-
 import clases.*;
 import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
@@ -36,6 +31,7 @@ public class controladorCurso implements IcontroladorCurso{
 				Instituto I = mI.buscarInstituto(instituto);
 				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
 				mc.agregarCurso(cursoNuevo);
+				I.agregarCurso(cursoNuevo);
 			}
 			else
 				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
@@ -45,14 +41,9 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public ArrayList<String> listarCursos(String nombreInstituto){
+	public List<String> listarCursos(String nombreInstituto){
 		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
-		Instituto inst = mInst.buscarInstituto(nombreInstituto);
-		List<Curso> cursos = inst.getCursos();
-		ArrayList<String> listCursos = new ArrayList<String>();
-		for(Curso c:cursos) {
-			listCursos.add(c.getNombre());
-		}
+		List<String> listCursos = mInst.obtenerCursosInstituto(nombreInstituto);
 		return listCursos;
 	}
 	

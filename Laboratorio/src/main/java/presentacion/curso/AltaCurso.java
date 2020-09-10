@@ -1,6 +1,8 @@
 package presentacion.curso;
 
 import com.toedter.calendar.JDateChooser;
+import exepciones.CursoExcepcion;
+import exepciones.InstitutoExcepcion;
 import interfaces.IcontroladorCurso;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class AltaCurso extends JInternalFrame {
 	
@@ -16,17 +19,21 @@ public class AltaCurso extends JInternalFrame {
 
 	private IcontroladorCurso icon;
 	private JComboBox<String> institutos;
+	private JComboBox<Integer> duracion;
+	private JComboBox<String> meses;
 	private JTextField textNombreCur;
 	private JTextField textDescripcion;
 	private JTextField textCantCreditos;
 	private JTextField textURL;
+	private JList listCursos;
 	private JDateChooser dateChooser;
-	private Integer[] listDur = {1,2,3,4,5,6,7,8};
-	private Integer[] listMeses = {2,3,4,5,6,7,8,9,10,11,12};
+	private Integer[] listDur = {0,1,2,3,4,5,6,7,8};
+	private String[] listMeses = {"","2","3","4","5","6","7","8","9","10","11","12"};
 
 	public AltaCurso(IcontroladorCurso icon) {
 		
 		this.icon = icon;
+		this.institutos=inicializarComboBoxIns();
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -43,6 +50,11 @@ public class AltaCurso extends JInternalFrame {
 		
 		institutos = new JComboBox<String>();
 		inicializarComboBoxInstituto();
+		institutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cbInstitutosActionPerformed(arg0);
+			}
+		});
 		institutos.setBounds(155, 30, 200, 20);
 		getContentPane().add(institutos);
 		
@@ -71,7 +83,13 @@ public class AltaCurso extends JInternalFrame {
 		LabelDur.setBounds(80, 210, 58, 20);
 		getContentPane().add(LabelDur);
 		
-		JComboBox<Integer> meses = new JComboBox<Integer>(listMeses);
+		meses = new JComboBox<String>(listMeses);
+		meses.setSelectedIndex(0);
+		meses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cbMesesActionPerformed(arg0);
+			}
+		});
 		meses.setBounds(155, 210, 50, 20);
 		getContentPane().add(meses);
 		
@@ -85,7 +103,13 @@ public class AltaCurso extends JInternalFrame {
 		LabelCantHoras.setBounds(25, 250, 118, 20);
 		getContentPane().add(LabelCantHoras);
 
-		JComboBox<Integer> duracion = new JComboBox<Integer>(listDur);
+		duracion = new JComboBox<Integer>(listDur);
+		duracion.setSelectedIndex(0);
+		duracion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			cbDuracionActionPerformed(arg0);
+			}
+		});
 		duracion.setBounds(155, 250, 50, 20);
 		getContentPane().add(duracion);
 		
@@ -128,15 +152,18 @@ public class AltaCurso extends JInternalFrame {
 		lblMateriasPrevias.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblMateriasPrevias.setBounds(35, 410, 105, 20);
 		getContentPane().add(lblMateriasPrevias);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(155, 415, 200, 100);
-		getContentPane().add(scrollPane);
-		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
-		
+
+		listCursos = new JList();
+		listCursos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		listCursos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		int[] selected = listCursos.getSelectedIndices();
+
+		JScrollPane listScroller = new JScrollPane(listCursos);
+		listScroller.setBounds(155, 415, 200, 100);
+		getContentPane().add(listScroller);
+
+
+
 		JButton ButtonAceptar = new JButton("Aceptar");
 		ButtonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -157,22 +184,48 @@ public class AltaCurso extends JInternalFrame {
 
 	}
 
+	private void cbInstitutosActionPerformed(ActionEvent arg0) {
+		String nomInstituto = this.institutos.getSelectedItem().toString();
+		List<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
+		this.listCursos.setListData(listaCursosDeInst.toArray());
+		JOptionPane.showMessageDialog(this, nomInstituto + listaCursosDeInst );
+	}
+
+	private void cbDuracionActionPerformed(ActionEvent arg0) {
+		Integer duracion = (Integer) this.duracion.getSelectedItem();
+	}
+
+
+
+	private void cbMesesActionPerformed(ActionEvent arg0) {
+		String meses = this.meses.getSelectedItem().toString();
+
+	}
+
 	private void aceptarAltaCurso(ActionEvent e) {
 		String nombreCurso = this.textNombreCur.getText();
 		String url = this.textURL.getText();
-
-		String cantCreditos = this.textCantCreditos.getText();
+		Integer duracion = (Integer) this.duracion.getSelectedItem();
+		String meses = (String) this.meses.getSelectedItem();
+		Integer cantCreditos = Integer.parseInt(this.textCantCreditos.getText());
 		String descripcion = this.textDescripcion.getText();
+		String instituto = this.institutos.getSelectedItem().toString();
+
 		Date dateChooser = this.dateChooser.getDate();
 		if(checkFormulario()){
-			/*try{
-				String curso = this.textNombreCur.getSelectedText();
-				if(!curso.isEmpty()){
-					//this.icon.AltaCurso(nombreCurso,descripcion,);
+			try{
+				JOptionPane.showMessageDialog(this, nombreCurso + instituto);
+				if(!instituto.isEmpty()){
+					if(!nombreCurso.isEmpty()){
+						this.icon.AltaCurso(nombreCurso,descripcion,meses,duracion,(Integer)cantCreditos, dateChooser,url,instituto);
+						JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}catch(CursoExcepcion c){
-
-			}*/
+				JOptionPane.showMessageDialog(this, c.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			}catch(InstitutoExcepcion i){
+				JOptionPane.showMessageDialog(this, i.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 	}
@@ -183,14 +236,22 @@ public class AltaCurso extends JInternalFrame {
 		institutos.setModel(listInst);
 		institutos.setSelectedIndex(0);
 	}
+	
+	public JComboBox<String> inicializarComboBoxIns() {
+		JComboBox<String> listInst = new JComboBox<String>(icon.listarInstitutos());
+		listInst.insertItemAt((new String("")), 0);
+		listInst.setSelectedIndex(0);
+		return listInst;
+	}
 
 	protected void cancelarAltaCurso(ActionEvent arg0) {
+		inicializarComboBoxInstituto();
 		limpiarFormulario();
 		setVisible(false);
 	}
 
+
 	private void limpiarFormulario() {
-		inicializarComboBoxInstituto();
 		textCantCreditos.setText("");
 		textDescripcion.setText("");
 		textNombreCur.setText("");

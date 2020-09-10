@@ -40,7 +40,8 @@ public class manejadorCurso {
 	public List<Curso> getCursos(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<Curso> cursos = em.createQuery("SELECT u FROM Curso c", Curso.class).getResultList();
+		@SuppressWarnings("Unchecked")
+		List<Curso> cursos = em.createQuery("FROM Curso c", Curso.class).getResultList();
 		return cursos;
 	}
 }

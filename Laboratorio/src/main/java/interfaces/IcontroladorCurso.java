@@ -7,6 +7,7 @@ import exepciones.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public interface IcontroladorCurso {
 	
@@ -17,7 +18,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto);
+	public List<String> listarCursos(String nombreInstituto);
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	
