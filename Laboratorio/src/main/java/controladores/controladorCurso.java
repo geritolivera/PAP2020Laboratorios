@@ -21,7 +21,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoExcepcion, InstitutoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
 		if(mc.existeCurso(nombre))
@@ -29,9 +29,19 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mI.existeInstituto(instituto)){
 				Instituto I = mI.buscarInstituto(instituto);
-				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
-				mc.agregarCurso(cursoNuevo);
-				I.agregarCurso(cursoNuevo);
+				List<Curso> lista = null;
+				if (previas==null){
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
+					mc.agregarCurso(cursoNuevo);
+					I.agregarCurso(cursoNuevo);
+				}else {
+					for (String s : previas) {
+						lista.add(mc.buscarCurso(s));
+					}
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
+					mc.agregarCurso(cursoNuevo);
+					I.agregarCurso(cursoNuevo);
+				}
 			}
 			else
 				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
