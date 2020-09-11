@@ -34,14 +34,6 @@ public class manejadorInstituto {
 		EntityManager em = con.getEntityManager();
 		return em.find(Instituto.class, nombre);
 	}
-
-	public List<String> obtenerCursosInstituto(String nomInst){
-		Conexion con = Conexion.getInstancia();
-		EntityManager em = con.getEntityManager();
-		@SuppressWarnings("unchecked")
-		List<String> listCursos = em.createQuery("SELECT c.nombre FROM Curso c, Instituto i WHERE c.instituto.nombre =i.nombre AND i.nombre LIKE :name").setParameter("name", nomInst).getResultList();
-		return listCursos;
-	}
 	
 	public boolean existeInstituto(String nombre) {
 		return this.buscarInstituto(nombre) instanceof Instituto;

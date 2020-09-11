@@ -1,6 +1,7 @@
 package controladores;
 
 import clases.*;
+import conexion.Conexion;
 import datatypes.*;
 import exepciones.InstitutoExcepcion;
 import exepciones.UsuarioExcepcion;
@@ -8,6 +9,7 @@ import interfaces.IcontroladorUsuario;
 import manejadores.manejadorInstituto;
 import manejadores.manejadorUsuario;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -107,13 +109,21 @@ public class controladorUsuario implements IcontroladorUsuario{
 	//usa listarUsuarios
 	//usa verInfoUsuario
 	@Override
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		if(mu.existeUsuarioNick(nickname)){
-			mu.modificarUsuario(nickname, nombre, apellido, fechaNaci);
+		if(mu.existeUsuarioNick(nickname)) {
+			Conexion con = Conexion.getInstancia();
+			EntityManager em = con.getEntityManager();
+			if(mu.existeUsuarioNick(nickname)){
+				Usuario u = mu.buscarUsuarioNickname(nickname);
+				u.setNombre(nombre);
+				u.setApellido(apellido);
+				u.setFechaNac(fechaNaci);
+				em.getTransaction().begin();
+				em.persist(u);
+				em.getTransaction().commit();
+			}
 		}
-		else
-			throw new UsuarioExcepcion("El usuario " + nickname + " no existe.");
 	}
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -148,16 +158,19 @@ public class controladorUsuario implements IcontroladorUsuario{
 		
 		@Override //Lista los nombres de los institutos
 		public String[] listarInstituto() {
-			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			List<Instituto> listIn = mi.getInstituto();
-			String[] institutos = new String[listIn.size()];
-			int i = 0;
-			for(Instituto ins : listIn) {
-				institutos[i] = ins.getNombre();
-				i++;
+				manejadorInstituto mi = manejadorInstituto.getInstancia();
+				List<Instituto> listIn = mi.getInstituto();
+				String[] listIns = new String[listIn.size()];
+				Integer i =0;
+				if(!listIn.isEmpty()) {
+					for (Instituto s: listIn) {
+						listIns[i] = s.getNombre();
+						i++;
+					}
+				}
+				return listIns;
 			}
-			return institutos;
-		}
+
 		
 		@Override //Lista los nicknames de los estudiantes
 		public String[] listarEstudiantesAux(){

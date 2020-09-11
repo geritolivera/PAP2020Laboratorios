@@ -1,15 +1,9 @@
 package clases;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class EdicionCurso {
@@ -27,8 +21,7 @@ public class EdicionCurso {
 	
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Docente> docentes = new ArrayList<>();
-	
-	
+	@OneToMany(mappedBy = "edicion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<InscripcionED> inscripciones = new ArrayList<>();
 
 
@@ -105,7 +98,7 @@ public class EdicionCurso {
 	public void agregarDocente(Docente docente) {
 		docentes.add(docente);
 	}
-	
+
 	public void agregarInscripcion(Date fecha, Estudiante est) {
 		InscripcionED ins = new InscripcionED(fecha, est, this);
 		inscripciones.add(ins);

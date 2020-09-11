@@ -37,7 +37,7 @@ public class Curso {
 	public Curso() {
 		super();
 	}
-	public Curso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, Instituto instituto, List<Curso> previas) {
+	public Curso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, Instituto instituto) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.duracion = duracion;
@@ -46,7 +46,6 @@ public class Curso {
 		this.fechaR = fechaR;
 		this.url = url;
 		this.instituto = instituto;
-		this.previas = previas;
 	}
 	
 	public String getNombre() {

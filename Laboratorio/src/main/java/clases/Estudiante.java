@@ -1,15 +1,9 @@
 package clases;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("tipo_estudiante")
@@ -75,22 +69,22 @@ public class Estudiante extends Usuario{
 	}
 	
 	//INSCRIPCIONES A PROGRAMA DE FORMACION
-	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
-		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
-		inscripcionesPF.add(ins);
-		programa.agregarInscripcion(fecha, this);
-	}
-	public List<InscripcionPF> getInscripcionesPF(){
-		return inscripcionesPF;
-	}
-	//prototipo de borrado de inscripcion
-	public void borrarInscripcionPF(Date fecha) {
-		List<InscripcionPF> list = this.getInscripcionesPF();
-		for(InscripcionPF i : list) {
-			if(i.getFecha() == fecha) {
-				list.remove(i);
-			}
-		}
-	}
-	
+//	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
+//		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
+//		inscripcionesPF.add(ins);
+//		programa.agregarInscripcion(fecha, this);
+//	}
+//	public List<InscripcionPF> getInscripcionesPF(){
+//		return inscripcionesPF;
+//	}
+//	//prototipo de borrado de inscripcion
+//	public void borrarInscripcionPF(Date fecha) {
+//		List<InscripcionPF> list = this.getInscripcionesPF();
+//		for(InscripcionPF i : list) {
+//			if(i.getFecha() == fecha) {
+//				list.remove(i);
+//			}
+//		}
+//	}
+//
 }

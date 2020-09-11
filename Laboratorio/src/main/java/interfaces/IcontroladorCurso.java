@@ -4,7 +4,6 @@ import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
 import exepciones.*;
-import manejadores.manejadorInstituto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +18,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public List<String> listarCursos(String nombreInstituto);
+	public List<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	

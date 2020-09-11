@@ -1,9 +1,12 @@
 package interfaces;
 
-import java.util.*;
+import datatypes.DTUsuario;
+import exepciones.InstitutoExcepcion;
+import exepciones.UsuarioExcepcion;
 
-import datatypes.*;
-import exepciones.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public interface IcontroladorUsuario {
 	
@@ -21,7 +24,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion;
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

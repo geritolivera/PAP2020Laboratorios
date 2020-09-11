@@ -1,19 +1,12 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import exepciones.InstitutoExcepcion;
 import interfaces.IcontroladorUsuario;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AltaInstituto extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
@@ -59,7 +52,7 @@ public class AltaInstituto extends JInternalFrame {
 		getContentPane().add(tfNombreInstituto);
 		tfNombreInstituto.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Acceptar");
+		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnAceptarActionPerformed(arg0);		

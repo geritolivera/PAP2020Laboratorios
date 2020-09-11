@@ -1,11 +1,10 @@
 package clases;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ProgramaFormacion {
@@ -19,8 +18,8 @@ public class ProgramaFormacion {
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();
-	
-	private List<InscripcionPF> inscripciones = new ArrayList<>();
+
+	//private List<InscripcionPF> inscripciones = new ArrayList<>();
 	
 	public ProgramaFormacion() {
 		super();
@@ -83,21 +82,21 @@ public class ProgramaFormacion {
 		return cursos;
 	}
 	
-	public void agregarInscripcion(Date fecha, Estudiante est) {
-		InscripcionPF ins = new InscripcionPF(fecha, est, this);
-		inscripciones.add(ins);
-	}
-	public List<InscripcionPF> getInscripciones(){
-		return inscripciones;
-	}
-	//prototipo de borrado de inscripcion
-	public void borrarInscripcion(Date fecha) {
-		List<InscripcionPF> list = this.getInscripciones();
-		for(InscripcionPF i : list) {
-			if(i.getFecha() == fecha) {
-				list.remove(i);
-			}
-		}
-	}
+//	public void agregarInscripcion(Date fecha, Estudiante est) {
+//		InscripcionPF ins = new InscripcionPF(fecha, est, this);
+//		inscripciones.add(ins);
+//	}
+//	public List<InscripcionPF> getInscripciones(){
+//		return inscripciones;
+//	}
+//	//prototipo de borrado de inscripcion
+//	public void borrarInscripcion(Date fecha) {
+//		List<InscripcionPF> list = this.getInscripciones();
+//		for(InscripcionPF i : list) {
+//			if(i.getFecha() == fecha) {
+//				list.remove(i);
+//			}
+//		}
+//	}
 
 }

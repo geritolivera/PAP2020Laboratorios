@@ -195,14 +195,16 @@ public class AltaCurso extends JInternalFrame {
 
 	private void cbInstitutosActionPerformed(ActionEvent arg0) {
 		String nomInstituto = this.institutos.getSelectedItem().toString();
-		List<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
-		if(!listaCursosDeInst.isEmpty()) {
-			Vector<String> list = new Vector<String>();
-			for (String s : listaCursosDeInst) {
-				list.addElement(s);
-			}
-			;
+		try{
+			List<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
+			if(!listaCursosDeInst.isEmpty()) {
+				Vector<String> list = new Vector<String>();
+				for (String s : listaCursosDeInst) {
+					list.addElement(s);
+				}
 			this.listCursos.setListData(list);
+		}}catch (InstitutoExcepcion institutoExcepcion) {
+			JOptionPane.showMessageDialog(this, "El instituto no existe");
 		}
 	}
 

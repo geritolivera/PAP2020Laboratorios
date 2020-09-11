@@ -61,10 +61,12 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		getContentPane().add(inputDescripcion);
 		
 		dateChooserInicio = new JDateChooser();
+		dateChooserInicio.setDateFormatString("dd-MM-yyyy");
 		dateChooserInicio.setBounds(244, 56, 130, 25);
 		getContentPane().add(dateChooserInicio);
 		
 		dateChooserFin = new JDateChooser();
+		dateChooserFin.setDateFormatString("dd-MM-yyyy");
 		dateChooserFin.setBounds(244, 92, 130, 25);
 		getContentPane().add(dateChooserFin);
 		
@@ -100,7 +102,6 @@ public class CrearProgramaFormacion extends JInternalFrame {
         Date fFin = this.dateChooserFin.getDate();
         String descripcion = this.inputDescripcion.getText();
         Date fInicio = this.dateChooserInicio.getDate();
-       
        
         if (checkFormulario()) {
         	try {

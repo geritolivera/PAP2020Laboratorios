@@ -39,7 +39,6 @@ public class Docente extends Usuario{
 	}
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
-		edicion.agregarDocente(this);
 	}
 	
 	 public void eliminarEdicion(EdicionCurso edicion) {

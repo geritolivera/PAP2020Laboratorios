@@ -1,11 +1,10 @@
 package manejadores;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import clases.ProgramaFormacion;
 import conexion.Conexion;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 public class manejadorPrograma {
 private static manejadorPrograma instancia = null;
@@ -34,7 +33,7 @@ private static manejadorPrograma instancia = null;
 	}
 	
 	public boolean existePrograma(String nombre) {
-		return this.buscarPrograma(nombre) instanceof ProgramaFormacion;
+		return this.buscarPrograma(nombre) != null;
 	}
 	
 	public List<ProgramaFormacion> getProgramas(){

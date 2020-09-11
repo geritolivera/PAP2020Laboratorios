@@ -1,6 +1,7 @@
 package controladores;
 
 import clases.*;
+import conexion.Conexion;
 import datatypes.DTCurso;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
@@ -8,6 +9,7 @@ import exepciones.*;
 import interfaces.IcontroladorCurso;
 import manejadores.*;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,16 +35,21 @@ public class controladorCurso implements IcontroladorCurso{
 				Instituto I = mI.buscarInstituto(instituto);
 				List<Curso> lista = null;
 				if (previas==null){
-					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
 					mc.agregarCurso(cursoNuevo);
 					I.agregarCurso(cursoNuevo);
 				}else {
-					for (String s : previas) {
-						lista.add(mc.buscarCurso(s));
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
+					for (String c:previas){
+						Curso cursoPrevia= new Curso();
+						cursoPrevia = mc.buscarCurso(c);
+						cursoNuevo.agregarPrevias(cursoPrevia);
 					}
-					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
 					mc.agregarCurso(cursoNuevo);
 					I.agregarCurso(cursoNuevo);
+					em.getTransaction().begin();
+					em.persist(I);
+					em.getTransaction().commit();
 				}
 			}
 			else
@@ -53,10 +60,19 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public List<String> listarCursos(String nombreInstituto){
+	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion{
 		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
-		List<String> listCursos = mInst.obtenerCursosInstituto(nombreInstituto);
-		return listCursos;
+		if(mInst.existeInstituto(nombreInstituto)) {
+			Instituto inst = mInst.buscarInstituto(nombreInstituto);
+			List<Curso> cursos = inst.getCursos();
+			ArrayList<String> listCursos = new ArrayList<String>();
+			for(Curso c:cursos) {
+				listCursos.add(c.getNombre());
+			}
+			return listCursos;
+		}
+		else
+			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
 	}
 	
 	@Override
@@ -105,7 +121,7 @@ public class controladorCurso implements IcontroladorCurso{
 					for(String s: docentes) {
 						Docente d = (Docente) mUsu.buscarUsuario(s);
 						edi.agregarDocente(d);
-						//actualiza al docente 
+						//actualiza al docente
 						d.agregarEdicion(edi);
 						em.getTransaction().begin();
 						em.persist(d);
@@ -154,11 +170,6 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	
-	//SE TIENE QUE COMPLETAR
-	//SE TIENE QUE COMPLETAR
-	//SE TIENE QUE COMPLETAR
-	
 	@Override
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
@@ -177,7 +188,7 @@ public class controladorCurso implements IcontroladorCurso{
 					dte.setCupo(e.getCupo());
 				}
 			}
-			//se tiene que cambiar
+
 			return null;
 		}
 		else
@@ -217,9 +228,10 @@ public class controladorCurso implements IcontroladorCurso{
 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
+	@Override
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
-		if(mpf.existePrograma(nombre)) {
+		if(mpf.buscarPrograma(nombre)!=null) {
 			throw new ProgramaFormacionExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
 		} else {
 			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
@@ -367,15 +379,17 @@ public class controladorCurso implements IcontroladorCurso{
 
 
 	public String[] listarInstitutos() {
-			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			List<Instituto> listIn = mi.getInstituto();
-			String[] institutos = new String[listIn.size()];
-			int i = 0;
-			for(Instituto ins : listIn) {
-				institutos[i] = ins.getNombre();
+		manejadorInstituto mi = manejadorInstituto.getInstancia();
+		List<Instituto> listIn = mi.getInstituto();
+		String[] listIns = new String[listIn.size()];
+		Integer i =0;
+		if(!listIn.isEmpty()) {
+			for (Instituto s: listIn) {
+				listIns[i] = s.getNombre();
 				i++;
 			}
-			return institutos;
+		}
+		return listIns;
 	}
 
 	@Override
