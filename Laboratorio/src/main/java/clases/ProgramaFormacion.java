@@ -20,6 +20,8 @@ public class ProgramaFormacion {
 	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();
 	
+	private List<InscripcionPF> inscripciones = new ArrayList<>();
+	
 	public ProgramaFormacion() {
 		super();
 	}
@@ -66,18 +68,36 @@ public class ProgramaFormacion {
 	public void setFechaA(Date fechaA) {
 		this.fechaA = fechaA;
 	}
-	/*
+	
 	public void agregarEstudiante(Estudiante estudiante) {
 		estudiantes.add(estudiante);
 	}
 	public List<Estudiante> getEstudiantes() {
 		return estudiantes;
 	}
-	*/
+
 	public void agregarCurso(Curso curso) {
 		cursos.add(curso);
 	}
 	public List<Curso> getCursos() {
 		return cursos;
 	}
+	
+	public void agregarInscripcion(Date fecha, Estudiante est) {
+		InscripcionPF ins = new InscripcionPF(fecha, est, this);
+		inscripciones.add(ins);
+	}
+	public List<InscripcionPF> getInscripciones(){
+		return inscripciones;
+	}
+	//prototipo de borrado de inscripcion
+	public void borrarInscripcion(Date fecha) {
+		List<InscripcionPF> list = this.getInscripciones();
+		for(InscripcionPF i : list) {
+			if(i.getFecha() == fecha) {
+				list.remove(i);
+			}
+		}
+	}
+
 }

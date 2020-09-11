@@ -195,8 +195,8 @@ public class controladorCurso implements IcontroladorCurso{
 				Usuario u = mUsu.buscarUsuario(nickUsuario);
 				if(u instanceof Estudiante) {
 					EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
-					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion -- por ahora esto no funciona
-					((Estudiante) u).agregarInscripcion(fecha, e);
+					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion
+					((Estudiante) u).agregarInscripcionED(fecha, e);
 					//funcion agregarEdicion tambien agrega al estudiante a la edicion
 					((Estudiante) u).agregarEdicion(e);
 					//persiste el estudiante y edicion
@@ -258,17 +258,27 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
+		boolean existe = false;
 		if(mCur.existeCurso(nomCur)) {
 			if(mPro.existePrograma(nomP)) {
 				Curso c = mCur.buscarCurso(nomCur);
 				ProgramaFormacion p = mPro.buscarPrograma(nomP);
-				p.agregarCurso(c);
-				c.agregarPrograma(p);
-				//persiste curso y programa
-				em.getTransaction().begin();
-				em.persist(c);
-				em.persist(p);
-				em.getTransaction().commit();
+				List<Curso> cursos = p.getCursos();
+				for(Curso cur: cursos) {
+					if(cur.getNombre().equals(c.getNombre()))
+						existe = true;
+				}
+				if(!existe) {
+					p.agregarCurso(c);
+					c.agregarPrograma(p);
+					//persiste curso y programa
+					em.getTransaction().begin();
+					em.persist(c);
+					em.persist(p);
+					em.getTransaction().commit();
+				}
+				else
+					throw new ProgramaFormacionExcepcion("El programa " + nomP + " ya tiene el curso " + nomCur + ".");
 			}
 			else
 				throw new ProgramaFormacionExcepcion("El programa " + nomP + " no existe.");

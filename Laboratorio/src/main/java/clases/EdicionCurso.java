@@ -27,7 +27,9 @@ public class EdicionCurso {
 	
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Docente> docentes = new ArrayList<>();
-	//private List<Inscripcion> inscripciones = new ArrayList<>();
+	
+	
+	private List<InscripcionED> inscripciones = new ArrayList<>();
 
 
 	
@@ -104,24 +106,21 @@ public class EdicionCurso {
 		docentes.add(docente);
 	}
 	
-//esto hay que cambiarlo
-	/*
 	public void agregarInscripcion(Date fecha, Estudiante est) {
-		Inscripcion ins = new Inscripcion(fecha, est, this);
+		InscripcionED ins = new InscripcionED(fecha, est, this);
 		inscripciones.add(ins);
 	}
-	public List<Inscripcion> getInscripciones(){
+	public List<InscripcionED> getInscripciones(){
 		return inscripciones;
 	}
 	//prototipo de borrado de inscripcion
 	public void borrarInscripcion(Date fecha) {
-		List<Inscripcion> list = this.getInscripciones();
-		for(Inscripcion i : list) {
+		List<InscripcionED> list = this.getInscripciones();
+		for(InscripcionED i : list) {
 			if(i.getFecha() == fecha) {
 				list.remove(i);
 			}
 		}
 	}
-	*/
 
 }

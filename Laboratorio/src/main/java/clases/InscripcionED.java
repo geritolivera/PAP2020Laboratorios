@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Inscripcion {
+public class InscripcionED {
 	
 	public Estudiante getEstudiante() {
 		return estudiante;
@@ -33,10 +33,10 @@ public class Inscripcion {
 	private EdicionCurso edicion;
 	
 		
-	public Inscripcion() {
+	public InscripcionED() {
 		super();
 	}
-	public Inscripcion(Date fecha, Estudiante estudiante, EdicionCurso edicion) {
+	public InscripcionED(Date fecha, Estudiante estudiante, EdicionCurso edicion) {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.edicion = edicion;
