@@ -11,9 +11,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 public class AltaCurso extends JInternalFrame {
@@ -55,6 +55,7 @@ public class AltaCurso extends JInternalFrame {
 
 		institutos = new JComboBox<String>();
 		inicializarComboBoxInstituto();
+
 		institutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbInstitutosActionPerformed(arg0);
@@ -158,12 +159,20 @@ public class AltaCurso extends JInternalFrame {
 		lblMateriasPrevias.setBounds(35, 410, 105, 20);
 		getContentPane().add(lblMateriasPrevias);
 
-		ListSelectionListener listSelectionListener = new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent listSelectionEvent) {
-			}
-		};
+
 
 		listCursos = new JList();
+
+		listCursos.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent listSelectionEvent) {
+				if (!listSelectionEvent.getValueIsAdjusting()){
+					JList source = (JList)listSelectionEvent.getSource();
+					String selected = source.getSelectedValue().toString();
+				}
+			}
+		});
+
 		listCursos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		listCursos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
@@ -196,7 +205,7 @@ public class AltaCurso extends JInternalFrame {
 	private void cbInstitutosActionPerformed(ActionEvent arg0) {
 		String nomInstituto = this.institutos.getSelectedItem().toString();
 		try{
-			List<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
+			ArrayList<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
 			if(!listaCursosDeInst.isEmpty()) {
 				Vector<String> list = new Vector<String>();
 				for (String s : listaCursosDeInst) {

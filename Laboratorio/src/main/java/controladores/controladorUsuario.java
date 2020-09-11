@@ -158,18 +158,18 @@ public class controladorUsuario implements IcontroladorUsuario{
 		
 		@Override //Lista los nombres de los institutos
 		public String[] listarInstituto() {
-				manejadorInstituto mi = manejadorInstituto.getInstancia();
-				List<Instituto> listIn = mi.getInstituto();
-				String[] listIns = new String[listIn.size()];
-				Integer i =0;
-				if(!listIn.isEmpty()) {
-					for (Instituto s: listIn) {
-						listIns[i] = s.getNombre();
-						i++;
-					}
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			List<Instituto> listIn= mi.getInstituto();
+			String[] listIns = new String[listIn.size()];
+			Integer i =0;
+			if(!listIn.isEmpty()) {
+				for (Instituto s: listIn) {
+					listIns[i] = s.getNombre();
+					i++;
 				}
-				return listIns;
 			}
+			return listIns;
+		}
 
 		
 		@Override //Lista los nicknames de los estudiantes

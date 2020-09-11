@@ -22,12 +22,6 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	public CrearProgramaFormacion(IcontroladorCurso iconCurso) {
 		
 		this.iconCurso = iconCurso;
-		setResizable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
-        setTitle("Crear Programa de Formacion");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -91,10 +85,6 @@ public class CrearProgramaFormacion extends JInternalFrame {
 
 	}
 
-    public CrearProgramaFormacion() {
-
-    }
-
     protected void cmdRegistroProgramaFormacionActionPerformed(ActionEvent arg0) {
            
         String nombre = this.inputNombre.getText();
@@ -111,7 +101,7 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	            limpiarFormulario();    
         	}catch (ProgramaFormacionExcepcion e) {
 	                // Muestro error de registro
-	                JOptionPane.showMessageDialog(this, e.getMessage(), "Crear Programa Formacion", JOptionPane.ERROR_MESSAGE);
+	                JOptionPane.showMessageDialog(this, e.getMessage(), "Programa Formacion", JOptionPane.ERROR_MESSAGE);
         	}
         }
     }

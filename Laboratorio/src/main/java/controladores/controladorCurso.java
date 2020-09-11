@@ -231,11 +231,19 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
-		if(mpf.buscarPrograma(nombre)!=null) {
-			throw new ProgramaFormacionExcepcion("El programa de Formacion de Nombre " + nombre + "ya existe dentro del Sistema");
-		} else {
-			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
-			mpf.agregarPrograma(nuevoProg);
+		if(mpf.existePrograma(nombre)) {
+			throw new ProgramaFormacionExcepcion("El programa de Formacion de " + nombre + " ya existe dentro del Sistema");
+		}else {
+			if(fechaF.compareTo(fechaI)<0) {
+				throw new ProgramaFormacionExcepcion("La fecha de fin tiene que ser posterior a la de inicio");
+			}else {
+				if(fechaI.compareTo(fActual)>0) {
+					throw new ProgramaFormacionExcepcion("La fecha de inicio tiene que ser posterior a la actual");
+				}else {
+					ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
+					mpf.agregarPrograma(nuevoProg);
+				}
+			}
 		}
 	}
 	
@@ -336,7 +344,7 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return cursos_ret;
 	}
-	
+
 	@Override
 	public String[] listarEdicionesAux(String nomCurso) {
 		manejadorCurso mC = manejadorCurso.getInstancia();
@@ -377,10 +385,10 @@ public class controladorCurso implements IcontroladorCurso{
 		return docentes_ret;
 	}
 
-
+	@Override
 	public String[] listarInstitutos() {
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
-		List<Instituto> listIn = mi.getInstituto();
+		List<Instituto> listIn= mi.getInstituto();
 		String[] listIns = new String[listIn.size()];
 		Integer i =0;
 		if(!listIn.isEmpty()) {

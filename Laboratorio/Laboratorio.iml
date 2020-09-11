@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="Conexion" />
+          <factory-entry name="Conexion" value="71c504b1-f034-44fe-a3a8-88c09f8a0a5f" />
           <factory-entry name="Laboratorio" />
         </datasource-mapping>
         <naming-strategy-map />
