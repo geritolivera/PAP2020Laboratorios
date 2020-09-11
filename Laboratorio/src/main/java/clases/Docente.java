@@ -39,12 +39,12 @@ public class Docente extends Usuario{
 	}
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
-		//edicion.getDocentes().add(this);
+		edicion.agregarDocente(this);
 	}
 	
 	 public void eliminarEdicion(EdicionCurso edicion) {
 		this.ediciones.remove(edicion);
-		//edicion.getDocentes().remove(this);
+		edicion.getDocentes().remove(this);
 	 }
 	public List<EdicionCurso> getEdiciones() {
 		return this.ediciones;

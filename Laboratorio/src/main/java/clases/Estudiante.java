@@ -22,7 +22,10 @@ public class Estudiante extends Usuario{
 	private List<EdicionCurso> ediciones = new ArrayList<>();
 	//inscripciones a las ediciones
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Inscripcion> inscripciones = new ArrayList<>();
+	private List<InscripcionED> inscripcionesED = new ArrayList<>();
+	//inscripciones a los programas
+	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<InscripcionPF> inscripcionesPF = new ArrayList<>();
 	
 	public Estudiante() {
 		super();
@@ -37,6 +40,8 @@ public class Estudiante extends Usuario{
 	
 	public void agregarPrograma(ProgramaFormacion programa) {
 		programas.add(programa);
+		programa.agregarEstudiante(this);
+		
 	}
 	public List<ProgramaFormacion> getProgramas(){
 		return this.programas;
@@ -44,24 +49,44 @@ public class Estudiante extends Usuario{
 	
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
-		//edicion.agregarEstudiante(this);
+		edicion.agregarEstudiante(this);
 	}
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
 	}
 	
-	public void agregarInscripcion(Date fecha, EdicionCurso edicion) {
-		Inscripcion ins = new Inscripcion(fecha, this, edicion);
-		inscripciones.add(ins);
-		//edicion.agregarInscripcion(date, this);
+	//INSCRIPCIONES A EDICION DE CURSO
+	public void agregarInscripcionED(Date fecha, EdicionCurso edicion) {
+		InscripcionED ins = new InscripcionED(fecha, this, edicion);
+		inscripcionesED.add(ins);
+		edicion.agregarInscripcion(fecha, this);
 	}
-	public List<Inscripcion> getInscripciones(){
-		return inscripciones;
+	public List<InscripcionED> getInscripcionesED(){
+		return inscripcionesED;
 	}
 	//prototipo de borrado de inscripcion
-	public void borrarInscripcion(Date fecha) {
-		List<Inscripcion> list = this.getInscripciones();
-		for(Inscripcion i : list) {
+	public void borrarInscripcionED(Date fecha) {
+		List<InscripcionED> list = this.getInscripcionesED();
+		for(InscripcionED i : list) {
+			if(i.getFecha() == fecha) {
+				list.remove(i);
+			}
+		}
+	}
+	
+	//INSCRIPCIONES A PROGRAMA DE FORMACION
+	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
+		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
+		inscripcionesPF.add(ins);
+		programa.agregarInscripcion(fecha, this);
+	}
+	public List<InscripcionPF> getInscripcionesPF(){
+		return inscripcionesPF;
+	}
+	//prototipo de borrado de inscripcion
+	public void borrarInscripcionPF(Date fecha) {
+		List<InscripcionPF> list = this.getInscripcionesPF();
+		for(InscripcionPF i : list) {
 			if(i.getFecha() == fecha) {
 				list.remove(i);
 			}
