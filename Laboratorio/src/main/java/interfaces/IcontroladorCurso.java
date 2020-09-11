@@ -4,17 +4,18 @@ import java.util.*;
 
 import datatypes.*;
 import exepciones.*;
+import manejadores.manejadorInstituto;
 
 public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoExcepcion, InstitutoExcepcion;
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto);
+	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	
@@ -26,7 +27,7 @@ public interface IcontroladorCurso {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public ArrayList<String> listarEdiciones(String nomCurso);
+	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion;
 	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion;
 	
 	

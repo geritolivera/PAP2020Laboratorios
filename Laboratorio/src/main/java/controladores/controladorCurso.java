@@ -5,7 +5,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+
 import clases.*;
+import conexion.Conexion;
 import datatypes.*;
 import exepciones.*;
 import manejadores.*;
@@ -20,16 +23,33 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) throws CursoExcepcion, InstitutoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mc.existeCurso(nombre))
 			throw new CursoExcepcion("La clase de Nombre " + nombre + "ya existe dentro del Sistema");
 		else {
 			if(mI.existeInstituto(instituto)){
 				Instituto I = mI.buscarInstituto(instituto);
 				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
+				//se fija que haya previas antes de ingresarlas
+				//puede ser o no necesario
+				if(previas.size() > 0) {
+					for(String s : previas) {
+						Curso previa = mc.buscarCurso(s);
+						cursoNuevo.agregarPrevias(previa);
+					}
+				}
+				/*else
+					cursoNuevo.agregarPrevias(null);*/ //esto no se si es necesario
 				mc.agregarCurso(cursoNuevo);
+				I.agregarCurso(cursoNuevo);
+				//persiste el curso agregado al instituto
+				em.getTransaction().begin();
+				em.persist(I);
+				em.getTransaction().commit();
 			}
 			else
 				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
@@ -39,23 +59,38 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public ArrayList<String> listarCursos(String nombreInstituto){
+	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion{
 		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
-		Instituto inst = mInst.buscarInstituto(nombreInstituto);
-		List<Curso> cursos = inst.getCursos();
-		ArrayList<String> listCursos = new ArrayList<String>();
-		for(Curso c:cursos) {
-			listCursos.add(c.getNombre());
+		if(mInst.existeInstituto(nombreInstituto)) {
+			Instituto inst = mInst.buscarInstituto(nombreInstituto);
+			List<Curso> cursos = inst.getCursos();
+			ArrayList<String> listCursos = new ArrayList<String>();
+			for(Curso c:cursos) {
+				listCursos.add(c.getNombre());
+			}
+			return listCursos;
 		}
-		return listCursos;
+		else
+			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
 	}
 	
 	@Override
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
+		List<EdicionCurso> ediciones = new ArrayList<>();
+		List<ProgramaFormacion> programas = new ArrayList<>();
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
+			ediciones = c.getEdiciones();
+			programas = c.getProgramas();
+			//son listas, no requieren informacion de las ediciones o programas
+			for(EdicionCurso e: ediciones) {
+				dtc.agregarEdicion(e.getNombre());
+			}
+			for(ProgramaFormacion p: programas) {
+				dtc.agregarPrograma(p.getNombre());
+			}
 			return dtc;
 		}
 		else
@@ -71,6 +106,8 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorCurso mCur = manejadorCurso.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mEdi.existeEdicion(nombre)) {
 			throw new EdicionExcepcion("La edicion de Nombre " + nombre + "ya existe dentro del Sistema");
 		}
@@ -78,9 +115,17 @@ public class controladorCurso implements IcontroladorCurso{
 			if(mCur.existeCurso(nomCurso)) {
 				Curso curso = mCur.buscarCurso(nomCurso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
-				for(String s: docentes) {
-					Docente d = (Docente) mUsu.buscarUsuario(s);
-					d.agregarEdicion(edi);
+				//se fija que haya docentes para ingresar
+				if(docentes.size() > 0) {
+					for(String s: docentes) {
+						Docente d = (Docente) mUsu.buscarUsuario(s);
+						edi.agregarDocente(d);
+						//actualiza al docente 
+						d.agregarEdicion(edi);
+						em.getTransaction().begin();
+						em.persist(d);
+						em.getTransaction().commit();
+					}
 				}
 				mEdi.agregarEdicion(edi);
 			}
@@ -93,16 +138,19 @@ public class controladorCurso implements IcontroladorCurso{
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public ArrayList<String> listarEdiciones(String nomCurso) {
-		//String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
-		Curso cur = mCur.buscarCurso(nomCurso);
-		List<EdicionCurso> ediciones = cur.getEdiciones();
-		ArrayList<String> listEdiciones = new ArrayList<>();
-		for (EdicionCurso e:ediciones) {
-			listEdiciones.add(e.getNombre());
+		if(mCur.existeCurso(nomCurso)) {
+			Curso cur = mCur.buscarCurso(nomCurso);
+			List<EdicionCurso> ediciones = cur.getEdiciones();
+			ArrayList<String> listEdiciones = new ArrayList<>();
+			for (EdicionCurso e:ediciones) {
+				listEdiciones.add(e.getNombre());
+			}
+			return listEdiciones;	
 		}
-		return listEdiciones;
+		else
+			throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
 	}
 	
 	@Override
@@ -121,6 +169,11 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
+	
+	//SE TIENE QUE COMPLETAR
+	//SE TIENE QUE COMPLETAR
+	//SE TIENE QUE COMPLETAR
+	
 	@Override
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
@@ -129,8 +182,11 @@ public class controladorCurso implements IcontroladorCurso{
 			List<EdicionCurso> ediciones = c.getEdiciones();
 			for(EdicionCurso e: ediciones){
 				//if(esVigente()){}  //como sabemos cual es vigente? 
+				//tiene que mergearlo Rita
+				//aca podemos hacer una variable edicionVigente en la clase Curso para facilitar la funcion 
 				DTEdicionCurso dte = new DTEdicionCurso(e);
 			}
+			//se tiene que cambiar
 			return null;
 		}
 		else
@@ -141,15 +197,22 @@ public class controladorCurso implements IcontroladorCurso{
 	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion{
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mUsu.existeUsuarioCorreo(nickUsuario)){
 			if(mEdi.existeEdicion(nomEdicion)){
 				Usuario u = mUsu.buscarUsuario(nickUsuario);
 				if(u instanceof Estudiante) {
 					EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
-					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion
+					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion -- por ahora esto no funciona
 					((Estudiante) u).agregarInscripcion(fecha, e);
 					//funcion agregarEdicion tambien agrega al estudiante a la edicion
 					((Estudiante) u).agregarEdicion(e);
+					//persiste el estudiante y edicion
+					em.getTransaction().begin();
+					em.persist(u);
+					em.persist(e);
+					em.getTransaction().commit();
 				}
 				else
 					throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
@@ -186,7 +249,7 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return listProgramas;
 	}
-	//es necesaria otra funcion para listarCursos 
+	
 	@Override
 	public ArrayList<String> listarCursos(){
 		manejadorCurso mCur = manejadorCurso.getInstancia();
@@ -202,12 +265,19 @@ public class controladorCurso implements IcontroladorCurso{
 	public void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mCur.existeCurso(nomCur)) {
 			if(mPro.existePrograma(nomP)) {
 				Curso c = mCur.buscarCurso(nomCur);
 				ProgramaFormacion p = mPro.buscarPrograma(nomP);
 				p.agregarCurso(c);
 				c.agregarPrograma(p);
+				//persiste curso y programa
+				em.getTransaction().begin();
+				em.persist(c);
+				em.persist(p);
+				em.getTransaction().commit();
 			}
 			else
 				throw new ProgramaFormacionExcepcion("El programa " + nomP + " no existe.");

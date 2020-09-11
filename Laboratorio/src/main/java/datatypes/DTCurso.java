@@ -1,6 +1,8 @@
 package datatypes;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 import clases.Curso;
 
@@ -14,6 +16,9 @@ public class DTCurso {
 	private Date fechaR;
 	private String url;
 	private String instituto;
+	
+	ArrayList<String> ediciones = new ArrayList<>();
+	ArrayList<String> programas = new ArrayList<>();
 	
 	public DTCurso() {
 		super();
@@ -97,5 +102,19 @@ public class DTCurso {
 	}
 	public String getInstituto() {
 		return instituto;
+	}
+	
+	public void agregarEdicion(String edicion) {
+		ediciones.add(edicion);
+	}
+	public ArrayList<String> getEdiciones(){
+		return ediciones;
+	}
+	
+	public void agregarPrograma(String programa) {
+		programas.add(programa);
+	}
+	public ArrayList<String> getProgramas(){
+		return programas;
 	}
 }

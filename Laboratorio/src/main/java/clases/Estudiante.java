@@ -44,12 +44,7 @@ public class Estudiante extends Usuario{
 	
 	public void agregarEdicion(EdicionCurso edicion) {
 		ediciones.add(edicion);
-		edicion.agregarEstudiante(this);
-		//esto agrega al estudiante a la edición a la cual se está inscribienedo
-		//alternativamente, se puede descartar la función agregarEstudiante completamente y usar
-		// - edicion.getEstudiantes().add(this) -
-		//notar que cuando usamos "this", nos referimos al objeto donde estamos trabajando
-		//en este caso, "this" se refiere a este estudiante específico
+		//edicion.agregarEstudiante(this);
 	}
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
@@ -58,7 +53,7 @@ public class Estudiante extends Usuario{
 	public void agregarInscripcion(Date fecha, EdicionCurso edicion) {
 		Inscripcion ins = new Inscripcion(fecha, this, edicion);
 		inscripciones.add(ins);
-		edicion.agregarEstudiante(this);
+		//edicion.agregarInscripcion(date, this);
 	}
 	public List<Inscripcion> getInscripciones(){
 		return inscripciones;
