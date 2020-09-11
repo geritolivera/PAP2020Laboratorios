@@ -1,17 +1,16 @@
 package controladores;
 
+import clases.*;
+import datatypes.*;
+import exepciones.InstitutoExcepcion;
+import exepciones.UsuarioExcepcion;
+import interfaces.IcontroladorUsuario;
+import manejadores.manejadorInstituto;
+import manejadores.manejadorUsuario;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import manejadores.*;
-import datatypes.*;
-import exepciones.*;
-import clases.*;
-import conexion.Conexion;
-import interfaces.IcontroladorUsuario;
 
 
 public class controladorUsuario implements IcontroladorUsuario{
@@ -27,7 +26,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			//si la string instituto no tiene nada
-			if(instituto==null) {
+			if(instituto == null) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
@@ -76,6 +75,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 			if(u instanceof Docente) {
 				DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
 				edicionesDoc = ((Docente) u).getEdiciones();
+
 				for(EdicionCurso e: edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
@@ -109,18 +109,8 @@ public class controladorUsuario implements IcontroladorUsuario{
 	@Override
 	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		if(mu.existeUsuarioNick(nickname)) {
-			Conexion con = Conexion.getInstancia();
-			EntityManager em = con.getEntityManager();
-			if(mu.existeUsuarioNick(nickname)){
-				Usuario u = mu.buscarUsuarioNickname(nickname);
-				u.setNombre(nombre);
-				u.setApellido(apellido);
-				u.setFechaNac(fechaNaci);
-				em.getTransaction().begin();
-				em.persist(u);
-				em.getTransaction().commit();
-			}
+		if(mu.existeUsuarioNick(nickname)){
+			mu.modificarUsuario(nickname, nombre, apellido, fechaNaci);
 		}
 		else
 			throw new UsuarioExcepcion("El usuario " + nickname + " no existe.");

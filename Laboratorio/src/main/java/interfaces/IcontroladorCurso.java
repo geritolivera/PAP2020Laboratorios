@@ -1,21 +1,25 @@
 package interfaces;
 
-import java.util.*;
-
-import datatypes.*;
+import datatypes.DTCurso;
+import datatypes.DTEdicionCurso;
+import datatypes.DTProgramaFormacion;
 import exepciones.*;
 import manejadores.manejadorInstituto;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion;
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas) throws CursoExcepcion, InstitutoExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
+	public List<String> listarCursos(String nombreInstituto);
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	
@@ -53,10 +57,12 @@ public interface IcontroladorCurso {
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
 	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion;
+
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
 	//Funciones aux para comboBox de Edicion de cursos
+
 	public String[] listarInstitutos();
 	public String[] listarCursosAux(String nombreInstiuto);
 	public String[] listarEdicionesAux(String nombreCurso);

@@ -1,19 +1,17 @@
 package controladores;
 
-import java.util.List;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.persistence.EntityManager;
-
 import clases.*;
-import conexion.Conexion;
-import datatypes.*;
+import datatypes.DTCurso;
+import datatypes.DTEdicionCurso;
+import datatypes.DTProgramaFormacion;
 import exepciones.*;
+import interfaces.IcontroladorCurso;
 import manejadores.*;
 
-import interfaces.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class controladorCurso implements IcontroladorCurso{
 	public controladorCurso() {
@@ -23,7 +21,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
 		Conexion con = Conexion.getInstancia();
@@ -33,23 +31,19 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mI.existeInstituto(instituto)){
 				Instituto I = mI.buscarInstituto(instituto);
-				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
-				//se fija que haya previas antes de ingresarlas
-				//puede ser o no necesario
-				if(previas.size() > 0) {
-					for(String s : previas) {
-						Curso previa = mc.buscarCurso(s);
-						cursoNuevo.agregarPrevias(previa);
+				List<Curso> lista = null;
+				if (previas==null){
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
+					mc.agregarCurso(cursoNuevo);
+					I.agregarCurso(cursoNuevo);
+				}else {
+					for (String s : previas) {
+						lista.add(mc.buscarCurso(s));
 					}
+					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I, lista);
+					mc.agregarCurso(cursoNuevo);
+					I.agregarCurso(cursoNuevo);
 				}
-				/*else
-					cursoNuevo.agregarPrevias(null);*/ //esto no se si es necesario
-				mc.agregarCurso(cursoNuevo);
-				I.agregarCurso(cursoNuevo);
-				//persiste el curso agregado al instituto
-				em.getTransaction().begin();
-				em.persist(I);
-				em.getTransaction().commit();
 			}
 			else
 				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
@@ -59,19 +53,10 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion{
+	public List<String> listarCursos(String nombreInstituto){
 		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
-		if(mInst.existeInstituto(nombreInstituto)) {
-			Instituto inst = mInst.buscarInstituto(nombreInstituto);
-			List<Curso> cursos = inst.getCursos();
-			ArrayList<String> listCursos = new ArrayList<String>();
-			for(Curso c:cursos) {
-				listCursos.add(c.getNombre());
-			}
-			return listCursos;
-		}
-		else
-			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
+		List<String> listCursos = mInst.obtenerCursosInstituto(nombreInstituto);
+		return listCursos;
 	}
 	
 	@Override
@@ -177,14 +162,20 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
+		Date today = Calendar.getInstance().getTime();
 		if(mCur.existeCurso(nomCurso)){
 			Curso c = mCur.buscarCurso(nomCurso);
 			List<EdicionCurso> ediciones = c.getEdiciones();
-			for(EdicionCurso e: ediciones){
-				//if(esVigente()){}  //como sabemos cual es vigente? 
-				//tiene que mergearlo Rita
-				//aca podemos hacer una variable edicionVigente en la clase Curso para facilitar la funcion 
-				DTEdicionCurso dte = new DTEdicionCurso(e);
+			DTEdicionCurso dte = new DTEdicionCurso();
+			for(EdicionCurso e: ediciones) {
+				if (e.getFechaF().after(today)) {
+					dte.setNombre(e.getNombre());
+					dte.setFechaPub(e.getFechaPub());
+					dte.setFechaI(e.getFechaI());
+					dte.setFechaF(e.getFechaF());
+					dte.setCurso(e.getNomCurso());
+					dte.setCupo(e.getCupo());
+				}
 			}
 			//se tiene que cambiar
 			return null;
@@ -222,8 +213,8 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
-	} 
-			
+	}
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{	
@@ -233,7 +224,7 @@ public class controladorCurso implements IcontroladorCurso{
 		} else {
 			ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
 			mpf.agregarPrograma(nuevoProg);
-		}		
+		}
 	}
 	
 		
@@ -364,10 +355,17 @@ public class controladorCurso implements IcontroladorCurso{
 		return docentes_ret;
 	}
 
-	@Override
+
 	public String[] listarInstitutos() {
-		// TODO Auto-generated method stub
-		return null;
+			manejadorInstituto mi = manejadorInstituto.getInstancia();
+			List<Instituto> listIn = mi.getInstituto();
+			String[] institutos = new String[listIn.size()];
+			int i = 0;
+			for(Instituto ins : listIn) {
+				institutos[i] = ins.getNombre();
+				i++;
+			}
+			return institutos;
 	}
 
 	@Override

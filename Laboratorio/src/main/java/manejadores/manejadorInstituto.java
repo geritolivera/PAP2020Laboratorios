@@ -1,12 +1,12 @@
 package manejadores;
 
-import java.util.ArrayList;
-import java.util.List;
+import clases.Instituto;
+import clases.Curso;
+import conexion.Conexion;
 
 import javax.persistence.EntityManager;
-
-import clases.Instituto;
-import conexion.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 
 public class manejadorInstituto {
 	
@@ -34,6 +34,14 @@ public class manejadorInstituto {
 		EntityManager em = con.getEntityManager();
 		return em.find(Instituto.class, nombre);
 	}
+
+	public List<String> obtenerCursosInstituto(String nomInst){
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		@SuppressWarnings("unchecked")
+		List<String> listCursos = em.createQuery("SELECT c.nombre FROM Curso c, Instituto i WHERE c.instituto.nombre =i.nombre AND i.nombre LIKE :name").setParameter("name", nomInst).getResultList();
+		return listCursos;
+	}
 	
 	public boolean existeInstituto(String nombre) {
 		return this.buscarInstituto(nombre) instanceof Instituto;
@@ -42,7 +50,8 @@ public class manejadorInstituto {
 	public List<Instituto> getInstituto(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<Instituto> institutos = em.createQuery("SELECT u FROM Instituto i", Instituto.class).getResultList();
+		@SuppressWarnings("unchecked")
+		List<Instituto> institutos = em.createQuery("FROM Instituto").getResultList();
 		return institutos;
 	}
 	

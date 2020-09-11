@@ -1,26 +1,15 @@
 package presentacion.programaFormacion;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
-
-
 import exepciones.ProgramaFormacionExcepcion;
 import interfaces.IcontroladorCurso;
 
-
-import java.awt.Font;
-import javax.swing.DropMode;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class CrearProgramaFormacion extends JInternalFrame {
@@ -99,7 +88,11 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		
 
 	}
-	
+
+    public CrearProgramaFormacion() {
+
+    }
+
     protected void cmdRegistroProgramaFormacionActionPerformed(ActionEvent arg0) {
            
         String nombre = this.inputNombre.getText();
