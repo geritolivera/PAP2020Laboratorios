@@ -20,40 +20,30 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 public class ConsultaDeEdicionDeCurso extends JInternalFrame {
+	
 	private static final long serialVersionUID = 1L;
+	
 	private IcontroladorCurso iconC;
+	
 	private JTextField tfNombre;
 	private JTextField tfFechaInicio;
 	private JTextField tfFechaFin;
 	private JTextField tfCupo;
+	
 	private JComboBox<String> cbInstitutos;
 	private JComboBox<String> cbCursos;
 	private JComboBox<String> cbEdicion;
+	
 	private JTextPane tpDocentes;
+	
 	private JTextField tfPublicacion;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {/*
-					ConsultaDeEdicionDeCurso frame = new ConsultaDeEdicionDeCurso(null);
-					frame.setVisible(true);*/
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
-	 * Create the frame.
-	 * @param iconC 
-	 */
+	
 	public ConsultaDeEdicionDeCurso(IcontroladorCurso iconC) {
+		
 		this.iconC = iconC;
 		setResizable(true);
         setIconifiable(true);
@@ -61,104 +51,115 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Consulta de Edicion de Curso");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 520, 335);
 		getContentPane().setLayout(null);
 		
+		//Label Instituto
 		JLabel lblNewLabel = new JLabel("Instituto");
-		lblNewLabel.setBounds(32, 22, 46, 14);
+		lblNewLabel.setBounds(35, 25, 50, 15);
 		getContentPane().add(lblNewLabel);
 		
+		//Label Cursos
 		JLabel lblCursos = new JLabel("Cursos");
-		lblCursos.setBounds(186, 22, 46, 14);
+		lblCursos.setBounds(265, 25, 50, 15);
 		getContentPane().add(lblCursos);
 		
+		//Label Edicion de curso
+		JLabel lblEdicionesDeCurso = new JLabel("Ediciones de Curso");
+		lblEdicionesDeCurso.setBounds(35, 77, 126, 14);
+		getContentPane().add(lblEdicionesDeCurso);
+		
+		//Combobox cursos de la edicion
 		cbCursos = new JComboBox<String>();
 		cbCursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbCursosActionPerformed(arg0);
 			}
 		});
-		cbCursos.setBounds(230, 19, 86, 20);
+		cbCursos.setBounds(315, 20, 150, 20);
 		getContentPane().add(cbCursos);
-		
-		JLabel lblEdicionesDeCurso = new JLabel("Ediciones de Curso");
-		lblEdicionesDeCurso.setBounds(32, 77, 126, 14);
-		getContentPane().add(lblEdicionesDeCurso);
-		
+				
+		//Combobox Ediciones de curso
 		cbEdicion = new JComboBox<String>();
 		cbEdicion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbEdicionActionPerformed(arg0);
 			}
 		});
-		cbEdicion.setBounds(181, 74, 109, 20);
+		cbEdicion.setBounds(145, 70, 150, 20);
 		getContentPane().add(cbEdicion);
 		
+		//Combobox de Instituto
 		cbInstitutos = new JComboBox<String>();
 		cbInstitutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbInstitutosActionPerformed(arg0);
 			}
 		});
-		cbInstitutos.setBounds(85, 19, 73, 20);
+		cbInstitutos.setBounds(85, 20, 150, 20);
 		getContentPane().add(cbInstitutos);
 		
+		//Label nombre
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(32, 133, 46, 14);
+		lblNombre.setBounds(35, 119, 46, 14);
 		getContentPane().add(lblNombre);
 		
 		JLabel lblFechaDeInicio = new JLabel("Fecha de inicio");
-		lblFechaDeInicio.setBounds(32, 159, 89, 14);
+		lblFechaDeInicio.setBounds(35, 145, 89, 14);
 		getContentPane().add(lblFechaDeInicio);
 		
 		JLabel lblFechaDeFin = new JLabel("Fecha de fin");
-		lblFechaDeFin.setBounds(32, 184, 89, 14);
+		lblFechaDeFin.setBounds(35, 170, 89, 14);
 		getContentPane().add(lblFechaDeFin);
 		
 		JLabel lblCupo = new JLabel("Cupo");
-		lblCupo.setBounds(32, 209, 46, 14);
+		lblCupo.setBounds(35, 195, 46, 14);
 		getContentPane().add(lblCupo);
 		
 		tfNombre = new JTextField();
-		tfNombre.setBounds(146, 130, 86, 20);
+		tfNombre.setBounds(145, 116, 150, 20);
 		getContentPane().add(tfNombre);
 		tfNombre.setColumns(10);
 		
 		tfFechaInicio = new JTextField();
-		tfFechaInicio.setBounds(146, 156, 86, 20);
+		tfFechaInicio.setBounds(145, 142, 150, 20);
 		getContentPane().add(tfFechaInicio);
 		tfFechaInicio.setColumns(10);
 		
 		tfFechaFin = new JTextField();
-		tfFechaFin.setBounds(146, 181, 86, 20);
+		tfFechaFin.setBounds(145, 167, 150, 20);
 		getContentPane().add(tfFechaFin);
 		tfFechaFin.setColumns(10);
 		
 		tfCupo = new JTextField();
-		tfCupo.setBounds(146, 206, 86, 20);
+		tfCupo.setBounds(145, 192, 150, 20);
 		getContentPane().add(tfCupo);
 		tfCupo.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(289, 147, 109, 112);
+		scrollPane.setBounds(315, 102, 150, 135);
 		getContentPane().add(scrollPane);
 		
 		tpDocentes = new JTextPane();
 		scrollPane.setViewportView(tpDocentes);
 		
 		JLabel lblDocentes = new JLabel("Docentes");
-		lblDocentes.setBounds(312, 108, 46, 14);
+		lblDocentes.setBounds(360, 75, 46, 14);
 		getContentPane().add(lblDocentes);
 		
 		JLabel lblFechaDePublicacion = new JLabel("Fecha de publicacion");
-		lblFechaDePublicacion.setBounds(32, 234, 109, 14);
+		lblFechaDePublicacion.setBounds(35, 220, 109, 14);
 		getContentPane().add(lblFechaDePublicacion);
 		
 		tfPublicacion = new JTextField();
-		tfPublicacion.setBounds(146, 231, 86, 20);
+		tfPublicacion.setBounds(145, 217, 150, 20);
 		getContentPane().add(tfPublicacion);
 		tfPublicacion.setColumns(10);
+		
+		JButton ButtonCancelar = new JButton("Cancelar");
+		ButtonCancelar.setBounds(180, 250, 100, 30);
+		getContentPane().add(ButtonCancelar);
 
 	}
 	public void inicializarComboBoxInstituto() {

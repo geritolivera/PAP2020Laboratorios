@@ -109,7 +109,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Fecha Nacimiento
 		JLabel LabelFechaNac = new JLabel("Fecha Nacimiento");
 		LabelFechaNac.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelFechaNac.setBounds(10, 162, 100, 15);
+		LabelFechaNac.setBounds(10, 162, 114, 15);
 		DatosPanel.add(LabelFechaNac);
 		
 		//Text Nombre
@@ -145,7 +145,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Docente
 		JLabel LabelDocente = new JLabel("Usuario Docente");
 		LabelDocente.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelDocente.setBounds(165, 210, 110, 15);
+		LabelDocente.setBounds(165, 210, 140, 15);
 		getContentPane().add(LabelDocente);
 		
 		//Label Ediciones de Curso Registrados
@@ -160,7 +160,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Usuario Estudiante
 		JLabel LabelEstudiante = new JLabel("Usuario Estudiante");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelEstudiante.setBounds(165, 270, 127, 15);
+		LabelEstudiante.setBounds(165, 270, 140, 15);
 		getContentPane().add(LabelEstudiante);
 		
 		//Label Inscripto en Edicion de Curso
@@ -170,7 +170,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		
 		//Label Programa de Formacion inscripto
 		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(165, 320, 160, 15);
+		ProgramaInscriptos.setBounds(165, 320, 175, 15);
 		getContentPane().add(ProgramaInscriptos);
 		
 		comboBoxInsEdCur = new JComboBox<String>();

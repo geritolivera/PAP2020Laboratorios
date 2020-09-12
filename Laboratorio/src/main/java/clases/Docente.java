@@ -14,7 +14,7 @@ import java.util.Date;
 @DiscriminatorValue("tipoDocente")
 public class Docente extends Usuario{
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private Instituto instituto;
 	
 	@ManyToMany

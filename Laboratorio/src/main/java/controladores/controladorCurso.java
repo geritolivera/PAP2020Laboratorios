@@ -322,20 +322,55 @@ public class controladorCurso implements IcontroladorCurso{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	
+	/*Utilizadas para Alta Edicion de Curso*/
+	public String[] listarInstitutos() {
+		manejadorInstituto mi = manejadorInstituto.getInstancia();
+		List<Instituto> listIn = mi.getInstituto();
+		String[] listIns = new String[listIn.size()+1];
+		listIns[0] = ""; 
+		Integer i = 1;
+		if(!listIn.isEmpty()) {
+			for (Instituto s: listIn) {
+				listIns[i] = s.getNombre();
+				i++;
+			}
+		}
+		return listIns;
+	}
+	
 	//Funciones Auxiliares
 	@Override //Listados para comboBoxes
-	public String[] listarCursosAux(String nombreInstituto){
+	public ArrayList<String> listarCursosAux(String nombreInstituto){
 		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
 		Instituto inst = mI.buscarInstituto(nombreInstituto);
 		List<Curso> cursos = inst.getCursos();
-		String[] cursos_ret = new String[cursos.size()] ;
-		int i=0;
-		for(Curso c:cursos) {
-			cursos_ret[i]=c.getNombre();
-			i++;
+		ArrayList<String> cursosRet = new ArrayList<String>();
+		for(Curso c : cursos) {
+			cursosRet.add(c.getNombre());
 		}
-		return cursos_ret;
+		return cursosRet;
 	}
+	
+	//Lista los docentes de un instituto
+		public ArrayList<String> listarDocentesInstituto(String nomInstituto) {
+			manejadorUsuario mu = manejadorUsuario.getInstancia();
+			List<Usuario> listaUsuario = mu.getUsuarios();
+			ArrayList<String> docentes = new ArrayList<String>();
+			for(Usuario u : listaUsuario) {
+				if(u instanceof Docente) {
+					Instituto ins = ((Docente) u).getInstituto();
+					if(ins != null) {
+						if(ins.getNombre().compareTo(nomInstituto) == 0) {
+							docentes.add(u.getNick());	
+						}
+					}
+				}
+			}
+			return docentes;
+		}
+	
+	/*Hasta aca Alta de Edicion de Curso*/
+	
 	
 	@Override
 	public String[] listarEdicionesAux(String nomCurso) {
@@ -364,33 +399,7 @@ public class controladorCurso implements IcontroladorCurso{
 //		return docente_ret; 
 //	}
 //	
-	public String[] listarDocentesInstituto(String nomInstituto) {
-		manejadorInstituto mI = manejadorInstituto.getInstancia();
-		Instituto inst = mI.buscarInstituto(nomInstituto);
-		List<Docente> docentes = inst.getDocentes();
-		String[] docentes_ret = new String[docentes.size()] ;
-		int i=0;
-		for(Docente d:docentes) {
-			docentes_ret[i]=d.getNick();
-			i++;
-		}
-		return docentes_ret;
-	}
-
-
-	public String[] listarInstitutos() {
-		manejadorInstituto mi = manejadorInstituto.getInstancia();
-		List<Instituto> listIn = mi.getInstituto();
-		String[] listIns = new String[listIn.size()];
-		Integer i =0;
-		if(!listIn.isEmpty()) {
-			for (Instituto s: listIn) {
-				listIns[i] = s.getNombre();
-				i++;
-			}
-		}
-		return listIns;
-	}
+	
 
 	@Override
 	public String[] listarDocentesAux(String nomEdicion) {

@@ -63,8 +63,8 @@ public interface IcontroladorCurso {
 	//Funciones aux para comboBox de Edicion de cursos
 
 	public String[] listarInstitutos();
-	public String[] listarCursosAux(String nombreInstiuto);
+	public ArrayList<String> listarCursosAux(String nombreInstiuto);
 	public String[] listarEdicionesAux(String nombreCurso);
 	public String[] listarDocentesAux(String nomEdicion);
-	public String[] listarDocentesInstituto(String nomInstituto);
+	public ArrayList<String> listarDocentesInstituto(String nomInstituto);
 }

@@ -221,9 +221,9 @@ public class principalView {
 		
 		JMenuItem MenuItemAltaEdicionCurso = new JMenuItem("Alta de Edicion de Curso");
 		MenuItemAltaEdicionCurso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				altaEdicionCursoInternalFrame.inicializarComboBoxInstituto();
+			public void actionPerformed(ActionEvent e) {			
 				altaEdicionCursoInternalFrame.setVisible(true);
+				altaEdicionCursoInternalFrame.inicializarComboBoxInstituto();
 			}
 		});
 		MenuEdicionCurso.add(MenuItemAltaEdicionCurso);
