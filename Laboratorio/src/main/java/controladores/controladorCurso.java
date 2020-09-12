@@ -166,13 +166,13 @@ public class controladorCurso implements IcontroladorCurso{
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
+	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		Date today = Calendar.getInstance().getTime();
+		DTEdicionCurso dte = new DTEdicionCurso();
 		if(mCur.existeCurso(nomCurso)){
 			Curso c = mCur.buscarCurso(nomCurso);
 			List<EdicionCurso> ediciones = c.getEdiciones();
-			DTEdicionCurso dte = new DTEdicionCurso();
 			for(EdicionCurso e: ediciones) {
 				if (e.getFechaF().after(today)) {
 					dte.setNombre(e.getNombre());
@@ -183,11 +183,8 @@ public class controladorCurso implements IcontroladorCurso{
 					dte.setCupo(e.getCupo());
 				}
 			}
-
-			return null;
 		}
-		else
-			throw new CursoExcepcion("No existe el curso " + nomCurso);
+		return dte;
 	}
 	
 	@Override
