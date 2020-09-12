@@ -264,7 +264,9 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 				modelDocenteEdiciones.addElement(s);
 			}
 			listDocentes.setModel(modelDocenteEdiciones);
-		} else if(!nombreEdicion.isEmpty()) {
+			
+		} else if(nombreEdicion.isEmpty()) {
+			
 			//Si no se elige Edicion se limpian los datos y la lista de docentes
 			this.tfNombre.setEnabled(false);
 			this.tfFechaInicio.setEnabled(false);
