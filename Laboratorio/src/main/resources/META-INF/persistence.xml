@@ -9,7 +9,8 @@
 		<class>clases.ProgramaFormacion</class>
 		<class>clases.Curso</class>
 		<class>clases.Instituto</class>
-		<class>clases.Inscripcion</class>
+		<class>clases.InscripcionED</class>
+		<class>clases.InscripcionPF</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

@@ -33,24 +33,20 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mI.existeInstituto(instituto)){
 				Instituto I = mI.buscarInstituto(instituto);
-				List<Curso> lista = null;
-				if (previas==null){
-					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
-					mc.agregarCurso(cursoNuevo);
-					I.agregarCurso(cursoNuevo);
-				}else {
-					Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
-					for (String c:previas){
-						Curso cursoPrevia= new Curso();
-						cursoPrevia = mc.buscarCurso(c);
-						cursoNuevo.agregarPrevias(cursoPrevia);
+				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
+				//se fija si hay previas antes de ingresarlas
+				if (previas!=null){
+					for (String s : previas) {
+						Curso previa = mc.buscarCurso(s);
+						cursoNuevo.agregarPrevias(previa);
 					}
-					mc.agregarCurso(cursoNuevo);
-					I.agregarCurso(cursoNuevo);
-					em.getTransaction().begin();
-					em.persist(I);
-					em.getTransaction().commit();
 				}
+				mc.agregarCurso(cursoNuevo);
+				I.agregarCurso(cursoNuevo);
+				//persiste el nuevo curso agregado al instituto
+				em.getTransaction().begin();
+				em.persist(I);
+				em.getTransaction().commit();
 			}
 			else
 				throw new InstitutoExcepcion("El instituto " + instituto + "no existe");
@@ -117,7 +113,7 @@ public class controladorCurso implements IcontroladorCurso{
 				Curso curso = mCur.buscarCurso(nomCurso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				//se fija que haya docentes para ingresar
-				if(docentes.size() > 0) {
+				if(docentes!=null) {
 					for(String s: docentes) {
 						Docente d = (Docente) mUsu.buscarUsuario(s);
 						edi.agregarDocente(d);
@@ -174,6 +170,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion {
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		Date today = Calendar.getInstance().getTime();
+		boolean vigente = false;
 		if(mCur.existeCurso(nomCurso)){
 			Curso c = mCur.buscarCurso(nomCurso);
 			List<EdicionCurso> ediciones = c.getEdiciones();
@@ -186,10 +183,14 @@ public class controladorCurso implements IcontroladorCurso{
 					dte.setFechaF(e.getFechaF());
 					dte.setCurso(e.getNomCurso());
 					dte.setCupo(e.getCupo());
+					vigente = true;
+					break;
 				}
 			}
-
-			return null;
+			if(vigente)
+				return dte;
+			else
+				throw new CursoExcepcion("No hay edicion vigente para curso " + nomCurso + ".");
 		}
 		else
 			throw new CursoExcepcion("No existe el curso " + nomCurso);

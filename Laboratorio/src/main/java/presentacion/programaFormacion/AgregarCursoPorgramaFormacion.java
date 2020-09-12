@@ -13,11 +13,11 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	
-	private IcontroladorCurso iconCurso;
-	private ArrayList<String> cursos; //esto es para hacer el populate del comboBox
-	private ArrayList<String> programas; //esto es para hacer el populate del comboBox
-	private JComboBox<String> comboCursos;
-	private JComboBox<String>  comboProgramasFormacion;
+	private final IcontroladorCurso iconCurso;
+	private final ArrayList<String> cursos; //esto es para hacer el populate del comboBox
+	private final ArrayList<String> programas; //esto es para hacer el populate del comboBox
+	private final JComboBox<String> comboCursos;
+	private final JComboBox<String>  comboProgramasFormacion;
 	private String curso;
 	private String programa;
 

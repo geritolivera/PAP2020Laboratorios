@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class ConsultaProgramaFormacion extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private final JTextField textField;
+	private final JTextField textField_1;
+	private final JTextField textField_2;
+	private final JTextField textField_3;
 
 	/**
 	 * Launch the application.

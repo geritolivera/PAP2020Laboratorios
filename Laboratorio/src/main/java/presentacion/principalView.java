@@ -16,26 +16,26 @@ public class principalView {
 	private JFrame frame;
 	
 	//JInternal Frame Usuario
-	private presentacion.usuario.AltaUsuario altaUsuarioInternalFrame;
-	private presentacion.usuario.ConsultaUsuario consultaUsuarioInternalFrame;
-	private presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
+	private final presentacion.usuario.AltaUsuario altaUsuarioInternalFrame;
+	private final presentacion.usuario.ConsultaUsuario consultaUsuarioInternalFrame;
+	private final presentacion.usuario.ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	
 	//JInternal Frame Curso
-	private presentacion.curso.AltaCurso altaCursoInternalFrame;
-	private presentacion.curso.ConsultaCurso consultaCursoInternalFrame;
+	private final presentacion.curso.AltaCurso altaCursoInternalFrame;
+	private final presentacion.curso.ConsultaCurso consultaCursoInternalFrame;
 	
 	//JInternal Frame Edicion de Curso
-	private presentacion.edicionCurso.AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
-	private presentacion.edicionCurso.ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
-	private presentacion.edicionCurso.InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
+	private final presentacion.edicionCurso.AltaDeEdicionDeCurso altaEdicionCursoInternalFrame;
+	private final presentacion.edicionCurso.ConsultaDeEdicionDeCurso consultaEdicionCursoInternalFrame;
+	private final presentacion.edicionCurso.InscripcionEdicionCurso inscripcionEdicionCursoInternalFrame;
 	
 	//JInternal Frame Programa Formacion
-	private presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
-	private presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
+	private final presentacion.programaFormacion.CrearProgramaFormacion crearPDFInternalFrame;
+	private final presentacion.programaFormacion.AgregarCursoPorgramaFormacion agregarCusroPDFInternalFrame;
 	private presentacion.programaFormacion.ConsultaProgramaFormacion consultaProgramaFormacionInternalFrame;
 
 	//JInternal Frame Instituto
-	private AltaInstituto altaInstitutoInternalFrame;	
+	private final AltaInstituto altaInstitutoInternalFrame;
 	
 	/**
 	 * Launch the application.

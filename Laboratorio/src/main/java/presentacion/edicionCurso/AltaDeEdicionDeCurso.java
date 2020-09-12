@@ -17,15 +17,15 @@ import java.util.Date;
 public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
-	private IcontroladorCurso iconC;
+	private final IcontroladorCurso iconC;
 	private IcontroladorUsuario iusu;
-	private JTextField tfNombreEd;
-	private JTextField tfCupo;
-	private JComboBox<String> comboBoxInstituto;
-	private JComboBox<String> comboBoxCursos;
+	private final JTextField tfNombreEd;
+	private final JTextField tfCupo;
+	private final JComboBox<String> comboBoxInstituto;
+	private final JComboBox<String> comboBoxCursos;
 	private JDateChooser dateInicio;
 	private JDateChooser dateFin;
-	private JList<String> listaDocentes;
+	private final JList<String> listaDocentes;
 	private String[] lisDocentes;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -160,14 +160,14 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	}
 	public void inicializarComboBoxInstituto() {
 			DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-			listInst.insertElementAt((new String("")),0);
+			listInst.insertElementAt((""),0);
 			comboBoxInstituto.setModel(listInst);
 			comboBoxInstituto.setSelectedIndex(0);
 	}
 	
 	protected void inicializarComboBoxCursos(String nombreInstituto) {
 		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
-		modelCursos.insertElementAt((new String("")),0);
+		modelCursos.insertElementAt((""),0);
 		comboBoxCursos.setModel(modelCursos);
 		comboBoxCursos.setSelectedIndex(0);
 	}

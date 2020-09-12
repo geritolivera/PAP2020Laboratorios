@@ -11,7 +11,7 @@ public class DTProgramaFormacion {
 	private Date fechaI;
 	private Date fechaF;
 	//private List<DTCurso> cursos = new ArrayList<>();
-	private ArrayList<String> cursos = new ArrayList<>();
+	private final ArrayList<String> cursos = new ArrayList<>();
 	
 	public DTProgramaFormacion() {
 		super();

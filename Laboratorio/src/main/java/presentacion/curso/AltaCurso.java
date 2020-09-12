@@ -20,18 +20,18 @@ public class AltaCurso extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	private IcontroladorCurso icon;
-	private JComboBox<String> institutos;
-	private JComboBox<Integer> duracion;
-	private JComboBox<String> meses;
-	private JTextField textNombreCur;
-	private JTextField textDescripcion;
-	private JTextField textCantCreditos;
-	private JTextField textURL;
-	private Integer[] listDur = {0,1,2,3,4,5,6,7,8};
-	private String[] listMeses = {"","2","3","4","5","6","7","8","9","10","11","12"};
+	private final IcontroladorCurso icon;
+	private final JComboBox<String> institutos;
+	private final JComboBox<Integer> duracion;
+	private final JComboBox<String> meses;
+	private final JTextField textNombreCur;
+	private final JTextField textDescripcion;
+	private final JTextField textCantCreditos;
+	private final JTextField textURL;
+	private final Integer[] listDur = {0,1,2,3,4,5,6,7,8};
+	private final String[] listMeses = {"","2","3","4","5","6","7","8","9","10","11","12"};
 	private JDateChooser dateChooser;
-	private JList listCursos;
+	private final JList listCursos;
 	private String[] previas;
 	private JTextArea output;
 
@@ -55,7 +55,6 @@ public class AltaCurso extends JInternalFrame {
 
 		institutos = new JComboBox<String>();
 		inicializarComboBoxInstituto();
-
 		institutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cbInstitutosActionPerformed(arg0);
@@ -89,7 +88,9 @@ public class AltaCurso extends JInternalFrame {
 		LabelDur.setBounds(80, 210, 58, 20);
 		getContentPane().add(LabelDur);
 
-		meses = new JComboBox<String>(listMeses);
+		meses = new JComboBox<String>();
+		DefaultComboBoxModel<String> comboBoxModelMeses = new DefaultComboBoxModel<String>(listMeses);
+		meses.setModel(comboBoxModelMeses);
 		meses.setSelectedIndex(0);
 		meses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -109,7 +110,9 @@ public class AltaCurso extends JInternalFrame {
 		LabelCantHoras.setBounds(25, 250, 118, 20);
 		getContentPane().add(LabelCantHoras);
 
-		duracion = new JComboBox<Integer>(listDur);
+		duracion = new JComboBox<Integer>();
+		DefaultComboBoxModel<Integer> comboBoxModelDuracion = new DefaultComboBoxModel<>(listDur);
+		duracion.setModel(comboBoxModelDuracion);
 		duracion.setSelectedIndex(0);
 		duracion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -244,7 +247,7 @@ public class AltaCurso extends JInternalFrame {
 				JOptionPane.showMessageDialog(this, nombreCurso + instituto);
 				if(!instituto.isEmpty()){
 					if(!nombreCurso.isEmpty()){
-						this.icon.AltaCurso(nombreCurso,descripcion,meses,duracion,(Integer)cantCreditos, dateChooser,url,instituto, previas);
+						this.icon.AltaCurso(nombreCurso,descripcion,meses,duracion, cantCreditos, dateChooser,url,instituto, previas);
 						JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
 						inicializarComboBoxInstituto();
 						limpiarFormulario();
@@ -262,14 +265,14 @@ public class AltaCurso extends JInternalFrame {
 
 	public void inicializarComboBoxInstituto() {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstitutos());
-		listInst.insertElementAt((new String("")),0);
+		listInst.insertElementAt((""),0);
 		institutos.setModel(listInst);
 		institutos.setSelectedIndex(0);
 	}
 	
 	public JComboBox<String> inicializarComboBoxIns() {
 		JComboBox<String> listInst = new JComboBox<String>(icon.listarInstitutos());
-		listInst.insertItemAt((new String("")), 0);
+		listInst.insertItemAt((""), 0);
 		listInst.setSelectedIndex(0);
 		return listInst;
 	}

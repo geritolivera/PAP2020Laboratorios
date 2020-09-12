@@ -15,14 +15,14 @@ public class AltaUsuario extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	private IcontroladorUsuario icon;
+	private final IcontroladorUsuario icon;
 	
-	private JTextField textFieldNick;
-	private JTextField textFieldNombre;
-	private JTextField textFieldApellido;
-	private JTextField textFieldEmail;
+	private final JTextField textFieldNick;
+	private final JTextField textFieldNombre;
+	private final JTextField textFieldApellido;
+	private final JTextField textFieldEmail;
 	private JDateChooser dateChooser;
-	private JComboBox<String> institutoChoose;
+	private final JComboBox<String> institutoChoose;
 	
 
 	public AltaUsuario(IcontroladorUsuario icon) {
@@ -129,10 +129,11 @@ public class AltaUsuario extends JInternalFrame {
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
-		Boolean institutoVacio = this.institutoChoose.getSelectedItem()== null	;
+		String instituto = this.institutoChoose.getSelectedItem().toString();
+		Boolean institutoVacio;
+		institutoVacio = this.institutoChoose.getSelectedItem().toString().isEmpty();
 		if(checkFormulario()) {
 			try {
-				String instituto = this.institutoChoose.getSelectedItem().toString();
 				if(!institutoVacio) {
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -143,14 +144,14 @@ public class AltaUsuario extends JInternalFrame {
 			} catch(UsuarioExcepcion u) {
 				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
-			limpiarFormulario();
-			setVisible(false);
 		}
+		limpiarFormulario();
+		setVisible(false);
 	}
 	
 	public void iniciarlizarComboBoxes() {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstituto());
-		listInst.insertElementAt((new String("")),0);
+		listInst.insertElementAt((""),0);
 		institutoChoose.setModel(listInst);
 		institutoChoose.setSelectedIndex(0);
 	}

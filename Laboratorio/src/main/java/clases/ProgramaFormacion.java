@@ -15,9 +15,9 @@ public class ProgramaFormacion {
 	private Date fechaF;
 	private Date fechaA;
 	@ManyToMany (mappedBy="programas")
-	private List<Estudiante> estudiantes = new ArrayList<>();
+	private final List<Estudiante> estudiantes = new ArrayList<>();
 	@ManyToMany (mappedBy= "programas")
-	private List<Curso> cursos = new ArrayList<>();
+	private final List<Curso> cursos = new ArrayList<>();
 
 	//private List<InscripcionPF> inscripciones = new ArrayList<>();
 	

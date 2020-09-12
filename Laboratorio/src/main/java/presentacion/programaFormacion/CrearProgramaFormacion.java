@@ -13,11 +13,11 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class CrearProgramaFormacion extends JInternalFrame {
-	private JTextField inputNombre;
-	private JTextArea inputDescripcion;
+	private final JTextField inputNombre;
+	private final JTextArea inputDescripcion;
 	private JDateChooser dateChooserInicio;
 	private JDateChooser dateChooserFin;
-	private IcontroladorCurso iconCurso;
+	private final IcontroladorCurso iconCurso;
 	
 	public CrearProgramaFormacion(IcontroladorCurso iconCurso) {
 		

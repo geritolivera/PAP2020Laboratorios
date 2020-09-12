@@ -10,16 +10,16 @@ import java.util.List;
 public class Estudiante extends Usuario{
 	//programas a los cuales se anota
 	@ManyToMany
-	private List<ProgramaFormacion> programas = new ArrayList<>();
+	private final List<ProgramaFormacion> programas = new ArrayList<>();
 	//ediciones a las cuales se anota
 	@ManyToMany
-	private List<EdicionCurso> ediciones = new ArrayList<>();
+	private final List<EdicionCurso> ediciones = new ArrayList<>();
 	//inscripciones a las ediciones
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InscripcionED> inscripcionesED = new ArrayList<>();
+	private final List<InscripcionED> inscripcionesED = new ArrayList<>();
 	//inscripciones a los programas
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InscripcionPF> inscripcionesPF = new ArrayList<>();
+	private final List<InscripcionPF> inscripcionesPF = new ArrayList<>();
 	
 	public Estudiante() {
 		super();

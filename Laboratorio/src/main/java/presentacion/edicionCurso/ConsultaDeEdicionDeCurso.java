@@ -23,16 +23,16 @@ import java.awt.event.ActionEvent;
 
 public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
-	private IcontroladorCurso iconC;
-	private JTextField tfNombre;
-	private JTextField tfFechaInicio;
-	private JTextField tfFechaFin;
-	private JTextField tfCupo;
-	private JComboBox<String> cbInstitutos;
-	private JComboBox<String> cbCursos;
-	private JComboBox<String> cbEdicion;
-	private JTextPane tpDocentes;
-	private JTextField tfPublicacion;
+	private final IcontroladorCurso iconC;
+	private final JTextField tfNombre;
+	private final JTextField tfFechaInicio;
+	private final JTextField tfFechaFin;
+	private final JTextField tfCupo;
+	private final JComboBox<String> cbInstitutos;
+	private final JComboBox<String> cbCursos;
+	private final JComboBox<String> cbEdicion;
+	private final JTextPane tpDocentes;
+	private final JTextField tfPublicacion;
 
 	/**
 	 * Launch the application.

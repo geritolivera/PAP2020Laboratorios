@@ -19,17 +19,17 @@ public class ConsultaUsuario extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private IcontroladorUsuario icon;
-	private JTextField textFieldNombre;
-	private JTextField textFieldApellido;
-	private JTextField textFieldNick;
-	private JTextField textFieldCorreo;
-	private JTextField textFieldFechaNac;
-	private JComboBox<String> comboBoxCursoReg;
-	private JComboBox<String> comboBoxInsEdCur;
-	private JComboBox<String> comboBoxProgForIns;
+	private final IcontroladorUsuario icon;
+	private final JTextField textFieldNombre;
+	private final JTextField textFieldApellido;
+	private final JTextField textFieldNick;
+	private final JTextField textFieldCorreo;
+	private final JTextField textFieldFechaNac;
+	private final JComboBox<String> comboBoxCursoReg;
+	private final JComboBox<String> comboBoxInsEdCur;
+	private final JComboBox<String> comboBoxProgForIns;
 	
-	private JList<String> ListaUsu;
+	private final JList<String> ListaUsu;
 	
 	private List<DTUsuario> listaUsuarios;
 	

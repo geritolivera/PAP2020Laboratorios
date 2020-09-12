@@ -20,14 +20,14 @@ public class ConsultaCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private IcontroladorCurso icon;
-	private JTextField textNomCurso;
-	private JTextField textDescripcion;
-	private JTextField textUrl;
-	private JTextField textFechaAlta;
-	private JTextField textCantCredito;
-	private JTextField textCantHoras;
-	private JTextField textDuracion;
+	private final IcontroladorCurso icon;
+	private final JTextField textNomCurso;
+	private final JTextField textDescripcion;
+	private final JTextField textUrl;
+	private final JTextField textFechaAlta;
+	private final JTextField textCantCredito;
+	private final JTextField textCantHoras;
+	private final JTextField textDuracion;
 	
 	public ConsultaCurso(IcontroladorCurso icon) {
 		

@@ -12,58 +12,58 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas) throws CursoExcepcion, InstitutoExcepcion;
+    void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas) throws CursoExcepcion, InstitutoExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
-	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
+    ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
+	DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion;
+    void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion;
-	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion;
+    ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion;
+	DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion;
-	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion;
+    DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion;
+	void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion;
+    void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//10 - Agregar Curso a Programa de Formacion
-	public ArrayList<String> listarProgramas();
-	public ArrayList<String> listarCursos();
-	public void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion;
+    ArrayList<String> listarProgramas();
+	ArrayList<String> listarCursos();
+	void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//11 - Consulta de Programa de Formacion
 	//Se utiliza la misma funcion de listarProgramas
-	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion;
+    DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion;
 
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
 	//Funciones aux para comboBox de Edicion de cursos
 
-	public String[] listarInstitutos();
-	public String[] listarCursosAux(String nombreInstiuto);
-	public String[] listarEdicionesAux(String nombreCurso);
-	public String[] listarDocentesAux(String nomEdicion);
-	public String[] listarDocentesInstituto(String nomInstituto);
+	String[] listarInstitutos();
+	String[] listarCursosAux(String nombreInstiuto);
+	String[] listarEdicionesAux(String nombreCurso);
+	String[] listarDocentesAux(String nomEdicion);
+	String[] listarDocentesInstituto(String nomInstituto);
 }

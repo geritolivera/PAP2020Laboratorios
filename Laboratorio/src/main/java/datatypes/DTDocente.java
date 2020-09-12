@@ -6,9 +6,9 @@ import java.util.List;
 
 
 public class DTDocente extends DTUsuario{
-	private List<DTCurso> cursos = new ArrayList<>();
-	private List<DTEdicionCurso> ediciones = new ArrayList<>();
-	private List<DTProgramaFormacion> programas = new ArrayList<>();	
+	private final List<DTCurso> cursos = new ArrayList<>();
+	private final List<DTEdicionCurso> ediciones = new ArrayList<>();
+	private final List<DTProgramaFormacion> programas = new ArrayList<>();
 	
 	public DTDocente() {
 		super();

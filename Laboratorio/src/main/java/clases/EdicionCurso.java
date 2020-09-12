@@ -17,12 +17,12 @@ public class EdicionCurso {
 	@JoinColumn(insertable = false, updatable = false)
 	private Curso curso;
 	@ManyToMany (mappedBy ="ediciones")
-	private List<Estudiante> estudiantes = new ArrayList<>();
+	private final List<Estudiante> estudiantes = new ArrayList<>();
 	
 	@ManyToMany (mappedBy ="ediciones")
-	private List<Docente> docentes = new ArrayList<>();
+	private final List<Docente> docentes = new ArrayList<>();
 	@OneToMany(mappedBy = "edicion", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InscripcionED> inscripciones = new ArrayList<>();
+	private final List<InscripcionED> inscripciones = new ArrayList<>();
 
 
 	

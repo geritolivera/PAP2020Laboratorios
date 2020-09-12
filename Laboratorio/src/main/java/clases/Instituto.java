@@ -14,9 +14,9 @@ public class Instituto {
 	private String nombre;
 	//Lista de docentes del instituto
 	@OneToMany(mappedBy = "instituto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Docente> docentes = new ArrayList<>();
+	private final List<Docente> docentes = new ArrayList<>();
 	@OneToMany(mappedBy = "instituto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Curso> cursos = new ArrayList<>();
+	private final List<Curso> cursos = new ArrayList<>();
 	
 	public Instituto() {
 		super();

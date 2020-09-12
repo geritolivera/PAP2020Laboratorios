@@ -15,12 +15,12 @@ import java.util.Date;
 public class InscripcionEdicionCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
-	private IcontroladorCurso iconC;
-	private IcontroladorUsuario iusu;
-	private JTextField tfEdVigente;
-	private JComboBox<String> cbInstituto;
-	private JComboBox<String> cbEstudiantes;
-	private JComboBox<String> cbCursos;
+	private final IcontroladorCurso iconC;
+	private final IcontroladorUsuario iusu;
+	private final JTextField tfEdVigente;
+	private final JComboBox<String> cbInstituto;
+	private final JComboBox<String> cbEstudiantes;
+	private final JComboBox<String> cbCursos;
 	/**
 	 * Launch the application.
 	 */
@@ -122,14 +122,14 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 
 	public void inicializarComboBoxInstituto() {
 		DefaultComboBoxModel<String> listInsti = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-		listInsti.insertElementAt((new String("")),0);
+		listInsti.insertElementAt((""),0);
 		cbInstituto.setModel(listInsti);
 		cbInstituto.setSelectedIndex(0);
 	}
 
 	public void inicializarComboBoxEstudiantes(){
 		DefaultComboBoxModel<String> listEst = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
-		listEst.insertElementAt((new String("")),0);
+		listEst.insertElementAt((""),0);
 		cbEstudiantes.setModel(listEst);
 		cbEstudiantes.setSelectedIndex(0);
 	}
