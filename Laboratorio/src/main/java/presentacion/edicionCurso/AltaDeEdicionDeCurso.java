@@ -32,8 +32,6 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	private ArrayList<String> lisDocentes;
 	private ArrayList<String> lisCursos;
 	
-	//private DefaultListModel<String> modelDocentes;
-	//private DefaultListModel<String> modelCursos;
 	
 	public AltaDeEdicionDeCurso(IcontroladorCurso iconC) {
 		

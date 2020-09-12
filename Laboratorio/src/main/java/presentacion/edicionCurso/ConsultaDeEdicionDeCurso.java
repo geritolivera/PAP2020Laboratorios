@@ -19,6 +19,7 @@ import javax.swing.JTextPane;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
@@ -167,7 +168,12 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		cbInstitutos.setModel(modelInstitutos);
 	}
 	protected void inicializarComboBoxCursos(String nombreInstituto) {
-		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
+		ArrayList<String> listaCursos = new ArrayList<String>();
+		listaCursos = iconC.listarCursosAux(nombreInstituto);
+		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
+		for(String s : listaCursos) {
+			modelCursos.addElement(s);
+		}
 		cbCursos.setModel(modelCursos);
 	}
 	protected void inicializarComboBoxEdicion(String nombreCurso) {

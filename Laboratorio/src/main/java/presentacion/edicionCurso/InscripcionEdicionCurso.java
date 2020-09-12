@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -139,7 +140,12 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		if(nombreInstituto.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Debe seleccionar un instituto" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 		}else {
-			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
+			ArrayList<String> listaCursos = new ArrayList<String>();
+			listaCursos = iconC.listarCursosAux(nombreInstituto);
+			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
+			for(String s : listaCursos) {
+				modelCursos.addElement(s);
+			}
 			cbCursos.setModel(modelCursos);
 		}
 	}
