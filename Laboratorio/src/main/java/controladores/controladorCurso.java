@@ -103,7 +103,7 @@ public class controladorCurso implements IcontroladorCurso{
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	@Override
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion{
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorCurso mCur = manejadorCurso.getInstancia();
@@ -130,8 +130,6 @@ public class controladorCurso implements IcontroladorCurso{
 				}
 				mEdi.agregarEdicion(edi);
 			}
-			else
-				throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
 		}
 	}
 	
@@ -154,16 +152,13 @@ public class controladorCurso implements IcontroladorCurso{
 			throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
 	}
 	
+	//Obtiene el DT de la edicion de curso
 	@Override
-	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion{
-		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
-		if(mEdi.existeEdicion(nomEdicion)) {
-			EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
-			DTEdicionCurso dte = new DTEdicionCurso(edi);
-			return dte;
-		}
-		else
-			throw new EdicionExcepcion("La edicion " + nomEdicion + " no existe.");
+	public DTEdicionCurso verInfoEdicion(String nomEdicion){
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();		 
+		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
+		DTEdicionCurso dte = new DTEdicionCurso(edi);
+		return dte;	
 	}
 	
 	 
@@ -321,8 +316,12 @@ public class controladorCurso implements IcontroladorCurso{
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
+	//Funciones Auxiliares
 	
 	/*Utilizadas para Alta Edicion de Curso*/
+	
+	//Lista institutos
+	@Override
 	public String[] listarInstitutos() {
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
 		List<Instituto> listIn = mi.getInstituto();
@@ -338,8 +337,8 @@ public class controladorCurso implements IcontroladorCurso{
 		return listIns;
 	}
 	
-	//Funciones Auxiliares
-	@Override //Listados para comboBoxes
+	//Lista cursos de un instituto
+	@Override 
 	public ArrayList<String> listarCursosAux(String nombreInstituto){
 		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
 		Instituto inst = mI.buscarInstituto(nombreInstituto);
@@ -352,58 +351,55 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	//Lista los docentes de un instituto
-		public ArrayList<String> listarDocentesInstituto(String nomInstituto) {
-			manejadorUsuario mu = manejadorUsuario.getInstancia();
-			List<Usuario> listaUsuario = mu.getUsuarios();
-			ArrayList<String> docentes = new ArrayList<String>();
-			for(Usuario u : listaUsuario) {
-				if(u instanceof Docente) {
-					Instituto ins = ((Docente) u).getInstituto();
-					if(ins != null) {
-						if(ins.getNombre().compareTo(nomInstituto) == 0) {
-							docentes.add(u.getNick());	
-						}
+	@Override
+	public ArrayList<String> listarDocentesInstituto(String nomInstituto) {
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		List<Usuario> listaUsuario = mu.getUsuarios();
+		ArrayList<String> docentes = new ArrayList<String>();
+		for(Usuario u : listaUsuario) {
+			if(u instanceof Docente) {
+				Instituto ins = ((Docente) u).getInstituto();
+				if(ins != null) {
+					if(ins.getNombre().compareTo(nomInstituto) == 0) {
+						docentes.add(u.getNick());	
 					}
 				}
 			}
-			return docentes;
 		}
+		return docentes;
+	}
 	
 	/*Hasta aca Alta de Edicion de Curso*/
 	
 	
-	@Override
-	public String[] listarEdicionesAux(String nomCurso) {
+	/*Utilizadas en Consulta de Edicion de Curso*/
+		
+	//Listas las ediciones de un curso	
+	@Override 
+	public ArrayList<String> listarEdicionesAux(String nomCurso) {
 		manejadorCurso mC = manejadorCurso.getInstancia();
 		Curso curso = mC.buscarCurso(nomCurso);
 		List<EdicionCurso> ediciones = curso.getEdiciones();
-		String[] ediciones_ret = new String[ediciones.size()];
-		int i=0;
-		for (EdicionCurso e:ediciones) {
-			ediciones_ret[i]=e.getNombre();
-			i++;
+		ArrayList<String> ediciones_ret = new ArrayList<String>();
+		for (EdicionCurso e : ediciones) {
+			ediciones_ret.add(e.getNombre());
 		}
 		return ediciones_ret;
 	}
-
-//	public String[] listarDocentesAux(String nomEdicion){
-//		manejadorEdicion mE =manejadorEdicion.getInstancia();
-//		EdicionCurso edicion= mE.buscarEdicion(nomEdicion);
-//		List<Docente> docentes = edicion.getDocentes();
-//		String[] docente_ret = new String[docentes.size()];
-//		int i=0;
-//		for (Docente d:docentes) {
-//			docente_ret[i]=d.getNick();
-//			i++;
-//		}
-//		return docente_ret; 
-//	}
-//	
 	
-
+	//Lista los docentes de una edicion
 	@Override
-	public String[] listarDocentesAux(String nomEdicion) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> listarDocentesAux(String nomEdicion) {
+		manejadorEdicion me = manejadorEdicion.getInstancia();
+		EdicionCurso edicion = me.buscarEdicion(nomEdicion);
+		List<Docente> docentesEdicion = edicion.getDocentes();
+		ArrayList<String> docentes_ret = new ArrayList<String>();
+		for(Docente d : docentesEdicion) {
+			docentes_ret.add(d.getNombre());
+		}
+		return docentes_ret;
 	}
+	
+	/*Hasta aca Consulta de Edicion de Curso*/
+	
 }

@@ -1,7 +1,6 @@
 package presentacion.edicionCurso;
 
 import com.toedter.calendar.JDateChooser;
-import exepciones.CursoExcepcion;
 import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
 
@@ -230,11 +229,8 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		if(checkFormulario()) {
 			try{
 				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,docentes);
-				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso",
-	                        JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso", JOptionPane.INFORMATION_MESSAGE);
 			}catch(EdicionExcepcion e){
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
-			}catch(CursoExcepcion e){
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -251,7 +247,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		if (nomEd.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if(dateInicio.compareTo(dateFin) < 0  || dateInicio.compareTo(dateFin) == 0) {
+		} else if(dateFin.compareTo(dateInicio) < 0  || dateInicio.compareTo(dateFin) == 0) {
 			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser menor a la fecha de fin de curso" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else {	
