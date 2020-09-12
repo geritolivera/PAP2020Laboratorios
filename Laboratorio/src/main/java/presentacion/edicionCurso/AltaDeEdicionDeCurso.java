@@ -189,6 +189,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 				modelDocentes.addElement(s);
 			}
 			listaDocentes.setModel(modelDocentes);
+		} else if(nomInstituto.contains("")){
+			modelDocentes.removeAllElements();
+			listaDocentes.setModel(modelDocentes);
 		}
 	}
 	
@@ -203,6 +206,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 				modelCursos.addElement(s);
 			}
 			listCursos.setModel(modelCursos);
+		} else if(nomInstituto.contains("")) {
+			modelCursos.removeAllElements();
+			listCursos.setModel(modelCursos);
 		}
 	}
 	
@@ -214,7 +220,10 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			dateFin.setEnabled(true);
 			tfCupo.setEnabled(true);
 		} else {
-			JOptionPane.showMessageDialog(this, "Seleccione un instituto" , "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			tfNombreEd.setEnabled(false);
+			dateInicio.setEnabled(false);
+			dateFin.setEnabled(false);
+			tfCupo.setEnabled(false);
 		}
 	}
 	

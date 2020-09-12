@@ -28,6 +28,9 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 	private JList<String> listEdicionesCurso;
 	private JList<String> listDocentes;	
 	
+	private ArrayList<String> listaCursos;
+	private ArrayList<String> listaEdiciones;
+	
 	public ConsultaDeEdicionDeCurso(IcontroladorCurso iconC) {
 		
 		this.iconC = iconC;
@@ -43,12 +46,12 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		/*----------------------------------------------------------------------------------------*/
 		//Label Instituto
 		JLabel lblNewLabel = new JLabel("Instituto");
-		lblNewLabel.setBounds(120, 25, 50, 15);
+		lblNewLabel.setBounds(200, 25, 50, 15);
 		getContentPane().add(lblNewLabel);
 		
 		//Label Cursos
 		JLabel lblCursos = new JLabel("Cursos");
-		lblCursos.setBounds(80, 65, 50, 15);
+		lblCursos.setBounds(80, 35, 50, 15);
 		getContentPane().add(lblCursos);
 		
 		//Label Edicion de curso
@@ -83,63 +86,83 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 				
 		//Label fecha publicacion
 		JLabel lblFechaDePublicacion = new JLabel("Fecha de publicacion");
-		lblFechaDePublicacion.setBounds(35, 395, 109, 15);
+		lblFechaDePublicacion.setBounds(35, 395, 115, 15);
 		getContentPane().add(lblFechaDePublicacion);
 		
 		/*----------------------------------------------------------------------------------------*/
 		//Variable de nombre
 		tfNombre = new JTextField();
-		tfNombre.setBounds(145, 270, 150, 20);
+		tfNombre.setEnabled(false);
+		tfNombre.setBounds(150, 270, 150, 20);
 		getContentPane().add(tfNombre);
 		tfNombre.setColumns(10);
 				
 		//Variable de fecha inicio
 		tfFechaInicio = new JTextField();
-		tfFechaInicio.setBounds(145, 300, 150, 20);
+		tfFechaInicio.setEnabled(false);
+		tfFechaInicio.setBounds(150, 300, 150, 20);
 		getContentPane().add(tfFechaInicio);
 		tfFechaInicio.setColumns(10);
 				
 		//Variable de fecha fin
 		tfFechaFin = new JTextField();
-		tfFechaFin.setBounds(145, 330, 150, 20);
+		tfFechaFin.setEnabled(false);
+		tfFechaFin.setBounds(150, 330, 150, 20);
 		getContentPane().add(tfFechaFin);
 		tfFechaFin.setColumns(10);
 				
 		//Variable cupo
 		tfCupo = new JTextField();
-		tfCupo.setBounds(145, 360, 150, 20);
+		tfCupo.setEnabled(false);
+		tfCupo.setBounds(150, 360, 150, 20);
 		getContentPane().add(tfCupo);
 		tfCupo.setColumns(10);
 				
 		//Variable fecha publicacion
 		tfPublicacion = new JTextField();
-		tfPublicacion.setBounds(145, 390, 150, 20);
+		tfPublicacion.setEnabled(false);
+		tfPublicacion.setBounds(150, 390, 150, 20);
 		getContentPane().add(tfPublicacion);
 		tfPublicacion.setColumns(10);
 		
 		
 		/*----------------------------------------------------------------------------------------*/
+		//Boton Seleccionar Curso
+		JButton ButtonSeleccionarCurso = new JButton("Seleccionar");
+		ButtonSeleccionarCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarEdicion(e);
+			}
+		});
+		ButtonSeleccionarCurso.setBounds(45, 210, 120, 25);
+		getContentPane().add(ButtonSeleccionarCurso);
+		
 		//Boton cancelar
 		JButton ButtonCancelar = new JButton("Cancelar");
+		ButtonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelarConsulta(e);
+			}
+		});
 		ButtonCancelar.setBounds(182, 425, 100, 30);
 		getContentPane().add(ButtonCancelar);
 		
-		//Boton Seleccionar
-		JButton ButtonSeleccionar = new JButton("Seleccionar");
-		ButtonSeleccionar.addActionListener(new ActionListener() {
+		//Boton Consulta
+		JButton ButtonConsulta = new JButton("Consultar");
+		ButtonConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				seleccionarEdicion(e);
 			}
 		});
-		ButtonSeleccionar.setBounds(375, 140, 90, 25);
-		getContentPane().add(ButtonSeleccionar);
+		ButtonConsulta.setBounds(365, 140, 120, 25);
+		getContentPane().add(ButtonConsulta);
 		
 		/*----------------------------------------------------------------------------------------*/
 		//Lista de cursos
 		JScrollPane scrollPaneCursos = new JScrollPane();
 		scrollPaneCursos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPaneCursos.setBounds(35, 95, 140, 140);
+		scrollPaneCursos.setBounds(35, 60, 140, 140);
 		getContentPane().add(scrollPaneCursos);		
 		listCursos = new JList<String>();
 		scrollPaneCursos.setViewportView(listCursos);
@@ -168,11 +191,11 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		comboBoxInstituto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listarCursos(arg0);
-				listarEdicion(arg0);
 			}
 		});
-		comboBoxInstituto.setBounds(195, 20, 150, 20);
+		comboBoxInstituto.setBounds(255, 20, 150, 20);
 		getContentPane().add(comboBoxInstituto);
+		
 				
 	}
 	
@@ -184,37 +207,115 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 	
 	//Lista los cursos asocidados
 	protected void listarCursos(ActionEvent e) {
-		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
-		ArrayList<String> listaCursos = new ArrayList<String>();
-		listaCursos = iconC.listarCursosAux(nomInstituto);
-		DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
-		for(String s : listaCursos) {
-			modelCursos.addElement(s);
+		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();		
+		DefaultListModel<String> modelCursos = new DefaultListModel<String>();
+		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+			listaCursos = iconC.listarCursosAux(nomInstituto);
+			for(String s : listaCursos) {
+				modelCursos.addElement(s);
+			}
+			listCursos.setModel(modelCursos);
+		} else if(nomInstituto.contains("")) {
+			modelCursos.removeAllElements();
+			listCursos.setModel(modelCursos);
 		}
-		listCursos.setModel(modelCursos);
 	}
 	
 	//Lista las ediciones asociadas al curso
 	protected void listarEdicion(ActionEvent e) {
 		String nomCurso = this.listCursos.getSelectedValue().toString();
-		ArrayList<String> listaEdiciones = new ArrayList<String>();
-		listaEdiciones = iconC.listarEdicionesAux(nomCurso);
-		DefaultComboBoxModel<String> modelEdiciones = new DefaultComboBoxModel<String>();
-		for(String s : listaEdiciones) {
-			modelEdiciones.addElement(s);
+		DefaultListModel<String> modelEdiciones = new DefaultListModel<String>();
+		if(!nomCurso.isEmpty()) {
+			listaEdiciones = iconC.listarEdicionesAux(nomCurso);
+			for(String s : listaEdiciones) {
+				modelEdiciones.addElement(s);
+			}
+			listEdicionesCurso.setModel(modelEdiciones);
+		} else if(nomCurso.isEmpty()) {
+			modelEdiciones.removeAllElements();
+			listEdicionesCurso.setModel(modelEdiciones);
 		}
-		listEdicionesCurso.setModel(modelEdiciones);
 	}
 	
 	protected void seleccionarEdicion(ActionEvent e) {
 		String nombreEdicion = this.listEdicionesCurso.getSelectedValue().toString();
-		DTEdicionCurso datosEdicion = new DTEdicionCurso();
-		datosEdicion = iconC.verInfoEdicion(nombreEdicion);
-		this.tfNombre.setText(datosEdicion.getNombre());
-		this.tfFechaInicio.setText(datosEdicion.getFechaI().toString());
-		this.tfFechaFin.setText(datosEdicion.getFechaF().toString());
-		this.tfCupo.setText(String.valueOf(datosEdicion.getCupo()));
-		this.tfPublicacion.setText(datosEdicion.getFechaPub().toString());
+		if(!nombreEdicion.isEmpty()) {
+			DTEdicionCurso datosEdicion = new DTEdicionCurso();
+			datosEdicion = iconC.verInfoEdicion(nombreEdicion);
+			this.tfNombre.setEnabled(true);
+			this.tfNombre.setText(datosEdicion.getNombre());
+			
+			this.tfFechaInicio.setEnabled(true);
+			this.tfFechaInicio.setText(datosEdicion.getFechaI().toString());
+			
+			this.tfFechaFin.setEnabled(true);
+			this.tfFechaFin.setText(datosEdicion.getFechaF().toString());
+			
+			this.tfCupo.setEnabled(true);
+			this.tfCupo.setText(String.valueOf(datosEdicion.getCupo()));
+			
+			this.tfPublicacion.setEnabled(true);
+			this.tfPublicacion.setText(datosEdicion.getFechaPub().toString());
+			
+			ArrayList<String> listaDocenteEdicione = new ArrayList<String>();
+			listaDocenteEdicione = iconC.listarDocentesAux(nombreEdicion);
+			DefaultListModel<String> modelDocenteEdiciones = new DefaultListModel<String>();
+			for(String s : listaDocenteEdicione) {
+				modelDocenteEdiciones.addElement(s);
+			}
+			listDocentes.setModel(modelDocenteEdiciones);
+		} else if(!nombreEdicion.isEmpty()) {
+			//Si no se elige Edicion se limpian los datos y la lista de docentes
+			this.tfNombre.setEnabled(false);
+			this.tfFechaInicio.setEnabled(false);
+			this.tfFechaFin.setEnabled(false);
+			this.tfCupo.setEnabled(false);
+			this.tfPublicacion.setEnabled(false);
+			DefaultListModel<String> modelDocenteEdiciones = new DefaultListModel<String>();
+			Integer i = 0;
+			for(i=0;i< listDocentes.getModel().getSize();i++) {
+				modelDocenteEdiciones.addElement("");
+			}
+			listDocentes.setModel(modelDocenteEdiciones);			
+		}
+	}
+	
+	protected void cancelarConsulta(ActionEvent e) {
+		limpiarFormulario();
+        setVisible(false);
+	}
+	
+	protected void limpiarFormulario() {
+		//Limpiar la lista de cursos
+		Integer i = 0;
+        DefaultListModel<String> modelCursos = new DefaultListModel<String>();
+        for(i=0;i<listCursos.getModel().getSize();i++) {
+        	modelCursos.addElement("");
+        }
+        listCursos.setModel(modelCursos);
+		
+        //Limpiar la lista de Ediciones
+        Integer j = 0;
+        DefaultListModel<String> modelEdiciones = new DefaultListModel<String>();
+        for(j=0;j<listEdicionesCurso.getModel().getSize();j++) {
+        	modelCursos.addElement("");
+        }
+        listEdicionesCurso.setModel(modelEdiciones);
+        
+        //Limpiar la lista de Docentes
+        Integer l = 0;
+        DefaultListModel<String> modelDocentes = new DefaultListModel<String>();
+        for(l=0;l<listDocentes.getModel().getSize();l++) {
+        	modelCursos.addElement("");
+        }
+        listDocentes.setModel(modelDocentes);
+		
+        //Limpia las demas variables
+		this.tfNombre.setText("");
+		this.tfFechaInicio.setText("");
+		this.tfFechaFin.setText("");
+		this.tfCupo.setText("");
+		this.tfPublicacion.setText("");
 	}
 	
 }
