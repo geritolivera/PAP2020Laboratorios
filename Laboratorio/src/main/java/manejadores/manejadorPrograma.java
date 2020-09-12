@@ -33,14 +33,13 @@ private static manejadorPrograma instancia = null;
 	}
 	
 	public boolean existePrograma(String nombre) {
-		return this.buscarPrograma(nombre) instanceof ProgramaFormacion;
+		return this.buscarPrograma(nombre) != null;
 	}
 	
 	public List<ProgramaFormacion> getProgramas(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		@SuppressWarnings("UNCHECKED")
-		List<ProgramaFormacion> programas = em.createQuery("FROM ProgramaFormacion p", ProgramaFormacion.class).getResultList();
+		List<ProgramaFormacion> programas = em.createQuery("SELECT u FROM ProgramaFormacion p", ProgramaFormacion.class).getResultList();
 		return programas;
 	}
 }

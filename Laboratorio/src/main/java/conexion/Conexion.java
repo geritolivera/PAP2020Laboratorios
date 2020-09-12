@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 
 public class Conexion {
 	private static Conexion instancia = null;
-	private final EntityManagerFactory emf;
-	private final EntityManager em;
+	private EntityManagerFactory emf;
+	private EntityManager em;
 	
 	private Conexion(){
 		emf=Persistence.createEntityManagerFactory("Conexion");

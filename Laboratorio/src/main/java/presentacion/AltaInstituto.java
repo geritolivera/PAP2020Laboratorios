@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 
 public class AltaInstituto extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
-	private final IcontroladorUsuario iusu;
-	private final JTextField tfNombreInstituto;
+	private IcontroladorUsuario iusu;
+	private JTextField tfNombreInstituto;
 
 	/**
 	 * Launch the application.

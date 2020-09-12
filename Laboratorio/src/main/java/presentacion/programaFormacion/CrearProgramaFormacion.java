@@ -13,15 +13,21 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class CrearProgramaFormacion extends JInternalFrame {
-	private final JTextField inputNombre;
-	private final JTextArea inputDescripcion;
+	private JTextField inputNombre;
+	private JTextArea inputDescripcion;
 	private JDateChooser dateChooserInicio;
 	private JDateChooser dateChooserFin;
-	private final IcontroladorCurso iconCurso;
+	private IcontroladorCurso iconCurso;
 	
 	public CrearProgramaFormacion(IcontroladorCurso iconCurso) {
 		
 		this.iconCurso = iconCurso;
+		setResizable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setClosable(true);
+        setTitle("Crear Programa de Formacion");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -85,6 +91,10 @@ public class CrearProgramaFormacion extends JInternalFrame {
 
 	}
 
+    public CrearProgramaFormacion() {
+
+    }
+
     protected void cmdRegistroProgramaFormacionActionPerformed(ActionEvent arg0) {
            
         String nombre = this.inputNombre.getText();
@@ -101,7 +111,7 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	            limpiarFormulario();    
         	}catch (ProgramaFormacionExcepcion e) {
 	                // Muestro error de registro
-	                JOptionPane.showMessageDialog(this, e.getMessage(), "Programa Formacion", JOptionPane.ERROR_MESSAGE);
+	                JOptionPane.showMessageDialog(this, e.getMessage(), "Crear Programa Formacion", JOptionPane.ERROR_MESSAGE);
         	}
         }
     }
@@ -111,21 +121,19 @@ public class CrearProgramaFormacion extends JInternalFrame {
     	String nombre = this.inputNombre.getText();
         Date fFin = this.dateChooserFin.getDate();
         Date fInicio = this.dateChooserInicio.getDate();
-		Date today= Calendar.getInstance().getTime();
+		Date today = Calendar.getInstance().getTime();
         if (nombre.isEmpty() || (fInicio == null) || (fFin== null)) {
-			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Programa Formacion",
-					JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Programa Formacion",
+                    JOptionPane.ERROR_MESSAGE);
+            if(fFin.before(fInicio)){
+				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser previa \n a la de finalizacion", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+				return false;
+            }
+            if(fInicio.before(today)){
+				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser posterior \n al dia de hoy", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+			}
 			return false;
-		}else{
-        	if(fInicio.compareTo(today) > 0){
-				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser posterior a la actual", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
-				return false;
-        	}
-        	if (fInicio.compareTo(fFin) > 0){
-				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior\n a la fecha de finalizacion", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
-				return false;
-        	}
-        }
+		}
 
         return true;
     }

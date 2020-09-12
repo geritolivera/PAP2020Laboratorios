@@ -15,14 +15,14 @@ public class AltaUsuario extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final IcontroladorUsuario icon;
+	private IcontroladorUsuario icon;
 	
-	private final JTextField textFieldNick;
-	private final JTextField textFieldNombre;
-	private final JTextField textFieldApellido;
-	private final JTextField textFieldEmail;
+	private JTextField textFieldNick;
+	private JTextField textFieldNombre;
+	private JTextField textFieldApellido;
+	private JTextField textFieldEmail;
 	private JDateChooser dateChooser;
-	private final JComboBox<String> institutoChoose;
+	private JComboBox<String> institutoChoose;
 	
 
 	public AltaUsuario(IcontroladorUsuario icon) {
@@ -126,14 +126,13 @@ public class AltaUsuario extends JInternalFrame {
 	protected void AltaUsuarioActionPerformed(ActionEvent arg0) {
 		String nickname = this.textFieldNick.getText();
 		String nombre = this.textFieldNombre.getText();
-		String apellido = this.textFieldNombre.getText();
+		String apellido = this.textFieldApellido.getText();
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
-		String instituto = this.institutoChoose.getSelectedItem().toString();
-		Boolean institutoVacio;
-		institutoVacio = this.institutoChoose.getSelectedItem().toString().isEmpty();
+		Boolean institutoVacio = this.institutoChoose.getSelectedItem().toString().isEmpty();
 		if(checkFormulario()) {
 			try {
+				String instituto = this.institutoChoose.getSelectedItem().toString();
 				if(!institutoVacio) {
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -144,14 +143,14 @@ public class AltaUsuario extends JInternalFrame {
 			} catch(UsuarioExcepcion u) {
 				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 			}
+			limpiarFormulario();
+			setVisible(false);
 		}
-		limpiarFormulario();
-		setVisible(false);
 	}
 	
 	public void iniciarlizarComboBoxes() {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstituto());
-		listInst.insertElementAt((""),0);
+		listInst.insertElementAt((new String("")),0);
 		institutoChoose.setModel(listInst);
 		institutoChoose.setSelectedIndex(0);
 	}

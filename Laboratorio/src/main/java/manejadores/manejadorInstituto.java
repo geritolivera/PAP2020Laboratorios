@@ -11,7 +11,7 @@ import java.util.List;
 public class manejadorInstituto {
 	
 	private static manejadorInstituto instancia = null;
-	private final List<Instituto> institutos = new ArrayList<>();
+	private List<Instituto> institutos = new ArrayList<>();
 	private manejadorInstituto() {}
 	
 	public static manejadorInstituto getInstancia() {

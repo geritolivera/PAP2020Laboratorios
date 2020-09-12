@@ -15,14 +15,14 @@ public class ModificarDatosUsuario extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private final IcontroladorUsuario icon;
+	private IcontroladorUsuario icon;
 	
 	private JDateChooser dateChooser;
-	private final JTextField nuevoApellido;
-	private final JTextField NuevoNombre;
-	private final JTextField textNickname;
-	private final JTextField textCorreo;
-	private final JList<String> nicknameUsu;
+	private JTextField nuevoApellido;
+	private JTextField NuevoNombre;
+	private JTextField textNickname;
+	private JTextField textCorreo;
+	private JList<String> nicknameUsu;
 	private List<DTUsuario> listaUsuarios;
 	private String[] correos;
 	private int contadorCorreo;

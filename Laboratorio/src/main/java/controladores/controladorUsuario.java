@@ -23,6 +23,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Alta de Usuario
+	@Override
 	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
@@ -34,10 +35,18 @@ public class controladorUsuario implements IcontroladorUsuario{
 				
 			}else {
 				if(mIns.existeInstituto(instituto)) {
+					Conexion con = Conexion.getInstancia();
+					EntityManager em = con.getEntityManager();
 					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
 					Instituto ins = mIns.buscarInstituto(instituto);
+					//aniade tambien el docente al instituto
 					doc.setInstituto(ins);
 					mUsu.agregarUsuario(doc);
+					//persiste al instituto
+					//es posible que sea innecesario. se mando pregunta al profe
+					em.getTransaction().begin();
+					em.persist(ins);
+					em.getTransaction().commit();
 				}
 			}
 		} else {
@@ -128,38 +137,37 @@ public class controladorUsuario implements IcontroladorUsuario{
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
-		@Override
-		public void AltaInstituto(String nombre) throws InstitutoExcepcion{
-			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			boolean existe = mi.existeInstituto(nombre);
-			if(existe) {
-				throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
-			} else {
-				Instituto i  = new Instituto(nombre);
-				mi.agregarInstituto(i);
-			}
+	@Override
+	public void AltaInstituto(String nombre) throws InstitutoExcepcion{
+		manejadorInstituto mi = manejadorInstituto.getInstancia();
+		if(mi.existeInstituto(nombre)) {
+			throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
+		} else {
+			Instituto i  = new Instituto(nombre);
+			mi.agregarInstituto(i);
 		}
+	}
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
 		
-		@Override //Lista los DT Usuarios
-		public List<DTUsuario> listarDTUsuarios(){
-			manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-			List<Usuario> usuarios = mUsu.getUsuarios();
-			List<DTUsuario> listUsers = new ArrayList<DTUsuario>();  
-			for(Usuario u: usuarios) {
-				DTUsuario dt = new DTUsuario(u);
-				listUsers.add(dt);
-			}
-			return listUsers;
+	@Override //Lista los DT Usuarios
+	public List<DTUsuario> listarDTUsuarios(){
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();
+		for(Usuario u: usuarios) {
+			DTUsuario dt = new DTUsuario(u);
+			listUsers.add(dt);
 		}
-		
-		
-		@Override //Lista los nombres de los institutos
-		public String[] listarInstituto() {
+		return listUsers;
+	}
+
+
+	@Override //Lista los nombres de los institutos
+	public String[] listarInstituto() {
 			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			List<Instituto> listIn= mi.getInstituto();
+			List<Instituto> listIn = mi.getInstituto();
 			String[] listIns = new String[listIn.size()];
 			Integer i =0;
 			if(!listIn.isEmpty()) {
@@ -171,20 +179,20 @@ public class controladorUsuario implements IcontroladorUsuario{
 			return listIns;
 		}
 
-		
-		@Override //Lista los nicknames de los estudiantes
-		public String[] listarEstudiantesAux(){
-			manejadorUsuario mU = manejadorUsuario.getInstancia();
-			List<Usuario> listUs = mU.getUsuarios();
-			String[] estudiantes = new String[listUs.size()];//ver esta funcion
-			int i=0;
-			for(Usuario us:listUs) {
-				if(us instanceof Estudiante) {
-					estudiantes[i]= us.getNick();
-					i++;
-				}
+
+	@Override //Lista los nicknames de los estudiantes
+	public String[] listarEstudiantesAux(){
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		List<Usuario> listUs = mU.getUsuarios();
+		String[] estudiantes = new String[listUs.size()];//ver esta funcion
+		int i=0;
+		for(Usuario us:listUs) {
+			if(us instanceof Estudiante) {
+				estudiantes[i]= us.getNick();
+				i++;
 			}
-			return estudiantes;
 		}
+		return estudiantes;
+	}
 	
 }

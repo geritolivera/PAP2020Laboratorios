@@ -1,35 +1,31 @@
 package presentacion.usuario;
 
-import java.awt.*;
-
-import javax.swing.*;
-
+import datatypes.DTUsuario;
 import interfaces.IcontroladorUsuario;
 
-import javax.swing.border.TitledBorder;
-
-import datatypes.DTUsuario;
-
+import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class ConsultaUsuario extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private final IcontroladorUsuario icon;
-	private final JTextField textFieldNombre;
-	private final JTextField textFieldApellido;
-	private final JTextField textFieldNick;
-	private final JTextField textFieldCorreo;
-	private final JTextField textFieldFechaNac;
-	private final JComboBox<String> comboBoxCursoReg;
-	private final JComboBox<String> comboBoxInsEdCur;
-	private final JComboBox<String> comboBoxProgForIns;
+	private IcontroladorUsuario icon;
+	private JTextField textFieldNombre;
+	private JTextField textFieldApellido;
+	private JTextField textFieldNick;
+	private JTextField textFieldCorreo;
+	private JTextField textFieldFechaNac;
+	private JComboBox<String> comboBoxCursoReg;
+	private JComboBox<String> comboBoxInsEdCur;
+	private JComboBox<String> comboBoxProgForIns;
 	
-	private final JList<String> ListaUsu;
+	private JList<String> ListaUsu;
 	
 	private List<DTUsuario> listaUsuarios;
 	
@@ -109,7 +105,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Fecha Nacimiento
 		JLabel LabelFechaNac = new JLabel("Fecha Nacimiento");
 		LabelFechaNac.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelFechaNac.setBounds(10, 162, 100, 15);
+		LabelFechaNac.setBounds(10, 162, 114, 15);
 		DatosPanel.add(LabelFechaNac);
 		
 		//Text Nombre
@@ -117,7 +113,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		textFieldNombre.setBounds(120, 20, 180, 20);
 		DatosPanel.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
-		
+
 		//Text Apellido
 		textFieldApellido = new JTextField();
 		textFieldApellido.setColumns(10);
@@ -145,7 +141,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Docente
 		JLabel LabelDocente = new JLabel("Usuario Docente");
 		LabelDocente.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelDocente.setBounds(165, 210, 110, 15);
+		LabelDocente.setBounds(165, 210, 140, 15);
 		getContentPane().add(LabelDocente);
 		
 		//Label Ediciones de Curso Registrados
@@ -160,7 +156,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Usuario Estudiante
 		JLabel LabelEstudiante = new JLabel("Usuario Estudiante");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelEstudiante.setBounds(165, 270, 127, 15);
+		LabelEstudiante.setBounds(165, 270, 140, 15);
 		getContentPane().add(LabelEstudiante);
 		
 		//Label Inscripto en Edicion de Curso
@@ -170,7 +166,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		
 		//Label Programa de Formacion inscripto
 		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(165, 320, 160, 15);
+		ProgramaInscriptos.setBounds(165, 320, 175, 15);
 		getContentPane().add(ProgramaInscriptos);
 		
 		comboBoxInsEdCur = new JComboBox<String>();

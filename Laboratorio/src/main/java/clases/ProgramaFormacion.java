@@ -1,4 +1,6 @@
 package clases;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -15,9 +17,10 @@ public class ProgramaFormacion {
 	private Date fechaF;
 	private Date fechaA;
 	@ManyToMany (mappedBy="programas")
-	private final List<Estudiante> estudiantes = new ArrayList<>();
+	@Column(nullable = true)
+	private List<Estudiante> estudiantes = new ArrayList<>();
 	@ManyToMany (mappedBy= "programas")
-	private final List<Curso> cursos = new ArrayList<>();
+	private List<Curso> cursos = new ArrayList<>();
 
 	//private List<InscripcionPF> inscripciones = new ArrayList<>();
 	

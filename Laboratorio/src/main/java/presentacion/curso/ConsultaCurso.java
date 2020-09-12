@@ -1,33 +1,31 @@
 package presentacion.curso;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-
+import exepciones.InstitutoExcepcion;
 import interfaces.IcontroladorCurso;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class ConsultaCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private final IcontroladorCurso icon;
-	private final JTextField textNomCurso;
-	private final JTextField textDescripcion;
-	private final JTextField textUrl;
-	private final JTextField textFechaAlta;
-	private final JTextField textCantCredito;
-	private final JTextField textCantHoras;
-	private final JTextField textDuracion;
+	private IcontroladorCurso icon;
+	private JComboBox<String> comboBoxInstitutos;
+	private JList listCursos;
+	private JTextField textNomCurso;
+	private JTextField textDescripcion;
+	private JTextField textUrl;
+	private JTextField textFechaAlta;
+	private JTextField textCantCredito;
+	private JTextField textCantHoras;
+	private JTextField textDuracion;
 	
 	public ConsultaCurso(IcontroladorCurso icon) {
 		
@@ -45,8 +43,14 @@ public class ConsultaCurso extends JInternalFrame {
 		LabelSelIns.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		LabelSelIns.setBounds(20, 25, 120, 20);
 		getContentPane().add(LabelSelIns);
-		
-		JComboBox comboBoxInstitutos = new JComboBox();
+
+		comboBoxInstitutos = new JComboBox<String>();
+		inicializarComboBoxInstituto();
+		comboBoxInstitutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cbInstitutosActionPerformed(e);
+			}
+		});
 		comboBoxInstitutos.setBounds(155, 25, 200, 20);
 		getContentPane().add(comboBoxInstitutos);
 		
@@ -174,5 +178,57 @@ public class ConsultaCurso extends JInternalFrame {
 		JButton btnSeleccionarCurso = new JButton("Seleccionar Curso");
 		btnSeleccionarCurso.setBounds(195, 185, 120, 25);
 		getContentPane().add(btnSeleccionarCurso);
+
+		listCursos = new JList();
+
+		listCursos.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent listSelectionEvent) {
+				if (!listSelectionEvent.getValueIsAdjusting()){
+					JList source = (JList)listSelectionEvent.getSource();
+					String selected = source.getSelectedValue().toString();
+				}
+			}
+		});
+
+		listCursos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		listCursos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+
+		JScrollPane listScroller = new JScrollPane(this.listCursos);
+		listScroller.setBounds(155, 415, 200, 100);
+		getContentPane().add(listScroller);
+
+		JOptionPane.showMessageDialog(this, this.listCursos);
+
 	}
+
+		private void cbInstitutosActionPerformed(ActionEvent e) {
+			String nomInstituto = this.comboBoxInstitutos.getSelectedItem().toString();
+			try{
+				ArrayList<String> listaCursosDeInst = icon.listarCursos(nomInstituto);
+				if(!listaCursosDeInst.isEmpty()) {
+					Vector<String> list = new Vector<String>();
+					for (String s : listaCursosDeInst) {
+						list.addElement(s);
+					}
+				this.listCursos.setListData(list);
+			}}catch (InstitutoExcepcion institutoExcepcion) {
+				JOptionPane.showMessageDialog(this, "El instituto no existe");
+			}
+		}
+
+		public void inicializarComboBoxInstituto() {
+			DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(icon.listarInstitutos());
+			listInst.insertElementAt((new String("")),0);
+			comboBoxInstitutos.setModel(listInst);
+			comboBoxInstitutos.setSelectedIndex(0);
+		}
+
+		public JComboBox<String> inicializarComboBoxIns() {
+			JComboBox<String> listInst = new JComboBox<String>(icon.listarInstitutos());
+			listInst.insertItemAt((new String("")), 0);
+			listInst.setSelectedIndex(0);
+			return listInst;
+		}
+
 }

@@ -9,18 +9,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class InscripcionEdicionCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
-	private final IcontroladorCurso iconC;
-	private final IcontroladorUsuario iusu;
-	private final JTextField tfEdVigente;
-	private final JComboBox<String> cbInstituto;
-	private final JComboBox<String> cbEstudiantes;
-	private final JComboBox<String> cbCursos;
+	private IcontroladorCurso iconC;
+	private IcontroladorUsuario iusu;
+	private JTextField tfEdVigente;
+	private JComboBox<String> cbInstituto;
+	private JComboBox<String> cbEstudiantes;
+	private JComboBox<String> cbCursos;
 	/**
 	 * Launch the application.
 	 */
@@ -122,14 +123,14 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 
 	public void inicializarComboBoxInstituto() {
 		DefaultComboBoxModel<String> listInsti = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-		listInsti.insertElementAt((""),0);
+		listInsti.insertElementAt((new String("")),0);
 		cbInstituto.setModel(listInsti);
 		cbInstituto.setSelectedIndex(0);
 	}
 
 	public void inicializarComboBoxEstudiantes(){
 		DefaultComboBoxModel<String> listEst = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
-		listEst.insertElementAt((""),0);
+		listEst.insertElementAt((new String("")),0);
 		cbEstudiantes.setModel(listEst);
 		cbEstudiantes.setSelectedIndex(0);
 	}
@@ -139,7 +140,12 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		if(nombreInstituto.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Debe seleccionar un instituto" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
 		}else {
-			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>(iconC.listarCursosAux(nombreInstituto));
+			ArrayList<String> listaCursos = new ArrayList<String>();
+			listaCursos = iconC.listarCursosAux(nombreInstituto);
+			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
+			for(String s : listaCursos) {
+				modelCursos.addElement(s);
+			}
 			cbCursos.setModel(modelCursos);
 		}
 	}

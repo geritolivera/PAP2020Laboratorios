@@ -1,9 +1,9 @@
 package datatypes;
 
-import java.util.Date;
-import java.util.ArrayList;
-
 import clases.ProgramaFormacion;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class DTProgramaFormacion {
 	private String nombre;
@@ -11,7 +11,7 @@ public class DTProgramaFormacion {
 	private Date fechaI;
 	private Date fechaF;
 	//private List<DTCurso> cursos = new ArrayList<>();
-	private final ArrayList<String> cursos = new ArrayList<>();
+	private ArrayList<String> cursos = new ArrayList<>();
 	
 	public DTProgramaFormacion() {
 		super();

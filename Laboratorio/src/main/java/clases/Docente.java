@@ -18,7 +18,7 @@ public class Docente extends Usuario{
 	private Instituto instituto;
 	
 	@ManyToMany
-	private final List<EdicionCurso> ediciones = new ArrayList<>();
+	private List<EdicionCurso> ediciones = new ArrayList<>();
 	
 	public Docente() {
 		super();

@@ -18,15 +18,15 @@ public class Curso {
 
 	//lista de cursos previos
 	@ManyToMany //es manytomany? como hago la autorelacion?
-	private final List<Curso> previas = new ArrayList<>();
+	private List<Curso> previas = new ArrayList<>();
 	
 	//lista de todos los programas de formacion
 	@ManyToMany
-	private final List<ProgramaFormacion> programas = new ArrayList<>();
+	private List<ProgramaFormacion> programas = new ArrayList<>();
 	
 	//lista de todos las ediciones
 	@OneToMany (mappedBy = "curso")
-	private final List<EdicionCurso> ediciones = new ArrayList<>();
+	private List<EdicionCurso> ediciones = new ArrayList<>();
 	
 	//el instituto donde reside el curso
 	@ManyToOne
