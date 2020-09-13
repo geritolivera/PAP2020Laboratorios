@@ -284,16 +284,12 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 
 	protected void limpiarFormulario() {
 		//Limpiar la lista de cursos
-		modelCursos.removeAllElements();
-        listCursos.setModel(modelCursos);
-
-        //Limpiar la lista de Ediciones
-		modelEdiciones.removeAllElements();
-        listEdicionesCurso.setModel(modelEdiciones);
-
-        //Limpiar la lista de Docentes
-        modelDocentes.removeAllElements();
-        listDocentes.setModel(modelDocentes);
+		String[] vacio = new String[1];
+		vacio[0] = "";
+		inicializarComboBoxInstituto();
+        listCursos.setListData(vacio);
+        listEdicionesCurso.setListData(vacio);
+        listDocentes.setListData(vacio);
 
         //Limpia las demas variables
 		this.tfNombre.setText("");

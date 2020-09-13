@@ -290,12 +290,10 @@ public class ConsultaCurso extends JInternalFrame {
 
 	}
 	//aca llena el cb de los institutos(inicializar del principal view)
-		public void inicializarComboBoxInstituto() {
-			DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
-			modelInstitutos.insertElementAt(new String(" "), 0);
-			comboBoxInstitutos.setModel(modelInstitutos);
-			comboBoxInstitutos.setSelectedIndex(0);
-		}
+	public void inicializarComboBoxInstituto() {
+		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
+		comboBoxInstitutos.setModel(modelInstitutos);
+	}
 		//lleno el cb de ediciones
 		protected void listarEdicionesAsociadas(String nomCurso) {
 			ArrayList<String> listEdiciones = new ArrayList<String>();
@@ -317,15 +315,18 @@ public class ConsultaCurso extends JInternalFrame {
 			comboBoxProAso.setModel(modelProgramas);
 		}
 		protected void listarCursos(String nomInstituto) {
-			ArrayList<String> listCursos = new ArrayList<String> ();
-			listCursos = icon.listarCursosAux(nomInstituto);
+			String instituto = this.comboBoxInstitutos.getSelectedItem().toString();
 			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
-			for(String l : listCursos) {
-				modelCursos.addElement(l);
+			if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+				ArrayList<String> listaCursos = icon.listarCursosAux(nomInstituto);
+				for(String s : listaCursos) {
+					modelCursos.addElement(s);
+				}
+				comboBoxCursos.setModel(modelCursos);
+			} else if(nomInstituto.contains("")) {
+				modelCursos.removeAllElements();
+				comboBoxCursos.setModel(modelCursos);
 			}
-			modelCursos.insertElementAt(new String (" "), 0);
-			comboBoxCursos.setModel(modelCursos);
-			comboBoxCursos.setSelectedIndex(0);
 		}
 		//aca lista los cursos
 		private void comboBoxInstitutosActionPerformed(ActionEvent arg0) {
@@ -340,31 +341,36 @@ public class ConsultaCurso extends JInternalFrame {
 		//muestro los datos del curso elegido
 		private void comboBoxCursosActionPerformed(ActionEvent arg0) {
 			String nomCurso = this.comboBoxCursos.getSelectedItem().toString();
-			if(nomCurso.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Debe seleccionar un curso" , "Consulta de Curso",JOptionPane.ERROR_MESSAGE);
-			}try {
-				DTCurso infoCurso = icon.verInfo(nomCurso);
-				textNomCurso.setEnabled(true);
-				textDescripcion.setEnabled(true);
-				textCantCredito.setEnabled(true);
-				textCantHoras.setEnabled(true);
-				textFechaAlta.setEnabled(true);
-				textUrl.setEnabled(true);
-				comboBoxEdicionCurso.setEnabled(true);
-				comboBoxProAso.setEnabled(true);
-				textNomCurso.setText(infoCurso.getNombre());
-				textDescripcion.setText(infoCurso.getDuracion());
-				textCantCredito.setText(Integer.toString(infoCurso.getCreditos()));
-				textCantHoras.setText(Integer.toString(infoCurso.getCantHoras()));
-				textUrl.setText(infoCurso.getUrl());
-				SimpleDateFormat fechaAlta = new SimpleDateFormat("yyyy/MM/dd");
-				String fechaA = fechaAlta.format(infoCurso.getFechaR());
-				textFechaAlta.setText(fechaA);
-				listarEdicionesAsociadas(nomCurso);
-				listarProgramasAsociados(nomCurso);
-			}catch(CursoExcepcion e){
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Consulta de Curso", JOptionPane.ERROR_MESSAGE);
+			if (nomCurso.isEmpty())
+				JOptionPane.showMessageDialog(this, "Debe seleccionar un curso", "Consulta de Curso", JOptionPane.ERROR_MESSAGE);
+			else {
+				try {
+					DTCurso infoCurso = icon.verInfo(nomCurso);
+					textNomCurso.setEnabled(true);
+					textDescripcion.setEnabled(true);
+					textCantCredito.setEnabled(true);
+					textDuracion.setEnabled(true);
+					textCantHoras.setEnabled(true);
+					textFechaAlta.setEnabled(true);
+					textUrl.setEnabled(true);
+					comboBoxEdicionCurso.setEnabled(true);
+					comboBoxProAso.setEnabled(true);
+					textNomCurso.setText(infoCurso.getNombre());
+					textDuracion.setText(infoCurso.getDuracion());
+					textDescripcion.setText(infoCurso.getDuracion());
+					textCantCredito.setText(Integer.toString(infoCurso.getCreditos()));
+					textCantHoras.setText(Integer.toString(infoCurso.getCantHoras()));
+					textUrl.setText(infoCurso.getUrl());
+					SimpleDateFormat fechaAlta = new SimpleDateFormat("yyyy/MM/dd");
+					String fechaA = fechaAlta.format(infoCurso.getFechaR());
+					textFechaAlta.setText(fechaA);
+					listarEdicionesAsociadas(nomCurso);
+					listarProgramasAsociados(nomCurso);
+				} catch (CursoExcepcion e) {
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Consulta de Curso", JOptionPane.ERROR_MESSAGE);
+				}
 			}
+
 
 		}
 
@@ -413,5 +419,34 @@ public class ConsultaCurso extends JInternalFrame {
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Consulta de Curso", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		}
+		public void limpiarForm(){
+			String[] vacio = new String[1];
+			vacio[0] = "";
+			inicializarComboBoxInstituto();
+			DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
+			vacioModel.addElement(vacio[0]);
+			comboBoxCursos.setModel(vacioModel);
+			comboBoxEdicionCurso.setModel(vacioModel);
+			comboBoxProAso.setModel(vacioModel);
+
+
+			textNomCurso.setText("");
+			textDescripcion.setText("");
+			textUrl.setText("");
+			textFechaAlta.setText("");
+		    textCantCredito.setText("");
+			textCantHoras.setText("");
+			textDuracion.setText("");
+			textFieldFechaI.setText("");
+			textFieldFechaF.setText("");
+			textFieldFechP.setText("");
+			textFieldCupo.setText("");
+			textFieldDescripcionP.setText("");
+			textFieldFechaIP.setText("");
+			textFieldFechaFP.setText("");
+
+
+
 		}
 }

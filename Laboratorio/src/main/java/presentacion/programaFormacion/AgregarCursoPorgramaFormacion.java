@@ -74,7 +74,23 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 		getContentPane().add(button_1);
 
 	}
-	
+
+
+	public void inicializar(){
+		programas = iconCurso.listarProgramas();
+		DefaultComboBoxModel<String> modeloIni = new DefaultComboBoxModel<String>();
+		for(String a:programas) {
+			modeloIni.addElement(a);
+		}
+		comboProgramasFormacion.setModel(modeloIni);
+		cursos = iconCurso.listarCursos();
+		DefaultComboBoxModel<String> modeloIniCursos = new DefaultComboBoxModel<String>();
+		for(String s:cursos){
+			modeloIniCursos.addElement(s);
+		}
+		comboCursos.setModel(modeloIniCursos);
+
+	}
 	 protected void cmdAgregarCursoProgramaFormacionActionPerformed(ActionEvent arg0) {
          
 		 programa=(String) comboProgramasFormacion.getSelectedItem();

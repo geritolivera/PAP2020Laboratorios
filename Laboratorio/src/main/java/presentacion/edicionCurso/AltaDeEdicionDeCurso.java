@@ -279,9 +279,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 
         tfNombreEd.setText("");
 
-        dateInicio = null;
+        dateInicio.revalidate();
 
-		dateFin = null;
+		dateFin.revalidate();
 
         tfCupo.setText("");
 

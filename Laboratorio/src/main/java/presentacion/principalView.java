@@ -221,7 +221,9 @@ public class principalView {
 		JMenuItem MenuItemConsultaCurso = new JMenuItem("Consulta de Curso");
 		MenuItemConsultaCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				consultaCursoInternalFrame.setVisible(true);
+				consultaCursoInternalFrame.limpiarForm();
 			}
 		});
 		MenuCurso.add(MenuItemConsultaCurso);
@@ -275,6 +277,7 @@ public class principalView {
 		MenuItemCursoProgForm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				agregarCusroPDFInternalFrame.setVisible(true);
+				agregarCusroPDFInternalFrame.inicializar();
 			}
 		});
 		MenuProgramaFormacion.add(MenuItemCursoProgForm);
