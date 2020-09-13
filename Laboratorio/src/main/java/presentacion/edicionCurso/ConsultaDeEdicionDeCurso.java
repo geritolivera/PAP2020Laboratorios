@@ -262,8 +262,7 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 			this.tfCupo.setText(String.valueOf(datosEdicion.getCupo()));
 			SimpleDateFormat fechaPub = new SimpleDateFormat("yyyy/MM/dd");
 			String fechaP = fechaPub.format(datosEdicion.getFechaPub());
-			tfFechaFin.setText(fechaP);
-			this.tfPublicacion.setText(datosEdicion.getFechaPub().toString());
+			tfPublicacion.setText(fechaP);
 			Integer sais = iconC.listarDocentesAux(nombreEdicion).size();
 			String[] listaDocenteEdicione = new String[sais];
 			Integer i = 0;

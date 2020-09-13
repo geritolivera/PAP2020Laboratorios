@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,11 +59,11 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 
 		this.icon = icon;
 		setResizable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
-        setTitle("Consulta de Programa De Formacion");
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setClosable(true);
+		setTitle("Consulta de Programa De Formacion");
 		setBounds(100, 100, 1130, 499);
 		getContentPane().setLayout(null);
 
@@ -295,7 +296,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		lblFechaDeRegistro.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblFechaDeRegistro.setBounds(10, 212, 100, 15);
 		PanelCurso.add(lblFechaDeRegistro);
-		
+
 		textFieldFechaRegistro = new JTextField();
 		textFieldFechaRegistro.setEditable(false);
 		textFieldFechaRegistro.setColumns(10);
@@ -348,7 +349,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		textFieldFechaInicioEdicion.setColumns(10);
 		textFieldFechaInicioEdicion.setBounds(120, 63, 180, 20);
 		panelEdicion.add(textFieldFechaInicioEdicion);
-		
+
 		textFieldFechaFinEdicion = new JTextField();
 		textFieldFechaFinEdicion.setEditable(false);
 		textFieldFechaFinEdicion.setColumns(10);
@@ -359,25 +360,25 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		lblFechaDePublicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblFechaDePublicacion.setBounds(10, 126, 100, 15);
 		panelEdicion.add(lblFechaDePublicacion);
-		
+
 		textFieldFechaPublicacionEdicion = new JTextField();
 		textFieldFechaPublicacionEdicion.setEditable(false);
 		textFieldFechaPublicacionEdicion.setColumns(10);
 		textFieldFechaPublicacionEdicion.setBounds(120, 125, 180, 20);
 		panelEdicion.add(textFieldFechaPublicacionEdicion);
-		
+
 		JLabel Vigente = new JLabel("Vigente");
 		Vigente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		Vigente.setBounds(10, 158, 100, 15);
 		panelEdicion.add(Vigente);
-		
+
 		textField_VigenteEdicion = new JTextField();
 		textField_VigenteEdicion.setEditable(false);
 		textField_VigenteEdicion.setColumns(10);
 		textField_VigenteEdicion.setBounds(120, 156, 180, 20);
 		panelEdicion.add(textField_VigenteEdicion);
 
-		
+
 
 	}
 
@@ -386,9 +387,15 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		programaDT= icon.verInfoPrograma(programa);
 		this.textFieldNombre.setText(programaDT.getNombre());
 		this.textAreaDescripcion.setText(programaDT.getDescripcion());
-		this.textFieldInicio.setText(programaDT.getFechaI().toString());
-		this.textFieldFin.setText(programaDT.getFechaI().toString());
-		this.textFieldFechaIngreso.setText(programaDT.getFechaA().toString());
+		SimpleDateFormat fechaIni = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaI = fechaIni.format(programaDT.getFechaI());
+		textFieldInicio.setText(fechaI);
+		SimpleDateFormat fechaFin = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaF = fechaFin.format(programaDT.getFechaF());
+		textFieldFin.setText(fechaF);
+		SimpleDateFormat fechaIng = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaIngr = fechaIng.format(programaDT.getFechaA());
+		textFieldFechaIngreso.setText(fechaIngr);
 		ArrayList<String> listaCursos = programaDT.getCursos();
 		for (String curso : listaCursos) {
 			comboCursos.addItem(curso);;
@@ -404,7 +411,9 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		this.textFieldDuracion.setText(cursoDT.getDuracion());
 		this.textFieldCantHoras.setText(String.valueOf(cursoDT.getCantHoras()));
 		this.textFieldCreditos.setText(String.valueOf(cursoDT.getCreditos()));
-		this.textFieldFechaRegistro.setText(cursoDT.getFechaR().toString());
+		SimpleDateFormat fechaReg = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaR = fechaReg.format(cursoDT.getFechaR());
+		textFieldFechaRegistro.setText(fechaR);
 		this.textFieldURL.setText(cursoDT.getUrl());
 		for (String edicion : listaEdiciones) {
 			comboEdiciones.addItem(edicion);
@@ -415,9 +424,15 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		edicionDT= icon.verInfoEdicion(edicion);
 		Date today = Calendar.getInstance().getTime();
 		this.textFieldNombreEdicion.setText(edicionDT.getNombre());
-		this.textFieldFechaInicioEdicion.setText(edicionDT.getFechaI().toString());
-		this.textFieldFechaFinEdicion.setText(edicionDT.getFechaF().toString());
-		this.textFieldFechaPublicacionEdicion.setText(edicionDT.getFechaPub().toString());
+		SimpleDateFormat fechaIni = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaI = fechaIni.format(edicionDT.getFechaI());
+		textFieldFechaInicioEdicion.setText(fechaI);
+		SimpleDateFormat fechaF = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaFin = fechaF.format(edicionDT.getFechaF());
+		textFieldFechaFinEdicion.setText(fechaFin);
+		SimpleDateFormat fechaP = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaPub = fechaP.format(edicionDT.getFechaPub());
+		textFieldFechaPublicacionEdicion.setText(fechaPub);
 		if (edicionDT.getFechaF().after(today))
 			this.textField_VigenteEdicion.setText("Si");
 		else
@@ -425,7 +440,6 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 	}
 	protected void cancelarConsultaEdicion(ActionEvent e) {
 		limpiarFormulario();
-		//comboProgramas.removeAllItems();
 		setVisible(false);
 	}
 
@@ -440,30 +454,33 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 
 	private void limpiarFormulario() {
 
-	 //limpio textFields
-	 textFieldNombre.setText("");;
-	 textAreaDescripcion.setText("");;
-	 textFieldInicio.setText("");;
-	 textFieldFin.setText("");;
-	 textFieldFechaIngreso.setText("");;
-	 textFieldNombreCurso.setText("");;
-	 textAreaDescripcionCurso.setText("");;
-	 textFieldDuracion.setText("");;
-	 textFieldCantHoras.setText("");;
-	 textFieldCreditos.setText("");;
-	 textFieldFechaRegistro.setText("");;
-	 textFieldURL.setText("");;
-	 textField_VigenteEdicion.setText("");;
-	 textFieldNombreEdicion.setText("");;
-	 textFieldFechaInicioEdicion.setText("");;
-	 textFieldFechaFinEdicion.setText("");;
-	 textFieldFechaPublicacionEdicion.setText("");;
+		//limpio textFields
+		textFieldNombre.setText("");;
+		textAreaDescripcion.setText("");;
+		textFieldInicio.setText("");;
+		textFieldFin.setText("");;
+		textFieldFechaIngreso.setText("");;
+		textFieldNombreCurso.setText("");;
+		textAreaDescripcionCurso.setText("");;
+		textFieldDuracion.setText("");;
+		textFieldCantHoras.setText("");;
+		textFieldCreditos.setText("");;
+		textFieldFechaRegistro.setText("");;
+		textFieldURL.setText("");;
+		textField_VigenteEdicion.setText("");;
+		textFieldNombreEdicion.setText("");;
+		textFieldFechaInicioEdicion.setText("");;
+		textFieldFechaFinEdicion.setText("");;
+		textFieldFechaPublicacionEdicion.setText("");
 
-	 //limpio combos
-	 comboCursos.removeAllItems();
-	 comboEdiciones.removeAllItems();
+		String[] vacio = new String[1];
+		vacio[0] = "";
+		DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
+		vacioModel.addElement(vacio[0]);
+		comboCursos.setModel(vacioModel);
+		comboEdiciones.setModel(vacioModel);
 
-		
+
 
 	}
 }

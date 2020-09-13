@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,7 +222,9 @@ public class ConsultaUsuario extends JInternalFrame {
 			this.textFieldApellido.setText(u.getApellido());
 			this.textFieldNick.setText(usuarioElegidoNick);
 			this.textFieldCorreo.setText(u.getCorreo());
-			this.textFieldFechaNac.setText(u.getFechaNac().toString());
+			SimpleDateFormat fechaNac = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaN = fechaNac.format(u.getFechaNac());
+			textFieldFechaNac.setText(fechaN);
 			if(u instanceof DTDocente) {
 				this.textFieldEsDocente.setText("Si");
 				ArrayList<String> edicionesD = new ArrayList<>();
