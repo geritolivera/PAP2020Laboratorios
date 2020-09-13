@@ -269,7 +269,6 @@ public class AltaCurso extends JInternalFrame {
 		Date dateChooser = this.dateChooser.getDate();
 		if(checkFormulario()){
 			try{
-				JOptionPane.showMessageDialog(this, nombreCurso + instituto);
 				if(!instituto.isEmpty()){
 					if(!nombreCurso.isEmpty()){
 						this.iconC.AltaCurso(nombreCurso,descripcion,meses,duracion, cantCreditos, dateChooser,url,instituto, previas);

@@ -415,8 +415,29 @@ public class controladorCurso implements IcontroladorCurso{
 
 	@Override
 	public ArrayList<String> listarDocentesAux(String nomEdicion) {
-		// TODO Auto-generated method stub
-		return null;
+		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
+		List<Docente> docentes = e.getDocentes();
+		ArrayList<String> listDoc = new ArrayList<String>();
+		for(Docente d:docentes) {
+			listDoc.add(d.getNombre());
+		}
+		return listDoc;
+        /*manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		ArrayList<String> listDoc = new ArrayList<>();
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		for(Usuario u : usuarios) {
+			//si el usuario es docente
+			if(u instanceof Docente) {
+				//saca las ediciones del docente
+				List<EdicionCurso> ediciones = ((Docente)u).getEdiciones();
+				for(EdicionCurso e : ediciones) {
+					if(e.getNombre().equals(nomEdicion))
+						listDoc.add(((Docente)u).getNombre());
+				}
+			}
+		}
+		return listDoc;*/
 	}
 
 	/*Hasta aca Consulta de Edicion de Curso*/

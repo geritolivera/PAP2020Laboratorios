@@ -252,21 +252,18 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 			DTEdicionCurso datosEdicion = new DTEdicionCurso();
 			datosEdicion = iconC.verInfoEdicion(nombreEdicion);
 			this.tfNombre.setText(datosEdicion.getNombre());
-
 			this.tfFechaInicio.setText(datosEdicion.getFechaI().toString());
-
 			this.tfFechaFin.setText(datosEdicion.getFechaF().toString());
-
 			this.tfCupo.setText(String.valueOf(datosEdicion.getCupo()));
-
 			this.tfPublicacion.setText(datosEdicion.getFechaPub().toString());
-
-			ArrayList<String> listaDocenteEdicione = new ArrayList<String>();
-			listaDocenteEdicione = iconC.listarDocentesAux(nombreEdicion);
-			for(String s : listaDocenteEdicione) {
-				modelDocenteEdiciones.addElement(s);
+			Integer sais = iconC.listarDocentesAux(nombreEdicion).size();
+			String[] listaDocenteEdicione = new String[sais];
+			Integer i = 0;
+			for(String a: iconC.listarDocentesAux(nombreEdicion)) {
+				listaDocenteEdicione[i]=a;
+				i++;
 			}
-			listDocentes.setModel(modelDocenteEdiciones);
+			listDocentes.setListData(listaDocenteEdicione);
 
 		} else if(nombreEdicion.isEmpty()) {
 
