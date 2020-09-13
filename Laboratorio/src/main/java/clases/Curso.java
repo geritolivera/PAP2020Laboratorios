@@ -17,7 +17,7 @@ public class Curso {
 	private String url;
 
 	//lista de cursos previos
-	@ManyToMany //es manytomany? como hago la autorelacion?
+	@ManyToMany
 	private List<Curso> previas = new ArrayList<>();
 	
 	//lista de todos los programas de formacion

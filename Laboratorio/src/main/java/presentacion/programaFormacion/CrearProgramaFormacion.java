@@ -106,9 +106,10 @@ public class CrearProgramaFormacion extends JInternalFrame {
         if (checkFormulario()) {
         	try {
 	        	this.iconCurso.crearProgramaFormacion(nombre, descripcion, fInicio, fFin, fActual);
-	        	JOptionPane.showMessageDialog(this, "El Programa de Formacionse ha creado con exitio", "Crear Programa Formacion",
+	        	JOptionPane.showMessageDialog(this, "El Programa de Formacion se ha creado con exito", "Crear Programa Formacion",
 	            JOptionPane.INFORMATION_MESSAGE);
-	            limpiarFormulario();    
+	            limpiarFormulario();
+	            setVisible(false);
         	}catch (ProgramaFormacionExcepcion e) {
 	                // Muestro error de registro
 	                JOptionPane.showMessageDialog(this, e.getMessage(), "Crear Programa Formacion", JOptionPane.ERROR_MESSAGE);
@@ -122,7 +123,7 @@ public class CrearProgramaFormacion extends JInternalFrame {
         Date fFin = this.dateChooserFin.getDate();
         Date fInicio = this.dateChooserInicio.getDate();
 		Date today = Calendar.getInstance().getTime();
-        if (nombre.isEmpty() || (fInicio == null) || (fFin== null)) {
+        if (nombre.isEmpty() || (fInicio == null) || (fFin == null)) {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Programa Formacion",
                     JOptionPane.ERROR_MESSAGE);
             if(fFin.before(fInicio)){
@@ -131,8 +132,9 @@ public class CrearProgramaFormacion extends JInternalFrame {
             }
             if(fInicio.before(today)){
 				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser posterior \n al dia de hoy", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
-			return false;
+            return false;
 		}
 
         return true;

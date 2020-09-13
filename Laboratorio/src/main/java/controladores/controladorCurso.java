@@ -111,20 +111,23 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mCur.existeCurso(nomCurso)) {
 				Curso curso = mCur.buscarCurso(nomCurso);
-				System.out.println(curso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				//se fija que haya docentes para ingresar
-				for(String s: docentes) {
-					Docente d = (Docente) mUsu.buscarUsuario(s);
-					if(!d.toString().isEmpty()) {
-						edi.agregarDocente(d);
-						//actualiza al docente
-						/*d.agregarEdicion(edi);
-						em.getTransaction().begin();
-						em.persist(d);
-						em.getTransaction().commit();*/
+				if(!docentes.isEmpty()) {
+					for(String s: docentes) {
+						Docente d = (Docente) mUsu.buscarUsuario(s);
+						if(!d.toString().isEmpty()) {
+							edi.agregarDocente(d);
+							//actualiza al docente
+                            /*d.agregarEdicion(edi);
+                        em.getTransaction().begin();
+                        em.persist(d);
+                        em.getTransaction().commit();*/
+						}
 					}
 				}
+				else
+					throw new EdicionExcepcion("Tiene que ingresar docentes.");
 				mEdi.agregarEdicion(edi);
 			}
 		}
@@ -246,7 +249,7 @@ public class controladorCurso implements IcontroladorCurso{
 	public ArrayList<String> listarProgramas(){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
 		List<ProgramaFormacion> programas = mPro.getProgramas();
-		ArrayList<String> listProgramas = new ArrayList<>();
+		ArrayList<String> listProgramas = new ArrayList<String>();
 		for(ProgramaFormacion p: programas) {
 			listProgramas.add(p.getNombre());
 		}
@@ -334,6 +337,7 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
 		Instituto inst = mI.buscarInstituto(nombreInstituto);
 		List<Curso> cursos = inst.getCursos();
+
 		ArrayList<String> cursosRet = new ArrayList<String>();
 		for(Curso c : cursos) {
 			cursosRet.add(c.getNombre());
@@ -353,11 +357,11 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	@Override
 	public ArrayList<String> listarEdicionesAux(String nomCurso) {
-		manejadorCurso mC = manejadorCurso.getInstancia();
-		Curso curso = mC.buscarCurso(nomCurso);
-		List<EdicionCurso> ediciones = curso.getEdiciones();
+		manejadorEdicion mE = manejadorEdicion.getInstancia();
+		List<EdicionCurso> ediciones = mE.getEdiciones();
 		ArrayList<String> ediciones_ret = new ArrayList<String>();
 		for (EdicionCurso e:ediciones) {
+			if(e.getCurso().getNombre().equals(nomCurso))
 			ediciones_ret.add(e.getNombre());
 		}
 		return ediciones_ret;

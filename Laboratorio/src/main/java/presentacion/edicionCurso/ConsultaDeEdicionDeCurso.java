@@ -7,6 +7,7 @@ import interfaces.IcontroladorCurso;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ConsultaDeEdicionDeCurso extends JInternalFrame {
@@ -252,9 +253,16 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 			DTEdicionCurso datosEdicion = new DTEdicionCurso();
 			datosEdicion = iconC.verInfoEdicion(nombreEdicion);
 			this.tfNombre.setText(datosEdicion.getNombre());
-			this.tfFechaInicio.setText(datosEdicion.getFechaI().toString());
-			this.tfFechaFin.setText(datosEdicion.getFechaF().toString());
+			SimpleDateFormat fechaInicio = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaI = fechaInicio.format(datosEdicion.getFechaI());
+			tfFechaInicio.setText(fechaI);
+			SimpleDateFormat fechaFin = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaF = fechaFin.format(datosEdicion.getFechaF());
+			tfFechaFin.setText(fechaF);
 			this.tfCupo.setText(String.valueOf(datosEdicion.getCupo()));
+			SimpleDateFormat fechaPub = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaP = fechaPub.format(datosEdicion.getFechaPub());
+			tfFechaFin.setText(fechaP);
 			this.tfPublicacion.setText(datosEdicion.getFechaPub().toString());
 			Integer sais = iconC.listarDocentesAux(nombreEdicion).size();
 			String[] listaDocenteEdicione = new String[sais];

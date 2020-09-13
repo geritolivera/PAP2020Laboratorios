@@ -226,7 +226,6 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		Date dateF = this.dateFin.getDate();
 		String cupo = this.tfCupo.getText();
 		String curso = this.listCursos.getSelectedValue();
-		JOptionPane.showMessageDialog(this, curso);
 		Date fechPubli = Calendar.getInstance().getTime();
 		if (!listaDocentes.getSelectedValuesList().isEmpty()) {
 			this.lisDocentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
@@ -256,7 +255,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (dateFin.compareTo(dateInicio) < 0 || dateInicio.compareTo(dateFin) == 0) {
-			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser menor a la fecha de fin de curso", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser\n menor a la fecha de fin de curso", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else {
 			try {

@@ -357,7 +357,7 @@ public class ConsultaCurso extends JInternalFrame {
 					comboBoxProAso.setEnabled(true);
 					textNomCurso.setText(infoCurso.getNombre());
 					textDuracion.setText(infoCurso.getDuracion());
-					textDescripcion.setText(infoCurso.getDuracion());
+					textDescripcion.setText(infoCurso.getDescripcion());
 					textCantCredito.setText(Integer.toString(infoCurso.getCreditos()));
 					textCantHoras.setText(Integer.toString(infoCurso.getCantHoras()));
 					textUrl.setText(infoCurso.getUrl());

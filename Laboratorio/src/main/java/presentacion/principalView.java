@@ -286,6 +286,7 @@ public class principalView {
 		MenuItemConsultaProgForm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				consultaProgramaFormacionInternalFrame.setVisible(true);
+				consultaProgramaFormacionInternalFrame.refreshCombo();
 			}
 		});
 		MenuProgramaFormacion.add(MenuItemConsultaProgForm);

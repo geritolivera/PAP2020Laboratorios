@@ -1,11 +1,10 @@
 package manejadores;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import clases.EdicionCurso;
 import conexion.Conexion;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 public class manejadorEdicion {
 	
@@ -41,7 +40,7 @@ public class manejadorEdicion {
 	public List<EdicionCurso> getEdiciones(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<EdicionCurso> ediciones = em.createQuery("SELECT u FROM EdicionCurso e", EdicionCurso.class).getResultList();
+		List<EdicionCurso> ediciones = em.createQuery("SELECT e FROM EdicionCurso e", EdicionCurso.class).getResultList();
 		return ediciones;
 	}
 }

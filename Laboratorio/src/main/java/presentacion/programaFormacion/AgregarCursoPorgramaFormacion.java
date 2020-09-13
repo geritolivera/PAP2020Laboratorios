@@ -101,7 +101,7 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	    else {
 	    	try {
 				this.iconCurso.agregarCursoPrograma(curso, programa);
-				JOptionPane.showMessageDialog(null, "Agregado!", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Agregado! ", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
 				inicializar();
 				setVisible(false);
 			} catch (ProgramaFormacionExcepcion e) {

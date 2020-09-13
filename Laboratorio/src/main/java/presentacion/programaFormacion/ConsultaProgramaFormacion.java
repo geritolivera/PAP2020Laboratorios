@@ -430,8 +430,12 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 	}
 
 	public void refreshCombo() {
-		listaProgramas=icon.listarProgramas();
-		comboProgramas = new JComboBox(listaProgramas.toArray());
+		ArrayList<String> listaProgramas =icon.listarProgramas();
+		DefaultComboBoxModel<String> modeloProg = new DefaultComboBoxModel<String>();
+		for(String s:listaProgramas) {
+			modeloProg.addElement(s);
+		}
+		comboProgramas.setModel(modeloProg);
 	}
 
 	private void limpiarFormulario() {
