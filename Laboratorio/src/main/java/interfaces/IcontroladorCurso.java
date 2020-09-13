@@ -24,13 +24,13 @@ public interface IcontroladorCurso {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//6 - Alta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion;
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion;
-	public DTEdicionCurso verInfoEdicion(String nomEdicion);
+	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -63,9 +63,8 @@ public interface IcontroladorCurso {
 
 	public String[] listarInstitutos();
 	public ArrayList<String> listarCursosAux(String nombreInstiuto);
-	public ArrayList<String> listarDocentesInstituto(String nomInstituto);
-
 	public ArrayList<String> listarEdicionesAux(String nombreCurso);
+	public ArrayList<String> listarProgramasAux(String nomCurso);
 	public ArrayList<String> listarDocentesAux(String nomEdicion);
-
+	public ArrayList<String> listarDocentesInstituto(String nomInstituto);
 }

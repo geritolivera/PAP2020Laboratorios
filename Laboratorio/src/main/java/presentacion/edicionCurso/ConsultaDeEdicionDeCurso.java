@@ -1,6 +1,7 @@
 package presentacion.edicionCurso;
 
 import datatypes.DTEdicionCurso;
+import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
 
 import javax.swing.*;
@@ -126,7 +127,10 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		JButton ButtonSeleccionar = new JButton("Seleccionar");
 		ButtonSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				seleccionarEdicion(e);
+				try {
+					seleccionarEdicion(e);
+				} catch (EdicionExcepcion edicionExcepcion) {
+				}
 			}
 		});
 		ButtonSeleccionar.setBounds(375, 140, 90, 25);
@@ -166,11 +170,11 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		comboBoxInstituto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listarCursos(arg0);
-				listarEdicion(arg0);
 			}
 		});
 		comboBoxInstituto.setBounds(195, 20, 150, 20);
 		getContentPane().add(comboBoxInstituto);
+
 
 	}
 
@@ -190,10 +194,11 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 			modelCursos.addElement(s);
 		}
 		listCursos.setModel(modelCursos);
+
 	}
 
 	//Lista las ediciones asociadas al curso
-	protected void listarEdicion(ActionEvent e) {
+	protected void listarEdicion() {
 		String nomCurso = this.listCursos.getSelectedValue().toString();
 		ArrayList<String> listaEdiciones = new ArrayList<String>();
 		listaEdiciones = iconC.listarEdicionesAux(nomCurso);
@@ -204,7 +209,7 @@ public class ConsultaDeEdicionDeCurso extends JInternalFrame {
 		listEdicionesCurso.setModel(modelEdiciones);
 	}
 
-	protected void seleccionarEdicion(ActionEvent e) {
+	protected void seleccionarEdicion(ActionEvent e) throws EdicionExcepcion {
 		String nombreEdicion = this.listEdicionesCurso.getSelectedValue().toString();
 		DTEdicionCurso datosEdicion = new DTEdicionCurso();
 		datosEdicion = iconC.verInfoEdicion(nombreEdicion);

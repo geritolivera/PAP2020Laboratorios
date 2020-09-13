@@ -264,7 +264,6 @@ public class AltaCurso extends JInternalFrame {
 		String instituto = this.comboBoxInstituto.getSelectedItem().toString();
 		if(!listCursos.getSelectedValuesList().isEmpty()) {
 			this.previas = (ArrayList<String>) listCursos.getSelectedValuesList();
-			JOptionPane.showMessageDialog(this, listCursos.getSelectedValuesList() + " " + previas );
 		}
 
 		Date dateChooser = this.dateChooser.getDate();

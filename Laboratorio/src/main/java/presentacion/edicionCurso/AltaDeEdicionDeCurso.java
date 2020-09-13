@@ -1,6 +1,7 @@
 package presentacion.edicionCurso;
 
 import com.toedter.calendar.JDateChooser;
+import exepciones.CursoExcepcion;
 import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
 
@@ -28,7 +29,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	private JList<String> listaDocentes;
 	private JList<String> listCursos;
 
-	private ArrayList<String> lisDocentes;
+	private ArrayList<String> lisDocentes = new ArrayList<String>();
 	private ArrayList<String> lisCursos;
 
 
@@ -223,14 +224,19 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		Date dateI = this.dateInicio.getDate();
 		Date dateF = this.dateFin.getDate();
 		String cupo = this.tfCupo.getText();
-		String curso = this.listCursos.getSelectedValue();
+		String curso = this.listCursos.getSelectedValue().toString();
 		Date fechPubli = Calendar.getInstance().getTime();
+		if(!listaDocentes.getSelectedValuesList().isEmpty()) {
+			this.lisDocentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
+		}
 		ArrayList<String> docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		if(checkFormulario()) {
 			try{
 				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,docentes);
 				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso", JOptionPane.INFORMATION_MESSAGE);
-			}catch(EdicionExcepcion e){
+				limpiarFormulario();
+				setVisible(false);
+			}catch(EdicionExcepcion | CursoExcepcion e){
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			}
 		}

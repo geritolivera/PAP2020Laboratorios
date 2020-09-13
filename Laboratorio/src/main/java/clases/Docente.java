@@ -31,6 +31,22 @@ public class Docente extends Usuario{
 		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac());
 	}
 	
+	public void setUserDocente(Usuario user) {
+		this.setNick(user.getNick());
+		this.setNombre(user.getNombre());
+		this.setApellido(user.getApellido());
+		this.setCorreo(user.getCorreo());
+		this.setFechaNac(user.getFechaNac());
+	}
+
+	public void setDocente(String nick, String nombre, String apellido, String correo, Date fechaNac) {
+		this.setNick(nick);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setCorreo(correo);
+		this.setFechaNac(fechaNac);
+	}
+
 	public void setInstituto(Instituto instituto) {
 		this.instituto = instituto;
 	}

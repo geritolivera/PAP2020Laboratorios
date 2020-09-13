@@ -1,8 +1,8 @@
 package datatypes;
 
-import java.util.Date;
-
 import clases.EdicionCurso;
+
+import java.util.Date;
 
 public class DTEdicionCurso {
 	private String nombre;
@@ -36,6 +36,15 @@ public class DTEdicionCurso {
 		this.curso = edicion.getNomCurso();
 	}
 	
+	public void setEdicionCurso(EdicionCurso edicion) {
+		this.nombre = edicion.getNombre();
+		this.fechaI = edicion.getFechaI();
+		this.fechaF = edicion.getFechaF();
+		this.cupo = edicion.getCupo();
+		this.fechaPub = edicion.getFechaPub();
+		this.curso = edicion.getNomCurso();
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

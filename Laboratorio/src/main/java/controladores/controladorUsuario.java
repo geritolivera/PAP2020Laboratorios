@@ -75,8 +75,10 @@ public class controladorUsuario implements IcontroladorUsuario{
 	}
 	
 	@Override
-	public void verInfoUsuario(String nickname) throws UsuarioExcepcion{
+	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		DTDocente dtd = new DTDocente();
+		DTEstudiante dte = new DTEstudiante();
 		if(mUsu.existeUsuarioNick(nickname)) {
 			Usuario u = mUsu.buscarUsuario(nickname);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
@@ -84,17 +86,17 @@ public class controladorUsuario implements IcontroladorUsuario{
 			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
 			//si el usuario es docente
 			if(u instanceof Docente) {
-				DTDocente dtd = new DTDocente(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+				dtd.setUserDocente(u);
 				edicionesDoc = ((Docente) u).getEdiciones();
-
 				for(EdicionCurso e: edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
 				}
+				return dtd;
 			}
 			//si el usuario es estudiante
-			else if (u instanceof Estudiante) {
-				DTEstudiante dte = new DTEstudiante(u.getNick(), u.getNombre(), u.getApellido(), u.getCorreo(), u.getFechaNac());
+			else {
+				dte.setUserEstudiante(u);
 				edicionesEst = ((Estudiante) u).getEdiciones();
 				programasEst = ((Estudiante) u).getProgramas();
 				for(EdicionCurso e: edicionesEst) {
@@ -105,6 +107,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
 					dte.agregarPrograma(dtpe);
 				}
+				return dte;
 			}
 		}
 		else 

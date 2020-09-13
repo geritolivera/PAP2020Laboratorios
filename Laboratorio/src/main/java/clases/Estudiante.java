@@ -32,6 +32,22 @@ public class Estudiante extends Usuario{
 		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac());
 	}
 	
+	public void setUserEstudiante(Usuario user) {
+		this.setNick(user.getNick());
+		this.setNombre(user.getNombre());
+		this.setApellido(user.getApellido());
+		this.setCorreo(user.getCorreo());
+		this.setFechaNac(user.getFechaNac());
+	}
+
+	public void setEstudiante(String nick, String nombre, String apellido, String correo, Date fechaNac) {
+		this.setNick(nick);
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setCorreo(correo);
+		this.setFechaNac(fechaNac);
+	}
+
 	public void agregarPrograma(ProgramaFormacion programa) {
 		programas.add(programa);
 		programa.agregarEstudiante(this);

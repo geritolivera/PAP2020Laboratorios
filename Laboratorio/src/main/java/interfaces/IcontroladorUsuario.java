@@ -19,7 +19,7 @@ public interface IcontroladorUsuario {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
 	public ArrayList<String> listarUsuarios();
-	public void verInfoUsuario(String nickname) throws UsuarioExcepcion;
+	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
