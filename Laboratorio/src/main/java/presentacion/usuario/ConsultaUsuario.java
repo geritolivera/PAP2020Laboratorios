@@ -41,7 +41,7 @@ public class ConsultaUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Consulta de Usuario");
-		setBounds(100, 100, 518, 462);
+		setBounds(100, 100, 565, 462);
 		getContentPane().setLayout(null);
 		
 		
@@ -161,11 +161,11 @@ public class ConsultaUsuario extends JInternalFrame {
 		
 		//Label Ediciones de Curso Registrados
 		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
-		LabelEdiCurAsc.setBounds(164, 267, 160, 15);
+		LabelEdiCurAsc.setBounds(164, 267, 204, 15);
 		getContentPane().add(LabelEdiCurAsc);
 		
 		comboBoxCursoReg = new JComboBox<String>();
-		comboBoxCursoReg.setBounds(350, 264, 140, 20);
+		comboBoxCursoReg.setBounds(378, 264, 140, 20);
 		getContentPane().add(comboBoxCursoReg);
 		
 		//Label Usuario Estudiante
@@ -176,20 +176,20 @@ public class ConsultaUsuario extends JInternalFrame {
 		
 		//Label Inscripto en Edicion de Curso
 		JLabel lblCursoInscriptos = new JLabel("Inscripto en Edicion de Curso:");
-		lblCursoInscriptos.setBounds(165, 327, 160, 15);
+		lblCursoInscriptos.setBounds(165, 327, 204, 15);
 		getContentPane().add(lblCursoInscriptos);
 		
 		//Label Programa de Formacion inscripto
 		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(164, 366, 175, 15);
+		ProgramaInscriptos.setBounds(164, 366, 204, 15);
 		getContentPane().add(ProgramaInscriptos);
 		
 		comboBoxInsEdCur = new JComboBox<String>();
-		comboBoxInsEdCur.setBounds(350, 324, 140, 20);
+		comboBoxInsEdCur.setBounds(378, 324, 140, 20);
 		getContentPane().add(comboBoxInsEdCur);
 		
 		comboBoxProgForIns = new JComboBox<String>();
-		comboBoxProgForIns.setBounds(349, 361, 140, 20);
+		comboBoxProgForIns.setBounds(378, 363, 140, 20);
 		getContentPane().add(comboBoxProgForIns);
 		
 		JButton ButtonCancelar = new JButton("Cancelar");

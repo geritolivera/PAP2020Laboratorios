@@ -182,6 +182,6 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNick.setText("");
 		textFieldNombre.setText("");
 		textFieldApellido.setText("");
-		dateChooser = new JDateChooser();
+		dateChooser.revalidate();
 	}
 }
