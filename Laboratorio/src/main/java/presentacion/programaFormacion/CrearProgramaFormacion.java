@@ -147,8 +147,8 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	private void limpiarFormulario() {
 		inputNombre.setText("");
 		inputDescripcion.setText("");
-		dateChooserFin=null;
-		dateChooserInicio=null;
+		dateChooserFin.revalidate();
+		dateChooserInicio.revalidate();
 		
 	}
 }

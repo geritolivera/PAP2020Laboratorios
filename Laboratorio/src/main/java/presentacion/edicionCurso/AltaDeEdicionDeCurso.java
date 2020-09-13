@@ -37,40 +37,40 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 		this.iconC = iconC;
 		setResizable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
-        setTitle("Alta de Edicion de Curso");
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setClosable(true);
+		setTitle("Alta de Edicion de Curso");
 		setBounds(100, 100, 355, 528);
 		getContentPane().setLayout(null);
-		
+
 		/*--------------------------------------------------------------------------------------------------------------------*/
 		//Label Instituto
 		JLabel lblinstituto = new JLabel("Institutos");
 		lblinstituto.setBounds(10, 35, 50, 15);
 		getContentPane().add(lblinstituto);
-		
+
 		//Label Cursos
 		JLabel lblCursos = new JLabel("Cursos");
 		lblCursos.setBounds(10, 70, 45, 14);
 		getContentPane().add(lblCursos);
-		
+
 		//Label Nombre de la edicion
 		JLabel lblNombreEdicion = new JLabel("Nombre de la edicion");
 		lblNombreEdicion.setBounds(10, 200, 120, 14);
 		getContentPane().add(lblNombreEdicion);
-		
+
 		//Label fecha de inicio
 		JLabel lblFecha = new JLabel("Fecha de inicio");
 		lblFecha.setBounds(10, 235, 99, 14);
 		getContentPane().add(lblFecha);
-		
+
 		//Label fecha de fin
 		JLabel lblFechaDeFin = new JLabel("Fecha de fin");
 		lblFechaDeFin.setBounds(10, 270, 80, 14);
 		getContentPane().add(lblFechaDeFin);
-		
+
 		//Label cupo
 		JLabel lblCupo = new JLabel("Cupo (opcional)");
 		lblCupo.setBounds(10, 305, 99, 14);
@@ -81,7 +81,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		lblDocentes.setBounds(10, 335, 80, 14);
 		getContentPane().add(lblDocentes);
 
-		
+
 		/*--------------------------------------------------------------------------------------------------------------------*/
 		//Variable string nombre de edicion
 		tfNombreEd = new JTextField();
@@ -89,28 +89,28 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		tfNombreEd.setBounds(140, 195, 150, 20);
 		getContentPane().add(tfNombreEd);
 		tfNombreEd.setColumns(10);
-		
+
 		//Variable fecha de inicio
 		dateInicio = new JDateChooser();
 		dateInicio.setEnabled(false);
 		dateInicio.setDateFormatString("dd-MM-yyyy");
 		dateInicio.setBounds(140, 230, 150, 20);
 		getContentPane().add(dateInicio);
-		
+
 		//Variable fecha de fin
 		dateFin = new JDateChooser();
 		dateFin.setEnabled(false);
 		dateFin.setDateFormatString("dd-MM-yyyy");
 		dateFin.setBounds(140, 265, 150, 20);
 		getContentPane().add(dateFin);
-		
+
 		//Variable de cupo
 		tfCupo = new JTextField();
 		tfCupo.setEnabled(false);
 		tfCupo.setBounds(140, 300, 150, 20);
 		getContentPane().add(tfCupo);
 		tfCupo.setColumns(10);
-		
+
 		/*--------------------------------------------------------------------------------------------------------------------*/
 		//Boton aceptar
 		JButton btnAceptar = new JButton("Aceptar");
@@ -121,7 +121,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		});
 		btnAceptar.setBounds(50, 450, 90, 25);
 		getContentPane().add(btnAceptar);
-		
+
 		//Boton cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -132,7 +132,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		btnCancelar.setBounds(200, 450, 90, 25);
 		getContentPane().add(btnCancelar);
 
-		
+
 		/*--------------------------------------------------------------------------------------------------------------------*/
 		//Lista de docentes con scroll pane
 		JScrollPane scrollPaneDocente = new JScrollPane();
@@ -170,7 +170,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		});
 		comboBoxInstituto.setBounds(66, 30, 150, 20);
 		getContentPane().add(comboBoxInstituto);
-		
+
 	}
 
 	//Lista en el combobox los institutos
@@ -178,15 +178,15 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
 		comboBoxInstituto.setModel(listInst);
 	}
-	
+
 	//Lista todos los docentes
 	protected void listarDocentes(ActionEvent e) {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
-		DefaultListModel<String> modelDocentes = new DefaultListModel<String> ();
-		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+		DefaultListModel<String> modelDocentes = new DefaultListModel<String>();
+		if (!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
 			listaDocentes.setEnabled(true);
 			lisDocentes = iconC.listarDocentesInstituto(nomInstituto);
-			for(String s : lisDocentes) {
+			for (String s : lisDocentes) {
 				modelDocentes.addElement(s);
 			}
 			listaDocentes.setModel(modelDocentes);
@@ -197,10 +197,10 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 	protected void listarCursos(ActionEvent e) {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
 		DefaultListModel<String> modelCursos = new DefaultListModel<String>();
-		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+		if (!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
 			listCursos.setEnabled(true);
 			lisCursos = iconC.listarCursosAux(nomInstituto);
-			for(String s : lisCursos) {
+			for (String s : lisCursos) {
 				modelCursos.addElement(s);
 			}
 			listCursos.setModel(modelCursos);
@@ -209,18 +209,18 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	protected void habilitarIngresarDatos(ActionEvent e) {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
-		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+		if (!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
 			tfNombreEd.setEnabled(true);
 			dateInicio.setEnabled(true);
 			dateFin.setEnabled(true);
 			tfCupo.setEnabled(true);
 
 		} else {
-			JOptionPane.showMessageDialog(this, "Seleccione un instituto" , "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Seleccione un instituto", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	protected void altaEdAceptarActionPerformed(ActionEvent arg0){
+
+	protected void altaEdAceptarActionPerformed(ActionEvent arg0) {
 		String nomEd = this.tfNombreEd.getText();
 		Date dateI = this.dateInicio.getDate();
 		Date dateF = this.dateFin.getDate();
@@ -228,24 +228,24 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String curso = this.listCursos.getSelectedValue();
 		JOptionPane.showMessageDialog(this, curso);
 		Date fechPubli = Calendar.getInstance().getTime();
-		if(!listaDocentes.getSelectedValuesList().isEmpty()) {
+		if (!listaDocentes.getSelectedValuesList().isEmpty()) {
 			this.lisDocentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		}
 		ArrayList<String> docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
-		if(checkFormulario()) {
-			try{
-				this.iconC.nuevosDatosEdicion(nomEd,dateI,dateF,Integer.parseInt(cupo),fechPubli,curso,docentes);
-				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito " , "Alta Edicion de Curso", JOptionPane.INFORMATION_MESSAGE);
+		if (checkFormulario()) {
+			try {
+				this.iconC.nuevosDatosEdicion(nomEd, dateI, dateF, Integer.parseInt(cupo), fechPubli, curso, docentes);
+				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito ", "Alta Edicion de Curso", JOptionPane.INFORMATION_MESSAGE);
 				limpiarFormulario();
 				setVisible(false);
-			}catch(EdicionExcepcion | CursoExcepcion e){
+			} catch (EdicionExcepcion | CursoExcepcion e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
 	}
-	
-	private boolean checkFormulario(){
+
+	private boolean checkFormulario() {
 		String nomEd = this.tfNombreEd.getText();
 		String cupo = this.tfCupo.getText();
 		String fechaInicio = this.dateInicio.toString();
@@ -253,16 +253,16 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		Date dateInicio = this.dateInicio.getDate();
 		Date dateFin = this.dateFin.getDate();
 		if (nomEd.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if(dateFin.compareTo(dateInicio) < 0  || dateInicio.compareTo(dateFin) == 0) {
-			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser menor a la fecha de fin de curso" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
+		} else if (dateFin.compareTo(dateInicio) < 0 || dateInicio.compareTo(dateFin) == 0) {
+			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser menor a la fecha de fin de curso", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else {
 			try {
 				Integer.parseInt(cupo);
-			}catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(this, "El numero de cupo debe ser un numero" , "Alta Edicion de Curso",JOptionPane.ERROR_MESSAGE);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(this, "El numero de cupo debe ser un numero", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 		}
@@ -271,32 +271,32 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 
 	protected void altaEdCancelarActionPerformed(ActionEvent arg0) {
 		limpiarFormulario();
-        setVisible(false);
+		setVisible(false);
 	}
-	
+
 	private void limpiarFormulario() {
 		inicializarComboBoxInstituto();
 
-        tfNombreEd.setText("");
+		tfNombreEd.setText("");
 
-        dateInicio.revalidate();
+		dateInicio.revalidate();
 
 		dateFin.revalidate();
 
-        tfCupo.setText("");
+		tfCupo.setText("");
 
-        Integer i = 0;
-        DefaultListModel<String> modelCursos = new DefaultListModel<String>();
-        for(i=0;i<listCursos.getModel().getSize();i++) {
-        	modelCursos.addElement("");
-        }
-        listCursos.setModel(modelCursos);
+		Integer i = 0;
+		DefaultListModel<String> modelCursos = new DefaultListModel<String>();
+		for (i = 0; i < listCursos.getModel().getSize(); i++) {
+			modelCursos.addElement("");
+		}
+		listCursos.setModel(modelCursos);
 
-        Integer j = 0;
-        DefaultListModel<String> modelDocentes = new DefaultListModel<String>();
-        for(j=0;j<listaDocentes.getModel().getSize();j++) {
-        	modelDocentes.addElement("");
-        }
-        listaDocentes.setModel(modelDocentes);
+		Integer j = 0;
+		DefaultListModel<String> modelDocentes = new DefaultListModel<String>();
+		for (j = 0; j < listaDocentes.getModel().getSize(); j++) {
+			modelDocentes.addElement("");
+		}
+		listaDocentes.setModel(modelDocentes);
 	}
 }
