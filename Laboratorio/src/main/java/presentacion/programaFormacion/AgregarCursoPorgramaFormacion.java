@@ -1,6 +1,8 @@
 
 package presentacion.programaFormacion;
 
+import exepciones.CursoExcepcion;
+import exepciones.ProgramaFormacionExcepcion;
 import interfaces.IcontroladorCurso;
 
 import javax.swing.*;
@@ -24,12 +26,6 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	public AgregarCursoPorgramaFormacion(IcontroladorCurso iconCurso) {
 		
 		this.iconCurso = iconCurso;
-		setResizable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
-        setTitle("Agregar Curso a Programa de Formacion");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -41,11 +37,21 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 		lblCurso.setBounds(25, 96, 178, 14);
 		getContentPane().add(lblCurso);
 		
-		comboProgramasFormacion = new JComboBox<String>();
+		programas=iconCurso.listarProgramas();
+		programas.add(0,"Selecionar Programa");
+		comboProgramasFormacion = new JComboBox(programas.toArray());
+
 		comboProgramasFormacion.setBounds(232, 45, 178, 22);
 		getContentPane().add(comboProgramasFormacion);
 		
-		comboCursos = new JComboBox<String>();
+
+		cursos=iconCurso.listarCursos();
+		cursos.add(0,"Selecionar Curso");
+		//cursos= new ArrayList<>();
+		//cursos.add("cursito 2 a�os");
+		//cursos.add("curso 3 a�os de ruta");
+		comboCursos = new JComboBox(cursos.toArray());
+
 		comboCursos.setBounds(232, 92, 178, 22);
 		getContentPane().add(comboCursos);
 		
@@ -76,21 +82,19 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	       
 	    if (programa.isEmpty() || curso.isEmpty())
 	        JOptionPane.showMessageDialog(null, "Error campos vacios", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
-	    else
-	        JOptionPane.showMessageDialog(null, "Agregado!", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
+	    else {
+	    	try {
+				this.iconCurso.agregarCursoPrograma(curso, programa);
+				JOptionPane.showMessageDialog(null, "Agregado!", "Agregar Curso a Programa de Formacion", JOptionPane.INFORMATION_MESSAGE);
+			} catch (ProgramaFormacionExcepcion e) {
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error Programa Inexistente", JOptionPane.ERROR_MESSAGE);
+			} catch (CursoExcepcion e) {
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error Curso Inexistente", JOptionPane.ERROR_MESSAGE);
+			}
+
 	    }
 
-
-
-	public void cargarCombos() {
-    	cursos=iconCurso.listarCursos();
-    	programas=iconCurso.listarProgramas();
-
-    	comboCursos.setModel(new DefaultComboBoxModel(cursos.toArray()));
-		comboProgramasFormacion.setModel(new DefaultComboBoxModel(programas.toArray()));
-
-
-    }
+	    }
 
 	protected void cancelar(ActionEvent arg0) {
 		comboProgramasFormacion.removeAllItems();

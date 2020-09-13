@@ -29,7 +29,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
 			//si la string instituto no tiene nada
-			if(instituto.isEmpty()) {
+			if(instituto == null) {
 				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
 				mUsu.agregarUsuario(est);
 				
@@ -82,7 +82,7 @@ public class controladorUsuario implements IcontroladorUsuario{
 		if(mUsu.existeUsuarioNick(nickname)) {
 			Usuario u = mUsu.buscarUsuario(nickname);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
-			List<EdicionCurso> edicionesEst = new ArrayList<EdicionCurso>();
+			List<InscripcionED> inscripcionesEst = new ArrayList<InscripcionED>();
 			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
 			//si el usuario es docente
 			if(u instanceof Docente) {
@@ -97,12 +97,13 @@ public class controladorUsuario implements IcontroladorUsuario{
 			//si el usuario es estudiante
 			else {
 				dte.setUserEstudiante(u);
-				edicionesEst = ((Estudiante) u).getEdiciones();
-				programasEst = ((Estudiante) u).getProgramas();
-				for(EdicionCurso e: edicionesEst) {
-					DTEdicionCurso dtee = new DTEdicionCurso(e);
+				//tiene que sacar el DTEdicion desde las inscripciones
+				inscripcionesEst = ((Estudiante) u).getInscripcionesED();
+				for(InscripcionED i : inscripcionesEst) {
+					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
 					dte.agregarEdicion(dtee);
 				}
+				programasEst = ((Estudiante) u).getProgramas();
 				for(ProgramaFormacion p: programasEst) {
 					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
 					dte.agregarPrograma(dtpe);
@@ -126,15 +127,13 @@ public class controladorUsuario implements IcontroladorUsuario{
 		if(mu.existeUsuarioNick(nickname)) {
 			Conexion con = Conexion.getInstancia();
 			EntityManager em = con.getEntityManager();
-			if(mu.existeUsuarioNick(nickname)){
-				Usuario u = mu.buscarUsuarioNickname(nickname);
-				u.setNombre(nombre);
-				u.setApellido(apellido);
-				u.setFechaNac(fechaNaci);
-				em.getTransaction().begin();
-				em.persist(u);
-				em.getTransaction().commit();
-			}
+			Usuario u = mu.buscarUsuarioNickname(nickname);
+			u.setNombre(nombre);
+			u.setApellido(apellido);
+			u.setFechaNac(fechaNaci);
+			em.getTransaction().begin();
+			em.persist(u);
+			em.getTransaction().commit();
 		}
 	}
 	

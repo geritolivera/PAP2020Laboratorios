@@ -12,8 +12,7 @@ public class Estudiante extends Usuario{
 	@ManyToMany
 	private List<ProgramaFormacion> programas = new ArrayList<>();
 	//ediciones a las cuales se anota
-	@ManyToMany
-	private List<EdicionCurso> ediciones = new ArrayList<>();
+	//---
 	//inscripciones a las ediciones
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<InscripcionED> inscripcionesED = new ArrayList<>();
@@ -57,13 +56,13 @@ public class Estudiante extends Usuario{
 		return this.programas;
 	}
 	
-	public void agregarEdicion(EdicionCurso edicion) {
-		ediciones.add(edicion);
-		edicion.agregarEstudiante(this);
-	}
-	public List<EdicionCurso> getEdiciones(){
-		return this.ediciones;
-	}
+//	public void agregarEdicion(EdicionCurso edicion) {
+//		ediciones.add(edicion);
+//		edicion.agregarEstudiante(this);
+//	}
+//	public List<EdicionCurso> getEdiciones(){
+//		return this.ediciones;
+//	}
 	
 	//INSCRIPCIONES A EDICION DE CURSO
 	public void agregarInscripcionED(Date fecha, EdicionCurso edicion) {

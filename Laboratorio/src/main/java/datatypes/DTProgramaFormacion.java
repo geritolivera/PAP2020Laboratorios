@@ -10,18 +10,20 @@ public class DTProgramaFormacion {
 	private String descripcion;
 	private Date fechaI;
 	private Date fechaF;
+	private Date fechaA;
 	//private List<DTCurso> cursos = new ArrayList<>();
 	private ArrayList<String> cursos = new ArrayList<>();
 	
 	public DTProgramaFormacion() {
 		super();
 	}
-	public DTProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF) {
+	public DTProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fechaI = fechaI;
 		this.fechaF = fechaF;
+		this.fechaA = fechaA;
 	}
 	
 	public DTProgramaFormacion(ProgramaFormacion programa) {
@@ -30,6 +32,7 @@ public class DTProgramaFormacion {
 		this.descripcion = programa.getDescripcion();
 		this.fechaI = programa.getFechaI();
 		this.fechaF = programa.getFechaF();
+		this.fechaA = programa.getFechaA();
 	}
 	
 	public String getNombre() {
@@ -65,5 +68,11 @@ public class DTProgramaFormacion {
 	}
 	public ArrayList<String> getCursos() {
 		return cursos;
+	}
+	public Date getFechaA() {
+		return fechaA;
+	}
+	public void setFechaA(Date fechaA) {
+		this.fechaA = fechaA;
 	}
 }

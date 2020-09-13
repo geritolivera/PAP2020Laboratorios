@@ -144,7 +144,14 @@ public class principalView {
 		agregarCusroPDFInternalFrame.setVisible(false);
 		frame.getContentPane().add(agregarCusroPDFInternalFrame);
 		
-		
+		//Consulta Programa Formacion
+
+		consultaProgramaFormacionInternalFrame = new presentacion.programaFormacion.ConsultaProgramaFormacion(icurso);
+		jIternalFrameSize = consultaProgramaFormacionInternalFrame.getSize();
+		consultaProgramaFormacionInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		consultaProgramaFormacionInternalFrame.setVisible(false);
+		frame.getContentPane().add(consultaProgramaFormacionInternalFrame);
+
 		/*------------------------------Instituto------------------------------*/
 		//Alta de Instituto
 		altaInstitutoInternalFrame = new AltaInstituto(iusu);
@@ -160,12 +167,12 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 900, 780);
+		frame.setBounds(100, 100, 1200, 780);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);	
 				
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 900, 21);
+		menuBar.setBounds(0, 0, 1200, 21);
 		frame.getContentPane().add(menuBar);
 		
 		/*---------- Usuario ----------*/

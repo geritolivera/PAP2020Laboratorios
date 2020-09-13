@@ -214,6 +214,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			dateInicio.setEnabled(true);
 			dateFin.setEnabled(true);
 			tfCupo.setEnabled(true);
+
 		} else {
 			JOptionPane.showMessageDialog(this, "Seleccione un instituto" , "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 		}
@@ -224,7 +225,8 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		Date dateI = this.dateInicio.getDate();
 		Date dateF = this.dateFin.getDate();
 		String cupo = this.tfCupo.getText();
-		String curso = this.listCursos.getSelectedValue().toString();
+		String curso = this.listCursos.getSelectedValue();
+		JOptionPane.showMessageDialog(this, curso);
 		Date fechPubli = Calendar.getInstance().getTime();
 		if(!listaDocentes.getSelectedValuesList().isEmpty()) {
 			this.lisDocentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();

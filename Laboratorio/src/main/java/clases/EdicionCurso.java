@@ -14,12 +14,12 @@ public class EdicionCurso {
 	private int cupo;
 	private Date fechaPub;
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private Curso curso;
-	@ManyToMany (mappedBy ="ediciones")
+	/*@ManyToMany (mappedBy ="ediciones")
 	@Column(nullable = true)
-	private List<Estudiante> estudiantes = new ArrayList<>();
-	
+	private List<Estudiante> estudiantes = new ArrayList<>();*/
+
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Docente> docentes = new ArrayList<>();
 	@OneToMany(mappedBy = "edicion", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -85,12 +85,12 @@ public class EdicionCurso {
 		return curso.getNombre();
 	}
 	
-	public void agregarEstudiante(Estudiante estudiante) {
-		estudiantes.add(estudiante);
-	}
-	public List<Estudiante> getEstudiantes() {
-		return estudiantes;
-	}
+//	public void agregarEstudiante(Estudiante estudiante) {
+//		estudiantes.add(estudiante);
+//	}
+//	public List<Estudiante> getEstudiantes() {
+//		return estudiantes;
+//	}
 
 	public List<Docente> getDocentes() {
 		return docentes;
@@ -98,6 +98,7 @@ public class EdicionCurso {
 
 	public void agregarDocente(Docente docente) {
 		docentes.add(docente);
+		docente.agregarEdicion(this);
 	}
 
 	public void agregarInscripcion(Date fecha, Estudiante est) {

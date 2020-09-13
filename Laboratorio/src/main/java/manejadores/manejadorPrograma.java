@@ -39,7 +39,7 @@ private static manejadorPrograma instancia = null;
 	public List<ProgramaFormacion> getProgramas(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<ProgramaFormacion> programas = em.createQuery("SELECT u FROM ProgramaFormacion p", ProgramaFormacion.class).getResultList();
+		List<ProgramaFormacion> programas = em.createQuery("SELECT p FROM ProgramaFormacion p", ProgramaFormacion.class).getResultList();
 		return programas;
 	}
 }

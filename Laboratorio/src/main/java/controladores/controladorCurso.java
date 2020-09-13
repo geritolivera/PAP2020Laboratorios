@@ -111,17 +111,18 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mCur.existeCurso(nomCurso)) {
 				Curso curso = mCur.buscarCurso(nomCurso);
+				System.out.println(curso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				//se fija que haya docentes para ingresar
 				for(String s: docentes) {
 					Docente d = (Docente) mUsu.buscarUsuario(s);
-					if(d.toString().isEmpty()) {
+					if(!d.toString().isEmpty()) {
 						edi.agregarDocente(d);
 						//actualiza al docente
-						d.agregarEdicion(edi);
+						/*d.agregarEdicion(edi);
 						em.getTransaction().begin();
 						em.persist(d);
-						em.getTransaction().commit();
+						em.getTransaction().commit();*/
 					}
 				}
 				mEdi.agregarEdicion(edi);
@@ -200,7 +201,7 @@ public class controladorCurso implements IcontroladorCurso{
 					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion
 					((Estudiante) u).agregarInscripcionED(fecha, e);
 					//funcion agregarEdicion tambien agrega al estudiante a la edicion
-					((Estudiante) u).agregarEdicion(e);
+					//((Estudiante) u).agregarEdicion(e);
 					//persiste el estudiante y edicion
 					em.getTransaction().begin();
 					em.persist(u);
@@ -260,7 +261,13 @@ public class controladorCurso implements IcontroladorCurso{
 		for(Curso c: cursos) {
 			listCursos.add(c.getNombre());
 		}
-		return listCursos;
+		if (listCursos.size()>0)
+			return listCursos;
+		else {
+			listCursos.add("Sin resultados");
+			return listCursos;
+		}
+
 	}
 	
 	@Override
@@ -333,6 +340,7 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return cursosRet;
 	}
+	@Override
 	public ArrayList<String> listarProgramasAux(String nomCurso) {
 		manejadorCurso mC = manejadorCurso.getInstancia();
 		Curso cur = mC.buscarCurso(nomCurso);
@@ -410,4 +418,25 @@ public class controladorCurso implements IcontroladorCurso{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/*Hasta aca Consulta de Edicion de Curso*/
+
+	/*Utilizadas para Inscripcion Edicion Curso*/
+
+	//Lista todos los Estudiantes
+	@Override
+	public ArrayList<String> listarEstudiantes(){
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		List<Usuario> listaUsuario = mu.getUsuarios();
+		ArrayList<String> estudiantes = new ArrayList<String>();
+		for(Usuario u : listaUsuario) {
+			if(u instanceof Estudiante) {
+				String nombreE = ((Estudiante) u).getNick();
+				estudiantes.add(nombreE);
+			}
+		}
+		return estudiantes;
+	}
+
+	/*Hasta aca Inscripcion Edicion Curso*/
 }

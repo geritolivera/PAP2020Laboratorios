@@ -1,189 +1,208 @@
 package presentacion.edicionCurso;
 
-import exepciones.EdicionExcepcion;
-import exepciones.UsuarioExcepcion;
+import exepciones.CursoExcepcion;
 import interfaces.IcontroladorCurso;
+
+import datatypes.*;
 import interfaces.IcontroladorUsuario;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.awt.event.*;
+import java.util.*;
 
 public class InscripcionEdicionCurso extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
+
 	private IcontroladorCurso iconC;
-	private IcontroladorUsuario iusu;
-	private JTextField tfEdVigente;
-	private JComboBox<String> cbInstituto;
-	private JComboBox<String> cbEstudiantes;
-	private JComboBox<String> cbCursos;
-	/**
-	 * Launch the application.
-	 */
+
+	private JTextField EdVigente;
+
+	private JComboBox<String> comboBoxInstituto;
+
+	private JList<String> listCursos;
+	private JList<String> listEstudiantes;
+
+	private ArrayList<String> listaCursos;
+	private ArrayList<String> listaEstudiantes;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {/*
-					InscripcionEdicionCurso frame = new InscripcionEdicionCurso();
-					frame.setVisible(true);*/
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
-	 * Create the frame.
-	 * @param iconC 
-	 */
-	public InscripcionEdicionCurso(IcontroladorCurso iconC,IcontroladorUsuario iusu) {
+
+	public InscripcionEdicionCurso(IcontroladorCurso iconC, IcontroladorUsuario iusu) {
+
 		this.iconC = iconC;
-		this.iusu = iusu;
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Inscripcion a Edicion de Curso");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 315, 565);
 		getContentPane().setLayout(null);
 		
+		/*-----------------------------------------------------------------------------------------------*/
+		//Label Instituto
 		JLabel lblInstituto = new JLabel("Instituto");
-		lblInstituto.setBounds(32, 11, 46, 14);
+		lblInstituto.setBounds(30, 20, 50, 15);
 		getContentPane().add(lblInstituto);
 		
+		//Label Cursos
 		JLabel lblCursos = new JLabel("Cursos");
-		lblCursos.setBounds(198, 11, 46, 14);
+		lblCursos.setBounds(30, 60, 46, 14);
 		getContentPane().add(lblCursos);
 		
-		cbCursos = new JComboBox<String>();
-		cbCursos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cbCursosActionPerformed(arg0);
-			}
-		});
-		cbCursos.setEnabled(false);
-		cbCursos.setBounds(242, 11, 92, 20);
-		getContentPane().add(cbCursos);
-		
-		cbInstituto = new JComboBox<String>();
-		inicializarComboBoxInstituto();
-		cbInstituto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cbInstitutoActionPerformed(arg0);
-			}
-		});
-		cbInstituto.setBounds(89, 11, 85, 20);
-		getContentPane().add(cbInstituto);
-		
+		//Label seleccionar
 		JLabel lblNewLabel = new JLabel("Seleccione el estudiante que desea inscribir");
-		lblNewLabel.setBounds(10, 151, 212, 14);
+		lblNewLabel.setBounds(15, 284, 245, 15);
 		getContentPane().add(lblNewLabel);
-		
-		cbEstudiantes = new JComboBox<String>();
-		cbEstudiantes.setEnabled(false);
-		cbEstudiantes.setBounds(232, 148, 102, 20);
-		getContentPane().add(cbEstudiantes);
-		
+
+		//Label edicion vigente
 		JLabel lblEdicionVigente = new JLabel("Edicion Vigente");
-		lblEdicionVigente.setBounds(10, 104, 102, 14);
+		lblEdicionVigente.setBounds(30, 250, 102, 14);
 		getContentPane().add(lblEdicionVigente);
+
 		
-		tfEdVigente = new JTextField();
-		tfEdVigente.setEnabled(false);
-		tfEdVigente.setBounds(120, 101, 86, 20);
-		getContentPane().add(tfEdVigente);
-		tfEdVigente.setColumns(10);
-		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
+		/*-----------------------------------------------------------------------------------------------*/
+		//Variable para edicion vigente
+		EdVigente = new JTextField();
+		EdVigente.setEditable(false);
+		EdVigente.setBounds(125, 245, 150, 20);
+		getContentPane().add(EdVigente);
+		EdVigente.setColumns(10);
+
+
+		/*-----------------------------------------------------------------------------------------------*/
+		//Combobox instituto
+		comboBoxInstituto = new JComboBox<String>();
+		inicializarComboBoxInstituto();
+		comboBoxInstituto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnAceptarActionPerformed(arg0);
+				listarCursos(arg0);
+				listarEstudiantes(arg0);
 			}
 		});
-		btnAceptar.setBounds(53, 225, 89, 23);
-		getContentPane().add(btnAceptar);
+		comboBoxInstituto.setBounds(90, 15, 150, 20);
+		getContentPane().add(comboBoxInstituto);
+
+
+		/*-----------------------------------------------------------------------------------------------*/
+		//Boton de inscribir
+		JButton btnInscribir = new JButton("Inscribir");
+		btnInscribir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				inscribirEstudiante(arg0);
+			}
+		});
+		btnInscribir.setBounds(30, 465, 90, 25);
+		getContentPane().add(btnInscribir);
 		
+		//Boton de cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnCancelarActionPerformed(arg0);
+
 			}
 		});
-		btnCancelar.setBounds(193, 225, 89, 23);
+		btnCancelar.setBounds(170, 465, 90, 25);
 		getContentPane().add(btnCancelar);
 
+		//Boton Seleccionar
+		JButton ButtonSeleccionar = new JButton("Seleccionar");
+		ButtonSeleccionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					mostrarEdicionVigente(e);
+				} catch (CursoExcepcion cursoExcepcion) {
+					cursoExcepcion.printStackTrace();
+				}
+			}
+		});
+		ButtonSeleccionar.setBounds(125, 205, 115, 25);
+		getContentPane().add(ButtonSeleccionar);
+
+		/*-----------------------------------------------------------------------------------------------*/
+		//Lista de Cursos
+		JScrollPane scrollPaneCursos = new JScrollPane();
+		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneCursos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneCursos.setBounds(90, 60, 150, 130);
+		getContentPane().add(scrollPaneCursos);
+		listCursos = new JList<String>();
+		scrollPaneCursos.setViewportView(listCursos);
+
+		//Lista de Estudiantes
+		JScrollPane scrollPaneEstudiantes = new JScrollPane();
+		scrollPaneEstudiantes.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneEstudiantes.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneEstudiantes.setBounds(60, 310, 180, 130);
+		getContentPane().add(scrollPaneEstudiantes);
+		listEstudiantes = new JList<String>();
+		listEstudiantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPaneEstudiantes.setViewportView(listEstudiantes);
+
 	}
 
+	//Iniciar comboBox instituto
 	public void inicializarComboBoxInstituto() {
-		DefaultComboBoxModel<String> listInsti = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
-		listInsti.insertElementAt((new String("")),0);
-		cbInstituto.setModel(listInsti);
-		cbInstituto.setSelectedIndex(0);
+		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
+		comboBoxInstituto.setModel(modelInstitutos);
 	}
 
-	public void inicializarComboBoxEstudiantes(){
-		DefaultComboBoxModel<String> listEst = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
-		listEst.insertElementAt((new String("")),0);
-		cbEstudiantes.setModel(listEst);
-		cbEstudiantes.setSelectedIndex(0);
-	}
-	
-	protected void cbInstitutoActionPerformed(ActionEvent arg0) {
-		String nombreInstituto = this.cbInstituto.getSelectedItem().toString();
-		if(nombreInstituto.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Debe seleccionar un instituto" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
-		}else {
-			ArrayList<String> listaCursos = new ArrayList<String>();
-			listaCursos = iconC.listarCursosAux(nombreInstituto);
-			DefaultComboBoxModel<String> modelCursos = new DefaultComboBoxModel<String>();
+	//Lista los cursos asocidados
+	protected void listarCursos(ActionEvent e) {
+		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
+		DefaultListModel<String> modelCursos = new DefaultListModel<String>();
+		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+			listaCursos = iconC.listarCursosAux(nomInstituto);
 			for(String s : listaCursos) {
 				modelCursos.addElement(s);
 			}
-			cbCursos.setModel(modelCursos);
-		}
-	}
-	
-	protected void cbCursosActionPerformed(ActionEvent arg0) {
-		String nombreCurso = this.cbCursos.getSelectedItem().toString();
-		if(nombreCurso.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Debe seleccionar un curso" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
-		}else {
-			tfEdVigente.setEnabled(true);
-			cbEstudiantes.setEnabled(true);
-			cbEstudiantes.setEnabled(true);
-			DefaultComboBoxModel<String> modelEstudiantes = new DefaultComboBoxModel<String>(iusu.listarEstudiantesAux());
-			cbEstudiantes.setModel(modelEstudiantes);
-		}
-	}
-	protected void btnAceptarActionPerformed(ActionEvent arg0) {
-		String nomEdicion = this.tfEdVigente.getText();
-		String nickEstudiante = this.cbEstudiantes.getSelectedItem().toString();
-		Date fecha = Calendar.getInstance().getTime();
-		if(nickEstudiante.isEmpty()||nomEdicion.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Inscripcion a Edicion de Curso",JOptionPane.ERROR_MESSAGE);
-		}else {
-			try {
-				this.iconC.inscribirEstudianteEdicion(nomEdicion, nickEstudiante, fecha);
-			}catch(EdicionExcepcion e){//ver como se ponen dos excepciones
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Inscripcion a Edicion de Curso", JOptionPane.ERROR_MESSAGE);
-			}catch(UsuarioExcepcion e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Inscripcion a Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+			listCursos.setModel(modelCursos);
+		} else if(nomInstituto.contains("")) {
+			listaCursos = iconC.listarDocentesInstituto(nomInstituto);
+			Integer i = 0;
+			for(i= 0;i<listaCursos.size();i++) {
+				modelCursos.addElement("");
 			}
+			listCursos.setModel(modelCursos);
 		}
 	}
 	
-	protected void btnCancelarActionPerformed(ActionEvent arg0){
-        setVisible(false);
-        tfEdVigente.setText("");
+	//Muestra ediciones vigentes
+	protected void mostrarEdicionVigente(ActionEvent e) throws CursoExcepcion {
+		String nomCurso = this.listCursos.getSelectedValue().toString();
+		DTEdicionCurso dt = this.iconC.mostrarEdicionVigente(nomCurso);
+		this.EdVigente.setText(dt.getNombre());
 	}
-	
-	
-	
+
+	//Lista los estudiantes
+	protected void listarEstudiantes(ActionEvent e) {
+		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
+		DefaultListModel<String> modelEstudiante = new DefaultListModel<String>();
+		if(!nomInstituto.isEmpty() || !nomInstituto.contains("")) {
+			listaEstudiantes = this.iconC.listarEstudiantes();
+			for(String s : listaEstudiantes) {
+				modelEstudiante.addElement(s);
+			}
+			listEstudiantes.setModel(modelEstudiante);
+		} else if(!nomInstituto.contains("")) {		JLabel lblEdicionVigente = new JLabel("Edicion Vigente");
+
+			listaEstudiantes = iconC.listarDocentesInstituto(nomInstituto);
+			Integer i = 0;
+			for(i= 0;i<listaEstudiantes.size();i++) {
+				modelEstudiante.addElement("");
+			}
+			listEstudiantes.setModel(modelEstudiante);
+		}
+	}
+	protected void inscribirEstudiante(ActionEvent arg0){
+		Date todayDate = Calendar.getInstance().getTime();
+		String nickEstudiante = this.listEstudiantes.getSelectedValue();
+		String nombreEdicion = this.EdVigente.toString();
+		/*try {
+			this.iconC.inscribirEstudianteEdicion(nombreEdicion, nickEstudiante, todayDate);
+		} catch (NumberFormatException e) {
+
+		}*/
+
+	}
 }

@@ -175,8 +175,8 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	
 	public void modificarDatos(ActionEvent arg0) {
 		String nick = nicknameUsu.getSelectedValue();
-		String newName = this.NuevoNombre.toString();
-		String newApellido = this.nuevoApellido.toString();
+		String newName = this.NuevoNombre.getText();
+		String newApellido = this.nuevoApellido.getText();
 		Date newBirthDay = this.dateChooser.getDate();
 		icon.nuevosDatos(nick, newName, newApellido, newBirthDay);
 		JOptionPane.showMessageDialog(this, "Se han modificado los datos con exito", "ModificarDatosUsuario", JOptionPane.INFORMATION_MESSAGE);

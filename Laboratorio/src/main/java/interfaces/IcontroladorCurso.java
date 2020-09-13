@@ -63,8 +63,12 @@ public interface IcontroladorCurso {
 
 	public String[] listarInstitutos();
 	public ArrayList<String> listarCursosAux(String nombreInstiuto);
-	public ArrayList<String> listarEdicionesAux(String nombreCurso);
-	public ArrayList<String> listarProgramasAux(String nomCurso);
-	public ArrayList<String> listarDocentesAux(String nomEdicion);
 	public ArrayList<String> listarDocentesInstituto(String nomInstituto);
+
+	ArrayList<String> listarProgramasAux(String nomCurso);
+
+	public ArrayList<String> listarEdicionesAux(String nombreCurso);
+	public ArrayList<String> listarDocentesAux(String nomEdicion);
+
+	public ArrayList<String> listarEstudiantes();
 }
