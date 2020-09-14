@@ -415,9 +415,11 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		String fechaR = fechaReg.format(cursoDT.getFechaR());
 		textFieldFechaRegistro.setText(fechaR);
 		this.textFieldURL.setText(cursoDT.getUrl());
+		DefaultComboBoxModel<String> modeloEdicion = new DefaultComboBoxModel<String>();
 		for (String edicion : listaEdiciones) {
-			comboEdiciones.addItem(edicion);
+			modeloEdicion.addElement(edicion);
 		}
+		comboEdiciones.setModel(modeloEdicion);
 	}
 	public void seleccionarEdicion(ActionEvent arg0) throws EdicionExcepcion{
 		String edicion = (String) comboEdiciones.getSelectedItem();

@@ -1,9 +1,12 @@
 package manejadores;
 
 import clases.EdicionCurso;
+import clases.Estudiante;
+import clases.InscripcionED;
 import conexion.Conexion;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 public class manejadorEdicion {
@@ -42,5 +45,15 @@ public class manejadorEdicion {
 		EntityManager em = con.getEntityManager();
 		List<EdicionCurso> ediciones = em.createQuery("SELECT e FROM EdicionCurso e", EdicionCurso.class).getResultList();
 		return ediciones;
+	}
+
+	public void agregarInscripcionED(Date fecha, Estudiante e, EdicionCurso eC){
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		InscripcionED ied= new InscripcionED(fecha, e, eC);
+		em.getTransaction().begin();
+		em.persist(ied);
+		em.getTransaction().commit();
+
 	}
 }

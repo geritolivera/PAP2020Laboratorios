@@ -1,15 +1,7 @@
 package clases;
 
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class InscripcionED {
@@ -21,7 +13,7 @@ public class InscripcionED {
 		this.estudiante = estudiante;
 	}
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private Estudiante estudiante;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +21,7 @@ public class InscripcionED {
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private EdicionCurso edicion;
 	
 		

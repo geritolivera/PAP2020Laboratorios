@@ -79,7 +79,7 @@ public class principalView {
 		frame.getContentPane().add(altaUsuarioInternalFrame);
 		
 		//Consulta de Usuario
-		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario(iusu);
+		consultaUsuarioInternalFrame = new presentacion.usuario.ConsultaUsuario(iusu,iconC);
 		jIternalFrameSize = consultaUsuarioInternalFrame.getSize();
 		consultaUsuarioInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		consultaUsuarioInternalFrame.setVisible(false);
@@ -192,7 +192,7 @@ public class principalView {
 		MenuItemConsultaUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				consultaUsuarioInternalFrame.setVisible(true);
-
+				consultaUsuarioInternalFrame.inicializarComboBoxListaUsuarios();
 			}
 		});
 		MenuUsuario.add(MenuItemConsultaUsuario);

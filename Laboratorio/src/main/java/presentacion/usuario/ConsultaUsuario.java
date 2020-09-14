@@ -1,7 +1,10 @@
 package presentacion.usuario;
 
 import datatypes.*;
+import exepciones.EdicionExcepcion;
+import exepciones.ProgramaFormacionExcepcion;
 import exepciones.UsuarioExcepcion;
+import interfaces.IcontroladorCurso;
 import interfaces.IcontroladorUsuario;
 
 import javax.swing.*;
@@ -12,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ConsultaUsuario extends JInternalFrame {
@@ -19,21 +24,35 @@ public class ConsultaUsuario extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 
 	private IcontroladorUsuario icon;
-	private JTextField textFieldNombre;
-	private JTextField textFieldApellido;
-	private JTextField textFieldNick;
-	private JTextField textFieldCorreo;
-	private JTextField textFieldFechaNac;
-	private JTextField textFieldEsDocente;
+	private IcontroladorCurso iconC;
+
+	private JTextField nombreUsuario;
+	private JTextField apellidoUsuario;
+	private JTextField nickname;
+	private JTextField correo;
+	private JTextField FechaNac;
+	private JTextField EsDocente;
+	private JTextField textNombreEdicion;
+	private JTextField fechaInicio;
+	private JTextField fechaFin;
+	private JTextField fechaPublicacion;
+	private JTextField vigente;
+	private JTextField nombreProg;
+	private JTextField fechaInicioProg;
+	private JTextField fechaFinProg;
+	private JTextField fechaIngresoProg;
+	private JTextArea DescripcionProg;
+
+	private JComboBox<String> comboBoxUsuarios;
 	private JComboBox<String> comboBoxCursoReg;
-	private JComboBox<String> comboBoxInsEdCur;
 	private JComboBox<String> comboBoxProgForIns;
-	
-	private JList<String> ListaUsu;
+	private JComboBox<String> comboCursosEnPrograma;
+
 	private List<DTUsuario> listaUsuarios;
 
-	public ConsultaUsuario(IcontroladorUsuario icon) {
 
+	public ConsultaUsuario(IcontroladorUsuario icon, IcontroladorCurso iconC) {
+		this.iconC = iconC;
 		this.icon = icon;
 		setResizable(true);
         setIconifiable(true);
@@ -41,43 +60,16 @@ public class ConsultaUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Consulta de Usuario");
-		setBounds(100, 100, 565, 462);
+		setBounds(100, 100, 1221, 371);
 		getContentPane().setLayout(null);
 		
+
 		
-		//Lista los usuarios
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(20, 65, 120, 316);
-		getContentPane().add(scrollPane);
-		ListaUsu = new JList<String>();
-		ListaUsu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(ListaUsu);
-		
-		//Boton Listar Usuarios
-		JButton ButtonListarUsuarios = new JButton("Listar Usuarios");
-		ButtonListarUsuarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				listarUsuarios(arg0);
-			}
-		});
-		ButtonListarUsuarios.setBounds(20, 20, 120, 25);
-		getContentPane().add(ButtonListarUsuarios);
-		
-		//Boton Seleccionar Usuarios
-		JButton ButtonSelccUsuario = new JButton("Seleccionar");
-		ButtonSelccUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				seleccionarUsuario(e);
-			}
-		});
-		ButtonSelccUsuario.setBounds(20, 392, 120, 25);
-		getContentPane().add(ButtonSelccUsuario);
-		
+		/*---------------------------------------------------------------------------------------------------------*/
 		//Panel datos Usuario
 		JPanel DatosPanel = new JPanel();
 		DatosPanel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos Usuario", TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.ITALIC, 14), new Color(0, 0, 0)));
-		DatosPanel.setBounds(164, 4, 325, 226);
+		DatosPanel.setBounds(15, 70, 325, 226);
 		getContentPane().add(DatosPanel);
 		DatosPanel.setLayout(null);
 		
@@ -116,81 +108,34 @@ public class ConsultaUsuario extends JInternalFrame {
 		LabelEsDocente.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		LabelEsDocente.setBounds(10, 197, 114, 15);
 		DatosPanel.add(LabelEsDocente);
+		/*----------------------------------------------------------------------------------------------------------------------------------*/
 
-		//Text Nombre
-		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(120, 20, 180, 20);
-		DatosPanel.add(textFieldNombre);
-		textFieldNombre.setColumns(10);
 
-		//Text Apellido
-		textFieldApellido = new JTextField();
-		textFieldApellido.setColumns(10);
-		textFieldApellido.setBounds(120, 55, 180, 20);
-		DatosPanel.add(textFieldApellido);
-		
-		//Text Nick
-		textFieldNick = new JTextField();
-		textFieldNick.setColumns(10);
-		textFieldNick.setBounds(120, 90, 180, 20);
-		DatosPanel.add(textFieldNick);
-		
-		//Text Correo
-		textFieldCorreo = new JTextField();
-		textFieldCorreo.setColumns(10);
-		textFieldCorreo.setBounds(120, 125, 180, 20);
-		DatosPanel.add(textFieldCorreo);
-		
-		//Text Fecha Nacimiento
-		textFieldFechaNac = new JTextField();
-		textFieldFechaNac.setColumns(10);
-		textFieldFechaNac.setBounds(120, 160, 180, 20);
-		DatosPanel.add(textFieldFechaNac);
-		
-		//Text Es Docente
-		textFieldEsDocente = new JTextField();
-		textFieldEsDocente.setColumns(10);
-		textFieldEsDocente.setBounds(120, 195, 180, 20);
-		DatosPanel.add(textFieldEsDocente);
 
 		//Label Docente
-		JLabel LabelDocente = new JLabel("Usuario Docente");
-		LabelDocente.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelDocente.setBounds(164, 241, 140, 15);
-		getContentPane().add(LabelDocente);
+		JLabel LabelSeleccEdi = new JLabel("Seleccione Edicion");
+		LabelSeleccEdi.setFont(new Font("Tahoma", Font.BOLD, 13));
+		LabelSeleccEdi.setBounds(370, 15, 140, 15);
+		getContentPane().add(LabelSeleccEdi);
 		
 		//Label Ediciones de Curso Registrados
 		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
-		LabelEdiCurAsc.setBounds(164, 267, 204, 15);
+		LabelEdiCurAsc.setBounds(347, 41, 204, 15);
 		getContentPane().add(LabelEdiCurAsc);
-		
-		comboBoxCursoReg = new JComboBox<String>();
-		comboBoxCursoReg.setBounds(378, 264, 140, 20);
-		getContentPane().add(comboBoxCursoReg);
+
 		
 		//Label Usuario Estudiante
-		JLabel LabelEstudiante = new JLabel("Usuario Estudiante");
+		JLabel LabelEstudiante = new JLabel("Seleccione Progama");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelEstudiante.setBounds(164, 301, 140, 15);
+		LabelEstudiante.setBounds(755, 15, 140, 15);
 		getContentPane().add(LabelEstudiante);
-		
-		//Label Inscripto en Edicion de Curso
-		JLabel lblCursoInscriptos = new JLabel("Inscripto en Edicion de Curso:");
-		lblCursoInscriptos.setBounds(165, 327, 204, 15);
-		getContentPane().add(lblCursoInscriptos);
-		
+
 		//Label Programa de Formacion inscripto
 		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(164, 366, 204, 15);
+		ProgramaInscriptos.setBounds(755, 40, 205, 15);
 		getContentPane().add(ProgramaInscriptos);
-		
-		comboBoxInsEdCur = new JComboBox<String>();
-		comboBoxInsEdCur.setBounds(378, 324, 140, 20);
-		getContentPane().add(comboBoxInsEdCur);
-		
-		comboBoxProgForIns = new JComboBox<String>();
-		comboBoxProgForIns.setBounds(378, 363, 140, 20);
-		getContentPane().add(comboBoxProgForIns);
+
+
 		
 		JButton ButtonCancelar = new JButton("Cancelar");
 		ButtonCancelar.addActionListener(new ActionListener() {
@@ -198,77 +143,368 @@ public class ConsultaUsuario extends JInternalFrame {
 				cancelarConsultaUsuario(arg0);
 			}
 		});
-		ButtonCancelar.setBounds(285, 392, 120, 25);
+		ButtonCancelar.setBounds(470, 300, 120, 25);
 		getContentPane().add(ButtonCancelar);		
 
-	}
-	
-	public void inicializarComboBoxEdicionesDocente() {
+		JPanel panelEdicion = new JPanel();
+		panelEdicion.setLayout(null);
+		panelEdicion.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos de la Edicion", TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.ITALIC, 14), new Color(0, 0, 0)));
+		panelEdicion.setBounds(370, 70, 339, 199);
+		getContentPane().add(panelEdicion);
+
+		JLabel labelNombreEdicion = new JLabel("Nombre");
+		labelNombreEdicion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelNombreEdicion.setBounds(10, 34, 45, 15);
+		panelEdicion.add(labelNombreEdicion);
+
+		JLabel labelFechaIEdicion = new JLabel("Fecha Inicio");
+		labelFechaIEdicion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelFechaIEdicion.setBounds(10, 60, 100, 15);
+		panelEdicion.add(labelFechaIEdicion);
+
+		JLabel labelFechaFinEdcion = new JLabel("Fecha Fin");
+		labelFechaFinEdcion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelFechaFinEdcion.setBounds(10, 96, 100, 15);
+		panelEdicion.add(labelFechaFinEdcion);
+
+		JLabel lblFechaDePublicacion = new JLabel("Fecha Publicacion");
+		lblFechaDePublicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblFechaDePublicacion.setBounds(10, 126, 100, 15);
+		panelEdicion.add(lblFechaDePublicacion);
+
+		JLabel Vigente = new JLabel("Vigente");
+		Vigente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		Vigente.setBounds(10, 158, 100, 15);
+		panelEdicion.add(Vigente);
+
+
+		JLabel lblUsuarios = new JLabel("Seleccionar Usuario");
+		lblUsuarios.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblUsuarios.setBounds(15, 15, 140, 15);
+		getContentPane().add(lblUsuarios);
+
+		JPanel PanelPrograma = new JPanel();
+		PanelPrograma.setLayout(null);
+		PanelPrograma.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Programa", TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.ITALIC, 14), new Color(0, 0, 0)));
+		PanelPrograma.setBounds(810, 70, 325, 245);
+		getContentPane().add(PanelPrograma);
+
+		JLabel LabelNombre_1 = new JLabel("Nombre");
+		LabelNombre_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelNombre_1.setBounds(10, 34, 45, 15);
+		PanelPrograma.add(LabelNombre_1);
+
+		JLabel LabelDescripcion = new JLabel("Descripcion");
+		LabelDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelDescripcion.setBounds(10, 60, 73, 15);
+		PanelPrograma.add(LabelDescripcion);
+
+		JLabel LabelNickname_1 = new JLabel("Fecha Inicio");
+		LabelNickname_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelNickname_1.setBounds(10, 129, 73, 15);
+		PanelPrograma.add(LabelNickname_1);
+
+		JLabel LabelCorreo_1 = new JLabel("Fecha Fin");
+		LabelCorreo_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelCorreo_1.setBounds(10, 155, 73, 15);
+		PanelPrograma.add(LabelCorreo_1);
+
+		JLabel LabelFechaNac_1 = new JLabel("Fecha de Ingreso");
+		LabelFechaNac_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelFechaNac_1.setBounds(10, 181, 100, 15);
+		PanelPrograma.add(LabelFechaNac_1);
+
+
+		/*------------------------ Usuario Variables  ------------------------------------------*/
+		//Combo box Usuarios
+		comboBoxUsuarios = new JComboBox<String>();
+		comboBoxUsuarios.setBounds(15, 40, 180, 25);
+		getContentPane().add(comboBoxUsuarios);
+
+		//Boton OK
+		JButton ButtonOK = new JButton("OK");
+		ButtonOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					seleccionarUsuario(e);
+				} catch (UsuarioExcepcion usuarioExcepcion) {
+					usuarioExcepcion.printStackTrace();
+				}
+			}
+		});
+		ButtonOK.setBounds(230, 40, 73, 25);
+		getContentPane().add(ButtonOK);
+
+		//Text Nombre usuario
+		nombreUsuario = new JTextField();
+		nombreUsuario.setBounds(120, 20, 180, 20);
+		DatosPanel.add(nombreUsuario);
+		nombreUsuario.setColumns(10);
+
+		//Text Apellido
+		apellidoUsuario = new JTextField();
+		apellidoUsuario.setColumns(10);
+		apellidoUsuario.setBounds(120, 55, 180, 20);
+		DatosPanel.add(apellidoUsuario);
+
+		//Text Nick
+		nickname = new JTextField();
+		nickname.setColumns(10);
+		nickname.setBounds(120, 90, 180, 20);
+		DatosPanel.add(nickname);
+
+		//Text Correo
+		correo = new JTextField();
+		correo.setColumns(10);
+		correo.setBounds(120, 125, 180, 20);
+		DatosPanel.add(correo);
+
+		//Text Fecha Nacimiento
+		FechaNac = new JTextField();
+		FechaNac.setColumns(10);
+		FechaNac.setBounds(120, 160, 180, 20);
+		DatosPanel.add(FechaNac);
+
+		//Text Es Docente
+		EsDocente = new JTextField();
+		EsDocente.setColumns(10);
+		EsDocente.setBounds(120, 195, 180, 20);
+		DatosPanel.add(EsDocente);
+
+		/*----------------------------------- Variables Edicion ----------------------------------------------------------*/
+		//Combo box edicion
+		comboBoxCursoReg = new JComboBox<String>();
+		comboBoxCursoReg.setBounds(530, 35, 140, 20);
+		getContentPane().add(comboBoxCursoReg);
+
+		//Nombre Edicion
+		textNombreEdicion = new JTextField();
+		textNombreEdicion.setEditable(false);
+		textNombreEdicion.setColumns(10);
+		textNombreEdicion.setBounds(120, 32, 180, 20);
+		panelEdicion.add(textNombreEdicion);
+
+		//fecha incio
+		fechaInicio = new JTextField();
+		fechaInicio.setEditable(false);
+		fechaInicio.setColumns(10);
+		fechaInicio.setBounds(120, 63, 180, 20);
+		panelEdicion.add(fechaInicio);
+
+		//fecha fin edicion
+		fechaFin = new JTextField();
+		fechaFin.setEditable(false);
+		fechaFin.setColumns(10);
+		fechaFin.setBounds(120, 94, 180, 20);
+		panelEdicion.add(fechaFin);
+
+		//Fecha publicacion edicion
+		fechaPublicacion = new JTextField();
+		fechaPublicacion.setEditable(false);
+		fechaPublicacion.setColumns(10);
+		fechaPublicacion.setBounds(120, 125, 180, 20);
+		panelEdicion.add(fechaPublicacion);
+
+		//Si es vigente edicion
+		vigente = new JTextField();
+		vigente.setEditable(false);
+		vigente.setColumns(10);
+		vigente.setBounds(120, 156, 180, 20);
+		panelEdicion.add(vigente);
+
+		JButton ButtonOKEdicion = new JButton("OK");
+		ButtonOKEdicion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listarEdicionDatos(arg0);
+			}
+		});
+		ButtonOKEdicion.setBounds(680, 35, 65, 25);
+		getContentPane().add(ButtonOKEdicion);
+
+		/*----------------------------------- Variables Programa Formacion ----------------------------------------------------------*/
+		//Combo box programa
+		comboBoxProgForIns = new JComboBox<String>();
+		comboBoxProgForIns.setBounds(960, 37, 140, 20);
+		getContentPane().add(comboBoxProgForIns);
+
+		//Nombre programa
+		nombreProg = new JTextField();
+		nombreProg.setEditable(false);
+		nombreProg.setColumns(10);
+		nombreProg.setBounds(120, 32, 180, 20);
+		PanelPrograma.add(nombreProg);
+
+		//Descripcion Programa
+		JTextArea DescripcionProg = new JTextArea();
+		DescripcionProg.setEditable(false);
+		DescripcionProg.setColumns(10);
+		DescripcionProg.setBounds(120, 63, 180, 53);
+		PanelPrograma.add(DescripcionProg);
+
+		//Fecha inicion programa
+		fechaInicioProg = new JTextField();
+		fechaInicioProg.setEditable(false);
+		fechaInicioProg.setColumns(10);
+		fechaInicioProg.setBounds(120, 127, 180, 20);
+		PanelPrograma.add(fechaInicioProg);
+
+		//Fecha fin programa
+		fechaFinProg = new JTextField();
+		fechaFinProg.setEditable(false);
+		fechaFinProg.setColumns(10);
+		fechaFinProg.setBounds(120, 153, 180, 20);
+		PanelPrograma.add(fechaFinProg);
+
+		//fecha ingreso programa
+		fechaIngresoProg = new JTextField();
+		fechaIngresoProg.setEditable(false);
+		fechaIngresoProg.setColumns(10);
+		fechaIngresoProg.setBounds(120, 179, 180, 20);
+		PanelPrograma.add(fechaIngresoProg);
+
+		JLabel LabelCursos = new JLabel("Cursos");
+		LabelCursos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		LabelCursos.setBounds(10, 213, 100, 15);
+		PanelPrograma.add(LabelCursos);
+
+		comboCursosEnPrograma = new JComboBox<String>();
+		comboCursosEnPrograma.setBounds(120, 210, 180, 22);
+		PanelPrograma.add(comboCursosEnPrograma);
+
+		JButton ButtonOKPrograma = new JButton("OK");
+		ButtonOKPrograma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listarProgramas(arg0);
+			}
+		});
+		ButtonOKPrograma.setBounds(1110, 35, 65, 25);
+		getContentPane().add(ButtonOKPrograma);
 
 	}
 
+	//Inicia el combo box de usuarios
+	public void inicializarComboBoxListaUsuarios() {
+		DefaultComboBoxModel<String> modelUsuarios = new DefaultComboBoxModel<String>();
+		ArrayList<String> listaUsuarios = this.icon.listarUsuarios();
+		for(String s : listaUsuarios) {
+			modelUsuarios.addElement(s);
+		}
+		comboBoxUsuarios.setModel(modelUsuarios);
+	}
 
 	protected void cancelarConsultaUsuario(ActionEvent arg0) {
 		limpiarFormulario();
 		setVisible(false);
 	}
 
-	public void seleccionarUsuario(ActionEvent arg0){
-		String usuarioElegidoNick = ListaUsu.getSelectedValue();
-		listaUsuarios = icon.listarDTUsuarios();
-		try {
-			DTUsuario u = icon.verInfoUsuario(usuarioElegidoNick);
-			this.textFieldNombre.setText(u.getNombre());
-			this.textFieldApellido.setText(u.getApellido());
-			this.textFieldNick.setText(usuarioElegidoNick);
-			this.textFieldCorreo.setText(u.getCorreo());
-			SimpleDateFormat fechaNac = new SimpleDateFormat("yyyy/MM/dd");
-			String fechaN = fechaNac.format(u.getFechaNac());
-			textFieldFechaNac.setText(fechaN);
-			if(u instanceof DTDocente) {
-				this.textFieldEsDocente.setText("Si");
-				ArrayList<String> edicionesD = new ArrayList<>();
-				for(DTEdicionCurso e : ((DTDocente)u).getEdiciones()) {
+	//Selecciona el usuario y lista los demas comboboxes
+	public void seleccionarUsuario(ActionEvent arg0) throws UsuarioExcepcion {
+	String usuarioElegidoNick = this.comboBoxUsuarios.getSelectedItem().toString();
+	List<DTUsuario> listaUsuarios = icon.listarDTUsuarios();
+	DTUsuario usuario = icon.verInfoUsuario(usuarioElegidoNick);
+		this.nombreUsuario.setText(usuario.getNombre());
+		this.apellidoUsuario.setText(usuario.getApellido());
+		this.nickname.setText(usuarioElegidoNick);
+		this.correo.setText(usuario.getCorreo());
+		SimpleDateFormat fechaNac = new SimpleDateFormat("yyyy/MM/dd");
+		String fechaN = fechaNac.format(usuario.getFechaNac());
+		FechaNac.setText(fechaN);
+
+		if(usuario instanceof DTDocente) {
+			this.EsDocente.setText("Si");
+			ArrayList<String> edicionesD = new ArrayList<>();
+			for(DTEdicionCurso e : ((DTDocente)usuario).getEdiciones()) {
 					edicionesD.add(e.getNombre());
-				}
-				DefaultComboBoxModel<String> listEdiDoc = new DefaultComboBoxModel<String>(edicionesD.toArray(new String[0]));
-				comboBoxCursoReg.setModel(listEdiDoc);
+			}
+			DefaultComboBoxModel<String> listEdiDoc = new DefaultComboBoxModel<String>(edicionesD.toArray(new String[0]));
+			comboBoxCursoReg.setModel(listEdiDoc);
 			}
 			else {
-				this.textFieldEsDocente.setText("No");
+				this.EsDocente.setText("No");
 				ArrayList<String> edicionesE = new ArrayList<>();
-				for(DTEdicionCurso e : ((DTEstudiante)u).getEdiciones()) {
+				for(DTEdicionCurso e : ((DTEstudiante)usuario).getEdiciones()) {
 					edicionesE.add(e.getNombre());
 				}
 				ArrayList<String> programasE = new ArrayList<>();
-				for(DTProgramaFormacion p : ((DTEstudiante)u).getProgramas()) {
+				for(DTProgramaFormacion p : ((DTEstudiante)usuario).getProgramas()) {
 					programasE.add(p.getNombre());
 				}
 				DefaultComboBoxModel<String> listEdiEst = new DefaultComboBoxModel<String>(edicionesE.toArray(new String[0]));
-				comboBoxInsEdCur.setModel(listEdiEst);
+				comboBoxCursoReg.setModel(listEdiEst);
 				DefaultComboBoxModel<String> listProEst = new DefaultComboBoxModel<String>(programasE.toArray(new String[0]));
 				comboBoxProgForIns.setModel(listProEst);
 			}
-		}catch(UsuarioExcepcion exe) {
-			JOptionPane.showMessageDialog(this, exe.getMessage(), "Consulta de Usuario", JOptionPane.ERROR_MESSAGE);
-		}
+
 	}
 	
-	public void listarUsuarios(ActionEvent arg0) {
-		listaUsuarios = icon.listarDTUsuarios();
-		DefaultListModel<String> listModel = new DefaultListModel<String>();
-		for(DTUsuario s : listaUsuarios) {
-			listModel.addElement(s.getNick());
+	protected void listarEdicionDatos(ActionEvent arg0){
+		String edicionCursoElegida = this.comboBoxCursoReg.getSelectedItem().toString();
+		DTEdicionCurso dtc = new DTEdicionCurso();
+		try {
+			dtc = this.iconC.verInfoEdicion(edicionCursoElegida);
+			this.textNombreEdicion.setText(dtc.getNombre());
+			this.fechaInicio.setText(dtc.getFechaI().toString());
+			this.fechaFin.setText(dtc.getFechaF().toString());
+			this.fechaPublicacion.setText(dtc.getFechaPub().toString());
+			Date todayDate = Calendar.getInstance().getTime();
+			Date dateChooser = dtc.getFechaPub();
+			if(dateChooser.compareTo(todayDate) > 0) {
+				this.vigente.setText("Si");
+			} else {
+				this.vigente.setText("No");
+			}
+
+		} catch (EdicionExcepcion e1) {
+			e1.printStackTrace();
 		}
-		//listModel.addElement("Gero");
-		ListaUsu.setModel(listModel);
 	}
-	
+
+	protected void listarProgramas(ActionEvent arg0) {
+		String programaElegido = this.comboBoxProgForIns.getSelectedItem().toString();
+		DTProgramaFormacion dtp = new DTProgramaFormacion();
+		try {
+			dtp = this.iconC.verInfoPrograma(programaElegido);
+			this.nombreProg.setText(dtp.getNombre());
+			DescripcionProg.setText(dtp.getDescripcion());
+			this.fechaInicioProg.setText(dtp.getFechaI().toString());
+			this.fechaFinProg.setText(dtp.getFechaF().toString());
+			this.fechaIngresoProg.setText(dtp.getFechaI().toString());
+			DefaultComboBoxModel<String> cursosPrograma = new DefaultComboBoxModel<String>();
+			ArrayList<String> listaCursosPrograma = dtp.getCursos();
+			for (String s : listaCursosPrograma) {
+				cursosPrograma.addElement(s);
+			}
+			comboCursosEnPrograma.setModel(cursosPrograma);
+
+		} catch (ProgramaFormacionExcepcion p) {
+			p.printStackTrace();
+		}
+	}
+
 	private void limpiarFormulario() {
-		textFieldCorreo.setText("");
-		textFieldNick.setText("");
-		textFieldNombre.setText("");
-		textFieldApellido.setText("");
-		textFieldFechaNac.setText("");
+		correo.setText("");
+		nickname.setText("");
+		nombreUsuario.setText("");
+		apellidoUsuario.setText("");
+		FechaNac.setText("");
+		EsDocente.setText("");
+		textNombreEdicion.setText("");
+		fechaInicio.setText("");
+		fechaFin.setText("");
+		fechaPublicacion.setText("");
+		vigente.setText("");
+		nombreProg.setText("");
+		fechaInicioProg.setText("");
+		fechaFinProg.setText("");
+		fechaIngresoProg.setText("");
+		//DescripcionProg.setText("");
+		String[] vacio = new String[1];
+		vacio[0] = "";
+		DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
+		vacioModel.addElement(vacio[0]);
+		comboBoxCursoReg.setModel(vacioModel);
+		comboBoxProgForIns.setModel(vacioModel);
+		comboCursosEnPrograma.setModel(vacioModel);
+
 	}
 }

@@ -46,7 +46,7 @@ public class manejadorUsuario {
 	}
 
 	public boolean existeUsuarioNick(String nick) {
-		return this.buscarUsuario(nick) instanceof Usuario;
+		return this.buscarUsuarioNickname(nick) instanceof Usuario;
 	}
 
 	public boolean existeUsuarioCorreo(String correo) {

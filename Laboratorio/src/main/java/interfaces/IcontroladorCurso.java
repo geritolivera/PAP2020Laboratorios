@@ -37,7 +37,7 @@ public interface IcontroladorCurso {
 	//8 - Inscripcion a Edicion de Curso
 	//Se utiliza la misma funcion listarCursos
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion;
-	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion;
+	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws Exception;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

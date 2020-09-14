@@ -191,35 +191,41 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 	
 	@Override
-	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws UsuarioExcepcion, EdicionExcepcion{
+	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws Exception {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		if(mUsu.existeUsuarioCorreo(nickUsuario)){
-			if(mEdi.existeEdicion(nomEdicion)){
-				Usuario u = mUsu.buscarUsuario(nickUsuario);
-				if(u instanceof Estudiante) {
-					EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
-					//funcion agregarInscripcion tambien agrega la inscripcion a la edicion
-					((Estudiante) u).agregarInscripcionED(fecha, e);
-					//funcion agregarEdicion tambien agrega al estudiante a la edicion
-					//((Estudiante) u).agregarEdicion(e);
-					//persiste el estudiante y edicion
-					em.getTransaction().begin();
-					em.persist(u);
-					em.persist(e);
-					em.getTransaction().commit();
+		System.out.println(nomEdicion);
+		Boolean yaInscripto=false;
+		if(mUsu.existeUsuarioNick(nickUsuario)) {
+			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);
+			List<InscripcionED> listIns = ((Estudiante) u).getInscripcionesED();
+			for (InscripcionED s : listIns) {
+				if (s.getEdicion().getNombre().equals(nomEdicion)) {
+					yaInscripto = true;
 				}
-				else
-					throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
 			}
-			else
-				throw new EdicionExcepcion("No existe edicion " + nomEdicion);
+			if (!yaInscripto) {
+				if (mEdi.existeEdicion(nomEdicion)) {
+					if (u instanceof Estudiante) {
+						EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
+						((Estudiante) u).agregarInscripcionED(fecha, e);
+						em.getTransaction().begin();
+						em.persist(u);
+						em.getTransaction().commit();
+					} else
+						throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
+				} else
+					throw new EdicionExcepcion("No existe edicion " + nomEdicion);
+			}else{
+				throw new Exception("El usuario ya esta inscripto en esta edicion");
+			}
 		}
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
 	}
+
 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion

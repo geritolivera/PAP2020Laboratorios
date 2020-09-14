@@ -68,7 +68,6 @@ public class Estudiante extends Usuario{
 	public void agregarInscripcionED(Date fecha, EdicionCurso edicion) {
 		InscripcionED ins = new InscripcionED(fecha, this, edicion);
 		inscripcionesED.add(ins);
-		edicion.agregarInscripcion(fecha, this);
 	}
 	public List<InscripcionED> getInscripcionesED(){
 		return inscripcionesED;

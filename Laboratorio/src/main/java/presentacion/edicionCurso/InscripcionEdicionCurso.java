@@ -1,6 +1,8 @@
 package presentacion.edicionCurso;
 
 import exepciones.CursoExcepcion;
+import exepciones.EdicionExcepcion;
+import exepciones.UsuarioExcepcion;
 import interfaces.IcontroladorCurso;
 
 import datatypes.*;
@@ -99,7 +101,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				cancelarAction(arg0);
 			}
 		});
 		btnCancelar.setBounds(170, 465, 90, 25);
@@ -139,6 +141,11 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		listEstudiantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneEstudiantes.setViewportView(listEstudiantes);
 
+	}
+
+	private void cancelarAction(ActionEvent arg0) {
+		limpiarForm();
+		setVisible(false);
 	}
 
 	//Iniciar comboBox instituto
@@ -184,8 +191,8 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 				modelEstudiante.addElement(s);
 			}
 			listEstudiantes.setModel(modelEstudiante);
-		} else if(!nomInstituto.contains("")) {		JLabel lblEdicionVigente = new JLabel("Edicion Vigente");
-
+		} else if(!nomInstituto.contains("")) {
+			JLabel lblEdicionVigente = new JLabel("Edicion Vigente");
 			listaEstudiantes = iconC.listarDocentesInstituto(nomInstituto);
 			Integer i = 0;
 			for(i= 0;i<listaEstudiantes.size();i++) {
@@ -196,13 +203,34 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 	}
 	protected void inscribirEstudiante(ActionEvent arg0){
 		Date todayDate = Calendar.getInstance().getTime();
-		String nickEstudiante = this.listEstudiantes.getSelectedValue();
-		String nombreEdicion = this.EdVigente.toString();
-		/*try {
+		String nickEstudiante = this.listEstudiantes.getSelectedValue().toString();
+		String nombreEdicion = this.EdVigente.getText();
+		try{
 			this.iconC.inscribirEstudianteEdicion(nombreEdicion, nickEstudiante, todayDate);
-		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "El estudiante "+ nickEstudiante + " ha sido inscripto");
+		} catch (UsuarioExcepcion e) {
+			JOptionPane.showMessageDialog(this, "Usuario");
 
-		}*/
+		} catch (EdicionExcepcion e) {
+			JOptionPane.showMessageDialog(this, "Edicion excepcion");
 
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "El estudiante ya esta inscipto en esta edicion");
+		}
+	}
+
+	public void limpiarForm(){
+		this.EdVigente.setText("");
+		String[] vacio = new String[1];
+		vacio[0] = "";
+		inicializarComboBoxInstituto();
+		DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
+		vacioModel.addElement(vacio[0]);
+		comboBoxInstituto.setModel(vacioModel);
+
+		String[] vacioLista = new String[1];
+		vacio[0] = "";
+		listCursos.setListData(vacioLista);
+		listEstudiantes.setListData(vacioLista);
 	}
 }
