@@ -19,6 +19,7 @@ public class DTCurso {
 	
 	ArrayList<String> ediciones = new ArrayList<>();
 	ArrayList<String> programas = new ArrayList<>();
+	ArrayList<String> previas = new ArrayList<>();
 	
 	public DTCurso() {
 		super();
@@ -116,5 +117,12 @@ public class DTCurso {
 	}
 	public ArrayList<String> getProgramas(){
 		return programas;
+	}
+
+	public void agregarPrevia(String previa) {
+		previas.add(previa);
+	}
+	public ArrayList<String> getPrevias(){
+		return previas;
 	}
 }

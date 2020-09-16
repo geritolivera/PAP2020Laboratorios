@@ -76,17 +76,22 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
 		List<EdicionCurso> ediciones = new ArrayList<>();
 		List<ProgramaFormacion> programas = new ArrayList<>();
+		List<Curso> previas = new ArrayList<>();
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
 			ediciones = c.getEdiciones();
 			programas = c.getProgramas();
+			previas = c.getPrevias();
 			//son listas, no requieren informacion de las ediciones o programas
 			for(EdicionCurso e: ediciones) {
 				dtc.agregarEdicion(e.getNombre());
 			}
 			for(ProgramaFormacion p: programas) {
 				dtc.agregarPrograma(p.getNombre());
+			}
+			for(Curso cur : previas){
+				dtc.agregarPrevia(cur.getNombre());
 			}
 			return dtc;
 		}
