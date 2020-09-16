@@ -36,6 +36,8 @@ public interface IcontroladorUsuario {
 	//Funciones auxiliares
 
 	public List<DTUsuario> listarDTUsuarios();
+
+	public boolean existeCorreoUsuario(String correo); // se fija si existe el correo en la lista de usuarios
 	
 	public String[] listarInstituto(); //Lista los nombres de los institutos
 

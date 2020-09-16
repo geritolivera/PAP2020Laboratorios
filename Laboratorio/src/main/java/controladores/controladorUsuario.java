@@ -27,36 +27,33 @@ public class controladorUsuario implements IcontroladorUsuario{
 	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
-		if(!mUsu.existeUsuarioNick(nickname) && !mUsu.existeUsuarioCorreo(correo)) {
-			//si la string instituto no tiene nada
-			if(instituto == null) {
-				Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
-				mUsu.agregarUsuario(est);
-				
-			}else {
-				if(mIns.existeInstituto(instituto)) {
-					Conexion con = Conexion.getInstancia();
-					EntityManager em = con.getEntityManager();
-					Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
-					Instituto ins = mIns.buscarInstituto(instituto);
-					//aniade tambien el docente al instituto
-					doc.setInstituto(ins);
-					mUsu.agregarUsuario(doc);
-					//persiste al instituto
-					//es posible que sea innecesario. se mando pregunta al profe
-					em.getTransaction().begin();
-					em.persist(ins);
-					em.getTransaction().commit();
+		if(!mUsu.existeUsuarioNick(nickname)){
+			if(!this.existeCorreoUsuario(correo)){
+				//si la string instituto no tiene nada
+				if(instituto == null) {
+					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
+					mUsu.agregarUsuario(est);
+
+				}else {
+					if (mIns.existeInstituto(instituto)) {
+						Conexion con = Conexion.getInstancia();
+						EntityManager em = con.getEntityManager();
+						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+						Instituto ins = mIns.buscarInstituto(instituto);
+						//aniade tambien el docente al instituto
+						doc.setInstituto(ins);
+						mUsu.agregarUsuario(doc);
+						//persiste al instituto
+						//es posible que sea innecesario. se mando pregunta al profe
+						em.getTransaction().begin();
+						em.persist(ins);
+						em.getTransaction().commit();
+					}
 				}
-			}
-		} else {
-			if(mUsu.existeUsuarioNick(nickname)) {
-				throw new UsuarioExcepcion("El Nickname '" + nickname +"' ya existe en el sistema");
-			}
-			if(mUsu.existeUsuarioNick(correo)) {
-				throw new UsuarioExcepcion("El Correo '" + correo +"' ya existe en el sistema");
-			}
-		}
+			}else
+				throw new UsuarioExcepcion("El correo " + correo + " ya existe en el sistema.");
+		}else
+			throw new UsuarioExcepcion("El Nickname '" + nickname +"' ya existe en el sistema");
 	}
 	
 	
@@ -163,6 +160,18 @@ public class controladorUsuario implements IcontroladorUsuario{
 			listUsers.add(dt);
 		}
 		return listUsers;
+	}
+
+	@Override
+	public boolean existeCorreoUsuario(String correo){
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		boolean encontre = false;
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		for(Usuario u : usuarios){
+			if(u.getCorreo().equals(correo))
+				encontre = true;
+		}
+		return encontre;
 	}
 
 
