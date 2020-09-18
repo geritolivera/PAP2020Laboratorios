@@ -236,20 +236,10 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
-		if(mpf.existePrograma(nombre)) {
-			throw new ProgramaFormacionExcepcion("El programa de Formacion de " + nombre + " ya existe dentro del Sistema");
-		}else {
-			if(fechaF.compareTo(fechaI)<0) {
-				throw new ProgramaFormacionExcepcion("La fecha de fin tiene que ser posterior a la de inicio");
-			}else {
-				if(fechaI.compareTo(fActual)>0) {
-					throw new ProgramaFormacionExcepcion("La fecha de inicio tiene que ser posterior a la actual");
-				}else {
-					ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre,descripcion,fechaI,fechaF,fActual);
-					mpf.agregarPrograma(nuevoProg);
-				}
-			}
-		}
+		mpf.existePrograma(nombre);
+		ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre, descripcion, fechaI, fechaF, fActual);
+		mpf.agregarPrograma(nuevoProg);
+
 	}
 	
 		

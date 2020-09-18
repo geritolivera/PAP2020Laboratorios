@@ -124,21 +124,26 @@ public class CrearProgramaFormacion extends JInternalFrame {
         Date fInicio = this.dateChooserInicio.getDate();
 		Date today = Calendar.getInstance().getTime();
         if (nombre.isEmpty() || (fInicio == null) || (fFin == null)) {
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Programa Formacion",
-                    JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Programa Formacion",
+					JOptionPane.ERROR_MESSAGE);
+		}else{
             if(fFin.before(fInicio)){
 				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser previa \n a la de finalizacion", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+				dateChooserFin.revalidate();
+				dateChooserInicio.revalidate();
 				return false;
             }
             if(fInicio.before(today)){
 				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser posterior \n al dia de hoy", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+				dateChooserInicio.revalidate();
+				dateChooserFin.revalidate();
 				return false;
 			}
-            return false;
+			return true;
 		}
 
-        return true;
-    }
+		return true;
+	}
 
 	protected void cancelarAltaProgramaFormacion(ActionEvent e) {
 		//PORQUE EXPLOTA?
