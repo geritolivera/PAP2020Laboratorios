@@ -82,6 +82,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		textNickname = new JTextField();
 		textNickname.setColumns(10);
 		textNickname.setBounds(400, 80, 130, 25);
+		textNickname.setEditable(false);
 		getContentPane().add(textNickname);
 		
 		JLabel LabelCorreo = new JLabel("Correo");
@@ -92,6 +93,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		textCorreo = new JTextField();
 		textCorreo.setColumns(10);
 		textCorreo.setBounds(400, 110, 130, 25);
+		textCorreo.setEditable(false);
 		getContentPane().add(textCorreo);
 
 		JLabel LabelNuevosDatos = new JLabel("Ingresar nuevos datos: ");

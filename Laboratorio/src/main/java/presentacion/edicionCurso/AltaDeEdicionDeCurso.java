@@ -251,13 +251,16 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String fechaFin = this.dateFin.toString();
 		Date dateInicio = this.dateInicio.getDate();
 		Date dateFin = this.dateFin.getDate();
+
 		if (nomEd.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (dateFin.compareTo(dateInicio) < 0 || dateInicio.compareTo(dateFin) == 0) {
 			JOptionPane.showMessageDialog(this, "La fecha de inicio de curso tiene que ser\n menor a la fecha de fin de curso", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else {
+		} else if(listaDocentes.getSelectedValuesList().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Debe seleccionar docente/s", "Alta Edicion de Curso", JOptionPane.ERROR_MESSAGE);
+		}else {
 			try {
 				Integer.parseInt(cupo);
 			} catch (NumberFormatException e) {

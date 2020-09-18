@@ -117,26 +117,13 @@ public class ConsultaUsuario extends JInternalFrame {
 		LabelSeleccEdi.setFont(new Font("Tahoma", Font.BOLD, 13));
 		LabelSeleccEdi.setBounds(370, 15, 325, 15);
 		getContentPane().add(LabelSeleccEdi);
-		
-//		//Label Ediciones de Curso Registrados
-//		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
-//		LabelEdiCurAsc.setBounds(347, 41, 204, 15);
-//		getContentPane().add(LabelEdiCurAsc);
 
-		
 		//Label Usuario Estudiante
 		JLabel LabelEstudiante = new JLabel("Seleccione Progama de Formacion");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
 		LabelEstudiante.setBounds(810, 15, 325, 15);
 		getContentPane().add(LabelEstudiante);
 
-//		//Label Programa de Formacion inscripto
-//		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-//		ProgramaInscriptos.setBounds(755, 40, 205, 15);
-//		getContentPane().add(ProgramaInscriptos);
-
-
-		
 		JButton ButtonCancelar = new JButton("Cancelar");
 		ButtonCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -237,36 +224,42 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		//Text Nombre usuario
 		nombreUsuario = new JTextField();
+		nombreUsuario.setEditable(false);
 		nombreUsuario.setBounds(140, 20, 160, 20);
 		DatosPanel.add(nombreUsuario);
 		nombreUsuario.setColumns(10);
 
 		//Text Apellido
 		apellidoUsuario = new JTextField();
+		apellidoUsuario.setEditable(false);
 		apellidoUsuario.setColumns(10);
 		apellidoUsuario.setBounds(140, 55, 160, 20);
 		DatosPanel.add(apellidoUsuario);
 
 		//Text Nick
 		nickname = new JTextField();
+		nickname.setEditable(false);
 		nickname.setColumns(10);
 		nickname.setBounds(140, 90, 160, 20);
 		DatosPanel.add(nickname);
 
 		//Text Correo
 		correo = new JTextField();
+		correo.setEditable(false);
 		correo.setColumns(10);
 		correo.setBounds(140, 125, 160, 20);
 		DatosPanel.add(correo);
 
 		//Text Fecha Nacimiento
 		FechaNac = new JTextField();
+		FechaNac.setEditable(false);
 		FechaNac.setColumns(10);
 		FechaNac.setBounds(140, 160, 160, 20);
 		DatosPanel.add(FechaNac);
 
 		//Text Es Docente
 		EsDocente = new JTextField();
+		EsDocente.setEditable(false);
 		EsDocente.setColumns(10);
 		EsDocente.setBounds(140, 195, 160, 20);
 		DatosPanel.add(EsDocente);
@@ -453,8 +446,8 @@ public class ConsultaUsuario extends JInternalFrame {
 			String fechaP = fechaPubl.format(dtc.getFechaPub());
 			this.fechaPublicacion.setText(fechaP);
 			Date todayDate = Calendar.getInstance().getTime();
-			Date dateChooser = dtc.getFechaPub();
-			if(dateChooser.compareTo(todayDate) > 0) {
+			Date dateChooser = dtc.getFechaF();
+			if(dateChooser.after(todayDate)) {
 				this.vigente.setText("Si");
 			} else {
 				this.vigente.setText("No");

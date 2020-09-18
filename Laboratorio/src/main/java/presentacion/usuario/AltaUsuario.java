@@ -145,7 +145,6 @@ public class AltaUsuario extends JInternalFrame {
 				}
 			} catch(UsuarioExcepcion u) {
 				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
-				limpiarFormulario();
 			}
 		}
 	}
@@ -164,6 +163,7 @@ public class AltaUsuario extends JInternalFrame {
 		String email = this.textFieldEmail.getText();
 		Date dateChooser = this.dateChooser.getDate();
 		String fechaString = dateChooser.toString();
+
 		Date todayDate = Calendar.getInstance().getTime();
 		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vac�s", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
@@ -185,6 +185,7 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNick.setText("");
 		textFieldNombre.setText("");
 		textFieldApellido.setText("");
+		dateChooser.setDate((Date)null);
 		dateChooser.revalidate();
 	}
 }

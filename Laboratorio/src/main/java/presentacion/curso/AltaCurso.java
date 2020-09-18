@@ -259,7 +259,7 @@ public class AltaCurso extends JInternalFrame {
 		String url = this.textURL.getText();
 		Integer duracion = (Integer) this.duracion.getSelectedItem();
 		String meses = (String) this.meses.getSelectedItem();
-		Integer cantCreditos = Integer.parseInt(this.textCantCreditos.getText());
+		Integer cantCreditos= null;
 		String descripcion = this.textDescripcion.getText();
 		String instituto = this.comboBoxInstituto.getSelectedItem().toString();
 		if(!listCursos.getSelectedValuesList().isEmpty()) {
@@ -267,22 +267,27 @@ public class AltaCurso extends JInternalFrame {
 		}
 
 		Date dateChooser = this.dateChooser.getDate();
-		if(checkFormulario()){
-			try{
-				if(!instituto.isEmpty()){
-					if(!nombreCurso.isEmpty()){
-						this.iconC.AltaCurso(nombreCurso,descripcion,meses,duracion, cantCreditos, dateChooser,url,instituto, previas);
-						JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
-						inicializarComboBoxInstituto();
-						limpiarFormulario();
-						setVisible(false);
+		try {
+			cantCreditos = Integer.parseInt(this.textCantCreditos.getText());
+			if (checkFormulario()) {
+				try {
+					if (!instituto.isEmpty()) {
+						if (!nombreCurso.isEmpty()) {
+							this.iconC.AltaCurso(nombreCurso, descripcion, meses, duracion, cantCreditos, dateChooser, url, instituto, previas);
+							JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
+							inicializarComboBoxInstituto();
+							limpiarFormulario();
+							setVisible(false);
+						}
 					}
+				} catch (CursoExcepcion c) {
+					JOptionPane.showMessageDialog(this, c.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
+				} catch (InstitutoExcepcion i) {
+					JOptionPane.showMessageDialog(this, i.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
 				}
-			}catch(CursoExcepcion c){
-				JOptionPane.showMessageDialog(this, c.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
-			}catch(InstitutoExcepcion i){
-				JOptionPane.showMessageDialog(this, i.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
 			}
+		} catch (Exception exep){
+			JOptionPane.showMessageDialog(this, "La cantidad de creditos ingresada no es valida", "Alta Curso", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -303,20 +308,27 @@ public class AltaCurso extends JInternalFrame {
 		textDescripcion.setText("");
 		textNombreCur.setText("");
 		textURL.setText("");
+		dateChooser.setDate((Date)null);
 		dateChooser.revalidate();
 	}
 
 	private boolean checkFormulario() {
 		String nombre = this.textNombreCur.getText();
 		String desc = this.textDescripcion.getText();
-		String cantCred = this.textCantCreditos.getText();
+		Integer cantCred= Integer.parseInt(this.textCantCreditos.getText());
 		String url = this.textURL.getText();
 		Date dateChooser = this.dateChooser.getDate();
 		String fechaString = dateChooser.toString();
+		Integer duracion = (Integer) this.duracion.getSelectedItem();
+		String meses = (String) this.meses.getSelectedItem();
 
 		Date today = Calendar.getInstance().getTime();
-		if(nombre.isEmpty() || desc.isEmpty() || cantCred.isEmpty() || url.isEmpty() || fechaString.isEmpty()) {
+		if(nombre.isEmpty() || desc.isEmpty() || url.isEmpty() || fechaString.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vac�s", "Alta Curso", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if((duracion == 0) || (meses == "")){
+			JOptionPane.showMessageDialog(this, "Ingrese duracion de curso", "Alta Curso", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(dateChooser.compareTo(today) > 0) {

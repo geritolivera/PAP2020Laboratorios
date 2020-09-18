@@ -91,9 +91,6 @@ public class CrearProgramaFormacion extends JInternalFrame {
 
 	}
 
-    public CrearProgramaFormacion() {
-
-    }
 
     protected void cmdRegistroProgramaFormacionActionPerformed(ActionEvent arg0) {
            
@@ -129,16 +126,12 @@ public class CrearProgramaFormacion extends JInternalFrame {
 		}else{
             if(fFin.before(fInicio)){
 				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser previa \n a la de finalizacion", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
+				dateChooserFin.setDate((Date)null);
+				dateChooserInicio.setDate((Date)null);
 				dateChooserFin.revalidate();
 				dateChooserInicio.revalidate();
 				return false;
             }
-            if(fInicio.before(today)){
-				JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser posterior \n al dia de hoy", "Crear Programa Formacion",JOptionPane.ERROR_MESSAGE);
-				dateChooserInicio.revalidate();
-				dateChooserFin.revalidate();
-				return false;
-			}
 			return true;
 		}
 
@@ -146,14 +139,15 @@ public class CrearProgramaFormacion extends JInternalFrame {
 	}
 
 	protected void cancelarAltaProgramaFormacion(ActionEvent e) {
-		//PORQUE EXPLOTA?
-		limpiarFormulario(); 
+		limpiarFormulario();
 		setVisible(false);
 	}
 
 	private void limpiarFormulario() {
 		inputNombre.setText("");
 		inputDescripcion.setText("");
+		dateChooserInicio.setDate((Date)null);
+		dateChooserFin.setDate((Date)null);
 		dateChooserFin.revalidate();
 		dateChooserInicio.revalidate();
 		
