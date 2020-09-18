@@ -1,5 +1,7 @@
 package clases;
 
+import com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLOperation;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,7 +117,10 @@ public class Curso {
 	public List<ProgramaFormacion> getProgramas(){
 		return this.programas;
 	}
-	
+
+	public void agregarEdicion(EdicionCurso edicion){
+		ediciones.add(edicion);
+	}
 	public List<EdicionCurso> getEdiciones(){
 		return this.ediciones;
 	}

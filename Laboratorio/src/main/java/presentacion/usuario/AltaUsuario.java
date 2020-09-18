@@ -135,15 +135,18 @@ public class AltaUsuario extends JInternalFrame {
 				if(!instituto.isEmpty()) {
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					limpiarFormulario();
+					setVisible(false);
 				} else {
 					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
 					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
+					limpiarFormulario();
+					setVisible(false);
 				}
 			} catch(UsuarioExcepcion u) {
 				JOptionPane.showMessageDialog(this, u.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+				limpiarFormulario();
 			}
-			limpiarFormulario();
-			setVisible(false);
 		}
 	}
 	

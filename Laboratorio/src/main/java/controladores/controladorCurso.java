@@ -123,17 +123,16 @@ public class controladorCurso implements IcontroladorCurso{
 						Docente d = (Docente) mUsu.buscarUsuario(s);
 						if(!d.toString().isEmpty()) {
 							edi.agregarDocente(d);
-							//actualiza al docente
-                            /*d.agregarEdicion(edi);
-                        em.getTransaction().begin();
-                        em.persist(d);
-                        em.getTransaction().commit();*/
 						}
 					}
 				}
 				else
 					throw new EdicionExcepcion("Tiene que ingresar docentes.");
 				mEdi.agregarEdicion(edi);
+				curso.agregarEdicion(edi);
+				em.getTransaction().begin();
+				em.persist(curso);
+				em.getTransaction().commit();
 			}
 		}
 	}
@@ -355,17 +354,7 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return cursosRet;
 	}
-	@Override
-	public ArrayList<String> listarProgramasAux(String nomCurso) {
-		manejadorCurso mC = manejadorCurso.getInstancia();
-		Curso cur = mC.buscarCurso(nomCurso);
-		List<ProgramaFormacion> programas = cur.getProgramas();
-		ArrayList<String> prog_ret = new ArrayList<String>();
-		for(ProgramaFormacion p:programas) {
-			prog_ret.add(p.getNombre());
-		}
-		return prog_ret;
-	}
+
 	@Override
 	public ArrayList<String> listarEdicionesAux(String nomCurso) {
 		manejadorEdicion mE = manejadorEdicion.getInstancia();

@@ -303,7 +303,7 @@ public class AltaCurso extends JInternalFrame {
 		textDescripcion.setText("");
 		textNombreCur.setText("");
 		textURL.setText("");
-		dateChooser = null;
+		dateChooser.revalidate();
 	}
 
 	private boolean checkFormulario() {

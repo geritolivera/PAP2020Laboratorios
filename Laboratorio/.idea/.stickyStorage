@@ -1,0 +1,22 @@
+#Sticky storage
+#Fri Sep 11 20:11:16 UYT 2020
+sticky.0.55796681776569021599772268684.content=*LF**LF*JScrollPane js \= new JScrollPane(listCursos);*LF*\t\tjs.setBounds(155, 415, 200, 100);*LF*\t\tadd(js);
+sticky.0.69134903874092671599865855095.content=public String[] listarInstitutos() {*LF*\t\tmanejadorInstituto mi \= manejadorInstituto.getInstancia();*LF*\t\tList<Instituto> listIn\= mi.getInstituto();*LF*\t\tString[] listIns \= new String[listIn.size()];*LF*\t\tInteger i \=0;*LF*\t\tif(\!listIn.isEmpty()) {*LF*\t\t\tfor (Instituto s\: listIn) {*LF*\t\t\t\tlistIns[i] \= s.getNombre();*LF*\t\t\t\ti++;*LF*\t\t\t}*LF*\t\t}*LF*\t\treturn listIns;*LF*\t}
+linkedFile_f1dea34c61844d831e01b76a0d796808_0.69134903874092671599865855095=0.69134903874092671599865855095
+sticky.0.55796681776569021599772268684.linkedFile=/home/nahuel-repo/IdeaProjects/PAP2020Laboratorios/Laboratorio/src/main/java/presentacion/curso/AltaCurso.java/AltaCurso.java
+sticky.0.55796681776569021599772268684.projectStorage=true
+sticky.0.69134903874092671599865855095.id=0.69134903874092671599865855095
+sticky.0.55796681776569021599772268684.minimized=true
+sticky.0.69134903874092671599865855095.location=65.0,24.0
+linkedFile_d457faacd083353a04e57b07f79ba461_0.55796681776569021599772268684=0.55796681776569021599772268684
+sticky.0.69134903874092671599865855095.title=controladorCurso.java
+sticky.0.69134903874092671599865855095.minimized=true
+sticky.0.69134903874092671599865855095.linkedFile=/home/nahuel-repo/IdeaProjects/PAP2020Laboratorios/Laboratorio/src/main/java/controladores/controladorCurso.java/controladorCurso.java
+sticky.0.55796681776569021599772268684.id=0.55796681776569021599772268684
+sticky.0.55796681776569021599772268684.size=300.0,100.0
+sticky.0.55796681776569021599772268684.title=AltaCurso.java
+sticky.0.69134903874092671599865855095.size=300.0,100.0
+sticky.0.69134903874092671599865855095.backgroundColor=255,255,204
+sticky.0.55796681776569021599772268684.location=150.0,707.0
+sticky.0.69134903874092671599865855095.projectStorage=true
+sticky.0.55796681776569021599772268684.backgroundColor=255,255,204
