@@ -227,10 +227,11 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		String cupo = this.tfCupo.getText();
 		String curso = this.listCursos.getSelectedValue();
 		Date fechPubli = Calendar.getInstance().getTime();
+		ArrayList<String> docentes = new ArrayList<>();
 		if (!listaDocentes.getSelectedValuesList().isEmpty()) {
 			this.lisDocentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
+			docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		}
-		ArrayList<String> docentes = (ArrayList<String>) listaDocentes.getSelectedValuesList();
 		if (checkFormulario()) {
 			try {
 				this.iconC.nuevosDatosEdicion(nomEd, dateI, dateF, Integer.parseInt(cupo), fechPubli, curso, docentes);
@@ -300,5 +301,9 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 			modelDocentes.addElement("");
 		}
 		listaDocentes.setModel(modelDocentes);
+		dateFin.setDate((Date)null);
+		dateFin.revalidate();
+		dateInicio.setDate((Date)null);
+		dateInicio.revalidate();
 	}
 }

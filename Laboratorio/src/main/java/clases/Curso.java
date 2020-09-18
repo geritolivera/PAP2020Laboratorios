@@ -1,7 +1,5 @@
 package clases;
 
-import com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLOperation;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;

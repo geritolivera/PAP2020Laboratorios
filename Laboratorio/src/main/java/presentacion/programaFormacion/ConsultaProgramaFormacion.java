@@ -482,22 +482,22 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 	private void limpiarFormulario() {
 
 		//limpio textFields
-		textFieldNombre.setText("");;
-		textAreaDescripcion.setText("");;
-		textFieldInicio.setText("");;
-		textFieldFin.setText("");;
-		textFieldFechaIngreso.setText("");;
-		textFieldNombreCurso.setText("");;
-		textAreaDescripcionCurso.setText("");;
-		textFieldDuracion.setText("");;
-		textFieldCantHoras.setText("");;
-		textFieldCreditos.setText("");;
-		textFieldFechaRegistro.setText("");;
-		textFieldURL.setText("");;
-		textField_VigenteEdicion.setText("");;
-		textFieldNombreEdicion.setText("");;
-		textFieldFechaInicioEdicion.setText("");;
-		textFieldFechaFinEdicion.setText("");;
+		textFieldNombre.setText("");
+		textAreaDescripcion.setText("");
+		textFieldInicio.setText("");
+		textFieldFin.setText("");
+		textFieldFechaIngreso.setText("");
+		textFieldNombreCurso.setText("");
+		textAreaDescripcionCurso.setText("");
+		textFieldDuracion.setText("");
+		textFieldCantHoras.setText("");
+		textFieldCreditos.setText("");
+		textFieldFechaRegistro.setText("");
+		textFieldURL.setText("");
+		textField_VigenteEdicion.setText("");
+		textFieldNombreEdicion.setText("");
+		textFieldFechaInicioEdicion.setText("");
+		textFieldFechaFinEdicion.setText("");
 		textFieldFechaPublicacionEdicion.setText("");
 
 		String[] vacio = new String[1];

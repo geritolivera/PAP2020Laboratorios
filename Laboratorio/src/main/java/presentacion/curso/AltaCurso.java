@@ -164,6 +164,9 @@ public class AltaCurso extends JInternalFrame {
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd-MM-yyyy");
 		dateChooser.setBounds(155, 365, 200, 25);
+		Date today = Calendar.getInstance().getTime();
+		dateChooser.setDate(today);
+		dateChooser.setSelectableDateRange(today, today);
 		getContentPane().add(dateChooser);
 
 		JScrollPane scrollPaneCursos = new JScrollPane();
@@ -280,13 +283,11 @@ public class AltaCurso extends JInternalFrame {
 							setVisible(false);
 						}
 					}
-				} catch (CursoExcepcion c) {
+				} catch (CursoExcepcion | InstitutoExcepcion c) {
 					JOptionPane.showMessageDialog(this, c.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
-				} catch (InstitutoExcepcion i) {
-					JOptionPane.showMessageDialog(this, i.getMessage(), "Alta Curso", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		} catch (Exception exep){
+		} catch (RuntimeException exep) {
 			JOptionPane.showMessageDialog(this, "La cantidad de creditos ingresada no es valida", "Alta Curso", JOptionPane.ERROR_MESSAGE);
 		}
 
