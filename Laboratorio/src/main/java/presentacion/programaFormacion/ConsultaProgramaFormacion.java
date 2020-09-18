@@ -36,6 +36,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 	////--------------------------CURSOS----------------------------------------//
 	private DTCurso cursoDT;
 	private JComboBox<String> comboEdiciones;
+	private JComboBox<String> comboPrevias;
 	private JTextField textFieldNombreCurso;
 	private JTextArea textAreaDescripcionCurso;
 	private JTextField textFieldDuracion;
@@ -64,7 +65,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Consulta de Programa De Formacion");
-		setBounds(100, 100, 1130, 499);
+		setBounds(100, 100, 1130, 531);
 		getContentPane().setLayout(null);
 
 
@@ -72,12 +73,11 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		//Combo programas
 		listaProgramas=icon.listarProgramas();
 		comboProgramas = new JComboBox(listaProgramas.toArray());
-		comboProgramas.setBounds(20, 50, 180, 22);
+		comboProgramas.setBounds(20, 50, 180, 25);
 		getContentPane().add(comboProgramas);
 
 		//Boton seleccionar Programa
-		JButton ButtonSelectPrograma = new JButton("");
-		ButtonSelectPrograma.setIcon(new ImageIcon("C:\\Users\\Nico\\eclipse-workspace\\PAP2020Laboratorios\\Laboratorio\\src\\main\\resources\\Imagenes\\check.png"));
+		JButton ButtonSelectPrograma = new JButton("Ok");
 		ButtonSelectPrograma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -89,7 +89,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 				}
 			}
 		});
-		ButtonSelectPrograma.setBounds(228, 47, 31, 25);
+		ButtonSelectPrograma.setBounds(228, 50, 80, 25);
 		getContentPane().add(ButtonSelectPrograma);
 
 		//Panel datos Programa
@@ -182,8 +182,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 				try {
 					seleccionarCurso(e2);
 				} catch (CursoExcepcion e21) {
-					// TODO Auto-generated catch block
-					e21.printStackTrace();
+
 				}
 			}
 		});
@@ -196,7 +195,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 				cancelarConsultaEdicion(e);
 			}
 		});
-		ButtonCancelar.setBounds(20, 416, 120, 25);
+		ButtonCancelar.setBounds(140, 416, 180, 25);
 		getContentPane().add(ButtonCancelar);
 
 		JLabel labelSeleccionePrograma = new JLabel("Seleccione Programa");
@@ -210,7 +209,7 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		JPanel PanelCurso = new JPanel();
 		PanelCurso.setLayout(null);
 		PanelCurso.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Curso", TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.ITALIC, 14), new Color(0, 0, 0)));
-		PanelCurso.setBounds(371, 94, 339, 347);
+		PanelCurso.setBounds(371, 94, 339, 378);
 		getContentPane().add(PanelCurso);
 
 		JLabel labelNombreCurso = new JLabel("Nombre");
@@ -270,12 +269,21 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 
 		JLabel labelEdiciones = new JLabel("Ediciones");
 		labelEdiciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelEdiciones.setBounds(10, 281, 100, 15);
+		labelEdiciones.setBounds(10, 312, 100, 15);
 		PanelCurso.add(labelEdiciones);
 
 		comboEdiciones = new JComboBox();
-		comboEdiciones.setBounds(120, 278, 180, 22);
+		comboEdiciones.setBounds(120, 309, 180, 22);
 		PanelCurso.add(comboEdiciones);
+
+		JLabel lblPrevias = new JLabel("Previas");
+		lblPrevias.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPrevias.setBounds(10, 276, 100, 15);
+		PanelCurso.add(lblPrevias);
+
+		comboPrevias = new JComboBox();
+		comboPrevias.setBounds(120, 272, 180, 22);
+		PanelCurso.add(comboPrevias);
 
 		JButton button_1 = new JButton("Seleccionar");
 		button_1.addActionListener(new ActionListener() {
@@ -283,13 +291,12 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 				try {
 					seleccionarEdicion(e);
 				} catch (EdicionExcepcion e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+
 				}
 
 			}
 		});
-		button_1.setBounds(120, 311, 180, 25);
+		button_1.setBounds(120, 342, 180, 25);
 		PanelCurso.add(button_1);
 
 		JLabel lblFechaDeRegistro = new JLabel("Fecha de Registro");
@@ -313,6 +320,9 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		textFieldURL.setColumns(10);
 		textFieldURL.setBounds(120, 241, 180, 20);
 		PanelCurso.add(textFieldURL);
+
+
+
 
 		////--------------------------EDICION----------------------------------------//
 
@@ -398,14 +408,22 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		textFieldFechaIngreso.setText(fechaIngr);
 		ArrayList<String> listaCursos = programaDT.getCursos();
 		for (String curso : listaCursos) {
-			comboCursos.addItem(curso);;
+			comboCursos.addItem(curso);
 		}
+		String[] vacio = new String[1];
+		vacio[0] = "";
+		DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
+		vacioModel.addElement(vacio[0]);
+		comboEdiciones.setModel(vacioModel);
+		comboPrevias.setModel(vacioModel);
+
 	}
 
 	public void seleccionarCurso(ActionEvent arg0) throws CursoExcepcion{
 		String curso = (String) comboCursos.getSelectedItem();
 		cursoDT= icon.verInfo(curso);
 		ArrayList<String> listaEdiciones = cursoDT.getEdiciones();
+		ArrayList<String> listaPrevias = cursoDT.getPrevias();
 		this.textFieldNombreCurso.setText(cursoDT.getNombre());
 		this.textAreaDescripcionCurso.setText(cursoDT.getDescripcion());
 		this.textFieldDuracion.setText(cursoDT.getDuracion());
@@ -420,6 +438,13 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 			modeloEdicion.addElement(edicion);
 		}
 		comboEdiciones.setModel(modeloEdicion);
+		DefaultComboBoxModel<String> modeloPrevia = new DefaultComboBoxModel<String>();
+		for (String previa : listaPrevias) {
+			modeloPrevia.addElement(previa);
+		}
+		comboPrevias.setModel(modeloPrevia);
+
+
 	}
 	public void seleccionarEdicion(ActionEvent arg0) throws EdicionExcepcion{
 		String edicion = (String) comboEdiciones.getSelectedItem();
@@ -480,7 +505,6 @@ public class ConsultaProgramaFormacion extends JInternalFrame {
 		DefaultComboBoxModel<String> vacioModel = new DefaultComboBoxModel<String>();
 		vacioModel.addElement(vacio[0]);
 		comboCursos.setModel(vacioModel);
-		comboEdiciones.setModel(vacioModel);
 
 
 

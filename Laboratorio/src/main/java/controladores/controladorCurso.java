@@ -37,6 +37,7 @@ public class controladorCurso implements IcontroladorCurso{
 				//se fija si hay previas antes de ingresarlas
 				if (!previas.isEmpty()){
 					for (String s : previas) {
+						//System.out.println(s);
 						Curso previa = mc.buscarCurso(s);
 						cursoNuevo.agregarPrevias(previa);
 					}
@@ -200,7 +201,6 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		System.out.println(nomEdicion);
 		Boolean yaInscripto=false;
 		if(mUsu.existeUsuarioNick(nickUsuario)) {
 			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);

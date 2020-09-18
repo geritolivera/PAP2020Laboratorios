@@ -167,12 +167,12 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 1200, 780);
+		frame.setBounds(100, 100, 1300, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);	
 				
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 1200, 21);
+		menuBar.setBounds(0, 0, 1300, 21);
 		frame.getContentPane().add(menuBar);
 		
 		/*---------- Usuario ----------*/

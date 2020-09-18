@@ -115,8 +115,7 @@ public class AgregarCursoPorgramaFormacion extends JInternalFrame {
 	    }
 
 	protected void cancelar(ActionEvent arg0) {
-		comboProgramasFormacion.removeAllItems();
-		comboCursos.removeAllItems();
+		inicializar();
 		setVisible(false);
 	}
 

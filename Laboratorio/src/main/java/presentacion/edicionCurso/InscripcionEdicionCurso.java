@@ -9,6 +9,7 @@ import datatypes.*;
 import interfaces.IcontroladorUsuario;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
@@ -44,22 +45,22 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		/*-----------------------------------------------------------------------------------------------*/
 		//Label Instituto
 		JLabel lblInstituto = new JLabel("Instituto");
-		lblInstituto.setBounds(30, 20, 50, 15);
+		lblInstituto.setBounds(30, 20, 70, 15);
 		getContentPane().add(lblInstituto);
 		
 		//Label Cursos
 		JLabel lblCursos = new JLabel("Cursos");
-		lblCursos.setBounds(30, 60, 46, 14);
+		lblCursos.setBounds(30, 60, 70, 14);
 		getContentPane().add(lblCursos);
 		
 		//Label seleccionar
-		JLabel lblNewLabel = new JLabel("Seleccione el estudiante que desea inscribir");
-		lblNewLabel.setBounds(15, 284, 245, 15);
+		JLabel lblNewLabel = new JLabel("<html>Seleccione el estudiante que desea<br/>inscribir</html>");
+		lblNewLabel.setBounds(15, 300, 260, 40);
 		getContentPane().add(lblNewLabel);
 
 		//Label edicion vigente
 		JLabel lblEdicionVigente = new JLabel("Edicion Vigente");
-		lblEdicionVigente.setBounds(30, 250, 102, 14);
+		lblEdicionVigente.setBounds(15, 250, 150, 14);
 		getContentPane().add(lblEdicionVigente);
 
 		
@@ -67,7 +68,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		//Variable para edicion vigente
 		EdVigente = new JTextField();
 		EdVigente.setEditable(false);
-		EdVigente.setBounds(125, 245, 150, 20);
+		EdVigente.setBounds(150, 245, 100, 20);
 		getContentPane().add(EdVigente);
 		EdVigente.setColumns(10);
 
@@ -82,7 +83,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 				listarEstudiantes(arg0);
 			}
 		});
-		comboBoxInstituto.setBounds(90, 15, 150, 20);
+		comboBoxInstituto.setBounds(120, 15, 150, 20);
 		getContentPane().add(comboBoxInstituto);
 
 
@@ -94,7 +95,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 				inscribirEstudiante(arg0);
 			}
 		});
-		btnInscribir.setBounds(30, 465, 90, 25);
+		btnInscribir.setBounds(25, 465, 100, 25);
 		getContentPane().add(btnInscribir);
 		
 		//Boton de cancelar
@@ -104,21 +105,23 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 				cancelarAction(arg0);
 			}
 		});
-		btnCancelar.setBounds(170, 465, 90, 25);
+		btnCancelar.setBounds(160, 465, 100, 25);
 		getContentPane().add(btnCancelar);
+
 
 		//Boton Seleccionar
 		JButton ButtonSeleccionar = new JButton("Seleccionar");
 		ButtonSeleccionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					EdVigente.setText("");
 					mostrarEdicionVigente(e);
 				} catch (CursoExcepcion cursoExcepcion) {
-					cursoExcepcion.printStackTrace();
+					JOptionPane.showMessageDialog( InscripcionEdicionCurso.this, cursoExcepcion.getMessage(), "Error: Edicion Vigente inexistente", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		ButtonSeleccionar.setBounds(125, 205, 115, 25);
+		ButtonSeleccionar.setBounds(125, 205, 150, 20);
 		getContentPane().add(ButtonSeleccionar);
 
 		/*-----------------------------------------------------------------------------------------------*/
@@ -126,7 +129,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		JScrollPane scrollPaneCursos = new JScrollPane();
 		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneCursos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneCursos.setBounds(90, 60, 150, 130);
+		scrollPaneCursos.setBounds(120, 60, 150, 130);
 		getContentPane().add(scrollPaneCursos);
 		listCursos = new JList<String>();
 		scrollPaneCursos.setViewportView(listCursos);
@@ -135,7 +138,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		JScrollPane scrollPaneEstudiantes = new JScrollPane();
 		scrollPaneEstudiantes.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneEstudiantes.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneEstudiantes.setBounds(60, 310, 180, 130);
+		scrollPaneEstudiantes.setBounds(20, 360, 240, 60);
 		getContentPane().add(scrollPaneEstudiantes);
 		listEstudiantes = new JList<String>();
 		listEstudiantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -208,14 +211,18 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 		try{
 			this.iconC.inscribirEstudianteEdicion(nombreEdicion, nickEstudiante, todayDate);
 			JOptionPane.showMessageDialog(this, "El estudiante "+ nickEstudiante + " ha sido inscripto");
+			limpiarForm();
+			setVisible(false);
 		} catch (UsuarioExcepcion e) {
 			JOptionPane.showMessageDialog(this, "Usuario");
 
 		} catch (EdicionExcepcion e) {
-			JOptionPane.showMessageDialog(this, "Edicion excepcion");
+			JOptionPane.showMessageDialog(this, "No existen ediciones vigentes \n para inscribir al estudiante");
+			limpiarForm();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "El estudiante ya esta inscipto en esta edicion");
+			limpiarForm();
 		}
 	}
 
@@ -230,6 +237,7 @@ public class InscripcionEdicionCurso extends JInternalFrame {
 
 		String[] vacioLista = new String[1];
 		vacio[0] = "";
+		this.EdVigente.setText("");
 		listCursos.setListData(vacioLista);
 		listEstudiantes.setListData(vacioLista);
 	}

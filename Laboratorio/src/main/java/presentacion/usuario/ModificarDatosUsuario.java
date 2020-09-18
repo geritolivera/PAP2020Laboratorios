@@ -56,77 +56,77 @@ public class ModificarDatosUsuario extends JInternalFrame {
 				listarUsuarios(e);
 			}
 		});
-		ButtonListarUsu.setBounds(60, 20, 130, 30);
+		ButtonListarUsu.setBounds(40, 20, 150, 25);
 		getContentPane().add(ButtonListarUsu);
 	
 		//Selecionar usuario boton
-		JButton ButtonSeleccionarUsu = new JButton("Seleccionar Usuario");
+		JButton ButtonSeleccionarUsu = new JButton("Seleccionar");
 		ButtonSeleccionarUsu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				seleccionarUsuario(e);
 			}
 		});
-		ButtonSeleccionarUsu.setBounds(60, 310, 130, 30);
+		ButtonSeleccionarUsu.setBounds(50, 310, 140, 25);
 		getContentPane().add(ButtonSeleccionarUsu);		
 		
 		JLabel LabelDatosElegidos = new JLabel("Datos de Usuario elegido: ");
-		LabelDatosElegidos.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		LabelDatosElegidos.setBounds(305, 30, 195, 25);
+		LabelDatosElegidos.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		LabelDatosElegidos.setBounds(240, 30, 250, 25);
 		getContentPane().add(LabelDatosElegidos);
 		
 		JLabel LabelNickname = new JLabel("Nickname");
-		LabelNickname.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelNickname.setBounds(285, 85, 63, 15);
+		LabelNickname.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		LabelNickname.setBounds(240, 85, 100, 15);
 		getContentPane().add(LabelNickname);
 		
 		textNickname = new JTextField();
 		textNickname.setColumns(10);
-		textNickname.setBounds(360, 80, 150, 25);
+		textNickname.setBounds(400, 80, 130, 25);
 		getContentPane().add(textNickname);
 		
 		JLabel LabelCorreo = new JLabel("Correo");
-		LabelCorreo.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelCorreo.setBounds(290, 135, 45, 15);
+		LabelCorreo.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		LabelCorreo.setBounds(240, 115, 100, 15);
 		getContentPane().add(LabelCorreo);
 		
 		textCorreo = new JTextField();
 		textCorreo.setColumns(10);
-		textCorreo.setBounds(360, 130, 150, 25);
+		textCorreo.setBounds(400, 110, 130, 25);
 		getContentPane().add(textCorreo);
 
 		JLabel LabelNuevosDatos = new JLabel("Ingresar nuevos datos: ");
-		LabelNuevosDatos.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		LabelNuevosDatos.setBounds(305, 170, 178, 25);
+		LabelNuevosDatos.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		LabelNuevosDatos.setBounds(240, 155, 250, 25);
 		getContentPane().add(LabelNuevosDatos);
 		
 		JLabel LabelNombre = new JLabel("Nombre");
-		LabelNombre.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelNombre.setBounds(310, 210, 45, 15);
+		LabelNombre.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		LabelNombre.setBounds(240, 210, 100, 15);
 		getContentPane().add(LabelNombre);
 		
 		NuevoNombre = new JTextField();
 		NuevoNombre.setColumns(10);
-		NuevoNombre.setBounds(380, 205, 130, 25);
+		NuevoNombre.setBounds(400, 205, 130, 25);
 		getContentPane().add(NuevoNombre);				
 		
 		JLabel LabelApellido = new JLabel("Apellido");
-		LabelApellido.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelApellido.setBounds(310, 245, 45, 15);
+		LabelApellido.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		LabelApellido.setBounds(240, 240, 100, 15);
 		getContentPane().add(LabelApellido);
 		
 		nuevoApellido = new JTextField();
-		nuevoApellido.setBounds(380, 240, 130, 25);
+		nuevoApellido.setBounds(400, 235, 130, 25);
 		getContentPane().add(nuevoApellido);
 		nuevoApellido.setColumns(10);
 		
 		JLabel LabelFechaNac = new JLabel("Fecha de Nacimiento");
-		LabelFechaNac.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		LabelFechaNac.setBounds(250, 280, 120, 14);
+		LabelFechaNac.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		LabelFechaNac.setBounds(240, 270, 150, 14);
 		getContentPane().add(LabelFechaNac);
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd-MM-yyyy");
-		dateChooser.setBounds(380, 275, 130, 25);
+		dateChooser.setBounds(400, 265, 130, 25);
 		getContentPane().add(dateChooser);
 		
 		JButton ButtonAceptar = new JButton("Aceptar");

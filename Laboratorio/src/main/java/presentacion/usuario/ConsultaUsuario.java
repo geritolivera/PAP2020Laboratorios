@@ -76,19 +76,19 @@ public class ConsultaUsuario extends JInternalFrame {
 		//Label Nombre
 		JLabel LabelNombre = new JLabel("Nombre");
 		LabelNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelNombre.setBounds(10, 25, 45, 15);
+		LabelNombre.setBounds(10, 25, 110, 15);
 		DatosPanel.add(LabelNombre);
 		
 		//Label Apellido
 		JLabel LabelApellido = new JLabel("Apellido");
 		LabelApellido.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelApellido.setBounds(10, 60, 45, 15);
+		LabelApellido.setBounds(10, 60, 110, 15);
 		DatosPanel.add(LabelApellido);
 		
 		//Label Nickname
 		JLabel LabelNickname = new JLabel("Nickname");
 		LabelNickname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelNickname.setBounds(10, 95, 57, 15);
+		LabelNickname.setBounds(10, 95, 110, 15);
 		DatosPanel.add(LabelNickname);
 		
 		//Label Correo
@@ -113,27 +113,27 @@ public class ConsultaUsuario extends JInternalFrame {
 
 
 		//Label Docente
-		JLabel LabelSeleccEdi = new JLabel("Seleccione Edicion");
+		JLabel LabelSeleccEdi = new JLabel("Seleccione Edicion Asociada al usuario");
 		LabelSeleccEdi.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelSeleccEdi.setBounds(370, 15, 140, 15);
+		LabelSeleccEdi.setBounds(370, 15, 325, 15);
 		getContentPane().add(LabelSeleccEdi);
 		
-		//Label Ediciones de Curso Registrados
-		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
-		LabelEdiCurAsc.setBounds(347, 41, 204, 15);
-		getContentPane().add(LabelEdiCurAsc);
+//		//Label Ediciones de Curso Registrados
+//		JLabel LabelEdiCurAsc = new JLabel("Ediciones de Curso Asociados: ");
+//		LabelEdiCurAsc.setBounds(347, 41, 204, 15);
+//		getContentPane().add(LabelEdiCurAsc);
 
 		
 		//Label Usuario Estudiante
-		JLabel LabelEstudiante = new JLabel("Seleccione Progama");
+		JLabel LabelEstudiante = new JLabel("Seleccione Progama de Formacion");
 		LabelEstudiante.setFont(new Font("Tahoma", Font.BOLD, 13));
-		LabelEstudiante.setBounds(755, 15, 140, 15);
+		LabelEstudiante.setBounds(810, 15, 325, 15);
 		getContentPane().add(LabelEstudiante);
 
-		//Label Programa de Formacion inscripto
-		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
-		ProgramaInscriptos.setBounds(755, 40, 205, 15);
-		getContentPane().add(ProgramaInscriptos);
+//		//Label Programa de Formacion inscripto
+//		JLabel ProgramaInscriptos = new JLabel("Programa de Formacion inscripto:");
+//		ProgramaInscriptos.setBounds(755, 40, 205, 15);
+//		getContentPane().add(ProgramaInscriptos);
 
 
 		
@@ -154,7 +154,7 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		JLabel labelNombreEdicion = new JLabel("Nombre");
 		labelNombreEdicion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		labelNombreEdicion.setBounds(10, 34, 45, 15);
+		labelNombreEdicion.setBounds(10, 34, 100, 15);
 		panelEdicion.add(labelNombreEdicion);
 
 		JLabel labelFechaIEdicion = new JLabel("Fecha Inicio");
@@ -169,7 +169,7 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		JLabel lblFechaDePublicacion = new JLabel("Fecha Publicacion");
 		lblFechaDePublicacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFechaDePublicacion.setBounds(10, 126, 100, 15);
+		lblFechaDePublicacion.setBounds(10, 126, 120, 15);
 		panelEdicion.add(lblFechaDePublicacion);
 
 		JLabel Vigente = new JLabel("Vigente");
@@ -191,25 +191,25 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		JLabel LabelNombre_1 = new JLabel("Nombre");
 		LabelNombre_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelNombre_1.setBounds(10, 34, 45, 15);
+		LabelNombre_1.setBounds(10, 34, 100, 15);
 		PanelPrograma.add(LabelNombre_1);
 
 		JLabel LabelDescripcion = new JLabel("Descripcion");
 		LabelDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelDescripcion.setBounds(10, 60, 73, 15);
+		LabelDescripcion.setBounds(10, 60, 100, 15);
 		PanelPrograma.add(LabelDescripcion);
 
 		JLabel LabelNickname_1 = new JLabel("Fecha Inicio");
 		LabelNickname_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelNickname_1.setBounds(10, 129, 73, 15);
+		LabelNickname_1.setBounds(10, 129, 100, 15);
 		PanelPrograma.add(LabelNickname_1);
 
 		JLabel LabelCorreo_1 = new JLabel("Fecha Fin");
 		LabelCorreo_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelCorreo_1.setBounds(10, 155, 73, 15);
+		LabelCorreo_1.setBounds(10, 155, 100, 15);
 		PanelPrograma.add(LabelCorreo_1);
 
-		JLabel LabelFechaNac_1 = new JLabel("Fecha de Ingreso");
+		JLabel LabelFechaNac_1 = new JLabel("Fecha Ingreso");
 		LabelFechaNac_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		LabelFechaNac_1.setBounds(10, 181, 100, 15);
 		PanelPrograma.add(LabelFechaNac_1);
@@ -237,79 +237,79 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		//Text Nombre usuario
 		nombreUsuario = new JTextField();
-		nombreUsuario.setBounds(120, 20, 180, 20);
+		nombreUsuario.setBounds(140, 20, 160, 20);
 		DatosPanel.add(nombreUsuario);
 		nombreUsuario.setColumns(10);
 
 		//Text Apellido
 		apellidoUsuario = new JTextField();
 		apellidoUsuario.setColumns(10);
-		apellidoUsuario.setBounds(120, 55, 180, 20);
+		apellidoUsuario.setBounds(140, 55, 160, 20);
 		DatosPanel.add(apellidoUsuario);
 
 		//Text Nick
 		nickname = new JTextField();
 		nickname.setColumns(10);
-		nickname.setBounds(120, 90, 180, 20);
+		nickname.setBounds(140, 90, 160, 20);
 		DatosPanel.add(nickname);
 
 		//Text Correo
 		correo = new JTextField();
 		correo.setColumns(10);
-		correo.setBounds(120, 125, 180, 20);
+		correo.setBounds(140, 125, 160, 20);
 		DatosPanel.add(correo);
 
 		//Text Fecha Nacimiento
 		FechaNac = new JTextField();
 		FechaNac.setColumns(10);
-		FechaNac.setBounds(120, 160, 180, 20);
+		FechaNac.setBounds(140, 160, 160, 20);
 		DatosPanel.add(FechaNac);
 
 		//Text Es Docente
 		EsDocente = new JTextField();
 		EsDocente.setColumns(10);
-		EsDocente.setBounds(120, 195, 180, 20);
+		EsDocente.setBounds(140, 195, 160, 20);
 		DatosPanel.add(EsDocente);
 
 		/*----------------------------------- Variables Edicion ----------------------------------------------------------*/
 		//Combo box edicion
 		comboBoxCursoReg = new JComboBox<String>();
-		comboBoxCursoReg.setBounds(530, 35, 140, 20);
+		comboBoxCursoReg.setBounds(370, 35, 200, 25);
 		getContentPane().add(comboBoxCursoReg);
 
 		//Nombre Edicion
 		textNombreEdicion = new JTextField();
 		textNombreEdicion.setEditable(false);
 		textNombreEdicion.setColumns(10);
-		textNombreEdicion.setBounds(120, 32, 180, 20);
+		textNombreEdicion.setBounds(140, 32, 160, 20);
 		panelEdicion.add(textNombreEdicion);
 
 		//fecha incio
 		fechaInicio = new JTextField();
 		fechaInicio.setEditable(false);
 		fechaInicio.setColumns(10);
-		fechaInicio.setBounds(120, 63, 180, 20);
+		fechaInicio.setBounds(140, 63, 160, 20);
 		panelEdicion.add(fechaInicio);
 
 		//fecha fin edicion
 		fechaFin = new JTextField();
 		fechaFin.setEditable(false);
 		fechaFin.setColumns(10);
-		fechaFin.setBounds(120, 94, 180, 20);
+		fechaFin.setBounds(140, 94, 160, 20);
 		panelEdicion.add(fechaFin);
 
 		//Fecha publicacion edicion
 		fechaPublicacion = new JTextField();
 		fechaPublicacion.setEditable(false);
 		fechaPublicacion.setColumns(10);
-		fechaPublicacion.setBounds(120, 125, 180, 20);
+		fechaPublicacion.setBounds(140, 125, 160, 20);
 		panelEdicion.add(fechaPublicacion);
 
 		//Si es vigente edicion
 		vigente = new JTextField();
 		vigente.setEditable(false);
 		vigente.setColumns(10);
-		vigente.setBounds(120, 156, 180, 20);
+		vigente.setBounds(140, 156, 160, 20);
 		panelEdicion.add(vigente);
 
 		JButton ButtonOKEdicion = new JButton("OK");
@@ -318,13 +318,13 @@ public class ConsultaUsuario extends JInternalFrame {
 				listarEdicionDatos(arg0);
 			}
 		});
-		ButtonOKEdicion.setBounds(680, 35, 65, 25);
+		ButtonOKEdicion.setBounds(600, 35, 100, 25);
 		getContentPane().add(ButtonOKEdicion);
 
 		/*----------------------------------- Variables Programa Formacion ----------------------------------------------------------*/
 		//Combo box programa
 		comboBoxProgForIns = new JComboBox<String>();
-		comboBoxProgForIns.setBounds(960, 37, 140, 20);
+		comboBoxProgForIns.setBounds(810, 37, 190, 25);
 		getContentPane().add(comboBoxProgForIns);
 
 		//Nombre programa
@@ -377,7 +377,7 @@ public class ConsultaUsuario extends JInternalFrame {
 				listarProgramas(arg0);
 			}
 		});
-		ButtonOKPrograma.setBounds(1110, 35, 65, 25);
+		ButtonOKPrograma.setBounds(1025, 37, 100, 25);
 		getContentPane().add(ButtonOKPrograma);
 
 	}
@@ -443,9 +443,15 @@ public class ConsultaUsuario extends JInternalFrame {
 		try {
 			dtc = this.iconC.verInfoEdicion(edicionCursoElegida);
 			this.textNombreEdicion.setText(dtc.getNombre());
-			this.fechaInicio.setText(dtc.getFechaI().toString());
-			this.fechaFin.setText(dtc.getFechaF().toString());
-			this.fechaPublicacion.setText(dtc.getFechaPub().toString());
+			SimpleDateFormat fechaInicio = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaI = fechaInicio.format(dtc.getFechaI());
+			this.fechaInicio.setText(fechaI);
+			SimpleDateFormat fechaF = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaFinal = fechaF.format(dtc.getFechaF());
+			this.fechaFin.setText(fechaFinal);
+			SimpleDateFormat fechaPubl = new SimpleDateFormat("yyyy/MM/dd");
+			String fechaP = fechaPubl.format(dtc.getFechaPub());
+			this.fechaPublicacion.setText(fechaP);
 			Date todayDate = Calendar.getInstance().getTime();
 			Date dateChooser = dtc.getFechaPub();
 			if(dateChooser.compareTo(todayDate) > 0) {
