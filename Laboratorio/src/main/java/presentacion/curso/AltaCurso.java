@@ -18,6 +18,7 @@ public class AltaCurso extends JInternalFrame {
 
 	private IcontroladorCurso iconC;
 	private JComboBox<String> comboBoxInstituto;
+	private JComboBox<String> comboBoxCategorias;
 	private JComboBox<Integer> duracion;
 	private JComboBox<String> meses;
 	private JTextField textNombreCur;
@@ -43,7 +44,7 @@ public class AltaCurso extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Alta de Curso");
-		setBounds(100, 100, 456, 621);
+		setBounds(100, 100, 460, 665);
 		getContentPane().setLayout(null);
 
 		/*----LABELS---------------------------------------------*/
@@ -98,9 +99,14 @@ public class AltaCurso extends JInternalFrame {
 		lblFechaDeAlta.setBounds(50, 370, 90, 20);
 		getContentPane().add(lblFechaDeAlta);
 
+		JLabel lblCategorias = new JLabel("Categorias");
+		lblCategorias.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCategorias.setBounds(50, 420, 90, 20);
+		getContentPane().add(lblCategorias);
+		
 		JLabel lblMateriasPrevias = new JLabel("Materias previas");
 		lblMateriasPrevias.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblMateriasPrevias.setBounds(35, 410, 105, 20);
+		lblMateriasPrevias.setBounds(35, 465, 105, 20);
 		getContentPane().add(lblMateriasPrevias);
 
 		/*---------------------variables-----------------------*/
@@ -148,18 +154,19 @@ public class AltaCurso extends JInternalFrame {
 		duracion.setBounds(155, 250, 50, 20);
 		getContentPane().add(duracion);
 
-
 		textCantCreditos = new JTextField();
 		textCantCreditos.setBounds(155, 290, 50, 20);
 		getContentPane().add(textCantCreditos);
 		textCantCreditos.setColumns(10);
 
-
 		textURL = new JTextField();
 		textURL.setColumns(10);
 		textURL.setBounds(155, 330, 200, 20);
 		getContentPane().add(textURL);
-
+		
+		comboBoxCategorias = new JComboBox<String>();
+		comboBoxCategorias.setBounds(155, 415, 150, 25);
+		getContentPane().add(comboBoxCategorias);
 
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd-MM-yyyy");
@@ -172,7 +179,7 @@ public class AltaCurso extends JInternalFrame {
 		JScrollPane scrollPaneCursos = new JScrollPane();
 		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneCursos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneCursos.setBounds(155, 415, 200, 100);
+		scrollPaneCursos.setBounds(155, 470, 200, 100);
 		getContentPane().add(scrollPaneCursos);
 		listCursos = new JList<String>();
 		scrollPaneCursos.setViewportView(listCursos);
@@ -184,7 +191,7 @@ public class AltaCurso extends JInternalFrame {
 				aceptarAltaCurso(e);
 			}
 		});
-		ButtonAceptar.setBounds(70, 540, 100, 30);
+		ButtonAceptar.setBounds(70, 590, 100, 30);
 		getContentPane().add(ButtonAceptar);
 
 		JButton ButtonCancelar = new JButton("Cancelar");
@@ -193,9 +200,9 @@ public class AltaCurso extends JInternalFrame {
 				cancelarAltaCurso(arg0);
 			}
 		});
-		ButtonCancelar.setBounds(270, 540, 100, 30);
+		ButtonCancelar.setBounds(270, 590, 100, 30);
 		getContentPane().add(ButtonCancelar);
-
+		
 	}
 
 	/*-----------------------------------------------------------------------*/
@@ -342,7 +349,4 @@ public class AltaCurso extends JInternalFrame {
 		}
 		return true;
 	}
-
-
-
 }
