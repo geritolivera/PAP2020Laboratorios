@@ -18,7 +18,6 @@ public class AltaCurso extends JInternalFrame {
 
 	private IcontroladorCurso iconC;
 	private JComboBox<String> comboBoxInstituto;
-	private JComboBox<String> comboBoxCategorias;
 	private JComboBox<Integer> duracion;
 	private JComboBox<String> meses;
 	private JTextField textNombreCur;
@@ -32,7 +31,7 @@ public class AltaCurso extends JInternalFrame {
 	private ArrayList<String> lisCursos ;
 	private ArrayList<String> previas = new ArrayList<String>();
 	private JTextArea output;
-
+	private JList<String> listCategorias;
 
 	public AltaCurso(IcontroladorCurso icon) {
 
@@ -44,7 +43,7 @@ public class AltaCurso extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Alta de Curso");
-		setBounds(100, 100, 460, 665);
+		setBounds(100, 100, 460, 760);
 		getContentPane().setLayout(null);
 
 		/*----LABELS---------------------------------------------*/
@@ -106,7 +105,7 @@ public class AltaCurso extends JInternalFrame {
 		
 		JLabel lblMateriasPrevias = new JLabel("Materias previas");
 		lblMateriasPrevias.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblMateriasPrevias.setBounds(35, 465, 105, 20);
+		lblMateriasPrevias.setBounds(35, 531, 105, 20);
 		getContentPane().add(lblMateriasPrevias);
 
 		/*---------------------variables-----------------------*/
@@ -163,10 +162,6 @@ public class AltaCurso extends JInternalFrame {
 		textURL.setColumns(10);
 		textURL.setBounds(155, 330, 200, 20);
 		getContentPane().add(textURL);
-		
-		comboBoxCategorias = new JComboBox<String>();
-		comboBoxCategorias.setBounds(155, 415, 150, 25);
-		getContentPane().add(comboBoxCategorias);
 
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd-MM-yyyy");
@@ -176,10 +171,19 @@ public class AltaCurso extends JInternalFrame {
 		dateChooser.setSelectableDateRange(today, today);
 		getContentPane().add(dateChooser);
 
+		JScrollPane scrollPaneCategorias = new JScrollPane();
+		scrollPaneCategorias.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneCategorias.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneCategorias.setBounds(155, 420, 200, 100);
+		getContentPane().add(scrollPaneCategorias);		
+		listCategorias = new JList<String>();
+		listCategorias.setEnabled(false);
+		scrollPaneCategorias.setViewportView(listCategorias);
+				
 		JScrollPane scrollPaneCursos = new JScrollPane();
 		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneCursos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneCursos.setBounds(155, 470, 200, 100);
+		scrollPaneCursos.setBounds(155, 536, 200, 100);
 		getContentPane().add(scrollPaneCursos);
 		listCursos = new JList<String>();
 		scrollPaneCursos.setViewportView(listCursos);
@@ -191,7 +195,7 @@ public class AltaCurso extends JInternalFrame {
 				aceptarAltaCurso(e);
 			}
 		});
-		ButtonAceptar.setBounds(70, 590, 100, 30);
+		ButtonAceptar.setBounds(70, 656, 100, 30);
 		getContentPane().add(ButtonAceptar);
 
 		JButton ButtonCancelar = new JButton("Cancelar");
@@ -200,8 +204,9 @@ public class AltaCurso extends JInternalFrame {
 				cancelarAltaCurso(arg0);
 			}
 		});
-		ButtonCancelar.setBounds(270, 590, 100, 30);
+		ButtonCancelar.setBounds(270, 656, 100, 30);
 		getContentPane().add(ButtonCancelar);
+		
 		
 	}
 
@@ -304,7 +309,16 @@ public class AltaCurso extends JInternalFrame {
 		DefaultComboBoxModel<String> listInst = new DefaultComboBoxModel<String>(iconC.listarInstitutos());
 		comboBoxInstituto.setModel(listInst);
 	}
-
+	
+	public void inicializarComboBoxCategoria() {
+		DefaultListModel<String> listCate = new DefaultListModel<String>();
+		ArrayList<String> categorias = iconC.listarCategorias();
+		for(String s : categorias) {
+			listCate.addElement(s);
+		}
+		listCategorias.setModel(listCate);
+	}
+	
 	protected void cancelarAltaCurso(ActionEvent arg0) {
 		limpiarFormulario();
 		setVisible(false);

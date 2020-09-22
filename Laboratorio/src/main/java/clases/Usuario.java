@@ -2,6 +2,7 @@ package clases;
 
 import java.util.*;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -17,6 +18,10 @@ public abstract class Usuario {
 	private String correo;
 	private Date fechaNac;
 	private String password;
+	
+	//lista de cursos previos
+	@ManyToMany
+	private List<Usuario> sigue = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -71,5 +76,13 @@ public abstract class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	} 
-	
+	public void agregarSigue(Usuario usuario) {
+		sigue.add(usuario);
+	}
+	public void removerSigue(Usuario usuario) {
+		sigue.remove(usuario);
+	}
+	public List<Usuario> getSigue(){
+		return this.sigue;
+	}
 }
