@@ -38,25 +38,9 @@ public class principalView {
 	//JInternal Frame Instituto
 	private AltaInstituto altaInstitutoInternalFrame;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					principalView window = new principalView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	//JInternal Frame Categoria
+	private AltaCategoria  altaCategoriaInternalFrame;
+	
 	public principalView() {
 		initialize();
 		
@@ -159,6 +143,15 @@ public class principalView {
 		altaInstitutoInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
 		altaInstitutoInternalFrame.setVisible(false);
 		frame.getContentPane().add(altaInstitutoInternalFrame);
+		
+		/*------------------------------Categoria------------------------------*/
+		//Alta de Categoria
+		altaCategoriaInternalFrame = new AltaCategoria(iusu);
+		jIternalFrameSize = altaCategoriaInternalFrame.getSize();
+		altaCategoriaInternalFrame.setLocation((escritorioTam.width - jIternalFrameSize.width)/2,(escritorioTam.height- jIternalFrameSize.height)/2);
+		altaCategoriaInternalFrame.setVisible(false);
+		frame.getContentPane().add(altaCategoriaInternalFrame);
+		
 			
 	}
 
@@ -302,6 +295,18 @@ public class principalView {
 			}
 		});
 		MenuInstituto.add(MenuItemAltaInstituto);
+		
+		/*---------- Categoria ----------*/
+		JMenu MenuCategoria = new JMenu("Categoria");
+		menuBar.add(MenuCategoria);
+		
+		JMenuItem MenuItemAltaCategoria = new JMenuItem("Alta de Categoria");
+		MenuItemAltaCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaCategoriaInternalFrame.setVisible(true);
+			}
+		});
+		MenuCategoria.add(MenuItemAltaCategoria);
 		
 	}
 }

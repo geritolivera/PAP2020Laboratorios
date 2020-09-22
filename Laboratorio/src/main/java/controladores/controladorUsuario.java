@@ -24,21 +24,21 @@ public class controladorUsuario implements IcontroladorUsuario{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Alta de Usuario
 	@Override
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto) throws UsuarioExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if(!mUsu.existeUsuarioNick(nickname)){
 			if(!this.existeCorreoUsuario(correo)){
 				//si la string instituto no tiene nada
 				if(instituto == null) {
-					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac);
+					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac,password);
 					mUsu.agregarUsuario(est);
 
 				}else {
 					if (mIns.existeInstituto(instituto)) {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
-						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac);
+						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac,password);
 						Instituto ins = mIns.buscarInstituto(instituto);
 						//aniade tambien el docente al instituto
 						doc.setInstituto(ins);

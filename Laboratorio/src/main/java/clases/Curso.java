@@ -32,7 +32,10 @@ public class Curso {
 	@ManyToOne
 	@JoinColumn(updatable = true)
 	private Instituto instituto;
-
+	
+	//Lista de categorizaciones
+	@ManyToMany (mappedBy= "categorias")
+	private List<Categoria> categorias = new ArrayList<>();
 
 	public Curso() {
 		super();
@@ -129,5 +132,11 @@ public class Curso {
 	
 	public List<Curso> getPrevias(){
 		return this.previas;
+	}
+	public List<Categoria> getCategoria(){
+		return this.categorias;
+	}
+	public void agregarCategoria(Categoria categoria) {
+		categorias.add(categoria);
 	}
 }

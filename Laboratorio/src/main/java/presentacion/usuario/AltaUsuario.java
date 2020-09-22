@@ -23,6 +23,8 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField textFieldEmail;
 	private JDateChooser dateChooser;
 	private JComboBox<String> institutoChoose;
+	private JPasswordField  textFieldPasswrd;
+	private JPasswordField  textFieldPasswordOK;
 	
 
 	public AltaUsuario(IcontroladorUsuario icon) {
@@ -35,7 +37,7 @@ public class AltaUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta Usuario");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 449, 380);
 		getContentPane().setLayout(null);
 
 		JLabel LabelNickname = new JLabel("Nickname");
@@ -58,14 +60,24 @@ public class AltaUsuario extends JInternalFrame {
 		LabelEmail.setBounds(25, 145, 140, 15);
 		getContentPane().add(LabelEmail);
 
+		JLabel LabelPassword = new JLabel("Password");
+		LabelPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		LabelPassword.setBounds(25, 185, 140, 15);
+		getContentPane().add(LabelPassword);
+				
+		JLabel LabelConfirmPassword = new JLabel("Confirmar Password");
+		LabelConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		LabelConfirmPassword.setBounds(25, 225, 140, 15);
+		getContentPane().add(LabelConfirmPassword);		
+		
 		JLabel LabelFechaNac = new JLabel("Fecha de Nacimiento");
 		LabelFechaNac.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelFechaNac.setBounds(25, 185, 130, 15);
+		LabelFechaNac.setBounds(25, 265, 130, 15);
 		getContentPane().add(LabelFechaNac);
 		
 		JLabel LabelInstituto = new JLabel("Instituto");
 		LabelInstituto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		LabelInstituto.setBounds(25, 225, 70, 15);
+		LabelInstituto.setBounds(25, 305, 70, 15);
 		getContentPane().add(LabelInstituto);
 
 		textFieldEmail = new JTextField();
@@ -87,15 +99,25 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldApellido.setColumns(10);
 		textFieldApellido.setBounds(165, 100, 130, 25);
 		getContentPane().add(textFieldApellido);
-
+		
+		textFieldPasswrd = new JPasswordField ();
+		textFieldPasswrd.setColumns(10);
+		textFieldPasswrd.setBounds(165, 180, 130, 25);
+		getContentPane().add(textFieldPasswrd);
+		
+		textFieldPasswordOK = new JPasswordField ();
+		textFieldPasswordOK.setColumns(10);
+		textFieldPasswordOK.setBounds(165, 220, 130, 25);
+		getContentPane().add(textFieldPasswordOK);
+		
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("dd-MM-yyyy");
-		dateChooser.setBounds(165, 180, 130, 25);
+		dateChooser.setBounds(165, 260, 130, 25);
 		getContentPane().add(dateChooser);
 
 		institutoChoose = new JComboBox<String>();
 		iniciarlizarComboBoxes();
-		institutoChoose.setBounds(165, 225, 130, 25);
+		institutoChoose.setBounds(165, 300, 130, 25);
 		getContentPane().add(institutoChoose);
 
 		JButton ButtonAceptar = new JButton("Aceptar");
@@ -104,7 +126,7 @@ public class AltaUsuario extends JInternalFrame {
 				AltaUsuarioActionPerformed(e);
 			}
 		});
-		ButtonAceptar.setBounds(325, 70, 90, 25);
+		ButtonAceptar.setBounds(325, 100, 90, 25);
 		getContentPane().add(ButtonAceptar);
 
 		JButton ButtonCancelar = new JButton("Cancelar");
@@ -113,8 +135,9 @@ public class AltaUsuario extends JInternalFrame {
 				cancelarAltaUsuario(arg0);
 			}
 		});
-		ButtonCancelar.setBounds(325, 140, 90, 25);
+		ButtonCancelar.setBounds(325, 180, 90, 25);
 		getContentPane().add(ButtonCancelar);
+		
 		
 	}
 
@@ -128,17 +151,18 @@ public class AltaUsuario extends JInternalFrame {
 		String nombre = this.textFieldNombre.getText();
 		String apellido = this.textFieldApellido.getText();
 		String email = this.textFieldEmail.getText();
+		String pswwd = this.textFieldPasswrd.toString();
 		Date dateChooser = this.dateChooser.getDate();
 		if(checkFormulario()) {
 			try {
 				String instituto = this.institutoChoose.getSelectedItem().toString();
 				if(!instituto.isEmpty()) {
-					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto, pswwd);
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					limpiarFormulario();
 					setVisible(false);
 				} else {
-					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null, pswwd);
 					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					limpiarFormulario();
 					setVisible(false);
@@ -161,12 +185,14 @@ public class AltaUsuario extends JInternalFrame {
 		String nombre = this.textFieldNombre.getText();
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
+		String pswwd = this.textFieldPasswrd.toString();
+		String pswwdOK = this.textFieldPasswordOK.toString();
 		Date dateChooser = this.dateChooser.getDate();
 		String fechaString = dateChooser.toString();
 
 		Date todayDate = Calendar.getInstance().getTime();
-		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "No puede haber campos vac�s", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+		if(nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaString.isEmpty() || pswwd.isEmpty() || pswwdOK.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacioss", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
 		if(dateChooser.compareTo(todayDate) > 0) {
@@ -177,6 +203,12 @@ public class AltaUsuario extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Debe ingresar una direccion de correo valida", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
             return false;
 		}
+		if(!pswwd.equals(pswwdOK)) {
+			JOptionPane.showMessageDialog(this, "Password no es igual, por favor ingresa los datos de nuevo", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			textFieldPasswrd.setText("");
+			textFieldPasswordOK.setText("");
+            return false;
+		}
 		return true;
 	}
 	
@@ -185,6 +217,8 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNick.setText("");
 		textFieldNombre.setText("");
 		textFieldApellido.setText("");
+		textFieldPasswrd.setText("");
+		textFieldPasswordOK.setText("");
 		dateChooser.setDate((Date)null);
 		dateChooser.revalidate();
 	}

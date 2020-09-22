@@ -13,25 +13,6 @@ public class AltaInstituto extends JInternalFrame {
 	private IcontroladorUsuario iusu;
 	private JTextField tfNombreInstituto;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {/*
-					AltaInstituto frame = new AltaInstituto();
-					frame.setVisible(true);*/
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public AltaInstituto(IcontroladorUsuario iusu) {
 		this.iusu = iusu;
 		setResizable(true);

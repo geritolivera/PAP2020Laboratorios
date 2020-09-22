@@ -23,12 +23,12 @@ public class Docente extends Usuario{
 	public Docente() {
 		super();
 	}
-	public Docente(String nick, String nombre, String apellido, String correo, Date fechaNac) {
-		super(nick, nombre, apellido, correo, fechaNac);
+	public Docente(String nick, String nombre, String apellido, String correo, Date fechaNac, String password) {
+		super(nick, nombre, apellido, correo, fechaNac, password);
 	}
 	
 	public Docente(Usuario user) {
-		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac());
+		super(user.getNick(), user.getNombre(), user.getApellido(), user.getCorreo(), user.getFechaNac(), user.getPassword());
 	}
 	
 	public void setUserDocente(Usuario user) {

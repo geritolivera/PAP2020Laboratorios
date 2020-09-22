@@ -11,6 +11,7 @@
 		<class>clases.Instituto</class>
 		<class>clases.InscripcionED</class>
 		<class>clases.InscripcionPF</class>
+		<class>clases.Categoria</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
