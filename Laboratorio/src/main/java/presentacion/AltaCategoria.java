@@ -2,19 +2,12 @@ package presentacion;
 
 import exepciones.CategoriaExcepcion;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-import exepciones.InstitutoExcepcion;
 import interfaces.IcontroladorUsuario;
+
 import java.awt.Font;
 
 public class AltaCategoria extends JInternalFrame {
@@ -47,6 +40,7 @@ public class AltaCategoria extends JInternalFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				btnAceptarActionPerformed(arg0);
 			}
 			
 		});
@@ -64,7 +58,7 @@ public class AltaCategoria extends JInternalFrame {
 	}
 	
 	protected void btnAceptarActionPerformed(ActionEvent arg0) {
-		/*String nombreCategoria = this.NombreCategoria.getText();
+		String nombreCategoria = this.NombreCategoria.getText();
 		if (nombreCategoria.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No pueden haber campos vacios" , "Alta de Categoria",JOptionPane.ERROR_MESSAGE);
 		}try {
@@ -74,7 +68,7 @@ public class AltaCategoria extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Categoria", JOptionPane.ERROR_MESSAGE);
 		}
 		NombreCategoria.setText("");
-        setVisible(false);*/
+        setVisible(false);
 	}
 	
 	protected void btnCancelarActionPerformed(ActionEvent arg0) {

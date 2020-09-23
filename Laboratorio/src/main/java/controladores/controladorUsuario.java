@@ -3,11 +3,9 @@ package controladores;
 import clases.*;
 import conexion.Conexion;
 import datatypes.*;
-import exepciones.InstitutoExcepcion;
-import exepciones.UsuarioExcepcion;
+import exepciones.*;
 import interfaces.IcontroladorUsuario;
-import manejadores.manejadorInstituto;
-import manejadores.manejadorUsuario;
+import manejadores.*;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -204,6 +202,19 @@ public class controladorUsuario implements IcontroladorUsuario{
 			}
 		}
 		return estudiantes;
+	}
+	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//13 - Alta de Categoria
+	@Override
+	public void AltaCategoria(String nombre) throws CategoriaExcepcion{
+		manejadorCategoria mc = manejadorCategoria.getInstancia();
+		if(mc.existeCategoria(nombre)) {
+			throw new CategoriaExcepcion("La Categoria con el nombre " + " ya existe en el Sistema");
+		} else {
+			Categoria c = new Categoria(nombre);
+			mc.agregarCategoria(c);
+		}
 	}
 	
 }

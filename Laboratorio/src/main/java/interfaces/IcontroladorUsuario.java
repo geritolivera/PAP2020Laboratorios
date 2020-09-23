@@ -1,8 +1,7 @@
 package interfaces;
 
 import datatypes.DTUsuario;
-import exepciones.InstitutoExcepcion;
-import exepciones.UsuarioExcepcion;
+import exepciones.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,4 +42,7 @@ public interface IcontroladorUsuario {
 
 	public String[] listarEstudiantesAux(); //Lista los nicknames de los estudiantes
 	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//13 - Alta de Categoria
+	public void AltaCategoria(String nombre) throws CategoriaExcepcion;
 }

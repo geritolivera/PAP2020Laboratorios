@@ -43,7 +43,7 @@ public class AltaCurso extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Alta de Curso");
-		setBounds(100, 100, 460, 760);
+		setBounds(100, 100, 410, 727);
 		getContentPane().setLayout(null);
 
 		/*----LABELS---------------------------------------------*/
@@ -114,6 +114,7 @@ public class AltaCurso extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				listarCursos(e);
 				habilitarIngresarDatos(e);
+				inicializarListaCategoria(e);
 			}
 		});
 		comboBoxInstituto.setBounds(155, 30, 150, 20);
@@ -177,8 +178,8 @@ public class AltaCurso extends JInternalFrame {
 		scrollPaneCategorias.setBounds(155, 420, 200, 100);
 		getContentPane().add(scrollPaneCategorias);		
 		listCategorias = new JList<String>();
-		listCategorias.setEnabled(false);
 		scrollPaneCategorias.setViewportView(listCategorias);
+		listCategorias.setEnabled(false);
 				
 		JScrollPane scrollPaneCursos = new JScrollPane();
 		scrollPaneCursos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -310,7 +311,7 @@ public class AltaCurso extends JInternalFrame {
 		comboBoxInstituto.setModel(listInst);
 	}
 	
-	public void inicializarComboBoxCategoria() {
+	public void inicializarListaCategoria(ActionEvent arg0) {
 		DefaultListModel<String> listCate = new DefaultListModel<String>();
 		ArrayList<String> categorias = iconC.listarCategorias();
 		for(String s : categorias) {
@@ -332,6 +333,7 @@ public class AltaCurso extends JInternalFrame {
 		textURL.setText("");
 		dateChooser.setDate((Date)null);
 		dateChooser.revalidate();
+		listCategorias.removeAll();
 	}
 
 	private boolean checkFormulario() {

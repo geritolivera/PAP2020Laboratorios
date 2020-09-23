@@ -151,7 +151,7 @@ public class AltaUsuario extends JInternalFrame {
 		String nombre = this.textFieldNombre.getText();
 		String apellido = this.textFieldApellido.getText();
 		String email = this.textFieldEmail.getText();
-		String pswwd = this.textFieldPasswrd.toString();
+		String pswwd = String.valueOf(this.textFieldPasswrd.getPassword());
 		Date dateChooser = this.dateChooser.getDate();
 		if(checkFormulario()) {
 			try {
@@ -185,8 +185,8 @@ public class AltaUsuario extends JInternalFrame {
 		String nombre = this.textFieldNombre.getText();
 		String apellido = this.textFieldNombre.getText();
 		String email = this.textFieldEmail.getText();
-		String pswwd = this.textFieldPasswrd.toString();
-		String pswwdOK = this.textFieldPasswordOK.toString();
+		String pswwd = String.valueOf(this.textFieldPasswrd.getPassword());
+		String pswwdOK = String.valueOf(this.textFieldPasswordOK.getPassword());
 		Date dateChooser = this.dateChooser.getDate();
 		String fechaString = dateChooser.toString();
 
@@ -208,6 +208,10 @@ public class AltaUsuario extends JInternalFrame {
 			textFieldPasswrd.setText("");
 			textFieldPasswordOK.setText("");
             return false;
+		}
+		if(pswwd.length() < 8) {
+			JOptionPane.showMessageDialog(this, "Password debe tener al menos 8 caracteres", "Alta Usuario", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		return true;
 	}

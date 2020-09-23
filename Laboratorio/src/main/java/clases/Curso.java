@@ -34,7 +34,7 @@ public class Curso {
 	private Instituto instituto;
 	
 	//Lista de categorizaciones
-	@ManyToMany (mappedBy= "categorias")
+	@ManyToMany
 	private List<Categoria> categorias = new ArrayList<>();
 
 	public Curso() {

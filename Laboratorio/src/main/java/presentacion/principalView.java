@@ -41,6 +41,25 @@ public class principalView {
 	//JInternal Frame Categoria
 	private AltaCategoria  altaCategoriaInternalFrame;
 	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					principalView window = new principalView();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */	
 	public principalView() {
 		initialize();
 		
