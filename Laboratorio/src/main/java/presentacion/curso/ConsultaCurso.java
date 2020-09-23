@@ -33,6 +33,7 @@ public class ConsultaCurso extends JInternalFrame {
 	private JComboBox<String> comboBoxProAso;
 	private JComboBox<String> comboBoxInstitutos;
 	private JComboBox<String> comboBoxCursos;
+	private JComboBox<String> comboBoxCategoria;
 	private JTextField textFieldFechaI;
 	private JTextField textFieldFechaF;
 	private JTextField textFieldFechP;
@@ -51,7 +52,7 @@ public class ConsultaCurso extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Consulta de Curso");
-		setBounds(100, 100, 1130, 550);
+		setBounds(100, 100, 1134, 580);
 		getContentPane().setLayout(null);
 
 		JLabel LabelSelIns = new JLabel("Seleccionar Instituto");
@@ -77,7 +78,7 @@ public class ConsultaCurso extends JInternalFrame {
 		panelCurso.setLayout(null);
 		panelCurso.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Curso",
 				TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.ITALIC, 14), new Color(0, 0, 0)));
-		panelCurso.setBounds(10, 103, 408, 379);
+		panelCurso.setBounds(10, 103, 408, 400);
 		getContentPane().add(panelCurso);
 
 		JLabel LabelDesc = new JLabel("Descripcion");
@@ -181,20 +182,30 @@ public class ConsultaCurso extends JInternalFrame {
 		comboBoxPrevias.setBounds(169, 311, 200, 20);
 		panelCurso.add(comboBoxPrevias);
 		
-				JLabel lblProgramasAsociadas = new JLabel("Programas Asociados");
-				lblProgramasAsociadas.setBounds(17, 341, 134, 20);
-				panelCurso.add(lblProgramasAsociadas);
-				lblProgramasAsociadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		JLabel lblProgramasAsociadas = new JLabel("Programas Asociados");
+		lblProgramasAsociadas.setBounds(17, 341, 134, 20);
+		panelCurso.add(lblProgramasAsociadas);
+		lblProgramasAsociadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-						comboBoxProAso = new JComboBox<String>();
-						comboBoxProAso.setBounds(169, 341, 200, 20);
-						panelCurso.add(comboBoxProAso);
-						comboBoxProAso.setEnabled(false);
-						comboBoxProAso.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								comboBoxProAsoActionPerformed(arg0);
-							}
-						});
+		comboBoxProAso = new JComboBox<String>();
+		comboBoxProAso.setBounds(169, 341, 200, 20);
+		panelCurso.add(comboBoxProAso);
+		comboBoxProAso.setEnabled(false);
+						
+		comboBoxCategoria = new JComboBox<String>();
+		comboBoxCategoria.setEnabled(false);
+		comboBoxCategoria.setBounds(169, 369, 200, 20);
+		panelCurso.add(comboBoxCategoria);
+						
+		JLabel lblCategoria = new JLabel("Categorias");
+		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCategoria.setBounds(17, 369, 134, 20);
+		panelCurso.add(lblCategoria);
+		comboBoxProAso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					comboBoxProAsoActionPerformed(arg0);
+			}
+		});
 
 		comboBoxCursos = new JComboBox<String>();
 		comboBoxCursos.setEnabled(false);
