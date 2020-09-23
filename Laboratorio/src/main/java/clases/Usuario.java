@@ -19,9 +19,13 @@ public abstract class Usuario {
 	private Date fechaNac;
 	private String password;
 	
-	//lista de cursos previos
+	//lista de usuarios a los que sigue
 	@ManyToMany
 	private List<Usuario> sigue = new ArrayList<>();
+	
+	//lista de seguidores
+	@ManyToMany
+	private List<Usuario> seguidores = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -84,5 +88,14 @@ public abstract class Usuario {
 	}
 	public List<Usuario> getSigue(){
 		return this.sigue;
+	}	
+	public void agregarSeguidor(Usuario usuario) {
+		seguidores.add(usuario);
+	}
+	public void removerSeguidor(Usuario usuario) {
+		seguidores.remove(usuario);
+	}
+	public List<Usuario> getSeguidores(){
+		return this.seguidores;
 	}
 }
