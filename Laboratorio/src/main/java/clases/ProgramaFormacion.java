@@ -16,6 +16,7 @@ public class ProgramaFormacion {
 	private Date fechaI;
 	private Date fechaF;
 	private Date fechaA;
+	private String imagenURL;
 	@ManyToMany (mappedBy="programas")
 	@Column(nullable = true)
 	private List<Estudiante> estudiantes = new ArrayList<>();
@@ -83,6 +84,12 @@ public class ProgramaFormacion {
 	}
 	public List<Curso> getCursos() {
 		return cursos;
+	}
+	public String getImagenURL() {
+		return imagenURL;
+	}
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
 	}
 	
 //	public void agregarInscripcion(Date fecha, Estudiante est) {

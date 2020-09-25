@@ -11,6 +11,7 @@ public class DTProgramaFormacion {
 	private Date fechaI;
 	private Date fechaF;
 	private Date fechaA;
+	private String imagenURL;
 	//private List<DTCurso> cursos = new ArrayList<>();
 	private ArrayList<String> cursos = new ArrayList<>();
 	
@@ -74,5 +75,11 @@ public class DTProgramaFormacion {
 	}
 	public void setFechaA(Date fechaA) {
 		this.fechaA = fechaA;
+	}
+	public String getImagenURL() {
+		return imagenURL;
+	}
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
 	}
 }
