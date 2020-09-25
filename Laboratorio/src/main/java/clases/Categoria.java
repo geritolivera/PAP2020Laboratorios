@@ -40,4 +40,7 @@ public class Categoria {
 		this.cursos = cursos;
 	}	
 	
+	public void agregarCurso(Curso c) {
+		this.cursos.add(c);
+	}
 }

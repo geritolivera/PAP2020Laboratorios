@@ -12,7 +12,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion;
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas, ArrayList<String> categorias) throws CursoExcepcion, InstitutoExcepcion;
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
@@ -62,4 +62,6 @@ public interface IcontroladorCurso {
 	public ArrayList<String> listarEstudiantes();
 	
 	public ArrayList<String> listarCategorias();
+
+	public ArrayList<String> getCategoriasPrograma(String programa);
 }

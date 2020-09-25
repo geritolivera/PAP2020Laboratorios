@@ -20,11 +20,14 @@ public class DTCurso {
 	ArrayList<String> ediciones = new ArrayList<>();
 	ArrayList<String> programas = new ArrayList<>();
 	ArrayList<String> previas = new ArrayList<>();
+	ArrayList<String> categorias = new ArrayList<>();
 	
 	public DTCurso() {
 		super();
 	}
 	
+
+
 	public DTCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto) {
 		super();
 		this.nombre = nombre;
@@ -124,5 +127,19 @@ public class DTCurso {
 	}
 	public ArrayList<String> getPrevias(){
 		return previas;
+	}
+	public ArrayList<String> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(ArrayList<String> categorias) {
+		this.categorias = categorias;
+	}
+
+
+
+	public void agregarCat(String cat) {
+		categorias.add(cat);
+		
 	}
 }

@@ -33,6 +33,8 @@ public class AltaCurso extends JInternalFrame {
 	private JTextArea output;
 	private JList<String> listCategorias;
 
+	private ArrayList<String> categorias;
+
 	public AltaCurso(IcontroladorCurso icon) {
 
 
@@ -281,7 +283,9 @@ public class AltaCurso extends JInternalFrame {
 		if(!listCursos.getSelectedValuesList().isEmpty()) {
 			this.previas = (ArrayList<String>) listCursos.getSelectedValuesList();
 		}
-
+		if(!listCategorias.getSelectedValue().isEmpty()) {
+			this.categorias = (ArrayList<String>) listCategorias.getSelectedValuesList();
+		}
 		Date dateChooser = this.dateChooser.getDate();
 		try {
 			cantCreditos = Integer.parseInt(this.textCantCreditos.getText());
@@ -289,7 +293,7 @@ public class AltaCurso extends JInternalFrame {
 				try {
 					if (!instituto.isEmpty()) {
 						if (!nombreCurso.isEmpty()) {
-							this.iconC.AltaCurso(nombreCurso, descripcion, meses, duracion, cantCreditos, dateChooser, url, instituto, previas);
+							this.iconC.AltaCurso(nombreCurso, descripcion, meses, duracion, cantCreditos, dateChooser, url, instituto, previas, categorias);
 							JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
 							inicializarComboBoxInstituto();
 							limpiarFormulario();
@@ -312,6 +316,7 @@ public class AltaCurso extends JInternalFrame {
 	}
 	
 	public void inicializarListaCategoria(ActionEvent arg0) {
+		listCategorias.setEnabled(true);
 		DefaultListModel<String> listCate = new DefaultListModel<String>();
 		ArrayList<String> categorias = iconC.listarCategorias();
 		for(String s : categorias) {

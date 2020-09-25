@@ -133,6 +133,10 @@ public class Curso {
 	public List<Curso> getPrevias(){
 		return this.previas;
 	}
+	public void setCategoria(List<Categoria> cats) {
+		this.categorias=cats;
+	}
+	
 	public List<Categoria> getCategoria(){
 		return this.categorias;
 	}

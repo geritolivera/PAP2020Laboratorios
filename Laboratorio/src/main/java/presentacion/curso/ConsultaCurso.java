@@ -33,7 +33,7 @@ public class ConsultaCurso extends JInternalFrame {
 	private JComboBox<String> comboBoxProAso;
 	private JComboBox<String> comboBoxInstitutos;
 	private JComboBox<String> comboBoxCursos;
-	private JComboBox<String> comboBoxCategoria;
+	private JComboBox<String> comboBoxCategoriaCurso;
 	private JTextField textFieldFechaI;
 	private JTextField textFieldFechaF;
 	private JTextField textFieldFechP;
@@ -192,10 +192,10 @@ public class ConsultaCurso extends JInternalFrame {
 		panelCurso.add(comboBoxProAso);
 		comboBoxProAso.setEnabled(false);
 						
-		comboBoxCategoria = new JComboBox<String>();
-		comboBoxCategoria.setEnabled(false);
-		comboBoxCategoria.setBounds(169, 369, 200, 20);
-		panelCurso.add(comboBoxCategoria);
+		comboBoxCategoriaCurso = new JComboBox<String>();
+		comboBoxCategoriaCurso.setEnabled(false);
+		comboBoxCategoriaCurso.setBounds(169, 369, 200, 20);
+		panelCurso.add(comboBoxCategoriaCurso);
 						
 		JLabel lblCategoria = new JLabel("Categorias");
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -385,6 +385,15 @@ public class ConsultaCurso extends JInternalFrame {
 		}
 		comboBoxPrevias.setModel(modelPrevias);
 	}
+	
+	protected void listarCatCurso(ArrayList<String> categorias) {
+		DefaultComboBoxModel<String> modelCategoriasCurso = new DefaultComboBoxModel<String>();
+		for (String cat : categorias) {
+			//System.out.println(cat);
+			modelCategoriasCurso.addElement(cat);
+		}
+		comboBoxCategoriaCurso.setModel(modelCategoriasCurso);
+	}
 
 	// aca lista los cursos
 	private void comboBoxInstitutosActionPerformed(ActionEvent arg0) {
@@ -413,6 +422,7 @@ public class ConsultaCurso extends JInternalFrame {
 				textCantHoras.setEnabled(true);
 				textFechaAlta.setEnabled(true);
 				textUrl.setEnabled(true);
+				comboBoxCategoriaCurso.setEnabled(true);
 				comboBoxEdicionCurso.setEnabled(true);
 				comboBoxPrevias.setEnabled(true);
 				comboBoxProAso.setEnabled(true);
@@ -427,8 +437,10 @@ public class ConsultaCurso extends JInternalFrame {
 				ArrayList<String> ediciones = infoCurso.getEdiciones();
 				ArrayList<String> programas = infoCurso.getProgramas();
 				ArrayList<String> previas = infoCurso.getPrevias();
+				ArrayList<String> categorias = infoCurso.getCategorias();
 				listarEdicionesAsociadas(ediciones);
 				listarProgramasAsociados(programas);
+				listarCatCurso(categorias);
 				listarPrevias(previas);
 			} catch (CursoExcepcion e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Consulta de Curso", JOptionPane.ERROR_MESSAGE);
@@ -500,6 +512,7 @@ public class ConsultaCurso extends JInternalFrame {
 		comboBoxEdicionCurso.setModel(vacioModel);
 		comboBoxProAso.setModel(vacioModel);
 		comboBoxPrevias.setModel(vacioModel);
+		comboBoxCategoriaCurso.setModel(vacioModel);
 		textDescripcion.setText("");
 		textUrl.setText("");
 		textFechaAlta.setText("");

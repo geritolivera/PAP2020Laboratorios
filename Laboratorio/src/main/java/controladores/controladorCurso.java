@@ -18,8 +18,9 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas) throws CursoExcepcion, InstitutoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas,  ArrayList<String> cats) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
+		manejadorCategoria mcat = manejadorCategoria.getInstancia();
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
@@ -35,6 +36,14 @@ public class controladorCurso implements IcontroladorCurso{
 						//System.out.println(s);
 						Curso previa = mc.buscarCurso(s);
 						cursoNuevo.agregarPrevias(previa);
+					}
+				}
+				if (!cats.isEmpty()){
+					for (String cat : cats) {
+						//System.out.println(s);
+						Categoria c = mcat.buscarCategoria(cat);
+						c.agregarCurso(cursoNuevo);
+						cursoNuevo.agregarCategoria(c);
 					}
 				}
 				mc.agregarCurso(cursoNuevo);
@@ -73,12 +82,14 @@ public class controladorCurso implements IcontroladorCurso{
 		List<EdicionCurso> ediciones = new ArrayList<>();
 		List<ProgramaFormacion> programas = new ArrayList<>();
 		List<Curso> previas = new ArrayList<>();
+		List<Categoria> categorias = new ArrayList<>();
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
 			ediciones = c.getEdiciones();
 			programas = c.getProgramas();
 			previas = c.getPrevias();
+			categorias = c.getCategoria();
 			//son listas, no requieren informacion de las ediciones o programas
 			for(EdicionCurso e: ediciones) {
 				dtc.agregarEdicion(e.getNombre());
@@ -89,6 +100,10 @@ public class controladorCurso implements IcontroladorCurso{
 			for(Curso cur : previas){
 				dtc.agregarPrevia(cur.getNombre());
 			}
+			for (Categoria cat:categorias) {
+				dtc.agregarCat(cat.getNombre());
+			}
+			
 			return dtc;
 		}
 		else
@@ -313,6 +328,25 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new ProgramaFormacionExcepcion("El programa " + nombreProg + " no existe.");
 	}
+	
+	@Override
+	public ArrayList<String> getCategoriasPrograma(String nombreProg) {
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		if(mPro.existePrograma(nombreProg)) {
+			ProgramaFormacion p = mPro.buscarPrograma(nombreProg);
+			List<Curso> cursos = p.getCursos();
+			ArrayList<String> listaCat= new  ArrayList<String>();
+			for(Curso c:cursos) {
+				List<Categoria> categorias = c.getCategoria();
+				for(Categoria cat: categorias) {
+					if(!listaCat.contains(cat.getNombre()))
+						listaCat.add(cat.getNombre());
+				}
+			}
+			return listaCat;
+		}
+		return null;
+	}
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones Auxiliares
@@ -411,4 +445,6 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return categorias;
 	}
+
+
 }
