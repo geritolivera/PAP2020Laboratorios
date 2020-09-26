@@ -179,7 +179,7 @@ public class principalView {
 	 */
 	private void initialize() {
 		frame = new JFrame("edEXT");
-		frame.setBounds(100, 100, 1300, 700);
+		frame.setBounds(100, 100, 1300, 795);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);	
 				
