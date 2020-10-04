@@ -29,14 +29,14 @@ public class controladorUsuario implements IcontroladorUsuario{
 			if(!this.existeCorreoUsuario(correo)){
 				//si la string instituto no tiene nada
 				if(instituto == null) {
-					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac,password);
+					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac, password);
 					mUsu.agregarUsuario(est);
 
 				}else {
 					if (mIns.existeInstituto(instituto)) {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
-						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac,password);
+						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac, password);
 						Instituto ins = mIns.buscarInstituto(instituto);
 						//aniade tambien el docente al instituto
 						doc.setInstituto(ins);

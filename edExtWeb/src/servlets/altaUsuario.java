@@ -45,9 +45,9 @@ public class altaUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//todo lo que se obtiene del frontend va en comillas
 		//datos del usuario
-		String tipoUsuario = request.getParameter("tipoUser");
 		String nick = request.getParameter("nickName");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
@@ -56,9 +56,8 @@ public class altaUsuario extends HttpServlet {
 		//cambia la string a un date
 		Date fechaNac = null;
 		try {
-			fechaNac = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("fechaNacimiento"));
+			fechaNac = format.parse(request.getParameter("fechaNacimiento"));
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}		
 		//tipoUser
@@ -72,9 +71,8 @@ public class altaUsuario extends HttpServlet {
 			request.setAttribute("mensaje", "El usuario de nickname " + nick + " ya existe en el sistema.");
 			e.printStackTrace();
 		}
-		//RequestDispatcher rd;
-		//rd = request.getRequestDispatcher("/notificacion.jsp");
-		//rd.forward(request, response);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/notificacion.jsp");
+		rd.forward(request, response);
 	}
-
 }
