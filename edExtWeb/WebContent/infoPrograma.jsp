@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ include file="defaultHeader.jsp"%>
+<%@page import="java.util.ArrayList"%>
 
     <div class="main">
         <br><br>
@@ -46,9 +47,13 @@
                             <span class="card-title">Categorias</span>
                         </div>
                         <ul class="collection">
-                            <li class="collection-item">Matematica</li>
-                            <li class="collection-item">Programcion</li>
-                            <li class="collection-item">Final</li>
+                        	<%
+							 ArrayList<String> cats = (java.util.ArrayList)request.getAttribute("categorias");
+							 for (String s : cats)
+							 { 
+								out.print("<li class='collection-item'>>"+s+"</li>");
+							 }
+							%>
                         </ul>
                     </div>
 
