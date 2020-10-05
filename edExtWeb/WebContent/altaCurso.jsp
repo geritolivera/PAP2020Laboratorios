@@ -7,7 +7,7 @@
         <div class="container">
             <!-- FORM-->
             <div class="row">
-                <form class="col s12 ">
+                <form class="col s12 " action="altaCurso" method="POST">
                     <div class="card-panel">
                         <h4 class="header2"> <span style="color: #81054b">></span>Alta de Curso</h4>
                         <div class="row">
@@ -18,7 +18,7 @@
                             <div class="input-field col s6">
                                 <select name="instituto" id="instituto">
                                     <option value="" disabled selected>Seleccione uno</option>
-                                    <option value="inco">INCO</option>
+                                    <option value="elbio">Elbio</option>
                                     <option value="mat">MAT</option>
                                 </select>
                                 <label>Instituto</label>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="input-field col s4">
                                 <input id="creditos" name="creditos" type="number" class="validate">
-                                <label for="creditoss">Creditos</label>
+                                <label for="creditos">Creditos</label>
                             </div>
                         </div>
                         <div class="row">
@@ -54,8 +54,8 @@
                             <div class="input-field col s6">
                                 <select multiple name="previas" id="previas">
                                     <option value="" disabled selected>Seleccionar previas</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
+                                    <option value="matematica">Matematica </option>
+                                    <option value="Calculo">Calculo</option>
                                     <option value="3">Option 3</option>
                                 </select>
                                 <label>Previas</label>
@@ -63,8 +63,8 @@
                             <div class="input-field col s6">
                                 <select multiple name="categorias" id="categorias">
                                     <option value="" disabled selected>Seleccionar categorias</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
+                                    <option value="cat1">Cat 1</option>
+                                    <option value="cat2">Cat 2</option>
                                     <option value="3">Option 3</option>
                                 </select>
                                 <label>Categorias</label>

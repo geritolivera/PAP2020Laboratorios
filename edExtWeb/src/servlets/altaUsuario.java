@@ -66,7 +66,7 @@ public class altaUsuario extends HttpServlet {
 			instituto = request.getParameter("instituto");
 		try {
 			icon.AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd);
-			request.setAttribute("mensaje", "Se ha ingresado correctamente el usuario " + nick + " en el sistema.");
+			request.setAttribute("mensaje", "El usuario " + nick + " se ha ingresado correctamente en el sistema.");
 		} catch (UsuarioExcepcion e) {
 			request.setAttribute("mensaje", "El usuario de nickname " + nick + " ya existe en el sistema.");
 			e.printStackTrace();
