@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@include  file="defaultHeader.jsp" %>
+ <%@page import="java.util.ArrayList"%>
  <div class="main">
         <br><br>
-
+   <%
+	ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
+	%>
         <div class="container">
             <!-- FORM-->
             <div class="row">
@@ -15,11 +18,17 @@
                                 <input type="text" name="nombre" id="nombre">
                                 <label for="nombre">Nombre de Curso</label>
                             </div>
+
                             <div class="input-field col s6">
                                 <select name="instituto" id="instituto">
                                     <option value="" disabled selected>Seleccione uno</option>
-                                    <option value="inco">INCO</option>
-                                    <option value="mat">MAT</option>
+                                   <%
+                                	for (String s : categorias) {
+								   %>
+                                    <option value="<%=s%>"><%=s%></option>
+                                   <%
+                                	}
+                                   %>
                                 </select>
                                 <label>Instituto</label>
                             </div>
