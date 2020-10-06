@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,13 +40,26 @@ public class GetListas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		fabrica fabrica = interfaces.fabrica.getInstancia();
 		IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-		java.util.ArrayList<String> categorias= icon.listarCategorias();
-		request.setAttribute("categorias", categorias);
+		String tipo = (String) request.getAttribute("tipo");
+		/*if(tipo.equals("institutos")) {
+			java.util.ArrayList<String> institutos = icon.listarInstitutos();
+			request.setAttribute("institutos", institutos);
+			for (String s : institutos){ 
+				out.print("<li class='collection-item'>>"+s+"</li>");
+			 }
+		}*/
+		if(tipo.equals("categoria")) {
+			java.util.ArrayList<String> categorias= icon.listarCategorias();
+			request.setAttribute("categorias", categorias);
+			for (String s : categorias){ 
+				out.print("<li class='collection-item'>>"+s+"</li>");
+			}
+		}
 		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("infoPrograma.jsp");
+		rd = request.getRequestDispatcher("altaCurso.jsp");
 		rd.forward(request, response);
 	}
-
 }

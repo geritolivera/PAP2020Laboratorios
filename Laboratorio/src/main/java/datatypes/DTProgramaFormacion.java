@@ -14,6 +14,7 @@ public class DTProgramaFormacion {
 	private String imagenURL;
 	//private List<DTCurso> cursos = new ArrayList<>();
 	private ArrayList<String> cursos = new ArrayList<>();
+	private ArrayList<String> categorias = new ArrayList<>();
 	
 	public DTProgramaFormacion() {
 		super();
@@ -70,6 +71,22 @@ public class DTProgramaFormacion {
 	public ArrayList<String> getCursos() {
 		return cursos;
 	}
+	
+	public void agregarCategoria(String categoria) {
+		categorias.add(categoria);
+	}
+	public ArrayList<String> getCategorias() {
+		return categorias;
+	}
+	public boolean existeCategoria(String categoria) {
+		boolean existe = false;
+		for(String s: categorias) {
+			if(s.equals(categoria))
+				existe = true;
+		}
+		return existe;
+	}
+	
 	public Date getFechaA() {
 		return fechaA;
 	}

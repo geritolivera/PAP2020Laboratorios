@@ -5,7 +5,7 @@
  <div class="main">
         <br><br>
    <%
-	ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
+	//ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
 	%>
         <div class="container">
             <!-- FORM-->
@@ -22,13 +22,7 @@
                             <div class="input-field col s6">
                                 <select name="instituto" id="instituto">
                                     <option value="" disabled selected>Seleccione uno</option>
-                                   <%
-                                	for (String s : categorias) {
-								   %>
-                                    <option value="<%=s%>"><%=s%></option>
-                                   <%
-                                	}
-                                   %>
+                                   
                                 </select>
                                 <label>Instituto</label>
                             </div>
@@ -72,9 +66,7 @@
                             <div class="input-field col s6">
                                 <select multiple name="categorias" id="categorias">
                                     <option value="" disabled selected>Seleccionar categorias</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    
                                 </select>
                                 <label>Categorias</label>
                             </div>
@@ -92,8 +84,46 @@
  <%@include  file="footer.jsp" %>
  <script>
  $(document).ready(function () {
+	 $.ajax({
+         type: "POST",
+         url: "GetListas",
+         data: 'tipo= categorias',
+         success: function(html){
+        	 $('#categorias').html(html);
+        	 $('#categorias').formSelect();
+             var element = document.getElementById('#categorias');
+             var event = new Event('change');
+             element.dispatchEvent(event);
+         }
+     });
+	 $('#categorias').formSelect();
+	 
+	 $.ajax({
+         type: "POST",
+         url: "GetListas",
+         data: 'tipo= institutos',
+         success: function(html){
+        	 $('#institutos').html(html);
+        	 $('#institutos').formSelect();
+             var element = document.getElementById('#institutos');
+             var event = new Event('change');
+             element.dispatchEvent(event);
+         }
+     });
      $('#instituto').formSelect();
+     
+     $.ajax({
+         type: "POST",
+         url: "GetListas",
+         data: 'tipo= previas',
+         success: function(html){
+        	 $('#previas').html(html);
+        	 $('#previas').formSelect();
+             var element = document.getElementById('#previas');
+             var event = new Event('change');
+             element.dispatchEvent(event);
+         }
+     });
      $('#previas').formSelect();
-     $('#categorias').formSelect();
  });
 </script>

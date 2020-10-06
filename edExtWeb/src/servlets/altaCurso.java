@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -45,8 +46,9 @@ public class altaCurso extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
+				
 		//datos del curso
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+		//SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("desc");
 		String duracion = request.getParameter("duracion");

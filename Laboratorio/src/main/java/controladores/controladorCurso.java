@@ -89,7 +89,7 @@ public class controladorCurso implements IcontroladorCurso{
 			ediciones = c.getEdiciones();
 			programas = c.getProgramas();
 			previas = c.getPrevias();
-			categorias = c.getCategoria();
+			categorias = c.getCategorias();
 			//son listas, no requieren informacion de las ediciones o programas
 			for(EdicionCurso e: ediciones) {
 				dtc.agregarEdicion(e.getNombre());
@@ -322,6 +322,12 @@ public class controladorCurso implements IcontroladorCurso{
 			DTProgramaFormacion dt = new DTProgramaFormacion(p);
 			for(Curso c:cursos) {
 				dt.agregarCurso(c.getNombre());
+				List<Categoria> categorias = c.getCategorias();
+				for(Categoria cat: categorias) {
+					if(!dt.existeCategoria(cat.getNombre())) {
+						dt.agregarCategoria(cat.getNombre());
+					}
+				}
 			}
 			return dt;
 		}
@@ -337,7 +343,7 @@ public class controladorCurso implements IcontroladorCurso{
 			List<Curso> cursos = p.getCursos();
 			ArrayList<String> listaCat= new  ArrayList<String>();
 			for(Curso c:cursos) {
-				List<Categoria> categorias = c.getCategoria();
+				List<Categoria> categorias = c.getCategorias();
 				for(Categoria cat: categorias) {
 					if(!listaCat.contains(cat.getNombre()))
 						listaCat.add(cat.getNombre());

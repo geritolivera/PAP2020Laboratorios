@@ -137,7 +137,7 @@ public class Curso {
 		this.categorias=cats;
 	}
 	
-	public List<Categoria> getCategoria(){
+	public List<Categoria> getCategorias(){
 		return this.categorias;
 	}
 	public void agregarCategoria(Categoria categoria) {
