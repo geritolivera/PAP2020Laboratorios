@@ -1,6 +1,7 @@
 package datatypes;
 
 import java.util.Date;
+import java.util.ArrayList;
 
 import clases.Usuario;
 
@@ -11,6 +12,9 @@ public class DTUsuario {
 	private String apellido;
 	private String correo;
 	private Date fechaNac;
+	
+	ArrayList<String> seguidores = new ArrayList<>();
+	ArrayList<String> seguidos = new ArrayList<>();
 	
 	public DTUsuario() {
 		super();
@@ -66,5 +70,19 @@ public class DTUsuario {
 	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
 	} 
+	
+	public void seguirUsuario(String usuario) {
+		seguidos.add(usuario);
+	}
+	public ArrayList<String> getSeguidos(){
+		return this.seguidos;
+	}
+	
+	public void añadirSeguidor(String usuario) {
+		seguidores.add(usuario);
+	}
+	public ArrayList<String> getSeguidores() {
+		return this.seguidores;
+	}
 	
 }

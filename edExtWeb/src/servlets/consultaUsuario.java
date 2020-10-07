@@ -12,21 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 import interfaces.fabrica;
-import interfaces.IcontroladorCurso;
-import exepciones.ProgramaFormacionExcepcion;
-import datatypes.DTProgramaFormacion;
+import interfaces.IcontroladorUsuario;
+import exepciones.UsuarioExcepcion;
+import datatypes.DTUsuario;
+import datatypes.DTEstudiante;
+import datatypes.DTDocente;
 
 /**
- * Servlet implementation class consultaProgramaFormacion
+ * Servlet implementation class consultaUsuario
  */
-@WebServlet("/consultaProgramaFormacion")
-public class consultaProgramaFormacion extends HttpServlet {
+@WebServlet("/consultaUsuario")
+public class consultaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public consultaProgramaFormacion() {
+    public consultaUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,36 +46,44 @@ public class consultaProgramaFormacion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		//recibe programa desde jsp
-		String programa = request.getParameter("programa");
+		//recibe nickname de usuario desde jsp
+		String nickname = request.getParameter("nickname");
 		
-		DTProgramaFormacion dtp = null;
+		DTUsuario dtu = null;
 		try {
-			dtp = icon.verInfoPrograma(programa);
+			dtu = icon.verInfoUsuario(nickname);
 			//request.setAttribute("mensaje", "El programa " + programa + " se ha ingresado correctamente en el sistema.");
-		} catch (ProgramaFormacionExcepcion e) {
+		} catch (UsuarioExcepcion e) {
 			//request.setAttribute("mensaje", "El programa " + programa + " se ha ingresado correctamente en el sistema.");
 			e.printStackTrace();
 		}
-				
-		String fechaInicio = format.format(dtp.getFechaI());
-		String fechaFin = format.format(dtp.getFechaF());
-		String fechaActual = format.format(dtp.getFechaA());
-		ArrayList<String> categorias = dtp.getCategorias();
 		
-		request.setAttribute("nombre", dtp.getNombre());
-		request.setAttribute("descripcion", dtp.getDescripcion());
-		request.setAttribute("fechaI", fechaInicio);
-		request.setAttribute("fechaF", fechaFin);
-		request.setAttribute("fechaA", fechaActual);
-		request.setAttribute("cursos", dtp.getCursos());
-		request.setAttribute("categorias", categorias);
-		request.setAttribute("imagenURL", dtp.getImagenURL());
+		String fechaNac = format.format(dtu.getFechaNac());
+		ArrayList<String> seguidores = dtu.getSeguidores();
+		ArrayList<String> seguidos = dtu.getSeguidos();
+		
+		request.setAttribute("nickname", nickname);
+		request.setAttribute("nombre", dtu.getNombre());
+		request.setAttribute("apellido", dtu.getApellido());
+		request.setAttribute("correo", dtu.getCorreo());
+		request.setAttribute("fechaNac", fechaNac);
+		request.setAttribute("seguidores", seguidores);
+		request.setAttribute("seguidos", seguidos);
+		
+		if(dtu instanceof DTDocente) {
+			ArrayList<String> ediciones = ((DTDocente)dtu).getEdiciones();
+			request.setAttribute("ediciones", ediciones);
+		}
+		else {
+			ArrayList<String> ediciones = ((DTEstudiante)dtu).getEdiciones();
+			ArrayList<String> programas = ((DTEstudiante)dtu).getProgramas();
+			request.setAttribute("ediciones", ediciones);
+			request.setAttribute("programas", programas);
+		}
 				
 		RequestDispatcher rd;
-		//rd = request.getRequestDispatcher("/notificacion.jsp");
 		rd = request.getRequestDispatcher("/infoPrograma.jsp");
 		rd.forward(request, response);
 	}

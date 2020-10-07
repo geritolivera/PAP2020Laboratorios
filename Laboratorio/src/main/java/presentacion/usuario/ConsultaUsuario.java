@@ -405,26 +405,17 @@ public class ConsultaUsuario extends JInternalFrame {
 
 		if(usuario instanceof DTDocente) {
 			this.EsDocente.setText("Si");
-			ArrayList<String> edicionesD = new ArrayList<>();
-			for(DTEdicionCurso e : ((DTDocente)usuario).getEdiciones()) {
-					edicionesD.add(e.getNombre());
-			}
-			DefaultComboBoxModel<String> listEdiDoc = new DefaultComboBoxModel<String>(edicionesD.toArray(new String[0]));
+			String[] edicionesD = ((DTDocente)usuario).getEdiciones().toArray(new String[0]);
+			DefaultComboBoxModel<String> listEdiDoc = new DefaultComboBoxModel<String>(edicionesD);
 			comboBoxCursoReg.setModel(listEdiDoc);
 			}
 			else {
 				this.EsDocente.setText("No");
-				ArrayList<String> edicionesE = new ArrayList<>();
-				for(DTEdicionCurso e : ((DTEstudiante)usuario).getEdiciones()) {
-					edicionesE.add(e.getNombre());
-				}
-				ArrayList<String> programasE = new ArrayList<>();
-				for(DTProgramaFormacion p : ((DTEstudiante)usuario).getProgramas()) {
-					programasE.add(p.getNombre());
-				}
-				DefaultComboBoxModel<String> listEdiEst = new DefaultComboBoxModel<String>(edicionesE.toArray(new String[0]));
+				String[] edicionesE = ((DTEstudiante)usuario).getEdiciones().toArray(new String[0]);
+				String[] programasE = ((DTEstudiante)usuario).getProgramas().toArray(new String[0]);
+				DefaultComboBoxModel<String> listEdiEst = new DefaultComboBoxModel<String>(edicionesE);
 				comboBoxCursoReg.setModel(listEdiEst);
-				DefaultComboBoxModel<String> listProEst = new DefaultComboBoxModel<String>(programasE.toArray(new String[0]));
+				DefaultComboBoxModel<String> listProEst = new DefaultComboBoxModel<String>(programasE);
 				comboBoxProgForIns.setModel(listProEst);
 			}
 
