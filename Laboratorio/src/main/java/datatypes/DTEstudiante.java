@@ -4,11 +4,12 @@ import clases.Usuario;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class DTEstudiante extends DTUsuario{
-	private ArrayList<String> ediciones = new ArrayList<>();
-	private ArrayList<String> programas = new ArrayList<>();
+	private List<DTEdicionCurso> ediciones = new ArrayList<>();
+	private List<DTProgramaFormacion> programas = new ArrayList<>();
 		
 	public DTEstudiante() {
 		super();
@@ -34,17 +35,17 @@ public class DTEstudiante extends DTUsuario{
 		this.setFechaNac(fechaNac);
 	}
 
-	public void agregarEdicion(String edicion) {
+	public void agregarEdicion(DTEdicionCurso edicion) {
 		ediciones.add(edicion);
 	}
-	public ArrayList<String> getEdiciones(){
+	public List<DTEdicionCurso> getEdiciones(){
 		return ediciones;
 	}
 	
-	public void agregarPrograma(String programa) {
+	public void agregarPrograma(DTProgramaFormacion programa) {
 		programas.add(programa);
 	}
-	public ArrayList<String> getProgramas(){
+	public List<DTProgramaFormacion> getProgramas(){
 		return programas;
 	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.ArrayList;
 
 import interfaces.fabrica;
@@ -17,6 +18,9 @@ import exepciones.UsuarioExcepcion;
 import datatypes.DTUsuario;
 import datatypes.DTEstudiante;
 import datatypes.DTDocente;
+import datatypes.DTEdicionCurso;
+import datatypes.DTCurso;
+import datatypes.DTProgramaFormacion;
 
 /**
  * Servlet implementation class consultaUsuario
@@ -73,12 +77,26 @@ public class consultaUsuario extends HttpServlet {
 		request.setAttribute("seguidos", seguidos);
 		
 		if(dtu instanceof DTDocente) {
-			ArrayList<String> ediciones = ((DTDocente)dtu).getEdiciones();
+			List<DTEdicionCurso> ediciones = ((DTDocente)dtu).getEdiciones();
+			//en caso de ser necesario tener las strings
+			/*ArrayList<String> listEdiciones = new ArrayList<>();
+			for(DTEdicionCurso e : ediciones) {
+				listEdiciones.add(e.getNombre());
+			}*/
 			request.setAttribute("ediciones", ediciones);
 		}
 		else {
-			ArrayList<String> ediciones = ((DTEstudiante)dtu).getEdiciones();
-			ArrayList<String> programas = ((DTEstudiante)dtu).getProgramas();
+			List<DTEdicionCurso> ediciones = ((DTEstudiante)dtu).getEdiciones();
+			List<DTProgramaFormacion> programas = ((DTEstudiante)dtu).getProgramas();
+			//en caso de ser necesario tener las strings
+			/*ArrayList<String> listEdiciones = new ArrayList<>();
+			for(DTEdicionCurso e : ediciones) {
+				listEdiciones.add(e.getNombre());
+			}
+			ArrayList<String> listProgramas = new ArrayList<>();
+			for(DTProgramaFormacion p : programas) {
+				listProgramas.add(p.getNombre());
+			}*/
 			request.setAttribute("ediciones", ediciones);
 			request.setAttribute("programas", programas);
 		}
