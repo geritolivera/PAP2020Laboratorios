@@ -16,7 +16,8 @@ public interface IcontroladorCurso {
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion;
+	public ArrayList<String> listarCursosInst(String nombreInstituto) throws InstitutoExcepcion;
+	public ArrayList<String> listarCursosCat(String nombreCategoria) throws CategoriaExcepcion;
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

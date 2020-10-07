@@ -142,5 +142,6 @@ public class Curso {
 	}
 	public void agregarCategoria(Categoria categoria) {
 		categorias.add(categoria);
+		categoria.agregarCurso(this);
 	}
 }

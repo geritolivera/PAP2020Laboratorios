@@ -13,25 +13,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interfaces.fabrica;
-import interfaces.IcontroladorUsuario;
-import exepciones.UsuarioExcepcion;
-import datatypes.DTUsuario;
-import datatypes.DTEstudiante;
-import datatypes.DTDocente;
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
+import interfaces.IcontroladorCurso;
+import exepciones.CursoExcepcion;
+import datatypes.DTCurso;
 
 /**
- * Servlet implementation class consultaUsuario
+ * Servlet implementation class consultaCurso
  */
-@WebServlet("/consultaUsuario")
-public class consultaUsuario extends HttpServlet {
+@WebServlet("/consultaCurso")
+public class consultaCurso extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public consultaUsuario() {
+    public consultaCurso() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,10 +45,15 @@ public class consultaUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
-		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+		IcontroladorCurso icon = fab.getIcontroladorCurso();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		//recibe nickname de usuario desde jsp
-		String nickname = request.getParameter("nickname");
+		//recibe consulta en forma de Instituto o Categoria
+		
+		DTCurso dtc = null;
+		
+		if(request.getParameter("consulta").equals("Instituto")) {
+			ArrayList<String> cursos = icon.listarCursos();
+		}
 		
 		DTUsuario dtu = null;
 		try {

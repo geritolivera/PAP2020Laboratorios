@@ -42,7 +42,6 @@ public class controladorCurso implements IcontroladorCurso{
 					for (String cat : cats) {
 						//System.out.println(s);
 						Categoria c = mcat.buscarCategoria(cat);
-						c.agregarCurso(cursoNuevo);
 						cursoNuevo.agregarCategoria(c);
 					}
 				}
@@ -61,7 +60,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public ArrayList<String> listarCursos(String nombreInstituto) throws InstitutoExcepcion{
+	public ArrayList<String> listarCursosInst(String nombreInstituto) throws InstitutoExcepcion{
 		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
 		if(mInst.existeInstituto(nombreInstituto)) {
 			Instituto inst = mInst.buscarInstituto(nombreInstituto);
@@ -74,6 +73,22 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		else
 			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
+	}
+	
+	@Override
+	public ArrayList<String> listarCursosCat(String nombreCategoria) throws CategoriaExcepcion{
+		manejadorCategoria mCat = manejadorCategoria.getInstancia(); 
+		if(mCat.existeCategoria(nombreCategoria)) {
+			Categoria cat = mCat.buscarCategoria(nombreCategoria);
+			List<Curso> cursos = cat.getCursos();
+			ArrayList<String> listCursos = new ArrayList<String>();
+			for(Curso c:cursos) {
+				listCursos.add(c.getNombre());
+			}
+			return listCursos;
+		}
+		else
+			throw new CategoriaExcepcion("El instituto " + nombreCategoria + " no existe.");
 	}
 	
 	@Override
