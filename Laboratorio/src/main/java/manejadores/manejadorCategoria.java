@@ -42,7 +42,7 @@ public class manejadorCategoria {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		@SuppressWarnings("unchecked")
-		List<Categoria> categorias = em.createQuery("FROM Categoria").getResultList();
+		List<Categoria> categorias = em.createQuery("SELECT c from Categoria c").getResultList();
 		return categorias;
 	}
 	

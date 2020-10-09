@@ -258,7 +258,7 @@ public class AltaCurso extends JInternalFrame {
 	private void cbInstitutosActionPerformed(ActionEvent arg0) {
 		String nomInstituto = this.comboBoxInstituto.getSelectedItem().toString();
 		try{
-			List<String> listaCursosDeInst = iconC.listarCursos(nomInstituto);
+			List<String> listaCursosDeInst = iconC.listarCursosInst(nomInstituto);
 			if(!listaCursosDeInst.isEmpty()) {
 				Vector<String> list = new Vector<String>();
 				for (String s : listaCursosDeInst) {

@@ -43,7 +43,7 @@ public class manejadorInstituto {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		@SuppressWarnings("unchecked")
-		List<Instituto> institutos = em.createQuery("FROM Instituto").getResultList();
+		List<Instituto> institutos = em.createQuery("select i FROM Instituto i").getResultList();
 		return institutos;
 	}
 	

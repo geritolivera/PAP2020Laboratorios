@@ -418,9 +418,8 @@ public class controladorCurso implements IcontroladorCurso{
 	public String[] listarInstitutos() {
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
 		List<Instituto> listIn = mi.getInstituto();
-		String[] listIns = new String[listIn.size()+1];
-		listIns[0] = "";
-		Integer i = 1;
+		String[] listIns = new String[listIn.size()];
+		Integer i = 0;
 		if(!listIn.isEmpty()) {
 			for (Instituto s: listIn) {
 				listIns[i] = s.getNombre();
