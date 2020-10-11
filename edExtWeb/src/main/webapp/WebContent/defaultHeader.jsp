@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="resources/styles/style.css">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--https://coolors.co/ba1200-5e0035-020202-023618-005c69 -->
@@ -75,7 +75,7 @@
               <a class="collapsible-header">Cursos<i class="material-icons right">arrow_drop_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="altaCurso.jsp">Alta Cursos</a></li>
+                  <li><a href="GetListas">Alta Cursos</a></li>
                   <li><a href="consultaCurso.jsp">Buscar Cursos</a></li>
                 </ul>
               </div>
