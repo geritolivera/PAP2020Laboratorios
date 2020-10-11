@@ -38,15 +38,15 @@
                   class="material-icons right">arrow_drop_down</i></a>
             </li>
             <li>
-              <a a class="dropdown-trigger" data-target="dropdownCurso" href="#">Cursos<i
+              <a class="dropdown-trigger" data-target="dropdownCurso" href="#">Cursos<i
                   class="material-icons right">arrow_drop_down</i></a>
             </li>
             <li>
-              <a a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i
+              <a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i
                   class="material-icons right">arrow_drop_down</i></a>
             </li>
             <li>
-              <a a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i
+              <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i
                   class="material-icons right">arrow_drop_down</i></a>
             </li>
             <li><a href="mobile.html"><i class="material-icons left">account_circle</i>Nombre Docente</a></li>

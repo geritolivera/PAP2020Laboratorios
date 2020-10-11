@@ -60,7 +60,7 @@
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
               </div>
               <div class="input-field col s6">
-                <select name="instituto" id="instituto"">
+                <select name="instituto" id="instituto">
                   <option value="" disabled selected>Seleccione uno</option>
                   <option value=" inco">INCO</option>
                   <option value="mat">MAT</option>

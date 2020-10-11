@@ -3,6 +3,5 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>Holas</head>
 <body>jes</body>
 </html>
