@@ -56,7 +56,7 @@
     </nav>
   </div>
   <ul class="sidenav" id="mobile-demo">
-    <li class="rojo"><a href="login.html" class="white-text"><i class="material-icons white-text">account_circle</i>Nombre Docente</a></li>
+    <li class="rojo"><a href="iniciarSesion.jsp" class="white-text"><i class="material-icons white-text">account_circle</i>Nombre Docente</a></li>
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
         <li class="no-padding">
@@ -75,7 +75,7 @@
               <a class="collapsible-header">Cursos<i class="material-icons right">arrow_drop_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="GetListas">Alta Cursos</a></li>
+                  <li><a href="altaCurso.jsp">Alta Cursos</a></li>
                   <li><a href="consultaCurso.jsp">Buscar Cursos</a></li>
                 </ul>
               </div>

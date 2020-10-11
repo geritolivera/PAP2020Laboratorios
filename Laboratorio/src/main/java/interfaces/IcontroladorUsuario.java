@@ -45,4 +45,7 @@ public interface IcontroladorUsuario {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//13 - Alta de Categoria
 	public void AltaCategoria(String nombre) throws CategoriaExcepcion;
+
+    //Validad login usuario
+    boolean validarUsuario(String nickname, String password) throws UsuarioExcepcion;
 }

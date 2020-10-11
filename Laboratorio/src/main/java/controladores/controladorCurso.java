@@ -376,7 +376,6 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
 		Instituto inst = mI.buscarInstituto(nombreInstituto);
 		List<Curso> cursos = inst.getCursos();
-
 		ArrayList<String> cursosRet = new ArrayList<String>();
 		for(Curso c : cursos) {
 			cursosRet.add(c.getNombre());

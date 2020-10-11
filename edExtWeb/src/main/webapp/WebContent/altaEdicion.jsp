@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@include  file="defaultHeader.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     <div class="main">
         <br><br>
@@ -14,10 +15,11 @@
 
                         <div class="row">
                             <div class="input-field col s6">
-                                <select name="instituto" id="instituto">
+                                <select name="instituto" id="instituto" onchange="obtenerCursosPorInstituto(instituto.value);obtenerDocentesPorInstituto(instituto.value)" >
                                     <option value="" disabled selected>Seleccione uno</option>
-                                    <option value="inco">INCO</option>
-                                    <option value="mat">MAT</option>
+                                    <c:forEach var="inst" items="${institutos}">
+                                        <option value="${inst}">${inst}</option>
+                                    </c:forEach>
                                 </select>
                                 <label>Instituto</label>
                             </div>
@@ -25,8 +27,6 @@
                             <div class="input-field col s6">
                                 <select name="curso" id="curso">
                                     <option value="" disabled selected>Seleccione uno</option>
-                                    <option value="inco">INCO</option>
-                                    <option value="mat">MAT</option>
                                 </select>
                                 <label>Curso</label>
                             </div>
@@ -39,9 +39,6 @@
                             <div class="input-field col s6">
                                 <select multiple name="docentes" id="docentes">
                                     <option value="" disabled selected>Seleccionar docentes</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
                                 </select>
                                 <label>Docentes</label>
                             </div>
@@ -66,7 +63,7 @@
                             </div>
                         </div>
                         <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Crear
+                            <button class="btn waves-effect waves-light rojo" type="submit" name="action" onclick="crearEdicion()">Crear
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -83,4 +80,33 @@
         $('#curso').formSelect();
         $('#docentes').formSelect();
      });
+
+    function crearEdicion() {
+        const nombre = document.querySelector("#nombre").value;
+        const fechaI = document.querySelector("#fechaInicio").value;
+        f1 = new Date(fechaI);
+        const fechaF = document.querySelector("#fechaFin").value;
+        f2 = new Date(fechaF);
+        const instituto = document.querySelector("#instituto").value;
+        const cursos = document.querySelector("#curso").value;
+        const docentes = document.querySelector("#docentes").value;
+        const cupo = document.querySelector("#cupo").value;
+
+        const fetchUrl = 'altaEdicion?nombre=' + nombre +
+            '&fechaI=' + f1 +
+            '&fechaF=' + f2 +
+            '&instituto=' + instituto +
+            '&cursos=' + cursos +
+            '&docentes=' + docentes +
+            '&cupo=' + cupo;
+
+        fetch(fetchUrl, {
+            method: 'POST'
+        }).then((res) => {
+            console.log(`que me devolviste papei `, res);
+
+        }).catch((err) => {
+            console.error(' paso algo: ', err);
+        });
+    }
  </script>

@@ -9,11 +9,11 @@
         <div class="col s12">
           <h3>Buscar Programas</h3>
           <div class="input-field">
-            <form action="GetListas" method="POST">
-              <input class="white grey-text autocomplete" placeholder="Progrmacion 1, matematica, etc..." type="text"
+            <form action="consultaProgramaFormacion" method="GET">
+              <input class="white grey-text autocomplete" placeholder="Programacion 1, matematica, etc..." type="text"
                 id="autocomplete-input" name="programa" >
                  <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Crear
+                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Buscar
                                 <i class="material-icons right">send</i>
                             </button>
                  </div>

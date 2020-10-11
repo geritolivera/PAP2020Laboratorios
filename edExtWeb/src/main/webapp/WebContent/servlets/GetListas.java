@@ -50,7 +50,8 @@ public class GetListas extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("altaCurso.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+
 
 
 	}

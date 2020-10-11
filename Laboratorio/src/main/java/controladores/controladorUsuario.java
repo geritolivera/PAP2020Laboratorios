@@ -13,26 +13,26 @@ import java.util.Date;
 import java.util.List;
 
 
-public class controladorUsuario implements IcontroladorUsuario{
+public class controladorUsuario implements IcontroladorUsuario {
 	public controladorUsuario() {
 		super();
 	}
-	
-	
+
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Alta de Usuario
 	@Override
 	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
-		if(!mUsu.existeUsuarioNick(nickname)){
-			if(!this.existeCorreoUsuario(correo)){
+		if (!mUsu.existeUsuarioNick(nickname)) {
+			if (!this.existeCorreoUsuario(correo)) {
 				//si la string instituto no tiene nada
-				if(instituto == null) {
+				if (instituto == null) {
 					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac, password);
 					mUsu.agregarUsuario(est);
 
-				}else {
+				} else {
 					if (mIns.existeInstituto(instituto)) {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
@@ -48,42 +48,42 @@ public class controladorUsuario implements IcontroladorUsuario{
 						em.getTransaction().commit();
 					}
 				}
-			}else
+			} else
 				throw new UsuarioExcepcion("El correo " + correo + " ya existe en el sistema.");
-		}else
-			throw new UsuarioExcepcion("El Nickname '" + nickname +"' ya existe en el sistema");
+		} else
+			throw new UsuarioExcepcion("El Nickname '" + nickname + "' ya existe en el sistema");
 	}
-	
-	
-	
+
+
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
-	
-	public ArrayList<String> listarUsuarios(){
+
+	public ArrayList<String> listarUsuarios() {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		ArrayList<String> listUsers = new ArrayList<>();
-		for(Usuario u: usuarios) {
+		for (Usuario u : usuarios) {
 			listUsers.add(u.getNick());
 		}
 		return listUsers;
 	}
-	
+
 	@Override
-	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
+	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		DTDocente dtd = new DTDocente();
 		DTEstudiante dte = new DTEstudiante();
-		if(mUsu.existeUsuarioNick(nickname)) {
+		if (mUsu.existeUsuarioNick(nickname)) {
 			Usuario u = mUsu.buscarUsuario(nickname);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
 			List<InscripcionED> inscripcionesEst = new ArrayList<InscripcionED>();
 			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
 			//si el usuario es docente
-			if(u instanceof Docente) {
+			if (u instanceof Docente) {
 				dtd.setUserDocente(u);
 				edicionesDoc = ((Docente) u).getEdiciones();
-				for(EdicionCurso e: edicionesDoc) {
+				for (EdicionCurso e : edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
 				}
@@ -94,32 +94,31 @@ public class controladorUsuario implements IcontroladorUsuario{
 				dte.setUserEstudiante(u);
 				//tiene que sacar el DTEdicion desde las inscripciones
 				inscripcionesEst = ((Estudiante) u).getInscripcionesED();
-				for(InscripcionED i : inscripcionesEst) {
+				for (InscripcionED i : inscripcionesEst) {
 					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
 					dte.agregarEdicion(dtee);
 				}
 				programasEst = ((Estudiante) u).getProgramas();
-				for(ProgramaFormacion p: programasEst) {
+				for (ProgramaFormacion p : programasEst) {
 					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
 					dte.agregarPrograma(dtpe);
 				}
 				return dte;
 			}
-		}
-		else 
+		} else
 			throw new UsuarioExcepcion("El usuario " + nickname + " no existe.");
 	}
-	
-	
+
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
-	
+
 	//usa listarUsuarios
 	//usa verInfoUsuario
 	@Override
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) {
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		if(mu.existeUsuarioNick(nickname)) {
+		if (mu.existeUsuarioNick(nickname)) {
 			Conexion con = Conexion.getInstancia();
 			EntityManager em = con.getEntityManager();
 			Usuario u = mu.buscarUsuarioNickname(nickname);
@@ -131,29 +130,29 @@ public class controladorUsuario implements IcontroladorUsuario{
 			em.getTransaction().commit();
 		}
 	}
-	
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//12 - Alta de Instituto
 	@Override
-	public void AltaInstituto(String nombre) throws InstitutoExcepcion{
+	public void AltaInstituto(String nombre) throws InstitutoExcepcion {
 		manejadorInstituto mi = manejadorInstituto.getInstancia();
-		if(mi.existeInstituto(nombre)) {
+		if (mi.existeInstituto(nombre)) {
 			throw new InstitutoExcepcion("El Instituto con el nombre " + nombre + " ya existe en el Sistema");
 		} else {
-			Instituto i  = new Instituto(nombre);
+			Instituto i = new Instituto(nombre);
 			mi.agregarInstituto(i);
 		}
 	}
-		
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones auxiliares
-		
+
 	@Override //Lista los DT Usuarios
-	public List<DTUsuario> listarDTUsuarios(){
+	public List<DTUsuario> listarDTUsuarios() {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		List<Usuario> usuarios = mUsu.getUsuarios();
 		List<DTUsuario> listUsers = new ArrayList<DTUsuario>();
-		for(Usuario u: usuarios) {
+		for (Usuario u : usuarios) {
 			DTUsuario dt = new DTUsuario(u);
 			listUsers.add(dt);
 		}
@@ -161,12 +160,12 @@ public class controladorUsuario implements IcontroladorUsuario{
 	}
 
 	@Override
-	public boolean existeCorreoUsuario(String correo){
+	public boolean existeCorreoUsuario(String correo) {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		boolean encontre = false;
 		List<Usuario> usuarios = mUsu.getUsuarios();
-		for(Usuario u : usuarios){
-			if(u.getCorreo().equals(correo))
+		for (Usuario u : usuarios) {
+			if (u.getCorreo().equals(correo))
 				encontre = true;
 		}
 		return encontre;
@@ -175,46 +174,60 @@ public class controladorUsuario implements IcontroladorUsuario{
 
 	@Override //Lista los nombres de los institutos
 	public String[] listarInstituto() {
-			manejadorInstituto mi = manejadorInstituto.getInstancia();
-			List<Instituto> listIn = mi.getInstituto();
-			String[] listIns = new String[listIn.size()];
-			Integer i =0;
-			if(!listIn.isEmpty()) {
-				for (Instituto s: listIn) {
-					listIns[i] = s.getNombre();
-					i++;
-				}
+		manejadorInstituto mi = manejadorInstituto.getInstancia();
+		List<Instituto> listIn = mi.getInstituto();
+		String[] listIns = new String[listIn.size()];
+		Integer i = 0;
+		if (!listIn.isEmpty()) {
+			for (Instituto s : listIn) {
+				listIns[i] = s.getNombre();
+				i++;
 			}
-			return listIns;
 		}
+		return listIns;
+	}
 
 
 	@Override //Lista los nicknames de los estudiantes
-	public String[] listarEstudiantesAux(){
+	public String[] listarEstudiantesAux() {
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
 		List<Usuario> listUs = mU.getUsuarios();
 		String[] estudiantes = new String[listUs.size()];//ver esta funcion
-		int i=0;
-		for(Usuario us:listUs) {
-			if(us instanceof Estudiante) {
-				estudiantes[i]= us.getNick();
+		int i = 0;
+		for (Usuario us : listUs) {
+			if (us instanceof Estudiante) {
+				estudiantes[i] = us.getNick();
 				i++;
 			}
 		}
 		return estudiantes;
 	}
-	
+
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//13 - Alta de Categoria
 	@Override
-	public void AltaCategoria(String nombre) throws CategoriaExcepcion{
+	public void AltaCategoria(String nombre) throws CategoriaExcepcion {
 		manejadorCategoria mc = manejadorCategoria.getInstancia();
-		if(mc.existeCategoria(nombre)) {
+		if (mc.existeCategoria(nombre)) {
 			throw new CategoriaExcepcion("La Categoria con el nombre " + " ya existe en el Sistema");
 		} else {
 			Categoria c = new Categoria(nombre);
 			mc.agregarCategoria(c);
 		}
 	}
-	
+
+
+	//Validad login usuario
+	@Override
+	public boolean validarUsuario(String nickname, String password) throws UsuarioExcepcion {
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		if (mUsu.existeUsuarioNick(nickname)) {
+			Usuario user = mUsu.buscarUsuario(nickname);
+			if (user.getPassword().equals(password))
+				return true;
+			else
+				return false;
+		} else
+			throw new UsuarioExcepcion("El usuario " + nickname + " no existe en el sistema.");
+	}
 }
