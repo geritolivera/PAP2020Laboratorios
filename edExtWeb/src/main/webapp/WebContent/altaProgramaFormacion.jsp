@@ -7,7 +7,7 @@
         <div class="container">
             <!-- FORM-->
             <div class="row">
-                <form class="col s12" action="altaProgramaFormacion" method="POST">
+                <form class="col s12 ">
                     <div class="card-panel">
                         <h4 class="header2"> <span style="color: #81054b">></span>Alta de Programa de Formacion</h4>
 

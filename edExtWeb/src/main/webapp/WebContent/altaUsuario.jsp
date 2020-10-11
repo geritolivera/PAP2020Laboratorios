@@ -7,7 +7,7 @@
     <div class="container">
       <!-- FORM-->
       <div class="row">
-        <form class="col s12" action="altaUsuario" method="POST">
+        <form class="col s12" action="AltaUsuario" method="POST">
           <div class="card-panel">
             <h4 class="header2"> <span style="color: #81054b">></span>Alta de Usuario</h4>
             <div class="row">
@@ -27,29 +27,29 @@
             <div class="row">
               <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input name="nombre" id="nombre" type="text" class="validate">
+                <input id="nombre" type="text" class="validate">
                 <label for="nombre">Nombre</label>
               </div>
               <div class="input-field col s6">
-                <input name="apellido" id="apellido" type="text" class="validate">
+                <input id="apellido" type="text" class="validate">
                 <label for="apellido">Apellido</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
-                <input name="email" id="email" type="email" class="validate">
+                <input id="email" type="email" class="validate">
                 <label for="email">Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
-                <input name="password" id="password" type="password" class="validate">
+                <input id="password" type="password" class="validate">
                 <label for="password">Contraseña</label>
               </div>
               <div class="input-field col s6">
-                <input name="passwordValidacion" id="passwordValidacion" type="password" class="validate">
+                <input id="passwordValidacion" type="password" class="validate">
                 <label for="passwordValidacion">Repita contraseña</label>
               </div>
             </div>
@@ -60,9 +60,9 @@
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
               </div>
               <div class="input-field col s6">
-                <select name="instituto" id="instituto">
+                <select name="instituto" id="instituto"">
                   <option value="" disabled selected>Seleccione uno</option>
-                  <option value="elbio">ELBIO</option>
+                  <option value=" inco">INCO</option>
                   <option value="mat">MAT</option>
                 </select>
                 <label id="lblInstituto">Instituto</label>

@@ -2,15 +2,13 @@
     pageEncoding="ISO-8859-1"%>
 <%@include  file="defaultHeader.jsp" %>
 
-
-
     <div class="main">
         <br><br>
 
         <div class="container">
             <!-- FORM-->
             <div class="row">
-                <form class="col s12 ">
+                 <form class="col s12 ">
                     <div class="card-panel">
                         <h4 class="header2"> <span style="color: #81054b">></span>Alta de Edicion</h4>
 
@@ -63,8 +61,8 @@
                         <div class="row">
                             <div class="input-field col s4">
                                 <i class="material-icons prefix">access_time</i>
-                                <input id="duracion" name="duracion" type="number" class="validate">
-                                <label for="duracion">Duracion</label>
+                                <input id="cupo" name="cupo" type="number" class="validate">
+                                <label for="cupo">Cupo(opcional)</label>
                             </div>
                         </div>
                         <div class="center-align">

@@ -5,12 +5,23 @@ body {
     flex-direction: column;
 }
 
-form{
+form:not(#formBusqueda){
   background: white;
-  padding: 20px 25px;
   height: auto;
   box-sizing: border-box;
   position: relative;
+}
+#formBusqueda{
+	margin-top:0px;
+}
+
+li.active .collapsible-header{ 
+  background-color: #660801; 
+  color:white;
+}
+li.active:hover .collapsible-header{ 
+  background-color: #660801; 
+  color:white;
 }
 
 .main{
@@ -39,23 +50,23 @@ form{
 }
 
  /* label focus color */
- .input-field input:focus + label {
+ .input-field input:focus + label:not(#searchIcon) {
   color: #0e5c2e !important;
 }
-.input-field input:focus + i {
+.input-field input:focus + i:not(#searchIcon) {
   color: #0e5c2e !important;
 }
 /* label underline focus color */
-.input-field input:focus {
+.input-field input:focus:not(#searchIcon) {
   border-bottom: 1px solid #0e5c2e !important;
   box-shadow: 0 1px 0 0 #0e5c2e !important;
 }
 
-.input-field .prefix.active{
+.input-field .prefix.active:not(#searchIcon){
   color: #0e5c2e  !important;
 }
 
-.input-field .prefix {
+.input-field .prefix:not(#searchIcon) {
   color: #81054b !important;
 }
 
@@ -95,4 +106,17 @@ form{
 
 .nav{
   background-color: #660801 !important;
+}
+
+.rojo-rita{
+	-webkit-box-shadow:inset 0px 0px 0px 1px #fff;
+    -moz-box-shadow:inset 0px 0px 0px 1px #fff;
+    box-shadow:inset 0px 0px 0px 1px #fff;
+}
+.verde{
+  background-color: #0e5c2e !important;
+}
+
+.rosado{
+  background-color: #81054b !important;
 }
