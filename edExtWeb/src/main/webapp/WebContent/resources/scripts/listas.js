@@ -27,6 +27,8 @@ var READY_STATE_INTERACTIVE = 3;
 var READY_STATE_COMPLETE    = 4;
 var STATUS_OK               = 200;
 var xhr;
+
+
 var baseURL = '/edExtWeb_war/';
 
 function ejecutarAlert(){
@@ -45,9 +47,9 @@ function cerrarMensaje(){
 
 function obtenerCursosPorInstituto(instituto){
     // Parametro:
-
+    debugger;
     console.log("instituto: ", instituto);
-    var url = `GetCursoInst?instituto=${instituto}`
+    var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
     fetch(url)
         .then( (res) => {
@@ -77,15 +79,11 @@ function obtenerCursosPorInstituto(instituto){
 }
 
 function obtenerDocentesPorInstituto(instituto){
-
-    console.log("instituto: ", instituto
-    );
-    var url = `GetDocInst?instituto=${instituto}`
-
+    debugger;
+    var url = baseURL +`GetDocInst?instituto=${instituto}`
     fetch(url)
-        .then( (responsed) => {
-            console.log(" docentes: ", responsed);
-            return responsed.json();
+        .then( (response) => {
+            return response.json();
         })
         .then(docentes => {
             console.log("docentes:", docentes);

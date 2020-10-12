@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/GetDocInst")
 public class GetDocInst extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class GetDocInst extends HttpServlet {
 
         try {
             String instituto = request.getParameter("instituto");
-            java.util.ArrayList<String> docentes = icon.listarDocentesAux(instituto);
+            java.util.ArrayList<String> docentes = icon.listarDocentesInstituto(instituto);
             System.out.println("instituto = " + instituto);
             System.out.println("docentes = " + docentes);
             session.setAttribute("docentes", docentes);

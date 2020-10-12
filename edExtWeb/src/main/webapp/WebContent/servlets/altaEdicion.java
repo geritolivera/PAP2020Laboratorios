@@ -24,24 +24,7 @@ import exepciones.UsuarioExcepcion;
 @WebServlet("/altaEdicion")
 public class altaEdicion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String instituto = request.getParameter("instituto");
-        fabrica fab = fabrica.getInstancia();
-        IcontroladorCurso icon = fab.getIcontroladorCurso();
-        ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            ArrayList<String> cur = icon.listarCursosInst(instituto);
-            String cursos = mapper.writeValueAsString(cur);
-            response.setContentType("application/json");
-            response.getWriter().append(cursos);
-        } catch (InstitutoExcepcion institutoExcepcion) {
-            institutoExcepcion.printStackTrace();
-        }
-
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         fabrica fab = fabrica.getInstancia();
         IcontroladorCurso icon = fab.getIcontroladorCurso();
 
@@ -68,7 +51,7 @@ public class altaEdicion extends HttpServlet {
         }
 
         try {
-            icon.nuevosDatosEdicion(nombre, today, fechaI, cupo, fechaF,cursos, listDocentes);
+            icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes);
         } catch (EdicionExcepcion edicionExcepcion) {
             request.setAttribute("mensaje", "La edicion " + nombre + " ya existe en el sistema.");
             edicionExcepcion.printStackTrace();
@@ -81,6 +64,12 @@ public class altaEdicion extends HttpServlet {
         RequestDispatcher rd;
         rd = request.getRequestDispatcher("/notificacion.jsp");
         rd.forward(request, response);
+
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 

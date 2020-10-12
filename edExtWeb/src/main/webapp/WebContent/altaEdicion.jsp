@@ -15,7 +15,7 @@
 
                         <div class="row">
                             <div class="input-field col s6">
-                                <select name="instituto" id="instituto" onchange="obtenerCursosPorInstituto(instituto.value);obtenerDocentesPorInstituto(instituto.value)" >
+                                <select name="instituto" id="instituto" onchange="obtenerDocentesPorInstituto(instituto.value);obtenerCursosPorInstituto(instituto.value)">
                                     <option value="" disabled selected>Seleccione uno</option>
                                     <c:forEach var="inst" items="${institutos}">
                                         <option value="${inst}">${inst}</option>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action" onclick="crearEdicion()">Crear
+                            <button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="crearEdicion()">Crear
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -84,17 +84,15 @@
     function crearEdicion() {
         const nombre = document.querySelector("#nombre").value;
         const fechaI = document.querySelector("#fechaInicio").value;
-        f1 = new Date(fechaI);
         const fechaF = document.querySelector("#fechaFin").value;
-        f2 = new Date(fechaF);
         const instituto = document.querySelector("#instituto").value;
         const cursos = document.querySelector("#curso").value;
         const docentes = document.querySelector("#docentes").value;
         const cupo = document.querySelector("#cupo").value;
 
         const fetchUrl = 'altaEdicion?nombre=' + nombre +
-            '&fechaI=' + f1 +
-            '&fechaF=' + f2 +
+            '&fechaI=' + fechaI +
+            '&fechaF=' + fechaF +
             '&instituto=' + instituto +
             '&cursos=' + cursos +
             '&docentes=' + docentes +
