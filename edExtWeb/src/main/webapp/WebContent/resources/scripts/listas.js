@@ -29,7 +29,7 @@ var STATUS_OK               = 200;
 var xhr;
 
 
-var baseURL = '/edExtWeb_war/';
+var baseURL = '/edExtWeb/';
 
 function ejecutarAlert(){
     Swal.fire(

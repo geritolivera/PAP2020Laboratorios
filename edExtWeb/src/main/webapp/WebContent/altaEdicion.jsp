@@ -102,6 +102,7 @@
             method: 'POST'
         }).then((res) => {
             console.log(`que me devolviste papei `, res);
+            
 
         }).catch((err) => {
             console.error(' paso algo: ', err);
