@@ -60,7 +60,7 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <select multiple name="previas" id="previas">
-                                    <option value="" disabled selected>Seleccionar previas</option>
+                                    <option value="" disabled >Seleccionar previas</option>
                                     <c:forEach var="pre" items="${previas}">
                                         <option value="${pre}">${pre}</option>
                                     </c:forEach>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="input-field col s6">
                                 <select multiple name="categorias" id="categorias">
-                                    <option value="" disabled selected>Seleccionar categorias</option>
+                                    <option value="" disabled>Seleccionar categorias</option>
                                     <c:forEach var="cat" items="${categorias}">
                                         <option value="${cat}">${cat}</option>
                                     </c:forEach>
@@ -96,37 +96,4 @@
     $('#categorias').formSelect();
     });
 
-    function crearCurso() {
-        const nombre = document.querySelector("#nombre").value;
-        const desc = document.querySelector("#desc").value;
-        const duracion = document.querySelector("#duracion").value;
-        const cantHoras =  document.querySelector("#cantHoras").value;
-        const creditos =  document.querySelector("#creditos").value;
-        const url =  document.querySelector("#url").value;
-        const instituto =  document.querySelector("#institutos").value;
-        const previas =  document.querySelector("#previas").value;
-        const categorias =  document.querySelector("#categorias").value;
-
-        console.log('canthoras: ', cantHoras);
-        console.log('creditos: ', creditos);
-        console.log('duracion: ', duracion);
-        const fetchUrl = 'altaCurso?nombre=' + nombre +
-                '&desc=' + desc +
-                '&duracion=' + duracion +
-                '&cantHoras=' + cantHoras +
-                '&creditos=' + creditos +
-                '&url=' + url +
-                '&instituto=' + instituto +
-                '&instituto=' + instituto +
-                '&previas=' + previas +
-                '&categorias=' + categorias;
-
-        fetch(fetchUrl, {
-            method: 'POST'
-        }).then( ( res ) => {
-            console.log(`que me devolviste papei `, res);
-
-        }).catch((err) => {
-            console.error(' paso algo: ', err); } )
-    }
 </script>

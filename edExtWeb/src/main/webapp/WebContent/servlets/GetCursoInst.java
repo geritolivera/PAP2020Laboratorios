@@ -28,11 +28,11 @@ public class GetCursoInst extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            String instituto =  request.getParameter("instituto");
-            java.util.ArrayList<String> cursos = icon.listarCursosInst(instituto);
+            String inst =  request.getParameter("instituto");
+            java.util.ArrayList<String> cursos = new ArrayList<>(icon.listarCursosAux(inst));
             System.out.println("cursos = " + cursos);
+            System.out.println("inst = " + inst);
             session.setAttribute("cursos", cursos);
-
 
             String recursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + recursosStr);
