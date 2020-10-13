@@ -14,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 
+import clases.EdicionCurso;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 
 /**
  * Servlet implementation class inscripcionUsuarioEdicion
@@ -46,26 +49,36 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		System.out.println("Entre al inscripcion");
+		
 		HttpSession session = request.getSession();
 		Date fecha = new Date();		
 		//String nickUsuario = (String) session.getAttribute("nombreUser");
 		String nickUsuario = "camilo";
 		String nomEdicion = request.getParameter("edicion");
+
+		DTResponse respuesta = new DTResponse();
+
+
 		System.out.println("nom edicion: " + nomEdicion);
 		System.out.println("nickUsuario: " + nickUsuario);
-		
+
 		try {
 			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");
+			request.setAttribute("mensaje", "El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");
 		} catch (Exception e) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("El usuario " + nickUsuario + " ya esta inscripto a "+ nomEdicion);
 			//algo no existe lol
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
-		
-		/*RequestDispatcher rd;
-		rd = request.getRequestDispatcher("/notificacion.jsp");
-		rd.forward(request, response);*/
+
+		ObjectMapper mapper = new ObjectMapper();
+		String inscriStr = mapper.writeValueAsString(respuesta);
+		System.out.println("La respuesta generada es: " + inscriStr);
+
+		response.setContentType("application/json");
+		response.getWriter().append(inscriStr);
 	}
 }

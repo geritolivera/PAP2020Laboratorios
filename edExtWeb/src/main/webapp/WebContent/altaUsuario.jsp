@@ -99,7 +99,7 @@
           $("#lblInstituto").show();
         }
         else{
-          $('#institutos').formSelect('destroy');
+          $('#institutos').formSelect('hide');
           $("#lblInstituto").hide();
         }
 

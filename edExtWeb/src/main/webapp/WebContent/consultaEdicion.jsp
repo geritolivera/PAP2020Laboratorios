@@ -13,7 +13,7 @@
               <input class="white grey-text autocomplete" placeholder="Edicion 1, EdiProgramacion, etc..." type="text"
                 id="autocomplete-input" name="edicion" >
                  <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Buscar
+                            <button class="btn waves-effect waves-light rojo" type="submit">Buscar
                                 <i class="material-icons right">send</i>
                             </button>
                  </div>
@@ -23,5 +23,6 @@
       </div>
     </div>
   </section>
-  
+
+
   <%@include  file="footer.jsp" %>

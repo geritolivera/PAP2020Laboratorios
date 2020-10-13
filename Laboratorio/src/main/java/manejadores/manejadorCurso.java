@@ -40,6 +40,7 @@ public class manejadorCurso {
 	public List getCursos(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		return em.createQuery("SELECT c FROM Curso c ").getResultList();
+		List c = em.createQuery("SELECT c FROM Curso c ").getResultList();
+		return c;
 	}
 }

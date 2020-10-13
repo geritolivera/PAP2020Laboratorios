@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/edExtWeb/WebContent/altaCurso.jsp" value="file://$PROJECT_DIR$/edExtWeb/WebContent" />
         <entry key="file://$PROJECT_DIR$/edExtWeb/WebContent/infoPrograma.jsp" value="file://$PROJECT_DIR$/edExtWeb/WebContent" />
+        <entry key="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent/altaEdicion.jsp" value="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent" />
         <entry key="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent/consultaUsuario.jsp" value="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent" />
         <entry key="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent/defaultHeader.jsp" value="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent" />
         <entry key="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent/infoUsuario.jsp" value="file://$PROJECT_DIR$/edExtWeb/src/main/webapp/WebContent" />

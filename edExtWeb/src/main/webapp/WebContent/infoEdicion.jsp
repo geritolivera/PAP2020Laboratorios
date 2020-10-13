@@ -80,5 +80,5 @@
             </div>
         </div>
     </div>
-    <%@include  file="footer.jsp" %>
 <script src="resources/scripts/alta.js"> </script>
+    <%@include  file="footer.jsp" %>

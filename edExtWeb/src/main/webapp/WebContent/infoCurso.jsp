@@ -13,7 +13,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="images/asd.jpg">
+                            <img src="resources/images/asd.jpg">
                             <span class="card-title" id="nombre">${nombre}</span>
                         </div>
                         <div class="card-content">
