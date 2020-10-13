@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 
@@ -42,17 +43,15 @@ public class GetListas extends HttpServlet {
 
 		try {
 			String[] institutos = icon.listarInstitutos();
-			java.util.ArrayList<String> categorias = icon.listarCategorias();
-			java.util.ArrayList<String> previas = icon.listarCursos();
 			session.setAttribute("institutos", institutos);
-			session.setAttribute("previas", previas);
-			session.setAttribute("categorias", categorias);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-
+		ObjectMapper mapper = new ObjectMapper();
+		String institutoStr = mapper.writeValueAsString(institutos);
+		response.setContentType("application/json");
+		response.getWriter().append(institutoStr);
 
 
 	}

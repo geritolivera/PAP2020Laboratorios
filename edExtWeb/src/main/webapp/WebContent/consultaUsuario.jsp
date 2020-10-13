@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.ArrayList"%>
+<%@ page import="datatypes.DTUsuario" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -10,21 +12,16 @@
 <%@include file="defaultHeader.jsp" %>
 
 </head>
-<body onload="listarUsuarios()">
+<body>
 <div class=main>
 	<div class="container">
 		<div class="row">
 			<div class="input-field col s12">
-		    <select id="listaUsuarios">
-		      <option value="" disabled selected>Seleccionar un usuario</option>
-				<c:forEach var="cur" items="${usuario}">
-					<option value="${cur}">${cur}</option>
-				</c:forEach>
+		    <select id="listassUsuarios">
+		      <option value="" disabled >Seleccionar un usuario</option>
 		    </select>
 		    <label>Lista de usuarios</label>
 			</div>
-			<%String nickname = "estudiante";
-			if (nickname.equals("docente") ){%>
 			<div class="col s12">
 			<div class="col s3">
 		      <div class="card">
@@ -42,7 +39,7 @@
 		    		<li>
 		      		<div class="collapsible-header green"><i class="material-icons">account_circle</i>Informacion personal</div>
 		      		<div class="collapsible-body">
-		      		
+
 		      			<div class="col s5">
               			<img src="images/img2.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
            				 </div>
@@ -53,7 +50,7 @@
                 		<label for="fnacimiento" style="color:black"><b>Fecha de Nacimiento:</b> <br></label>
 		      		</div>
 		    		</li>
-		    		
+
 		    		<li>
 		      		<div class="collapsible-header lime"><i class="material-icons">book</i>Cursos</div>
 		      		<div class="collapsible-body">
@@ -107,7 +104,7 @@
 		    		<li>
 		      		<div class="collapsible-header green"><i class="material-icons">account_circle</i>Informacion personal</div>
 		      		<div class="collapsible-body">
-		      		
+
 		      			<div class="col s5">
               			<img src="images/img2.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
            				 </div>
@@ -118,7 +115,7 @@
                 		<label for="fnacimiento" style="color:black"><b>Fecha de Nacimiento:</b> <br></label>
 		      		</div>
 		    		</li>
-		    		
+
 		    		<li>
 		      		<div class="collapsible-header lime"><i class="material-icons">book</i>Cursos</div>
 		      		<div class="collapsible-body">
@@ -169,7 +166,7 @@
 		  		</ul>
 			</div>
 			</div>
-			<%} %>
+			<%%>
 		</div>
 	</div>		
 </div>
@@ -197,7 +194,7 @@ function infoPrograma() {
     //completar los datos del curso
     } 
 prog.onchange=infoPrograma;  
-
+ selected
 </script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {

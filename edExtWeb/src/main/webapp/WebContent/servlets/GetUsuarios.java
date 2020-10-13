@@ -1,8 +1,8 @@
 package main.webapp.WebContent.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import exepciones.InstitutoExcepcion;
 import interfaces.IcontroladorCurso;
+import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
 
 import javax.servlet.ServletException;
@@ -14,39 +14,29 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/GetCursoInst")
-public class GetCursoInst extends HttpServlet {
+@WebServlet("/GetUsuarios")
+public class GetUsuarios extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         HttpSession session = request.getSession();
-
+        fabrica fabrica = interfaces.fabrica.getInstancia();
+        IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
+        ArrayList<String> usuarios = new ArrayList<>();
         try {
-            String inst =  request.getParameter("instituto");
-            java.util.ArrayList<String> cursos = new ArrayList<>();
-            cursos = icon.listarCursosAux(inst);
-            System.out.println("cursos = " + cursos);
-            System.out.println("inst = " + inst);
-            session.setAttribute("cursos", cursos);
-
-            String recursosStr = mapper.writeValueAsString(cursos);
-            System.out.println("	Los recursos que guardo son: " + recursosStr);
-
-            response.setContentType("application/json");
-            response.getWriter().append(recursosStr);
-
+            usuarios = iconu.listarUsuarios();
+            System.out.println("usuarios = " + usuarios);
+            session.setAttribute("listaUsuarios", usuarios);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-
-
+        ObjectMapper mapper = new ObjectMapper();
+        String usuarioStr = mapper.writeValueAsString(usuarios);
+        response.setContentType("application/json");
+        response.getWriter().append(usuarioStr);
     }
 }

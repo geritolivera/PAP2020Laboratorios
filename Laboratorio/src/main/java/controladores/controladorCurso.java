@@ -381,12 +381,12 @@ public class controladorCurso implements IcontroladorCurso{
 	//Funciones Auxiliares
 	@Override //Listados para comboBoxes
 	public ArrayList<String> listarCursosAux(String nombreInstituto){
-		manejadorInstituto mI = manejadorInstituto.getInstancia(); 
-		Instituto inst = mI.buscarInstituto(nombreInstituto);
-		List<Curso> cursos = inst.getCursos();
-		ArrayList<String> cursosRet = new ArrayList<String>();
+		manejadorCurso mC = manejadorCurso.getInstancia();
+		List<Curso> cursos =(List<Curso>) mC.getCursos();
+		ArrayList<String>cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
-			cursosRet.add(c.getNombre());
+			if(c.getNomInstituto().equals(nombreInstituto))
+				cursosRet.add(c.getNombre());
 		}
 		return cursosRet;
 	}
@@ -394,7 +394,7 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public ArrayList<String> listarEdicionesAux(String nomCurso) {
 		manejadorEdicion mE = manejadorEdicion.getInstancia();
-		List<EdicionCurso> ediciones = mE.getEdiciones();
+		List<EdicionCurso> ediciones =(List<EdicionCurso>) mE.getEdiciones();
 		ArrayList<String> ediciones_ret = new ArrayList<String>();
 		for (EdicionCurso e:ediciones) {
 			if(e.getCurso().getNombre().equals(nomCurso))
@@ -406,13 +406,12 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override
 	public ArrayList<String> listarDocentesInstituto(String nomInstituto) {
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		List<Usuario> listaUsuario = mu.getUsuarios();
+		List<Usuario> listaUsuario = (List<Usuario>) mu.getUsuarios();
 		ArrayList<String> docentes = new ArrayList<String>();
 		for(Usuario u : listaUsuario) {
 			if(u instanceof Docente) {
-				Instituto ins = ((Docente) u).getInstituto();
-				if(ins != null) {
-					if(ins.getNombre().compareTo(nomInstituto) == 0) {
+				if(((Docente) u).getInstituto() != null) {
+					if(((Docente) u).getInstituto().getNombre().equals(nomInstituto)) {
 						docentes.add(u.getNick());
 					}
 				}
@@ -451,7 +450,7 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override //Lista todos los Estudiantes
 	public ArrayList<String> listarEstudiantes(){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
-		List<Usuario> listaUsuario = mu.getUsuarios();
+		List<Usuario> listaUsuario = (List<Usuario>) mu.getUsuarios();
 		ArrayList<String> estudiantes = new ArrayList<String>();
 		for(Usuario u : listaUsuario) {
 			if(u instanceof Estudiante) {

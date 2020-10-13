@@ -61,7 +61,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 
 	public ArrayList<String> listarUsuarios() {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		List<Usuario> usuarios = mUsu.getUsuarios();
+		List<Usuario> usuarios =(List<Usuario>) mUsu.getUsuarios();
 		ArrayList<String> listUsers = new ArrayList<>();
 		for (Usuario u : usuarios) {
 			listUsers.add(u.getNick());
@@ -163,10 +163,12 @@ public class controladorUsuario implements IcontroladorUsuario {
 	public boolean existeCorreoUsuario(String correo) {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		boolean encontre = false;
-		List<Usuario> usuarios = mUsu.getUsuarios();
+		List<Usuario> usuarios =(List<Usuario>) mUsu.getUsuarios();
 		for (Usuario u : usuarios) {
-			if (u.getCorreo().equals(correo))
-				encontre = true;
+			if (u.getCorreo() != null) {
+				if (u.getCorreo().equals(correo))
+					encontre = true;
+			}
 		}
 		return encontre;
 	}

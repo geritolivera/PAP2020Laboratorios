@@ -109,7 +109,7 @@ public class Curso {
 	}
 	//se retorna solo el nombre del instituto
 	public String getNomInstituto() {
-		return instituto.getNombre();
+		return this.instituto.getNombre();
 	}
 	
 	public void agregarPrograma(ProgramaFormacion programa) {

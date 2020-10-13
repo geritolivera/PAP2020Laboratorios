@@ -22,10 +22,7 @@
 
                             <div class="input-field col s6">
                                 <select name="instituto" id="institutos">
-                                    <option value="" disabled selected>Seleccione uno</option>
-                                    <c:forEach var="inst" items="${institutos}">
-                                        <option value="${inst}">${inst}</option>
-                                    </c:forEach>
+                                    <option value="" disabled>Seleccione uno</option>
 
                                 </select>
                                 <label>Instituto</label>
@@ -97,3 +94,5 @@
     });
 
 </script>
+<script src="resources/scripts/listas.js"> </script>
+<script src="resources/scripts/alta.js"> </script>

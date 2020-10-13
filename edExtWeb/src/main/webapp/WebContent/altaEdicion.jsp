@@ -14,12 +14,9 @@
                         <h4 class="header2"> <span style="color: #81054b">></span>Alta de Edicion</h4>
 
                         <div class="row">
-                            <div class="input-field col s6">
-                                <select name="instituto" id="instituto" onchange="obtenerDocentesPorInstituto(instituto.value);obtenerCursosPorInstituto(instituto.value)">
-                                    <option value="" disabled selected>Seleccione uno</option>
-                                    <c:forEach var="inst" items="${institutos}">
-                                        <option value="${inst}">${inst}</option>
-                                    </c:forEach>
+                            <div class="input-field col s6" >
+                                <select name="institutos" id="institutos" onchange="obtenerDocentesPorInstituto(institutos.value);obtenerCursosPorInstituto(institutos.value)">
+                                    <option value="" disabled >Seleccione uno</option>
                                 </select>
                                 <label>Instituto</label>
                             </div>
@@ -76,10 +73,12 @@
  <script>
 	$(document).ready(function () {
     	$('.datepicker').datepicker();
-        $('#instituto').formSelect();
+        $('#institutos').formSelect();
         $('#curso').formSelect();
         $('#docentes').formSelect();
      });
 
 
  </script>
+<script src="resources/scripts/listas.js"> </script>
+<script src="resources/scripts/alta.js"> </script>

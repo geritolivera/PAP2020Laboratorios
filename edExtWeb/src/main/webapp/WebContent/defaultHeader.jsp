@@ -94,7 +94,7 @@
               <div class="collapsible-body">
                 <ul>
                   <li><a href="altaUsuario.jsp">Alta Usuario</a></li>
-                  <li><a href="consultaUsuario.jsp">Buscar</a></li>
+                  <li><a href="infoUsuario.jsp">Buscar</a></li>
                   <li><a href="consultaUsuario.jsp">Seguir Usuario</a></li>
                 </ul>
               </div>
@@ -120,7 +120,7 @@
       <!-- Dropdown Usuario -->
       <ul id="dropdownUsuario" class="dropdown-content">
         <li><a href="altaUsuario.jsp">Alta</a></li>
-        <li><a href="consultaUsuario.jsp">Ver Usuarios</a></li>
+        <li><a href="infoUsuario.jsp">Ver Usuarios</a></li>
       </ul>
    </li>
    </ul>

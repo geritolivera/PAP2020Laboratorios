@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import main.webapp.WebContent.resources.dataType.DTResponse;
+
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
@@ -19,29 +22,11 @@ import exepciones.UsuarioExcepcion;
 /**
  * Servlet implementation class altaUsuario
  */
-@WebServlet("/altaUsuario")
-public class altaUsuario extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public altaUsuario() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+@WebServlet("/crearUsuario")
+public class crearUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
@@ -51,28 +36,34 @@ public class altaUsuario extends HttpServlet {
 		String nick = request.getParameter("nickName");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
-		String correo = request.getParameter("email");
+		String correo = request.getParameter("correo");
 		String passwd = request.getParameter("password");
 		//cambia la string a un date
-		Date fechaNac = null;
-		try {
-			fechaNac = format.parse(request.getParameter("fechaNacimiento"));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}		
+		long fN = Date.parse(request.getParameter( "fechaN"));
+		Date fechaNac = new Date(fN);
+
+		DTResponse respuesta = new DTResponse();
 		//tipoUser
 		String instituto = null;
 		if (request.getParameter("tipoUser").equals("docente"))
-			instituto = request.getParameter("instituto");
+			instituto = request.getParameter("institutos");
 		try {
 			icon.AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El usuario " + nick + " se ha ingresado correctamente en el sistema.");
 			request.setAttribute("mensaje", "El usuario " + nick + " se ha ingresado correctamente en el sistema.");
 		} catch (UsuarioExcepcion e) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje(e.getMessage());
+			respuesta.setElemento("nickName");
 			request.setAttribute("mensaje", "El usuario de nickname " + nick + " ya existe en el sistema.");
 			e.printStackTrace();
 		}
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("/notificacion.jsp");
-		rd.forward(request, response);
+		ObjectMapper mapper = new ObjectMapper();
+		String usuarioStr = mapper.writeValueAsString(respuesta);
+		response.setContentType("application/json");
+		response.getWriter().append(usuarioStr);
+
+
 	}
 }
