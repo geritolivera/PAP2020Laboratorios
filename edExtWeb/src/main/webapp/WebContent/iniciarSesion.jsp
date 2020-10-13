@@ -8,7 +8,7 @@
         <br><br>
             	<!-- FORM-->
             	<div class="row">
-                	<form class="col s6 center-align">
+                	<form class="col s6 center-align" method="POST" action="login">
                     	<div class="card-panel">
                         	<h4 class="header2 center-align"> <span style="color: #81054b">></span>Iniciar Sesion</h4>
                         	<div class="row">

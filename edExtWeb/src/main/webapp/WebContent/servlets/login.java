@@ -49,7 +49,7 @@ public class login extends HttpServlet {
         fabrica fab = fabrica.getInstancia();
         IcontroladorUsuario icon = fab.getIcontroladorUsuario();
         PrintWriter out = response.getWriter();
-
+        System.out.println("entro aca");
         //request de nickname y password de usuario
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
@@ -59,6 +59,7 @@ public class login extends HttpServlet {
         try {
             //prueba la validez del usuario y su contraseña contra la BD
             if(icon.validarUsuario(nickname, password)) {
+            	System.out.println("SE VALIDA");
                 out.print("Bienvenido, "+nickname);
                 DTUsuario dtu = icon.verInfoUsuario(nickname);
                 if(dtu instanceof DTEstudiante)

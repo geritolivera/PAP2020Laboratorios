@@ -38,7 +38,8 @@ public class logout extends HttpServlet {
         response.getWriter().append("Served at: ").append(request.getContextPath());
         HttpSession session = request.getSession(false);
         if(session != null) {
-            session.removeAttribute("user");
+            session.removeAttribute("nombreUser");
+            session.removeAttribute("tipoUser");
             RequestDispatcher dp = request.getRequestDispatcher("index.jsp");
             dp.forward(request, response);
         }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,14 +50,15 @@
               <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i
                   class="material-icons right">arrow_drop_down</i></a>
             </li>
-            <li><a href="mobile.html"><i class="material-icons left">account_circle</i>Nombre Docente</a></li>
+            <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
+            <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
           </ul>
         </div>
       </div>
     </nav>
   </div>
   <ul class="sidenav" id="mobile-demo">
-    <li class="rojo"><a href="iniciarSesion.jsp" class="white-text"><i class="material-icons white-text">account_circle</i>Nombre Docente</a></li>
+    <li class="rojo"><a href="miPerfil.jsp" class="white-text"><i class="material-icons white-text">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
         <li class="no-padding">
@@ -65,7 +67,7 @@
               <a class="collapsible-header">Programas<i class="material-icons right">arrow_drop_down</i></a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="altaPrograma.jsp">Alta Programa</a></li>
+                  <li><a href="altaProgramaEdicion.jsp">Alta Programa</a></li>
                   <li><a href="consultaPrograma.jsp">Buscar</a></li>
                   <li><a href="agregarCursoPrograma.jsp">Agregar Curso</a></li>
                 </ul>
@@ -99,12 +101,13 @@
                 </ul>
               </div>
             </li>
+           <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
           </ul>
         </li>
       </ul>
       <!-- Dropdown Programa -->
       <ul id="dropdownPrograma" class="dropdown-content">
-        <li><a href="altaPrograma.jsp">Alta</a></li>
+        <li><a href="altaProgramaFormacion.jsp">Alta</a></li>
         <li><a href="consultaPrograma.jsp">Ver Programas</a></li>
       </ul>
       <!-- Dropdown Curso -->
