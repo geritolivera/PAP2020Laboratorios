@@ -93,8 +93,9 @@ function crearEdicion() {
     });
 }
 
-function inscribirUsuario() {
-    const edicion = document.querySelector("#nombre").value;
+function inscribirUsuario(edicion) {
+    debugger;
+    //const edicion = document.querySelector("#nombre").value;
 
     const fetchUrl = 'inscripcionUE?edicion=' + edicion;
     fetch(fetchUrl, {

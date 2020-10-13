@@ -17,11 +17,11 @@
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%
-                            	//String tipoUser = (String) session.getAttribute("tipoUser");
-                            	String tipoUser = "estudiante";
+                            	String tipoUser = (String) session.getAttribute("tipoUser");
+                            	//String tipoUser = "estudiante";
                             	if(tipoUser != null && tipoUser.equals("estudiante")){                            
                             %>
-                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario()" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
+                            <a id="ediBTN" class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario(${nombre})" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
                                     class="material-icons">add</i></a>
 							<%}%>
                         </div>
@@ -80,5 +80,4 @@
             </div>
         </div>
     </div>
-    
     <%@include  file="footer.jsp" %>

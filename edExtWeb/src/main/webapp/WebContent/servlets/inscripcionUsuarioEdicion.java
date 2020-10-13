@@ -46,12 +46,14 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		
+		System.out.println("Entre al inscripcion");
 		HttpSession session = request.getSession();
 		Date fecha = new Date();		
-		//String nickUsuario = (String) session.getAttribute("nombreUser");
-		String nickUsuario = "camilo";
+		String nickUsuario = (String) session.getAttribute("nombreUser");
+		//String nickUsuario = "camilo";
 		String nomEdicion = request.getParameter("edicion");
+		System.out.println("nom edicion: " + nomEdicion);
+		System.out.println("nickUsuario: " + nickUsuario);
 		
 		try {
 			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
