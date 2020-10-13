@@ -49,8 +49,8 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 		System.out.println("Entre al inscripcion");
 		HttpSession session = request.getSession();
 		Date fecha = new Date();		
-		String nickUsuario = (String) session.getAttribute("nombreUser");
-		//String nickUsuario = "camilo";
+		//String nickUsuario = (String) session.getAttribute("nombreUser");
+		String nickUsuario = "camilo";
 		String nomEdicion = request.getParameter("edicion");
 		System.out.println("nom edicion: " + nomEdicion);
 		System.out.println("nickUsuario: " + nickUsuario);
