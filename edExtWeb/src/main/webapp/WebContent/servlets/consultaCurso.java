@@ -3,17 +3,17 @@ package main.webapp.WebContent.servlets;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 
 import datatypes.*;
-import exepciones.UsuarioExcepcion;
+import exepciones.CursoExcepcion;
 import interfaces.fabrica;
 import interfaces.*;
 
@@ -36,75 +36,48 @@ public class consultaCurso extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		
+		fabrica fab = fabrica.getInstancia();
+		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+		//recibe consulta en forma de Instituto o Categoria
+		
+		String curso = request.getParameter("curso");
+		
+		DTCurso dtc = null;
+		
+		try {
+			dtc = icon.verInfo(curso);
+			//previas y categorias no se precisan
+			String fechaR = format.format(dtc.getFechaR());
+			ArrayList<String> ediciones = dtc.getEdiciones();
+			ArrayList<String> programas = dtc.getProgramas();
+			//ArrayList<String> previas = dtc.getPrevias();
+			//ArrayList<String> categorias = dtc.getCategorias();
+			session.setAttribute("nombre", dtc.getNombre());
+			session.setAttribute("descripcion", dtc.getDescripcion());
+			session.setAttribute("duracion", dtc.getDuracion());
+			session.setAttribute("cantHoras", dtc.getCantHoras());
+			session.setAttribute("creditos", dtc.getCreditos());
+			session.setAttribute("fechaR", fechaR);
+			session.setAttribute("url", dtc.getUrl());
+			session.setAttribute("ediciones", ediciones);
+			session.setAttribute("programas", programas);
+			//session.setAttribute("previas", previas);
+			//session.setAttribute("categorias", categorias);
+		} catch (CursoExcepcion e) {
+			//curso no existe
+			e.printStackTrace();
+		}
+				
+		request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		//recibe consulta en forma de Instituto o Categoria
-		
-		DTCurso dtc = null;
-		
-		if(request.getParameter("consulta").equals("Instituto")) {
-			ArrayList<String> cursos = icon.listarCursos();
-		}
-		
-		DTUsuario dtu = null;
-		String nickname = "Rita";
-		try {
-			dtu = iconu.verInfoUsuario(nickname);
-			//request.setAttribute("mensaje", "El programa " + programa + " se ha ingresado correctamente en el sistema.");
-		} catch (UsuarioExcepcion e) {
-			//request.setAttribute("mensaje", "El programa " + programa + " se ha ingresado correctamente en el sistema.");
-			e.printStackTrace();
-		}
-		
-		String fechaNac = format.format(dtu.getFechaNac());
-		ArrayList<String> seguidores = dtu.getSeguidores();
-		ArrayList<String> seguidos = dtu.getSeguidos();
-		
-		request.setAttribute("nickname", nickname);
-		request.setAttribute("nombre", dtu.getNombre());
-		request.setAttribute("apellido", dtu.getApellido());
-		request.setAttribute("correo", dtu.getCorreo());
-		request.setAttribute("fechaNac", fechaNac);
-		request.setAttribute("seguidores", seguidores);
-		request.setAttribute("seguidos", seguidos);
-		
-		if(dtu instanceof DTDocente) {
-			List<DTEdicionCurso> ediciones = ((DTDocente)dtu).getEdiciones();
-			//en caso de ser necesario tener las strings
-			/*ArrayList<String> listEdiciones = new ArrayList<>();
-			for(DTEdicionCurso e : ediciones) {
-				listEdiciones.add(e.getNombre());
-			}*/
-			request.setAttribute("ediciones", ediciones);
-		}
-		else {
-			List<DTEdicionCurso> ediciones = ((DTEstudiante)dtu).getEdiciones();
-			List<DTProgramaFormacion> programas = ((DTEstudiante)dtu).getProgramas();
-			//en caso de ser necesario tener las strings
-			/*ArrayList<String> listEdiciones = new ArrayList<>();
-			for(DTEdicionCurso e : ediciones) {
-				listEdiciones.add(e.getNombre());
-			}
-			ArrayList<String> listProgramas = new ArrayList<>();
-			for(DTProgramaFormacion p : programas) {
-				listProgramas.add(p.getNombre());
-			}*/
-			request.setAttribute("ediciones", ediciones);
-			request.setAttribute("programas", programas);
-		}
-				
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("/infoPrograma.jsp");
-		rd.forward(request, response);
+		this.doGet(request, response);
 	}
 }

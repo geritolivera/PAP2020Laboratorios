@@ -18,6 +18,7 @@ import interfaces.fabrica;
  */
 @WebServlet("/GetListas")
 public class GetListas extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	/**

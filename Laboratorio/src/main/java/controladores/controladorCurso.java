@@ -181,11 +181,19 @@ public class controladorCurso implements IcontroladorCurso{
 	
 	//Obtiene el DT de la edicion de curso
 	@Override
-	public DTEdicionCurso verInfoEdicion(String nomEdicion){
+	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
-		EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
-		DTEdicionCurso dte = new DTEdicionCurso(edi);
-		return dte;
+		if(mEdi.existeEdicion(nomEdicion)) {
+			EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
+			DTEdicionCurso dte = new DTEdicionCurso(edi);
+			List<Docente> docentes = edi.getDocentes();
+			for(Docente d: docentes) {
+				dte.agregarDocente(d.getNick());
+			}
+			return dte;
+		}
+		else
+			throw new EdicionExcepcion("La edicion " + nomEdicion + " no existe en el sistema.");
 	}
 		 
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -465,5 +473,10 @@ public class controladorCurso implements IcontroladorCurso{
 		return categorias;
 	}
 
+	@Override
+	public Docente obtenerDocente(String nickDocente) {
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		return (Docente) mUsu.buscarUsuario(nickDocente);
+	}
 
 }

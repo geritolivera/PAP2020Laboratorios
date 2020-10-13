@@ -3,6 +3,7 @@ package datatypes;
 import clases.EdicionCurso;
 
 import java.util.Date;
+import java.util.ArrayList;
 
 public class DTEdicionCurso {
 	private String nombre;
@@ -11,6 +12,8 @@ public class DTEdicionCurso {
 	private int cupo;
 	private Date fechaPub;
 	private String curso;
+	
+	ArrayList<String> docentes = new ArrayList<>();
 	
 	public DTEdicionCurso() {
 		super();
@@ -85,6 +88,13 @@ public class DTEdicionCurso {
 	}
 	public String getNomCurso() {
 		return curso;
+	}
+	
+	public void agregarDocente(String docente) {
+		docentes.add(docente);
+	}
+	public ArrayList<String> getDocentes(){
+		return this.docentes;
 	}
 
 }

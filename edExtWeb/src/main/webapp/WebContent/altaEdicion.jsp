@@ -81,31 +81,5 @@
         $('#docentes').formSelect();
      });
 
-    function crearEdicion() {
-        const nombre = document.querySelector("#nombre").value;
-        const fechaI = document.querySelector("#fechaInicio").value;
-        const fechaF = document.querySelector("#fechaFin").value;
-        const instituto = document.querySelector("#instituto").value;
-        const cursos = document.querySelector("#curso").value;
-        const docentes = document.querySelector("#docentes").value;
-        const cupo = document.querySelector("#cupo").value;
 
-        const fetchUrl = 'altaEdicion?nombre=' + nombre +
-            '&fechaI=' + fechaI +
-            '&fechaF=' + fechaF +
-            '&instituto=' + instituto +
-            '&cursos=' + cursos +
-            '&docentes=' + docentes +
-            '&cupo=' + cupo;
-
-        fetch(fetchUrl, {
-            method: 'POST'
-        }).then((res) => {
-            console.log(`que me devolviste papei `, res);
-            
-
-        }).catch((err) => {
-            console.error(' paso algo: ', err);
-        });
-    }
  </script>

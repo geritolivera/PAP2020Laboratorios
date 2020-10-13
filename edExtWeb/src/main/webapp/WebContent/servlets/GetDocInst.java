@@ -25,9 +25,9 @@ public class GetDocInst extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            String instituto = request.getParameter("instituto");
-            java.util.ArrayList<String> docentes = icon.listarDocentesInstituto(instituto);
-            System.out.println("instituto = " + instituto);
+            String inst = request.getParameter("instituto");
+            java.util.ArrayList<String> docentes = icon.listarDocentesInstituto(inst);
+            System.out.println("instituto = " + inst);
             System.out.println("docentes = " + docentes);
             session.setAttribute("docentes", docentes);
 
@@ -43,4 +43,3 @@ public class GetDocInst extends HttpServlet {
         }
     }
 }
-

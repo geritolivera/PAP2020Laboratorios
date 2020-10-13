@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
+import datatypes.DTUsuario;
+import datatypes.DTDocente;
+import datatypes.DTEstudiante;
 
 /**
  * Servlet implementation class iniciarSesion
@@ -50,24 +53,31 @@ public class login extends HttpServlet {
         //request de nickname y password de usuario
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
-        String parse = "iniciarSesion.jsp"; // se usa para probar por el momento
+        String tipoUser = null;
+        //String parse = "iniciarSesion.jsp"; // se usa para probar por el momento
 
         try {
             //prueba la validez del usuario y su contraseña contra la BD
             if(icon.validarUsuario(nickname, password)) {
                 out.print("Bienvenido, "+nickname);
+                DTUsuario dtu = icon.verInfoUsuario(nickname);
+                if(dtu instanceof DTEstudiante)
+                	tipoUser = "estudiante";
+                else
+                	tipoUser = "docente";
                 HttpSession session = request.getSession();
-                session.setAttribute("user", nickname);
-                parse = "altaProgramaFormacion.jsp";
+                session.setAttribute("nombreUser", nickname);
+                session.setAttribute("tipoUser", tipoUser);
+                //parse = "altaProgramaFormacion.jsp";
             }
         } catch (UsuarioExcepcion e) {
             // el usuario no existe
-            parse = "altaUsuario.jsp";
+            //parse = "altaUsuario.jsp";
             e.printStackTrace();
         }
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher(parse);
+        rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }
 }

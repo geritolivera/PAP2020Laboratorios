@@ -20,11 +20,12 @@ import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 
 @WebServlet("/altaEdicion")
 public class altaEdicion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        DTResponse respuesta = new DTResponse();
         fabrica fab = fabrica.getInstancia();
         IcontroladorCurso icon = fab.getIcontroladorCurso();
 
@@ -40,7 +41,8 @@ public class altaEdicion extends HttpServlet {
 
         String instituto = request.getParameter("instituto");
         String cursos = request.getParameter("cursos");
-        String[] docentes = request.getParameterValues("docentes");
+
+        String[] docentes = request.getParameter("docentes").split(",");
         Integer cupo = Integer.parseInt(request.getParameter("cupo"));
 
 
@@ -52,19 +54,29 @@ public class altaEdicion extends HttpServlet {
 
         try {
             icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes);
+            respuesta.setCodigo(0);
+            respuesta.setMensaje("La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
+            request.setAttribute("mensaje", "La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
         } catch (EdicionExcepcion edicionExcepcion) {
             request.setAttribute("mensaje", "La edicion " + nombre + " ya existe en el sistema.");
+            respuesta.setCodigo(1);
+            respuesta.setMensaje("La edicion " + nombre + " ya existe en el sistema.");
+            respuesta.setElemento("nombre");
             edicionExcepcion.printStackTrace();
         } catch (CursoExcepcion cursoExcepcion) {
             request.setAttribute("mensaje", "El curso " + nombre + " no existe en el sistema.");
+            respuesta.setCodigo(1);
+            respuesta.setElemento("curso");
+            respuesta.setMensaje("El curso " + nombre + " no existe en el sistema.");
             cursoExcepcion.printStackTrace();
         }
-        request.setAttribute("mensaje", "La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
 
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/notificacion.jsp");
-        rd.forward(request, response);
+        ObjectMapper mapper = new ObjectMapper();
+        String cursoStr = mapper.writeValueAsString(respuesta);
+        System.out.println("La respuesta generada es: " + cursoStr);
 
+        response.setContentType("application/json");
+        response.getWriter().append(cursoStr);
     }
 
 

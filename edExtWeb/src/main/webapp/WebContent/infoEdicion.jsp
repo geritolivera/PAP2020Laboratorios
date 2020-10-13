@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@include  file="defaultHeader.jsp" %>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.ArrayList"%>
     <div class="main">
         <br><br>
 
@@ -12,38 +14,44 @@
                     <div class="card">
                         <div class="card-image">
                             <img src="images/asd.jpg">
-                            <span class="card-title" id="tituloPrograma">Nombre Edicion</span>
+                            <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
-                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" href="linkInscripcion"><i
+                            <%
+                            	//String tipoUser = (String) session.getAttribute("tipoUser");
+                            	String tipoUser = "estudiante";
+                            	if(tipoUser != null && tipoUser.equals("estudiante")){                            
+                            %>
+                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario()" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
                                     class="material-icons">add</i></a>
+							<%}%>
                         </div>
-                        <ul id="dataPrograma" class="collection">
+                        <ul id="dataEdicion" class="collection">
                             <li class="collection-item">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha Publicacion
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">01/01/2021</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align" id="fechaPub">${fechaPub}</div>
                                 </div>
                             </li>
                             <li class="collection-item">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">200</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align" id="cupo">${cupo}</div>
                                 </div>
                             </li>
                             <li class="collection-item">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-action-wallet-travel"></i>
                                         Fecha Inicio</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">01/12/2010</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align" id="fechaI">${fechaI}</div>
                                 </div>
                             </li>
                             <li class="collection-item">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha Fin
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">01/01/2021</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align" id="fechaF">${fechaF}</div>
                                 </div>
                             </li>
                             <li class="collection-item">
@@ -62,11 +70,10 @@
                         <div class="card-content white-text">
                             <span class="card-title">Docentes</span>
                         </div>
-                        <div class="collection">
-                            <a href="#!" class="collection-item">P1</a>
-                            <a href="#!" class="collection-item ">P2</a>
-                            <a href="#!" class="collection-item">P3</a>
-                            <a href="#!" class="collection-item">Logica</a>
+                        <div class="collection" name="docentes" id="docentes">
+                            <c:forEach var="docs" items="${docentes}">
+                            <a href="" class="collection-item">${docs}</a>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-	<script>
-		M.toast({html: 'Agregado!', classes: 'rounded pink darken-4'});
-	</script>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<meta charset="utf-8">
+</body>
+	<h1>${mensaje}</h1>
+</body>
+</html>

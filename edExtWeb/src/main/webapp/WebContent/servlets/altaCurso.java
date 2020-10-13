@@ -1,5 +1,6 @@
 package main.webapp.WebContent.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
 import exepciones.CursoExcepcion;
@@ -42,10 +45,19 @@ public class altaCurso extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		DTResponse respuesta = new DTResponse();
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
-				
+		StringBuilder buffer = new StringBuilder();
+		BufferedReader reader = request.getReader();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			buffer.append(line);
+			buffer.append(System.lineSeparator());
+		}
+		String data = buffer.toString();
+
+		System.out.println("data = " + data);
 		//datos del curso
 		//SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		String nombre = request.getParameter("nombre");
@@ -62,9 +74,11 @@ public class altaCurso extends HttpServlet {
 		String url = request.getParameter("url");
 		String instituto = request.getParameter("instituto");
 		//getParameterValues se usa para sacar un array de strings
-		String[] previas = request.getParameterValues("previas");
-		String[] categorias = request.getParameterValues("categorias");
+		String[] previas = request.getParameter("previas").split(",");
+		String[] categorias = request.getParameter("categorias").split(",");
 
+		System.out.println("previas = " + previas.toString());
+		System.out.println("categorias = " + categorias.toString());
 		
 		ArrayList<String> listPrevias = new ArrayList<>();
 		for(String s: previas) {
@@ -78,16 +92,28 @@ public class altaCurso extends HttpServlet {
 		try {
 			icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, listPrevias, listCategorias);
 			request.setAttribute("mensaje", "El curso " + nombre + " se ha ingresado correctamente en el sistema.");
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El curso " + nombre + " se ha ingresado correctamente en el sistema");
 		} catch (CursoExcepcion e) {
 			request.setAttribute("mensaje", "El curso de nombre " + nombre + " ya existe en el sistema.");
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("El curso " + nombre + " ya existe en el sistema");
+			respuesta.setElemento("nombre");
 			e.printStackTrace();
 		} catch (InstitutoExcepcion e) {
 			request.setAttribute("mensaje", "El instituto de nombre " + instituto + " no existe en el sistema.");
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("El instituto " + instituto + " no existe en el sistema");
+			respuesta.setElemento("instituto");
 			e.printStackTrace();
 		}
-		
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("/notificacion.jsp");
-		rd.forward(request, response);
+
+		ObjectMapper mapper = new ObjectMapper();
+		String cursoStr = mapper.writeValueAsString(respuesta);
+		System.out.println("La respuesta generada es: " + cursoStr);
+
+		response.setContentType("application/json");
+		response.getWriter().append(cursoStr);
+
 	}
 }

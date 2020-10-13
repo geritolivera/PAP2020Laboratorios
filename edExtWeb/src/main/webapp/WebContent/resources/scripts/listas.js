@@ -1,7 +1,8 @@
+var baseURL = 'http://localhost:8080/edExtWeb/';
 $(document).ready(function (){
     $('#institutos').change(function (){
         $.ajax({
-            url: '/src/GetListas',
+            url: baseURL+'GetListas',
             type: 'post',
             data: "tipo = 'institutos'",
             success: function (response){
@@ -15,9 +16,9 @@ $(document).ready(function (){
             }
         })
     })
+
+
 })
-
-
 /** FUNCIONES GENERALES PARA CONSUMIR AJAX **/
 //declao variables globales para
 var READY_STATE_UNITIALIZED = 0;
@@ -26,24 +27,6 @@ var READY_STATE_LOADED      = 2;
 var READY_STATE_INTERACTIVE = 3;
 var READY_STATE_COMPLETE    = 4;
 var STATUS_OK               = 200;
-var xhr;
-
-
-var baseURL = '/edExtWeb/';
-
-function ejecutarAlert(){
-    Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-    )
-}
-
-function cerrarMensaje(){
-    console.log("Elimino mensaje...")
-    document.getElementById("mensaje").style.display = "none";
-}
-
 
 function obtenerCursosPorInstituto(instituto){
     // Parametro:
