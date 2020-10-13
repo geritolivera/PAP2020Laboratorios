@@ -53,11 +53,10 @@ public class manejadorUsuario {
 		return this.buscarUsuarioCorreo(correo) instanceof Usuario;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public List getUsuarios() {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
-		return usuarios;
+		return em.createQuery("select u from Usuario u", Usuario.class).getResultList();
 	}
 
 	public void modificarUsuario(String nickname, String nombre, String apellido, Date fechaNaci) {

@@ -50,11 +50,84 @@ function crearCurso() {
         console.error(' paso algo: ', err); } )
 }
 
+function usuario() {
+    const nick = document.querySelector("#nickName").value;
+    const nombre = document.querySelector("#nombre").value;
+    const apellido = document.querySelector("#apellido").value;
+    const correo = document.querySelector("#email").value;
+    const passwd = document.querySelector("#password").value;
+    const fechan = document.querySelector("#fechaNacimiento").value;
+    const tipoUser = document.querySelector("#tipoUser").value;
+    const instituto = document.querySelector("#institutos").value;
+    let fetchUrl;
+    if(tipoUser == 'estudiante') {
+        fetchUrl = 'crearUsuario?nickName=' + nick +
+            '&nombre=' + nombre +
+            '&apellido=' + apellido +
+            '&correo=' + correo +
+            '&password=' + passwd +
+            '&fechaN=' + fechan +
+            '&tipoUser=' + tipoUser;
+
+        fetch(fetchUrl, {
+            method: 'POST'
+        }).then((res) => {
+            return res.json();
+        }).then((respuesta) => {
+            respuesta.codigo //1 o 0
+            respuesta.mensaje //mensaje de error o success
+            if (respuesta.codigo == 0) {
+                mensajeConfirmacion("Estudiante dado de alta!", respuesta.mensaje).then(() => {
+                    // rediraccinar a otro jsp.
+                    window.location = baseURL + '/index.jsp';
+                })
+            } else {
+                mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                })
+            }
+        }).catch((err) => {
+            console.error(' paso algo: ', err);
+        });
+    }else{
+        fetchUrl = 'crearUsuario?nickName=' + nick +
+            '&nombre=' + nombre +
+            '&apellido=' + apellido +
+            '&correo=' + correo +
+            '&password=' + passwd +
+            '&fechaN=' + fechan +
+            '&tipoUser=' + tipoUser +
+            '&institutos=' + instituto;
+        fetch(fetchUrl, {
+            method: 'POST'
+        }).then((res) => {
+            return res.json();
+        }).then((respuesta) => {
+            respuesta.codigo //1 o 0
+            respuesta.mensaje //mensaje de error o success
+            if (respuesta.codigo == 0) {
+                mensajeConfirmacion("Docente dado de alta!", respuesta.mensaje).then(() => {
+                    // rediraccinar a otro jsp.
+                    window.location = baseURL + '/index.jsp';
+                })
+            } else {
+                mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                })
+            }
+        }).catch((err) => {
+            console.error(' paso algo: ', err);
+        });
+    }
+
+
+}
+
 function crearEdicion() {
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
     const fechaF = document.querySelector("#fechaFin").value;
-    const instituto = document.querySelector("#instituto").value;
+    const instituto = document.querySelector("#institutos").value;
     const cursos = document.querySelector("#curso").value;
     const doc = document.querySelector("#docentes").value;
     docen = Array.from(docentes.selectedOptions).map( doc => doc.value);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@include  file="defaultHeader.jsp" %>
@@ -7,7 +8,7 @@
     <div class="container">
       <!-- FORM-->
       <div class="row">
-        <form class="col s12" action="AltaUsuario" method="POST">
+        <form class="col s12">
           <div class="card-panel">
             <h4 class="header2"> <span style="color: #81054b">></span>Alta de Usuario</h4>
             <div class="row">
@@ -60,16 +61,14 @@
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
               </div>
               <div class="input-field col s6">
-                <select name="instituto" id="instituto">
-                  <option value="" disabled selected>Seleccione uno</option>
-                  <option value=" inco">INCO</option>
-                  <option value="mat">MAT</option>
-                </select>
+                <select name="institutos" id="institutos">
+                  <option value="" disabled>Seleccione uno</option>
+                  </select>
                 <label id="lblInstituto">Instituto</label>
               </div>
             </div>
             <div class="center-align">
-              <button class="btn waves-effect waves-light rojo" type="submit" name="action">Crear
+              <button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="usuario()">Crear
                 <i class="material-icons right">send</i>
               </button>
             </div>
@@ -90,19 +89,21 @@
       $(document).ready(function () {
         $('#tipoUser').formSelect();
         $('.datepicker').datepicker();
-        $("#instituto").hide();
+        $("#institutos").hide();
         $("#lblInstituto").hide();
 
       });
       $("#tipoUser").change(function () {
-        if ($(this).val() == "docente") {
-          $('#instituto').formSelect();
+        if ($("#tipoUser").val() == "docente") {
+          $('#institutos').formSelect();
           $("#lblInstituto").show();
         }
         else{
-          $('#instituto').formSelect('destroy');
+          $('#institutos').formSelect('destroy');
           $("#lblInstituto").hide();
         }
 
       });
 </script>
+<script src="resources/scripts/listas.js"> </script>
+<script src="resources/scripts/alta.js"> </script>

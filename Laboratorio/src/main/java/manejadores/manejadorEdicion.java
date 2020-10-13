@@ -40,11 +40,10 @@ public class manejadorEdicion {
 		return this.buscarEdicion(nombre) instanceof EdicionCurso;
 	}
 	
-	public List<EdicionCurso> getEdiciones(){
+	public List getEdiciones(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List<EdicionCurso> ediciones = em.createQuery("SELECT e FROM EdicionCurso e", EdicionCurso.class).getResultList();
-		return ediciones;
+		return em.createQuery("SELECT e FROM EdicionCurso e", EdicionCurso.class).getResultList();
 	}
 
 	public void agregarInscripcionED(Date fecha, Estudiante e, EdicionCurso eC){

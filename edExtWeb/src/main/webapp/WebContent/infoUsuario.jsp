@@ -1,29 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.ArrayList"%>
+<%@ page import="datatypes.DTUsuario" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Consulta de Usuario</title>
-<%@include file="defaultHeader.jsp" %>
-
+	<%@include file="defaultHeader.jsp" %>
+	<title>Consulta de Usuario</title>
 </head>
-<body onload="listarUsuarios()">
+<body>
+
+
 <div class=main>
 	<div class="container">
 		<div class="row">
 			<div class="input-field col s12">
-		    <select id="listaUsuarios">
-		      <option value="" disabled selected>Seleccionar un usuario</option>
-		      <option value="1">estudiante</option>
-		      <option value="1">docente</option>
+		    <select name="listaUsuarios" id="listaUsuarios" onchange="listaEdicionesUsuario(listaUsuarios.value);obtenerDatosUsuario(listaUsuarios.value)">
+		      <option value="" disabled>Seleccionar un usuario</option>
 		    </select>
 		    <label>Lista de usuarios</label>
 			</div>
-			<%String nickname = "estudiante";
-			if (nickname.equals("docente") ){%>
-			<div class="col s12">
+
+			<div class="col s12" id="estudiante">
 			<div class="col s3">
 		      <div class="card">
 		        <div class="card-image">
@@ -35,27 +35,29 @@
 		        </div>
 		      </div>
 			</div>
-			<div class="col s9">
+			<div class="col s9" id="datos">
 				<ul class="collapsible">
 		    		<li>
 		      		<div class="collapsible-header green"><i class="material-icons">account_circle</i>Informacion personal</div>
 		      		<div class="collapsible-body">
-		      		
+
 		      			<div class="col s5">
               			<img src="images/img2.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
            				 </div>
-                		<label for="nickName" style="color:black"><b>NickName:</b><br></label>
-                		<label for="nombre" style="color:black"><b>Nombre:</b> <br></label>
-                		<label for="apellido" style="color:black"><b>Apellido:</b> <br></label>
-                		<label for="correo" style="color:black"><b>Correo:</b><br></label>
-                		<label for="fnacimiento" style="color:black"><b>Fecha de Nacimiento:</b> <br></label>
+						<div id="detallesU">
+                		<label id="nickName" style="color:black"><b>NickName:</b>${nickname}<br></label>
+                		<label id="nombre" style="color:black"><b>Nombre:</b> <br></label>
+                		<label id="apellido" style="color:black"><b>Apellido:</b> <br></label>
+                		<label id="correo" style="color:black"><b>Correo:</b><br></label>
+                		<label id="fnacimiento" style="color:black"><b>Fecha de Nacimiento:</b> <br></label>
+						</div>
 		      		</div>
 		    		</li>
-		    		
+
 		    		<li>
 		      		<div class="collapsible-header lime"><i class="material-icons">book</i>Cursos</div>
 		      		<div class="collapsible-body">
-			    		<select id="listaCursos">
+			    		<select id="listaCursosE">
 			      		<option value="" disabled selected>Seleccionar un curso</option>
 			      		<option value="1">cursos</option>
 			   			 </select>
@@ -87,8 +89,8 @@
 		  		</ul>
 			</div>
 			</div>
-			<%}else if(nickname.equals("estudiante")) {%>
-						<div class="col s12">
+
+			<div class="col s12" id="docente" >
 			<div class="col s3">
 		      <div class="card">
 		        <div class="card-image">
@@ -100,14 +102,14 @@
 		        </div>
 		      </div>
 			</div>
-			<div class="col s9">
+			<div class="col s9" >
 				<ul class="collapsible">
 		    		<li>
 		      		<div class="collapsible-header green"><i class="material-icons">account_circle</i>Informacion personal</div>
 		      		<div class="collapsible-body">
-		      		
+
 		      			<div class="col s5">
-              			<img src="images/img2.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+              			<img src="resources/images/asd.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
            				 </div>
                 		<label for="nickName" style="color:black"><b>NickName:</b><br></label>
                 		<label for="nombre" style="color:black"><b>Nombre:</b> <br></label>
@@ -116,7 +118,7 @@
                 		<label for="fnacimiento" style="color:black"><b>Fecha de Nacimiento:</b> <br></label>
 		      		</div>
 		    		</li>
-		    		
+
 		    		<li>
 		      		<div class="collapsible-header lime"><i class="material-icons">book</i>Cursos</div>
 		      		<div class="collapsible-body">
@@ -136,8 +138,7 @@
 		      		<div class="collapsible-header yellow"><i class="material-icons">book</i>Programas</div>
 		      		<div class="collapsible-body">
 						<select id="listaProgramas">
-			      		<option value="" disabled selected>Seleccionar un programa</option>
-			      		<option value="1">programas</option>
+			      		<option value="" disabled>Seleccionar un programa</option>
 		   			 	</select >
 		    			<label>Lista de Programas</label>
                 		<label for="nombre" style="color:black"><b>Nombre:</b><br></label>
@@ -167,26 +168,25 @@
 		  		</ul>
 			</div>
 			</div>
-			<%} %>
+
 		</div>
-	</div>		
+	</div>
 </div>
 <%@include file="footer.jsp" %>
 <script type="text/javascript">
-var nickname = document.getElementById("listaUsuarios");
-function infoUsuario() { 
-    //completar los datos del usuario
-    //listar los cursos 
-    //listar los programas
-} 
-nickname.onchange=infoUsuario;    
+var nickname = document.getElementById("listaUsuarios").value;
+
+function infoUsuario() {
+
+}
+
 </script>
 <script type="text/javascript">
 var curso = document.getElementById("listaCursos");
-function infoCurso() { 
+function infoCurso() {
     //completar los datos del curso
-    } 
-curso.onchange=infoCurso;  
+    }
+curso.onchange=infoCurso;
 
 </script>
 <script type="text/javascript">
@@ -208,6 +208,41 @@ document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems);
   });
+
+<%
+	String tipoUsuario = (String) session.getAttribute("tipoUser");
+
+%>
+
+const elementListaUsuarios = document.querySelector("#listaUsuarios");
+elementListaUsuarios.addEventListener('onchange', () =>{
+
+	const divEstudiante = document.querySelector("#estudiante");
+	const divDocente = document.querySelector("#docente");
+
+<%
+	if(tipoUsuario != null){
+%>
+	divDocente.hidden = true;
+	divEstudiante.hidden = false;
+
+	<%
+
+	if(tipoUsuario.equals("docente")){
+	%>
+		divDocente.hidden = false;
+		divEstudiante.hidden = true;
+
+	<%
+	};
+	%>
+
+<%
+};
+%>
+
+})
 </script>
+<script src="resources/scripts/listas.js"> </script>
 </body>
 </html>

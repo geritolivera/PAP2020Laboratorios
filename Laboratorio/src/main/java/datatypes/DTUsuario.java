@@ -78,7 +78,7 @@ public class DTUsuario {
 		return this.seguidos;
 	}
 	
-	public void añadirSeguidor(String usuario) {
+	public void AnadirSeguidor(String usuario) {
 		seguidores.add(usuario);
 	}
 	public ArrayList<String> getSeguidores() {
