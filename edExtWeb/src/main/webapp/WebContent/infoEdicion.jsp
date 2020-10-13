@@ -13,7 +13,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="images/asd.jpg">
+                            <img src="resources/images/asd.jpg">
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%
@@ -21,7 +21,7 @@
                             	String tipoUser = "estudiante";
                             	if(tipoUser != null && tipoUser.equals("estudiante")){                            
                             %>
-                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario()" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
+                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario('${nombre}')" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
                                     class="material-icons">add</i></a>
 							<%}%>
                         </div>
@@ -80,5 +80,5 @@
             </div>
         </div>
     </div>
-    
+<script src="resources/scripts/alta.js"> </script>
     <%@include  file="footer.jsp" %>

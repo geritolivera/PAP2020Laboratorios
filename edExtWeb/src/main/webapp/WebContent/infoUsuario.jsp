@@ -27,7 +27,7 @@
 			<div class="col s3">
 		      <div class="card">
 		        <div class="card-image">
-		          <img src="images/img1.jpg">
+		          <img src="resources/images/asd.jpg">
 		          <span class="card-title">Usuarios</span>
 		        </div>
 		        <div class="card-content">

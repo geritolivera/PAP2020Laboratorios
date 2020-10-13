@@ -1,5 +1,6 @@
 package datatypes;
 
+import clases.Docente;
 import clases.EdicionCurso;
 
 import java.util.Date;
@@ -37,6 +38,9 @@ public class DTEdicionCurso {
 		this.cupo = edicion.getCupo();
 		this.fechaPub = edicion.getFechaPub();
 		this.curso = edicion.getNomCurso();
+		for (Docente d:edicion.getDocentes()) {
+			this.docentes.add(d.getNick());
+		}
 	}
 	
 	public void setEdicionCurso(EdicionCurso edicion) {

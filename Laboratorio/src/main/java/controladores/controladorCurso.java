@@ -186,10 +186,6 @@ public class controladorCurso implements IcontroladorCurso{
 		if(mEdi.existeEdicion(nomEdicion)) {
 			EdicionCurso edi = mEdi.buscarEdicion(nomEdicion);
 			DTEdicionCurso dte = new DTEdicionCurso(edi);
-			List<Docente> docentes = edi.getDocentes();
-			for(Docente d: docentes) {
-				dte.agregarDocente(d.getNick());
-			}
 			return dte;
 		}
 		else

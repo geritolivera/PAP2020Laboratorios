@@ -13,7 +13,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="images/asd.jpg">
+                            <img src="resources/images/asd.jpg">
                             <span class="card-title" id="nombre">${nombre}</span>
                         </div>
                         <div class="card-content">
@@ -65,7 +65,7 @@
                         </div>
                         <ul class="collection" name="ediciones" id="ediciones">
                                 <c:forEach var="edi" items="${ediciones}">
-                                    <li class="collection-item"><div>${edi}<a href="consultaEdicion?edicion=${edi}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                                    <li class="collection-item"><div>${edi}<a href="consultaEdicionCurso?edicion=${edi}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
                                 </c:forEach>
                         </ul>
                     </div>
