@@ -12,6 +12,7 @@ public class DTUsuario {
 	private String apellido;
 	private String correo;
 	private Date fechaNac;
+	private String password;
 	
 	ArrayList<String> seguidores = new ArrayList<>();
 	ArrayList<String> seguidos = new ArrayList<>();
@@ -26,6 +27,7 @@ public class DTUsuario {
 		this.apellido = apellido;
 		this.correo = correo;
 		this.fechaNac = fechaNac;
+
 	}
 	public DTUsuario(Usuario usuario) {
 		super();
@@ -69,8 +71,15 @@ public class DTUsuario {
 	}
 	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
-	} 
-	
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void seguirUsuario(String usuario) {
 		seguidos.add(usuario);
 	}

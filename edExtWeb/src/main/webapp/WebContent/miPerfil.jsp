@@ -1,6 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.List" %>
+<%@ page import="datatypes.DTEdicionCurso" %>
+<%@ page import="interfaces.fabrica" %>
+<%@ page import="interfaces.IcontroladorUsuario" %>
+
+<%@ page import="controladores.controladorCurso" %>
+<%@ page import="datatypes.DTUsuario" %>
+<%@ page import="org.apache.taglibs.standard.tei.DeclareTEI" %>
+<%@ page import="datatypes.DTEstudiante" %>
 <!DOCTYPE html>
 <html>
 
@@ -13,15 +24,23 @@
 <body>
     <!--GET-ATRIBUTOS USUARIO-->
     <%
-      //ver la imagen
-      String nickname = (String) request.getAttribute("nickname");
-      String nombre = (String) request.getAttribute("nombre");
-      String apellido = (String) request.getAttribute("apellido");
-      String correo = (String) request.getAttribute("correo");
-      String fechaNac = (String) request.getAttribute("fechaNac");
-  	  //String tipo = (String) request.getAttribute("tipo");                          	
-     String tipo = "estudiante";
-     %>
+      //ver la imagen\
+        HttpSession ses = request.getSession();
+      String nickname = (String) ses.getAttribute("nickname");
+      String nombre = (String) ses.getAttribute("nombre");
+      String apellido = (String) ses.getAttribute("apellido");
+      String correo = (String) ses.getAttribute("correo");
+      Date fechaNac = (Date) ses.getAttribute("fechaNac");
+  	  String tipo = (String) ses.getAttribute("tipoUser");
+//      ArrayList<String> programas = (ArrayList<String>) ses.getAttribute("programas");
+      fabrica fab = fabrica.getInstancia();
+      IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+
+        DTUsuario dtu = icon.verInfoUsuario(nickname);
+        List<DTEdicionCurso> ediciones = ((DTEstudiante)dtu).getEdiciones();
+        System.out.println("ediciones = " + ediciones);
+        String selectedEdi = new String();
+    %>
     <div class="main">
         <br><br>
         <div class="container">
@@ -31,7 +50,7 @@
                     <div class="card">
                         <div class="card-image">
                         	 <!-- IMAGEN DEL USUARIO-->
-                            <img src="images/img4.jpg">
+                            <img src="resources/images/img4.jpg">
                         </div>
                         <!-- COLLAPSIBLE USUARIO -->
                         <ul class="collapsible">
@@ -41,7 +60,7 @@
                                         class="material-icons">account_circle</i>Mi Perfil
                                 </div>
                                 <div class="collapsible-body">
-                                    <p><a href="https://www.w3schools.com/">Modificar Datos</a></p>
+                                    <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
                                 </div>
                             </li>
                             <li>
@@ -60,7 +79,7 @@
                                         class="material-icons">account_circle</i>Mi Perfil
                                 </div>
                                 <div class="collapsible-body">
-                                    <p><a href="<%//modificardatos.jsp%>">Modificar Datos</a></p>
+                                    <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
                                 </div>
                             </li>
                             <li>
@@ -71,7 +90,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <%} %>
+                            </div>
+                            <%}%>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +107,7 @@
                                 <li class="tab" class="active"><a href="#test1">Datos</a></li>
                                 <li class="tab"><a href="#test2">Social</a></li>
                                 <li class="tab"><a href="#test3">Cursos</a></li>
-                                <%if(tipo.equals("estudiante")){ %>
+                                <%if(tipo.equals("docente")){ %>
                                 <li class="tab"><a href="#test4">Programas</a></li>
                                 <%} %>
                             </ul>
@@ -98,11 +118,11 @@
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nickname
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=nickname %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=nickname%></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=nombre %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=nombre%></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Apellido
@@ -164,61 +184,65 @@
                             <div id="test3">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <%
-											//ArrayList<DTEdicionCurso> ediciones = (ArrayList<DTEdicionCurso>) request.getAttribute("ediciones");
-                                			//if(ediciones.size()>0){
-										%>
-                                        <select id="ediciones">
-                                            <option value="" >Seleccionar una edicion</option>
-                                            <%
-											//for (DTEdicionCurso e : ediciones){ %>
-                                            <option value="<%//=ediciones.indexOf(e)%>"><%//=e.getNombre()%></option>
-                                            <%//}%>
+                                        <select id="edicion" name="edicion" onchange="getDatosEdicion(edicion.value)" >
+                                            <option value="" disabled selected >Seleccionar una edicion</option>
+                                            <c:forEach var="ed" items="${edicionesNombres}">
+                                                <option value="${ed}">${ed}</option>
+                                            </c:forEach>
                                         </select>
                                         <%if(tipo.equals("estudiante")){ %>
                                         <label>Inscripciones a Ediciones de Cursos</label>
                                         <%}else if(tipo.equals("docente")){%>
                                         <label>Ediciones de Cursos Asociados</label>
                                         <%} %>
-                                        <%//}%>
                                     </div>
                                 </div>
                                 <%
                                     	//DTEdicionCurso edicion = null ;
-										String nombreEdicion = "edicion.getNombre()";
-                                    	String fechaI = "edicion.getFechaI()";
-                                    	String fechaF = "edicion.getFechaF()";
-                                    	String fechaPub = "edicion.getFechaPub()";
-                                    	int cupo = 3;
-                                    	String curso = "edicion.getNomCurso()";
+                                        DTEdicionCurso dtSelected = new DTEdicionCurso();
+                                    for (DTEdicionCurso dte:ediciones) {
+                                        if(dte.getNombre().equals(selectedEdi)){
+                                            dtSelected = dte;
+                                        }
+
+                                    }
+										String nombreEdicion = dtSelected.getNombre();
+                                    	Date fechaI = dtSelected.getFechaI();
+                                    	Date fechaF = dtSelected.getFechaF();
+                                    	Date fechaPub = dtSelected.getFechaPub();
+                                    	Integer cupo = dtSelected.getCupo();
+                                    	String curso = dtSelected.getNomCurso();
                                  %>
+
+                                <div id="infoSelecEdi">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">nombreEdicion</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=selectedEdi %></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
                                         Inicio</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaI</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaI %></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaF</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaF %></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
                                         Publicacion</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaPub</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaPub %></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">cupo</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=cupo %></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">curso</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"><%=curso %></div>
                                 </div>
+                            </div>
                             </div>
 							<!--GET- PROGRAMAS DE FORMACION-->
                             <div id="test4">
@@ -226,18 +250,13 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <!--GET-PROGRAMAS-->
-                                        <%
-											//ArrayList<DTProgramaFormacion> programas = (ArrayList<DTProgramaFormacion>) request.getAttribute("programas");
-                                			//if(programas.size()>0){
-										%>
                                         <select id="programas">
                                             <option value="" disabled selected>Seleccionar un programa</option>
-                                            <%
-											//for (DTProgramaFormacion p : programas){ %>
-                                            <option value="<%//=programas.indexOf(p)%>"><%//=p.getNombre()%></option>
-                                            <%//}%>
+                                            <c:forEach var="pro" items="${programas}">
+                                                <option value="${pro}">${pro}</option>
+                                            </c:forEach>
                                         </select>
-                                        <%//} %>
+
                                         <label>Inscripciones a Programas de Formacion</label>
                                     </div>
                                 </div>
@@ -253,7 +272,7 @@
                                  %>
                                 <div class="row">
                                     <!--imagen del programa-->
-                                    <img src="images/img4.jpg">
+                                    <img src="resources/images/asd.jpg" sizes="[class]= card-content" style="width: 400px;height: 300px;padding-left: 100px;">
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
@@ -288,22 +307,79 @@
         </div>
     </div>
     <%@ include file="footer.jsp" %>
-                            <script type="text/javascript">
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    var elems = document.querySelectorAll('.collapsible');
-                                    var instances = M.Collapsible.init(elems);
-                                });
-                            </script>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    var elems = document.querySelectorAll('select');
-                                    var instances = M.FormSelect.init(elems);
-                                });
-                            </script>
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    $('.tabs').tabs();
-                                });
-                            </script>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.tabs').tabs();
+    });
+</script>
+    <script>
+        function getDatosEdicion(nombre){
+            var baseURL = 'http://localhost:8080/edExtWeb/';
+
+            var url = baseURL +`GetDatosEdicion?nombre=`+ nombre;
+
+            fetch(url)
+                .then((res)=>{
+                    return res.json();
+                }).then((ediSelected) => {
+                var edicionHtml = document.getElementById("infoSelecEdi");
+                console.log(ediSelected)
+                edicionHtml.innerHTML= ``;
+                <%--institutoHtml.innerHTML = `<option value="" disabled selected>Seleccione un instituto</option>`;--%>
+                <%--if (institutos.length > 0){--%>
+                <%--    institutos.forEach((item, index) => {--%>
+                <%--        console.log(" Re item: " + JSON.stringify(item) + " index: " + index);--%>
+                <%--        institutoHtml.innerHTML += `<option value="${item}"> ${item}</option>`;--%>
+                <%--    });--%>
+                <%--    $('#institutos').formSelect();--%>
+                <%--}else{--%>
+                <%--    console.log('no hay institutos');--%>
+                <%--}--%>
+                JSON.stringify(ediSelected);
+                Date.parse(ediSelected.fechaI)
+
+                edicionHtml.innerHTML = `<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.nombre +`</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Inicio</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ Date.parse(ediSelected.fechaI).toLocaleDateString() +`</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin`;
+                    edicionHtml.innerHTML +=`</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +Date.parse(ediSelected.fechaF).toLocaleDateString()+ `</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Publicacion</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + new Date(ediSelected.fechaPub).toLocaleDateString() +`</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.cupo +`</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
+                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>`;
+                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +ediSelected.nomCurso + `</div>`;
+                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
+            })
+        }
+    </script>
 </body>
+
 </html>

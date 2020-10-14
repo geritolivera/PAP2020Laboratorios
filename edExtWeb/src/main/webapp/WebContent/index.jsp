@@ -1,9 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
- <%@include file="defaultHeader.jsp" %>
+  <% if (session.getAttribute("tipoUser")=="docente"){ %>
+  <%@include file="defaultHeader.jsp"%>
+  <%}else{ %>
+  <%@include file="headerEstVis.jsp"%>
+  <%}%>
   <title>edExt</title>
 </head>
 
@@ -15,8 +21,8 @@
         <img src="resources/images/img1.jpg" alt="">
         <div class="caption center-align ">
           <h2 >Bienvenido a edEXT</h2>
-          <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gestión de cursos
-relacionados con la extensión universitaria</h5>
+          <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gestiï¿½n de cursos
+relacionados con la extensiï¿½n universitaria</h5>
           <a href="" class="btn btn-large rojo">Unete</a>
         </div>
       </li>
@@ -71,7 +77,7 @@ relacionados con la extensión universitaria</h5>
           <div class="card-panel">
             <i class="material-icons large red-text">collections_bookmark</i>
             <h4>Programas</h4>
-            <p>Mejora tu organización.</p>
+            <p>Mejora tu organizaciï¿½n.</p>
           </div>
         </div>
         <div class="col s12 m4">
