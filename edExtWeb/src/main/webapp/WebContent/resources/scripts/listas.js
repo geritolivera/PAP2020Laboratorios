@@ -121,32 +121,32 @@ function obtenerCursosPorInstituto(instituto){
 }
 
 function obtenerCursosPorCategoria(categoria){
-    // Parametro:
+// Parametro:
 
-    var url = baseURL + `GetCursoCat?categoria=${categoria}`
+var url = baseURL + `GetCursoCat?categoria=${categoria}`
 
-    fetch(url)
-        .then( (res) => {
-            return res.json();
-        })
-        .then(cursos => {
-            console.log("cursos:", cursos);
-            var cursosHtml = document.getElementById("curso");
+fetch(url)
+    .then( (res) => {
+        return res.json();
+    })
+    .then(cursos => {
+        console.log("cursos:", cursos);
+        var cursosHtml = document.getElementById("curso");
 
-            cursosHtml.innerHTML= ``;
+        cursosHtml.innerHTML= ``;
 
-            if (cursos.length > 0){
-                cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
-                cursos.forEach((item, index) => {
-                    cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
-                    });
-                console.log(cursos);    
-                $('#curso').formSelect();
-            }else{
-                console.log('no hay cursos');
-            }
-        }).catch(error => console.log(' 1) eerr ', error));
-     //obtenerDocentesPorInstituto(instituto);
+        if (cursos.length > 0){
+            cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
+            cursos.forEach((item, index) => {
+                cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+                });
+            console.log(cursos);    
+            $('#curso').formSelect();
+        }else{
+            console.log('no hay cursos');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+    //obtenerDocentesPorInstituto(instituto);
 
 }
 
@@ -233,4 +233,50 @@ function listaEdicionesUsuario(nickname){
 
 
         }).catch(error => console.log(' 1) eerr ', error));
+}
+
+function collectionCursosPorInstituto(instituto){
+    // Parametro:
+
+    var url = baseURL + `GetCursoInst?instituto=${instituto}`
+
+    fetch(url)
+        .then(res => res.json())
+        .then(cursos => {
+            console.log("cursos:", cursos);
+            var cursosHtml = document.getElementById("curso");
+            cursosHtml.innerHTML= ``;
+    
+            if (cursos.length > 0){
+                cursos.forEach((item, index) => {
+                    cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                    });
+            }else{
+                console.log('no hay cursos');
+            }
+        }).catch(error => console.log(' 1) eerr ', error));
+     //obtenerDocentesPorInstituto(instituto);
+}
+
+function collectionCursosPorCategoria(categoria){
+    // Parametro:
+    
+    var url = baseURL + `GetCursoCat?categoria=${categoria}`
+    
+    fetch(url)
+        .then(res => res.json())
+        .then(cursos => {
+            console.log("cursos:", cursos);
+            var cursosHtml = document.getElementById("curso");
+            cursosHtml.innerHTML= ``;
+    
+            if (cursos.length > 0){
+                cursos.forEach((item, index) => {
+                    cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                    });
+            }else{
+                console.log('no hay cursos');
+            }
+        }).catch(error => console.log(' 1) eerr ', error));
+        //obtenerDocentesPorInstituto(instituto);    
 }

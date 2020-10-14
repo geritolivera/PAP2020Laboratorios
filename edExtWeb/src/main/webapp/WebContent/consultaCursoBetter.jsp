@@ -10,31 +10,30 @@
         
             <div class="row">
 	            <div class="input-field col s6" >
-	                <select name="institutos" id="institutos" onchange="obtenerCursosPorInstituto(institutos.value)">
+	                <select name="institutos" id="institutos" onchange="collectionCursosPorInstituto(institutos.value)">
 	                    <option value="" disabled >Seleccione uno</option>
 	                </select>
 	                <label>Instituto</label>
 	            </div>
 	            
 	            <div class="input-field col s6" >
-	                <select name="categorias" id="categorias" onchange="obtenerCursosPorCategoria(categorias.value)">
+	                <select name="categorias" id="categorias" onchange="collectionCursosPorCategoria(categorias.value)">
 	                    <option value="" disabled >Seleccione uno</option>
 	                </select>
 	                <label>Categorias</label>
 	            </div>
 	            
                 <!-- CARD CONSULTA CURSO-->
-				<div class="col s12 m5">
-                    <div class="card teal darken-4">
-                        <div class="card-content white-text">
-                            <span class="card-title">Cursos</span>
-                        </div>
-                        <ul class="collection" name="curso" id="curso">
-                                <c:forEach var="cur" items="${curso}">
-                                    <li class="collection-item"><div>${cur}<a href="consultaCurso?curso=${cur}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                </c:forEach>
-                        </ul>
-                    </div>
+                <div>
+					<div class="col s12 m5">
+	                    <div class="card teal darken-4">
+	                        <div class="card-content white-text">
+	                            <span class="card-title">Cursos</span>
+	                        </div>
+	                        <ul class="collection" name="curso" id="curso">
+	                        </ul>
+	                    </div>
+	                </div>
                 </div>
             </div>
         </div>
