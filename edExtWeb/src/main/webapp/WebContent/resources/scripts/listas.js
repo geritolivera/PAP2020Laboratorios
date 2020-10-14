@@ -120,6 +120,36 @@ function obtenerCursosPorInstituto(instituto){
 
 }
 
+function obtenerCursosPorCategoria(categoria){
+    // Parametro:
+
+    var url = baseURL + `GetCursoCat?categoria=${categoria}`
+
+    fetch(url)
+        .then( (res) => {
+            return res.json();
+        })
+        .then(cursos => {
+            console.log("cursos:", cursos);
+            var cursosHtml = document.getElementById("curso");
+
+            cursosHtml.innerHTML= ``;
+
+            if (cursos.length > 0){
+                cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
+                cursos.forEach((item, index) => {
+                    cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+                    });
+                console.log(cursos);    
+                $('#curso').formSelect();
+            }else{
+                console.log('no hay cursos');
+            }
+        }).catch(error => console.log(' 1) eerr ', error));
+     //obtenerDocentesPorInstituto(instituto);
+
+}
+
 function obtenerDocentesPorInstituto(instituto){
     debugger;
     var url = baseURL +`GetDocInst?instituto=${instituto}`
