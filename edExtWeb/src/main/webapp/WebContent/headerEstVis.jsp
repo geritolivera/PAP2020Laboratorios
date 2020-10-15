@@ -36,10 +36,10 @@
                         <a href="consultaPrograma.jsp">Programas</a>
                     </li>
                     <li>
-                        <a href="consultaCursoBetter.jsp">Cursos</a>
+                        <a href="consultaCurso.jsp">Cursos</a>
                     </li>
                     <li>
-                        <a href="consultaEdicion.jsp">Ediciones</a>
+                        <a href="consultaCurso.jsp">Ediciones</a>
                     </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
@@ -65,10 +65,10 @@
         <a href="consultaPrograma.jsp">Programas</a>
     </li>
     <li>
-        <a href="consultaCursoBetter.jsp">Cursos</a>
+        <a href="consultaCurso.jsp">Cursos</a>
     </li>
     <li>
-        <a href="consultaEdicion.jsp">Ediciones</a>
+        <a href="consultaCurso.jsp">Ediciones</a>
     </li>
     <li>
         <a href="consultaUsuario.jsp">Usuarios</a>

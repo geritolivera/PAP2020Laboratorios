@@ -63,11 +63,11 @@
                         <div class="card-content white-text">
                             <span class="card-title">Cursos</span>
                         </div>
-                        <div class="collection" name="cursos" id="cursos">
-                            <c:forEach var="cur" items="${cursos}">
-                            <a href="" class="collection-item">${cur}</a>
-                            </c:forEach>
-                        </div>
+                        <ul class="collection" name="cursos" id="cursos">
+                                <c:forEach var="cur" items="${cursos}">
+                                    <li class="collection-item"><div>${cur}<a href="consultaCurso?curso=${cur}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                                </c:forEach>
+                        </ul>
                     </div>
                 </div>
             </div>

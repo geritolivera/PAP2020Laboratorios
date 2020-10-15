@@ -247,8 +247,8 @@ function collectionCursosPorInstituto(instituto){
 
     fetch(url, {
         method: 'GET',
-    }).then(res => res.json())
-        .then(cursos => {
+    }).then(res => res.json()
+    ).then(cursos => {
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
             cursosHtml.innerHTML= ``;
@@ -281,7 +281,30 @@ function collectionCursosPorCategoria(categoria){
                     cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
                     });
             }else{
-                console.log('no hay cursos');
+                console.log('no hay categorias');
+            }
+        }).catch(error => console.log(' 1) eerr ', error));
+        //obtenerDocentesPorInstituto(instituto);    
+}
+
+function collectionProgramas(){
+    // Parametro:
+    //debugger;
+    var url = baseURL + `GetProgramasFormacion`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(programas => {
+            console.log("programas:", programas);
+            var programasHtml = document.getElementById("programa");
+            programasHtml.innerHTML= ``;
+    
+            if (programas.length > 0){
+                programas.forEach((item, index) => {
+                    programasHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaProgramaFormacion?programa=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                    });
+            }else{
+                console.log('no hay programas');
             }
         }).catch(error => console.log(' 1) eerr ', error));
         //obtenerDocentesPorInstituto(instituto);    
