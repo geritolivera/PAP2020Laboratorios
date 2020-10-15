@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8080/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 
 $(document).ready(function (){
     var url = baseURL +`GetListas`
@@ -242,7 +242,7 @@ function listaEdicionesUsuario(nickname){
 
 function collectionCursosPorInstituto(instituto){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
     fetch(url, {
@@ -266,7 +266,7 @@ function collectionCursosPorInstituto(instituto){
 
 function collectionCursosPorCategoria(categoria){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetCursoCat?categoria=${categoria}`
     fetch(url, {
         method: 'GET',
