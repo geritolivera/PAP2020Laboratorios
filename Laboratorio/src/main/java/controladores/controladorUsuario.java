@@ -82,16 +82,19 @@ public class controladorUsuario implements IcontroladorUsuario {
 			//si el usuario es docente
 			if (u instanceof Docente) {
 				dtd.setUserDocente(u);
+				dtd.setPassword(u.getPassword());
 				edicionesDoc = ((Docente) u).getEdiciones();
 				for (EdicionCurso e : edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
+
 				}
 				return dtd;
 			}
 			//si el usuario es estudiante
 			else {
 				dte.setUserEstudiante(u);
+				dte.setPassword(u.getPassword());
 				//tiene que sacar el DTEdicion desde las inscripciones
 				inscripcionesEst = ((Estudiante) u).getInscripcionesED();
 				for (InscripcionED i : inscripcionesEst) {

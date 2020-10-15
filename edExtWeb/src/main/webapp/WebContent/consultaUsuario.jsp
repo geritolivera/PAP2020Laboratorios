@@ -9,7 +9,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Consulta de Usuario</title>
-<%@include file="defaultHeader.jsp" %>
+	<% if (session.getAttribute("tipoUser")=="docente"){ %>
+	<%@include file="defaultHeader.jsp"%>
+	<%}else{ %>
+	<%@include file="headerEstVis.jsp"%>
+	<%}%>
 
 </head>
 <body>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@include  file="defaultHeader.jsp" %>
+<% if (session.getAttribute("tipoUser")=="docente"){ %>
+<%@include file="defaultHeader.jsp"%>
+<%}else{ %>
+<%@include file="headerEstVis.jsp"%>
+<%}%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
     <div class="main">
@@ -13,7 +17,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="images/asd.jpg">
+                            <img src="resources/images/img2.jpg">
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%

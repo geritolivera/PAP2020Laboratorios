@@ -120,3 +120,13 @@ li.active:hover .collapsible-header{
 .rosado{
   background-color: #81054b !important;
 }
+
+
+nav .brand-logo {
+  position: absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 3rem;
+  margin-left: 30px;
+  font-variant: unicase;
+}
