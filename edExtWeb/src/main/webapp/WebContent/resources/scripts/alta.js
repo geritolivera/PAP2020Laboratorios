@@ -222,6 +222,36 @@ function inscribirUsuario(nombreEdi) {
     });
 }
 
+function agregarCursoPrograma(nomCurso, nomPrograma) {
+
+    console.log("nombreCurso " + nomCurso + ", " + "nombrePrograma " + nomPrograma);
+    const fetchUrl = 'agregarCursoPrograma?curso=' + nomCurso +
+        '&programa=' + nomPrograma;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+        console.log(`que me devolviste papei `, res);
+    }).then((respuesta) => {
+        console.log(`respuesta: `, respuesta);
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
+                // rediraccinar a otro jsp.
+                window.location = baseURL+ '/index.jsp';
+            })
+        } else {
+            mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
 
 function testAlert(){
     swal({

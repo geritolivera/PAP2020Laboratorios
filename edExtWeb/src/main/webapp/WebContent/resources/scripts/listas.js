@@ -82,6 +82,28 @@ $(document).ready(function (){
             console.log('no hay previas');
         }
     })
+
+    url = baseURL +`GetCursos`
+    debugger;
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
+            console.log(res + " " + res.json);
+            return res.json();
+        }).then((cursos) => {
+        var cursosHtml = document.getElementById("cursosagregar");
+        cursosHtml.innerHTML= ``;
+
+        if (cursos.length > 0){
+            cursosHtml.innerHTML = `<option value="" disabled>Seleccione los cursos</option>`
+            cursos.forEach((item, index) => {
+                cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+            });
+            $('#cursosagregar').formSelect();
+        }else{
+            console.log('no hay cursos');
+        }
+    })
 })
 
 /** FUNCIONES GENERALES PARA CONSUMIR AJAX **/

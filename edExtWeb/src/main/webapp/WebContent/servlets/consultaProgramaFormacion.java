@@ -56,7 +56,7 @@ public class consultaProgramaFormacion extends HttpServlet {
 			session.setAttribute("fechaFin", fechaFin);
 			session.setAttribute("fechaA", fechaActual);
 			session.setAttribute("cursos", dtp.getCursos());
-			session.setAttribute("categorias", categorias);
+			session.setAttribute("categoriass", categorias);
 			session.setAttribute("imagenURL", "resources/images/asd.jpg");
 
 
