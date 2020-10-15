@@ -24,6 +24,7 @@ public class Previas extends HttpServlet {
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         HttpSession session = request.getSession();
         ArrayList<String> previas = icon.listarCursos();
+        System.out.println("previas = " + previas);
 
         try {
             session.setAttribute("previas", previas);
@@ -31,7 +32,6 @@ public class Previas extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         ObjectMapper mapper = new ObjectMapper();
         String previaStr = mapper.writeValueAsString(previas);
         response.setContentType("application/json");

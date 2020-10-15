@@ -106,17 +106,25 @@ public class controladorCurso implements IcontroladorCurso{
 			previas = c.getPrevias();
 			categorias = c.getCategorias();
 			//son listas, no requieren informacion de las ediciones o programas
-			for(EdicionCurso e: ediciones) {
-				dtc.agregarEdicion(e.getNombre());
+			if(!ediciones.isEmpty()) {
+				for (EdicionCurso e : ediciones) {
+					dtc.agregarEdicion(e.getNombre());
+				}
 			}
-			for(ProgramaFormacion p: programas) {
-				dtc.agregarPrograma(p.getNombre());
+			if(!programas.isEmpty()) {
+				for (ProgramaFormacion p : programas) {
+					dtc.agregarPrograma(p.getNombre());
+				}
 			}
-			for(Curso cur : previas){
-				dtc.agregarPrevia(cur.getNombre());
+			if (!previas.isEmpty()) {
+				for (Curso cur : previas) {
+					dtc.agregarPrevia(cur.getNombre());
+				}
 			}
-			for (Categoria cat:categorias) {
-				dtc.agregarCat(cat.getNombre());
+			if(!categorias.isEmpty()) {
+				for (Categoria cat : categorias) {
+					dtc.agregarCat(cat.getNombre());
+				}
 			}
 			
 			return dtc;
@@ -253,6 +261,7 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
 	}
+
 	
 	@Override
 	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Date fecha) throws Exception{
@@ -269,6 +278,7 @@ public class controladorCurso implements IcontroladorCurso{
 					yaInscripto = true;
 			}
 			if (!yaInscripto) {
+				System.out.println("LLEGA");
 				if (mPro.existePrograma(nomPrograma)) {
 					if (user instanceof Estudiante) {
 						ProgramaFormacion p = mPro.buscarPrograma(nomPrograma);
@@ -414,8 +424,9 @@ public class controladorCurso implements IcontroladorCurso{
 		List<Curso> cursos =(List<Curso>) mC.getCursos();
 		ArrayList<String>cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
-			if(c.getNomInstituto().equals(nombreInstituto))
+			if((c.getNomInstituto()!= null)&&(c.getNomInstituto().equals(nombreInstituto))) {
 				cursosRet.add(c.getNombre());
+			}
 		}
 		return cursosRet;
 	}

@@ -12,6 +12,7 @@
 <%@ page import="datatypes.DTUsuario" %>
 <%@ page import="org.apache.taglibs.standard.tei.DeclareTEI" %>
 <%@ page import="datatypes.DTEstudiante" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,16 +36,18 @@
       String nombre = (String) ses.getAttribute("nombre");
       String apellido = (String) ses.getAttribute("apellido");
       String correo = (String) ses.getAttribute("correo");
-      Date fechaNac = (Date) ses.getAttribute("fechaNac");
+      Date fechaN = (Date) ses.getAttribute("fechaNac");
+
+      SimpleDateFormat fechaNa = new SimpleDateFormat("yyyy/MM/dd");
+      String fechaNac = fechaNa.format(fechaN);
+
   	  String tipo = (String) ses.getAttribute("tipoUser");
-//      ArrayList<String> programas = (ArrayList<String>) ses.getAttribute("programas");
+  	  if(tipo.equals("estudiante")) {
+          ArrayList<String> programas = (ArrayList<String>) ses.getAttribute("programas");
+      }
       fabrica fab = fabrica.getInstancia();
       IcontroladorUsuario icon = fab.getIcontroladorUsuario();
-
-        DTUsuario dtu = icon.verInfoUsuario(nickname);
-        List<DTEdicionCurso> ediciones = ((DTEstudiante)dtu).getEdiciones();
-        System.out.println("ediciones = " + ediciones);
-        String selectedEdi = new String();
+      String selectedEdi = new String();
     %>
     <div class="main">
         <br><br>
@@ -112,7 +115,7 @@
                                 <li class="tab" class="active"><a href="#test1">Datos</a></li>
                                 <li class="tab"><a href="#test2">Social</a></li>
                                 <li class="tab"><a href="#test3">Cursos</a></li>
-                                <%if(tipo.equals("docente")){ %>
+                                <%if(tipo.equals("estudiante")){ %>
                                 <li class="tab"><a href="#test4">Programas</a></li>
                                 <%} %>
                             </ul>
@@ -203,49 +206,35 @@
                                     </div>
                                 </div>
                                 <%
-                                    	//DTEdicionCurso edicion = null ;
-                                        DTEdicionCurso dtSelected = new DTEdicionCurso();
-                                    for (DTEdicionCurso dte:ediciones) {
-                                        if(dte.getNombre().equals(selectedEdi)){
-                                            dtSelected = dte;
-                                        }
-
-                                    }
-										String nombreEdicion = dtSelected.getNombre();
-                                    	Date fechaI = dtSelected.getFechaI();
-                                    	Date fechaF = dtSelected.getFechaF();
-                                    	Date fechaPub = dtSelected.getFechaPub();
-                                    	Integer cupo = dtSelected.getCupo();
-                                    	String curso = dtSelected.getNomCurso();
                                  %>
 
                                 <div id="infoSelecEdi">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=selectedEdi %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
                                         Inicio</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaI %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaF %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
                                         Publicacion</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=fechaPub %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=cupo %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"><%=curso %></div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                             </div>
                             </div>
@@ -255,9 +244,9 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <!--GET-PROGRAMAS-->
-                                        <select id="programas">
+                                        <select id="programas" name="programa" onchange="getDatosPrograma(programa.value)">
                                             <option value="" disabled selected>Seleccionar un programa</option>
-                                            <c:forEach var="pro" items="${programas}">
+                                            <c:forEach var="pro" items="${programasNombres}">
                                                 <option value="${pro}">${pro}</option>
                                             </c:forEach>
                                         </select>
@@ -265,43 +254,35 @@
                                         <label>Inscripciones a Programas de Formacion</label>
                                     </div>
                                 </div>
-                                <%
-                                        	//DTProgramaFormacion programa = ; 
-											String nombreProg = "programa.getNombre()";
-                                         	String descripcion = "programa.getDescripcion()";
-	                                    	String fechaInicio = "programa.getFechaI()";
-	                                    	String fechaFin = "programa.getFechaF()";
-	                                    	String fechaA = "programa.fechaA()";
-	                                    	String imagen = "programa.getImagenURL()";
-                                    	
-                                 %>
                                 <div class="row">
                                     <!--imagen del programa-->
                                     <img src="resources/images/asd.jpg" sizes="[class]= card-content" style="width: 400px;height: 300px;padding-left: 100px;">
                                 </div>
+                                <div id="infoSelectedProg">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">nombreProg</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Descripcion
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">descripcion</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
                                         Inicio</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaInicio</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaFin</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">fechaA</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                </div>
                                 </div>
                             </div>
                             <%}%>
@@ -331,6 +312,56 @@
     });
 </script>
     <script>
+        function getDatosPrograma(nombre){
+            var baseURL = 'http://localhost:8080/edExtWeb/';
+
+            var url = baseURL +`GetDatosPrograma?nombre=`+ nombre;
+
+            fetch(url)
+                .then((res)=>{
+                    return res.json();
+                }).then((progSelected) => {
+                var progHtml = document.getElementById("infoSelectedProg");
+                console.log(progSelected)
+                progHtml.innerHTML= ``;
+
+                JSON.stringify(progSelected);
+
+                var fechaInicio = new Date(progSelected.fechaI).toLocaleDateString();
+                var fechaFin = new Date(progSelected.fechaF).toLocaleDateString();
+                var fechaAlta = new Date(progSelected.fechaA).toLocaleDateString();
+
+                progHtml.innerHTML = `<div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
+                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.nombre +`</div>`;
+                    progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`<div class="row">`;
+                progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Descripcion</div>`;
+                progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.descripcion + `</div>`;
+                progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`<div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Inicio</div>`;
+                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ fechaInicio +`</div>`;
+                    progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`<div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin`;
+                    progHtml.innerHTML +=`</div>`;
+                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaFin + `</div>`;
+                    progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`<div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta</div>`;
+                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaAlta +`</div>`;
+                    progHtml.innerHTML +=`</div>`;
+                progHtml.innerHTML +=`<div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
+                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.cupo +`</div>`;
+                    progHtml.innerHTML +=`</div>`;
+
+            })
+        }
+    </script>
+    <script>
         function getDatosEdicion(nombre){
             var baseURL = 'http://localhost:8080/edExtWeb/';
 
@@ -343,44 +374,38 @@
                 var edicionHtml = document.getElementById("infoSelecEdi");
                 console.log(ediSelected)
                 edicionHtml.innerHTML= ``;
-                <%--institutoHtml.innerHTML = `<option value="" disabled selected>Seleccione un instituto</option>`;--%>
-                <%--if (institutos.length > 0){--%>
-                <%--    institutos.forEach((item, index) => {--%>
-                <%--        console.log(" Re item: " + JSON.stringify(item) + " index: " + index);--%>
-                <%--        institutoHtml.innerHTML += `<option value="${item}"> ${item}</option>`;--%>
-                <%--    });--%>
-                <%--    $('#institutos').formSelect();--%>
-                <%--}else{--%>
-                <%--    console.log('no hay institutos');--%>
-                <%--}--%>
+
                 JSON.stringify(ediSelected);
-                Date.parse(ediSelected.fechaI)
+
+                var fechaInicio = new Date(ediSelected.fechaI).toLocaleDateString();
+                var fechaFin = new Date(ediSelected.fechaF).toLocaleDateString();
+                var fechaPublic = new Date(ediSelected.fechaPub).toLocaleDateString();
 
                 edicionHtml.innerHTML = `<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.nombre +`</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.nombre +`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Inicio</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ Date.parse(ediSelected.fechaI).toLocaleDateString() +`</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Inicio</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ fechaInicio +`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin`;
-                    edicionHtml.innerHTML +=`</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +Date.parse(ediSelected.fechaF).toLocaleDateString()+ `</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin`;
+                edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaFin + `</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Publicacion</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + new Date(ediSelected.fechaPub).toLocaleDateString() +`</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Publicacion</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaPublic +`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.cupo +`</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.cupo +`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                    edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>`;
-                    edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +ediSelected.nomCurso + `</div>`;
-                    edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +ediSelected.nomCurso + `</div>`;
+                edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`</div>`;
             })
         }

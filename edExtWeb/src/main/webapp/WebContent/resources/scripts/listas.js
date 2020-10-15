@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8081/edExtWeb/';
+var baseURL = 'http://localhost:8080/edExtWeb/';
 
 $(document).ready(function (){
     var url = baseURL +`GetListas`
@@ -9,7 +9,7 @@ $(document).ready(function (){
             return res.json();
         }).then((institutos) => {
         var institutoHtml = document.getElementById("institutos");
-        institutoHtml.innerHTML= ``;
+        institutoHtml.innerHTML= "";
         institutoHtml.innerHTML = `<option value="" disabled selected>Seleccione un instituto</option>`;
         if (institutos.length > 0){
             institutos.forEach((item, index) => {
@@ -29,7 +29,7 @@ $(document).ready(function (){
             return res.json();
         }).then((usuarios) => {
         var usuariosHtml = document.getElementById("listaUsuarios");
-        usuariosHtml.innerHTML= ``;
+        usuariosHtml.innerHTML= "";
 
         if (usuarios.length > 0){
             usuariosHtml.innerHTML = `<option value="" disabled selected>Seleccione el usuario</option>`;
@@ -50,7 +50,7 @@ $(document).ready(function (){
         return res.json();
     }).then((categorias) => {
         var categoriasHtml = document.getElementById("categorias");
-        categoriasHtml.innerHTML= ``;
+        categoriasHtml.innerHTML= "";
         categoriasHtml.innerHTML = `<option value="" disabled>Seleccione las categorias</option>`;
         if (categorias.length > 0){
             categorias.forEach((item, index) => {
@@ -70,8 +70,7 @@ $(document).ready(function (){
             return res.json();
         }).then((previas) => {
         var previasHtml = document.getElementById("previas");
-        previasHtml.innerHTML= ``;
-
+        previasHtml.innerHTML= "";
         if (previas.length > 0){
             previasHtml.innerHTML = `<option value="" disabled>Seleccione las previas</option>`
             previas.forEach((item, index) => {
@@ -84,20 +83,19 @@ $(document).ready(function (){
     })
 
     url = baseURL +`GetCursos`
-    debugger;
     fetch(url, {
         method: 'GET',
     }).then((res)=>{
             console.log(res + " " + res.json);
             return res.json();
         }).then((cursos) => {
-        var cursosHtml = document.getElementById("cursosagregar");
-        cursosHtml.innerHTML= ``;
+        var cursosagHtml = document.getElementById("cursosagregar");
+        cursosagHtml.innerHTML= "";
 
         if (cursos.length > 0){
-            cursosHtml.innerHTML = `<option value="" disabled>Seleccione los cursos</option>`
+            cursosagHtml.innerHTML = `<option value="" disabled selected>Seleccione los cursos</option>`
             cursos.forEach((item, index) => {
-                cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+                cursosagHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
             });
             $('#cursosagregar').formSelect();
         }else{

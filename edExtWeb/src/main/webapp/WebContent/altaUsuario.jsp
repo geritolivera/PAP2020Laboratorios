@@ -21,7 +21,7 @@
                 <label for="nickName">NickName</label>
               </div>
               <div class="input-field col s6">
-                <select name="tipoUser" id="tipoUser">
+                <select name="tipo" id="tipo">
                   <option value="" disabled selected>Seleccione uno</option>
                   <option value="estudiante">Estudiante</option>
                   <option value="docente">Docente</option>
@@ -91,14 +91,14 @@
         var instances = M.Datepicker.init(elems, options);
       });
       $(document).ready(function () {
-        $('#tipoUser').formSelect();
+        $('#tipo').formSelect();
         $('.datepicker').datepicker();
         $("#institutos").hide();
         $("#lblInstituto").hide();
 
       });
-      $("#tipoUser").change(function () {
-        if ($("#tipoUser").val() == "docente") {
+      $("#tipo").change(function () {
+        if ($("#tipo").val() == "docente") {
           $('#institutos').formSelect();
           $("#lblInstituto").show();
         }

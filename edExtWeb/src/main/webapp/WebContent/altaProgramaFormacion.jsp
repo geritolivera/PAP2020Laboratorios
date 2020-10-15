@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Crear
+                            <button class="btn waves-effect waves-light rojo" type="button" onclick="crearPrograma()">Crear
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -57,3 +57,5 @@
     	$('.datepicker').datepicker();
     });
  </script>
+<script src="resources/scripts/alta.js"> </script>
+<script src="resources/scripts/alta.js"> </script>

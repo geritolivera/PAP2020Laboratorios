@@ -1,10 +1,6 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,23 +11,23 @@ import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
 
-import clases.EdicionCurso;
+import clases.ProgramaFormacion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 
 /**
- * Servlet implementation class inscripcionUsuarioEdicion
+ * Servlet implementation class inscripcionPrograma
  */
-@WebServlet("/inscripcionUE")
-public class inscripcionUsuarioEdicion extends HttpServlet {
+@WebServlet("/inscripcionPrograma")
+public class inscripcionPrograma extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public inscripcionUsuarioEdicion() {
+    public inscripcionPrograma() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,21 +50,22 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
-		String nomEdicion = request.getParameter("edicion");
+		String nomPrograma = request.getParameter("programa");
+
+		System.out.println("nomPrograma = " + nomPrograma);
+		System.out.println("nickUsuario = " + nickUsuario);
+
+
 		DTResponse respuesta = new DTResponse();
 
-		System.out.println("nom edicion: " + nomEdicion);
-		System.out.println("nickUsuario: " + nickUsuario);
-
 		try {
-			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
+			icon.inscribirEstudiantePrograma(nomPrograma, nickUsuario, fecha);
 			respuesta.setCodigo(0);
-			respuesta.setMensaje("El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");
-			request.setAttribute("mensaje", "El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");
+			respuesta.setMensaje("El usuario " + nickUsuario + " se inscribio a " + nomPrograma + " correctamente");
+			request.setAttribute("mensaje", "El usuario " + nickUsuario + " se inscribio a " + nomPrograma + " correctamente");
 		} catch (Exception e) {
-			System.out.println("e.getMessage() = " + e.getMessage());
 			respuesta.setCodigo(1);
-			respuesta.setMensaje("El usuario " + nickUsuario + " ya esta inscripto a "+ nomEdicion);
+			respuesta.setMensaje("El usuario " + nickUsuario + " ya esta inscripto a " + nomPrograma);
 			//algo no existe lol
 			e.printStackTrace();
 		}
@@ -80,4 +77,5 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().append(inscriStr);
 	}
+
 }

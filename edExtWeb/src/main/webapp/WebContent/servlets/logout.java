@@ -35,13 +35,14 @@ public class logout extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
-        HttpSession session = request.getSession();
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+        HttpSession session = request.getSession(false);
         if(session != null) {
-            request.getRequestDispatcher("index.jsp").include(request,response);
+            session.removeAttribute("nombreUser");
+            session.removeAttribute("tipoUser");
             session.invalidate();
-
-            out.print("You are successfully logged out!");
+            RequestDispatcher dp = request.getRequestDispatcher("index.jsp");
+            dp.forward(request, response);
         }
     }
 

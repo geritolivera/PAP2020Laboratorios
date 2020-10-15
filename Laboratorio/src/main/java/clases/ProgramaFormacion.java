@@ -76,7 +76,7 @@ public class ProgramaFormacion {
 	}
 	
 	public void agregarEstudiante(Estudiante estudiante) {
-		estudiantes.add(estudiante);
+		this.estudiantes.add(estudiante);
 	}
 	public List<Estudiante> getEstudiantes() {
 		return estudiantes;
@@ -97,10 +97,10 @@ public class ProgramaFormacion {
 	
 	public void agregarInscripcion(Date fecha, Estudiante est) {
 		InscripcionPF ins = new InscripcionPF(fecha, est, this);
-		inscripciones.add(ins);
+		this.inscripciones.add(ins);
 	}
 	public List<InscripcionPF> getInscripciones(){
-		return inscripciones;
+		return this.inscripciones;
 	}
 	//prototipo de borrado de inscripcion
 	public void borrarInscripcion(Date fecha) {

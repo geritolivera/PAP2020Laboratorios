@@ -25,39 +25,15 @@ import exepciones.InstitutoExcepcion;
  */
 @WebServlet("/altaCurso")
 public class altaCurso extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public altaCurso() {
-        super();
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DTResponse respuesta = new DTResponse();
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		StringBuilder buffer = new StringBuilder();
-		BufferedReader reader = request.getReader();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			buffer.append(line);
-			buffer.append(System.lineSeparator());
-		}
-		String data = buffer.toString();
 
-		System.out.println("data = " + data);
 		//datos del curso
 		//SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		String nombre = request.getParameter("nombre");

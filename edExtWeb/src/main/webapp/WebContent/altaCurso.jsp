@@ -62,18 +62,12 @@
                             <div class="input-field col s6">
                                 <select multiple name="previas" id="previas">
                                     <option value="" disabled >Seleccionar previas</option>
-                                    <c:forEach var="pre" items="${previas}">
-                                        <option value="${pre}">${pre}</option>
-                                    </c:forEach>
                                 </select>
                                 <label>Previas</label>
                             </div>
                             <div class="input-field col s6">
                                 <select multiple name="categorias" id="categorias">
                                     <option value="" disabled>Seleccionar categorias</option>
-                                    <c:forEach var="cat" items="${categorias}">
-                                        <option value="${cat}">${cat}</option>
-                                    </c:forEach>
                                 </select>
                                 <label>Categorias</label>
                             </div>

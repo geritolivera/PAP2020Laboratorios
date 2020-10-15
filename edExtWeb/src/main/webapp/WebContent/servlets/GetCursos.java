@@ -19,45 +19,22 @@ import interfaces.fabrica;
  */
 @WebServlet("/GetCursos")
 public class GetCursos extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	fabrica fabrica = interfaces.fabrica.getInstancia();
 	IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-	String[] institutos = icon.listarInstitutos();
-
-	public GetCursos() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	java.util.ArrayList<String> cursos = icon.listarCursos();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-
 		try {
-			java.util.ArrayList<String> cursos = icon.listarCursos();
 			session.setAttribute("cursosagregar", cursos);
-			ObjectMapper mapper = new ObjectMapper();
-			String cursosStr = mapper.writeValueAsString(cursos);
-			response.setContentType("application/json");
-			response.getWriter().append(cursosStr);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ObjectMapper mapper = new ObjectMapper();
+		String cursosStr = mapper.writeValueAsString(cursos);
+		response.setContentType("application/json");
+		response.getWriter().append(cursosStr);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doGet(request, response);
 	}
 }

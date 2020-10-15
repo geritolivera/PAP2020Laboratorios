@@ -19,11 +19,17 @@
                         <div class="card-image">
                             <img src="resources/images/asd.jpg">
                             <span class="card-title" id="tituloPrograma">${tituloPrograma}</span>
-                            <a class="btn-floating halfway-fab waves-effect waves-light rojo"><i
+                            <%
+                                String tipoUser = (String) session.getAttribute("tipoUser");
+                                if(tipoUser != null && tipoUser.equals("estudiante")){
+                            %>
+                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuarioProg('${tituloPrograma}')"><i
                                     class="material-icons">add</i></a>
+                            <%}%>
                         </div>
                         <div class="card-content">
-                            <p id="desc"></p>
+
+                            <p id="desc">${desc}</p>
 
                         </div>
                         <ul id="dataPrograma" class="collection">
@@ -65,14 +71,13 @@
                         </div>
                         <ul class="collection" name="cursos" id="cursos">
                                 <c:forEach var="cur" items="${cursos}">
-                                    <li class="collection-item"><div>${cur}<a href="consultaCurso?curso=${cur}" class="secondary-content"><i class="material-icons">send</i></a></div></li>	
+                                    <li class="collection-item"><div>${cur}<a href="consultaCurso?curso=${cur}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
                                 </c:forEach>
                         </ul>
                     </div>
                 </div>
                 <%
-                	//String tipoUser = (String) session.getAttribute("tipoUser");
-                	String tipoUser = "docente";
+                	tipoUser = (String) session.getAttribute("tipoUser");
                 	if(tipoUser != null && tipoUser.equals("docente")){
                 %>
                 <div class="col s12 m5">
@@ -91,13 +96,13 @@
         </div>
     </div>
     </div>
-    
+
 <script type="text/javascript">
-	
+
 	$(document).ready(function () {
 	    $('#cursosagregar').formSelect();
 	 });
-	
+
 </script>
 <script src="resources/scripts/listas.js"> </script>
 <script src="resources/scripts/alta.js"> </script>

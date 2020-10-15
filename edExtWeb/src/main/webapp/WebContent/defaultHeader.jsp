@@ -75,7 +75,7 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="altaCurso.jsp">Alta Cursos</a></li>
-                <li><a href="consultaCursoBetter.jsp">Buscar Cursos</a></li>
+                <li><a href="consultaCurso.jsp">Buscar Cursos</a></li>
               </ul>
             </div>
           </li>
@@ -109,7 +109,7 @@
     <!-- Dropdown Curso -->
     <ul id="dropdownCurso" class="dropdown-content">
       <li><a href="altaCurso.jsp">Alta</a></li>
-      <li><a href="consultaCursoBetter.jsp">Ver Cursos</a></li>
+      <li><a href="consultaCurso.jsp">Ver Cursos</a></li>
     </ul>
     <!-- Dropdown Edicion -->
     <ul id="dropdownEdicion" class="dropdown-content">
