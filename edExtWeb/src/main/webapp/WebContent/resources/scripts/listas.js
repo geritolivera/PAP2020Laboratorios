@@ -49,9 +49,8 @@ $(document).ready(function (){
     }).then((categorias) => {
         var categoriasHtml = document.getElementById("categorias");
         categoriasHtml.innerHTML= ``;
-
+        categoriasHtml.innerHTML = `<option value="" disabled>Seleccione las categorias</option>`;
         if (categorias.length > 0){
-            categoriasHtml.innerHTML = `<option value="" disabled>Seleccione las categorias</option>`;
             categorias.forEach((item, index) => {
                 categoriasHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
             });
@@ -237,7 +236,7 @@ function listaEdicionesUsuario(nickname){
 
 function collectionCursosPorInstituto(instituto){
     // Parametro:
-
+    debugger;
     var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
     fetch(url)
@@ -260,7 +259,7 @@ function collectionCursosPorInstituto(instituto){
 
 function collectionCursosPorCategoria(categoria){
     // Parametro:
-    
+    debugger;
     var url = baseURL + `GetCursoCat?categoria=${categoria}`
     
     fetch(url)

@@ -225,7 +225,7 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		Boolean yaInscripto=false;
+		Boolean yaInscripto = false;
 		if(mUsu.existeUsuarioNick(nickUsuario)) {
 			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);
 			List<InscripcionED> listIns = ((Estudiante) u).getInscripcionesED();
@@ -249,6 +249,39 @@ public class controladorCurso implements IcontroladorCurso{
 			}else{
 				throw new Exception("El usuario ya esta inscripto en esta edicion");
 			}
+		}
+		else
+			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
+	}
+	
+	@Override
+	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Date fecha) throws Exception{
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		Boolean yaInscripto = false;
+		if(mUsu.existeUsuarioNick(nickUsuario)) {
+			Usuario user = mUsu.buscarUsuario(nickUsuario);
+			List<InscripcionPF> listIns = ((Estudiante)user).getInscripcionesPF();
+			for(InscripcionPF s: listIns) {
+				if(s.getPrograma().getNombre().equals(nomPrograma))
+					yaInscripto = true;
+			}
+			if (!yaInscripto) {
+				if (mPro.existePrograma(nomPrograma)) {
+					if (user instanceof Estudiante) {
+						ProgramaFormacion p = mPro.buscarPrograma(nomPrograma);
+						((Estudiante)user).agregarInscripcionPF(fecha, p);
+						em.getTransaction().begin();
+						em.persist(user);
+						em.getTransaction().commit();
+					} else
+						throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
+				} else
+					throw new EdicionExcepcion("No existe programa " + nomPrograma);
+			}else
+				throw new Exception("El usuario ya esta inscripto en esta edicion");
 		}
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);

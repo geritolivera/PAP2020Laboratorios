@@ -36,6 +36,7 @@ public interface IcontroladorCurso {
 	//Se utiliza la misma funcion listarCursos
 	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) throws CursoExcepcion;
 	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws Exception;
+	public void inscribirEstudiantePrograma(String nombrePrograma, String nickUsuario, Date fecha) throws Exception;
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
@@ -67,4 +68,5 @@ public interface IcontroladorCurso {
 	public ArrayList<String> listarCategorias();
 
 	public ArrayList<String> getCategoriasPrograma(String programa);
+	
 }
