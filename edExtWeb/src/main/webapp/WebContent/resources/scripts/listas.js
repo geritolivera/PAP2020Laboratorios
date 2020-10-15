@@ -1,10 +1,11 @@
-var baseURL = 'http://localhost:8081/edExtWeb/';
+var baseURL = 'http://localhost:8080/edExtWeb/';
 
 $(document).ready(function (){
     var url = baseURL +`GetListas`
 
-    fetch(url)
-        .then((res)=>{
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
             return res.json();
         }).then((institutos) => {
         var institutoHtml = document.getElementById("institutos");
@@ -43,8 +44,9 @@ $(document).ready(function (){
 
     url = baseURL +`Categorias`
 
-    fetch(url)
-        .then((res)=>{
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
         return res.json();
     }).then((categorias) => {
         var categoriasHtml = document.getElementById("categorias");
@@ -63,8 +65,9 @@ $(document).ready(function (){
 
     url = baseURL +`Previas`
 
-    fetch(url)
-        .then((res)=>{
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
             return res.json();
         }).then((previas) => {
         var previasHtml = document.getElementById("previas");
@@ -96,8 +99,9 @@ function obtenerCursosPorInstituto(instituto){
 
     var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
-    fetch(url)
-        .then( (res) => {
+    fetch(url, {
+        method: 'GET',
+    }).then( (res) => {
             return res.json();
         })
         .then(cursos => {
@@ -125,8 +129,9 @@ function obtenerCursosPorCategoria(categoria){
 
 var url = baseURL + `GetCursoCat?categoria=${categoria}`
 
-fetch(url)
-    .then( (res) => {
+    fetch(fetchUrl, {
+        method: 'GET',
+    }).then( (res) => {
         return res.json();
     })
     .then(cursos => {
@@ -153,8 +158,9 @@ fetch(url)
 function obtenerDocentesPorInstituto(instituto){
     debugger;
     var url = baseURL +`GetDocInst?instituto=${instituto}`
-    fetch(url)
-        .then( (response) => {
+    fetch(url, {
+        method: 'GET',
+    }).then( (response) => {
             return response.json();
         })
         .then(docentes => {
@@ -240,13 +246,14 @@ function collectionCursosPorInstituto(instituto){
 
     var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
-    fetch(url)
-        .then(res => res.json())
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json())
         .then(cursos => {
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
             cursosHtml.innerHTML= ``;
-    
+            console.log(cursos);
             if (cursos.length > 0){
                 cursos.forEach((item, index) => {
                     cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
@@ -262,10 +269,10 @@ function collectionCursosPorCategoria(categoria){
     // Parametro:
     
     var url = baseURL + `GetCursoCat?categoria=${categoria}`
-    
-    fetch(url)
-        .then(res => res.json())
-        .then(cursos => {
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(cursos => {
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
             cursosHtml.innerHTML= ``;

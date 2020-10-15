@@ -31,7 +31,7 @@ public class Categorias extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        System.out.println("categorias = " + categorias);
         ObjectMapper mapper = new ObjectMapper();
         String categoriaStr = mapper.writeValueAsString(categorias);
         response.setContentType("application/json");

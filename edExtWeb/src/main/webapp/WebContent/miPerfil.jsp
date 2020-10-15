@@ -12,13 +12,18 @@
 <%@ page import="datatypes.DTUsuario" %>
 <%@ page import="org.apache.taglibs.standard.tei.DeclareTEI" %>
 <%@ page import="datatypes.DTEstudiante" %>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="ISO-8859-1">
     <title>Mi Perfil</title>
-    <%@include file="defaultHeader.jsp" %>
+    <% if (session.getAttribute("tipoUser")=="docente"){ %>
+    <%@include file="defaultHeader.jsp"%>
+    <%}else{ %>
+    <%@include file="headerEstVis.jsp"%>
+    <%}%>
 </head>
 
 <body>

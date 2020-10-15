@@ -21,7 +21,7 @@
   <nav class="rojo">
 <%--    <div class="container">--%>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">edExt</a>
+        <a href="index.jsp" class="brand-logo">edExt</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
 
@@ -34,20 +34,16 @@
             </form>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownPrograma" href='#'>Programas<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" data-target="dropdownPrograma" href='#'>Programas<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownCurso" href="#">Cursos<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" data-target="dropdownCurso" href="#">Cursos<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i
-                    class="material-icons right">arrow_drop_down</i></a>
+            <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
           <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
@@ -68,7 +64,7 @@
             <a class="collapsible-header">Programas<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaPrograma.jsp">Alta Programa</a></li>
+                <li><a href="altaProgramaFormacion.jsp">Alta Programa</a></li>
                 <li><a href="consultaPrograma.jsp">Buscar</a></li>
                 <li><a href="agregarCursoPrograma.jsp">Agregar Curso</a></li>
               </ul>
@@ -79,7 +75,7 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="altaCurso.jsp">Alta Cursos</a></li>
-                <li><a href="consultaCurso.jsp">Buscar Cursos</a></li>
+                <li><a href="consultaCursoBetter.jsp">Buscar Cursos</a></li>
               </ul>
             </div>
           </li>
@@ -113,7 +109,7 @@
     <!-- Dropdown Curso -->
     <ul id="dropdownCurso" class="dropdown-content">
       <li><a href="altaCurso.jsp">Alta</a></li>
-      <li><a href="consultaCurso.jsp">Ver Cursos</a></li>
+      <li><a href="consultaCursoBetter.jsp">Ver Cursos</a></li>
     </ul>
     <!-- Dropdown Edicion -->
     <ul id="dropdownEdicion" class="dropdown-content">

@@ -36,7 +36,7 @@
                         <a href="consultaPrograma.jsp">Programas</a>
                     </li>
                     <li>
-                        <a href="consultaCurso.jsp">Cursos</a>
+                        <a href="consultaCursoBetter.jsp">Cursos</a>
                     </li>
                     <li>
                         <a href="consultaEdicion.jsp">Ediciones</a>
@@ -65,7 +65,7 @@
         <a href="consultaPrograma.jsp">Programas</a>
     </li>
     <li>
-        <a href="consultaCurso.jsp">Cursos</a>
+        <a href="consultaCursoBetter.jsp">Cursos</a>
     </li>
     <li>
         <a href="consultaEdicion.jsp">Ediciones</a>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@include  file="defaultHeader.jsp" %>
+<% if (session.getAttribute("tipoUser")=="docente"){ %>
+<%@include file="defaultHeader.jsp"%>
+<%}else{ %>
+<%@include file="headerEstVis.jsp"%>
+<%}%>
  
   <!-- Section: Search -->
   <section id="search" class="section section-search  rojo white-text center scrollspy">
