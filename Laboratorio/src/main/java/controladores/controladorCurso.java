@@ -467,11 +467,4 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return categorias;
 	}
-
-	@Override
-	public Docente obtenerDocente(String nickDocente) {
-		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		return (Docente) mUsu.buscarUsuario(nickDocente);
-	}
-
 }

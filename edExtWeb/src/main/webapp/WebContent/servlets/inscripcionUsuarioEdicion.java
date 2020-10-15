@@ -49,14 +49,18 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		
 		HttpSession session = request.getSession();
 		Date fecha = new Date();		
 		//String nickUsuario = (String) session.getAttribute("nombreUser");
-		String nickUsuario = "kurt";
+		String nickUsuario = "camilo";
 		String nomEdicion = request.getParameter("edicion");
 
 		DTResponse respuesta = new DTResponse();
 
+
+		System.out.println("nom edicion: " + nomEdicion);
+		System.out.println("nickUsuario: " + nickUsuario);
 
 		try {
 			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);

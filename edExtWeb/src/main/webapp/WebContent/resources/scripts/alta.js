@@ -119,8 +119,36 @@ function usuario() {
             console.error(' paso algo: ', err);
         });
     }
+}
 
+function inscribirUsuario(edicion) {
+    debugger;
+    //const edicion = document.querySelector("#nombre").value;
 
+    const fetchUrl = 'inscripcionUE?edicion=' + edicion;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+        console.log(`que me devolviste papei `, res);
+    }).then((respuesta) => {
+        console.log(`respuesta: `, respuesta);
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
+                // rediraccinar a otro jsp.
+                window.location = baseURL+ '/index.jsp';
+            })
+        } else {
+            mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
 }
 
 function crearEdicion() {

@@ -67,5 +67,4 @@ public interface IcontroladorCurso {
 	public ArrayList<String> listarCategorias();
 
 	public ArrayList<String> getCategoriasPrograma(String programa);
-	public Docente obtenerDocente(String nomDocente);
 }
