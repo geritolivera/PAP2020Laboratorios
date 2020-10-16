@@ -1,3 +1,43 @@
+var baseURL = 'http://localhost:8080/edExtWeb/';
+function crearPrograma(){
+    const nombre = document.querySelector("#nombre").value;
+    const fechaI = document.querySelector("#fechaInicio").value;
+    const fechaF = document.querySelector("#fechaFin").value;
+    const desc = document.querySelector("#desc").value;
+    const url = "/resources/images/img2.jpg";
+    const fetchUrl = 'altaProgramaFormacion?nombre=' + nombre +
+        '&desc=' + desc +
+        '&fechaI=' + fechaI +
+        '&fechaF=' + fechaF +
+        '&url=' + url;
+
+    fetch(fetchUrl, {
+        method: 'POST',
+    }).then( ( res ) => {
+        return res.json();
+        console.log(`que me devolviste papei `, res);
+    }).then((respuesta) => {
+        console.log(`respuesta: `, respuesta);
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Programa dado de alta!", respuesta.mensaje).then(() => {
+                // rediraccinar a otro jsp.
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err); } )
+
+}
+
+
+
 function crearCurso() {
     const nombre = document.querySelector("#nombre").value;
     const desc = document.querySelector("#desc").value;
@@ -38,7 +78,7 @@ function crearCurso() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ '/index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -57,7 +97,7 @@ function usuario() {
     const correo = document.querySelector("#email").value;
     const passwd = document.querySelector("#password").value;
     const fechan = document.querySelector("#fechaNacimiento").value;
-    const tipoUser = document.querySelector("#tipoUser").value;
+    const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
     let fetchUrl;
     if(tipoUser == 'estudiante') {
@@ -79,7 +119,7 @@ function usuario() {
             if (respuesta.codigo == 0) {
                 mensajeConfirmacion("Estudiante dado de alta!", respuesta.mensaje).then(() => {
                     // rediraccinar a otro jsp.
-                    window.location = baseURL + '/index.jsp';
+                    window.location = baseURL + 'index.jsp';
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -108,7 +148,7 @@ function usuario() {
             if (respuesta.codigo == 0) {
                 mensajeConfirmacion("Docente dado de alta!", respuesta.mensaje).then(() => {
                     // rediraccinar a otro jsp.
-                    window.location = baseURL + '/index.jsp';
+                    window.location = baseURL + 'index.jsp';
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -138,7 +178,7 @@ function inscribirUsuario(edicion) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ '/index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -181,7 +221,7 @@ function crearEdicion() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Edicion dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ '/index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -209,7 +249,7 @@ function inscribirUsuario(nombreEdi) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ '/index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -222,6 +262,61 @@ function inscribirUsuario(nombreEdi) {
     });
 }
 
+function agregarCursoPrograma(nomCurso, nomPrograma) {
+
+    console.log("nombreCurso " + nomCurso + ", " + "nombrePrograma " + nomPrograma);
+    const fetchUrl = 'agregarCursoPrograma?curso=' + nomCurso +
+        '&programa=' + nomPrograma;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+        console.log(`que me devolviste papei `, res);
+    }).then((respuesta) => {
+        console.log(`respuesta: `, respuesta);
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
+                // rediraccinar a otro jsp.
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+function inscribirUsuarioProg(nombreProg) {
+
+    console.log(nombreProg);
+    const fetchUrl = 'inscripcionPrograma?programa=' + nombreProg;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario inscripto al Programa!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error en inscripcion", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
 
 function testAlert(){
     swal({
@@ -242,6 +337,11 @@ function testAlert(){
             }
         });
 }
+
+
+
+
+
 
 function mensajeConfirmacion(titulo, mensaje) {
     return swal({

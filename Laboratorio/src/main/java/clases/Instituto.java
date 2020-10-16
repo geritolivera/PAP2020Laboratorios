@@ -29,20 +29,20 @@ public class Instituto {
 		this.nombre = nombre;
 	}
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	
 	public void agregarDocente(Docente docente) {
 		docentes.add(docente);
 	}
 	public List<Docente> getDocentes(){
-		return docentes;
+		return this.docentes;
 	}
 	
 	public void agregarCurso(Curso curso) {
 		cursos.add(curso);
 	}
 	public List<Curso> getCursos(){
-		return cursos;
+		return this.cursos;
 	}
 }

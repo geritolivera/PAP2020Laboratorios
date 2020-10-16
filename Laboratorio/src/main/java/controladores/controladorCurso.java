@@ -106,17 +106,25 @@ public class controladorCurso implements IcontroladorCurso{
 			previas = c.getPrevias();
 			categorias = c.getCategorias();
 			//son listas, no requieren informacion de las ediciones o programas
-			for(EdicionCurso e: ediciones) {
-				dtc.agregarEdicion(e.getNombre());
+			if(!ediciones.isEmpty()) {
+				for (EdicionCurso e : ediciones) {
+					dtc.agregarEdicion(e.getNombre());
+				}
 			}
-			for(ProgramaFormacion p: programas) {
-				dtc.agregarPrograma(p.getNombre());
+			if(!programas.isEmpty()) {
+				for (ProgramaFormacion p : programas) {
+					dtc.agregarPrograma(p.getNombre());
+				}
 			}
-			for(Curso cur : previas){
-				dtc.agregarPrevia(cur.getNombre());
+			if (!previas.isEmpty()) {
+				for (Curso cur : previas) {
+					dtc.agregarPrevia(cur.getNombre());
+				}
 			}
-			for (Categoria cat:categorias) {
-				dtc.agregarCat(cat.getNombre());
+			if(!categorias.isEmpty()) {
+				for (Categoria cat : categorias) {
+					dtc.agregarCat(cat.getNombre());
+				}
 			}
 			
 			return dtc;
@@ -225,7 +233,7 @@ public class controladorCurso implements IcontroladorCurso{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		Boolean yaInscripto=false;
+		Boolean yaInscripto = false;
 		if(mUsu.existeUsuarioNick(nickUsuario)) {
 			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);
 			List<InscripcionED> listIns = ((Estudiante) u).getInscripcionesED();
@@ -249,6 +257,41 @@ public class controladorCurso implements IcontroladorCurso{
 			}else{
 				throw new Exception("El usuario ya esta inscripto en esta edicion");
 			}
+		}
+		else
+			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
+	}
+
+	
+	@Override
+	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Date fecha) throws Exception{
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		manejadorPrograma mPro = manejadorPrograma.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		Boolean yaInscripto = false;
+		if(mUsu.existeUsuarioNick(nickUsuario)) {
+			Usuario user = mUsu.buscarUsuario(nickUsuario);
+			List<InscripcionPF> listIns = ((Estudiante)user).getInscripcionesPF();
+			for(InscripcionPF s: listIns) {
+				if(s.getPrograma().getNombre().equals(nomPrograma))
+					yaInscripto = true;
+			}
+			if (!yaInscripto) {
+				System.out.println("LLEGA");
+				if (mPro.existePrograma(nomPrograma)) {
+					if (user instanceof Estudiante) {
+						ProgramaFormacion p = mPro.buscarPrograma(nomPrograma);
+						((Estudiante)user).agregarInscripcionPF(fecha, p);
+						em.getTransaction().begin();
+						em.persist(user);
+						em.getTransaction().commit();
+					} else
+						throw new UsuarioExcepcion("El usuario " + nickUsuario + " no es un estudiante");
+				} else
+					throw new EdicionExcepcion("No existe programa " + nomPrograma);
+			}else
+				throw new Exception("El usuario ya esta inscripto en esta edicion");
 		}
 		else
 			throw new UsuarioExcepcion("No existe usuario " + nickUsuario);
@@ -381,8 +424,9 @@ public class controladorCurso implements IcontroladorCurso{
 		List<Curso> cursos =(List<Curso>) mC.getCursos();
 		ArrayList<String>cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
-			if(c.getNomInstituto().equals(nombreInstituto))
+			if((c.getNomInstituto()!= null)&&(c.getNomInstituto().equals(nombreInstituto))) {
 				cursosRet.add(c.getNombre());
+			}
 		}
 		return cursosRet;
 	}

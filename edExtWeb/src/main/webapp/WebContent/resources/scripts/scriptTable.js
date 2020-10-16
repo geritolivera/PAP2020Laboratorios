@@ -4,7 +4,6 @@
 
 		"use strict";
 
-
 		$('.search-toggle').click(function () {
 			if ($('.hiddensearch').css('display') == 'none')
 				$('.hiddensearch').slideDown();

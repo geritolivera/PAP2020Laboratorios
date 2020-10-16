@@ -21,7 +21,7 @@ public class InscripcionPF {
 		this.estudiante = estudiante;
 	}
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private Estudiante estudiante;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class InscripcionPF {
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
 	@ManyToOne
-	@JoinColumn(insertable = false, updatable = false)
+	@JoinColumn(insertable = true, updatable = true)
 	private ProgramaFormacion programa;
 	
 		

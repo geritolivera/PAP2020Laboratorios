@@ -49,7 +49,7 @@ public class DTCurso {
 		this.creditos = curso.getCreditos();
 		this.fechaR = curso.getFechaR();
 		this.url = curso.getUrl();
-		this.instituto = curso.getNomInstituto();
+		this.instituto = curso.getInstituto().getNombre();
 	}
 	
 	public String getNombre() {

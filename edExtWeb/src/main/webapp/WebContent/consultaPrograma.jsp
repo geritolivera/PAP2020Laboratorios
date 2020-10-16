@@ -5,27 +5,37 @@
 <%}else{ %>
 <%@include file="headerEstVis.jsp"%>
 <%}%>
- 
-  <!-- Section: Search -->
-  <section id="search" class="section section-search  rojo white-text center scrollspy">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h3>Buscar Programas</h3>
-          <div class="input-field">
-            <form action="consultaProgramaFormacion" method="GET">
-              <input class="white grey-text autocomplete" placeholder="Programacion 1, matematica, etc..." type="text"
-                id="autocomplete-input" name="programa" >
-                 <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Buscar
-                                <i class="material-icons right">send</i>
-                            </button>
-                 </div>
-            </form>
-          </div>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@page import="java.util.ArrayList"%>
+
+    <div class="main">
+        <br><br>
+        <div class="container">
+            <div class="row">
+	            <!-- CARD CONSULTA PROGRAMA-->
+                <div>
+					<div class="col s12">
+	                    <div class="card teal darken-4">
+	                        <div class="card-content white-text">
+	                            <span class="card-title">Programas Formacion</span>
+	                        </div>
+	                        <ul class="collection" name="programa" id="programa">
+	                        </ul>
+	                    </div>
+	                </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-  <%@include  file="footer.jsp" %>
+
+<script type="text/javascript">
+
+	window.onload = function(){
+		collectionProgramas();		
+	}
+	
+</script>
+    
+   <script src="resources/scripts/listas.js"> </script>
+    <%@include  file="footer.jsp" %>
+   

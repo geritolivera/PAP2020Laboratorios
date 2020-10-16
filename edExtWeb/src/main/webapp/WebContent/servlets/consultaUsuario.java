@@ -28,56 +28,47 @@ import datatypes.DTProgramaFormacion;
  */
 @WebServlet("/consultaUsuario")
 public class consultaUsuario extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public consultaUsuario() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		ObjectMapper mapper = new ObjectMapper();
-		HttpSession session = request.getSession();
 		String nickname = request.getParameter("nickname");
-		DTUsuario dtu = new DTUsuario();
 		try {
-			dtu = icon.verInfoUsuario(nickname);
-			if(dtu instanceof DTDocente) {
-				session.setAttribute("tipoUser", "docente");
-				String userStr = mapper.writeValueAsString(dtu);
-				System.out.println(session.getAttribute("tipoUser"));
-				System.out.println("La respuesta generada es: " + userStr);
+			DTUsuario dt = icon.verInfoUsuario(nickname);;
+			if(dt instanceof DTEstudiante) {
+				ArrayList<String> ediciones = new ArrayList<>();
+				for(DTEdicionCurso d:((DTEstudiante) dt).getEdiciones()){
+					if(!((DTEstudiante) dt).getEdiciones().isEmpty()){
+						ediciones.add(d.getNombre());
+					}
 
+				}
+				request.setAttribute("tipo", "estudiante");
+				request.setAttribute("dtu", ((DTEstudiante)dt));
+				String userStr = mapper.writeValueAsString(((DTEstudiante)dt));
+				System.out.println("La respuesta generada es: " + userStr);
 				response.setContentType("application/json");
 				response.getWriter().append(userStr);
-
-			} else {
-				session.setAttribute("tipoUser", "estudiante");
-				String userStr = mapper.writeValueAsString(dtu);
+			}else{if(dt instanceof DTDocente){
+				ArrayList<String> ediciones = new ArrayList<>();
+				for(DTEdicionCurso d:((DTDocente) dt).getEdiciones()){
+					if(!((DTDocente) dt).getEdiciones().isEmpty()){
+						ediciones.add(d.getNombre());
+					}
+				}
+				request.setAttribute("tipo", "docente");
+				request.setAttribute("dtu", ((DTDocente)dt));
+				String userStr = mapper.writeValueAsString(((DTDocente)dt));
 				System.out.println("La respuesta generada es: " + userStr);
-
 				response.setContentType("application/json");
 				response.getWriter().append(userStr);
-
 			}
-
+			}
 		} catch (UsuarioExcepcion e) {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 

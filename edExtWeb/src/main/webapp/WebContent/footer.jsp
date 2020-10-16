@@ -15,7 +15,7 @@
         jQuery(document).ready(function ($) {
           $('.collapsible').collapsible();
         });
-      
+      <% System.out.println(session.getAttribute("tipoUser"));%>
     </script>
   </footer>
 </body>

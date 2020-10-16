@@ -45,8 +45,5 @@ public class GetCursoInst extends HttpServlet {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-
-
     }
 }

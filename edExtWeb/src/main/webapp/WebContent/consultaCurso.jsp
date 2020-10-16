@@ -5,27 +5,51 @@
 <%}else{ %>
 <%@include file="headerEstVis.jsp"%>
 <%}%>
- 
-  <!-- Section: Search -->
-  <section id="search" class="section section-search  rojo white-text center scrollspy">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h3>Buscar Cursos</h3>
-          <div class="input-field">
-            <form action="consultaCurso" method="GET">
-              <input class="white grey-text autocomplete" placeholder="Programacion 1, matematica, etc..." type="text"
-                id="autocomplete-input" name="curso" >
-                 <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit" name="action">Buscar
-                                <i class="material-icons right">send</i>
-                            </button>
-                 </div>
-            </form>
-          </div>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@page import="java.util.ArrayList"%>
+
+    <div class="main">
+        <br><br>
+        <div class="container">
+            <div class="row">
+	            <div class="input-field col s6">
+	            	<div>
+	            		<label>Instituto</label>
+	                	<select name="institutos" id="institutos" onchange="collectionCursosPorInstituto(institutos.value)">
+	                    	<option value="" disabled >Seleccione uno</option>
+	                	</select>
+	                </div>
+	                <div>
+	                	<label>Categorias</label>
+	                	<select name="categorias" id="categorias" onchange="collectionCursosPorCategoria(categorias.value)">
+	                    	<option value="" disabled >Seleccione uno</option>
+	                	</select>
+	                </div>
+	            </div>
+	            
+                <!-- CARD CONSULTA CURSO-->
+                <div>
+					<div class="col s12 m5">
+	                    <div class="card teal darken-4">
+	                        <div class="card-content white-text">
+	                            <span class="card-title">Cursos</span>
+	                        </div>
+	                        <ul class="collection" name="curso" id="curso">
+	                        </ul>
+	                    </div>
+	                </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-  <%@include  file="footer.jsp" %>
+<script type="text/javascript">
+
+	$(document).ready(function () {
+	    $('#institutos').formSelect();
+	    $('#categorias').formSelect();
+	 });
+	
+</script>
+    <script src="resources/scripts/listas.js"> </script>
+    <%@include  file="footer.jsp" %>
+   

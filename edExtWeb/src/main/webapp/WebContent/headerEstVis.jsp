@@ -11,7 +11,7 @@
     <!--https://coolors.co/ba1200-5e0035-020202-023618-005c69 -->
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <link rel="stylesheet" href="resources/styles/styleTable.css">
+	 <link rel="stylesheet" href="resources/styles/styleTable.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>edExt</title>
@@ -37,10 +37,10 @@
                         <a href="consultaPrograma.jsp">Programas</a>
                     </li>
                     <li>
-                        <a href="consultaCursoBetter.jsp">Cursos</a>
+                        <a href="consultaCurso.jsp">Cursos</a>
                     </li>
                     <li>
-                        <a href="consultaEdicion.jsp">Ediciones</a>
+                        <a href="consultaCurso.jsp">Ediciones</a>
                     </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
@@ -66,10 +66,10 @@
         <a href="consultaPrograma.jsp">Programas</a>
     </li>
     <li>
-        <a href="consultaCursoBetter.jsp">Cursos</a>
+        <a href="consultaCurso.jsp">Cursos</a>
     </li>
     <li>
-        <a href="consultaEdicion.jsp">Ediciones</a>
+        <a href="consultaCurso.jsp">Ediciones</a>
     </li>
     <li>
         <a href="consultaUsuario.jsp">Usuarios</a>

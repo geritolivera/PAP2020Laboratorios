@@ -17,8 +17,8 @@ public class Estudiante extends Usuario{
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<InscripcionED> inscripcionesED = new ArrayList<>();
 	//inscripciones a los programas -- no se usa todavia
-	//@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
-	//private List<InscripcionPF> inscripcionesPF = new ArrayList<>();
+	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<InscripcionPF> inscripcionesPF = new ArrayList<>();
 	
 	public Estudiante() {
 		super();
@@ -67,7 +67,7 @@ public class Estudiante extends Usuario{
 	//INSCRIPCIONES A EDICION DE CURSO
 	public void agregarInscripcionED(Date fecha, EdicionCurso edicion) {
 		InscripcionED ins = new InscripcionED(fecha, this, edicion);
-		inscripcionesED.add(ins);
+		this.inscripcionesED.add(ins);
 	}
 	public List<InscripcionED> getInscripcionesED(){
 		return inscripcionesED;
@@ -83,22 +83,20 @@ public class Estudiante extends Usuario{
 	}
 	
 	//INSCRIPCIONES A PROGRAMA DE FORMACION
-//	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
-//		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
-//		inscripcionesPF.add(ins);
-//		programa.agregarInscripcion(fecha, this);
-//	}
-//	public List<InscripcionPF> getInscripcionesPF(){
-//		return inscripcionesPF;
-//	}
-//	//prototipo de borrado de inscripcion
-//	public void borrarInscripcionPF(Date fecha) {
-//		List<InscripcionPF> list = this.getInscripcionesPF();
-//		for(InscripcionPF i : list) {
-//			if(i.getFecha() == fecha) {
-//				list.remove(i);
-//			}
-//		}
-//	}
-//
+	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
+		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
+		this.inscripcionesPF.add(ins);
+	}
+	public List<InscripcionPF> getInscripcionesPF(){
+		return inscripcionesPF;
+	}
+	//prototipo de borrado de inscripcion
+	public void borrarInscripcionPF(Date fecha) {
+		List<InscripcionPF> list = this.getInscripcionesPF();
+		for(InscripcionPF i : list) {
+			if(i.getFecha() == fecha) {
+				list.remove(i);
+			}
+		}
+	}
 }

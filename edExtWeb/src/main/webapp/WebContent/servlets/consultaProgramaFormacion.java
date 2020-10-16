@@ -21,19 +21,7 @@ import datatypes.DTProgramaFormacion;
  */
 @WebServlet("/consultaProgramaFormacion")
 public class consultaProgramaFormacion extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public consultaProgramaFormacion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
@@ -43,36 +31,31 @@ public class consultaProgramaFormacion extends HttpServlet {
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//recibe programa desde jsp
 		String programa = request.getParameter("programa");
-
+		System.out.println("programa = " + programa);
+		String url = "resources/images/asd.jpg";
 		try {
 			DTProgramaFormacion dtp = icon.verInfoPrograma(programa);
 			String fechaInicio = format.format(dtp.getFechaI());
 			String fechaFin = format.format(dtp.getFechaF());
-			String fechaActual = format.format(dtp.getFechaA());
+			String fechaA = format.format(dtp.getFechaA());
+			ArrayList<String> cursos = dtp.getCursos();
 			ArrayList<String> categorias = dtp.getCategorias();
 			session.setAttribute("tituloPrograma", dtp.getNombre());
 			session.setAttribute("desc", dtp.getDescripcion());
 			session.setAttribute("fechaInicio", fechaInicio);
 			session.setAttribute("fechaFin", fechaFin);
-			session.setAttribute("fechaA", fechaActual);
-			session.setAttribute("cursos", dtp.getCursos());
-			session.setAttribute("categorias", categorias);
-			session.setAttribute("imagenURL", "resources/images/asd.jpg");
-
-
+			session.setAttribute("fechaA", fechaA);
+			session.setAttribute("cursos", cursos);
+			session.setAttribute("categoriass", categorias);
+			session.setAttribute("imagenURL", url);
 
 		} catch (ProgramaFormacionExcepcion e) {
-
 			e.printStackTrace();
 		}
-
 		request.getRequestDispatcher("/infoPrograma.jsp").forward(request, response);
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
