@@ -309,3 +309,25 @@ function collectionProgramas(){
         }).catch(error => console.log(' 1) eerr ', error));
         //obtenerDocentesPorInstituto(instituto);    
 }
+
+function collectionUsuarios(){
+    // Parametro:
+    //debugger;
+    var url = baseURL + `GetUsuarios`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(listaUsuarios => {
+            console.log("listaUsuarios:", listaUsuarios);
+            var usuariosHtml = document.getElementById("listaUsuarios");
+            usuariosHtml.innerHTML= ``;
+    
+            if (listaUsuarios.length > 0){
+                listaUsuarios.forEach((item, index) => {
+                    usuariosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaUsuario?usuario=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                    });
+            }else{
+                console.log('no hay usuarios');
+            }
+        }).catch(error => console.log(' 1) eerr ', error));
+}
