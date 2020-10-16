@@ -27,9 +27,7 @@ public class GetDatosPrograma extends HttpServlet {
         try {
             String prog =  request.getParameter("nombre");
             DTProgramaFormacion dtp = icon.verInfoPrograma(prog);
-
             request.setAttribute("progSelected", dtp);
-
             String recursosStr = mapper.writeValueAsString(dtp);
             System.out.println("	Los recursos que guardo son: " + recursosStr);
 

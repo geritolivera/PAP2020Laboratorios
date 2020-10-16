@@ -26,15 +26,15 @@ public class GetCursoUsu extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            String nick =  request.getParameter("nickname");
+            String nick = request.getParameter("nickname");
             java.util.ArrayList<String> cursos = new ArrayList<>(icon.listarEdicionesAux(nick));
             System.out.println("cursos = " + cursos);
             System.out.println("inst = " + nick);
             session.setAttribute("cursos", cursos);
+            session.setAttribute("edicionesConsulta", cursos);
 
             String cursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + cursosStr);
-
             response.setContentType("application/json");
             response.getWriter().append(cursosStr);
 

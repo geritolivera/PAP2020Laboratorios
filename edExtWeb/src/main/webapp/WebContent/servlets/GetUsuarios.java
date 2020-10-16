@@ -25,11 +25,10 @@ public class GetUsuarios extends HttpServlet {
         HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        ArrayList<String> usuarios = new ArrayList<>();
+        ArrayList<String> usuarios = iconu.listarUsuarios();
         try {
-            usuarios = iconu.listarUsuarios();
             System.out.println("usuarios = " + usuarios);
-            session.setAttribute("listaUsuarios", usuarios);
+            session.setAttribute("usuarios", usuarios);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
