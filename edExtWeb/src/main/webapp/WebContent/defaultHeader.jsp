@@ -26,7 +26,7 @@
         <ul class="right hide-on-med-and-down">
 
           <li class="rojo-rita">
-            <form action="Busqueda" method="post" id="formBusqueda">
+            <form action="Busqueda" method="post" id="formBusqueda" >
               <div class="input-field">
                 <i class="material-icons prefix" id="searchIcon">search</i>
                 <input type="text" id="busqueda" class="autocomplete white-text">
@@ -45,10 +45,14 @@
           <li>
             <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i class="material-icons right">arrow_drop_down</i></a>
           </li>
-          <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
-          <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
+          <li>
+            <a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a>
+          </li>
+          <li>
+            <a href="logout"><i class="material-icons left">exit_to_app</i></a>
+          </li>
 
-        </ul>
+
       </div>
 <%--    </div>--%>
   </nav>
@@ -123,4 +127,19 @@
     </ul>
   </li>
 </ul>
-   
+
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>

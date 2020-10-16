@@ -14,8 +14,8 @@
                     <div class="table-header">
                         <span class="table-title">Busqueda General</span>
                         <div class="actions">
-                            <a href="#" class="search-toggle btn-flat nopadding"><i
-                                    class="material-icons prefix">search</i></a>
+                            <a href="#" class="search-toggle btn-flat nopadding" name="input"><i
+                                    class="material-icons prefix" >search</i></a>
                         </div>
                     </div>
                     <table id="datatable">
@@ -76,3 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="resources/scripts/scriptTable.js"></script>
 <%@ include file="footer.jsp"%>
+
+<script>
+
+</script>

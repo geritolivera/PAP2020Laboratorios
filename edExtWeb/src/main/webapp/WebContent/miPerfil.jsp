@@ -64,23 +64,23 @@
                         <ul class="collapsible">
                             <%if (tipo.equals("estudiante")){%>
                             <li>
-                                <div class="collapsible-header  yellow darken-4"><i
-                                        class="material-icons">account_circle</i>Mi Perfil
+                                <div class="collapsible-header  yellow darken-4">
+                                    <i class="material-icons">account_circle</i>Mi Perfil
                                 </div>
                                 <div class="collapsible-body">
-                                    <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
+                                    <p><a href="modificarDatosUsuario.jsp" type="button" onclick="window.location = 'http://localhost:8080/edExtWeb/modificarDatosUsuario.jsp'">Modificar Datos</a></p>
                                 </div>
                             </li>
                             <li>
                                 <div class="collapsible-header lime"><i class="material-icons">book</i>Inscribirme</div>
                                 <div class="collapsible-body">
                                     <div class="row">
-                                        <p><a href="<%//InscripcionEdicion.jsp%>">Inscribirme a Edicion de curso</a></p>
-                                        <p><a href="<%//InscripcionPrograma.jsp%>">Inscribirme a Programa de
-                                                Formacion</a></p>
+                                        <p><a href="consultaEdicion.jsp">Inscribirme a Edicion de curso</a></p>
+                                        <p><a href="consultaPrograma.jsp">Inscribirme a Programa de Formacion</a></p>
                                     </div>
                                 </div>
                             </li>
+                        </div>
                             <%}else if(tipo.equals("docente")){%>
                             <li>
                                 <div class="collapsible-header  yellow darken-4"><i
@@ -102,7 +102,6 @@
                             <%}%>
                         </ul>
                     </div>
-                </div>
                 <div class="col s12 m9">
                 	<!-- TAB DE INFORMACION-->
                     <div id="cardInfo" class="card">
@@ -149,10 +148,6 @@
                             </div>
                             <!-- SEGUIDORES Y SEGUIDOS -->
                             <div id="test2">
-                                <%
-										//ArrayList<DTUsuario> seguidos = (java.util.ArrayList)request.getAttribute("seguidos");
-										//if(seguidos.size()>0){
-									%>
                                 <ul class="collection with-header">
                                     <li class="collection-header">
                                         <h10>Seguidos</h10>
@@ -161,17 +156,8 @@
                                         <a class="btn-floating btn-small "><i class="material-icons">delete</i></a>
                                         Alvin
                                     </li>
-                                    <%
-											//for (DTUsuario s : seguidos){
-											//out.print("<li class='collection-item'>>"+s.getNick()+"</li>");
-											//}
-										%>
+
                                 </ul>
-                                <%//}%>
-                                <% 
-                                   		//ArrayList<DTUsuario> seguidores = (java.util.ArrayList)request.getAttribute("seguidores");
-										//if(seguidores.size()>0){
-									%>
                                 <ul class="collection with-header">
                                     <li class="collection-header">
                                         <h10>Seguidores</h10>
@@ -192,15 +178,21 @@
                             <div id="test3">
                                 <div class="row">
                                     <div class="input-field col s12">
+                                        <%if(tipo.equals("estudiante")){ %>
                                         <select id="edicion" name="edicion" onchange="getDatosEdicion(edicion.value)" >
                                             <option value="" disabled selected >Seleccionar una edicion</option>
                                             <c:forEach var="ed" items="${edicionesNombres}">
                                                 <option value="${ed}">${ed}</option>
                                             </c:forEach>
                                         </select>
-                                        <%if(tipo.equals("estudiante")){ %>
                                         <label>Inscripciones a Ediciones de Cursos</label>
                                         <%}else if(tipo.equals("docente")){%>
+                                        <select id="edicion" name="edicion" onchange="getDatosEdicion(edicion.value)" >
+                                            <option value="" disabled selected >Seleccionar una edicion</option>
+                                            <c:forEach var="ed" items="${ediciones}">
+                                                <option value="${ed}">${ed}</option>
+                                            </c:forEach>
+                                        </select>
                                         <label>Ediciones de Cursos Asociados</label>
                                         <%} %>
                                     </div>
@@ -239,8 +231,8 @@
                             </div>
                             </div>
 							<!--GET- PROGRAMAS DE FORMACION-->
+                            <%if (tipo.equals("estudiante")){%>
                             <div id="test4">
-                                <%if (tipo.equals("estudiante")){%>
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <!--GET-PROGRAMAS-->
@@ -323,7 +315,6 @@
                 }).then((progSelected) => {
                 var progHtml = document.getElementById("infoSelectedProg");
                 console.log(progSelected)
-                progHtml.innerHTML= ``;
 
                 JSON.stringify(progSelected);
 
@@ -331,8 +322,8 @@
                 var fechaFin = new Date(progSelected.fechaF).toLocaleDateString();
                 var fechaAlta = new Date(progSelected.fechaA).toLocaleDateString();
 
-                progHtml.innerHTML = `<div class="row">`;
-                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
+
+                    progHtml.innerHTML =`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
                     progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.nombre +`</div>`;
                     progHtml.innerHTML +=`</div>`;
                 progHtml.innerHTML +=`<div class="row">`;
@@ -373,7 +364,7 @@
                 }).then((ediSelected) => {
                 var edicionHtml = document.getElementById("infoSelecEdi");
                 console.log(ediSelected)
-                edicionHtml.innerHTML= ``;
+
 
                 JSON.stringify(ediSelected);
 
@@ -406,7 +397,7 @@
                 edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>`;
                 edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +ediSelected.nomCurso + `</div>`;
                 edicionHtml.innerHTML +=`</div>`;
-                edicionHtml.innerHTML +=`</div>`;
+
             })
         }
     </script>

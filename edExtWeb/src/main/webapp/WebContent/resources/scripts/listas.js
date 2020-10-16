@@ -1,13 +1,14 @@
 var baseURL = 'http://localhost:8080/edExtWeb/';
 
-$(document).ready(function (){
+$(document).ready(function institutos(){
+
     var url = baseURL +`GetListas`
 
     fetch(url, {
         method: 'GET',
     }).then((res)=>{
-            return res.json();
-        }).then((institutos) => {
+        return res.json();
+    }).then((institutos) => {
         var institutoHtml = document.getElementById("institutos");
         institutoHtml.innerHTML= "";
         institutoHtml.innerHTML = `<option value="" disabled selected>Seleccione un instituto</option>`;
@@ -20,8 +21,10 @@ $(document).ready(function (){
         }else{
             console.log('no hay institutos');
         }
-    })
+    });
+});
 
+$(document).ready(function (){
     url = baseURL +`GetUsuarios`
 
     fetch(url)
@@ -40,8 +43,10 @@ $(document).ready(function (){
         }else{
             console.log('no hay institutos');
         }
-    })
+    });
+});
 
+$(document).ready(function (){
     url = baseURL +`Categorias`
 
     fetch(url, {
@@ -60,15 +65,17 @@ $(document).ready(function (){
         }else{
             console.log('no hay categorias');
         }
-    })
+    });
+});
 
+$(document).ready(function (){
     url = baseURL +`Previas`
 
     fetch(url, {
         method: 'GET',
     }).then((res)=>{
-            return res.json();
-        }).then((previas) => {
+        return res.json();
+    }).then((previas) => {
         var previasHtml = document.getElementById("previas");
         previasHtml.innerHTML= "";
         if (previas.length > 0){
@@ -80,7 +87,11 @@ $(document).ready(function (){
         }else{
             console.log('no hay previas');
         }
-    })
+    });
+});
+
+
+$(document).ready(function (){
 
     url = baseURL +`GetCursos`
     fetch(url, {
@@ -140,37 +151,6 @@ function obtenerCursosPorInstituto(instituto){
             }
         }).catch(error => console.log(' 1) eerr ', error));
      //obtenerDocentesPorInstituto(instituto);
-
-}
-
-function obtenerCursosPorCategoria(categoria){
-// Parametro:
-
-var url = baseURL + `GetCursoCat?categoria=${categoria}`
-
-    fetch(fetchUrl, {
-        method: 'GET',
-    }).then( (res) => {
-        return res.json();
-    })
-    .then(cursos => {
-        console.log("cursos:", cursos);
-        var cursosHtml = document.getElementById("curso");
-
-        cursosHtml.innerHTML= ``;
-
-        if (cursos.length > 0){
-            cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
-            cursos.forEach((item, index) => {
-                cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
-                });
-            console.log(cursos);    
-            $('#curso').formSelect();
-        }else{
-            console.log('no hay cursos');
-        }
-    }).catch(error => console.log(' 1) eerr ', error));
-    //obtenerDocentesPorInstituto(instituto);
 
 }
 

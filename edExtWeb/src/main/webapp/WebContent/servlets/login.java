@@ -87,8 +87,7 @@ public class login extends HttpServlet {
                         edis.add(edi.getNombre());
                     }
                     System.out.println("edis = " + edis);
-                    List<DTEdicionCurso> ediciones =  ((DTDocente) dtu).getEdiciones();
-                    session.setAttribute("ediciones", ediciones);
+                    session.setAttribute("ediciones", edis);
                     //parse = "altaProgramaFormacion.jsp";
                     RequestDispatcher rd;
                     rd = request.getRequestDispatcher("/index.jsp");
