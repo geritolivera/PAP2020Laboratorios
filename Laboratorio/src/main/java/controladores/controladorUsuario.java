@@ -235,4 +235,84 @@ public class controladorUsuario implements IcontroladorUsuario {
 		} else
 			throw new UsuarioExcepcion("El usuario " + nickname + " no existe en el sistema.");
 	}
+	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Seguir y dejar de seguir users
+	@Override
+	public void dejarDeSeguir(String nickname, String nicknameSeguido) {
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguido)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			Usuario dejarSeguir = mU.buscarUsuarioNickname(nicknameSeguido);
+			currentUser.removerSigue(dejarSeguir);
+			dejarSeguir.removerSeguidor(currentUser);
+		}
+	}
+	
+	@Override
+    public void comenzarSeguir(String nickname, String nicknameSeguir) {
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguir)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			Usuario userSeguir = mU.buscarUsuarioNickname(nicknameSeguir);
+			currentUser.agregarSigue(userSeguir);
+			userSeguir.agregarSeguidor(currentUser);
+		}
+    }
+
+    public ArrayList<String> listarSeguidores(String nickname){
+    	ArrayList<String> seguidores = new ArrayList<String>();
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSeguidores = currentUser.getSeguidores();
+			for(Usuario u : usuariosSeguidores) {
+				DTUsuario dtU = new DTUsuario(u);
+				seguidores.add(dtU.getNick());
+			}
+		}
+		return seguidores;
+    }
+	
+    public ArrayList<String> listarSeguidos(String nickname){
+    	ArrayList<String> sigue = new ArrayList<String>();
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSigue = currentUser.getSigue();
+			for(Usuario u : usuariosSigue) {
+				DTUsuario dtU = new DTUsuario(u);
+				sigue.add(dtU.getNick());
+			}
+		}
+		return sigue;
+    }
+    
+    public boolean validarSigue(String nickname, String nicknameSigue) {
+    	manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSigue)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSigue = currentUser.getSigue();
+			for(Usuario u : usuariosSigue) {
+				if(nicknameSigue.contains(u.getNick())) {
+					return true;
+				}
+			}
+		}
+		return false;
+    }
+    
+    public boolean validarSeguidor(String nickname, String nicknameSguidor) {
+    	manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSguidor)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSeguidores = currentUser.getSeguidores();
+			for(Usuario u : usuariosSeguidores) {
+				if(nicknameSguidor.contains(u.getNick())) {
+					return true;
+				}
+			}
+		}
+		return false;
+    }
 }

@@ -48,4 +48,24 @@ public interface IcontroladorUsuario {
 
     //Validad login usuario
     boolean validarUsuario(String nickname, String password) throws UsuarioExcepcion;
+    
+	/*-------------------------------------------------------------------------------------------------------------*/
+    //Currentuser deja de seguir a otro user, y al user que se deja de seguir se saca de seguidores al Currentuser
+    public void dejarDeSeguir(String nickname, String nicknameSeguido);
+    
+    //Currentuser empieza a seguir a un user, y al user se le agrega a la lista de seguidores al Currentuser
+    public void comenzarSeguir(String nickname, String nicknameSeguir);
+    
+    //Lista los seguidores de un user
+    public ArrayList<String> listarSeguidores(String nickname);
+    
+    //Lista los seguidos de un user
+    public ArrayList<String> listarSeguidos(String nickname);
+    
+    //Si un user sigue a otro
+    public boolean validarSigue(String nickname, String nicknameSigue);
+    
+    //Si un user es seguidor de otro
+    public boolean validarSeguidor(String nickname, String nicknameSguidor);
+    
 }
