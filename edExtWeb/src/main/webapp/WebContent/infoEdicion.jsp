@@ -21,8 +21,8 @@
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%
-	                            String tipoUser = (String) request.getAttribute("tipoUser");
-	                        	Boolean vigencia = (Boolean) request.getAttribute("vigencia");
+	                            String tipoUser = (String) session.getAttribute("tipoUser");
+	                        	Boolean vigencia = (Boolean) session.getAttribute("vigencia");
 	                        	//para probar
 	                        	//Boolean vigencia = true;
 	                        	//String tipoUser = "estudiante";
