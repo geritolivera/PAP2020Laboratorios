@@ -23,12 +23,14 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:rita" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:branchCamilo" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="" />
+    <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,6 +74,7 @@
       <workItem from="1601764033254" duration="17000" />
       <workItem from="1602626709073" duration="2321000" />
       <workItem from="1602725444079" duration="1295000" />
+      <workItem from="1602967817085" duration="1142000" />
     </task>
     <servers />
   </component>
@@ -89,7 +92,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="rita" />
+                        <option value="branchCamilo" />
                       </list>
                     </value>
                   </entry>
