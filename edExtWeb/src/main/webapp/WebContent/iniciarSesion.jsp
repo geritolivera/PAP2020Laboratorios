@@ -13,8 +13,8 @@
 		<div class="container center" >
             	<!-- FORM-->
             	<div class="row">
-                	<form class="col s4 center-align" method="POST" action="login">
-                    	<div class="card-panel">
+                	<form class="col s12 center-align" method="POST" action="login">
+                    	<div class="card-panel s12 m12">
                         	<h4 class="header2 center-align"> <span style="color: #81054b">></span>Iniciar Sesion</h4>
                         	<div class="row">
                             	<div class="input-field col s12 center-align">

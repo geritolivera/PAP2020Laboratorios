@@ -31,41 +31,41 @@
                         <p id="descripcion"></p>
                     </div>
                     <ul id="detallesUE" class="collection">
-<%--                        <li class="collection-item">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col s5 grey-text darken-1"><i class="mdi-action-wallet-travel"></i>Nickname</div>--%>
-<%--                                <div class="col s7 grey-text text-darken-4 right-align" id="nicknamee"></div>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
-<%--                        <li class="collection-item">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Nombre--%>
-<%--                                </div>--%>
-<%--                                <div class="col s7 grey-text text-darken-4 right-align" id="nombree"></div>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
-<%--                        <li class="collection-item">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Apellido--%>
-<%--                                </div>--%>
-<%--                                <div class="col s7 grey-text text-darken-4 right-align" id="apellidoe"></div>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
-<%--                        <li class="collection-item">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Correo--%>
-<%--                                </div>--%>
-<%--                                <div class="col s7 grey-text text-darken-4 right-align" id="correoe"></div>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
-<%--                        <li class="collection-item">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Fecha de--%>
-<%--                                    Nacimiento--%>
-<%--                                </div>--%>
-<%--                                <div class="col s7 grey-text text-darken-4 right-align" id="fechaNace"></div>--%>
-<%--                            </div>--%>
-<%--                        </li>--%>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1"><i class="mdi-action-wallet-travel"></i>Nickname</div>
+                                <div class="col s7 grey-text text-darken-4 right-align" id="nicknamee"></div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Nombre
+                                </div>
+                                <div class="col s7 grey-text text-darken-4 right-align" id="nombree"></div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Apellido
+                                </div>
+                                <div class="col s7 grey-text text-darken-4 right-align" id="apellidoe"></div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Correo
+                                </div>
+                                <div class="col s7 grey-text text-darken-4 right-align" id="correoe"></div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Fecha de
+                                    Nacimiento
+                                </div>
+                                <div class="col s7 grey-text text-darken-4 right-align" id="fechaNace"></div>
+                            </div>
+                        </li>
 
                     </ul>
                 </div>

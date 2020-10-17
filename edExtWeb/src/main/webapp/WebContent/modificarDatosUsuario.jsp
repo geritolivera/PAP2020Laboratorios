@@ -31,13 +31,20 @@
                 		<input id="nombre" type="text" class="validate">
                 		<label for="nombre">Nombre</label>
               		</div>
+              		<div class="input-field col s1">
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons">mode_edit</i></a>
+              		</div>
             	</div>
             	<div class="row">
+            		
             		<div>
             			<div class="input-field col s10">
                 			<input id="apellido" type="text" class="validate">
                 			<label for="apellido">Apellido</label>
               			</div>
+              		</div>
+              		<div class="input-field col s1">
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons ">mode_edit</i></a>
               		</div>
               	</div>
             	<div class = "row">
@@ -45,6 +52,9 @@
                 		<i class="material-icons prefix">date_range</i>
                 		<input type="text" name="fechaNacimiento" id="fechaNacimiento" class="datepicker">
                 		<label for="fechaNacimiento">Fecha de Nacimiento</label>
+              		</div>
+              		<div class="input-field col s1">
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons ">mode_edit</i></a>
               		</div>
             	</div>
           	</div>
