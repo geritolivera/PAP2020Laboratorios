@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import datatypes.*;
 import exepciones.EdicionExcepcion;
@@ -44,6 +46,7 @@ public class consultaEdicionCurso extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String edicion = request.getParameter("edicion");
+		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
 		
 		try {
@@ -58,6 +61,10 @@ public class consultaEdicionCurso extends HttpServlet {
 			session.setAttribute("fechaI", fechaI);
 			session.setAttribute("fechaF", fechaF);
 			session.setAttribute("fechaPub", fechaPub);
+			Boolean esVigente = false;
+			if (dte.getFechaF().after(today)) 
+				esVigente = true; 
+			session.setAttribute("vigencia", esVigente);
 			//session.setAttribute("docentes", docentes);
 			//obtiene una lista con el nombre, apellido y nickname de los docentes
 			ArrayList<String> listDoc = new ArrayList<>();
