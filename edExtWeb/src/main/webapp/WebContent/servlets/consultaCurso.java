@@ -24,7 +24,7 @@ import interfaces.*;
 public class consultaCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
@@ -43,15 +43,15 @@ public class consultaCurso extends HttpServlet {
 			ArrayList<String> programas = dtc.getProgramas();
 			//ArrayList<String> previas = dtc.getPrevias();
 			//ArrayList<String> categorias = dtc.getCategorias();
-			session.setAttribute("nombre", dtc.getNombre());
-			session.setAttribute("descripcion", dtc.getDescripcion());
-			session.setAttribute("duracion", dtc.getDuracion());
-			session.setAttribute("cantHoras", dtc.getCantHoras());
-			session.setAttribute("creditos", dtc.getCreditos());
-			session.setAttribute("fechaR", fechaR);
-			session.setAttribute("url", dtc.getUrl());
-			session.setAttribute("ediciones", ediciones);
-			session.setAttribute("programas", programas);
+			request.setAttribute("nombre", dtc.getNombre());
+			request.setAttribute("descripcion", dtc.getDescripcion());
+			request.setAttribute("duracion", dtc.getDuracion());
+			request.setAttribute("cantHoras", dtc.getCantHoras());
+			request.setAttribute("creditos", dtc.getCreditos());
+			request.setAttribute("fechaR", fechaR);
+			request.setAttribute("url", dtc.getUrl());
+			request.setAttribute("ediciones", ediciones);
+			request.setAttribute("programas", programas);
 			//session.setAttribute("previas", previas);
 			//session.setAttribute("categorias", categorias);
 		} catch (CursoExcepcion e) {

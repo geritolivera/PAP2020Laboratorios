@@ -22,13 +22,13 @@ public class GetUsuarios extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
         ArrayList<String> usuarios = iconu.listarUsuarios();
         try {
             System.out.println("usuarios = " + usuarios);
-            session.setAttribute("usuarios", usuarios);
+            request.setAttribute("usuarios", usuarios);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

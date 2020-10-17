@@ -22,12 +22,12 @@ public class Previas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         ArrayList<String> previas = icon.listarCursos();
         System.out.println("previas = " + previas);
 
         try {
-            session.setAttribute("previas", previas);
+        	request.setAttribute("previas", previas);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

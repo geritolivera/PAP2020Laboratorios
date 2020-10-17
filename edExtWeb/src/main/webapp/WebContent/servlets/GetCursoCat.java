@@ -33,7 +33,7 @@ public class GetCursoCat extends HttpServlet {
             cursos = icon.listarCursosCat(categoria);
             System.out.println("cursos = " + cursos);
             System.out.println("cat = " + categoria);
-            session.setAttribute("cursos", cursos);
+            request.setAttribute("cursos", cursos);
 
             String recursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + recursosStr);

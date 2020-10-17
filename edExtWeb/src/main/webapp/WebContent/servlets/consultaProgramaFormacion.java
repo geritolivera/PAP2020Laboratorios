@@ -24,7 +24,7 @@ public class consultaProgramaFormacion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
@@ -40,14 +40,14 @@ public class consultaProgramaFormacion extends HttpServlet {
 			String fechaA = format.format(dtp.getFechaA());
 			ArrayList<String> cursos = dtp.getCursos();
 			ArrayList<String> categorias = dtp.getCategorias();
-			session.setAttribute("tituloPrograma", dtp.getNombre());
-			session.setAttribute("desc", dtp.getDescripcion());
-			session.setAttribute("fechaInicio", fechaInicio);
-			session.setAttribute("fechaFin", fechaFin);
-			session.setAttribute("fechaA", fechaA);
-			session.setAttribute("cursos", cursos);
-			session.setAttribute("categoriass", categorias);
-			session.setAttribute("imagenURL", url);
+			request.setAttribute("tituloPrograma", dtp.getNombre());
+			request.setAttribute("desc", dtp.getDescripcion());
+			request.setAttribute("fechaInicio", fechaInicio);
+			request.setAttribute("fechaFin", fechaFin);
+			request.setAttribute("fechaA", fechaA);
+			request.setAttribute("cursos", cursos);
+			request.setAttribute("categoriass", categorias);
+			request.setAttribute("imagenURL", url);
 
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();
