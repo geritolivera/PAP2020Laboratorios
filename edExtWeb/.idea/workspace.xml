@@ -28,11 +28,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCursoBetter.jsp" beforeDir="false" />
-    </list>
+    <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

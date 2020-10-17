@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8080/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 function crearPrograma(){
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;

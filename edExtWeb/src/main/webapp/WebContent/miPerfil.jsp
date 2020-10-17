@@ -305,7 +305,7 @@
 </script>
     <script>
         function getDatosPrograma(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosPrograma?nombre=`+ nombre;
 
@@ -354,7 +354,7 @@
     </script>
     <script>
         function getDatosEdicion(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosEdicion?nombre=`+ nombre;
 
