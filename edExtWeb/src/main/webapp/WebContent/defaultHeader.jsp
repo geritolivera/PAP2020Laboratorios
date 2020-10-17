@@ -30,8 +30,8 @@
           <li class="rojo-rita">
             <form action="Busqueda" method="post" id="formBusqueda" >
               <div class="input-field">
-                <i class="material-icons prefix" id="searchIcon">search</i>
-                <input type="text" id="busqueda" class="autocomplete white-text">
+                <i class="material-icons prefix" id="searchIcon" style="top: 0;">search</i>
+                <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
               </div>
             </form>
           </li>

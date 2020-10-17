@@ -288,6 +288,7 @@ function collectionCursosPorInstituto(instituto){
     ).then(cursos => {
         console.log("cursos:", cursos);
         var cursosHtml = document.getElementById("curso");
+        cursosHtml.innerHTML = '';
         console.log(cursos);
         if (cursos.length > 0){
             cursos.forEach((item, index) => {
