@@ -21,8 +21,17 @@
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%
+<<<<<<< HEAD
                                 String tipoUser = (String) session.getAttribute("tipoUser");
                                 if(tipoUser != null && tipoUser.equals("estudiante")){
+=======
+                            	String tipoUser = (String) session.getAttribute("tipoUser");
+                            	Boolean vigencia = (Boolean) session.getAttribute("vigencia");
+                            	//para probar
+                            	//Boolean vigencia = true;
+                            	//String tipoUser = "estudiante";
+                            	if(tipoUser != null && tipoUser.equals("estudiante") && vigencia){                            
+>>>>>>> origin/branchCamilo
                             %>
                             <a id="ediBTN" class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario('${nombre}')" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
                                     class="material-icons">add</i></a>

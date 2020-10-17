@@ -85,7 +85,11 @@ public class Estudiante extends Usuario{
 	//INSCRIPCIONES A PROGRAMA DE FORMACION
 	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
 		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
+<<<<<<< HEAD
 		this.inscripcionesPF.add(ins);
+=======
+		inscripcionesPF.add(ins);
+>>>>>>> origin/branchCamilo
 	}
 	public List<InscripcionPF> getInscripcionesPF(){
 		return inscripcionesPF;
