@@ -11,7 +11,7 @@
     	<div class="container">
       	<!-- FORM-->
       	<div class="row">
-			<form class="col s12">
+			<form class="col s8">
           	<div class="card-panel">
             	<h4 class="header2"> <span style="color: #81054b">></span>Modificar Datos de Usuario</h4>
             	<div class="row">
@@ -56,6 +56,13 @@
               		<div class="input-field col s1">
                 		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons ">mode_edit</i></a>
               		</div>
+            	</div>
+            	<div class = "row">
+            		<div class="center-align">
+             			<button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="">Modificar
+                			<i class="material-icons right">send</i>
+             			</button>
+            		</div>
             	</div>
           	</div>
         	</form>

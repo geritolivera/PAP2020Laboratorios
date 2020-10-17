@@ -11,7 +11,8 @@
     <!--https://coolors.co/ba1200-5e0035-020202-023618-005c69 -->
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+	 <link rel="stylesheet" href="resources/styles/styleTable.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>edExt</title>
 </head>
@@ -77,4 +78,3 @@
     <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
     <%}%>
 </ul>
-

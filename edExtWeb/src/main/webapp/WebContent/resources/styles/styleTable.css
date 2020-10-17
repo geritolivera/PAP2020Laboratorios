@@ -94,7 +94,7 @@ div.material-table .table-footer label {
 div.material-table .table-footer .select-wrapper {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
+  -webkit-flex-direction: row
   /* works with row or column */
   
   flex-direction: row;
@@ -223,6 +223,11 @@ div.material-table table tbody tr:hover {
   background-color: #a16864;
   color: #ffffff !important;
   cursor:pointer;
+}
+
+table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected {
+  background-color: #a16864 !important;
+  color: #ffffff !important;
 }
 
 div.material-table table th:first-child,
