@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import datatypes.DtClase;
+import datatypes.DtSocio;
 import interfaces.fabrica;
+import servlets.RequestDispatcher;
 import interfaces.IcontroladorUsuario;
 
 /**
@@ -48,6 +53,18 @@ public class ModificarDatos extends HttpServlet {
 		Date fechaNaci = new Date(fechaN);
 		icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
 		
+		if (request.getParameter("boton").equals("nombre")){
+			
+			request.setAttribute("nombre", nombre);
+		}else if (request.getParameter("boton").equals("apellido")) {
+
+			request.setAttribute("apellido", apellido);
+		}else
+		
+			
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/modificarDatosUsuario.jsp");
+		rd.forward(request, response);
 		doGet(request, response);
 	}
 
