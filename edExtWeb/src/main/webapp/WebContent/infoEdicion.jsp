@@ -22,15 +22,24 @@
                             <!-- -Aca se pone el a si es vigente -->
                             <%
 	                            String tipoUser = (String) session.getAttribute("tipoUser");
-	                        	Boolean vigencia = (Boolean) session.getAttribute("vigencia");
+	                        	Boolean vigencia = (Boolean) request.getAttribute("vigencia");
+	                        	Boolean inscripto = (Boolean) request.getAttribute("inscripto");
 	                        	//para probar
 	                        	//Boolean vigencia = true;
 	                        	//String tipoUser = "estudiante";
-	                        	if(tipoUser != null && tipoUser.equals("estudiante") && vigencia){                             
+	                        	if(tipoUser != null && tipoUser.equals("estudiante") && vigencia){
+	                        		if(!inscripto){
                             %>
-                            <a id="ediBTN" class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuario('${nombre}')" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
-                                    class="material-icons">add</i></a>
-							<%}%>
+                            <div class="card-action right-align">
+	                            <a id="ediBTN" class="waves-effect waves-light btn" type="button" onclick="inscribirUsuario('${nombre}')" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
+	                                    class="material-icons"></i>Inscribirse</a>
+							</div>
+								<%}else{%>
+								<div class="card-action right-align">
+                            	<a class="btn disabled">Inscripto</a>
+                            </div>
+                            	<%}
+							}%>
                         </div>
                         <ul id="dataEdicion" class="collection">
                             <li class="collection-item">

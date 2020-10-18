@@ -13,6 +13,7 @@ import java.util.Enumeration;
 
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
+import interfaces.IcontroladorUsuario;
 import exepciones.ProgramaFormacionExcepcion;
 import datatypes.DTProgramaFormacion;
 
@@ -24,10 +25,12 @@ public class consultaProgramaFormacion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+		String nickLog = (String) session.getAttribute("nombreUser");
 
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//recibe programa desde jsp
 		String programa = request.getParameter("programa");
@@ -48,6 +51,8 @@ public class consultaProgramaFormacion extends HttpServlet {
 			request.setAttribute("cursos", cursos);
 			request.setAttribute("categoriass", categorias);
 			request.setAttribute("imagenURL", url);
+			Boolean inscripto = iconu.inscriptoPF(nickLog, programa);
+			request.setAttribute("inscripto", inscripto);
 
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();

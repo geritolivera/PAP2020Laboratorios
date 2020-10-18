@@ -49,6 +49,11 @@
 	    $('#categorias').formSelect();
 	 });
 	
+	window.onload =function(){
+		getInstitutos();
+		getCategorias();
+	}
+	
 </script>
     <script src="resources/scripts/listas.js"> </script>
     <%@include  file="footer.jsp" %>

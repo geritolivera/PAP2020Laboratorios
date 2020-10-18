@@ -47,8 +47,7 @@ public class dejarSeguirUsuario extends HttpServlet {
 		IcontroladorUsuario iconU = fab.getIcontroladorUsuario();
 		
 		HttpSession session = request.getSession();
-		String nickUsuario = (String) session.getAttribute("nickname");
-		
+		String nickUsuario = (String) session.getAttribute("nombreUser");
 		String dejarSeguirNickname = request.getParameter("nicknameDejarSeguir");		
 		
 		iconU.dejarDeSeguir(nickUsuario, dejarSeguirNickname);

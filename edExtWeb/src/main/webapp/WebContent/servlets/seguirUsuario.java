@@ -46,11 +46,9 @@ public class seguirUsuario extends HttpServlet {
 		IcontroladorUsuario iconU = fab.getIcontroladorUsuario();
 		
 		HttpSession session = request.getSession();
-		String nickUsuario = (String) session.getAttribute("nickname");
-		
+		String nickUsuario = (String) session.getAttribute("nombreUser");
 		String aSeguirNickname = request.getParameter("nicknameSeguir");
-		
-		
+				
 		iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
 		respuesta.setCodigo(0);
 		respuesta.setMensaje("El usuario " + nickUsuario + " ah comenzado a seguir a " + aSeguirNickname + ".");

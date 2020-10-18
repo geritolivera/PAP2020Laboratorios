@@ -73,13 +73,6 @@ public class DTUsuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public void seguirUsuario(String usuario) {
 		seguidos.add(usuario);
 	}
@@ -87,7 +80,7 @@ public class DTUsuario {
 		return this.seguidos;
 	}
 	
-	public void AnadirSeguidor(String usuario) {
+	public void agregarSeguidor(String usuario) {
 		seguidores.add(usuario);
 	}
 	public ArrayList<String> getSeguidores() {

@@ -2,10 +2,15 @@ package interfaces;
 
 import datatypes.DTUsuario;
 import exepciones.*;
+import manejadores.manejadorUsuario;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import clases.Estudiante;
+import clases.InscripcionPF;
+import clases.Usuario;
 
 public interface IcontroladorUsuario {
 	
@@ -67,5 +72,8 @@ public interface IcontroladorUsuario {
     
     //Si un user es seguidor de otro
     public boolean validarSeguidor(String nickname, String nicknameSguidor);
+    
+    public boolean inscriptoPF(String nickname, String nomPrograma);
+    public boolean inscriptoED(String nickname, String nomEdicion);
     
 }
