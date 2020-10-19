@@ -25,8 +25,8 @@ public class consultaProgramaFormacion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		String nickLog = (String) session.getAttribute("nombreUser");
+		HttpSession session = request.getSession(false);
+		
 
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
@@ -51,8 +51,16 @@ public class consultaProgramaFormacion extends HttpServlet {
 			request.setAttribute("cursos", cursos);
 			request.setAttribute("categoriass", categorias);
 			request.setAttribute("imagenURL", url);
-			Boolean inscripto = iconu.inscriptoPF(nickLog, programa);
-			request.setAttribute("inscripto", inscripto);
+			Boolean userLog = false;
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser");
+				if(session.getAttribute("tipoUser").equals("estudiante")) {
+					Boolean inscripto = iconu.inscriptoPF(nickLog, programa);
+					request.setAttribute("inscripto", inscripto);
+				}
+			}
+			request.setAttribute("userLog", userLog);
 
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();

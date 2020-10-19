@@ -28,9 +28,7 @@ import datatypes.DTEstudiante;
 public class consultaUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//HttpSession session = request.getSession();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
@@ -69,17 +67,24 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("ediciones", ediciones);
 			request.setAttribute("programas", programas);
 			request.setAttribute("tipo", tipo);
-			Boolean yaSeguido = false;
-			String nickLog = (String) session.getAttribute("nombreUser"); //nick del user logueado
-			if(nickLog.equals(nickname))
-				yaSeguido = true;
-			else {
-				for(String u: seguidos){
-					if(nickname.equals(u))
-						yaSeguido = true;
+			Boolean userLog = false; //hay un usuario logueado?
+			Boolean yaSeguido = false; //el usuario ya sigue al consultado?
+			Boolean igualdad = false; //el nickname del usuario logueado es igual al del consultado?
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser"); //nick del user logueado
+				if(nickLog.equals(nickname)) //si el usuario se esta consultando a si mismo
+					igualdad = true;
+				else {
+					for(String u: seguidos){
+						if(nickname.equals(u))
+							yaSeguido = true;
+					}
 				}
 			}
+			request.setAttribute("userLog", userLog);
 			request.setAttribute("yaSeguido", yaSeguido);
+			request.setAttribute("igualdad", igualdad);
 			System.out.println("ediciones de  " + nickname + ":" + ediciones);
 			System.out.println("programas de  " + nickname + ":" + programas);
 

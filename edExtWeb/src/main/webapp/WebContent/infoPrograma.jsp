@@ -20,10 +20,11 @@
                             <img src="resources/images/asd.jpg">
                             <span class="card-title" id="tituloPrograma">${tituloPrograma}</span>
                             <%
-                                String tipoUser = (String) session.getAttribute("tipoUser");
-                            	Boolean inscripto = (Boolean) request.getAttribute("inscripto");
-                                if(tipoUser != null && tipoUser.equals("estudiante")){
-                                	if(!inscripto){
+                            	Boolean userLog = (Boolean) request.getAttribute("userLog");
+	                            String tipoUser = (String) session.getAttribute("tipoUser");
+                            	if(userLog && tipoUser.equals("estudiante")){
+	                            	Boolean inscripto = (Boolean) request.getAttribute("inscripto");
+	                                if(!inscripto){
                             %>
                             <div class="card-action right-align">
                             	<a class="waves-effect waves-light btn" type="button" onclick="inscribirUsuarioProg('${tituloPrograma}')"><i

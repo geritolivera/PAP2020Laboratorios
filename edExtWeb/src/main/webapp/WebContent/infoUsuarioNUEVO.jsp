@@ -21,19 +21,25 @@
                         <img src="resources/images/asd.jpg">
                         <span class="card-title" id="nicknameSelected"></span>
                         <%
-                        	Boolean yaSeguido = (Boolean) request.getAttribute("yaSeguido");
-                        	if(!yaSeguido){
+                        	Boolean userLog = (Boolean) request.getAttribute("userLog");
+                        	if(userLog){
+                        		Boolean igualdad = (Boolean) request.getAttribute("igualdad");
+                        		if(!igualdad){
+		                        	Boolean yaSeguido = (Boolean) request.getAttribute("yaSeguido");
+		                        	if(!yaSeguido){
                         %>
                         <div class="card-action right-align">
                             	<a class="waves-effect waves-light btn" type="button" onclick="seguirUsuario('${nickname}')"><i
                                     class="material-icons"></i>Seguir</a>
                             </div>
-                            	<%}else{%>
+                            		<%}else{%>
                             <div class="card-action right-align">
                             	<a class="waves-effect waves-light btn" type="button" onclick="dejarSeguirUsuario('${nickname}')"><i
                                     class="material-icons"></i>Dejar de seguir</a>
                             </div>
-						<%}%>
+									<%}
+								}
+                        	}%>
 					</div>
                     </div>
                     <div class="card-content">

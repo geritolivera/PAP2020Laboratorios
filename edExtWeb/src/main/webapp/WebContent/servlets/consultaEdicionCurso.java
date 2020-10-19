@@ -44,8 +44,7 @@ public class consultaEdicionCurso extends HttpServlet {
 		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		
-		HttpSession session = request.getSession();
-		String nickLog = (String) session.getAttribute("nombreUser");
+		HttpSession session = request.getSession(false);
 		String edicion = request.getParameter("edicion");
 		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
@@ -80,8 +79,16 @@ public class consultaEdicionCurso extends HttpServlet {
 				}
 			}
 			request.setAttribute("docentes", listDoc);
-			Boolean inscripto = iconu.inscriptoED(nickLog, edicion);
-			request.setAttribute("inscripto", inscripto);
+			Boolean userLog = false;
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser");
+				if(session.getAttribute("tipoUser").equals("estudiante")) {
+					Boolean inscripto = iconu.inscriptoED(nickLog, edicion);
+					request.setAttribute("inscripto", inscripto);
+				}
+			}
+			request.setAttribute("userLog", userLog);
 		} catch (EdicionExcepcion e) {
 			//no existe edicion
 			e.printStackTrace();

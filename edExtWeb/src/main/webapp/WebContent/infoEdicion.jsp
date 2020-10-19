@@ -22,12 +22,10 @@
                             <!-- -Aca se pone el a si es vigente -->
                             <%
 	                            String tipoUser = (String) session.getAttribute("tipoUser");
+                            	Boolean userLog = (Boolean) request.getAttribute("userLog");
 	                        	Boolean vigencia = (Boolean) request.getAttribute("vigencia");
-	                        	Boolean inscripto = (Boolean) request.getAttribute("inscripto");
-	                        	//para probar
-	                        	//Boolean vigencia = true;
-	                        	//String tipoUser = "estudiante";
-	                        	if(tipoUser != null && tipoUser.equals("estudiante") && vigencia){
+	                        	if(userLog && tipoUser.equals("estudiante") && vigencia){
+	                        		Boolean inscripto = (Boolean) request.getAttribute("inscripto");
 	                        		if(!inscripto){
                             %>
                             <div class="card-action right-align">
