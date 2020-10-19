@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <label>Cursos</label>
-                    <select name="curso" id="curso" onchange="collectionEdicionesPorCurso(curso.value)">
+                    <select name="curso" id="curso" onchange="collectionEdicionPorCursos(curso.value)">
                         <option value="" disabled >Seleccione uno</option>
                     </select>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col s12 m6">
                     <div class="card teal darken-4">
                         <div class="card-content white-text">
-                            <span class="card-title">Cursos</span>
+                            <span class="card-title">Ediciones</span>
                         </div>
                         <ul class="collection" name="ediciones" id="ediciones">
                         </ul>
@@ -46,7 +46,7 @@
 
     $(document).ready(function () {
         $('#institutos').formSelect();
-        $('#categorias').formSelect();
+        $('#curso').formSelect();
     });
 
 </script>

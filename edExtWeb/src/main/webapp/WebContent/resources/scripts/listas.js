@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8080/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 
 $(document).ready(function institutos(){
 
@@ -323,6 +323,30 @@ function collectionCursosPorCategoria(categoria){
     }).catch(error => console.log(' 1) eerr ', error));
 
 }
+
+function collectionEdicionPorCursos(curso){
+    // Parametro:
+    //debugger;
+    var url = baseURL + `GetEdicionesCurso?curso=${curso}`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(ediciones => {
+        console.log("ediciones:", ediciones);
+        JSON.stringify(ediciones);
+        var edicionesHtml = document.getElementById("ediciones");
+        edicionesHtml.innerHTML = '';
+        if (ediciones.length > 0){
+            ediciones.forEach((item, index) => {
+                edicionesHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaEdicionCurso?edicion=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+            });
+        }else{
+            console.log('no hay categorias');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+
+}
+
 
 function collectionProgramas(){
     // Parametro:

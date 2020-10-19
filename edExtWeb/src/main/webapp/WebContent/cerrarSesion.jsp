@@ -13,9 +13,9 @@
             	<div class="row">
                 	<form class="col s12 left-align">
                     	<div class="card-panel">
-                        	<h5 class="header2 center-align"> <span style="color: #81054b">></span>Tu sesion a sido cerrada con exito</h5>
+                        	<h5 class="header2 center-align"> <span style="color: #81054b">></span>Tu sesion ha sido cerrada con exito</h5>
                         	<div class="row">
-                            	<h6 class="header2 center-align"> <span style="color: #81054b"></span>Gracias por pasar tiempo de calidad con nuestra pagina web. Te esperamos de vuelta!</h6>	
+                            	<h6 class="header2 center-align"> <span style="color: #81054b"></span>Gracias por pasar tiempo de calidad con nuestra pagina web. Te esperamos de vuelta! <3 </h6>
                         	</div>
                     	</div>
                     	<div class="right-align">

@@ -424,7 +424,7 @@ public class controladorCurso implements IcontroladorCurso{
 		List<Curso> cursos =(List<Curso>) mC.getCursos();
 		ArrayList<String>cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
-			if((c.getNomInstituto()!= null)&&(c.getNomInstituto().equals(nombreInstituto))) {
+			if((c.getInstituto().getNombre()!= null)&&(c.getInstituto().getNombre().equals(nombreInstituto))) {
 				cursosRet.add(c.getNombre());
 			}
 		}

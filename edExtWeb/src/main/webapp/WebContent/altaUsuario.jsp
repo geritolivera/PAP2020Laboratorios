@@ -98,13 +98,14 @@
 
       });
       $("#tipo").change(function () {
-        if ($("#tipo").val() == "docente") {
+        console.log(document.querySelector("#tipo").value);
+        if (document.querySelector("#tipo") == "docente") {
           $('#institutos').formSelect();
           $("#lblInstituto").show();
         }
         else{
-          $('#institutos').formSelect('hide');
-          $("#lblInstituto").hide();
+          $('#institutos').formSelect().hidden;
+          $("#lblInstituto").hidden;
         }
 
       });

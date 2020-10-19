@@ -40,7 +40,7 @@
                         <a href="consultaCurso.jsp">Cursos</a>
                     </li>
                     <li>
-                        <a href="consultaCurso.jsp">Ediciones</a>
+                        <a href="consultaEdicion.jsp">Ediciones</a>
                     </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>

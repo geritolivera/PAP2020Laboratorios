@@ -48,7 +48,8 @@ public class consultaEdicionCurso extends HttpServlet {
 		String edicion = request.getParameter("edicion");
 		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
-		
+
+
 		try {
 			dte = icon.verInfoEdicion(edicion);
 			//previas y categorias no se precisan
@@ -56,15 +57,15 @@ public class consultaEdicionCurso extends HttpServlet {
 			String fechaF = format.format(dte.getFechaF());
 			String fechaPub = format.format(dte.getFechaPub());
 			ArrayList<String> docentes = dte.getDocentes();
-			session.setAttribute("nombre", dte.getNombre());
-			session.setAttribute("cupo", dte.getCupo());
-			session.setAttribute("fechaI", fechaI);
-			session.setAttribute("fechaF", fechaF);
-			session.setAttribute("fechaPub", fechaPub);
+			request.setAttribute("nombre", dte.getNombre());
+			request.setAttribute("cupo", dte.getCupo());
+			request.setAttribute("fechaI", fechaI);
+			request.setAttribute("fechaF", fechaF);
+			request.setAttribute("fechaPub", fechaPub);
 			Boolean esVigente = false;
 			if (dte.getFechaF().after(today)) 
-				esVigente = true; 
-			session.setAttribute("vigencia", esVigente);
+				esVigente = true;
+			request.setAttribute("vigencia", esVigente);
 			//session.setAttribute("docentes", docentes);
 			//obtiene una lista con el nombre, apellido y nickname de los docentes
 			ArrayList<String> listDoc = new ArrayList<>();
@@ -78,7 +79,7 @@ public class consultaEdicionCurso extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			session.setAttribute("docentes", listDoc);
+			request.setAttribute("docentes", listDoc);
 		} catch (EdicionExcepcion e) {
 			//no existe edicion
 			e.printStackTrace();
@@ -86,10 +87,6 @@ public class consultaEdicionCurso extends HttpServlet {
 				
 		request.getRequestDispatcher("/infoEdicion.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
