@@ -1,27 +1,29 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import interfaces.fabrica;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 import interfaces.IcontroladorUsuario;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class ModificarDatos
+ * Servlet implementation class seguirUsuario
  */
-@WebServlet("/ModificarDatos")
-public class ModificarDatos extends HttpServlet {
+@WebServlet("/seguirUsuario")
+public class seguirUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificarDatos() {
+    public seguirUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,17 +40,24 @@ public class ModificarDatos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
-		String nickname  = request.getParameter("nickname");
-		String nombre = request.getParameter("nombre");
-		String apellido = request.getParameter("apellido");
-		long fechaN = Date.parse(request.getParameter( "fechaNac"));
-		Date fechaNaci = new Date(fechaN);
-		icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
 		
-		doGet(request, response);
+		DTResponse respuesta = new DTResponse();
+		fabrica fab = fabrica.getInstancia();
+		IcontroladorUsuario iconU = fab.getIcontroladorUsuario();
+		
+		HttpSession session = request.getSession();
+		String nickUsuario = (String) session.getAttribute("nombreUser");
+		String aSeguirNickname = request.getParameter("nicknameSeguir");
+				
+		iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
+		respuesta.setCodigo(0);
+		respuesta.setMensaje("El usuario " + nickUsuario + " ah comenzado a seguir a " + aSeguirNickname + ".");
+		request.setAttribute("mensaje", "El usuario " + nickUsuario + " ah comenzado a seguir a " + aSeguirNickname + ".");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String programaStr = mapper.writeValueAsString(respuesta);
+		response.setContentType("application/json");
+		response.getWriter().append(programaStr);
 	}
 
 }

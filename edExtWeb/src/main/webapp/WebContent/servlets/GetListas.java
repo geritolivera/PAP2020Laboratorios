@@ -22,11 +22,11 @@ public class GetListas extends HttpServlet {
 		IcontroladorCurso icon = fabrica.getIcontroladorCurso();
 		String[] institutos = icon.listarInstitutos();
 
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 
 		try {
 			institutos = icon.listarInstitutos();
-			session.setAttribute("institutos", institutos);
+			request.setAttribute("institutos", institutos);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

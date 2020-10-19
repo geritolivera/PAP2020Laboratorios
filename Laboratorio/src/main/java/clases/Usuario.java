@@ -2,7 +2,8 @@ package clases;
 
 import java.util.*;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -20,11 +21,11 @@ public abstract class Usuario {
 	private String password;
 	
 	//lista de usuarios a los que sigue
-	@ManyToMany
+	@OneToMany
 	private List<Usuario> sigue = new ArrayList<>();
 	
 	//lista de seguidores
-	@ManyToMany
+	@OneToMany
 	private List<Usuario> seguidores = new ArrayList<>();
 	
 	public Usuario() {

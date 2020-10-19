@@ -77,35 +77,46 @@ public class controladorUsuario implements IcontroladorUsuario {
 		if (mUsu.existeUsuarioNick(nickname)) {
 			Usuario u = mUsu.buscarUsuario(nickname);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
-			List<InscripcionED> inscripcionesEst = new ArrayList<InscripcionED>();
-			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
+			List<InscripcionED> inscripcionesEDEst = new ArrayList<>();
+			List<InscripcionPF> inscripcionesPFEst = new ArrayList<>();
 			//si el usuario es docente
 			if (u instanceof Docente) {
 				dtd.setUserDocente(u);
-				dtd.setPassword(u.getPassword());
 				edicionesDoc = ((Docente) u).getEdiciones();
 				for (EdicionCurso e : edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
-
 				}
+				List<Usuario> seguidores = u.getSeguidores();
+				for(Usuario s: seguidores){
+					dtd.agregarSeguidor(s.getNombre());
+				}
+				List<Usuario> seguidos = u.getSigue();
+				for(Usuario s: seguidos)
+					dtd.seguirUsuario(s.getNombre());
 				return dtd;
 			}
 			//si el usuario es estudiante
 			else {
 				dte.setUserEstudiante(u);
-				dte.setPassword(u.getPassword());
 				//tiene que sacar el DTEdicion desde las inscripciones
-				inscripcionesEst = ((Estudiante) u).getInscripcionesED();
-				for (InscripcionED i : inscripcionesEst) {
+				inscripcionesEDEst = ((Estudiante) u).getInscripcionesED();
+				for (InscripcionED i : inscripcionesEDEst) {
 					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
 					dte.agregarEdicion(dtee);
 				}
-				programasEst = ((Estudiante) u).getProgramas();
-				for (ProgramaFormacion p : programasEst) {
-					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
+				inscripcionesPFEst = ((Estudiante) u).getInscripcionesPF();
+				for (InscripcionPF i: inscripcionesPFEst) {
+					DTProgramaFormacion dtpe = new DTProgramaFormacion(i.getPrograma());
 					dte.agregarPrograma(dtpe);
 				}
+				List<Usuario> seguidores = u.getSeguidores();
+				for(Usuario s: seguidores){
+					dtd.agregarSeguidor(s.getNombre());
+				}
+				List<Usuario> seguidos = u.getSigue();
+				for(Usuario s: seguidos)
+					dtd.seguirUsuario(s.getNombre());
 				return dte;
 			}
 		} else
@@ -241,22 +252,34 @@ public class controladorUsuario implements IcontroladorUsuario {
 	@Override
 	public void dejarDeSeguir(String nickname, String nicknameSeguido) {
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguido)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			Usuario dejarSeguir = mU.buscarUsuarioNickname(nicknameSeguido);
 			currentUser.removerSigue(dejarSeguir);
 			dejarSeguir.removerSeguidor(currentUser);
+			em.getTransaction().begin();
+			em.persist(currentUser);
+			em.persist(dejarSeguir);
+			em.getTransaction().commit();
 		}
 	}
 	
 	@Override
     public void comenzarSeguir(String nickname, String nicknameSeguir) {
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguir)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			Usuario userSeguir = mU.buscarUsuarioNickname(nicknameSeguir);
 			currentUser.agregarSigue(userSeguir);
 			userSeguir.agregarSeguidor(currentUser);
+			em.getTransaction().begin();
+			em.persist(currentUser);
+			em.persist(userSeguir);
+			em.getTransaction().commit();
 		}
     }
 
@@ -315,4 +338,29 @@ public class controladorUsuario implements IcontroladorUsuario {
 		}
 		return false;
     }
+    
+    public boolean inscriptoPF(String nickname, String nomPrograma) {
+    	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+    	Usuario user = mUsu.buscarUsuario(nickname);
+    	List<InscripcionPF> inscripciones = ((Estudiante)user).getInscripcionesPF();
+    	Boolean inscripto = false;
+    	for(InscripcionPF i: inscripciones) {
+    		if(i.getNombrePrograma().equals(nomPrograma))
+    			inscripto = true;
+    	}
+    	return inscripto;
+    }
+    
+    public boolean inscriptoED(String nickname, String nomEdicion) {
+    	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+    	Usuario user = mUsu.buscarUsuario(nickname);
+    	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
+    	Boolean inscripto = false;
+    	for(InscripcionED i: inscripciones) {
+    		if(i.getNombreEdicion().equals(nomEdicion))
+    			inscripto = true;
+    	}
+    	return inscripto;
+    }
+    
 }

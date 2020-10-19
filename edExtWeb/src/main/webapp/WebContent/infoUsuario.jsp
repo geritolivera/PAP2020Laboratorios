@@ -133,6 +133,10 @@
     $(document).ready(function () {
         $('#listaUsuarios').formSelect();
     });
+    
+    window.onload = function(){
+    	getUsuarios();
+    }
 </script>
 
 <script src="resources/scripts/listas.js"> </script>

@@ -25,7 +25,7 @@ public class GetCursos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			session.setAttribute("cursosagregar", cursos);
+			request.setAttribute("cursosagregar", cursos);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

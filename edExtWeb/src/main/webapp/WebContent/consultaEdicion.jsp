@@ -15,13 +15,13 @@
             <div class="input-field col s6">
                 <div>
                     <label>Instituto</label>
-                    <select name="institutos" id="institutos" onchange="obtenerCursosPorInstituto(institutos.value)">
+                    <select name="institutos" id="institutos">
                         <option value="" disabled >Seleccione uno</option>
                     </select>
                 </div>
                 <div>
                     <label>Cursos</label>
-                    <select name="curso" id="curso" onchange="collectionEdicionPorCursos(curso.value)">
+                    <select name="curso" id="curso">
                         <option value="" disabled >Seleccione uno</option>
                     </select>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col s12 m6">
                     <div class="card teal darken-4">
                         <div class="card-content white-text">
-                            <span class="card-title">Ediciones</span>
+                            <span class="card-title">Cursos</span>
                         </div>
                         <ul class="collection" name="ediciones" id="ediciones">
                         </ul>
@@ -46,8 +46,19 @@
 
     $(document).ready(function () {
         $('#institutos').formSelect();
-        $('#curso').formSelect();
+        $('#categorias').formSelect();
     });
+    $("#institutos").on("change", function() {
+        obtenerCursosPorInstituto(document.querySelector("#institutos").value);
+    });
+    $("#curso").on("change", function() {
+    	collectionEdicionesPorCurso(document.querySelector("#curso").value);
+    });
+    
+    window.onload = function(){
+    	getInstitutos();
+    	getCategorias();
+    }
 
 </script>
 <script src="resources/scripts/listas.js"> </script>

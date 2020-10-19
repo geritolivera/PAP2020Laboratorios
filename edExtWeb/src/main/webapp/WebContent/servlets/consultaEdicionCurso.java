@@ -44,12 +44,11 @@ public class consultaEdicionCurso extends HttpServlet {
 		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		String edicion = request.getParameter("edicion");
 		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
-
-
+		
 		try {
 			dte = icon.verInfoEdicion(edicion);
 			//previas y categorias no se precisan
@@ -80,6 +79,16 @@ public class consultaEdicionCurso extends HttpServlet {
 				}
 			}
 			request.setAttribute("docentes", listDoc);
+			Boolean userLog = false;
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser");
+				if(session.getAttribute("tipoUser").equals("estudiante")) {
+					Boolean inscripto = iconu.inscriptoED(nickLog, edicion);
+					request.setAttribute("inscripto", inscripto);
+				}
+			}
+			request.setAttribute("userLog", userLog);
 		} catch (EdicionExcepcion e) {
 			//no existe edicion
 			e.printStackTrace();
@@ -87,6 +96,10 @@ public class consultaEdicionCurso extends HttpServlet {
 				
 		request.getRequestDispatcher("/infoEdicion.jsp").forward(request, response);
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}

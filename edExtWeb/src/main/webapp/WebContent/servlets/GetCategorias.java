@@ -2,7 +2,6 @@ package main.webapp.WebContent.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
-import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
 
 import javax.servlet.ServletException;
@@ -14,28 +13,28 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/GetUsuarios")
-public class GetUsuarios extends HttpServlet {
+@WebServlet("/GetCategorias")
+public class GetCategorias extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        ArrayList<String> usuarios = iconu.listarUsuarios();
+        IcontroladorCurso icon = fabrica.getIcontroladorCurso();
+        HttpSession session = request.getSession();
+        ArrayList<String> categorias = icon.listarCategorias();
+
         try {
-            System.out.println("usuarios = " + usuarios);
-            request.setAttribute("usuarios", usuarios);
+        	request.setAttribute("categorias", categorias);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("categorias = " + categorias);
         ObjectMapper mapper = new ObjectMapper();
-        String usuarioStr = mapper.writeValueAsString(usuarios);
+        String categoriaStr = mapper.writeValueAsString(categorias);
         response.setContentType("application/json");
-        response.getWriter().append(usuarioStr);
+        response.getWriter().append(categoriaStr);
     }
 }

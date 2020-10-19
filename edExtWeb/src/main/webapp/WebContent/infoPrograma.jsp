@@ -20,12 +20,22 @@
                             <img src="resources/images/asd.jpg">
                             <span class="card-title" id="tituloPrograma">${tituloPrograma}</span>
                             <%
-                                String tipoUser = (String) session.getAttribute("tipoUser");
-                                if(tipoUser != null && tipoUser.equals("estudiante")){
+                            	Boolean userLog = (Boolean) request.getAttribute("userLog");
+	                            String tipoUser = (String) session.getAttribute("tipoUser");
+                            	if(userLog && tipoUser.equals("estudiante")){
+	                            	Boolean inscripto = (Boolean) request.getAttribute("inscripto");
+	                                if(!inscripto){
                             %>
-                            <a class="btn-floating halfway-fab waves-effect waves-light rojo" type="button" onclick="inscribirUsuarioProg('${tituloPrograma}')"><i
-                                    class="material-icons">add</i></a>
-                            <%}%>
+                            <div class="card-action right-align">
+                            	<a class="waves-effect waves-light btn" type="button" onclick="inscribirUsuarioProg('${tituloPrograma}')"><i
+                                    class="material-icons"></i>Inscribirse</a>
+                            </div>
+                            	<%}else{%>
+                            <div class="card-action right-align">
+                            	<a class="btn disabled">Inscripto</a>
+                            </div>
+                            	<%}
+							}%>
                         </div>
                         <div class="card-content">
 
@@ -62,7 +72,6 @@
                                 </c:forEach>
                         </ul>
                     </div>
-
                 </div>
                 <div class="col s12 m5">
                     <div class="card teal darken-4">
@@ -102,6 +111,10 @@
 	$(document).ready(function () {
 	    $('#cursosagregar').formSelect();
 	 });
+
+	window.onload = function(){
+		getCursos();
+    }
 
 </script>
 <script src="resources/scripts/listas.js"> </script>

@@ -318,6 +318,58 @@ function inscribirUsuarioProg(nombreProg) {
     });
 }
 
+function seguirUsuario(nickname) {
+    console.log(nickname);
+    const fetchUrl = 'seguirUsuario?nicknameSeguir=' + nickname;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario seguido!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+function dejarSeguirUsuario(nickname) {
+    console.log(nickname);
+    const fetchUrl = 'dejarSeguirUsuario?nicknameDejarSeguir=' + nickname;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario dejado de seguir!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
 function testAlert(){
     swal({
         title: "¿Desea confirmar el alta?",
@@ -337,11 +389,6 @@ function testAlert(){
             }
         });
 }
-
-
-
-
-
 
 function mensajeConfirmacion(titulo, mensaje) {
     return swal({

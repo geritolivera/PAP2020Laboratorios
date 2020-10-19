@@ -19,7 +19,7 @@
 
                         <div class="row">
                             <div class="input-field col s6" >
-                                <select name="institutos" id="institutos" onchange="obtenerDocentesPorInstituto(institutos.value)">
+                                <select name="institutos" id="institutos">
                                     <option value="" disabled >Seleccione uno</option>
                                 </select>
                                 <label>Instituto</label>
@@ -83,7 +83,12 @@
      });
     $("#institutos").on("change", function() {
         obtenerCursosPorInstituto(document.querySelector("#institutos").value);
+        obtenerDocentesPorInstituto(document.querySelector("#institutos").value);
     });
+    
+    window.onload = function(){
+    	getInstitutos();
+    }
 
 
  </script>

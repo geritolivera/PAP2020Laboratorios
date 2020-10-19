@@ -149,23 +149,23 @@
                             <!-- SEGUIDORES Y SEGUIDOS -->
                             <div id="test2">
                                 <ul class="collection with-header">
-                                    <li class="collection-header">
+                                    <li class="collection-header" name="seguido" id="seguido">
                                         <h10>Seguidos</h10>
                                     </li>
-                                    <li class='collection-item'>
+                                    <%--- <li class='collection-item'>
                                         <a class="btn-floating btn-small "><i class="material-icons">delete</i></a>
                                         Alvin
-                                    </li>
+                                    </li>--%>
 
                                 </ul>
-                                <ul class="collection with-header">
+                                <ul class="collection with-header" name="seguidor" id="seguidor">
                                     <li class="collection-header">
                                         <h10>Seguidores</h10>
                                     </li>
-                                    <li class='collection-item'>
+                                    <%--- <li class='collection-item'>
                                         <a class="btn-floating btn-small "><i class="material-icons">person_add</i></a>
                                         Alvin
-                                    </li>
+                                    </li>--%>                                   
                                     <%
 											//for (DTUsuario s : seguidores){ 
 											//out.print("<li class='collection-item'>>"+s.getNick()+"</li>");
@@ -305,7 +305,7 @@
 </script>
     <script>
         function getDatosPrograma(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosPrograma?nombre=`+ nombre;
 
@@ -354,7 +354,7 @@
     </script>
     <script>
         function getDatosEdicion(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosEdicion?nombre=`+ nombre;
 
@@ -401,6 +401,21 @@
             })
         }
     </script>
+
+<script type="text/javascript">
+
+	window.onload = function(){
+		collectionSeguidores();
+		collectionSeguidos();
+	}
+	
+</script>
+
+<script src="resources/scripts/alta.js"> </script>
+<script src="resources/scripts/listas.js"> </script>
+
+
 </body>
+
 
 </html>
