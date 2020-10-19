@@ -101,6 +101,7 @@ public class controladorCurso implements IcontroladorCurso{
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
+			System.out.println("dtc.toString() = " + dtc.toString());
 			ediciones = c.getEdiciones();
 			programas = c.getProgramas();
 			previas = c.getPrevias();

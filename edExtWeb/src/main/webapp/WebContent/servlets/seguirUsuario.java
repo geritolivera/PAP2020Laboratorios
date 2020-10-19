@@ -13,32 +13,13 @@ import main.webapp.WebContent.resources.dataType.DTResponse;
 import interfaces.IcontroladorUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * Servlet implementation class seguirUsuario
- */
 @WebServlet("/seguirUsuario")
 public class seguirUsuario extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public seguirUsuario() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		DTResponse respuesta = new DTResponse();
@@ -51,8 +32,8 @@ public class seguirUsuario extends HttpServlet {
 				
 		iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
 		respuesta.setCodigo(0);
-		respuesta.setMensaje("El usuario " + nickUsuario + " ah comenzado a seguir a " + aSeguirNickname + ".");
-		request.setAttribute("mensaje", "El usuario " + nickUsuario + " ah comenzado a seguir a " + aSeguirNickname + ".");
+		respuesta.setMensaje("El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
+		request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String programaStr = mapper.writeValueAsString(respuesta);

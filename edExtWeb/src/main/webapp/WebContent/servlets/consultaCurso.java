@@ -32,9 +32,9 @@ public class consultaCurso extends HttpServlet {
 		//recibe consulta en forma de Instituto o Categoria
 		
 		String curso = request.getParameter("curso");
-		
+
 		DTCurso dtc = null;
-		
+
 		try {
 			dtc = icon.verInfo(curso);
 			//previas y categorias no se precisan
@@ -58,8 +58,12 @@ public class consultaCurso extends HttpServlet {
 			//curso no existe
 			e.printStackTrace();
 		}
-				
-		request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
+
+		if (dtc!= null) {
+			request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
+		}else{
+			System.out.println("dtc (si null algo paso atras) = " + dtc );
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

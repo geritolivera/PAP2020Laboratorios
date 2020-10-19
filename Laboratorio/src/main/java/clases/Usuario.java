@@ -1,5 +1,7 @@
 package clases;
 
+import manejadores.manejadorUsuario;
+
 import java.util.*;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -23,11 +25,7 @@ public abstract class Usuario {
 	//lista de usuarios a los que sigue
 	@OneToMany
 	private List<Usuario> sigue = new ArrayList<>();
-	
-	//lista de seguidores
-	@OneToMany
-	private List<Usuario> seguidores = new ArrayList<>();
-	
+
 	public Usuario() {
 		super();
 	}
@@ -90,13 +88,17 @@ public abstract class Usuario {
 	public List<Usuario> getSigue(){
 		return this.sigue;
 	}	
-	public void agregarSeguidor(Usuario usuario) {
-		seguidores.add(usuario);
-	}
-	public void removerSeguidor(Usuario usuario) {
-		seguidores.remove(usuario);
-	}
 	public List<Usuario> getSeguidores(){
-		return this.seguidores;
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		List<Usuario> seguidoresRet = new ArrayList<>();
+		List<Usuario> usuarios = (List<Usuario>) mu.getUsuarios();
+		for (Usuario u:usuarios) {
+			for (Usuario seguidos:u.getSigue()) {
+				if(seguidos.getNick().equals(this.nick)){
+					seguidoresRet.add(seguidos);
+				}
+			}
+		}
+		return seguidoresRet;
 	}
 }

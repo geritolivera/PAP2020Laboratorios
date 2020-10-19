@@ -258,7 +258,6 @@ public class controladorUsuario implements IcontroladorUsuario {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			Usuario dejarSeguir = mU.buscarUsuarioNickname(nicknameSeguido);
 			currentUser.removerSigue(dejarSeguir);
-			dejarSeguir.removerSeguidor(currentUser);
 			em.getTransaction().begin();
 			em.persist(currentUser);
 			em.persist(dejarSeguir);
@@ -275,7 +274,6 @@ public class controladorUsuario implements IcontroladorUsuario {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			Usuario userSeguir = mU.buscarUsuarioNickname(nicknameSeguir);
 			currentUser.agregarSigue(userSeguir);
-			userSeguir.agregarSeguidor(currentUser);
 			em.getTransaction().begin();
 			em.persist(currentUser);
 			em.persist(userSeguir);

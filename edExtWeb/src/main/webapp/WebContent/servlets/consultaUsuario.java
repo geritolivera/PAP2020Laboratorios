@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Enumeration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
@@ -85,10 +86,13 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("userLog", userLog);
 			request.setAttribute("yaSeguido", yaSeguido);
 			request.setAttribute("igualdad", igualdad);
+
 			System.out.println("ediciones de  " + nickname + ":" + ediciones);
 			System.out.println("programas de  " + nickname + ":" + programas);
 
 		} catch (UsuarioExcepcion e) {
+
+			System.out.println("SE RE LIMO");
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher("/infoUsuarioNUEVO.jsp").forward(request, response);
