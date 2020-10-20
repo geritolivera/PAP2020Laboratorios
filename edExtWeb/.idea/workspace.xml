@@ -23,27 +23,13 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:branchCamilo" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:rita" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/altaCurso.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/altaCurso.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/altaEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/altaEdicion.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaEdicion.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaUsuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaUsuario.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoEdicion.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoPrograma.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoPrograma.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoUsuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoUsuario.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/miPerfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/miPerfil.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/Categorias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/GetCategorias.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/Previas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/GetPrevias.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaEdicionCurso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaEdicionCurso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaUsuarioJS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboratorio/src/main/java/clases/InscripcionED.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboratorio/src/main/java/clases/InscripcionED.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +92,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="branchCamilo" />
+                        <option value="rita" />
                       </list>
                     </value>
                   </entry>

@@ -26,6 +26,7 @@ public class InscripcionPF {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private InscripcionEnum estado;
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
 	@ManyToOne
@@ -58,5 +59,19 @@ public class InscripcionPF {
 	}
 	public ProgramaFormacion getPrograma() {
 		return programa;
+	}
+	
+	public void setEstado(String estado) {
+		switch (estado){
+			case "En_espera":
+				this.estado = InscripcionEnum.EN_ESPERA;
+			case "Aceptado":
+				this.estado = InscripcionEnum.ACEPTADO;
+			case "Rechazado":
+				this.estado = InscripcionEnum.RECHAZADO;
+		}
+	}
+	public InscripcionEnum getEstado() {
+		return estado;
 	}
 }
