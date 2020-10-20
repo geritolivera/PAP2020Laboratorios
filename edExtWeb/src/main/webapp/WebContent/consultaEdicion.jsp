@@ -15,14 +15,14 @@
             <div class="input-field col s6">
                 <div>
                     <label>Instituto</label>
-                    <select name="institutos" id="institutos">
-                        <option value="" disabled >Seleccione uno</option>
+                    <select name="institutos" id="institutos" >
+
                     </select>
                 </div>
                 <div>
                     <label>Cursos</label>
                     <select name="curso" id="curso">
-                        <option value="" disabled >Seleccione uno</option>
+
                     </select>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col s12 m6">
                     <div class="card teal darken-4">
                         <div class="card-content white-text">
-                            <span class="card-title">Cursos</span>
+                            <span class="card-title">Ediciones</span>
                         </div>
                         <ul class="collection" name="ediciones" id="ediciones">
                         </ul>
@@ -52,12 +52,12 @@
         obtenerCursosPorInstituto(document.querySelector("#institutos").value);
     });
     $("#curso").on("change", function() {
-    	collectionEdicionesPorCurso(document.querySelector("#curso").value);
+        collectionEdicionPorCursos(document.querySelector("#curso").value);
     });
-    
+
+
     window.onload = function(){
     	getInstitutos();
-    	getCategorias();
     }
 
 </script>

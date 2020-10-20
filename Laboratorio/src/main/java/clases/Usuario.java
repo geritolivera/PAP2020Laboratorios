@@ -79,15 +79,18 @@ public abstract class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	} 
+
 	public void agregarSigue(Usuario usuario) {
-		sigue.add(usuario);
+		this.sigue.add(usuario);
 	}
 	public void removerSigue(Usuario usuario) {
-		sigue.remove(usuario);
+		this.sigue.remove(usuario);
 	}
+
 	public List<Usuario> getSigue(){
 		return this.sigue;
 	}	
+
 	public List<Usuario> getSeguidores(){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		List<Usuario> seguidoresRet = new ArrayList<>();

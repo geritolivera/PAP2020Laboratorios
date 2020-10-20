@@ -61,10 +61,13 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaI", fechaI);
 			request.setAttribute("fechaF", fechaF);
 			request.setAttribute("fechaPub", fechaPub);
+			String vigente = "No";
 			Boolean esVigente = false;
-			if (dte.getFechaF().after(today)) 
+			if (dte.getFechaF().after(today)) {
 				esVigente = true;
-			request.setAttribute("vigencia", esVigente);
+				vigente= "Si";
+			}
+			request.setAttribute("vigencia", vigente);
 			//session.setAttribute("docentes", docentes);
 			//obtiene una lista con el nombre, apellido y nickname de los docentes
 			ArrayList<String> listDoc = new ArrayList<>();

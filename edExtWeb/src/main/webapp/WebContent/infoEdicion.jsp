@@ -23,8 +23,8 @@
                             <%
 	                            String tipoUser = (String) session.getAttribute("tipoUser");
                             	Boolean userLog = (Boolean) request.getAttribute("userLog");
-	                        	Boolean vigencia = (Boolean) request.getAttribute("vigencia");
-	                        	if(userLog && tipoUser.equals("estudiante") && vigencia){
+	                        	String vigencia = (String) request.getAttribute("vigencia");
+	                        	if(userLog && tipoUser.equals("estudiante") && vigencia.equals("Si")){
 	                        		Boolean inscripto = (Boolean) request.getAttribute("inscripto");
 	                        		if(!inscripto){
                             %>
@@ -72,7 +72,7 @@
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1"><i class="mdi-help_outline"></i> Vigente
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">Si</div>
+                                    <div class="col s7 grey-text text-darken-4 right-align">${vigencia}</div>
                                 </div>
                             </li>
                             
@@ -91,9 +91,11 @@
                         </div>
                     </div>
                 </div>
+                <% if(tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
                <div class="row center">
 	            <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
             	</div>
+                <%}%>
             </div>
             
             <div class="row" style="display: none;" id="containerEstudiantes">

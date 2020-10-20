@@ -135,13 +135,14 @@ function obtenerCursosPorInstituto(instituto){
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
 
+            cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
             if (cursos.length > 0){
-                cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
                 cursos.forEach((item, index) => {
                     cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
                 });
                 $('#curso').formSelect();
             }else{
+                cursosHtml.innerHTML = `<option value="" disabled selected>No existen cursos para este Instituto</option>`;
                 console.log('no hay cursos');
             }
         }).catch(error => console.log(' 1) eerr ', error));
@@ -341,7 +342,7 @@ function collectionEdicionPorCursos(curso){
                 edicionesHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaEdicionCurso?edicion=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
             });
         }else{
-            console.log('no hay categorias');
+            edicionesHtml.innerHTML += `<li class="collection-item">No existen ediciones para este curso.</li>`
         }
     }).catch(error => console.log(' 1) eerr ', error));
 
@@ -407,7 +408,7 @@ function collectionSeguidores(){
         seguidoresHtml.innerHTML = '';
         if (seguidores.length > 0){
             seguidores.forEach((item, index) => {
-                seguidoresHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="seguirUsuario?nicknameSeguir=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                seguidoresHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="seguirUsuario('${item}')"><i class="material-icons" type="button">person_add</i></a></div></li>`;
             });
         }else{
             seguidoresHtml.innerHTML += `<li class="collection-item">No tiene seguidores aun.</li>`;
@@ -430,7 +431,7 @@ function collectionSeguidos(){
         seguidosHtml.innerHTML = '';
         if (seguidos.length > 0){
             seguidos.forEach((item, index) => {
-                seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="dejarSeguirUsuario?nicknameSeguir=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="dejarSeguirUsuario('${item}')"><i class="material-icons" type="button">delete_forever</i></a></div></li>`;
             });
         }else{
             seguidosHtml.innerHTML += `<li class="collection-item">No sigue a nadie aun.</li>`;

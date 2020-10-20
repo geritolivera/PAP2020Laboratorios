@@ -29,7 +29,6 @@ public class GetSeguidores extends HttpServlet {
 
         try {
             String nick = (String) session.getAttribute("nickname");
-            System.out.println("nickname seguidores: " + nick);
             DTUsuario dtu = icon.verInfoUsuario(nick);
             java.util.ArrayList<String> seguidores = dtu.getSeguidores();
             System.out.println("seguidores= " + seguidores);

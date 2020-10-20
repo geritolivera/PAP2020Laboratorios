@@ -12,43 +12,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 
-/**
- * Servlet implementation class iniciarSesion
- */
 @WebServlet("/logout")
 public class logout extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public logout() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+
         HttpSession session = request.getSession(false);
+        DTResponse respuesta = new DTResponse();
         if(session != null) {
             session.removeAttribute("nombreUser");
             session.removeAttribute("tipoUser");
             session.invalidate();
-            RequestDispatcher dp = request.getRequestDispatcher("cerrarSesion.jsp");
-            dp.forward(request, response);
+
+            respuesta.setCodigo(0);
+            respuesta.setMensaje("Gracias por pasar tiempo de calidad con nuestra pagina web. Te esperamos de vuelta!");
+            ObjectMapper mapper = new ObjectMapper();
+            String userStr = mapper.writeValueAsString(respuesta);
+            response.setContentType("application/json");
+            response.getWriter().append(userStr);
+//            RequestDispatcher dp = request.getRequestDispatcher("cerrarSesion.jsp");
+//            dp.forward(request, response);
         }
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

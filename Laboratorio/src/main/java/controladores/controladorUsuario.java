@@ -9,6 +9,7 @@ import manejadores.*;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -89,11 +90,11 @@ public class controladorUsuario implements IcontroladorUsuario {
 				}
 				List<Usuario> seguidores = u.getSeguidores();
 				for(Usuario s: seguidores){
-					dtd.agregarSeguidor(s.getNombre());
+					dtd.agregarSeguidor(s.getNick());
 				}
 				List<Usuario> seguidos = u.getSigue();
 				for(Usuario s: seguidos)
-					dtd.seguirUsuario(s.getNombre());
+					dtd.seguirUsuario(s.getNick());
 				return dtd;
 			}
 			//si el usuario es estudiante
@@ -112,11 +113,11 @@ public class controladorUsuario implements IcontroladorUsuario {
 				}
 				List<Usuario> seguidores = u.getSeguidores();
 				for(Usuario s: seguidores){
-					dtd.agregarSeguidor(s.getNombre());
+					dtd.agregarSeguidor(s.getNick());
 				}
 				List<Usuario> seguidos = u.getSigue();
 				for(Usuario s: seguidos)
-					dtd.seguirUsuario(s.getNombre());
+					dtd.seguirUsuario(s.getNick());
 				return dte;
 			}
 		} else
@@ -260,7 +261,6 @@ public class controladorUsuario implements IcontroladorUsuario {
 			currentUser.removerSigue(dejarSeguir);
 			em.getTransaction().begin();
 			em.persist(currentUser);
-			em.persist(dejarSeguir);
 			em.getTransaction().commit();
 		}
 	}
@@ -276,7 +276,6 @@ public class controladorUsuario implements IcontroladorUsuario {
 			currentUser.agregarSigue(userSeguir);
 			em.getTransaction().begin();
 			em.persist(currentUser);
-			em.persist(userSeguir);
 			em.getTransaction().commit();
 		}
     }
@@ -311,15 +310,19 @@ public class controladorUsuario implements IcontroladorUsuario {
     
     public boolean validarSigue(String nickname, String nicknameSigue) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
+
+		System.out.println("nick log= " + nickname + " sigue a :"+ nicknameSigue);
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSigue)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			List<Usuario> usuariosSigue = currentUser.getSigue();
+			System.out.println( nickname + " usuariosSigue  = " + Arrays.toString(usuariosSigue.toArray()));
 			for(Usuario u : usuariosSigue) {
-				if(nicknameSigue.contains(u.getNick())) {
+				if(u.getNick().equals(nicknameSigue)) {
 					return true;
 				}
 			}
 		}
+		System.out.println("dice que uno no existe");
 		return false;
     }
     
