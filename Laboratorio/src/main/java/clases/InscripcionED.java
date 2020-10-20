@@ -13,6 +13,8 @@ public class InscripcionED {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Enumerated(EnumType.STRING)
+	@Column(name="estado")
 	private InscripcionEnum estado;
 	@Temporal (TemporalType.DATE)
 	private Date fecha;

@@ -2,7 +2,10 @@ package clases;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +29,8 @@ public class InscripcionPF {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Enumerated(EnumType.STRING)
+	@Column(name="estado")
 	private InscripcionEnum estado;
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
