@@ -51,10 +51,10 @@
             <a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a>
           </li>
           <li>
-            <a href="logout"><i class="material-icons left">exit_to_app</i></a>
+            <a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a>
           </li>
 
-
+        </ul>
       </div>
 <%--    </div>--%>
   </nav>
@@ -72,7 +72,6 @@
               <ul>
                 <li><a href="altaProgramaFormacion.jsp">Alta Programa</a></li>
                 <li><a href="consultaPrograma.jsp">Buscar</a></li>
-                <li><a href="agregarCursoPrograma.jsp">Agregar Curso</a></li>
               </ul>
             </div>
           </li>
@@ -145,3 +144,5 @@
     $('.collapsible').collapsible();
   });
 </script>
+<script src="resources/scripts/log.js"></script>
+<script src="resources/scripts/alta.js"></script>

@@ -44,9 +44,9 @@
                     </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
-                    <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
+                    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
                     <%}else{%>
-                    <li><a href="iniciarSesion.jsp"><i class="material-icons left">account_circle</i>Login</a></li>
+                    <li type="button" onclick="inicioSesion()"><a><i class="material-icons left" >account_circle</i>Login</a></li>
                     <%}%>
                 </ul>
             </div>
@@ -58,7 +58,7 @@
     <li class="rojo"><a href="miPerfil.jsp" class="white-text"><i
             class="material-icons white-text">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
     <%}else{%>
-    <li class="rojo"><a href="login.html" class="white-text"><i
+    <li class="rojo"><a class="white-text" type="button" onclick="inicioSesion()"><i
             class="material-icons white-text">account_circle</i>Login</a></li>
     <%}%>
 
@@ -75,6 +75,10 @@
         <a href="consultaUsuario.jsp">Usuarios</a>
     </li>
     <% if (session.getAttribute("nombreUser")!=null) {%>
-    <li><a href="logout"><i class="material-icons left">exit_to_app</i></a></li>
+    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
     <%}%>
 </ul>
+
+<script src="resources/scripts/log.js"></script>
+<script src="resources/scripts/alta.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

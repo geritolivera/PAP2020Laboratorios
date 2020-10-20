@@ -28,13 +28,20 @@ public class seguirUsuario extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
+		System.out.println("nickUsuario = " + nickUsuario);
 		String aSeguirNickname = request.getParameter("nicknameSeguir");
-				
-		iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
-		respuesta.setCodigo(0);
-		respuesta.setMensaje("El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
-		request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
-		
+		System.out.println("aSeguirNickname = " + aSeguirNickname);
+
+		if(iconU.validarSigue(nickUsuario, aSeguirNickname)){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("El usuario " + nickUsuario + " ya sigue " + aSeguirNickname + ".");
+		}else {
+			iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
+			request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
+
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String programaStr = mapper.writeValueAsString(respuesta);
 		response.setContentType("application/json");

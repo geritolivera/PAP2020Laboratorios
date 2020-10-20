@@ -110,5 +110,6 @@
     <orderEntry type="library" name="buttons.print" level="application" />
     <orderEntry type="library" name="dataTables.buttons" level="application" />
     <orderEntry type="library" name="select.dataTables" level="application" />
+    <orderEntry type="library" name="sweetalert2" level="application" />
   </component>
 </module>

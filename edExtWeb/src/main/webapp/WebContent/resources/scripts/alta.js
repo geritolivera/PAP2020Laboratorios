@@ -27,6 +27,7 @@ function crearPrograma(){
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -82,6 +83,7 @@ function crearCurso() {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -123,7 +125,8 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    document.getElementById(respuesta.elemento).focus();
+                    if(respuesta.elemento != null)
+                        document.getElementById(respuesta.elemento).focus();
                 })
             }
         }).catch((err) => {
@@ -152,6 +155,7 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 })
             }
@@ -182,6 +186,7 @@ function inscribirUsuario(edicion) {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -225,6 +230,7 @@ function crearEdicion() {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -253,6 +259,7 @@ function inscribirUsuario(nombreEdi) {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -283,6 +290,7 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -309,6 +317,7 @@ function inscribirUsuarioProg(nombreProg) {
             })
         } else {
             mensajeError("Error en inscripcion", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -335,9 +344,9 @@ function seguirUsuario(nickname) {
             })
         } else {
             mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-                }
-            )
+                });
         }
     }).catch((err) => {
         console.error(' paso algo: ', err);
@@ -345,7 +354,7 @@ function seguirUsuario(nickname) {
 }
 
 function dejarSeguirUsuario(nickname) {
-    console.log(nickname);
+    console.log("quiere dejar de seguir a =" + nickname);
     const fetchUrl = 'dejarSeguirUsuario?nicknameDejarSeguir=' + nickname;
     fetch(fetchUrl, {
         method: 'POST'
@@ -361,6 +370,7 @@ function dejarSeguirUsuario(nickname) {
             })
         } else {
             mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
