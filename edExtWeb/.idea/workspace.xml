@@ -30,6 +30,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Laboratorio/src/main/java/clases/InscripcionED.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboratorio/src/main/java/clases/InscripcionED.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboratorio/src/main/java/controladores/controladorUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboratorio/src/main/java/controladores/controladorUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +60,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laboratorio" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -75,6 +78,7 @@
       <workItem from="1602626709073" duration="2321000" />
       <workItem from="1602725444079" duration="1295000" />
       <workItem from="1602967817085" duration="2946000" />
+      <workItem from="1603226832427" duration="1858000" />
     </task>
     <servers />
   </component>
@@ -114,10 +118,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602971199242" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602627779182">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603242647232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602627779182" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603242647232" />
     <state x="86" y="86" width="1833" height="868" key="MergeDialog" timestamp="1602725548978">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -138,5 +142,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="708" y="233" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602626864480" />
+    <state x="342" y="140" key="new project wizard" timestamp="1603242637390">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="140" key="new project wizard/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603242637390" />
   </component>
 </project>
