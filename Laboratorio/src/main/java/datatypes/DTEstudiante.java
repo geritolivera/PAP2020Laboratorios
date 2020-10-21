@@ -18,6 +18,15 @@ public class DTEstudiante extends DTUsuario{
 	public DTEstudiante(String nick, String nombre, String apellido, String correo, Date fechaNac) {
 		super(nick,nombre,apellido,correo,fechaNac);
 	}
+	public DTEstudiante(DTUsuario dtu){
+		this.setNick(dtu.getNick());
+		this.setNombre(dtu.getNombre());
+		this.setApellido(dtu.getApellido());
+		this.setCorreo(dtu.getCorreo());
+		this.setFechaNac(dtu.getFechaNac());
+		this.seguidos = dtu.getSeguidos();
+		this.seguidores = dtu.getSeguidores();
+	}
 
 	public void setUserEstudiante(Usuario user) {
 		this.setNick(user.getNick());

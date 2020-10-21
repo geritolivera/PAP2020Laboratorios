@@ -51,7 +51,7 @@
             <a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a>
           </li>
           <li>
-            <a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a>
+            <a ><i class="material-icons left" type="button" onclick="logout()">exit_to_app</i></a>
           </li>
 
         </ul>

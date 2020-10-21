@@ -71,9 +71,12 @@ public class login extends HttpServlet {
                         edis.add(edi.getNombre());
                     }
                     session.setAttribute("edicionesNombres", edis);
-
+                    ArrayList<String> seguido = dtu.getSeguidos();
+                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    session.setAttribute("seguidos", seguido);
+                    session.setAttribute("seguidores", seguidor);
                     respuesta.setCodigo(0);
-                    respuesta.setMensaje("Bienvenido!" + nickname);
+                    respuesta.setMensaje(nickname);
                     ObjectMapper mapper = new ObjectMapper();
                     String userStr = mapper.writeValueAsString(respuesta);
                     response.setContentType("application/json");
@@ -90,6 +93,10 @@ public class login extends HttpServlet {
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
                     session.setAttribute("fechaNac", dtu.getFechaNac());
+                    ArrayList<String> seguido = dtu.getSeguidos();
+                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    session.setAttribute("seguidos", seguido);
+                    session.setAttribute("seguidores", seguidor);
                     ArrayList<String> edis = new ArrayList<String>();
                     for (DTEdicionCurso edi : (((DTDocente) dtu).getEdiciones())) {
                         edis.add(edi.getNombre());

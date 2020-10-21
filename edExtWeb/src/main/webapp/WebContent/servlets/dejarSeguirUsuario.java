@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import exepciones.UsuarioExcepcion;
 import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
 import main.webapp.WebContent.resources.dataType.DTResponse;
@@ -35,6 +36,11 @@ public class dejarSeguirUsuario extends HttpServlet {
 		System.out.println(nickUsuario + "sigue a " + dejarSeguirNickname+  " ?: " + iconU.validarSigue(nickUsuario, dejarSeguirNickname));
 		if(iconU.validarSigue(nickUsuario, dejarSeguirNickname)) {
 			iconU.dejarDeSeguir(nickUsuario, dejarSeguirNickname);
+			try {
+				session.setAttribute("seguidos", iconU.verInfoUsuario(nickUsuario).getSeguidos());
+			} catch (UsuarioExcepcion usuarioExcepcion) {
+				usuarioExcepcion.printStackTrace();
+			}
 			respuesta.setCodigo(0);
 			respuesta.setMensaje("El usuario " + nickUsuario + " ha dejado de seguir a " + dejarSeguirNickname + ".");
 			request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha dejado de seguir a " + dejarSeguirNickname + ".");

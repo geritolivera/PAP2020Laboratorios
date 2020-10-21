@@ -21,7 +21,7 @@
                             <span class="card-title" id="nombre">${nombre}</span>
                         </div>
                         <div class="card-content">
-                            <p id="descripcion"></p>
+                            <p id="descripcion">${descripcion}</p>
                         </div>
                         <ul id="dataCurso" class="collection">
                             <li class="collection-item">
@@ -59,6 +59,30 @@
                                 </div>
                             </li>
 
+                        </ul>
+                    </div>
+                </div>
+                <div class="col s12 m5">
+                    <div class="card teal darken-4">
+                        <div class="card-content white-text">
+                            <span class="card-title">Previas</span>
+                        </div>
+                        <ul class="collection" name="previas" id="previas">
+                            <c:forEach var="pre" items="${previas}">
+                                <li class="collection-item"><div>${pre}<a href="consultaCurso?curso=${pre}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col s12 m5">
+                    <div class="card teal darken-4">
+                        <div class="card-content white-text">
+                            <span class="card-title">Categorias</span>
+                        </div>
+                        <ul class="collection" name="categorias" id="categorias">
+                            <c:forEach var="pre" items="${categorias}">
+                                <li class="collection-item"><div>${pre}</div></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>

@@ -94,11 +94,11 @@ public abstract class Usuario {
 	public List<Usuario> getSeguidores(){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		List<Usuario> seguidoresRet = new ArrayList<>();
-		List<Usuario> usuarios = (List<Usuario>) mu.getUsuarios();
+		List<Usuario> usuarios = mu.getUsuarios();
 		for (Usuario u:usuarios) {
 			for (Usuario seguidos:u.getSigue()) {
 				if(seguidos.getNick().equals(this.nick)){
-					seguidoresRet.add(seguidos);
+					seguidoresRet.add(u);
 				}
 			}
 		}

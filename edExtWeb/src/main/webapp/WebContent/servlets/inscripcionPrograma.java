@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import clases.ProgramaFormacion;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import datatypes.DTEstudiante;
+import datatypes.DTProgramaFormacion;
+import datatypes.DTUsuario;
+import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
 import main.webapp.WebContent.resources.dataType.DTResponse;
@@ -22,27 +27,11 @@ import main.webapp.WebContent.resources.dataType.DTResponse;
  */
 @WebServlet("/inscripcionPrograma")
 public class inscripcionPrograma extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public inscripcionPrograma() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
@@ -50,8 +39,8 @@ public class inscripcionPrograma extends HttpServlet {
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
+		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		String nomPrograma = request.getParameter("programa");
-
 		System.out.println("nomPrograma = " + nomPrograma);
 		System.out.println("nickUsuario = " + nickUsuario);
 
@@ -60,7 +49,15 @@ public class inscripcionPrograma extends HttpServlet {
 
 		try {
 			icon.inscribirEstudiantePrograma(nomPrograma, nickUsuario, fecha);
+			DTEstudiante usu =  new DTEstudiante();
+			usu = (DTEstudiante) iconu.verInfoUsuario(nickUsuario);
 			respuesta.setCodigo(0);
+			ArrayList<String> programas = new ArrayList<>();
+			for (DTProgramaFormacion pf:usu.getProgramas()){
+				programas.add(pf.getNombre());
+
+			}
+			session.setAttribute("programasNombres", programas);
 			respuesta.setMensaje("El usuario " + nickUsuario + " se inscribio a " + nomPrograma + " correctamente");
 			request.setAttribute("mensaje", "El usuario " + nickUsuario + " se inscribio a " + nomPrograma + " correctamente");
 		} catch (Exception e) {

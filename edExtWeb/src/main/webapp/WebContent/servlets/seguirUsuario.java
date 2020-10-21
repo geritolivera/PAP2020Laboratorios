@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import datatypes.DTUsuario;
+import exepciones.UsuarioExcepcion;
 import interfaces.fabrica;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 import interfaces.IcontroladorUsuario;
@@ -37,10 +39,15 @@ public class seguirUsuario extends HttpServlet {
 			respuesta.setMensaje("El usuario " + nickUsuario + " ya sigue " + aSeguirNickname + ".");
 		}else {
 			iconU.comenzarSeguir(nickUsuario, aSeguirNickname);
+			try {
+				DTUsuario usu = iconU.verInfoUsuario(nickUsuario);
+				session.setAttribute("seguidos", usu.getSeguidos());
+			} catch (UsuarioExcepcion usuarioExcepcion) {
+				usuarioExcepcion.printStackTrace();
+			}
 			respuesta.setCodigo(0);
 			respuesta.setMensaje("El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
 			request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha comenzado a seguir a " + aSeguirNickname + ".");
-
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String programaStr = mapper.writeValueAsString(respuesta);

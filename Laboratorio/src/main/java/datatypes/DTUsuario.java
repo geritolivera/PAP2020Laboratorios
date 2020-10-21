@@ -36,6 +36,13 @@ public class DTUsuario {
 		this.apellido = usuario.getApellido();
 		this.correo = usuario.getCorreo();
 		this.fechaNac = usuario.getFechaNac();
+		for (Usuario usu:usuario.getSeguidores()){
+			this.seguidores.add(usu.getNick());
+		}
+		for (Usuario usu:usuario.getSigue()){
+			this.seguidos.add(usu.getNick());
+		}
+
 	}
 	
 	public String getNick() {
