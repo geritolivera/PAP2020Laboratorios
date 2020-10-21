@@ -66,7 +66,7 @@ public class Estudiante extends Usuario{
 	
 	//INSCRIPCIONES A EDICION DE CURSO
 	public void agregarInscripcionED(Date fecha, EdicionCurso edicion) {
-		InscripcionED ins = new InscripcionED(fecha, this, edicion);
+		InscripcionED ins = new InscripcionED(fecha, this, edicion, InscripcionEnum.PENDIENTE);
 		this.inscripcionesED.add(ins);
 	}
 	public List<InscripcionED> getInscripcionesED(){
@@ -84,7 +84,7 @@ public class Estudiante extends Usuario{
 	
 	//INSCRIPCIONES A PROGRAMA DE FORMACION
 	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
-		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
+		InscripcionPF ins = new InscripcionPF(fecha, this, programa, InscripcionEnum.PENDIENTE);
 		this.inscripcionesPF.add(ins);
 
 	}

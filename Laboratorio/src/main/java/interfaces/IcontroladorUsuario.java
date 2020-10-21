@@ -1,5 +1,6 @@
 package interfaces;
 
+import datatypes.DTInscripcionED;
 import datatypes.DTUsuario;
 import exepciones.*;
 import manejadores.manejadorUsuario;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import clases.Estudiante;
+import clases.InscripcionED;
 import clases.InscripcionPF;
 import clases.Usuario;
 
@@ -75,5 +77,7 @@ public interface IcontroladorUsuario {
     
     public boolean inscriptoPF(String nickname, String nomPrograma);
     public boolean inscriptoED(String nickname, String nomEdicion);
+    
+    public List<DTInscripcionED> listarInscripcionesED();
     
 }

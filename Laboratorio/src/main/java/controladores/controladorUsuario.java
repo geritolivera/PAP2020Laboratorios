@@ -350,4 +350,21 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
+    public List<DTInscripcionED> listarInscripcionesED(){
+    	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
+    	List<InscripcionED> inscripciones = mIns.getInscripciones();
+    	for(InscripcionED i : inscripciones) {
+    		System.out.println("HAY COSAS EN EL CONTROLADOR");
+    		System.out.println("edicion: " + i.getNombreEdicion());
+    		System.out.println("usuario: " + i.getNombreUsuario());
+    		System.out.println("fecha: " + i.getFecha());
+    	}
+    	List<DTInscripcionED> listIns = new ArrayList<>();
+    	for(InscripcionED i: inscripciones) {
+    		DTInscripcionED dti = new DTInscripcionED(i);
+    		listIns.add(dti);
+    	}
+    	return listIns;
+    }
+    
 }

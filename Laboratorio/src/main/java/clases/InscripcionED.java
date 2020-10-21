@@ -13,6 +13,9 @@ public class InscripcionED {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Enumerated(EnumType.STRING)
+	@Column(name="estado")
+	private InscripcionEnum estado;
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
 	@ManyToOne
@@ -23,10 +26,11 @@ public class InscripcionED {
 	public InscripcionED() {
 		super();
 	}
-	public InscripcionED(Date fecha, Estudiante estudiante, EdicionCurso edicion) {
+	public InscripcionED(Date fecha, Estudiante estudiante, EdicionCurso edicion, InscripcionEnum estado) {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.edicion = edicion;
+		this.estado = estado;
 	}
 	
 	public Estudiante getEstudiante() {
@@ -52,5 +56,22 @@ public class InscripcionED {
 	}
 	public EdicionCurso getEdicion() {
 		return edicion;
+	}
+	
+	public void setEstado(InscripcionEnum estado) {
+		this.estado = estado;
+	}
+	public void setEstadoString(String estado) {
+		switch (estado){
+			case "PENDIENTE":
+				this.estado = InscripcionEnum.PENDIENTE;
+			case "ACEPTADO":
+				this.estado = InscripcionEnum.ACEPTADO;
+			case "RECHAZADO":
+				this.estado = InscripcionEnum.RECHAZADO;
+		}
+	}
+	public InscripcionEnum getEstado() {
+		return estado;
 	}
 }

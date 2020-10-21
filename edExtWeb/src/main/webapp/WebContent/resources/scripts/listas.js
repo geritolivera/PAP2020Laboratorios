@@ -445,3 +445,41 @@ function collectionSeguidos(){
     //obtenerDocentesPorInstituto(instituto);
 }
 
+function tableInscripciones(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetInscripcionesED`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(dti => {
+        JSON.stringify(dti);
+        var inscripcionesHtml = document.getElementById("detallesIns");
+        console.log("inscripciones:", dti);
+        inscripcionesHtml.innerHTML = '';
+        if (dti.length > 0){
+            dti.forEach((item, index) => {
+                inscripcionesHtml.innerHTML += `<tr>
+                                                <td>
+                                                    <div class="switch">
+                                                    <label>
+                                                        No
+                                                        <input type="checkbox">
+                                                        <span class="lever"></span>
+                                                        Si
+                                                    </label>
+                                              </div>
+                                                </td>
+                                                <td> ${item.edicion} </td>
+                                                <td> ${item.usuario} </td>
+                                                <td> ${item.estado} </td>
+                                                <td> ${item.fecha}</td>
+                                                <th>0.5</th>
+                                            </tr>`;
+            });
+        }else{
+            console.log('no hay inscripciones');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+}
+

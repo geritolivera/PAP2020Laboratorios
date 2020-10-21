@@ -2,7 +2,10 @@ package clases;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +29,9 @@ public class InscripcionPF {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Enumerated(EnumType.STRING)
+	@Column(name="estado")
+	private InscripcionEnum estado;
 	@Temporal (TemporalType.DATE)
 	private Date fecha;
 	@ManyToOne
@@ -36,10 +42,11 @@ public class InscripcionPF {
 	public InscripcionPF() {
 		super();
 	}
-	public InscripcionPF(Date fecha, Estudiante estudiante, ProgramaFormacion programa) {
+	public InscripcionPF(Date fecha, Estudiante estudiante, ProgramaFormacion programa, InscripcionEnum estado) {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.programa = programa;
+		this.estado = estado;
 	}
 	
 	public Date getFecha() {
@@ -58,5 +65,22 @@ public class InscripcionPF {
 	}
 	public ProgramaFormacion getPrograma() {
 		return programa;
+	}
+	
+	public void setEstado(InscripcionEnum estado) {
+		this.estado = estado;
+	}
+	public void setEstadoString(String estado) {
+		switch (estado){
+			case "PENDIENTE":
+				this.estado = InscripcionEnum.PENDIENTE;
+			case "ACEPTADO":
+				this.estado = InscripcionEnum.ACEPTADO;
+			case "RECHAZADO":
+				this.estado = InscripcionEnum.RECHAZADO;
+		}
+	}
+	public InscripcionEnum getEstado() {
+		return estado;
 	}
 }
