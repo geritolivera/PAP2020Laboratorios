@@ -152,8 +152,8 @@
                                         <h10>Seguidos</h10>
                                     </li>
                                 </ul>
-                                <ul class="collection with-header" name="seguidor" id="seguidor">
-                                    <li class="collection-header">
+                                <ul class="collection with-header">
+                                    <li class="collection-header" name="seguidor" id="seguidor">
                                         <h10>Seguidores</h10>
                                     </li>
                                 </ul>

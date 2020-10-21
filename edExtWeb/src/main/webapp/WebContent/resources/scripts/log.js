@@ -5,6 +5,7 @@ function inicioSesion(){
         html: '<input type="text" id="username" class="swal2-input" placeholder="Enter your username"></input>' +
             '<input type="password" id="password" class="swal2-input" placeholder="Enter your password"></input>',
         confirmButtonText: 'Ingresar',
+        style: "resources/styles/style.css",
         preConfirm: () => {
             let username = Swal.getPopup().querySelector('#username').value
             let password = Swal.getPopup().querySelector('#password').value
