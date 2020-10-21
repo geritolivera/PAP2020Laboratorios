@@ -12,45 +12,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import clases.EdicionCurso;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import datatypes.DTEdicionCurso;
+import datatypes.DTEstudiante;
+import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 
-/**
- * Servlet implementation class inscripcionUsuarioEdicion
- */
+
 @WebServlet("/inscripcionUE")
 public class inscripcionUsuarioEdicion extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public inscripcionUsuarioEdicion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		
+		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
@@ -62,6 +48,12 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 
 		try {
 			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
+			ArrayList<String> ediciones = new ArrayList<>();
+			List<DTEdicionCurso> edis = ((DTEstudiante)iconu.verInfoUsuario(nickUsuario)).getEdiciones();
+			for (DTEdicionCurso dec:edis) {
+				ediciones.add(dec.getNombre());
+			}
+			session.setAttribute("edicionesNombres", ediciones);
 			respuesta.setCodigo(0);
 			respuesta.setMensaje("El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");
 			request.setAttribute("mensaje", "El usuario " + nickUsuario + " se inscribio a "+ nomEdicion+ " correctamente");

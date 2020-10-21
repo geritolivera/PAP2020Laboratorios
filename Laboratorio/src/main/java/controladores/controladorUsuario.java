@@ -73,33 +73,26 @@ public class controladorUsuario implements IcontroladorUsuario {
 	@Override
 	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		DTDocente dtd = new DTDocente();
-		DTEstudiante dte = new DTEstudiante();
+		DTUsuario dtu = new DTUsuario();
 		if (mUsu.existeUsuarioNick(nickname)) {
-			Usuario u = mUsu.buscarUsuario(nickname);
+			Usuario u = mUsu.buscarUsuarioNickname(nickname);
+			dtu = new DTUsuario(u);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
 			List<InscripcionED> inscripcionesEDEst = new ArrayList<>();
 			List<InscripcionPF> inscripcionesPFEst = new ArrayList<>();
 			//si el usuario es docente
 			if (u instanceof Docente) {
-				dtd.setUserDocente(u);
 				edicionesDoc = ((Docente) u).getEdiciones();
+				DTDocente dtd = new DTDocente(dtu);
 				for (EdicionCurso e : edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
 				}
-				List<Usuario> seguidores = u.getSeguidores();
-				for(Usuario s: seguidores){
-					dtd.agregarSeguidor(s.getNick());
-				}
-				List<Usuario> seguidos = u.getSigue();
-				for(Usuario s: seguidos)
-					dtd.seguirUsuario(s.getNick());
 				return dtd;
 			}
 			//si el usuario es estudiante
 			else {
-				dte.setUserEstudiante(u);
+				DTEstudiante dte = new DTEstudiante(dtu);
 				//tiene que sacar el DTEdicion desde las inscripciones
 				inscripcionesEDEst = ((Estudiante) u).getInscripcionesED();
 				for (InscripcionED i : inscripcionesEDEst) {
@@ -111,13 +104,6 @@ public class controladorUsuario implements IcontroladorUsuario {
 					DTProgramaFormacion dtpe = new DTProgramaFormacion(i.getPrograma());
 					dte.agregarPrograma(dtpe);
 				}
-				List<Usuario> seguidores = u.getSeguidores();
-				for(Usuario s: seguidores){
-					dtd.agregarSeguidor(s.getNick());
-				}
-				List<Usuario> seguidos = u.getSigue();
-				for(Usuario s: seguidos)
-					dtd.seguirUsuario(s.getNick());
 				return dte;
 			}
 		} else

@@ -17,9 +17,7 @@ import exepciones.CursoExcepcion;
 import interfaces.fabrica;
 import interfaces.*;
 
-/**
- * Servlet implementation class consultaCurso
- */
+
 @WebServlet("/consultaCurso")
 public class consultaCurso extends HttpServlet {
 
@@ -32,8 +30,8 @@ public class consultaCurso extends HttpServlet {
 		//recibe consulta en forma de Instituto o Categoria
 		
 		String curso = request.getParameter("curso");
-
-		DTCurso dtc = null;
+		System.out.println("curso = |" + curso);
+		DTCurso dtc = new DTCurso();
 
 		try {
 			dtc = icon.verInfo(curso);
@@ -41,8 +39,8 @@ public class consultaCurso extends HttpServlet {
 			String fechaR = format.format(dtc.getFechaR());
 			ArrayList<String> ediciones = dtc.getEdiciones();
 			ArrayList<String> programas = dtc.getProgramas();
-			//ArrayList<String> previas = dtc.getPrevias();
-			//ArrayList<String> categorias = dtc.getCategorias();
+			ArrayList<String> previas = dtc.getPrevias();
+			ArrayList<String> categorias = dtc.getCategorias();
 			request.setAttribute("nombre", dtc.getNombre());
 			request.setAttribute("descripcion", dtc.getDescripcion());
 			request.setAttribute("duracion", dtc.getDuracion());
@@ -52,8 +50,8 @@ public class consultaCurso extends HttpServlet {
 			request.setAttribute("url", dtc.getUrl());
 			request.setAttribute("ediciones", ediciones);
 			request.setAttribute("programas", programas);
-			//session.setAttribute("previas", previas);
-			//session.setAttribute("categorias", categorias);
+			request.setAttribute("previas", previas);
+			request.setAttribute("categorias", categorias);
 		} catch (CursoExcepcion e) {
 			//curso no existe
 			e.printStackTrace();
@@ -67,6 +65,6 @@ public class consultaCurso extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doGet(request, response);
+
 	}
 }

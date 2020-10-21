@@ -405,7 +405,9 @@ function collectionSeguidores(){
     ).then(seguidores => {
         console.log("seguidores:", seguidores);
         var seguidoresHtml = document.getElementById("seguidor");
-        seguidoresHtml.innerHTML = '';
+        seguidoresHtml.innerHTML = '<li class="collection-header">\n' +
+            '    <h10>Seguidores</h10>\n' +
+            '</li>';
         if (seguidores.length > 0){
             seguidores.forEach((item, index) => {
                 seguidoresHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="seguirUsuario('${item}')"><i class="material-icons" type="button">person_add</i></a></div></li>`;
@@ -428,7 +430,9 @@ function collectionSeguidos(){
     ).then(seguidos => {
         console.log("seguidos:", seguidos);
         var seguidosHtml = document.getElementById("seguido");
-        seguidosHtml.innerHTML = '';
+        seguidosHtml.innerHTML = '<li class="collection-header">\n' +
+            '    <h10>Seguidos</h10>\n' +
+            '</li>';
         if (seguidos.length > 0){
             seguidos.forEach((item, index) => {
                 seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="dejarSeguirUsuario('${item}')"><i class="material-icons" type="button">delete_forever</i></a></div></li>`;
