@@ -1,6 +1,6 @@
-var baseURL = 'http://localhost:8080/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 
-$(document).ready(function institutos(){
+function getInstitutos(){
 
     var url = baseURL +`GetListas`
 
@@ -21,9 +21,9 @@ $(document).ready(function institutos(){
             console.log('no hay institutos');
         }
     });
-});
+}
 
-$(document).ready(function (){
+function getUsuarios(){
     url = baseURL +`GetUsuarios`
 
     fetch(url, {
@@ -44,11 +44,11 @@ $(document).ready(function (){
             console.log('no hay estudiantes');
         }
     });
-});
+}
 
 
-$(document).ready(function (){
-    url = baseURL +`Categorias`
+function getCategorias(){
+    url = baseURL +`GetCategorias`
 
     fetch(url, {
         method: 'GET',
@@ -66,10 +66,10 @@ $(document).ready(function (){
             console.log('no hay categorias');
         }
     });
-});
+}
 
-$(document).ready(function (){
-    url = baseURL +`Previas`
+function getPrevias(){
+    url = baseURL +`GetPrevias`
 
     fetch(url, {
         method: 'GET',
@@ -87,10 +87,10 @@ $(document).ready(function (){
             console.log('no hay previas');
         }
     });
-});
+}
 
 
-$(document).ready(function (){
+function getCursos(){
 
     url = baseURL +`GetCursos`
     fetch(url, {
@@ -110,7 +110,7 @@ $(document).ready(function (){
             console.log('no hay cursos');
         }
     })
-})
+}
 
 /** FUNCIONES GENERALES PARA CONSUMIR AJAX **/
 //declao variables globales para
@@ -135,13 +135,14 @@ function obtenerCursosPorInstituto(instituto){
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
 
+            cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
             if (cursos.length > 0){
-                cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
                 cursos.forEach((item, index) => {
                     cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
                 });
                 $('#curso').formSelect();
             }else{
+                cursosHtml.innerHTML = `<option value="" disabled selected>No existen cursos para este Instituto</option>`;
                 console.log('no hay cursos');
             }
         }).catch(error => console.log(' 1) eerr ', error));
@@ -288,12 +289,13 @@ function collectionCursosPorInstituto(instituto){
     ).then(cursos => {
         console.log("cursos:", cursos);
         var cursosHtml = document.getElementById("curso");
-        console.log(cursos);
+        cursosHtml.innerHTML = '';
         if (cursos.length > 0){
             cursos.forEach((item, index) => {
                 cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
             });
         }else{
+            cursosHtml.innerHTML += `<li class="collection-item">No existen cursos en este instituto.</li>`;
             console.log('no hay cursos');
         }
     }).catch(error => console.log(' 1) eerr ', error));
@@ -309,7 +311,6 @@ function collectionCursosPorCategoria(categoria){
     }).then(res => res.json()
     ).then(cursos => {
         console.log("cursos:", cursos);
-
         var cursosHtml = document.getElementById("curso");
         cursosHtml.innerHTML = '';
         if (cursos.length > 0){
@@ -317,11 +318,36 @@ function collectionCursosPorCategoria(categoria){
                 cursosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaCurso?curso=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
             });
         }else{
+            cursosHtml.innerHTML += `<li class="collection-item">No existen cursos en esta categoria.</li>`;
             console.log('no hay categorias');
         }
     }).catch(error => console.log(' 1) eerr ', error));
 
 }
+
+function collectionEdicionPorCursos(curso){
+    // Parametro:
+    //debugger;
+    var url = baseURL + `GetEdicionesCurso?curso=${curso}`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(ediciones => {
+        console.log("ediciones:", ediciones);
+        JSON.stringify(ediciones);
+        var edicionesHtml = document.getElementById("ediciones");
+        edicionesHtml.innerHTML = '';
+        if (ediciones.length > 0){
+            ediciones.forEach((item, index) => {
+                edicionesHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaEdicionCurso?edicion=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+            });
+        }else{
+            edicionesHtml.innerHTML += `<li class="collection-item">No existen ediciones para este curso.</li>`
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+
+}
+
 
 function collectionProgramas(){
     // Parametro:
@@ -339,7 +365,81 @@ function collectionProgramas(){
                 programasHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaProgramaFormacion?programa=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
             });
         }else{
+            programasHtml.innerHTML += `<li class="collection-item">No existen programas.</li>`;
             console.log('no hay programas');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+    //obtenerDocentesPorInstituto(instituto);
+}
+
+function collectionUsuarios(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetUsuarios`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(usuarios => {
+        console.log("seguidos:", usuarios);
+        var usuariosHtml = document.getElementById("usuario");
+        usuariosHtml.innerHTML = '';
+        if (usuarios.length > 0){
+            usuarios.forEach((item, index) => {
+                usuariosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaUsuario?nickname=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+            });
+        }else{
+            usuariosHtml.innerHTML += `<li class="collection-item">No existen usuarios.</li>`;
+            console.log('no hay usuarios');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+    //obtenerDocentesPorInstituto(instituto);
+}
+
+function collectionSeguidores(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetSeguidores`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(seguidores => {
+        console.log("seguidores:", seguidores);
+        var seguidoresHtml = document.getElementById("seguidor");
+        seguidoresHtml.innerHTML = '<li class="collection-header">\n' +
+            '    <h10>Seguidores</h10>\n' +
+            '</li>';
+        if (seguidores.length > 0){
+            seguidores.forEach((item, index) => {
+                seguidoresHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="seguirUsuario('${item}')"><i class="material-icons" type="button">person_add</i></a></div></li>`;
+            });
+        }else{
+            seguidoresHtml.innerHTML += `<li class="collection-item">No tiene seguidores aun.</li>`;
+            console.log('no hay seguidores');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+    //obtenerDocentesPorInstituto(instituto);
+}
+
+function collectionSeguidos(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetSeguidos`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(seguidos => {
+        console.log("seguidos:", seguidos);
+        var seguidosHtml = document.getElementById("seguido");
+        seguidosHtml.innerHTML = '<li class="collection-header">\n' +
+            '    <h10>Seguidos</h10>\n' +
+            '</li>';
+        if (seguidos.length > 0){
+            seguidos.forEach((item, index) => {
+                seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="dejarSeguirUsuario('${item}')"><i class="material-icons" type="button">delete_forever</i></a></div></li>`;
+            });
+        }else{
+            seguidosHtml.innerHTML += `<li class="collection-item">No sigue a nadie aun.</li>`;
+            console.log('no hay seguidos');
         }
     }).catch(error => console.log(' 1) eerr ', error));
     //obtenerDocentesPorInstituto(instituto);

@@ -29,7 +29,7 @@
 	            
                 <!-- CARD CONSULTA CURSO-->
                 <div>
-					<div class="col s12 m5">
+					<div class="col s12 m6">
 	                    <div class="card teal darken-4">
 	                        <div class="card-content white-text">
 	                            <span class="card-title">Cursos</span>
@@ -48,6 +48,11 @@
 	    $('#institutos').formSelect();
 	    $('#categorias').formSelect();
 	 });
+	
+	window.onload =function(){
+		getInstitutos();
+		getCategorias();
+	}
 	
 </script>
     <script src="resources/scripts/listas.js"> </script>

@@ -32,7 +32,7 @@ public class GetEdicionesUsu extends HttpServlet {
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         ArrayList<String> ediciones = new ArrayList<String>();
 
         String nick = request.getParameter("nickname");

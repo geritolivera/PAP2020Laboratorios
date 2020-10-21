@@ -36,6 +36,13 @@ public class DTUsuario {
 		this.apellido = usuario.getApellido();
 		this.correo = usuario.getCorreo();
 		this.fechaNac = usuario.getFechaNac();
+		for (Usuario usu:usuario.getSeguidores()){
+			this.seguidores.add(usu.getNick());
+		}
+		for (Usuario usu:usuario.getSigue()){
+			this.seguidos.add(usu.getNick());
+		}
+
 	}
 	
 	public String getNick() {
@@ -73,13 +80,6 @@ public class DTUsuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public void seguirUsuario(String usuario) {
 		seguidos.add(usuario);
 	}
@@ -87,7 +87,7 @@ public class DTUsuario {
 		return this.seguidos;
 	}
 	
-	public void AnadirSeguidor(String usuario) {
+	public void agregarSeguidor(String usuario) {
 		seguidores.add(usuario);
 	}
 	public ArrayList<String> getSeguidores() {

@@ -6,12 +6,7 @@ import java.util.Date;
 @Entity
 public class InscripcionED {
 	
-	public Estudiante getEstudiante() {
-		return estudiante;
-	}
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
-	}
+	
 	@ManyToOne
 	@JoinColumn(insertable = true, updatable = true)
 	private Estudiante estudiante;
@@ -32,6 +27,13 @@ public class InscripcionED {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.edicion = edicion;
+	}
+	
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 	
 	public Date getFecha() {

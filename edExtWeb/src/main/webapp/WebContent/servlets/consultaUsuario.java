@@ -4,73 +4,102 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import javax.servlet.http.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Enumeration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
-import datatypes.DTUsuario;
-import datatypes.DTEstudiante;
-import datatypes.DTDocente;
 import datatypes.DTEdicionCurso;
 import datatypes.DTProgramaFormacion;
+import datatypes.DTUsuario;
+import datatypes.DTDocente;
+import datatypes.DTEstudiante;
 
 /**
- * Servlet implementation class consultaUsuario
+ * Servlet implementation class consultaProgramaFormacion
  */
 @WebServlet("/consultaUsuario")
 public class consultaUsuario extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
-		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+		//recibe programa desde jsp
 		String nickname = request.getParameter("nickname");
+		System.out.println("nickname = " + nickname);
 		try {
-			DTUsuario dt = icon.verInfoUsuario(nickname);;
-			if(dt instanceof DTEstudiante) {
-				ArrayList<String> ediciones = new ArrayList<>();
-				for(DTEdicionCurso d:((DTEstudiante) dt).getEdiciones()){
-					if(!((DTEstudiante) dt).getEdiciones().isEmpty()){
-						ediciones.add(d.getNombre());
+			DTUsuario dtu = icon.verInfoUsuario(nickname);
+			String fechaNac = format.format(dtu.getFechaNac());
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("nombre", dtu.getNombre());
+			request.setAttribute("apellido", dtu.getApellido());
+			request.setAttribute("correo", dtu.getCorreo());
+			request.setAttribute("fechaNac", fechaNac);
+			request.setAttribute("seguidores", dtu.getSeguidores());
+			ArrayList<String> seguidos = dtu.getSeguidos();
+			request.setAttribute("seguidos", seguidos);
+			ArrayList<String> ediciones = new ArrayList<>();
+			ArrayList<String> programas = new ArrayList<>();
+			String tipo;
+			if(dtu instanceof DTDocente) {
+				List<DTEdicionCurso> listEdiciones = ((DTDocente)dtu).getEdiciones();
+				for(DTEdicionCurso e: listEdiciones)
+					ediciones.add(e.getNombre());
+				tipo = "docente";
+			}
+			else {
+				List<DTEdicionCurso> listEdiciones = ((DTEstudiante)dtu).getEdiciones();
+				for(DTEdicionCurso e: listEdiciones)
+					ediciones.add(e.getNombre());
+				List<DTProgramaFormacion> listProgramas = ((DTEstudiante)dtu).getProgramas();
+				for(DTProgramaFormacion p: listProgramas)
+					programas.add(p.getNombre());
+				tipo = "estudiante";
+			}
+			request.setAttribute("ediciones", ediciones);
+			request.setAttribute("programas", programas);
+			request.setAttribute("tipo", tipo);
+			Boolean userLog = false; //hay un usuario logueado?
+			Boolean yaSeguido = false; //el usuario ya sigue al consultado?
+			Boolean igualdad = false; //el nickname del usuario logueado es igual al del consultado?
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser"); //nick del user logueado
+				if(nickLog.equals(nickname)) //si el usuario se esta consultando a si mismo
+					igualdad = true;
+				else {
+					for(String u: seguidos){
+						if(nickname.equals(u))
+							yaSeguido = true;
 					}
+				}
+			}
+			request.setAttribute("userLog", userLog);
+			request.setAttribute("yaSeguido", yaSeguido);
+			request.setAttribute("igualdad", igualdad);
 
-				}
-				request.setAttribute("tipo", "estudiante");
-				request.setAttribute("dtu", ((DTEstudiante)dt));
-				String userStr = mapper.writeValueAsString(((DTEstudiante)dt));
-				System.out.println("La respuesta generada es: " + userStr);
-				response.setContentType("application/json");
-				response.getWriter().append(userStr);
-			}else{if(dt instanceof DTDocente){
-				ArrayList<String> ediciones = new ArrayList<>();
-				for(DTEdicionCurso d:((DTDocente) dt).getEdiciones()){
-					if(!((DTDocente) dt).getEdiciones().isEmpty()){
-						ediciones.add(d.getNombre());
-					}
-				}
-				request.setAttribute("tipo", "docente");
-				request.setAttribute("dtu", ((DTDocente)dt));
-				String userStr = mapper.writeValueAsString(((DTDocente)dt));
-				System.out.println("La respuesta generada es: " + userStr);
-				response.setContentType("application/json");
-				response.getWriter().append(userStr);
-			}
-			}
+			System.out.println("ediciones de  " + nickname + ":" + ediciones);
+			System.out.println("programas de  " + nickname + ":" + programas);
+
 		} catch (UsuarioExcepcion e) {
+
+			System.out.println("SE RE LIMO");
 			e.printStackTrace();
 		}
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/infoUsuarioNUEVO.jsp").forward(request, response);
 
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doGet(request, response);
 	}
 }

@@ -106,8 +106,7 @@
                 	<!-- TAB DE INFORMACION-->
                     <div id="cardInfo" class="card">
                         <div class="card-content">
-                            <p>I am a very simple card. I am good at containing small bits of information. I am
-                                convenient because I require little markup to use effectively.</p>
+                            <p><%=tipo%></p>
                         </div>
                         <div class="card-tabs">
                             <ul class="tabs tabs-fixed-width">
@@ -149,30 +148,16 @@
                             <!-- SEGUIDORES Y SEGUIDOS -->
                             <div id="test2">
                                 <ul class="collection with-header">
-                                    <li class="collection-header">
+                                    <li class="collection-header" name="seguido" id="seguido">
                                         <h10>Seguidos</h10>
                                     </li>
-                                    <li class='collection-item'>
-                                        <a class="btn-floating btn-small "><i class="material-icons">delete</i></a>
-                                        Alvin
-                                    </li>
-
                                 </ul>
-                                <ul class="collection with-header">
+                                <ul class="collection with-header" name="seguidor" id="seguidor">
                                     <li class="collection-header">
                                         <h10>Seguidores</h10>
                                     </li>
-                                    <li class='collection-item'>
-                                        <a class="btn-floating btn-small "><i class="material-icons">person_add</i></a>
-                                        Alvin
-                                    </li>
-                                    <%
-											//for (DTUsuario s : seguidores){ 
-											//out.print("<li class='collection-item'>>"+s.getNick()+"</li>");
-								 			//}
-										%>
                                 </ul>
-                                <%//}%>
+
                             </div>
                             <!--GET-EDICIONES-->
                             <div id="test3">
@@ -236,7 +221,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <!--GET-PROGRAMAS-->
-                                        <select id="programas" name="programa" onchange="getDatosPrograma(programa.value)">
+                                        <select id="programas" name="programas" onchange="getDatosPrograma(programas.value)">
                                             <option value="" disabled selected>Seleccionar un programa</option>
                                             <c:forEach var="pro" items="${programasNombres}">
                                                 <option value="${pro}">${pro}</option>
@@ -248,34 +233,45 @@
                                 </div>
                                 <div class="row">
                                     <!--imagen del programa-->
-                                    <img src="resources/images/asd.jpg" sizes="[class]= card-content" style="width: 400px;height: 300px;padding-left: 100px;">
-                                </div>
-                                <div id="infoSelectedProg">
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Descripcion
+                                    <div class="col s12 m7" style="width: 100%">
+                                        <div class="card" id="infoSelectedProg">
+                                            <div class="card-image">
+                                                <img src="resources/images/asd.jpg">
+                                            </div>
+                                            <div class="card-content">
+                                                    <div class="row">
+                                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>
+                                                        <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Descripcion
+                                                        </div>
+                                                        <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
+                                                            Inicio</div>
+                                                        <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin
+                                                        </div>
+                                                        <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta
+                                                        </div>
+                                                        <div class="col s7 grey-text text-darken-4 right-align"></div>
+                                                    </div>
+
+                                            </div>
+                                            <div class="card-action">
+                                                <a href="#">This is a link</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de
-                                        Inicio</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin
-                                    </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta
-                                    </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align"></div>
-                                </div>
-                                </div>
+
                             </div>
                             <%}%>
                         </div>
@@ -305,7 +301,7 @@
 </script>
     <script>
         function getDatosPrograma(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosPrograma?nombre=`+ nombre;
 
@@ -318,12 +314,17 @@
 
                 JSON.stringify(progSelected);
 
+
                 var fechaInicio = new Date(progSelected.fechaI).toLocaleDateString();
                 var fechaFin = new Date(progSelected.fechaF).toLocaleDateString();
                 var fechaAlta = new Date(progSelected.fechaA).toLocaleDateString();
 
-
-                    progHtml.innerHTML =`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
+                progHtml.innerHTML = `<div class="card-image">
+                                                <img src="`+ progSelected.imagenURL +`">
+                                            </div>`;
+                progHtml.innerHTML += `<div class="card-content">
+                                                    <div class="row">`;
+                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
                     progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.nombre +`</div>`;
                     progHtml.innerHTML +=`</div>`;
                 progHtml.innerHTML +=`<div class="row">`;
@@ -344,17 +345,18 @@
                     progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta</div>`;
                     progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaAlta +`</div>`;
                     progHtml.innerHTML +=`</div>`;
-                progHtml.innerHTML +=`<div class="row">`;
-                    progHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
-                    progHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + progSelected.cupo +`</div>`;
-                    progHtml.innerHTML +=`</div>`;
+                    progHtml.innerHTML += ` </div>
+                                            <div class="card-action">
+                                                <a href="consultaProgramaFormacion?programa=`+ progSelected.nombre +`">Ir al programa</a>
+                                            </div>
+                                        </div>`
 
             })
         }
     </script>
     <script>
         function getDatosEdicion(nombre){
-            var baseURL = 'http://localhost:8080/edExtWeb/';
+            var baseURL = 'http://localhost:8081/edExtWeb/';
 
             var url = baseURL +`GetDatosEdicion?nombre=`+ nombre;
 
@@ -401,6 +403,21 @@
             })
         }
     </script>
+
+<script type="text/javascript">
+
+    $(document).ready( function(){
+		collectionSeguidores();
+		collectionSeguidos();
+	});
+	
+</script>
+
+<script src="resources/scripts/alta.js"> </script>
+<script src="resources/scripts/listas.js"> </script>
+
+
 </body>
+
 
 </html>

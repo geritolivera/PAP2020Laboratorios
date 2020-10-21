@@ -22,14 +22,14 @@ public class GetProgramasFormacion extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         ArrayList<String> programas = new ArrayList<>();
         try {
             programas = icon.listarProgramas();
             System.out.println("programas = " + programas);
-            session.setAttribute("programas", programas);
+            request.setAttribute("programas", programas);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

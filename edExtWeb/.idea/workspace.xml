@@ -23,15 +23,27 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:rita" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:branchCamilo" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4e330dd-0a09-4932-9f00-5020ff00ef8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/altaCurso.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/altaCurso.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/altaEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/altaEdicion.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCurso.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaCursoBetter.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaEdicion.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaUsuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/consultaUsuario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoEdicion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoEdicion.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoPrograma.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoPrograma.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/infoUsuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/infoUsuario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/miPerfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/miPerfil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/resources/scripts/listas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/Categorias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/GetCategorias.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/Previas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/GetPrevias.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaEdicionCurso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaEdicionCurso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WebContent/servlets/consultaUsuarioJS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +88,7 @@
       <workItem from="1601764033254" duration="17000" />
       <workItem from="1602626709073" duration="2321000" />
       <workItem from="1602725444079" duration="1295000" />
+      <workItem from="1602967817085" duration="2946000" />
     </task>
     <servers />
   </component>
@@ -93,7 +106,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="rita" />
+                        <option value="branchCamilo" />
                       </list>
                     </value>
                   </entry>
@@ -111,6 +124,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="890" y="230" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602627476837" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1602971199242">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602971199242" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602627779182">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -127,6 +144,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" width="1240" height="851" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602627511525" />
+    <state x="807" y="433" key="VCS.ChangelistChooser" timestamp="1602970291522">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="807" y="433" key="VCS.ChangelistChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1602970291522" />
     <state x="708" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1602626864480">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

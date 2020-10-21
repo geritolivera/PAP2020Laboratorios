@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8080/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 function crearPrograma(){
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
@@ -27,6 +27,7 @@ function crearPrograma(){
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -82,6 +83,7 @@ function crearCurso() {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -123,7 +125,8 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    document.getElementById(respuesta.elemento).focus();
+                    if(respuesta.elemento != null)
+                        document.getElementById(respuesta.elemento).focus();
                 })
             }
         }).catch((err) => {
@@ -152,6 +155,7 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                    if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 })
             }
@@ -182,6 +186,7 @@ function inscribirUsuario(edicion) {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -225,6 +230,7 @@ function crearEdicion() {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -253,6 +259,7 @@ function inscribirUsuario(nombreEdi) {
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -283,6 +290,7 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -309,6 +317,60 @@ function inscribirUsuarioProg(nombreProg) {
             })
         } else {
             mensajeError("Error en inscripcion", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+function seguirUsuario(nickname) {
+    console.log(nickname);
+    const fetchUrl = 'seguirUsuario?nicknameSeguir=' + nickname;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario seguido!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
+                    document.getElementById(respuesta.elemento).focus();
+                });
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+function dejarSeguirUsuario(nickname) {
+    console.log("quiere dejar de seguir a =" + nickname);
+    const fetchUrl = 'dejarSeguirUsuario?nicknameDejarSeguir=' + nickname;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Usuario dejado de seguir!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
             )
@@ -337,11 +399,6 @@ function testAlert(){
             }
         });
 }
-
-
-
-
-
 
 function mensajeConfirmacion(titulo, mensaje) {
     return swal({

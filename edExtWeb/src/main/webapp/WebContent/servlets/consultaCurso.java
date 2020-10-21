@@ -17,14 +17,12 @@ import exepciones.CursoExcepcion;
 import interfaces.fabrica;
 import interfaces.*;
 
-/**
- * Servlet implementation class consultaCurso
- */
+
 @WebServlet("/consultaCurso")
 public class consultaCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
@@ -32,37 +30,41 @@ public class consultaCurso extends HttpServlet {
 		//recibe consulta en forma de Instituto o Categoria
 		
 		String curso = request.getParameter("curso");
-		
-		DTCurso dtc = null;
-		
+		System.out.println("curso = |" + curso);
+		DTCurso dtc = new DTCurso();
+
 		try {
 			dtc = icon.verInfo(curso);
 			//previas y categorias no se precisan
 			String fechaR = format.format(dtc.getFechaR());
 			ArrayList<String> ediciones = dtc.getEdiciones();
 			ArrayList<String> programas = dtc.getProgramas();
-			//ArrayList<String> previas = dtc.getPrevias();
-			//ArrayList<String> categorias = dtc.getCategorias();
-			session.setAttribute("nombre", dtc.getNombre());
-			session.setAttribute("descripcion", dtc.getDescripcion());
-			session.setAttribute("duracion", dtc.getDuracion());
-			session.setAttribute("cantHoras", dtc.getCantHoras());
-			session.setAttribute("creditos", dtc.getCreditos());
-			session.setAttribute("fechaR", fechaR);
-			session.setAttribute("url", dtc.getUrl());
-			session.setAttribute("ediciones", ediciones);
-			session.setAttribute("programas", programas);
-			//session.setAttribute("previas", previas);
-			//session.setAttribute("categorias", categorias);
+			ArrayList<String> previas = dtc.getPrevias();
+			ArrayList<String> categorias = dtc.getCategorias();
+			request.setAttribute("nombre", dtc.getNombre());
+			request.setAttribute("descripcion", dtc.getDescripcion());
+			request.setAttribute("duracion", dtc.getDuracion());
+			request.setAttribute("cantHoras", dtc.getCantHoras());
+			request.setAttribute("creditos", dtc.getCreditos());
+			request.setAttribute("fechaR", fechaR);
+			request.setAttribute("url", dtc.getUrl());
+			request.setAttribute("ediciones", ediciones);
+			request.setAttribute("programas", programas);
+			request.setAttribute("previas", previas);
+			request.setAttribute("categorias", categorias);
 		} catch (CursoExcepcion e) {
 			//curso no existe
 			e.printStackTrace();
 		}
-				
-		request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
+
+		if (dtc!= null) {
+			request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
+		}else{
+			System.out.println("dtc (si null algo paso atras) = " + dtc );
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doGet(request, response);
+
 	}
 }

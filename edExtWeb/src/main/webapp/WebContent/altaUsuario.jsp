@@ -64,8 +64,8 @@
                 <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="datepicker">
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
               </div>
-              <div class="input-field col s6">
-                <select name="institutos" id="institutos">
+              <div class="input-field col s6" id="institutosSelect" >
+                <select  name="institutos" id="institutos">
                   <option value="" disabled>Seleccione uno</option>
                   </select>
                 <label id="lblInstituto">Instituto</label>
@@ -92,18 +92,20 @@
       });
       $(document).ready(function () {
         $('#tipo').formSelect();
+        getInstitutos()
         $('.datepicker').datepicker();
-        $("#institutos").hide();
-        $("#lblInstituto").hide();
+        $("#lblInstituto").show();
 
       });
       $("#tipo").change(function () {
-        if ($("#tipo").val() == "docente") {
+        console.log(document.querySelector("#tipo").value);
+        if (document.querySelector("#tipo").value == "docente") {
+          $('#institutosSelect').show();
           $('#institutos').formSelect();
           $("#lblInstituto").show();
         }
         else{
-          $('#institutos').formSelect('hide');
+          $('#institutosSelect').hide();
           $("#lblInstituto").hide();
         }
 

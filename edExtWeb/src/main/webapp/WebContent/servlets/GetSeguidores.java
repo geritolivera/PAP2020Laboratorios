@@ -1,9 +1,9 @@
 package main.webapp.WebContent.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.IcontroladorCurso;
 import interfaces.IcontroladorUsuario;
 import interfaces.fabrica;
+import datatypes.DTUsuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,28 +14,34 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/GetUsuarios")
-public class GetUsuarios extends HttpServlet {
+
+@WebServlet("/GetSeguidores")
+public class GetSeguidores extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //HttpSession session = request.getSession();
+        ObjectMapper mapper = new ObjectMapper();
         fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        ArrayList<String> usuarios = iconu.listarUsuarios();
+        IcontroladorUsuario icon = fabrica.getIcontroladorUsuario();
+        HttpSession session = request.getSession();
+
         try {
-            System.out.println("usuarios = " + usuarios);
-            request.setAttribute("usuarios", usuarios);
+            String nick = (String) session.getAttribute("nickname");
+            DTUsuario dtu = icon.verInfoUsuario(nick);
+            java.util.ArrayList<String> seguidores = dtu.getSeguidores();
+            System.out.println("seguidores= " + seguidores);
+            request.setAttribute("seguidores", seguidores);
+
+            String seguidoresStr = mapper.writeValueAsString(seguidores);
+            System.out.println("	Los recursos que guardo son: " + seguidoresStr);
+            response.setContentType("application/json");
+            response.getWriter().append(seguidoresStr);
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        ObjectMapper mapper = new ObjectMapper();
-        String usuarioStr = mapper.writeValueAsString(usuarios);
-        response.setContentType("application/json");
-        response.getWriter().append(usuarioStr);
     }
 }

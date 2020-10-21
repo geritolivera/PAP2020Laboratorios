@@ -14,36 +14,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 
-/**
- * Servlet implementation class GetListas
- */
 @WebServlet("/GetListas")
 public class GetListas extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	fabrica fabrica = interfaces.fabrica.getInstancia();
-	IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-	String[] institutos = icon.listarInstitutos();
-
-	public GetListas() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+
+		fabrica fabrica = interfaces.fabrica.getInstancia();
+		IcontroladorCurso icon = fabrica.getIcontroladorCurso();
+		String[] institutos = icon.listarInstitutos();
+
+		//HttpSession session = request.getSession();
 
 		try {
-			String[] institutos = icon.listarInstitutos();
-			session.setAttribute("institutos", institutos);
+			institutos = icon.listarInstitutos();
+			request.setAttribute("institutos", institutos);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,10 +38,6 @@ public class GetListas extends HttpServlet {
 
 
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}

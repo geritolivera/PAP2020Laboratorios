@@ -1,32 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1"%>
 <% if (session.getAttribute("tipoUser")=="docente"){ %>
 <%@include file="defaultHeader.jsp"%>
 <%}else{ %>
 <%@include file="headerEstVis.jsp"%>
 <%}%>
- 
-  <!-- Section: Search -->
-  <section id="search" class="section section-search  rojo white-text center scrollspy">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.ArrayList"%>
+
+<div class="main">
+    <br><br>
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h3>Buscar Ediciones</h3>
-          <div class="input-field">
-            <form action="consultaEdicionCurso" method="GET">
-              <input class="white grey-text autocomplete" placeholder="Edicion 1, EdiProgramacion, etc..." type="text"
-                id="autocomplete-input" name="edicion" >
-                 <div class="center-align">
-                            <button class="btn waves-effect waves-light rojo" type="submit">Buscar
-                                <i class="material-icons right">send</i>
-                            </button>
-                 </div>
-            </form>
-          </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <div>
+                    <label>Instituto</label>
+                    <select name="institutos" id="institutos" >
+
+                    </select>
+                </div>
+                <div>
+                    <label>Cursos</label>
+                    <select name="curso" id="curso">
+
+                    </select>
+                </div>
+            </div>
+
+            <!-- CARD CONSULTA EDICIONES xd-->
+            <div>
+                <div class="col s12 m6">
+                    <div class="card teal darken-4">
+                        <div class="card-content white-text">
+                            <span class="card-title">Ediciones</span>
+                        </div>
+                        <ul class="collection" name="ediciones" id="ediciones">
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#institutos').formSelect();
+        $('#categorias').formSelect();
+    });
+    $("#institutos").on("change", function() {
+        obtenerCursosPorInstituto(document.querySelector("#institutos").value);
+    });
+    $("#curso").on("change", function() {
+        collectionEdicionPorCursos(document.querySelector("#curso").value);
+    });
 
 
-  <%@include  file="footer.jsp" %>
+    window.onload = function(){
+    	getInstitutos();
+    }
+
+</script>
+<script src="resources/scripts/listas.js"> </script>
+<%@include  file="footer.jsp" %>

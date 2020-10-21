@@ -4,6 +4,7 @@
 
 		"use strict";
 
+
 		$('.search-toggle').click(function () {
 			if ($('.hiddensearch').css('display') == 'none')
 				$('.hiddensearch').slideDown();
@@ -181,6 +182,12 @@
 })(window, document);
 
 
+//https://datatables.net/extensions/select/examples/api/get.html
+
+function toggleEstudiantes() {
+	$("#containerEstudiantes").toggle();
+}
+
 
 $(document).ready(function () {
 	$('#datatable').dataTable({
@@ -200,6 +207,29 @@ $(document).ready(function () {
 				'</select></div>'
 		},
 		bAutoWidth: false,
+		columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+			targets:   0,
+			'render': function(data, type, row, meta){
+				data = '<input type="checkbox" class="select-checkbox">'
+				if(row[3] === 'Aceptado'){
+					data = '';
+				}
+				return data;
+			},
+			'createdCell':  function (td, cellData, rowData, row, col){
+				if(rowData[3] === 'Aceptado'){
+					console.log(rowData[3]);
+					this.api().cell(td).checkboxes.select(true);
+				}
+			}
+        } ],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]],
 
 		buttons: [
 			{
@@ -235,7 +265,7 @@ $(document).ready(function () {
 				text: '<span style="color:#4d4d4d; margin-right:15px">Copiar<span>',
 				extend: 'copyHtml5',
 
-			},
+			}
 		]
 	});
 });

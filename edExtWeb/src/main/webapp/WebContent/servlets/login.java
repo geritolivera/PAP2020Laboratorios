@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import clases.Usuario;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import datatypes.*;
 import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 
 
 @WebServlet("/login")
@@ -39,6 +41,7 @@ public class login extends HttpServlet {
         IcontroladorCurso iconc = fab.getIcontroladorCurso();
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+        DTResponse respuesta = new DTResponse();
 
         //request de nickname y password de usuario
         String nickname = request.getParameter("nickname");
@@ -68,11 +71,19 @@ public class login extends HttpServlet {
                         edis.add(edi.getNombre());
                     }
                     session.setAttribute("edicionesNombres", edis);
-
-
-                    RequestDispatcher rd;
-                    rd = request.getRequestDispatcher("/index.jsp");
-                    rd.forward(request, response);
+                    ArrayList<String> seguido = dtu.getSeguidos();
+                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    session.setAttribute("seguidos", seguido);
+                    session.setAttribute("seguidores", seguidor);
+                    respuesta.setCodigo(0);
+                    respuesta.setMensaje(nickname);
+                    ObjectMapper mapper = new ObjectMapper();
+                    String userStr = mapper.writeValueAsString(respuesta);
+                    response.setContentType("application/json");
+                    response.getWriter().append(userStr);
+//                    RequestDispatcher rd;
+//                    rd = request.getRequestDispatcher("/index.jsp");
+//                    rd.forward(request, response);
                 } else {
                     tipoUser = "docente";
                     session.setAttribute("nombreUser", nickname);
@@ -82,31 +93,50 @@ public class login extends HttpServlet {
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
                     session.setAttribute("fechaNac", dtu.getFechaNac());
+                    ArrayList<String> seguido = dtu.getSeguidos();
+                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    session.setAttribute("seguidos", seguido);
+                    session.setAttribute("seguidores", seguidor);
                     ArrayList<String> edis = new ArrayList<String>();
                     for (DTEdicionCurso edi : (((DTDocente) dtu).getEdiciones())) {
                         edis.add(edi.getNombre());
                     }
                     System.out.println("edis = " + edis);
                     session.setAttribute("ediciones", edis);
-                    //parse = "altaProgramaFormacion.jsp";
-                    RequestDispatcher rd;
-                    rd = request.getRequestDispatcher("/index.jsp");
-                    rd.forward(request, response);
-                }
-            }else{
-                RequestDispatcher rd;
-                rd = request.getRequestDispatcher("/iniciarSesion.jsp");
-                rd.forward(request, response);
-                System.out.println("nickname no es valido = " + nickname);
 
+                    respuesta.setCodigo(0);
+                    respuesta.setMensaje(nickname);
+                    ObjectMapper mapper = new ObjectMapper();
+                    String userStr = mapper.writeValueAsString(respuesta);
+                    response.setContentType("application/json");
+                    response.getWriter().append(userStr);
+                    //parse = "altaProgramaFormacion.jsp";
+//                    RequestDispatcher rd;
+//                    rd = request.getRequestDispatcher("/index.jsp");
+//                    rd.forward(request, response);
+                    }
+            }else{
+                respuesta.setCodigo(1);
+                respuesta.setMensaje("Constrase;a incorrecta para" + nickname);
+                ObjectMapper mapper = new ObjectMapper();
+                String userStr = mapper.writeValueAsString(respuesta);
+                response.setContentType("application/json");
+                response.getWriter().append(userStr);
             }
         }catch (UsuarioExcepcion e) {
-            RequestDispatcher rd;
-            rd = request.getRequestDispatcher("/iniciarSesion.jsp");
-            rd.forward(request, response);
-            System.out.println("nickname no es valido = " + nickname);
-            // el usuario no existe
-            //parse = "altaUsuario.jsp";
+            respuesta.setCodigo(1);
+            respuesta.setMensaje("El nickname ingresado " + nickname + "no existe.");
+            ObjectMapper mapper = new ObjectMapper();
+            String userStr = mapper.writeValueAsString(respuesta);
+            response.setContentType("application/json");
+            response.getWriter().append(userStr);
+
+//            RequestDispatcher rd;
+//            rd = request.getRequestDispatcher("/iniciarSesion.jsp");
+//            rd.forward(request, response);
+//            System.out.println("nickname no es valido = " + nickname);
+//            // el usuario no existe
+//            //parse = "altaUsuario.jsp";
             e.printStackTrace();
         }
     }

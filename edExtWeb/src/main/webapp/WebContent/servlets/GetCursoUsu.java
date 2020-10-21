@@ -23,15 +23,15 @@ public class GetCursoUsu extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
 
         try {
             String nick = request.getParameter("nickname");
             java.util.ArrayList<String> cursos = new ArrayList<>(icon.listarEdicionesAux(nick));
             System.out.println("cursos = " + cursos);
             System.out.println("inst = " + nick);
-            session.setAttribute("cursos", cursos);
-            session.setAttribute("edicionesConsulta", cursos);
+            request.setAttribute("cursos", cursos);
+            request.setAttribute("edicionesConsulta", cursos);
 
             String cursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + cursosStr);

@@ -13,28 +13,34 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/Categorias")
-public class Categorias extends HttpServlet {
+@WebServlet("/GetEdicionesCurso")
+public class GetEdicionesCurso extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         HttpSession session = request.getSession();
-        ArrayList<String> categorias = icon.listarCategorias();
 
         try {
-            session.setAttribute("categorias", categorias);
+            String curso =  request.getParameter("curso");
+            java.util.ArrayList<String> ediciones = new ArrayList<>();
+            ediciones = icon.listarEdicionesAux(curso);
+            request.setAttribute("ediciones : ", ediciones);
+
+            String recursosStr = mapper.writeValueAsString(ediciones);
+            System.out.println("	Los recursos que guardo son: " + recursosStr);
+
+            response.setContentType("application/json");
+            response.getWriter().append(recursosStr);
+
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            // la categoria no existe
             e.printStackTrace();
         }
-        System.out.println("categorias = " + categorias);
-        ObjectMapper mapper = new ObjectMapper();
-        String categoriaStr = mapper.writeValueAsString(categorias);
-        response.setContentType("application/json");
-        response.getWriter().append(categoriaStr);
     }
 }

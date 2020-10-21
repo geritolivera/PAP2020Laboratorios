@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import datatypes.*;
 import exepciones.EdicionExcepcion;
@@ -42,8 +44,9 @@ public class consultaEdicionCurso extends HttpServlet {
 		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		String edicion = request.getParameter("edicion");
+		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
 		
 		try {
@@ -53,11 +56,18 @@ public class consultaEdicionCurso extends HttpServlet {
 			String fechaF = format.format(dte.getFechaF());
 			String fechaPub = format.format(dte.getFechaPub());
 			ArrayList<String> docentes = dte.getDocentes();
-			session.setAttribute("nombre", dte.getNombre());
-			session.setAttribute("cupo", dte.getCupo());
-			session.setAttribute("fechaI", fechaI);
-			session.setAttribute("fechaF", fechaF);
-			session.setAttribute("fechaPub", fechaPub);
+			request.setAttribute("nombre", dte.getNombre());
+			request.setAttribute("cupo", dte.getCupo());
+			request.setAttribute("fechaI", fechaI);
+			request.setAttribute("fechaF", fechaF);
+			request.setAttribute("fechaPub", fechaPub);
+			String vigente = "No";
+			Boolean esVigente = false;
+			if (dte.getFechaF().after(today)) {
+				esVigente = true;
+				vigente= "Si";
+			}
+			request.setAttribute("vigencia", vigente);
 			//session.setAttribute("docentes", docentes);
 			//obtiene una lista con el nombre, apellido y nickname de los docentes
 			ArrayList<String> listDoc = new ArrayList<>();
@@ -71,7 +81,17 @@ public class consultaEdicionCurso extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			session.setAttribute("docentes", listDoc);
+			request.setAttribute("docentes", listDoc);
+			Boolean userLog = false;
+			if(session.getAttribute("nombreUser") != null) {
+				userLog = true;
+				String nickLog = (String) session.getAttribute("nombreUser");
+				if(session.getAttribute("tipoUser").equals("estudiante")) {
+					Boolean inscripto = iconu.inscriptoED(nickLog, edicion);
+					request.setAttribute("inscripto", inscripto);
+				}
+			}
+			request.setAttribute("userLog", userLog);
 		} catch (EdicionExcepcion e) {
 			//no existe edicion
 			e.printStackTrace();

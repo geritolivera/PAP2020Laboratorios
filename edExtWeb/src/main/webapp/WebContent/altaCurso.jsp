@@ -86,10 +86,16 @@
 
 <script>
     $(document).ready(function () {
-    $('#previas').formSelect();
-    $('#institutos').formSelect();
-    $('#categorias').formSelect();
+	    $('#previas').formSelect();
+	    $('#institutos').formSelect();
+	    $('#categorias').formSelect();
     });
+    
+    window.onload = function(){
+    	getPrevias();
+    	getInstitutos();
+    	getCategorias();
+    }
 
 </script>
 <script src="resources/scripts/listas.js"> </script>

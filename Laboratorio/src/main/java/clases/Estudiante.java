@@ -86,6 +86,7 @@ public class Estudiante extends Usuario{
 	public void agregarInscripcionPF(Date fecha, ProgramaFormacion programa) {
 		InscripcionPF ins = new InscripcionPF(fecha, this, programa);
 		this.inscripcionesPF.add(ins);
+
 	}
 	public List<InscripcionPF> getInscripcionesPF(){
 		return inscripcionesPF;

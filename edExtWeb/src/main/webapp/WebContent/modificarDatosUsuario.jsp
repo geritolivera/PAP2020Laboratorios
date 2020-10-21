@@ -23,31 +23,28 @@
     	<div class="container">
       	<!-- FORM-->
       	<div class="row">
-			<form class="col s12" action="ModificarDatos" method="post">
-			<input type="hidden" name="boton" id="boton" value="">
+			<form class="col s8">
           	<div class="card-panel">
             	<h4 class="header2"> <span style="color: #81054b">></span>Modificar Datos de Usuario</h4>
             	<div class="row">
               		<div class="input-field col s10">
                 		<i class="material-icons prefix">account_circle</i>
-          				<input disabled  id="nickname" type="text" class="validate">
-  				        <label for="nickname"><%=nickname %></label>
+          				<input disabled value="Nickname" id="nickname" type="text" class="validate">
               		</div>
             	</div>
             	<div class = "row">
             		<div class="input-field col s10">
-                		<i class="material-icons prefix">email</i>
-          				<input disabled id="correo" type="text" class="validate">
-          				<label for="nickname"><%=correo %></label>
+                			<i class="material-icons prefix">email</i>
+          					<input disabled value="Correo Electronico" id="email" type="text" class="validate">
               		</div>
             	</div>
             	<div class="row">
               		<div class="input-field col s10">
                 		<input id="nombre" type="text" class="validate">
-                		<label for="nombre"><%=nombre %></label>
+                		<label for="nombre">Nombre</label>
               		</div>
               		<div class="input-field col s1">
-                		<a type="button" class="btn-floating btn-small rojo oscuro-4" onclick="editar('nombre')"><i class="material-icons">mode_edit</i></a>
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons">mode_edit</i></a>
               		</div>
             	</div>
             	<div class="row">
@@ -55,22 +52,29 @@
             		<div>
             			<div class="input-field col s10">
                 			<input id="apellido" type="text" class="validate">
-                			<label for="apellido"><%=apellido %></label>
+                			<label for="apellido">Apellido</label>
               			</div>
               		</div>
               		<div class="input-field col s1">
-                		<a type="button" class="btn-floating btn-small rojo oscuro-4" onclick="editar('apellido')"><i class="material-icons ">mode_edit</i></a>
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons ">mode_edit</i></a>
               		</div>
               	</div>
             	<div class = "row">
             		<div class="input-field col s10">
                 		<i class="material-icons prefix">date_range</i>
-                		<input type="text" id="fechaNacimiento" class="datepicker">
-                		<label for="fechaNacimiento"><%=fechaNac %></label>
+                		<input type="text" name="fechaNacimiento" id="fechaNacimiento" class="datepicker">
+                		<label for="fechaNacimiento">Fecha de Nacimiento</label>
               		</div>
-              		    <div class="input-field col s1">
-                		<a type="button" class="btn-floating btn-small rojo oscuro-4" onclick="editar('fechaNac')"><i class="material-icons ">mode_edit</i></a>
+              		<div class="input-field col s1">
+                		<a class="btn-floating btn-small rojo oscuro-4"><i class="material-icons ">mode_edit</i></a>
               		</div>
+            	</div>
+            	<div class = "row">
+            		<div class="center-align">
+             			<button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="">Modificar
+                			<i class="material-icons right">send</i>
+             			</button>
+            		</div>
             	</div>
           	</div>
         	</form>
@@ -79,13 +83,6 @@
   	</div>
  
  <%@include  file="footer.jsp" %>
- <script>
- 	function editar(atributo) {
-		document.getElementById("boton").value = atributo;
-		document.forms[0].submit();
-	}
- 
- </script>
  <script>
  		document.addEventListener('DOMContentLoaded', function () {
         	var elems = document.querySelectorAll('.datepicker');

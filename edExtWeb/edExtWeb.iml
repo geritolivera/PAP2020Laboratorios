@@ -76,7 +76,7 @@
     <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0" level="project" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:4.0.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: javax.servlet:jstl:1.2" level="project" />
-    <orderEntry type="library" exported="" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="Maven: com.codebind:Laboratorio:0.0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.6" level="project" />
@@ -109,5 +109,7 @@
     <orderEntry type="library" name="buttons.html5" level="application" />
     <orderEntry type="library" name="buttons.print" level="application" />
     <orderEntry type="library" name="dataTables.buttons" level="application" />
+    <orderEntry type="library" name="select.dataTables" level="application" />
+    <orderEntry type="library" name="sweetalert2" level="application" />
   </component>
 </module>

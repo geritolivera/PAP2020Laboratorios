@@ -33,7 +33,7 @@ public class GetCursoInst extends HttpServlet {
             cursos = icon.listarCursosAux(inst);
             System.out.println("cursos = " + cursos);
             System.out.println("inst = " + inst);
-            session.setAttribute("cursos", cursos);
+            request.setAttribute("cursos", cursos);
 
             String recursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + recursosStr);

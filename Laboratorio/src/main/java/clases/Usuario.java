@@ -1,8 +1,11 @@
 package clases;
 
+import manejadores.manejadorUsuario;
+
 import java.util.*;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -20,13 +23,9 @@ public abstract class Usuario {
 	private String password;
 	
 	//lista de usuarios a los que sigue
-	@ManyToMany
+	@OneToMany
 	private List<Usuario> sigue = new ArrayList<>();
-	
-	//lista de seguidores
-	@ManyToMany
-	private List<Usuario> seguidores = new ArrayList<>();
-	
+
 	public Usuario() {
 		super();
 	}
@@ -80,22 +79,29 @@ public abstract class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	} 
+
 	public void agregarSigue(Usuario usuario) {
-		sigue.add(usuario);
+		this.sigue.add(usuario);
 	}
 	public void removerSigue(Usuario usuario) {
-		sigue.remove(usuario);
+		this.sigue.remove(usuario);
 	}
+
 	public List<Usuario> getSigue(){
 		return this.sigue;
 	}	
-	public void agregarSeguidor(Usuario usuario) {
-		seguidores.add(usuario);
-	}
-	public void removerSeguidor(Usuario usuario) {
-		seguidores.remove(usuario);
-	}
+
 	public List<Usuario> getSeguidores(){
-		return this.seguidores;
+		manejadorUsuario mu = manejadorUsuario.getInstancia();
+		List<Usuario> seguidoresRet = new ArrayList<>();
+		List<Usuario> usuarios = mu.getUsuarios();
+		for (Usuario u:usuarios) {
+			for (Usuario seguidos:u.getSigue()) {
+				if(seguidos.getNick().equals(this.nick)){
+					seguidoresRet.add(u);
+				}
+			}
+		}
+		return seguidoresRet;
 	}
 }

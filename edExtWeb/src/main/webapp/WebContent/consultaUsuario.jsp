@@ -12,14 +12,14 @@
         <br><br>
         <div class="container">
             <div class="row">
-	            <!-- CARD CONSULTA USUARIO-->
+	            <!-- CARD CONSULTA PROGRAMA-->
                 <div>
 					<div class="col s12">
 	                    <div class="card teal darken-4">
 	                        <div class="card-content white-text">
 	                            <span class="card-title">Usuarios</span>
 	                        </div>
-	                        <ul class="collection" name="listaUsuarios" id="listaUsuarios" onchange="listaEdicionesUsuario(listaUsuarios.value);obtenerDatosUsuario(listaUsuarios.value)">
+	                        <ul class="collection" name="usuario" id="usuario">
 	                        </ul>
 	                    </div>
 	                </div>

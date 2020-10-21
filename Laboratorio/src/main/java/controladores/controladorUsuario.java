@@ -9,6 +9,7 @@ import manejadores.*;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -72,38 +73,35 @@ public class controladorUsuario implements IcontroladorUsuario {
 	@Override
 	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		DTDocente dtd = new DTDocente();
-		DTEstudiante dte = new DTEstudiante();
+		DTUsuario dtu = new DTUsuario();
 		if (mUsu.existeUsuarioNick(nickname)) {
-			Usuario u = mUsu.buscarUsuario(nickname);
+			Usuario u = mUsu.buscarUsuarioNickname(nickname);
+			dtu = new DTUsuario(u);
 			List<EdicionCurso> edicionesDoc = new ArrayList<EdicionCurso>();
-			List<InscripcionED> inscripcionesEst = new ArrayList<InscripcionED>();
-			List<ProgramaFormacion> programasEst = new ArrayList<ProgramaFormacion>();
+			List<InscripcionED> inscripcionesEDEst = new ArrayList<>();
+			List<InscripcionPF> inscripcionesPFEst = new ArrayList<>();
 			//si el usuario es docente
 			if (u instanceof Docente) {
-				dtd.setUserDocente(u);
-				dtd.setPassword(u.getPassword());
 				edicionesDoc = ((Docente) u).getEdiciones();
+				DTDocente dtd = new DTDocente(dtu);
 				for (EdicionCurso e : edicionesDoc) {
 					DTEdicionCurso dted = new DTEdicionCurso(e);
 					dtd.agregarEdicion(dted);
-
 				}
 				return dtd;
 			}
 			//si el usuario es estudiante
 			else {
-				dte.setUserEstudiante(u);
-				dte.setPassword(u.getPassword());
+				DTEstudiante dte = new DTEstudiante(dtu);
 				//tiene que sacar el DTEdicion desde las inscripciones
-				inscripcionesEst = ((Estudiante) u).getInscripcionesED();
-				for (InscripcionED i : inscripcionesEst) {
+				inscripcionesEDEst = ((Estudiante) u).getInscripcionesED();
+				for (InscripcionED i : inscripcionesEDEst) {
 					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
 					dte.agregarEdicion(dtee);
 				}
-				programasEst = ((Estudiante) u).getProgramas();
-				for (ProgramaFormacion p : programasEst) {
-					DTProgramaFormacion dtpe = new DTProgramaFormacion(p);
+				inscripcionesPFEst = ((Estudiante) u).getInscripcionesPF();
+				for (InscripcionPF i: inscripcionesPFEst) {
+					DTProgramaFormacion dtpe = new DTProgramaFormacion(i.getPrograma());
 					dte.agregarPrograma(dtpe);
 				}
 				return dte;
@@ -235,4 +233,121 @@ public class controladorUsuario implements IcontroladorUsuario {
 		} else
 			throw new UsuarioExcepcion("El usuario " + nickname + " no existe en el sistema.");
 	}
+	
+	/*-------------------------------------------------------------------------------------------------------------*/
+	//Seguir y dejar de seguir users
+	@Override
+	public void dejarDeSeguir(String nickname, String nicknameSeguido) {
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguido)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			Usuario dejarSeguir = mU.buscarUsuarioNickname(nicknameSeguido);
+			currentUser.removerSigue(dejarSeguir);
+			em.getTransaction().begin();
+			em.persist(currentUser);
+			em.getTransaction().commit();
+		}
+	}
+	
+	@Override
+    public void comenzarSeguir(String nickname, String nicknameSeguir) {
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSeguir)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			Usuario userSeguir = mU.buscarUsuarioNickname(nicknameSeguir);
+			currentUser.agregarSigue(userSeguir);
+			em.getTransaction().begin();
+			em.persist(currentUser);
+			em.getTransaction().commit();
+		}
+    }
+
+    public ArrayList<String> listarSeguidores(String nickname){
+    	ArrayList<String> seguidores = new ArrayList<String>();
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSeguidores = currentUser.getSeguidores();
+			for(Usuario u : usuariosSeguidores) {
+				DTUsuario dtU = new DTUsuario(u);
+				seguidores.add(dtU.getNick());
+			}
+		}
+		return seguidores;
+    }
+	
+    public ArrayList<String> listarSeguidos(String nickname){
+    	ArrayList<String> sigue = new ArrayList<String>();
+		manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSigue = currentUser.getSigue();
+			for(Usuario u : usuariosSigue) {
+				DTUsuario dtU = new DTUsuario(u);
+				sigue.add(dtU.getNick());
+			}
+		}
+		return sigue;
+    }
+    
+    public boolean validarSigue(String nickname, String nicknameSigue) {
+    	manejadorUsuario mU = manejadorUsuario.getInstancia();
+
+		System.out.println("nick log= " + nickname + " sigue a :"+ nicknameSigue);
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSigue)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSigue = currentUser.getSigue();
+			System.out.println( nickname + " usuariosSigue  = " + Arrays.toString(usuariosSigue.toArray()));
+			for(Usuario u : usuariosSigue) {
+				if(u.getNick().equals(nicknameSigue)) {
+					return true;
+				}
+			}
+		}
+		System.out.println("dice que uno no existe");
+		return false;
+    }
+    
+    public boolean validarSeguidor(String nickname, String nicknameSguidor) {
+    	manejadorUsuario mU = manejadorUsuario.getInstancia();
+		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSguidor)) {
+			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
+			List<Usuario> usuariosSeguidores = currentUser.getSeguidores();
+			for(Usuario u : usuariosSeguidores) {
+				if(nicknameSguidor.contains(u.getNick())) {
+					return true;
+				}
+			}
+		}
+		return false;
+    }
+    
+    public boolean inscriptoPF(String nickname, String nomPrograma) {
+    	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+    	Usuario user = mUsu.buscarUsuario(nickname);
+    	List<InscripcionPF> inscripciones = ((Estudiante)user).getInscripcionesPF();
+    	Boolean inscripto = false;
+    	for(InscripcionPF i: inscripciones) {
+    		if(i.getNombrePrograma().equals(nomPrograma))
+    			inscripto = true;
+    	}
+    	return inscripto;
+    }
+    
+    public boolean inscriptoED(String nickname, String nomEdicion) {
+    	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+    	Usuario user = mUsu.buscarUsuario(nickname);
+    	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
+    	Boolean inscripto = false;
+    	for(InscripcionED i: inscripciones) {
+    		if(i.getNombreEdicion().equals(nomEdicion))
+    			inscripto = true;
+    	}
+    	return inscripto;
+    }
+    
 }
