@@ -42,10 +42,11 @@ public class InscripcionPF {
 	public InscripcionPF() {
 		super();
 	}
-	public InscripcionPF(Date fecha, Estudiante estudiante, ProgramaFormacion programa) {
+	public InscripcionPF(Date fecha, Estudiante estudiante, ProgramaFormacion programa, InscripcionEnum estado) {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.programa = programa;
+		this.estado = estado;
 	}
 	
 	public Date getFecha() {
@@ -66,13 +67,16 @@ public class InscripcionPF {
 		return programa;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado(InscripcionEnum estado) {
+		this.estado = estado;
+	}
+	public void setEstadoString(String estado) {
 		switch (estado){
-			case "En_espera":
-				this.estado = InscripcionEnum.EN_ESPERA;
-			case "Aceptado":
+			case "PENDIENTE":
+				this.estado = InscripcionEnum.PENDIENTE;
+			case "ACEPTADO":
 				this.estado = InscripcionEnum.ACEPTADO;
-			case "Rechazado":
+			case "RECHAZADO":
 				this.estado = InscripcionEnum.RECHAZADO;
 		}
 	}

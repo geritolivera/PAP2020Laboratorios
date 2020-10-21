@@ -102,7 +102,7 @@ public class EdicionCurso {
 	}
 
 	public void agregarInscripcion(Date fecha, Estudiante est) {
-		InscripcionED ins = new InscripcionED(fecha, est, this);
+		InscripcionED ins = new InscripcionED(fecha, est, this, InscripcionEnum.PENDIENTE);
 		inscripciones.add(ins);
 	}
 	public List<InscripcionED> getInscripciones(){

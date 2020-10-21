@@ -96,7 +96,7 @@ public class ProgramaFormacion {
 	}
 	
 	public void agregarInscripcion(Date fecha, Estudiante est) {
-		InscripcionPF ins = new InscripcionPF(fecha, est, this);
+		InscripcionPF ins = new InscripcionPF(fecha, est, this, InscripcionEnum.PENDIENTE);
 		this.inscripciones.add(ins);
 	}
 	public List<InscripcionPF> getInscripciones(){

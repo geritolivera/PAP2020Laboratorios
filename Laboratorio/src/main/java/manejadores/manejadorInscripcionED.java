@@ -4,7 +4,6 @@ import clases.InscripcionED;
 import conexion.Conexion;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import java.util.List;
 
@@ -20,13 +19,13 @@ public class manejadorInscripcionED {
 		return instancia;
 	}
 
-	public List getInscripciones() {
+	public List<InscripcionED> getInscripciones() {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		return em.createQuery("select i from InscripcionED i", InscripcionED.class).getResultList();
 	}
 	
-	public List getInscripcionesUsuario(String nickUsuario) {
+	public List<InscripcionED> getInscripcionesUsuario(String nickUsuario) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		return em.createQuery("select i from InscripcionED i where i.estudiante_nick LIKE", InscripcionED.class)
@@ -34,7 +33,7 @@ public class manejadorInscripcionED {
 				.getResultList();
 	}
 	
-	public List getInscripcionesEstado(String nickUsuario, String estado) {
+	public List<InscripcionED> getInscripcionesEstado(String nickUsuario, String estado) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		return em.createQuery("select i from InscripcionED i where i.estudiante_nick LIKE :userName and i.estado LIKE :estadoIns", InscripcionED.class)
@@ -43,22 +42,13 @@ public class manejadorInscripcionED {
 				.getResultList();
 	}
 	
-	public List buscarInscripcion(String nickUsuario, String nomEdicion) {
+	public List<InscripcionED> buscarInscripcion(String nickUsuario, String nomEdicion) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
 		return em.createQuery("select i from InscripcionED i where i.estudiante_nick LIKE :userName and i.edicion_nombre LIKE :nomEdicion", InscripcionED.class)
 				.setParameter("userName", nickUsuario)
 				.setParameter("nomEdicion", nomEdicion)
 				.getResultList();
-	}
-	
-	public Boolean existeInscripcion(String nickUsuario, String nomEdicion) {
-		Conexion con = Conexion.getInstancia();
-		EntityManager em = con.getEntityManager();
-		Query query = em.createNativeQuery("select Count(*) from InscripcionED i where i.estudiante_nick LIKE :userName and i.edicion_nombre LIKE :nomEdicion", InscripcionED.class)
-				.setParameter("userName", nickUsuario)
-				.setParameter("nomEdicion", nomEdicion);
-		return ((Number) query.getSingleResult()).intValue() > 0;
 	}
 }
 

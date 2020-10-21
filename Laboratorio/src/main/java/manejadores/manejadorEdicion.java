@@ -45,14 +45,4 @@ public class manejadorEdicion {
 		EntityManager em = con.getEntityManager();
 		return em.createQuery("SELECT e FROM EdicionCurso e", EdicionCurso.class).getResultList();
 	}
-
-	public void agregarInscripcionED(Date fecha, Estudiante e, EdicionCurso eC){
-		Conexion con = Conexion.getInstancia();
-		EntityManager em = con.getEntityManager();
-		InscripcionED ied= new InscripcionED(fecha, e, eC);
-		em.getTransaction().begin();
-		em.persist(ied);
-		em.getTransaction().commit();
-
-	}
 }

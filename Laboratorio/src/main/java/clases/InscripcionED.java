@@ -26,10 +26,11 @@ public class InscripcionED {
 	public InscripcionED() {
 		super();
 	}
-	public InscripcionED(Date fecha, Estudiante estudiante, EdicionCurso edicion) {
+	public InscripcionED(Date fecha, Estudiante estudiante, EdicionCurso edicion, InscripcionEnum estado) {
 		this.fecha = fecha;
 		this.estudiante = estudiante;
 		this.edicion = edicion;
+		this.estado = estado;
 	}
 	
 	public Estudiante getEstudiante() {
@@ -57,13 +58,16 @@ public class InscripcionED {
 		return edicion;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado(InscripcionEnum estado) {
+		this.estado = estado;
+	}
+	public void setEstadoString(String estado) {
 		switch (estado){
-			case "En_espera":
-				this.estado = InscripcionEnum.EN_ESPERA;
-			case "Aceptado":
+			case "PENDIENTE":
+				this.estado = InscripcionEnum.PENDIENTE;
+			case "ACEPTADO":
 				this.estado = InscripcionEnum.ACEPTADO;
-			case "Rechazado":
+			case "RECHAZADO":
 				this.estado = InscripcionEnum.RECHAZADO;
 		}
 	}
