@@ -232,18 +232,12 @@ public class controladorCurso implements IcontroladorCurso{
 	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws Exception {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
+		manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		Boolean yaInscripto = false;
 		if(mUsu.existeUsuarioNick(nickUsuario)) {
 			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);
-			List<InscripcionED> listIns = ((Estudiante) u).getInscripcionesED();
-			for (InscripcionED s : listIns) {
-				if (s.getEdicion().getNombre().equals(nomEdicion)) {
-					yaInscripto = true;
-				}
-			}
-			if (!yaInscripto) {
+			if(!mIns.existeInscripcion(nickUsuario, nomEdicion)){
 				if (mEdi.existeEdicion(nomEdicion)) {
 					if (u instanceof Estudiante) {
 						EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
