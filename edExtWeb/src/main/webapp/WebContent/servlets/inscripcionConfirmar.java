@@ -36,13 +36,15 @@ public class inscripcionConfirmar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
-		String indReq = request.getParameter("index");
+		String edicion = request.getParameter("edicion");
+		String usuario = request.getParameter("usuario");
 		String action = request.getParameter("action");
 		
-		int index = Integer.parseInt(indReq);
-		System.out.println("index: " + index);
+		//int index = Integer.parseInt(indReq);
+		System.out.println("edicion: " + edicion);
+		System.out.println("usuario: " + usuario);
 		System.out.println("action: " + action);
 		
-		iconu.cambiarInscripcion(action, index);
+		iconu.cambiarInscripcion(action, edicion, usuario);
 	}
 }

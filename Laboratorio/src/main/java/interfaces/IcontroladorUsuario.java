@@ -76,9 +76,9 @@ public interface IcontroladorUsuario {
     public boolean validarSeguidor(String nickname, String nicknameSguidor);
     
     public boolean inscriptoPF(String nickname, String nomPrograma);
-    public boolean inscriptoED(String nickname, String nomEdicion);
+    public String inscriptoED(String nickname, String nomEdicion);
     
     public List<DTInscripcionED> listarInscripcionesED();
-    public void cambiarInscripcion(String cambio, int index);
+    public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario);
     
 }

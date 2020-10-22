@@ -380,11 +380,13 @@ function dejarSeguirUsuario(nickname) {
     });
 }
 
-function confirmarInscripcion(index, action) {
+function confirmarInscripcion(edicion, usuario, action) {
     debugger;
-    console.log("el index= " + index);
+    console.log("la edicion es= " + edicion);
+    console.log("el usuario es= " + usuario);
     console.log("la action es= " + action);
-    const fetchUrl = 'inscripcionConfirmar?index=' + index +
+    const fetchUrl = 'inscripcionConfirmar?edicion=' + edicion +
+        '&usuario=' + usuario +
         '&action=' + action;
     fetch(fetchUrl, {
         method: 'POST'

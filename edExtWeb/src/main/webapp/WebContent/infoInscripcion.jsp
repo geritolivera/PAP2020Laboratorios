@@ -27,7 +27,7 @@
 	                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                            <tr>
-	                            	<th></th>
+	                            
 	                            	<th></th>
 	                                <th>Edicion</th>
 	                                <th>Estudiante</th>
@@ -53,20 +53,9 @@
   		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
-
 		<script src="resources/scripts/alta.js"> </script>		
     	<script src="resources/scripts/listas.js"> </script>
-        <script src="resources/scripts/scriptTable2.js"></script>
     <%@include  file="footer.jsp" %>
     
 <script>

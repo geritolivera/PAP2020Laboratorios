@@ -461,15 +461,30 @@ function tableInscripciones(){
         if (dti.length > 0){
             dti.forEach((item, index) => {
                 contador++;
-                inscripcionesHtml.innerHTML += `<tr>
-                                                    <td><button type="button" onclick="confirmarInscripcion(`+ index +`, 'aceptar')">Aceptar</button></td>
-                                                    <td><button type="button" onclick="confirmarInscripcion(`+ index +`, 'rechazar')">Rechazar</button></td>
-                                                    <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
-                                                    <td> ${item.usuario} </td>
-                                                    <td> ${item.estado} </td>
-                                                    <td> ${item.fecha}</td>
-                                                    <th>` + index + `</th>
-                                            </tr>`;
+                console.log("estado: ", item.estado);
+                if(item.estado == "PENDIENTE"){
+
+                    inscripcionesHtml.innerHTML += `<tr>
+                                                        <td><button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'aceptar')">Aceptar</button>
+                                                        <button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'rechazar')">Rechazar</button></td>
+                                                        <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
+                                                        <td> ${item.usuario} </td>
+                                                        <td> ${item.estado} </td>
+                                                        <td> ${item.fecha}</td>
+                                                        <th>` + index + `</th>
+                                                </tr>`;
+                }
+                else{
+                    inscripcionesHtml.innerHTML += `<tr>
+                                                        <td><button disabled>Aceptar</button>
+                                                        <button disabled>Rechazar</button></td>
+                                                        <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
+                                                        <td> ${item.usuario} </td>
+                                                        <td> ${item.estado} </td>
+                                                        <td> ${item.fecha}</td>
+                                                        <th>` + index + `</th>
+                                                    </tr>`;
+                }
             });
         }else{
             console.log('no hay inscripciones');

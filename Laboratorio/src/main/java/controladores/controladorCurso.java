@@ -239,7 +239,7 @@ public class controladorCurso implements IcontroladorCurso{
 			Usuario u = mUsu.buscarUsuarioNickname(nickUsuario);
 			List<InscripcionED> listIns = ((Estudiante)u).getInscripcionesED();
 			for(InscripcionED s : listIns) {
-				if(s.getEdicion().getNombre().equals(nomEdicion))
+				if(s.getEdicion().getNombre().equals(nomEdicion) && s.getEstado() != InscripcionEnum.RECHAZADO)
 					yaInscripto = true;
 			}
 			if(!yaInscripto){
