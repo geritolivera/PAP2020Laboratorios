@@ -493,18 +493,16 @@ function tableInscripcionesAjax(){
         method: 'GET',
     }).then(res => res.json()
     ).then(dti => {
-        //JSON.stringify(dti);
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         data = [];
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                //dataSet = [["edicion1", "usuario1", "estado", "fecha1", 0.5], ["edicion2", "usuario2", "estado", "fecha2", 0.4]];
-                data = JSON.stringify(item.edicion, item.usuario, item.estado, item.fecha, 0.5);
+                data[index] = [item.edicion, item.usuario, item.estado, item.fecha, 0.5];
             })
-            /*$(document).ready(function() {
-                $('#tablaInscripciones').DataTable( {
+            $(document).ready(function() {
+                var tabla = $('#tablaInscripciones').DataTable( {
                     data: data,
                     columns: [
                         { title: "Edicion" },
@@ -512,10 +510,35 @@ function tableInscripcionesAjax(){
                         { title: "Estado" },
                         { title: "Fecha" },
                         { title: "Prioridad" },
-                    ]
-                });
-            });*/
-            console.log(JSON.stringify([item.edicion, item.usuario, item.estado, item.fecha, 0.5]));
+                    ],
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            checkboxes: {
+                                selectRow: true
+                            }
+                        }
+                    ],
+                    select:{
+                        style: 'multi'
+                    },
+                    order: [[1, 'asc']]
+                })
+                $("#tableForm").on('submit', function(e){
+                    var form = this
+                    var rowsel = tabla.column(0).checkboxes.selected();
+                    $.each(rowsel, function(index, rowId){
+                        $(form).append(
+                            $('<input>').attr('type','hidden').attr('name','id[]').val(rowId)
+                        )
+                    })
+                    $("#view-rows").text(rowsel.join(","))
+                    $("#view-form").text($(form).serialize())
+                    $('input[name="id\[\]"]', form).remove()
+                    e.preventDefault()
+                })
+            });
+            console.log(data);
         }else{
             console.log('no hay inscripciones');
         }

@@ -36,8 +36,9 @@ public class inscripcionConfirmar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
 		//IcontroladorCurso icon = fab.getIcontroladorCurso();
-		String[] inscripciones = request.getParameterValues("tableInscripciones");
+		/*String[] inscripciones = request.getParameterValues("tablaInscripciones");
 		for(int i = 0; i<inscripciones.length; i++)
-			System.out.println(inscripciones[i]);
+			System.out.println(inscripciones[i]);*/
+		System.out.println("inscripciones: " + request.getParameter("tablaInscripciones"));
 	}
 }

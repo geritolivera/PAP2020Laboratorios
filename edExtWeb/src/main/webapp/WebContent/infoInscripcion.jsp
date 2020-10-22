@@ -13,18 +13,19 @@
         <div class="container">
             <div class="row" id="containerEstudiantes">
             <div id="admin" class="col s12">
-            <form name="tableForm" class="col s12 signup-form" action="inscripcionConfirmar" method="POST">
+            <form name="tableForm" class="col s12 signup-form"method="POST">
+            <p><b>Rows data</b></p>
+            <pre id="view-rows"></pre>
+            <p><b>Form data</b></p>
+            <pre id="view-form"></pre>
                 <div class="card material-table">
                     <div class="table-header">
                         <span class="table-title">Inscripciones</span>
-                        <div class="actions">
-                            <a href="#" class="search-toggle btn-flat nopadding"><i
-                                    class="material-icons prefix">search</i></a>
-                        </div>
                     </div>
-                    <table id="tablaInscripciones">
+                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
+                            	<th></th>
                                 <th>Edicion</th>
                                 <th>Estudiante</th>
                                 <th>Estado</th>
@@ -62,10 +63,17 @@
         <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap/min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.bootstrap.min.js"></script>
+        
 		<script src="resources/scripts/alta.js"> </script>		
     	<script src="resources/scripts/listas.js"> </script>
         <script src="resources/scripts/scriptTable2.js"></script>
     <%@include  file="footer.jsp" %>
+    
 <script>
 		
 	window.onload = function(){
