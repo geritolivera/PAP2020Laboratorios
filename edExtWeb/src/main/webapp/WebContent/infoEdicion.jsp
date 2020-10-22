@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <% if(tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
+                <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
                <div class="row center">
 	            <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
             	</div>

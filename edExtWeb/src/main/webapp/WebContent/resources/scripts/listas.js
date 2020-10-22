@@ -457,18 +457,20 @@ function tableInscripciones(){
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
+        var contador = 0;
         if (dti.length > 0){
             dti.forEach((item, index) => {
+                contador++;
                 inscripcionesHtml.innerHTML += `<tr>
                                                 <td>
                                                     <div class="switch">
-                                                    <label>
-                                                        No
-                                                        <input type="checkbox">
-                                                        <span class="lever"></span>
-                                                        Si
-                                                    </label>
-                                              </div>
+                                                        <label>
+                                                            No
+                                                            <input type="checkbox" id="contador" name="contador">
+                                                            <span class="lever"></span>
+                                                            Si
+                                                        </label>
+                                                    </div>
                                                 </td>
                                                 <td> ${item.edicion} </td>
                                                 <td> ${item.usuario} </td>
@@ -477,6 +479,43 @@ function tableInscripciones(){
                                                 <th>0.5</th>
                                             </tr>`;
             });
+        }else{
+            console.log('no hay inscripciones');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+}
+
+function tableInscripcionesAjax(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetInscripcionesED`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(dti => {
+        //JSON.stringify(dti);
+        var inscripcionesHtml = document.getElementById("detallesIns");
+        console.log("inscripciones:", dti);
+        data = [];
+        inscripcionesHtml.innerHTML = '';
+        if (dti.length > 0){
+            dti.forEach((item, index) => {
+                //dataSet = [["edicion1", "usuario1", "estado", "fecha1", 0.5], ["edicion2", "usuario2", "estado", "fecha2", 0.4]];
+                data = JSON.stringify(item.edicion, item.usuario, item.estado, item.fecha, 0.5);
+            })
+            /*$(document).ready(function() {
+                $('#tablaInscripciones').DataTable( {
+                    data: data,
+                    columns: [
+                        { title: "Edicion" },
+                        { title: "Usuario" },
+                        { title: "Estado" },
+                        { title: "Fecha" },
+                        { title: "Prioridad" },
+                    ]
+                });
+            });*/
+            console.log(JSON.stringify([item.edicion, item.usuario, item.estado, item.fecha, 0.5]));
         }else{
             console.log('no hay inscripciones');
         }

@@ -13,6 +13,7 @@
         <div class="container">
             <div class="row" id="containerEstudiantes">
             <div id="admin" class="col s12">
+            <form name="tableForm" class="col s12 signup-form" action="inscripcionConfirmar" method="POST">
                 <div class="card material-table">
                     <div class="table-header">
                         <span class="table-title">Inscripciones</span>
@@ -21,10 +22,9 @@
                                     class="material-icons prefix">search</i></a>
                         </div>
                     </div>
-                    <table>
+                    <table id="tablaInscripciones">
                         <thead>
                             <tr>
-                                <th>Aprobar inscripcion</th>
                                 <th>Edicion</th>
                                 <th>Estudiante</th>
                                 <th>Estado</th>
@@ -41,6 +41,8 @@
                         
                     </table>
                 </div>
+                	<button type="submit" name="submit" class="btn-large waves-effect waves-light cyan darken-1">Confirmar</button>
+            </form>
             </div>
         </div>
             
@@ -65,8 +67,8 @@
         <script src="resources/scripts/scriptTable2.js"></script>
     <%@include  file="footer.jsp" %>
 <script>
-	
+		
 	window.onload = function(){
-		tableInscripciones();
+		tableInscripcionesAjax();
 	}
 </script>
