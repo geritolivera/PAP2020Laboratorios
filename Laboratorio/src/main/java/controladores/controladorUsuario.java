@@ -117,7 +117,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 	//usa listarUsuarios
 	//usa verInfoUsuario
 	@Override
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) {
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci)throws UsuarioExcepcion {
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		if (mu.existeUsuarioNick(nickname)) {
 			Conexion con = Conexion.getInstancia();

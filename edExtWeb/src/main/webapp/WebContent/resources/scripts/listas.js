@@ -457,10 +457,10 @@ function tableInscripciones(){
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
-        var contador = 0;
+        //var contador = 0;
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                contador++;
+               // contador++;
                 inscripcionesHtml.innerHTML += `<tr>
                                                 <td>
                                                     <div class="switch">

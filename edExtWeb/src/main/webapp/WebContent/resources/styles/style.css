@@ -11,6 +11,7 @@ form:not(#formBusqueda){
   box-sizing: border-box;
   position: relative;
 }
+
 #formBusqueda{
 	margin-top:0px;
 }
