@@ -13,37 +13,37 @@
         <div class="container">
             <div class="row" id="containerEstudiantes">
             <div id="admin" class="col s12">
-            <form name="tableForm" class="col s12 signup-form"method="POST">
-            <p><b>Rows data</b></p>
-            <pre id="view-rows"></pre>
-            <p><b>Form data</b></p>
-            <pre id="view-form"></pre>
                 <div class="card material-table">
                     <div class="table-header">
                         <span class="table-title">Inscripciones</span>
                     </div>
-                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
-                        <thead>
-                            <tr>
-                            	<th></th>
-                                <th>Edicion</th>
-                                <th>Estudiante</th>
-                                <th>Estado</th>
-                                <th>Fecha de inscripcion</th>
-                                <th>Prioridad</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody id="detallesIns">
-                        	<tr>
-	                        		
-                            </tr>
-                        </tbody>
-                        
-                    </table>
+                    <form>
+                    	<input type="hidden" name="id" id="id"/>
+                    	<input type="hidden" name="edicion" id="edicion"/>
+                    	<input type="hidden" name="usuario" id="usuario"/>
+                    	<input type="hidden" name="estado" id="estado"/>                   
+                    	<input type="hidden" name="fecha" id="fecha"/>
+                    	<input type="hidden" name="prioridad" id="prioridad"/>
+	                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
+	                        <thead>
+	                            <tr>
+	                            	<th></th>
+	                            	<th></th>
+	                                <th>Edicion</th>
+	                                <th>Estudiante</th>
+	                                <th>Estado</th>
+	                                <th>Fecha de inscripcion</th>
+	                                <th>Prioridad</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody id="detallesIns">
+	                        
+	                        </tbody>
+	                        
+	                    </table>
+                    </form>
                 </div>
                 	<button type="submit" name="submit" class="btn-large waves-effect waves-light cyan darken-1">Confirmar</button>
-            </form>
             </div>
         </div>
             
@@ -64,19 +64,15 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap/min.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bootstrap.min.js"></script>
-        
 		<script src="resources/scripts/alta.js"> </script>		
     	<script src="resources/scripts/listas.js"> </script>
         <script src="resources/scripts/scriptTable2.js"></script>
     <%@include  file="footer.jsp" %>
     
 <script>
-		
-	window.onload = function(){
-		tableInscripcionesAjax();
-	}
+
+	$(document).ready(function () {
+		tableInscripciones();
+	 });
+
 </script>

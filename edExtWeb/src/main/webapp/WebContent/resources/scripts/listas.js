@@ -462,21 +462,13 @@ function tableInscripciones(){
             dti.forEach((item, index) => {
                 contador++;
                 inscripcionesHtml.innerHTML += `<tr>
-                                                <td>
-                                                    <div class="switch">
-                                                        <label>
-                                                            No
-                                                            <input type="checkbox" id="contador" name="contador">
-                                                            <span class="lever"></span>
-                                                            Si
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td> ${item.edicion} </td>
-                                                <td> ${item.usuario} </td>
-                                                <td> ${item.estado} </td>
-                                                <td> ${item.fecha}</td>
-                                                <th>0.5</th>
+                                                    <td><button type="button" onclick="confirmarInscripcion(`+ index +`, 'aceptar')">Aceptar</button></td>
+                                                    <td><button type="button" onclick="confirmarInscripcion(`+ index +`, 'rechazar')">Rechazar</button></td>
+                                                    <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
+                                                    <td> ${item.usuario} </td>
+                                                    <td> ${item.estado} </td>
+                                                    <td> ${item.fecha}</td>
+                                                    <th>` + index + `</th>
                                             </tr>`;
             });
         }else{
@@ -499,30 +491,71 @@ function tableInscripcionesAjax(){
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                data[index] = [item.edicion, item.usuario, item.estado, item.fecha, 0.5];
+                data[index] = [index, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
             })
             $(document).ready(function() {
                 var tabla = $('#tablaInscripciones').DataTable( {
                     data: data,
                     columns: [
+                        { title: ""},
+                        { title: "Edicion" },
+                        { title: "Usuario" },
+                        { title: "Estado" },
+                        { title: "Fecha" },
+                        { title: "Prioridad" }
+                    ]
+                });
+            });
+            console.log(data);
+        }else{
+            console.log('no hay inscripciones');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+}
+
+function tableInscripcionesCheckbox(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetInscripcionesED`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(dti => {
+        debugger;
+        var inscripcionesHtml = document.getElementById("detallesIns");
+        console.log("inscripciones:", dti);
+        data = [];
+        var cont = 1;
+        inscripcionesHtml.innerHTML = '';
+        if (dti.length > 0){
+            dti.forEach((item, index) => {
+                data[index] = [cont, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
+                cont++;
+            })
+            $(document).ready(function() {
+                debugger;
+                var tabla = $('#tablaInscripciones').DataTable( {
+                    data: data,
+                    columns: [
+                        { title: ""},
                         { title: "Edicion" },
                         { title: "Usuario" },
                         { title: "Estado" },
                         { title: "Fecha" },
                         { title: "Prioridad" },
                     ],
-                    columnDefs: [
+                    'columnDefs': [
                         {
-                            targets: 0,
-                            checkboxes: {
-                                selectRow: true
+                            'targets': 0,
+                            'checkboxes': {
+                                'selectRow': true
                             }
                         }
                     ],
-                    select:{
-                        style: 'multi'
+                    'select':{
+                        'style': 'multi'
                     },
-                    order: [[1, 'asc']]
+                    'order': [[1, 'asc']]
                 })
                 $("#tableForm").on('submit', function(e){
                     var form = this

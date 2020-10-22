@@ -361,4 +361,23 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return listIns;
     }
     
+    public void cambiarInscripcion(String cambio, int index) {
+    	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
+    	Conexion con = Conexion.getInstancia();
+    	EntityManager em = con.getEntityManager();
+    	int cont = 0;
+    	List<InscripcionED> inscripciones = mIns.getInscripciones();
+    	for(InscripcionED i: inscripciones) {
+    		if(cont == index) {
+	    		if(cambio.equals("aceptar"))
+	    			i.setEstado(InscripcionEnum.ACEPTADO);
+	    		else
+	    			i.setEstado(InscripcionEnum.RECHAZADO);
+	    		em.getTransaction().begin();
+	    		em.persist(i);
+	    		em.getTransaction().commit();
+    		}
+    		cont++;
+    	}
+    }
 }

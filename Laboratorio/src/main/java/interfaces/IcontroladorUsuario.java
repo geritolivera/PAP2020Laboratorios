@@ -79,5 +79,6 @@ public interface IcontroladorUsuario {
     public boolean inscriptoED(String nickname, String nomEdicion);
     
     public List<DTInscripcionED> listarInscripcionesED();
+    public void cambiarInscripcion(String cambio, int index);
     
 }
