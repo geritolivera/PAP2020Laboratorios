@@ -338,14 +338,14 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
-    public boolean inscriptoED(String nickname, String nomEdicion) {
+    public String inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
     	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
-    	Boolean inscripto = false;
+    	String inscripto = "No";
     	for(InscripcionED i: inscripciones) {
     		if(i.getNombreEdicion().equals(nomEdicion))
-    			inscripto = true;
+    			inscripto = i.getEstadoString();
     	}
     	return inscripto;
     }
@@ -355,10 +355,29 @@ public class controladorUsuario implements IcontroladorUsuario {
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	List<DTInscripcionED> listIns = new ArrayList<>();
     	for(InscripcionED i: inscripciones) {
-    		DTInscripcionED dti = new DTInscripcionED(i);
-    		listIns.add(dti);
+    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
+	    		DTInscripcionED dti = new DTInscripcionED(i);
+	    		listIns.add(dti);
+    		//}
     	}
     	return listIns;
     }
     
+    public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario) {
+    	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
+    	Conexion con = Conexion.getInstancia();
+    	EntityManager em = con.getEntityManager();
+    	List<InscripcionED> inscripciones = mIns.getInscripciones();
+    	for(InscripcionED i: inscripciones) {
+    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNombreUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
+	    		if(cambio.equals("aceptar"))
+	    			i.setEstado(InscripcionEnum.ACEPTADO);
+	    		else
+	    			i.setEstado(InscripcionEnum.RECHAZADO);
+	    		em.getTransaction().begin();
+	    		em.persist(i);
+	    		em.getTransaction().commit();
+    		}
+    	}
+    }
 }

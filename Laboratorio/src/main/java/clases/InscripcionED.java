@@ -74,4 +74,12 @@ public class InscripcionED {
 	public InscripcionEnum getEstado() {
 		return estado;
 	}
+	public String getEstadoString() {
+		if(this.estado == InscripcionEnum.PENDIENTE)
+			return "Pendiente";
+		else if(this.estado == InscripcionEnum.ACEPTADO)
+			return "Aceptado";
+		else 
+			return "Rechazado";
+	}
 }
