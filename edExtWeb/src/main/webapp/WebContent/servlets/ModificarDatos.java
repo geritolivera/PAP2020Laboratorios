@@ -1,6 +1,8 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -8,7 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import exepciones.UsuarioExcepcion;
 import interfaces.fabrica;
+import main.webapp.WebContent.resources.dataType.DTResponse;
 import interfaces.IcontroladorUsuario;
 
 /**
@@ -38,17 +45,35 @@ public class ModificarDatos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("entro aca");
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		String nickname  = request.getParameter("nickname");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
-		long fechaN = Date.parse(request.getParameter( "fechaNac"));
-		Date fechaNaci = new Date(fechaN);
-		icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
-		
-		doGet(request, response);
+		System.out.println(request.getParameter( "fechaNacimiento"));
+		long fN = Date.parse(request.getParameter( "fechaNacimiento"));
+		Date fechaNaci = new Date(fN);
+		System.out.println(fechaNaci);
+		System.out.println(nickname);
+		DTResponse respuesta = new DTResponse();
+		try {
+			icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El usuario " + nickname + " se ha modificado correctamente en el sistema.");
+			request.setAttribute("mensaje", "El usuario " + nickname + " se ha modificado correctamente en el sistema.");
+		} catch (UsuarioExcepcion e) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje(e.getMessage());
+			respuesta.setElemento("nickName");
+			request.setAttribute("mensaje", "No se pudieron modificar los datos.");
+			e.printStackTrace();
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String usuarioStr = mapper.writeValueAsString(respuesta);
+		response.setContentType("application/json");
+		response.getWriter().append(usuarioStr);
 	}
 
 }

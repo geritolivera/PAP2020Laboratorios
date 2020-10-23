@@ -30,7 +30,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

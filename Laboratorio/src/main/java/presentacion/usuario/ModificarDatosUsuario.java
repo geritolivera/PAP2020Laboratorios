@@ -2,6 +2,7 @@ package presentacion.usuario;
 
 import com.toedter.calendar.JDateChooser;
 import datatypes.DTUsuario;
+import exepciones.UsuarioExcepcion;
 import interfaces.IcontroladorUsuario;
 
 import javax.swing.*;
@@ -180,8 +181,14 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		String newName = this.NuevoNombre.getText();
 		String newApellido = this.nuevoApellido.getText();
 		Date newBirthDay = this.dateChooser.getDate();
-		icon.nuevosDatos(nick, newName, newApellido, newBirthDay);
-		JOptionPane.showMessageDialog(this, "Se han modificado los datos con exito", "ModificarDatosUsuario", JOptionPane.INFORMATION_MESSAGE);
+		try {
+			icon.nuevosDatos(nick, newName, newApellido, newBirthDay);
+			JOptionPane.showMessageDialog(this, "Se han modificado los datos con exito", "ModificarDatosUsuario", JOptionPane.INFORMATION_MESSAGE);
+		} catch (UsuarioExcepcion e) {
+			JOptionPane.showMessageDialog(this, "Error", "ModificarDatosUsuario", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
 		limpiarFormulario();
 		setVisible(false);
 	}
