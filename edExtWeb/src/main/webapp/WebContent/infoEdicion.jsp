@@ -24,7 +24,8 @@
 	                            String tipoUser = (String) session.getAttribute("tipoUser");
                             	Boolean userLog = (Boolean) request.getAttribute("userLog");
 	                        	String vigencia = (String) request.getAttribute("vigencia");
-	                        	if(userLog && tipoUser.equals("estudiante") && vigencia.equals("Si")){
+	                        	String cupo = (String) request.getAttribute("haycupo");
+	                        	if(userLog && tipoUser.equals("estudiante") && vigencia.equals("Si") && cupo.equals("Si")){
 	                        		String inscripto = (String) request.getAttribute("inscripto");
 	                        		if(inscripto.equals("No") || inscripto.equals("Rechazado")){
                             %>
@@ -106,66 +107,33 @@
             <div id="admin" class="col s12">
                 <div class="card material-table">
                     <div class="table-header">
-                        <span class="table-title">Seleccionar Estudiantes</span>
-                        <div class="actions">
-                            <a href="#" class="search-toggle btn-flat nopadding"><i
-                                    class="material-icons prefix">search</i></a>
-                        </div>
+                        <span class="table-title">Inscripciones</span>
                     </div>
-                    <table id="datatable">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>NickName</th>
-                                <th>Estudiante</th>
-                                <th>Estado</th>
-                                <th>Fecha de inscripcion</th>
-                                <th>Prioridad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td>jPerez</td>
-                                <td>Julian Perez</td>
-                                <td>Aceptado</td>
-                                <td>2011/04/25</td>
-                                <th>0.5</th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>mmartinez</td>
-                                <td>Martin Martinez</td>
-                                <td>Rechazado</td>
-                                <td>2020/08/25</td>
-                                <th>0.0</th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>mgutierrez</td>
-                                <td>Marta Gutierrez</td>
-                                <td>Rechazado</td>
-                                <td>2020/08/25</td>
-                                <td>0.5</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>dmaradona</td>
-                                <td>Diego Maradona</td>
-                                <td>En espera</td>
-                                <td>2020/08/25</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>lmessi</td>
-                                <td>Lionel Messi</td>
-                                <td>Aceptado</td>
-                                <td>2020/08/25</td>
-                                <td>0.7</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form>
+                    	<input type="hidden" name="id" id="id"/>
+                    	<input type="hidden" name="edicion" id="edicion"/>
+                    	<input type="hidden" name="usuario" id="usuario"/>
+                    	<input type="hidden" name="estado" id="estado"/>                   
+                    	<input type="hidden" name="fecha" id="fecha"/>
+                    	<input type="hidden" name="prioridad" id="prioridad"/>
+	                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
+	                        <thead>
+	                            <tr>
+	                            
+	                            	<th></th>
+	                                <th>Edicion</th>
+	                                <th>Estudiante</th>
+	                                <th>Estado</th>
+	                                <th>Fecha de inscripcion</th>
+	                                <th>Prioridad</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody id="detallesIns">
+	                        
+	                        </tbody>
+	                        
+	                    </table>
+                    </form>
                 </div>
             </div>
         </div>
@@ -188,4 +156,13 @@
         <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
         <script src="resources/scripts/scriptTable2.js"></script>
 		<script src="resources/scripts/alta.js"> </script>		
+		<script src="resources/scripts/listas.js"> </script>
     <%@include  file="footer.jsp" %>
+    
+<script>
+
+	$(document).ready(function () {
+		tableInscripciones('${nombre}');
+	 });
+
+</script>

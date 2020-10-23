@@ -2,9 +2,12 @@ package datatypes;
 
 import clases.Docente;
 import clases.EdicionCurso;
+import clases.InscripcionED;
+import manejadores.manejadorInscripcionED;
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DTEdicionCurso {
 	private String nombre;
@@ -35,7 +38,15 @@ public class DTEdicionCurso {
 		this.nombre = edicion.getNombre();
 		this.fechaI = edicion.getFechaI();
 		this.fechaF = edicion.getFechaF();
-		this.cupo = edicion.getCupo();
+		//cuenta la cantidad de inscripciones antes de asignar el cupo
+		int cont = 0;
+		manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
+		List<InscripcionED> inscripciones = mIns.getInscripciones();
+		for(InscripcionED i: inscripciones) {
+			if(i.getNombreEdicion().equals(this.nombre))
+				cont++;
+		}
+		this.cupo = edicion.getCupo() - cont;
 		this.fechaPub = edicion.getFechaPub();
 		this.curso = edicion.getNomCurso();
 		for (Docente d:edicion.getDocentes()) {

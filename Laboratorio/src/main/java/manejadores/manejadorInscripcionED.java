@@ -33,6 +33,14 @@ public class manejadorInscripcionED {
 				.getResultList();
 	}
 	
+	public List<InscripcionED> getInscripcionesEdicion(String nomEdicion) {
+		Conexion con = Conexion.getInstancia();
+		EntityManager em = con.getEntityManager();
+		return em.createQuery("select i from InscripcionED i where i.edicion_nombre LIKE nomEdicion", InscripcionED.class)
+				.setParameter("nomEdicion", nomEdicion)
+				.getResultList();
+	}
+	
 	public List<InscripcionED> getInscripcionesEstado(String nickUsuario, String estado) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();

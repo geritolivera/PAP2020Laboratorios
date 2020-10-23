@@ -350,15 +350,22 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
-    public List<DTInscripcionED> listarInscripcionesED(){
+    public List<DTInscripcionED> listarInscripcionesED(String nomEdicion){
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	List<DTInscripcionED> listIns = new ArrayList<>();
     	for(InscripcionED i: inscripciones) {
-    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
-	    		DTInscripcionED dti = new DTInscripcionED(i);
+    		if(!nomEdicion.equals("undefined")) {
+	    		if(i.getNombreEdicion().equals(nomEdicion)) {
+	    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
+		    		DTInscripcionED dti = new DTInscripcionED(i);
+		    		listIns.add(dti);
+	    		}
+    		}
+    		else {
+    			DTInscripcionED dti = new DTInscripcionED(i);
 	    		listIns.add(dti);
-    		//}
+    		}
     	}
     	return listIns;
     }
@@ -369,7 +376,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	EntityManager em = con.getEntityManager();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	for(InscripcionED i: inscripciones) {
-    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNombreUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
+    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNickUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
 	    		if(cambio.equals("aceptar"))
 	    			i.setEstado(InscripcionEnum.ACEPTADO);
 	    		else

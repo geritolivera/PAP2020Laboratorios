@@ -61,6 +61,10 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaI", fechaI);
 			request.setAttribute("fechaF", fechaF);
 			request.setAttribute("fechaPub", fechaPub);
+			String cupo = "Si";
+			if(dte.getCupo() <= 0)
+				cupo = "No";
+			request.setAttribute("haycupo", cupo);
 			String vigente = "No";
 			if (dte.getFechaF().after(today)) {
 				vigente= "Si";

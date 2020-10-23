@@ -445,10 +445,10 @@ function collectionSeguidos(){
     //obtenerDocentesPorInstituto(instituto);
 }
 
-function tableInscripciones(){
+function tableInscripciones(edicion){
     // Parametro:
     debugger;
-    var url = baseURL + `GetInscripcionesED`
+    var url = baseURL + `GetInscripcionesED?edicion=` + edicion;
     fetch(url, {
         method: 'GET',
     }).then(res => res.json()
@@ -457,13 +457,10 @@ function tableInscripciones(){
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
-        var contador = 0;
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                contador++;
                 console.log("estado: ", item.estado);
                 if(item.estado == "PENDIENTE"){
-
                     inscripcionesHtml.innerHTML += `<tr>
                                                         <td><button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'aceptar')">Aceptar</button>
                                                         <button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'rechazar')">Rechazar</button></td>
@@ -471,7 +468,7 @@ function tableInscripciones(){
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
                                                         <td> ${item.fecha}</td>
-                                                        <th>` + index + `</th>
+                                                        <th> ${item.prioridad} </th>
                                                 </tr>`;
                 }
                 else{
@@ -482,11 +479,14 @@ function tableInscripciones(){
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
                                                         <td> ${item.fecha}</td>
-                                                        <th>` + index + `</th>
+                                                        <th> ${item.prioridad} </th>
                                                     </tr>`;
                 }
             });
         }else{
+            inscripcionesHtml.innerHTML += `<tr>
+                                                <th>No hay inscripciones para esta edicion.</th>
+                                            </tr>`;
             console.log('no hay inscripciones');
         }
     }).catch(error => console.log(' 1) eerr ', error));
