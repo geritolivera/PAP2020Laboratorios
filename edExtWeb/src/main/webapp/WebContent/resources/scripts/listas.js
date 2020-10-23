@@ -447,7 +447,7 @@ function collectionSeguidos(){
 
 function tableInscripciones(edicion){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetInscripcionesED?edicion=` + edicion;
     fetch(url, {
         method: 'GET',
@@ -455,11 +455,11 @@ function tableInscripciones(edicion){
     ).then(dti => {
         JSON.stringify(dti);
         var inscripcionesHtml = document.getElementById("detallesIns");
-        console.log("inscripciones:", dti);
+        //console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                console.log("estado: ", item.estado);
+                //console.log("estado: ", item.estado);
                 if(item.estado == "PENDIENTE"){
                     inscripcionesHtml.innerHTML += `<tr>
                                                         <td><button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'aceptar')">Aceptar</button>
@@ -593,3 +593,38 @@ function tableInscripcionesCheckbox(){
     }).catch(error => console.log(' 1) eerr ', error));
 }
 
+function tableInscripcionesAceptados(edicion){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetInscripcionesED?edicion=` + edicion;
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(dti => {
+        JSON.stringify(dti);
+        var inscripcionesHtml = document.getElementById("detallesAceptados");
+        console.log("inscripcionesAceptados:", dti);
+        inscripcionesHtml.innerHTML = '';
+        console.log("length",dti.length );
+        if (dti.length > 0){
+            dti.forEach((item, index) => {
+                console.log("estado: ", item.estado);
+                if(item.estado == "ACEPTADO"){
+                    inscripcionesHtml.innerHTML += `<tr>
+                                                        <td> ${item.edicion}</td>
+                                                        <td> ${item.usuario} </td>
+                                                        <td> ${item.estado} </td>
+                                                        <td> ${item.fecha}</td>
+                                                        <th> ${item.prioridad} </th>
+                                                </tr>`;
+                console.log("inscripcionesAceptados:", inscripcionesHtml.innerHTML);
+                }
+            });
+        }else{
+            inscripcionesHtml.innerHTML += `<tr>
+                                                <th>No hay inscripciones para esta edicion.</th>
+                                            </tr>`;
+            console.log('no hay inscripciones');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+}
