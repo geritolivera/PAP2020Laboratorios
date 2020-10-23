@@ -457,27 +457,34 @@ function tableInscripciones(){
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
-        //var contador = 0;
+        var contador = 0;
         if (dti.length > 0){
             dti.forEach((item, index) => {
-               // contador++;
-                inscripcionesHtml.innerHTML += `<tr>
-                                                <td>
-                                                    <div class="switch">
-                                                        <label>
-                                                            No
-                                                            <input type="checkbox" id="contador" name="contador">
-                                                            <span class="lever"></span>
-                                                            Si
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td> ${item.edicion} </td>
-                                                <td> ${item.usuario} </td>
-                                                <td> ${item.estado} </td>
-                                                <td> ${item.fecha}</td>
-                                                <th>0.5</th>
-                                            </tr>`;
+                contador++;
+                console.log("estado: ", item.estado);
+                if(item.estado == "PENDIENTE"){
+
+                    inscripcionesHtml.innerHTML += `<tr>
+                                                        <td><button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'aceptar')">Aceptar</button>
+                                                        <button type="button" onclick="confirmarInscripcion('${item.edicion}', '${item.usuario}', 'rechazar')">Rechazar</button></td>
+                                                        <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
+                                                        <td> ${item.usuario} </td>
+                                                        <td> ${item.estado} </td>
+                                                        <td> ${item.fecha}</td>
+                                                        <th>` + index + `</th>
+                                                </tr>`;
+                }
+                else{
+                    inscripcionesHtml.innerHTML += `<tr>
+                                                        <td><button disabled>Aceptar</button>
+                                                        <button disabled>Rechazar</button></td>
+                                                        <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
+                                                        <td> ${item.usuario} </td>
+                                                        <td> ${item.estado} </td>
+                                                        <td> ${item.fecha}</td>
+                                                        <th>` + index + `</th>
+                                                    </tr>`;
+                }
             });
         }else{
             console.log('no hay inscripciones');
@@ -493,29 +500,93 @@ function tableInscripcionesAjax(){
         method: 'GET',
     }).then(res => res.json()
     ).then(dti => {
-        //JSON.stringify(dti);
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         data = [];
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                //dataSet = [["edicion1", "usuario1", "estado", "fecha1", 0.5], ["edicion2", "usuario2", "estado", "fecha2", 0.4]];
-                data = JSON.stringify(item.edicion, item.usuario, item.estado, item.fecha, 0.5);
+                data[index] = [index, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
             })
-            /*$(document).ready(function() {
-                $('#tablaInscripciones').DataTable( {
+            $(document).ready(function() {
+                var tabla = $('#tablaInscripciones').DataTable( {
                     data: data,
                     columns: [
+                        { title: ""},
+                        { title: "Edicion" },
+                        { title: "Usuario" },
+                        { title: "Estado" },
+                        { title: "Fecha" },
+                        { title: "Prioridad" }
+                    ]
+                });
+            });
+            console.log(data);
+        }else{
+            console.log('no hay inscripciones');
+        }
+    }).catch(error => console.log(' 1) eerr ', error));
+}
+
+function tableInscripcionesCheckbox(){
+    // Parametro:
+    debugger;
+    var url = baseURL + `GetInscripcionesED`
+    fetch(url, {
+        method: 'GET',
+    }).then(res => res.json()
+    ).then(dti => {
+        debugger;
+        var inscripcionesHtml = document.getElementById("detallesIns");
+        console.log("inscripciones:", dti);
+        data = [];
+        var cont = 1;
+        inscripcionesHtml.innerHTML = '';
+        if (dti.length > 0){
+            dti.forEach((item, index) => {
+                data[index] = [cont, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
+                cont++;
+            })
+            $(document).ready(function() {
+                debugger;
+                var tabla = $('#tablaInscripciones').DataTable( {
+                    data: data,
+                    columns: [
+                        { title: ""},
                         { title: "Edicion" },
                         { title: "Usuario" },
                         { title: "Estado" },
                         { title: "Fecha" },
                         { title: "Prioridad" },
-                    ]
-                });
-            });*/
-            console.log(JSON.stringify([item.edicion, item.usuario, item.estado, item.fecha, 0.5]));
+                    ],
+                    'columnDefs': [
+                        {
+                            'targets': 0,
+                            'checkboxes': {
+                                'selectRow': true
+                            }
+                        }
+                    ],
+                    'select':{
+                        'style': 'multi'
+                    },
+                    'order': [[1, 'asc']]
+                })
+                $("#tableForm").on('submit', function(e){
+                    var form = this
+                    var rowsel = tabla.column(0).checkboxes.selected();
+                    $.each(rowsel, function(index, rowId){
+                        $(form).append(
+                            $('<input>').attr('type','hidden').attr('name','id[]').val(rowId)
+                        )
+                    })
+                    $("#view-rows").text(rowsel.join(","))
+                    $("#view-form").text($(form).serialize())
+                    $('input[name="id\[\]"]', form).remove()
+                    e.preventDefault()
+                })
+            });
+            console.log(data);
         }else{
             console.log('no hay inscripciones');
         }

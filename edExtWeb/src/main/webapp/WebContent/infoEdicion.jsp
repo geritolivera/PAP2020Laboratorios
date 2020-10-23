@@ -25,17 +25,21 @@
                             	Boolean userLog = (Boolean) request.getAttribute("userLog");
 	                        	String vigencia = (String) request.getAttribute("vigencia");
 	                        	if(userLog && tipoUser.equals("estudiante") && vigencia.equals("Si")){
-	                        		Boolean inscripto = (Boolean) request.getAttribute("inscripto");
-	                        		if(!inscripto){
+	                        		String inscripto = (String) request.getAttribute("inscripto");
+	                        		if(inscripto.equals("No") || inscripto.equals("Rechazado")){
                             %>
                             <div class="card-action right-align">
 	                            <a id="ediBTN" class="waves-effect waves-light btn" type="button" onclick="inscribirUsuario('${nombre}')" <%--href="inscripcionUE?edicion=${nombre}"--%>><i
 	                                    class="material-icons"></i>Inscribirse</a>
 							</div>
-								<%}else{%>
+								<%}else if(inscripto.equals("Pendiente")){%>
 								<div class="card-action right-align">
-                            	<a class="btn disabled">Inscripto</a>
-                            </div>
+                            	<a class="btn disabled">Pendiente</a>
+                            	</div>
+                            	<%}else{%>
+                            		<div class="card-action right-align">
+                                	<a class="btn disabled">Inscripto</a>
+                                	</div>
                             	<%}
 							}%>
                         </div>

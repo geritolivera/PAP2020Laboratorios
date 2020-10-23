@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import datatypes.DTEdicionCurso;
 import datatypes.DTEstudiante;
 import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
+import interfaces.fabrica;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 
 
@@ -35,9 +35,16 @@ public class inscripcionConfirmar extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fabrica fab = fabrica.getInstancia();
-		//IcontroladorCurso icon = fab.getIcontroladorCurso();
-		String[] inscripciones = request.getParameterValues("tableInscripciones");
-		for(int i = 0; i<inscripciones.length; i++)
-			System.out.println(inscripciones[i]);
+		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
+		String edicion = request.getParameter("edicion");
+		String usuario = request.getParameter("usuario");
+		String action = request.getParameter("action");
+		
+		//int index = Integer.parseInt(indReq);
+		System.out.println("edicion: " + edicion);
+		System.out.println("usuario: " + usuario);
+		System.out.println("action: " + action);
+		
+		iconu.cambiarInscripcion(action, edicion, usuario);
 	}
 }

@@ -1,5 +1,5 @@
 var baseURL = 'http://localhost:8081/edExtWeb/';
-function crearPrograma() {
+function crearPrograma(){
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
     const fechaF = document.querySelector("#fechaFin").value;
@@ -13,7 +13,7 @@ function crearPrograma() {
 
     fetch(fetchUrl, {
         method: 'POST',
-    }).then((res) => {
+    }).then( ( res ) => {
         return res.json();
         console.log(`que me devolviste papei `, res);
     }).then((respuesta) => {
@@ -23,18 +23,17 @@ function crearPrograma() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Programa dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
-        console.error(' paso algo: ', err);
-    })
+        console.error(' paso algo: ', err); } )
 
 }
 
@@ -44,15 +43,15 @@ function crearCurso() {
     const nombre = document.querySelector("#nombre").value;
     const desc = document.querySelector("#desc").value;
     const duracion = document.querySelector("#duracion").value;
-    const cantHoras = document.querySelector("#cantHoras").value;
-    const creditos = document.querySelector("#creditos").value;
-    const url = document.querySelector("#url").value;
-    const instituto = document.querySelector("#institutos").value;
+    const cantHoras =  document.querySelector("#cantHoras").value;
+    const creditos =  document.querySelector("#creditos").value;
+    const url =  document.querySelector("#url").value;
+    const instituto =  document.querySelector("#institutos").value;
 
 
-    cursosprevios = Array.from(previas.selectedOptions).map(previa => previa.value);
-    console.log("previas: ", cursosprevios);
-    categoria = Array.from(categorias.selectedOptions).map(cate => cate.value);
+    cursosprevios = Array.from(previas.selectedOptions).map( previa => previa.value);
+    console.log( "previas: " , cursosprevios);
+    categoria = Array.from(categorias.selectedOptions).map( cate => cate.value);
 
     console.log('canthoras: ', cantHoras);
     console.log('creditos: ', creditos);
@@ -70,7 +69,7 @@ function crearCurso() {
 
     fetch(fetchUrl, {
         method: 'POST',
-    }).then((res) => {
+    }).then( ( res ) => {
         return res.json();
         console.log(`que me devolviste papei `, res);
     }).then((respuesta) => {
@@ -80,18 +79,17 @@ function crearCurso() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
-        console.error(' paso algo: ', err);
-    })
+        console.error(' paso algo: ', err); } )
 }
 
 function usuario() {
@@ -104,7 +102,7 @@ function usuario() {
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
     let fetchUrl;
-    if (tipoUser == 'estudiante') {
+    if(tipoUser == 'estudiante') {
         fetchUrl = 'crearUsuario?nickName=' + nick +
             '&nombre=' + nombre +
             '&apellido=' + apellido +
@@ -127,14 +125,14 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    if (respuesta.elemento != null)
+                    if(respuesta.elemento != null)
                         document.getElementById(respuesta.elemento).focus();
                 })
             }
         }).catch((err) => {
             console.error(' paso algo: ', err);
         });
-    } else {
+    }else{
         fetchUrl = 'crearUsuario?nickName=' + nick +
             '&nombre=' + nombre +
             '&apellido=' + apellido +
@@ -157,8 +155,8 @@ function usuario() {
                 })
             } else {
                 mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    if (respuesta.elemento != null)
-                        document.getElementById(respuesta.elemento).focus();
+                    if(respuesta.elemento != null)
+                    document.getElementById(respuesta.elemento).focus();
                 })
             }
         }).catch((err) => {
@@ -184,13 +182,13 @@ function inscribirUsuario(edicion) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -205,7 +203,7 @@ function crearEdicion() {
     const instituto = document.querySelector("#institutos").value;
     const cursos = document.querySelector("#curso").value;
     const doc = document.querySelector("#docentes").value;
-    docen = Array.from(docentes.selectedOptions).map(doc => doc.value);
+    docen = Array.from(docentes.selectedOptions).map( doc => doc.value);
     const cupo = document.querySelector("#cupo").value;
 
     const fetchUrl = 'altaEdicion?nombre=' + nombre +
@@ -228,13 +226,13 @@ function crearEdicion() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Edicion dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -257,13 +255,13 @@ function inscribirUsuario(nombreEdi) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -288,13 +286,13 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -315,13 +313,13 @@ function inscribirUsuarioProg(nombreProg) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto al Programa!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error en inscripcion", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -342,13 +340,13 @@ function seguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario seguido!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            });
+                });
         }
     }).catch((err) => {
         console.error(' paso algo: ', err);
@@ -368,13 +366,13 @@ function dejarSeguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario dejado de seguir!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL + 'index.jsp';
+                window.location = baseURL+ 'index.jsp';
             })
         } else {
             mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {
-                if (respuesta.elemento != null)
+                if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-            }
+                }
             )
         }
     }).catch((err) => {
@@ -382,7 +380,39 @@ function dejarSeguirUsuario(nickname) {
     });
 }
 
-function testAlert() {
+function confirmarInscripcion(edicion, usuario, action) {
+    debugger;
+    console.log("la edicion es= " + edicion);
+    console.log("el usuario es= " + usuario);
+    console.log("la action es= " + action);
+    const fetchUrl = 'inscripcionConfirmar?edicion=' + edicion +
+        '&usuario=' + usuario +
+        '&action=' + action;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Inscripcion cambiada!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al cambiar inscripcion", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+function testAlert(){
     swal({
         title: "¿Desea confirmar el alta?",
         text: "Are you very very sure?",
