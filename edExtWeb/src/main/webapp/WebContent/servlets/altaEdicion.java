@@ -51,26 +51,51 @@ public class altaEdicion extends HttpServlet {
         for(String d: docentes) {
             listDocentes.add(d);
         }
-
-        try {
-            icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes);
-            respuesta.setCodigo(0);
-            respuesta.setMensaje("La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
-            request.setAttribute("mensaje", "La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
-        } catch (EdicionExcepcion edicionExcepcion) {
-            request.setAttribute("mensaje", "La edicion " + nombre + " ya existe en el sistema.");
-            respuesta.setCodigo(1);
-            respuesta.setMensaje("La edicion " + nombre + " ya existe en el sistema.");
-            respuesta.setElemento("nombre");
-            edicionExcepcion.printStackTrace();
-        } catch (CursoExcepcion cursoExcepcion) {
-            request.setAttribute("mensaje", "El curso " + nombre + " no existe en el sistema.");
-            respuesta.setCodigo(1);
-            respuesta.setElemento("curso");
-            respuesta.setMensaje("El curso " + nombre + " no existe en el sistema.");
-            cursoExcepcion.printStackTrace();
-        }
-
+        
+        if(nombre.equals("") || cupo == 0) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("No puede haber campos vacios");
+			request.setAttribute("mensaje", "No puede haber campos vacios");		
+		}else if(today.compareTo(fechaF) > 0){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Ingresar una fecha de fin valida");
+			request.setAttribute("mensaje", "Ingresar una fecha de fin valida");
+		} else if(fechaF.before(fechaI)){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("La fecha de inicio debe ser previa a la de finalizacion");
+			request.setAttribute("mensaje", "La fecha de inicio debe ser previa a la de finalizacion");
+		} else if(instituto.equals("")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe seleccionar un instituto para dar de alta a la edicion");
+			request.setAttribute("mensaje", "Debe seleccionar un instituto para dar de alta a la edicion");
+		} else if(cursos.equals("")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe seleccionar un curso para dar de alta a la edicion");
+			request.setAttribute("mensaje", "Debe seleccionar un curso para dar de alta a la edicion");
+		} else if(listDocentes.contains("")) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar al menos un docente para dar de alta a la edicion");
+			request.setAttribute("mensaje", "Debe ingresar al menos un docente para dar de alta a la edicion");
+		} else {
+	        try {
+	            icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes);
+	            respuesta.setCodigo(0);
+	            respuesta.setMensaje("La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
+	            request.setAttribute("mensaje", "La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
+	        } catch (EdicionExcepcion edicionExcepcion) {
+	            request.setAttribute("mensaje", "La edicion " + nombre + " ya existe en el sistema.");
+	            respuesta.setCodigo(1);
+	            respuesta.setMensaje("La edicion " + nombre + " ya existe en el sistema.");
+	            respuesta.setElemento("nombre");
+	            edicionExcepcion.printStackTrace();
+	        } catch (CursoExcepcion cursoExcepcion) {
+	            request.setAttribute("mensaje", "El curso " + nombre + " no existe en el sistema.");
+	            respuesta.setCodigo(1);
+	            respuesta.setElemento("curso");
+	            respuesta.setMensaje("El curso " + nombre + " no existe en el sistema.");
+	            cursoExcepcion.printStackTrace();
+	        }
+		}
         ObjectMapper mapper = new ObjectMapper();
         String cursoStr = mapper.writeValueAsString(respuesta);
         System.out.println("La respuesta generada es: " + cursoStr);

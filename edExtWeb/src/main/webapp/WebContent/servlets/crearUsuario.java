@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.Calendar;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,25 +41,46 @@ public class crearUsuario extends HttpServlet {
 		String correo = request.getParameter("correo");
 		String passwd = request.getParameter("password");
 		//cambia la string a un date
-		long fN = Date.parse(request.getParameter( "fechaN"));
+		long fN = Date.parse(request.getParameter( "fechaN")); 
 		Date fechaNac = new Date(fN);
-
+		Date todayDate = Calendar.getInstance().getTime();
+		
 		DTResponse respuesta = new DTResponse();
-		//tipoUser
-		String instituto = null;
-		if (request.getParameter("tipoUser").equals("docente"))
-			instituto = request.getParameter("institutos");
-		try {
-			icon.AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd);
-			respuesta.setCodigo(0);
-			respuesta.setMensaje("El usuario " + nick + " se ha ingresado correctamente en el sistema.");
-			request.setAttribute("mensaje", "El usuario " + nick + " se ha ingresado correctamente en el sistema.");
-		} catch (UsuarioExcepcion e) {
+		String tipoUser = request.getParameter("tipoUser");
+		String instituto = request.getParameter("institutos");
+		if(nick.equals("") || nombre.equals("") || apellido.equals("") || correo.equals("") || passwd.equals("")) {
 			respuesta.setCodigo(1);
-			respuesta.setMensaje(e.getMessage());
-			respuesta.setElemento("nickName");
-			request.setAttribute("mensaje", "El usuario de nickname " + nick + " ya existe en el sistema.");
-			e.printStackTrace();
+			respuesta.setMensaje("No puede haber campos vacios");
+			request.setAttribute("mensaje", "No puede haber campos vacios");
+		} if(!correo.contains("@")) {
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar una direccion de correo valida");
+			request.setAttribute("mensaje", "Debe ingresar una direccion de correo valida");
+		}else if(fechaNac.compareTo(todayDate) > 0){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar una fecha de nacimiento valida");
+			request.setAttribute("mensaje", "Debe ingresar una fecha de nacimiento valida");
+		}else if(request.getParameter("tipoUser").equals("docente") && instituto.equals("")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar un instituto para dara de alta a un Docente");
+			request.setAttribute("mensaje", "Debe ingresar un instituto para dara de alta a un Docente");
+		} else if(tipoUser.equals("")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar un tipo de Usuario");
+			request.setAttribute("mensaje", "Debe ingresar un tipo de Usuario");
+		} else {			
+			try {
+				icon.AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd);
+				respuesta.setCodigo(0);
+				respuesta.setMensaje("El usuario " + nick + " se ha ingresado correctamente en el sistema.");
+				request.setAttribute("mensaje", "El usuario " + nick + " se ha ingresado correctamente en el sistema.");
+			} catch (UsuarioExcepcion e) {
+				respuesta.setCodigo(1);
+				respuesta.setMensaje(e.getMessage());
+				respuesta.setElemento("nickName");
+				request.setAttribute("mensaje", "El usuario de nickname " + nick + " ya existe en el sistema.");
+				e.printStackTrace();
+			}
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String usuarioStr = mapper.writeValueAsString(respuesta);

@@ -102,6 +102,7 @@ function usuario() {
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
     let fetchUrl;
+ 
     if(tipoUser == 'estudiante') {
         fetchUrl = 'crearUsuario?nickName=' + nick +
             '&nombre=' + nombre +

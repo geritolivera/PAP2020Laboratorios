@@ -59,7 +59,7 @@
                         <div class="row">
                             <div class="input-field col s4">
                                 <i class="material-icons prefix">access_time</i>
-                                <input id="cupo" name="cupo" type="number" class="validate">
+                                <input id="cupo" name="cupo" type="number" class="validate" value = "0">
                                 <label for="cupo">Cupo(opcional)</label>
                             </div>
                         </div>
