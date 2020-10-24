@@ -1,4 +1,4 @@
-package main.webapp.WebContent.servlets;
+package main.webapp.WebContent.servlets.altas;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

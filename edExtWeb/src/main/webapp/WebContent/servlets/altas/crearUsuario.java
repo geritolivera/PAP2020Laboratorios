@@ -1,4 +1,4 @@
-package main.webapp.WebContent.servlets;
+package main.webapp.WebContent.servlets.altas;
 
 import java.io.IOException;
 import java.text.ParseException;
