@@ -45,8 +45,17 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp/WebContent" tag="defaultRootSource"/>
+                                
+        
+        
         <dependent-module archiveName="Laboratorio-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Laboratorio/Laboratorio">
+                                                
+            
+            
             <dependency-type>uses</dependency-type>
+                                            
+        
+        
         </dependent-module>
                                                                                 
         
