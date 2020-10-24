@@ -5,7 +5,6 @@ div.material-table {
 div.material-table .hiddensearch {
   padding: 0 14px 0 24px;
   border-bottom: solid 1px #DDDDDD;
-  display: none;
 }
 
 div.material-table .hiddensearch input {
@@ -94,7 +93,7 @@ div.material-table .table-footer label {
 div.material-table .table-footer .select-wrapper {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row
+  -webkit-flex-direction: row;
   /* works with row or column */
   
   flex-direction: row;

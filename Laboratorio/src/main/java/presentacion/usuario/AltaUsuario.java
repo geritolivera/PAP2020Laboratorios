@@ -157,12 +157,12 @@ public class AltaUsuario extends JInternalFrame {
 			try {
 				String instituto = this.institutoChoose.getSelectedItem().toString();
 				if(!instituto.isEmpty()) {
-					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto, pswwd);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, instituto, pswwd, "");
 					JOptionPane.showMessageDialog(this, "El Docente se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					limpiarFormulario();
 					setVisible(false);
 				} else {
-					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null, pswwd);
+					this.icon.AltaUsuario(nickname, nombre, apellido, email, dateChooser, null, pswwd, "");
 					JOptionPane.showMessageDialog(this, "El Estudiante se ha creado con exito", "Alta Usuario", JOptionPane.INFORMATION_MESSAGE);
 					limpiarFormulario();
 					setVisible(false);

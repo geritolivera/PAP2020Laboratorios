@@ -23,7 +23,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Alta de Usuario
 	@Override
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password) throws UsuarioExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password, String url) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if (!mUsu.existeUsuarioNick(nickname)) {
@@ -31,6 +31,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 				//si la string instituto no tiene nada
 				if (instituto == null) {
 					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac, password);
+					est.setImagenUrl(url);
 					mUsu.agregarUsuario(est);
 
 				} else {
@@ -38,6 +39,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
 						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac, password);
+						doc.setImagenUrl(url);
 						Instituto ins = mIns.buscarInstituto(instituto);
 						//aniade tambien el docente al instituto
 						doc.setInstituto(ins);
@@ -338,14 +340,14 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
-    public String inscriptoED(String nickname, String nomEdicion) {
+    public boolean inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
     	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
-    	String inscripto = "No";
+    	Boolean inscripto = false;
     	for(InscripcionED i: inscripciones) {
     		if(i.getNombreEdicion().equals(nomEdicion))
-    			inscripto = i.getEstadoString();
+    			inscripto = true;
     	}
     	return inscripto;
     }
@@ -355,10 +357,8 @@ public class controladorUsuario implements IcontroladorUsuario {
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	List<DTInscripcionED> listIns = new ArrayList<>();
     	for(InscripcionED i: inscripciones) {
-    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
-	    		DTInscripcionED dti = new DTInscripcionED(i);
-	    		listIns.add(dti);
-    		//}
+    		DTInscripcionED dti = new DTInscripcionED(i);
+    		listIns.add(dti);
     	}
     	return listIns;
     }

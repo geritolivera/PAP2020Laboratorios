@@ -1,5 +1,11 @@
 package main.webapp.WebContent.servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import interfaces.IcontroladorCurso;
+import interfaces.fabrica;
+import main.webapp.WebContent.resources.dataType.DTInfo;
+import manejadores.manejadorCurso;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,14 +17,28 @@ import java.io.IOException;
 @WebServlet("/Busqueda")
 public class Busqueda extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String input =  request.getParameter("busqueda");
+        String input = request.getParameter("busqueda");
+        fabrica fab = fabrica.getInstancia();
+        IcontroladorCurso icon = fab.getIcontroladorCurso();
+
+
+        System.out.println("input = " + input);
         request.setAttribute("input", input);
-        RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/busquedaGeneral.jsp");
-        rd.forward(request, response);
+
+        DTInfo di = new DTInfo();
+        di.setCursos(icon.listaDTCurso());
+        di.setProgramas(icon.listaDTPrograma());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String infoStr = mapper.writeValueAsString(di);
+        System.out.println("La info generada es: " + infoStr);
+
+        response.setContentType("application/json");
+        response.getWriter().append(infoStr);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+            doPost(request, response);
     }
 }

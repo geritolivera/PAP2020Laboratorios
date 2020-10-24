@@ -62,6 +62,12 @@
                                 <input id="cupo" name="cupo" type="number" class="validate" value = "0">
                                 <label for="cupo">Cupo(opcional)</label>
                             </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">image</i>
+                                <input type="text" id="url">
+                                <label for="url">Imagen de la edicion</label>
+                            </div>
+
                         </div>
                         <div class="center-align">
                             <button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="crearEdicion()">Crear
@@ -76,6 +82,7 @@
  <%@include  file="footer.jsp" %>
  <script>
 	$(document).ready(function () {
+	    getInstitutos();
     	$('.datepicker').datepicker();
         $('#institutos').formSelect();
         $('#curso').formSelect();
@@ -85,11 +92,15 @@
         obtenerCursosPorInstituto(document.querySelector("#institutos").value);
         obtenerDocentesPorInstituto(document.querySelector("#institutos").value);
     });
-    
-    window.onload = function(){
-    	getInstitutos();
-    }
-
+    $('#url').change(function (){
+        document.getElementById('download')
+        var link = document.createElement('a');
+        link.href = document.querySelector("#url").value;
+        link.download = document.querySelector("#url").value;
+        document.body.appendChild(link);
+        link.click()
+        document.body.removeChild(link);
+    });
 
  </script>
 <script src="resources/scripts/listas.js"> </script>

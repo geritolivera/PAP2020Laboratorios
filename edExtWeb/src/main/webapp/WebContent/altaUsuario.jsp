@@ -51,11 +51,11 @@
               <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
                 <input id="password" type="password" class="validate">
-                <label for="password">Contrase�a</label>
+                <label for="password">Contraseña</label>
               </div>
               <div class="input-field col s6">
                 <input id="passwordValidacion" type="password" class="validate">
-                <label for="passwordValidacion">Repita contrase�a</label>
+                <label for="passwordValidacion">Repita contraseña</label>
               </div>
             </div>
             <div class="row">
@@ -69,6 +69,13 @@
                   <option value="" disabled>Seleccione uno</option>
                   </select>
                 <label id="lblInstituto">Instituto</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                  <i class="material-icons prefix">image</i>
+                  <input type="text" id="imagen">
+                  <label for="imagen">Imagen de la edicion</label>
               </div>
             </div>
             <div class="center-align">
@@ -110,6 +117,16 @@
         }
 
       });
-</script>
+      $('#imagen').change(function (){
+        document.getElementById('download')
+        var link = document.createElement('a');
+        link.href = document.querySelector("#imagen").value;
+        link.download = document.querySelector("#imagen").value;
+        document.body.appendChild(link);
+        link.click()
+        document.body.removeChild(link);
+      });
+
+ </script>
 <script src="resources/scripts/listas.js"> </script>
 <script src="resources/scripts/alta.js"> </script>

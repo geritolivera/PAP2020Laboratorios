@@ -16,7 +16,8 @@ public class DTCurso {
 	private Date fechaR;
 	private String url;
 	private String instituto;
-	
+	private String imagenURL;
+
 	ArrayList<String> ediciones = new ArrayList<>();
 	ArrayList<String> programas = new ArrayList<>();
 	ArrayList<String> previas = new ArrayList<>();
@@ -50,6 +51,8 @@ public class DTCurso {
 		this.fechaR = curso.getFechaR();
 		this.url = curso.getUrl();
 		this.instituto = curso.getInstituto().getNombre();
+		this.imagenURL = curso.getImagenUrl();
+
 	}
 	
 	public String getNombre() {
@@ -141,5 +144,13 @@ public class DTCurso {
 	public void agregarCat(String cat) {
 		categorias.add(cat);
 		
+	}
+
+	public String getImagenURL() {
+		return imagenURL;
+	}
+
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
 	}
 }

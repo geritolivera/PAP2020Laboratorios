@@ -163,14 +163,14 @@ function obtenerDocentesPorInstituto(instituto){
             var docentesHtml = document.getElementById("docentes");
 
             if (docentes.length > 0){
-                docentesHtml.innerHTML = `<option disabled>Seleccione los docentes</option>`;
+                docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
                 docentes.forEach((item, index) => {
                     console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
                     docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
                 });
                 $('#docentes').formSelect();
             }else{
-                console.log('no hay docentes');
+                docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
             }
 
 

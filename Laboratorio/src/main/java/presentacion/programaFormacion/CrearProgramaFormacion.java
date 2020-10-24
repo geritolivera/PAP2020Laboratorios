@@ -99,10 +99,11 @@ public class CrearProgramaFormacion extends JInternalFrame {
         Date fFin = this.dateChooserFin.getDate();
         String descripcion = this.inputDescripcion.getText();
         Date fInicio = this.dateChooserInicio.getDate();
-       
+        String url = "";
         if (checkFormulario()) {
         	try {
-	        	this.iconCurso.crearProgramaFormacion(nombre, descripcion, fInicio, fFin, fActual);
+	        	this.iconCurso.crearProgramaFormacion(nombre, descripcion, fInicio, fFin, fActual, url
+				);
 	        	JOptionPane.showMessageDialog(this, "El Programa de Formacion se ha creado con exito", "Crear Programa Formacion",
 	            JOptionPane.INFORMATION_MESSAGE);
 	            limpiarFormulario();

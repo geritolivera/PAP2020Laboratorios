@@ -4,7 +4,8 @@ function crearPrograma(){
     const fechaI = document.querySelector("#fechaInicio").value;
     const fechaF = document.querySelector("#fechaFin").value;
     const desc = document.querySelector("#desc").value;
-    const url = "/resources/images/img2.jpg";
+    const url = document.querySelector("#url").value;
+    console.log (url)
     const fetchUrl = 'altaProgramaFormacion?nombre=' + nombre +
         '&desc=' + desc +
         '&fechaI=' + fechaI +
@@ -47,7 +48,7 @@ function crearCurso() {
     const creditos =  document.querySelector("#creditos").value;
     const url =  document.querySelector("#url").value;
     const instituto =  document.querySelector("#institutos").value;
-
+    const imagen = document.querySelector("#imagen").value;
 
     cursosprevios = Array.from(previas.selectedOptions).map( previa => previa.value);
     console.log( "previas: " , cursosprevios);
@@ -65,7 +66,8 @@ function crearCurso() {
         '&url=' + url +
         '&instituto=' + instituto +
         '&previas=' + cursosprevios +
-        '&categorias=' + categoria;
+        '&categorias=' + categoria +
+        '&imagen=' + imagen;
 
     fetch(fetchUrl, {
         method: 'POST',
@@ -101,8 +103,8 @@ function usuario() {
     const fechan = document.querySelector("#fechaNacimiento").value;
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
+    const url = document.querySelector("#url").value;
     let fetchUrl;
- 
     if(tipoUser == 'estudiante') {
         fetchUrl = 'crearUsuario?nickName=' + nick +
             '&nombre=' + nombre +
@@ -110,7 +112,8 @@ function usuario() {
             '&correo=' + correo +
             '&password=' + passwd +
             '&fechaN=' + fechan +
-            '&tipoUser=' + tipoUser;
+            '&tipoUser=' + tipoUser +
+            '&imagen='+ url;
 
         fetch(fetchUrl, {
             method: 'POST'
@@ -141,6 +144,7 @@ function usuario() {
             '&password=' + passwd +
             '&fechaN=' + fechan +
             '&tipoUser=' + tipoUser +
+            '&imagen='+ url +
             '&institutos=' + instituto;
         fetch(fetchUrl, {
             method: 'POST'
@@ -206,6 +210,7 @@ function crearEdicion() {
     const doc = document.querySelector("#docentes").value;
     docen = Array.from(docentes.selectedOptions).map( doc => doc.value);
     const cupo = document.querySelector("#cupo").value;
+    const url = document.querySelector("#url").value;
 
     const fetchUrl = 'altaEdicion?nombre=' + nombre +
         '&fechaI=' + fechaI +
@@ -213,7 +218,8 @@ function crearEdicion() {
         '&instituto=' + instituto +
         '&cursos=' + cursos +
         '&docentes=' + docen +
-        '&cupo=' + cupo;
+        '&cupo=' + cupo +
+        '&imagen=' + url;
 
     fetch(fetchUrl, {
         method: 'POST'

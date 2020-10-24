@@ -16,34 +16,31 @@
                 <div class="card material-table">
                     <div class="table-header">
                         <span class="table-title">Inscripciones</span>
+                        <div class="actions">
+                            <a href="#" class="search-toggle btn-flat nopadding"><i
+                                    class="material-icons prefix">search</i></a>
+                        </div>
                     </div>
-                    <form>
-                    	<input type="hidden" name="id" id="id"/>
-                    	<input type="hidden" name="edicion" id="edicion"/>
-                    	<input type="hidden" name="usuario" id="usuario"/>
-                    	<input type="hidden" name="estado" id="estado"/>                   
-                    	<input type="hidden" name="fecha" id="fecha"/>
-                    	<input type="hidden" name="prioridad" id="prioridad"/>
-	                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
-	                        <thead>
-	                            <tr>
-	                            
-	                            	<th></th>
-	                                <th>Edicion</th>
-	                                <th>Estudiante</th>
-	                                <th>Estado</th>
-	                                <th>Fecha de inscripcion</th>
-	                                <th>Prioridad</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody id="detallesIns">
-	                        
-	                        </tbody>
-	                        
-	                    </table>
-                    </form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aprobar inscripcion</th>
+                                <th>Edicion</th>
+                                <th>Estudiante</th>
+                                <th>Estado</th>
+                                <th>Fecha de inscripcion</th>
+                                <th>Prioridad</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="detallesIns">
+                        	<tr>
+	                        		
+                            </tr>
+                        </tbody>
+                        
+                    </table>
                 </div>
-                	<button type="submit" name="submit" class="btn-large waves-effect waves-light cyan darken-1">Confirmar</button>
             </div>
         </div>
             
@@ -53,15 +50,23 @@
   		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
 		<script src="resources/scripts/alta.js"> </script>		
     	<script src="resources/scripts/listas.js"> </script>
+        <script src="resources/scripts/scriptTable2.js"></script>
     <%@include  file="footer.jsp" %>
-    
 <script>
-
-	$(document).ready(function () {
+	
+	window.onload = function(){
 		tableInscripciones();
-	 });
-
+	}
 </script>

@@ -13,7 +13,9 @@ public class DTEdicionCurso {
 	private int cupo;
 	private Date fechaPub;
 	private String curso;
-	
+
+	private String imagenURL;
+
 	ArrayList<String> docentes = new ArrayList<>();
 	
 	public DTEdicionCurso() {
@@ -41,6 +43,8 @@ public class DTEdicionCurso {
 		for (Docente d:edicion.getDocentes()) {
 			this.docentes.add(d.getNick());
 		}
+		this.imagenURL = edicion.getImagenURL();
+
 	}
 	
 	public void setEdicionCurso(EdicionCurso edicion) {
@@ -50,6 +54,7 @@ public class DTEdicionCurso {
 		this.cupo = edicion.getCupo();
 		this.fechaPub = edicion.getFechaPub();
 		this.curso = edicion.getNomCurso();
+		this.imagenURL = edicion.getImagenURL();
 	}
 
 	public String getNombre() {
@@ -101,4 +106,11 @@ public class DTEdicionCurso {
 		return this.docentes;
 	}
 
+	public String getImagenURL() {
+		return imagenURL;
+	}
+
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
+	}
 }

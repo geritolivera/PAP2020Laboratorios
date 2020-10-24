@@ -44,6 +44,7 @@ public class altaEdicion extends HttpServlet {
 
         String[] docentes = request.getParameter("docentes").split(",");
         Integer cupo = Integer.parseInt(request.getParameter("cupo"));
+        String imagen = request.getParameter("url");
 
 
         //getParameterValues se usa para sacar un array de strings
@@ -78,7 +79,7 @@ public class altaEdicion extends HttpServlet {
 			request.setAttribute("mensaje", "Debe ingresar al menos un docente para dar de alta a la edicion");
 		} else {
 	        try {
-	            icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes);
+	            icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, today,cursos, listDocentes, imagen);
 	            respuesta.setCodigo(0);
 	            respuesta.setMensaje("La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
 	            request.setAttribute("mensaje", "La edicion " + nombre + " se ha ingresado correctamente en el sistema.");
