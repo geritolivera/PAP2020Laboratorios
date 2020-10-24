@@ -153,4 +153,12 @@ public class DTCurso {
 	public void setImagenURL(String imagenURL) {
 		this.imagenURL = imagenURL;
 	}
+
+	public String getImagenURL() {
+		return imagenURL;
+	}
+
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
+	}
 }

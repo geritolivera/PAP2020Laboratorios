@@ -1,4 +1,4 @@
-package main.webapp.WebContent.servlets.Gets;
+package main.webapp.WebContent.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
@@ -27,18 +27,9 @@ public class GetInscripcionesED extends HttpServlet {
         //HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        List<DTInscripcionED> inscripciones = iconu.listarInscripcionesED();
-        if(inscripciones == null)
-        	System.out.println("no hay nada amigo");
-        else {
-        	for(DTInscripcionED i: inscripciones) {
-        		System.out.println("HAY COSAS EN ESTO");
-        		System.out.println("edicion: " + i.getEdicion());
-        		System.out.println("usuario: " + i.getUsuario());
-        		System.out.println("fecha: " + i.getFecha());
-        		System.out.println("estado: " + i.getEstado());
-        	}
-        }
+        String edicion = request.getParameter("edicion");
+        System.out.println("edicion: " + edicion);
+        List<DTInscripcionED> inscripciones = iconu.listarInscripcionesED(edicion);
         try {
             request.setAttribute("dti", inscripciones);
         } catch (Exception e) {

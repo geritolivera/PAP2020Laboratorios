@@ -44,20 +44,31 @@ public class altaProgramaFormacion extends HttpServlet {
 		long fF = Date.parse(request.getParameter( "fechaF"));
 		Date fechaF = new Date(fF);
 		Date fechaA = Calendar.getInstance().getTime();
-		//fecha inicio
-
-		//tipoUser
-		try {
-			icon.crearProgramaFormacion(nombre, descripcion, fechaI, fechaF, fechaA, url);
-
-			respuesta.setCodigo(0);
-			respuesta.setMensaje("El programa " + nombre + " se ha ingresado correctamente en el sistema.");
-			request.setAttribute("mensaje", "El programa de formacion " + nombre + " se ha ingresado correctamente en el sistema.");
-		} catch (ProgramaFormacionExcepcion e) {
+		
+		if(nombre.equals("") || descripcion.equals("")) {
 			respuesta.setCodigo(1);
-			respuesta.setMensaje("El programa  " + nombre + " ya existe en el sistema.");
-			request.setAttribute("mensaje", "El programa de formacion " + nombre + " ya existe en el sistema.");
-			e.printStackTrace();
+			respuesta.setMensaje("No puede haber campos vacios");
+			request.setAttribute("mensaje", "No puede haber campos vacios");		
+		}else if(fechaA.compareTo(fechaF) > 0){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Ingresar una fecha de fin valida");
+			request.setAttribute("mensaje", "Ingresar una fecha de fin valida");	
+		} else if(fechaF.before(fechaI)){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("La fecha de inicio debe ser previa a la de finalizacion\"");
+			request.setAttribute("mensaje", "La fecha de inicio debe ser previa a la de finalizacion\"");
+		} else {		
+			try {
+				icon.crearProgramaFormacion(nombre, descripcion, fechaI, fechaF, fechaA, url);
+				respuesta.setCodigo(0);
+				respuesta.setMensaje("El programa " + nombre + " se ha ingresado correctamente en el sistema.");
+				request.setAttribute("mensaje", "El programa de formacion " + nombre + " se ha ingresado correctamente en el sistema.");
+			} catch (ProgramaFormacionExcepcion e) {
+				respuesta.setCodigo(1);
+				respuesta.setMensaje("El programa  " + nombre + " ya existe en el sistema.");
+				request.setAttribute("mensaje", "El programa de formacion " + nombre + " ya existe en el sistema.");
+				e.printStackTrace();
+			}
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String programaStr = mapper.writeValueAsString(respuesta);

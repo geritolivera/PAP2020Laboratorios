@@ -65,31 +65,45 @@ public class altaCurso extends HttpServlet {
 			listCategorias.add(su);
 		}
 		
-		try {
-			icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, listPrevias, listCategorias, imagen);
-			request.setAttribute("mensaje", "El curso " + nombre + " se ha ingresado correctamente en el sistema.");
-			respuesta.setCodigo(0);
-			respuesta.setMensaje("El curso " + nombre + " se ha ingresado correctamente en el sistema");
-		} catch (CursoExcepcion e) {
-			request.setAttribute("mensaje", "El curso de nombre " + nombre + " ya existe en el sistema.");
+		if(nombre.equals("") || descripcion.equals("") || url.equals("") || duracion.equals("0") || cantHoras == 0 || creditos == 0) {
 			respuesta.setCodigo(1);
-			respuesta.setMensaje("El curso " + nombre + " ya existe en el sistema");
-			respuesta.setElemento("nombre");
-			e.printStackTrace();
-		} catch (InstitutoExcepcion e) {
-			request.setAttribute("mensaje", "El instituto de nombre " + instituto + " no existe en el sistema.");
+			respuesta.setMensaje("No puede haber campos vacios");
+			request.setAttribute("mensaje", "No puede haber campos vacios");
+		} else if(instituto.equals("")){
 			respuesta.setCodigo(1);
-			respuesta.setMensaje("El instituto " + instituto + " no existe en el sistema");
-			respuesta.setElemento("instituto");
-			e.printStackTrace();
+			respuesta.setMensaje("Debe ingresar un instituto para dar de alta a un Curso");
+			request.setAttribute("mensaje", "Debe ingresar un instituto para dar de alta a un Curso");
+		} else if(listCategorias.contains("")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar al menos una categoria para dar de alta a un Curso");
+			request.setAttribute("mensaje", "Debe ingresar al menos una categoria para dar de alta a un Curso");
+		} else if(!url.contains("www") || !url.contains(".com")){
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("Debe ingresar una URL valida para dar de alta a un Curso");
+			request.setAttribute("mensaje", "Debe ingresar una URL valida para dar de alta a un Curso");
+		} else {
+			try {
+				icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, listPrevias, listCategorias, imagen);
+				request.setAttribute("mensaje", "El curso " + nombre + " se ha ingresado correctamente en el sistema.");
+				respuesta.setCodigo(0);
+				respuesta.setMensaje("El curso " + nombre + " se ha ingresado correctamente en el sistema");
+			} catch (CursoExcepcion e) {
+				request.setAttribute("mensaje", "El curso de nombre " + nombre + " ya existe en el sistema.");
+				respuesta.setCodigo(1);
+				respuesta.setMensaje("El curso " + nombre + " ya existe en el sistema");
+				respuesta.setElemento("nombre");
+				e.printStackTrace();
+			} catch (InstitutoExcepcion e) {
+				request.setAttribute("mensaje", "El instituto de nombre " + instituto + " no existe en el sistema.");
+				respuesta.setCodigo(1);
+				respuesta.setMensaje("El instituto " + instituto + " no existe en el sistema");
+				respuesta.setElemento("instituto");
+				e.printStackTrace();
+			}
 		}
-
 		ObjectMapper mapper = new ObjectMapper();
 		String cursoStr = mapper.writeValueAsString(respuesta);
-		System.out.println("La respuesta generada es: " + cursoStr);
-
 		response.setContentType("application/json");
 		response.getWriter().append(cursoStr);
-
 	}
 }

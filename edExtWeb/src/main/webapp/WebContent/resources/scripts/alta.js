@@ -388,6 +388,38 @@ function dejarSeguirUsuario(nickname) {
     });
 }
 
+function confirmarInscripcion(edicion, usuario, action) {
+    debugger;
+    console.log("la edicion es= " + edicion);
+    console.log("el usuario es= " + usuario);
+    console.log("la action es= " + action);
+    const fetchUrl = 'inscripcionConfirmar?edicion=' + edicion +
+        '&usuario=' + usuario +
+        '&action=' + action;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            mensajeConfirmacion("Inscripcion cambiada!", respuesta.mensaje).then(() => {
+
+                window.location = baseURL+ 'index.jsp';
+            })
+        } else {
+            mensajeError("Error al cambiar inscripcion", respuesta.mensaje).then(() => {
+                if(respuesta.elemento != null)
+                    document.getElementById(respuesta.elemento).focus();
+                }
+            )
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
 function testAlert(){
     swal({
         title: "¿Desea confirmar el alta?",

@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <input type="text" name="nombre" id="nombre">
-                                <label for="nombre">Nombre del programa</label>
+                                <label for="nombre">Nombre del Programa</label>
                             </div>
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">image</i>

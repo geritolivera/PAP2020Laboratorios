@@ -30,7 +30,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//3 - Modificar Datos de Usuario
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci);
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -76,8 +76,9 @@ public interface IcontroladorUsuario {
     public boolean validarSeguidor(String nickname, String nicknameSguidor);
     
     public boolean inscriptoPF(String nickname, String nomPrograma);
-    public boolean inscriptoED(String nickname, String nomEdicion);
+    public String inscriptoED(String nickname, String nomEdicion);
     
-    public List<DTInscripcionED> listarInscripcionesED();
+    public List<DTInscripcionED> listarInscripcionesED(String nomEdicion);
+    public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario);
     
 }

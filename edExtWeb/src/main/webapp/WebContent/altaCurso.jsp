@@ -34,15 +34,15 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s4">
-                                <input id="duracion" name="duracion" type="number" class="validate">
+                                <input id="duracion" name="duracion" type="number" class="validate" value="0">
                                 <label for="duracion">Duracion</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="cantHoras" name="cantHoras" type="number" class="validate">
+                                <input id="cantHoras" name="cantHoras" type="number" class="validate" value="0">
                                 <label for="cantHoras">Cantidad de Horas</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="creditos" name="creditos" type="number" class="validate">
+                                <input id="creditos" name="creditos" type="number" class="validate" value="0">
                                 <label for="creditos">Creditos</label>
                             </div>
                         </div>

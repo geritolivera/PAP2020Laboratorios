@@ -51,11 +51,11 @@
               <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
                 <input id="password" type="password" class="validate">
-                <label for="password">Contraseña</label>
+                <label for="password">ContraseÃ±a</label>
               </div>
               <div class="input-field col s6">
                 <input id="passwordValidacion" type="password" class="validate">
-                <label for="passwordValidacion">Repita contraseña</label>
+                <label for="passwordValidacion">Repita contraseÃ±a</label>
               </div>
             </div>
             <div class="row">
