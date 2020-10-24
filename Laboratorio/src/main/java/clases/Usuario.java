@@ -21,7 +21,8 @@ public abstract class Usuario {
 	private String correo;
 	private Date fechaNac;
 	private String password;
-	
+	private String imagenUrl;
+
 	//lista de usuarios a los que sigue
 	@OneToMany
 	private List<Usuario> sigue = new ArrayList<>();
@@ -103,5 +104,13 @@ public abstract class Usuario {
 			}
 		}
 		return seguidoresRet;
+	}
+
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
+
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
 	}
 }

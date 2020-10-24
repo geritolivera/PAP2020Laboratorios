@@ -15,11 +15,12 @@ public class Curso {
 	private int creditos;
 	private Date fechaR;
 	private String url;
+	private String imagenUrl;
 
 	//lista de cursos previos
+
 	@ManyToMany
 	private List<Curso> previas = new ArrayList<>();
-	
 	//lista de todos los programas de formacion
 	@ManyToMany
 	private List<ProgramaFormacion> programas = new ArrayList<>();
@@ -103,6 +104,7 @@ public class Curso {
 	public void setInstituto(Instituto instituto) {
 		this.instituto = instituto;
 	}
+
 	//se retorna la clase instituto
 	public Instituto getInstituto() {
 		return instituto;
@@ -143,5 +145,13 @@ public class Curso {
 	public void agregarCategoria(Categoria categoria) {
 		this.categorias.add(categoria);
 		categoria.agregarCurso(this);
+	}
+
+	public String getImagenUrl() {
+		return imagenUrl;
+	}
+
+	public void setImagenUrl(String imagenUrl) {
+		this.imagenUrl = imagenUrl;
 	}
 }

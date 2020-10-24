@@ -35,6 +35,7 @@ public class DTProgramaFormacion {
 		this.fechaI = programa.getFechaI();
 		this.fechaF = programa.getFechaF();
 		this.fechaA = programa.getFechaA();
+		this.imagenURL = programa.getImagenURL();
 	}
 	
 	public String getNombre() {

@@ -13,7 +13,8 @@ public class DTUsuario {
 	private String correo;
 	private Date fechaNac;
 	private String password;
-	
+	private String image;
+
 	ArrayList<String> seguidores = new ArrayList<>();
 	ArrayList<String> seguidos = new ArrayList<>();
 	
@@ -42,7 +43,7 @@ public class DTUsuario {
 		for (Usuario usu:usuario.getSigue()){
 			this.seguidos.add(usu.getNick());
 		}
-
+		this.image = usuario.getImagenUrl();
 	}
 	
 	public String getNick() {
@@ -93,5 +94,12 @@ public class DTUsuario {
 	public ArrayList<String> getSeguidores() {
 		return this.seguidores;
 	}
-	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 }

@@ -34,15 +34,15 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s4">
-                                <input id="duracion" name="duracion" type="number" class="validate">
+                                <input id="duracion" name="duracion" type="number" class="validate" value="0">
                                 <label for="duracion">Duracion</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="cantHoras" name="cantHoras" type="number" class="validate">
+                                <input id="cantHoras" name="cantHoras" type="number" class="validate" value="0">
                                 <label for="cantHoras">Cantidad de Horas</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="creditos" name="creditos" type="number" class="validate">
+                                <input id="creditos" name="creditos" type="number" class="validate" value="0">
                                 <label for="creditos">Creditos</label>
                             </div>
                         </div>
@@ -53,9 +53,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col s6">
                                 <input id="url" type="text" name="url" class="validate">
                                 <label for="url">URL</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">image</i>
+                                <input type="text" id="imagen">
+                                <label for="imagen">Imagen de la edicion</label>
                             </div>
                         </div>
                         <div class="row">
@@ -86,16 +91,22 @@
 
 <script>
     $(document).ready(function () {
+        getPrevias();
 	    $('#previas').formSelect();
-	    $('#institutos').formSelect();
-	    $('#categorias').formSelect();
+        getInstitutos();
+        $('#institutos').formSelect();
+        getCategorias();
+        $('#categorias').formSelect();
     });
-    
-    window.onload = function(){
-    	getPrevias();
-    	getInstitutos();
-    	getCategorias();
-    }
+    $('#imagen').change(function (){
+        document.getElementById('download')
+        var link = document.createElement('a');
+        link.href = document.querySelector("#imagen").value;
+        link.download = document.querySelector("#imagen").value;
+        document.body.appendChild(link);
+        link.click()
+        document.body.removeChild(link);
+    });
 
 </script>
 <script src="resources/scripts/listas.js"> </script>

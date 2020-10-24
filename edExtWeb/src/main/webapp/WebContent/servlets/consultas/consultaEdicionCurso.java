@@ -43,8 +43,7 @@ public class consultaEdicionCurso extends HttpServlet {
 		IcontroladorCurso icon = fab.getIcontroladorCurso();
 		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		String edicion = request.getParameter("edicion");
 		Date today = Calendar.getInstance().getTime();
 		DTEdicionCurso dte = null;
@@ -61,6 +60,7 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaI", fechaI);
 			request.setAttribute("fechaF", fechaF);
 			request.setAttribute("fechaPub", fechaPub);
+			request.setAttribute("imagen", dte.getImagenURL());
 			String cupo = "Si";
 			if(dte.getCupo() <= 0)
 				cupo = "No";

@@ -1,4 +1,4 @@
-package main.webapp.WebContent.servlets;
+package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
@@ -11,35 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet("/GetDocInst")
-public class GetDocInst extends HttpServlet {
+@WebServlet("/GetPrevias")
+public class GetPrevias extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
+        ArrayList<String> previas = icon.listarCursos();
+        System.out.println("previas = " + previas);
 
         try {
-            String inst = request.getParameter("instituto");
-            java.util.ArrayList<String> docentes = icon.listarDocentesInstituto(inst);
-            System.out.println("instituto = " + inst);
-            System.out.println("docentes = " + docentes);
-            session.setAttribute("docentes", docentes);
-
-
-            String docentesStr = mapper.writeValueAsString(docentes);
-            System.out.println("	Los docentes que guardo son: " + docentesStr);
-
-            response.setContentType("application/json");
-            response.getWriter().append(docentesStr);
+        	request.setAttribute("previas", previas);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        ObjectMapper mapper = new ObjectMapper();
+        String previaStr = mapper.writeValueAsString(previas);
+        response.setContentType("application/json");
+        response.getWriter().append(previaStr);
     }
 }

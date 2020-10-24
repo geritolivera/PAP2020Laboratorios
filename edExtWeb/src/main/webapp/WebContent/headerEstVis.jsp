@@ -20,15 +20,15 @@
 <body>
 <div class="navbar-fixed">
     <nav class="rojo">
+        <a href="index.jsp" class="brand-logo">edExt</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index.jsp" class="brand-logo">edExt</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li class="rojo-rita">
-                        <form action="Busqueda" method="post" id="formBusqueda">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix" id="searchIcon" style="top: 0;">search</i>
+                    <li>
+                        <form  id="formBusqueda" >
+                            <div class="input-field col s12" >
+                                <i class="material-icons prefix" id="searchIcon" style="top: 0;" type="button" onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">search</i>
                                 <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
                             </div>
                         </form>
@@ -78,7 +78,6 @@
     <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
     <%}%>
 </ul>
-
 <script src="resources/scripts/log.js"></script>
 <script src="resources/scripts/alta.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

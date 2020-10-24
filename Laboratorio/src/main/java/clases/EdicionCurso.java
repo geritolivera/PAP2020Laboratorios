@@ -13,6 +13,9 @@ public class EdicionCurso {
 	private Date fechaF;
 	private int cupo;
 	private Date fechaPub;
+
+	private String imagenURL;
+
 	@ManyToOne
 	@JoinColumn(insertable = true, updatable = true)
 	private Curso curso;
@@ -118,4 +121,11 @@ public class EdicionCurso {
 		}
 	}
 
+	public String getImagenURL() {
+		return imagenURL;
+	}
+
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
+	}
 }
