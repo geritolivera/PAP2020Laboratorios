@@ -38,6 +38,7 @@
       String correo = (String) ses.getAttribute("correo");
       Date fechaN = (Date) ses.getAttribute("fechaNac");
 
+
       SimpleDateFormat fechaNa = new SimpleDateFormat("yyyy/MM/dd");
       String fechaNac = fechaNa.format(fechaN);
 
@@ -58,7 +59,7 @@
                     <div class="card">
                         <div class="card-image">
                         	 <!-- IMAGEN DEL USUARIO-->
-                            <img src="resources/images/img4.jpg">
+                            <img id="imagen" src="${imagen}">
                         </div>
                         <!-- COLLAPSIBLE USUARIO -->
                         <ul class="collapsible">
@@ -105,9 +106,6 @@
                 <div class="col s12 m9">
                 	<!-- TAB DE INFORMACION-->
                     <div id="cardInfo" class="card">
-                        <div class="card-content">
-                            <p><%=tipo%></p>
-                        </div>
                         <div class="card-tabs">
                             <ul class="tabs tabs-fixed-width">
                                 <li class="tab" class="active"><a href="#test1">Datos</a></li>
@@ -320,7 +318,7 @@
                 var fechaAlta = new Date(progSelected.fechaA).toLocaleDateString();
 
                 progHtml.innerHTML = `<div class="card-image">
-                                                <img src="`+ progSelected.imagenURL +`">
+                                                <img src="`+ progSelected.imagenURL +`" width="702.281" height="345.953">
                                             </div>`;
                 progHtml.innerHTML += `<div class="card-content">
                                                     <div class="row">`;

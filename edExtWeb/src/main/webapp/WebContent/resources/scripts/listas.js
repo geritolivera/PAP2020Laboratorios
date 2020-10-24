@@ -23,29 +23,6 @@ function getInstitutos(){
     });
 }
 
-function getUsuarios(){
-    url = baseURL +`GetUsuarios`
-
-    fetch(url, {
-        method: 'GET',
-    }).then((res)=>{
-        return res.json();
-    }).then((usuarios) => {
-
-        console.log('usuarios : ' +usuarios)
-        var usuariosHtml = document.getElementById("listaUsuarios");
-        if (usuarios.length > 0){
-            usuariosHtml.innerHTML = `<option value="" disabled selected>Seleccione el usuario</option>`;
-            usuarios.forEach((item, index) => {
-                usuariosHtml.innerHTML += `<option value="${item}">${item}</option>`;
-            });
-            $('#listaUsuarios').formSelect();
-        }else{
-            console.log('no hay estudiantes');
-        }
-    });
-}
-
 
 function getCategorias(){
     url = baseURL +`GetCategorias`
@@ -146,7 +123,7 @@ function obtenerCursosPorInstituto(instituto){
                 console.log('no hay cursos');
             }
         }).catch(error => console.log(' 1) eerr ', error));
-    //obtenerDocentesPorInstituto(instituto);
+
 
 }
 
@@ -163,14 +140,14 @@ function obtenerDocentesPorInstituto(instituto){
             var docentesHtml = document.getElementById("docentes");
 
             if (docentes.length > 0){
-                docentesHtml.innerHTML = `<option disabled>Seleccione los docentes</option>`;
+                docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
                 docentes.forEach((item, index) => {
                     console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
                     docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
                 });
                 $('#docentes').formSelect();
             }else{
-                console.log('no hay docentes');
+                docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
             }
 
 
@@ -430,19 +407,18 @@ function collectionSeguidos(){
     ).then(seguidos => {
         console.log("seguidos:", seguidos);
         var seguidosHtml = document.getElementById("seguido");
-        seguidosHtml.innerHTML = '<li class="collection-header">\n' +
-            '    <h10>Seguidos</h10>\n' +
-            '</li>';
+        seguidosHtml.innerHTML ='<li class="collection-header">\n' +
+                                '    <h10>Seguidos</h10>\n' +
+                                '</li>';
         if (seguidos.length > 0){
             seguidos.forEach((item, index) => {
                 seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="dejarSeguirUsuario('${item}')"><i class="material-icons" type="button">delete_forever</i></a></div></li>`;
             });
         }else{
             seguidosHtml.innerHTML += `<li class="collection-item">No sigue a nadie aun.</li>`;
-            console.log('no hay seguidos');
+
         }
     }).catch(error => console.log(' 1) eerr ', error));
-    //obtenerDocentesPorInstituto(instituto);
 }
 
 function tableInscripciones(){

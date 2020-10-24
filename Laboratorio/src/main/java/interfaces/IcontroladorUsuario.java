@@ -19,7 +19,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuario
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto,String password) throws UsuarioExcepcion;
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto,String password, String url) throws UsuarioExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/

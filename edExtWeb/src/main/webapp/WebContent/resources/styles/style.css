@@ -6,7 +6,9 @@
    color: #fff;
    font-size: 1.0625em;
 }
-
+.nav ul a {
+display: flex;
+}
 body {
     display: flex;
     min-height: 100vh;
@@ -39,7 +41,8 @@ li.active:hover .collapsible-header{
 }
 
 .container{
-  vertical-align: middle;
+    width: 95%;
+    vertical-align: middle;
 }
 
 .card_panel{

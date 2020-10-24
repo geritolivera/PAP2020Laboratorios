@@ -13,23 +13,26 @@ public class EdicionCurso {
 	private Date fechaF;
 	private int cupo;
 	private Date fechaPub;
+
+	private String imagenURL;
+
 	@ManyToOne
 	@JoinColumn(insertable = true, updatable = true)
 	private Curso curso;
 	/*@ManyToMany (mappedBy ="ediciones")
 	@Column(nullable = true)
 	private List<Estudiante> estudiantes = new ArrayList<>();*/
-
 	@ManyToMany (mappedBy ="ediciones")
 	private List<Docente> docentes = new ArrayList<>();
+
 	@OneToMany(mappedBy = "edicion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<InscripcionED> inscripciones = new ArrayList<>();
 
 
-	
 	public EdicionCurso() {
 		super();
 	}
+
 	public EdicionCurso(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso) {
 		super();
 		this.nombre = nombre;
@@ -39,59 +42,58 @@ public class EdicionCurso {
 		this.fechaPub = fechaPub;
 		this.curso = curso;
 	}
-	
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 	public Date getFechaI() {
 		return fechaI;
 	}
+
 	public void setFechaI(Date fechaI) {
 		this.fechaI = fechaI;
 	}
-	
 	public Date getFechaF() {
 		return fechaF;
 	}
+
 	public void setFechaF(Date fechaF) {
 		this.fechaF = fechaF;
 	}
-	
 	public int getCupo() {
 		return cupo;
 	}
+
 	public void setCupo(int cupo) {
 		this.cupo = cupo;
 	}
-	
 	public Date getFechaPub() {
 		return fechaPub;
 	}
+
 	public void setFechaPub(Date fechaPub) {
 		this.fechaPub = fechaPub;
 	}
-	
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+
 	public Curso getCurso() {
 		return curso;
 	}
 	public String getNomCurso() {
 		return curso.getNombre();
 	}
-	
+
 //	public void agregarEstudiante(Estudiante estudiante) {
 //		estudiantes.add(estudiante);
 //	}
 //	public List<Estudiante> getEstudiantes() {
 //		return estudiantes;
 //	}
-
 	public List<Docente> getDocentes() {
 		return docentes;
 	}
@@ -105,6 +107,7 @@ public class EdicionCurso {
 		InscripcionED ins = new InscripcionED(fecha, est, this, InscripcionEnum.PENDIENTE);
 		inscripciones.add(ins);
 	}
+
 	public List<InscripcionED> getInscripciones(){
 		return inscripciones;
 	}
@@ -118,4 +121,11 @@ public class EdicionCurso {
 		}
 	}
 
+	public String getImagenURL() {
+		return imagenURL;
+	}
+
+	public void setImagenURL(String imagenURL) {
+		this.imagenURL = imagenURL;
+	}
 }

@@ -71,6 +71,13 @@
                 <label id="lblInstituto">Instituto</label>
               </div>
             </div>
+            <div class="row">
+              <div class="input-field col s6">
+                  <i class="material-icons prefix">image</i>
+                  <input type="text" id="imagen">
+                  <label for="imagen">Imagen de la edicion</label>
+              </div>
+            </div>
             <div class="center-align">
               <button class="btn waves-effect waves-light rojo" type="button" name="action" onclick="usuario()">Crear
                 <i class="material-icons right">send</i>
@@ -110,6 +117,16 @@
         }
 
       });
-</script>
+      $('#imagen').change(function (){
+        document.getElementById('download')
+        var link = document.createElement('a');
+        link.href = document.querySelector("#imagen").value;
+        link.download = document.querySelector("#imagen").value;
+        document.body.appendChild(link);
+        link.click()
+        document.body.removeChild(link);
+      });
+
+ </script>
 <script src="resources/scripts/listas.js"> </script>
 <script src="resources/scripts/alta.js"> </script>

@@ -12,6 +12,7 @@
     <br><br>
     <div class="container">
         <div class="row">
+            <h4 class="header2"> <span style="color: #81054b">></span>Consulta de Edicion</h4>
             <div class="input-field col s6">
                 <div>
                     <label>Instituto</label>
@@ -46,7 +47,7 @@
 
     $(document).ready(function () {
         $('#institutos').formSelect();
-        $('#categorias').formSelect();
+        $('#curso').formSelect();
     });
     $("#institutos").on("change", function() {
         obtenerCursosPorInstituto(document.querySelector("#institutos").value);

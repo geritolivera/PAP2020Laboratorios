@@ -26,6 +26,7 @@ public class DTDocente extends DTUsuario{
 		this.setApellido(dtu.getApellido());
 		this.setCorreo(dtu.getCorreo());
 		this.setFechaNac(dtu.getFechaNac());
+		this.setImage(dtu.getImage());
 		this.seguidos = dtu.getSeguidos();
 		this.seguidores = dtu.getSeguidores();
 	}
@@ -36,6 +37,7 @@ public class DTDocente extends DTUsuario{
 		this.setApellido(user.getApellido());
 		this.setCorreo(user.getCorreo());
 		this.setFechaNac(user.getFechaNac());
+		this.setImage(user.getImagenUrl());
 
 	}
 

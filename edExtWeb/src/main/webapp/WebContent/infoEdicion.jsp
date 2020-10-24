@@ -17,12 +17,13 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="resources/images/img2.jpg">
+                            <img src="${imagen}">
                             <span class="card-title" id="nombre">${nombre}</span>
                             <!-- -Aca se pone el a si es vigente -->
                             <%
-	                            String tipoUser = (String) session.getAttribute("tipoUser");
-                            	Boolean userLog = (Boolean) request.getAttribute("userLog");
+                                Boolean userLog = (Boolean) request.getAttribute("userLog");
+                                if(userLog){
+                                String tipoUser = (String) session.getAttribute("tipoUser");
 	                        	String vigencia = (String) request.getAttribute("vigencia");
 	                        	if(userLog && tipoUser.equals("estudiante") && vigencia.equals("Si")){
 	                        		Boolean inscripto = (Boolean) request.getAttribute("inscripto");
@@ -37,7 +38,7 @@
                             	<a class="btn disabled">Inscripto</a>
                             </div>
                             	<%}
-							}%>
+							}}%>
                         </div>
                         <ul id="dataEdicion" class="collection">
                             <li class="collection-item">
@@ -91,11 +92,14 @@
                         </div>
                     </div>
                 </div>
-                <% if(tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
+                <% if(userLog){
+                    String tipoUser = (String) session.getAttribute("tipoUser");
+                    String vigencia = (String) request.getAttribute("vigencia");
+                    if(tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
                <div class="row center">
 	            <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
             	</div>
-                <%}%>
+                <%}}%>
             </div>
             
             <div class="row" style="display: none;" id="containerEstudiantes">
@@ -183,5 +187,5 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
         <script src="resources/scripts/scriptTable2.js"></script>
-		<script src="resources/scripts/alta.js"> </script>		
+		<script src="resources/scripts/alta.js"></script>
     <%@include  file="footer.jsp" %>
