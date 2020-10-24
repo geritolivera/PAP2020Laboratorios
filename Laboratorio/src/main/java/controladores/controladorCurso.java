@@ -99,6 +99,7 @@ public class controladorCurso implements IcontroladorCurso{
 		List<ProgramaFormacion> programas = new ArrayList<>();
 		List<Curso> previas = new ArrayList<>();
 		List<Categoria> categorias = new ArrayList<>();
+		System.out.println("mCur.existeCurso(nomCurso) = " + mCur.existeCurso(nomCurso));
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
@@ -425,13 +426,14 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override //Listados para comboBoxes
 	public ArrayList<String> listarCursosAux(String nombreInstituto){
 		manejadorCurso mC = manejadorCurso.getInstancia();
-		List<Curso> cursos =(List<Curso>) mC.getCursos();
-		ArrayList<String>cursosRet = new ArrayList<>();
+		List<Curso> cursos = mC.getCursos();
+		ArrayList<String> cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
 			if((c.getInstituto().getNombre()!= null)&&(c.getInstituto().getNombre().equals(nombreInstituto))) {
 				cursosRet.add(c.getNombre());
 			}
 		}
+		System.out.println("cursosRet = " + cursosRet);
 		return cursosRet;
 	}
 

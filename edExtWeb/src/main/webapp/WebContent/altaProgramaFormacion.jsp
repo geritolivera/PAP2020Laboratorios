@@ -68,7 +68,7 @@
         link.href = document.querySelector("#url").value;
         link.download = document.querySelector("#url").value;
         document.body.appendChild(link);
-        link.click()
+
         document.body.removeChild(link);
     });
  </script>

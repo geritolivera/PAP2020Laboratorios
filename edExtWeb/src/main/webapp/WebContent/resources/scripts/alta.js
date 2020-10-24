@@ -104,7 +104,7 @@ function usuario() {
     const fechan = document.querySelector("#fechaNacimiento").value;
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
-    const url = document.querySelector("#url").value;
+    const url = document.querySelector("#imagen").value;
     let fetchUrl;
     if(tipoUser == 'estudiante') {
         fetchUrl = 'crearUsuario?nickName=' + nick +
@@ -263,7 +263,7 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'consultaProgramaFormacion?programa='+ nomPrograma;
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {

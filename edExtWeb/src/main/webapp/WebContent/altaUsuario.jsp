@@ -51,11 +51,11 @@
               <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
                 <input id="password" type="password" class="validate">
-                <label for="password">ContraseÃ±a</label>
+                <label for="password">Contraseña</label>
               </div>
               <div class="input-field col s6">
                 <input id="passwordValidacion" type="password" class="validate">
-                <label for="passwordValidacion">Repita contraseÃ±a</label>
+                <label for="passwordValidacion">Repita contraseña</label>
               </div>
             </div>
             <div class="row">
@@ -123,7 +123,6 @@
         link.href = document.querySelector("#imagen").value;
         link.download = document.querySelector("#imagen").value;
         document.body.appendChild(link);
-        link.click()
         document.body.removeChild(link);
       });
 

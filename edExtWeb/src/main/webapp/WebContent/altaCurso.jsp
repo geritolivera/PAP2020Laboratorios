@@ -104,7 +104,6 @@
         link.href = document.querySelector("#imagen").value;
         link.download = document.querySelector("#imagen").value;
         document.body.appendChild(link);
-        link.click()
         document.body.removeChild(link);
     });
 

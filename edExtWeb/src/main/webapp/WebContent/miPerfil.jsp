@@ -372,31 +372,37 @@
                 var fechaFin = new Date(ediSelected.fechaF).toLocaleDateString();
                 var fechaPublic = new Date(ediSelected.fechaPub).toLocaleDateString();
 
-                edicionHtml.innerHTML = `<div class="row">`;
+                edicionHtml.innerHTML = `<div class="card-image">
+                                                <img src="`+ ediSelected.imagenURL +`" width="702.281" height="345.953">
+                                            </div>`;
+                edicionHtml.innerHTML += `<div class="card-content">
+                                                    <div class="row">`;
                 edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Nombre</div>`;
                 edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.nombre +`</div>`;
                 edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Descripcion</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaInicio + `</div>`;
+                edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML +=`<div class="row">`;
                 edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Inicio</div>`;
-                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ fechaInicio +`</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">`+ fechaFin +`</div>`;
                 edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
                 edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Fin`;
                 edicionHtml.innerHTML +=`</div>`;
-                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaFin + `</div>`;
+                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaPublic + `</div>`;
                 edicionHtml.innerHTML +=`</div>`;
                 edicionHtml.innerHTML +=`<div class="row">`;
-                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Publicacion</div>`;
-                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + fechaPublic +`</div>`;
-                edicionHtml.innerHTML +=`</div>`;
-                edicionHtml.innerHTML +=`<div class="row">`;
-                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Cupo</div>`;
+                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Fecha de Alta</div>`;
                 edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` + ediSelected.cupo +`</div>`;
                 edicionHtml.innerHTML +=`</div>`;
-                edicionHtml.innerHTML +=`<div class="row">`;
-                edicionHtml.innerHTML +=`<div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Curso</div>`;
-                edicionHtml.innerHTML +=`<div class="col s7 grey-text text-darken-4 right-align">` +ediSelected.nomCurso + `</div>`;
-                edicionHtml.innerHTML +=`</div>`;
+                edicionHtml.innerHTML += ` </div>
+                                            <div class="card-action">
+                                                <a href="consultaEdicionCurso?edicion=`+ ediSelected.nombre +`">Ir a la Edicion</a>
+                                            </div>
+                                        </div>`
 
             })
         }
