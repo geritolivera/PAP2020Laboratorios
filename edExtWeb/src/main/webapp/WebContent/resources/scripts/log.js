@@ -1,4 +1,4 @@
-var url = 'http://localhost:8081/edExtWeb/'
+var baseurl = 'http://localhost:8081/edExtWeb/'
 function inicioSesion(){
     Swal.fire({
         title: 'Inicia Sesion',
@@ -16,7 +16,7 @@ function inicioSesion(){
     }).then((result) => {
         let username = Swal.getPopup().querySelector('#username').value
         let password = Swal.getPopup().querySelector('#password').value
-        var urlLogin = url + 'login?nickname='+ username +'&password=' + password;
+        var urlLogin = baseurl + 'login?nickname='+ username +'&password=' + password;
         fetch(urlLogin, {
             method: 'POST',
         }).then((res) => {
@@ -41,7 +41,7 @@ function inicioSesion(){
 
 
 function logout(){
-    var urlLogout = url + 'logout';
+    var urlLogout = baseurl + 'logout';
     fetch(urlLogout, {
         method: 'GET',
     }).then((res) => {

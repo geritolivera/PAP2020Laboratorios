@@ -348,7 +348,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     }
     
     @Override
-    public boolean inscriptoED(String nickname, String nomEdicion) {
+    public String inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
     	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
@@ -388,7 +388,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	EntityManager em = con.getEntityManager();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	for(InscripcionED i: inscripciones) {
-    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNombreUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
+    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNickUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
 	    		if(cambio.equals("aceptar"))
 	    			i.setEstado(InscripcionEnum.ACEPTADO);
 	    		else

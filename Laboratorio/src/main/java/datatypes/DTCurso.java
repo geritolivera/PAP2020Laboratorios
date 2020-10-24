@@ -154,11 +154,4 @@ public class DTCurso {
 		this.imagenURL = imagenURL;
 	}
 
-	public String getImagenURL() {
-		return imagenURL;
-	}
-
-	public void setImagenURL(String imagenURL) {
-		this.imagenURL = imagenURL;
-	}
 }
