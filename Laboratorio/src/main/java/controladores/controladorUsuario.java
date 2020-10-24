@@ -267,7 +267,8 @@ public class controladorUsuario implements IcontroladorUsuario {
 			em.getTransaction().commit();
 		}
     }
-
+	
+	@Override
     public ArrayList<String> listarSeguidores(String nickname){
     	ArrayList<String> seguidores = new ArrayList<String>();
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -282,6 +283,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return seguidores;
     }
 	
+    @Override
     public ArrayList<String> listarSeguidos(String nickname){
     	ArrayList<String> sigue = new ArrayList<String>();
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -296,6 +298,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return sigue;
     }
     
+    @Override
     public boolean validarSigue(String nickname, String nicknameSigue) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
 
@@ -314,6 +317,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return false;
     }
     
+    @Override
     public boolean validarSeguidor(String nickname, String nicknameSguidor) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSguidor)) {
@@ -328,6 +332,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return false;
     }
     
+    @Override
     public boolean inscriptoPF(String nickname, String nomPrograma) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
@@ -340,6 +345,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
+    @Override
     public boolean inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
@@ -352,6 +358,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
+    @Override
     public List<DTInscripcionED> listarInscripcionesED(){
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
@@ -363,6 +370,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return listIns;
     }
     
+    @Override
     public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario) {
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	Conexion con = Conexion.getInstancia();

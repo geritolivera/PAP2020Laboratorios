@@ -80,4 +80,6 @@ public interface IcontroladorUsuario {
     
     public List<DTInscripcionED> listarInscripcionesED();
     
+    public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario);
+    
 }
