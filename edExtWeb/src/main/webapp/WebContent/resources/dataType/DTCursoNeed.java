@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class DTCursoNeed {
 
     private static String tipo = "Curso";
-    private ArrayList<String> nombre;
-    private ArrayList<String> descripcion;
+    private String nombre;
+    private String descripcion;
 
     public DTCursoNeed() {
     }
 
-    public DTCursoNeed(ArrayList<String> nombre, ArrayList<String> descripcion) {
+    public DTCursoNeed(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
@@ -24,19 +24,19 @@ public class DTCursoNeed {
         return tipo;
     }
 
-    public ArrayList<String> getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(ArrayList<String> nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public ArrayList<String> getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(ArrayList<String> descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
