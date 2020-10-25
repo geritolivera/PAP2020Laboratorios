@@ -152,10 +152,6 @@
                     <div class="card material-table">
                         <div class="table-header">
                             <span class="table-title">Estudiantes Aceptados</span>
-                            <div class="actions">
-                                <a href="#" class="search-toggle btn-flat nopadding" name="input"><i
-                                        class="material-icons prefix" >search</i></a>
-                            </div>
                         </div>
                         <table id="datatable">
                             <thead>

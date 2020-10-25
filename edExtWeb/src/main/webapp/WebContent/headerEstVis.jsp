@@ -42,6 +42,9 @@
                     <li>
                         <a href="consultaEdicion.jsp">Ediciones</a>
                     </li>
+                    <li>
+                        <a href="consultaUsuario.jsp">Usuarios</a>
+                    </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
                     <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>

@@ -3,7 +3,8 @@ function inicioSesion(){
     Swal.fire({
         title: 'Inicia Sesion',
         html: '<input type="text" id="username" class="swal2-input" placeholder="Enter your username"></input>' +
-            '<input type="password" id="password" class="swal2-input" placeholder="Enter your password"></input>',
+            '<input type="password" id="password" class="swal2-input" placeholder="Enter your password"></input>'+
+            '<a href="altaUsuario.jsp">Quiero registrarme!</a>',
         confirmButtonText: 'Ingresar',
         style: "resources/styles/style.css",
         preConfirm: () => {

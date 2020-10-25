@@ -6,7 +6,7 @@ function crearPrograma(){
     const fechaF = document.querySelector("#fechaFin").value;
     const desc = document.querySelector("#desc").value;
     const url = document.querySelector("#url").value;
-    console.log (url)
+    console.log(url)
     const fetchUrl = 'altaProgramaFormacion?nombre=' + nombre +
         '&desc=' + desc +
         '&fechaI=' + fechaI +
@@ -15,7 +15,7 @@ function crearPrograma(){
 
     fetch(fetchUrl, {
         method: 'POST',
-    }).then( ( res ) => {
+    }).then((res) => {
         return res.json();
         console.log(`que me devolviste papei `, res);
     }).then((respuesta) => {
@@ -25,17 +25,18 @@ function crearPrograma(){
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Programa dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL + 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if(respuesta.elemento != null)
+                if (respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-                }
+            }
             )
         }
     }).catch((err) => {
-        console.error(' paso algo: ', err); } )
+        console.error(' paso algo: ', err);
+    })
 
 }
 
@@ -45,15 +46,15 @@ function crearCurso() {
     const nombre = document.querySelector("#nombre").value;
     const desc = document.querySelector("#desc").value;
     const duracion = document.querySelector("#duracion").value;
-    const cantHoras =  document.querySelector("#cantHoras").value;
-    const creditos =  document.querySelector("#creditos").value;
-    const url =  document.querySelector("#url").value;
-    const instituto =  document.querySelector("#institutos").value;
+    const cantHoras = document.querySelector("#cantHoras").value;
+    const creditos = document.querySelector("#creditos").value;
+    const url = document.querySelector("#url").value;
+    const instituto = document.querySelector("#institutos").value;
     const imagen = document.querySelector("#imagen").value;
 
-    cursosprevios = Array.from(previas.selectedOptions).map( previa => previa.value);
-    console.log( "previas: " , cursosprevios);
-    categoria = Array.from(categorias.selectedOptions).map( cate => cate.value);
+    cursosprevios = Array.from(previas.selectedOptions).map(previa => previa.value);
+    console.log("previas: ", cursosprevios);
+    categoria = Array.from(categorias.selectedOptions).map(cate => cate.value);
 
     console.log('canthoras: ', cantHoras);
     console.log('creditos: ', creditos);
@@ -72,7 +73,7 @@ function crearCurso() {
 
     fetch(fetchUrl, {
         method: 'POST',
-    }).then( ( res ) => {
+    }).then((res) => {
         return res.json();
         console.log(`que me devolviste papei `, res);
     }).then((respuesta) => {
@@ -82,17 +83,18 @@ function crearCurso() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL + 'index.jsp';
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if(respuesta.elemento != null)
+                if (respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
-                }
+            }
             )
         }
     }).catch((err) => {
-        console.error(' paso algo: ', err); } )
+        console.error(' paso algo: ', err);
+    })
 }
 
 function usuario() {
@@ -101,74 +103,88 @@ function usuario() {
     const apellido = document.querySelector("#apellido").value;
     const correo = document.querySelector("#email").value;
     const passwd = document.querySelector("#password").value;
+    const passwd2 = document.querySelector("#passwordValidacion").value;
     const fechan = document.querySelector("#fechaNacimiento").value;
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
     const url = document.querySelector("#imagen").value;
     let fetchUrl;
-    if(tipoUser == 'estudiante') {
-        fetchUrl = 'crearUsuario?nickName=' + nick +
-            '&nombre=' + nombre +
-            '&apellido=' + apellido +
-            '&correo=' + correo +
-            '&password=' + passwd +
-            '&fechaN=' + fechan +
-            '&tipoUser=' + tipoUser +
-            '&imagen='+ url;
 
-        fetch(fetchUrl, {
-            method: 'POST'
-        }).then((res) => {
-            return res.json();
-        }).then((respuesta) => {
-            respuesta.codigo //1 o 0
-            respuesta.mensaje //mensaje de error o success
-            if (respuesta.codigo == 0) {
-                mensajeConfirmacion("Estudiante dado de alta!", respuesta.mensaje).then(() => {
-                    // rediraccinar a otro jsp.
-                    window.location = baseURL + 'index.jsp';
-                })
-            } else {
-                mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    if(respuesta.elemento != null)
-                        document.getElementById(respuesta.elemento).focus();
-                })
-            }
-        }).catch((err) => {
-            console.error(' paso algo: ', err);
-        });
-    }else{
-        fetchUrl = 'crearUsuario?nickName=' + nick +
-            '&nombre=' + nombre +
-            '&apellido=' + apellido +
-            '&correo=' + correo +
-            '&password=' + passwd +
-            '&fechaN=' + fechan +
-            '&tipoUser=' + tipoUser +
-            '&imagen='+ url +
-            '&institutos=' + instituto;
-        fetch(fetchUrl, {
-            method: 'POST'
-        }).then((res) => {
-            return res.json();
-        }).then((respuesta) => {
-            respuesta.codigo //1 o 0
-            respuesta.mensaje //mensaje de error o success
-            if (respuesta.codigo == 0) {
-                mensajeConfirmacion("Docente dado de alta!", respuesta.mensaje).then(() => {
-                    // rediraccinar a otro jsp.
-                    window.location = baseURL + 'index.jsp';
-                })
-            } else {
-                mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                    if(respuesta.elemento != null)
-                    document.getElementById(respuesta.elemento).focus();
-                })
-            }
-        }).catch((err) => {
-            console.error(' paso algo: ', err);
-        });
+    if (passwd2 != passwd) {
+        mensajeError("Error en alta", "Las contrase&ntilde;as deben coincidir!").then(() => {
+            document.getElementById(respuesta.elemento).focus();
+        })
+    } else if (passwd.length < 8) {
+        mensajeError("Error en alta", "La contrase&ntilde;a tiene que ser > 8 caracteres!").then(() => {
+            document.getElementById(respuesta.elemento).focus();
+        })
+    } else {
+        if (tipoUser == 'estudiante') {
+            fetchUrl = 'crearUsuario?nickName=' + nick +
+                '&nombre=' + nombre +
+                '&apellido=' + apellido +
+                '&correo=' + correo +
+                '&password=' + passwd +
+                '&fechaN=' + fechan +
+                '&tipoUser=' + tipoUser +
+                '&imagen=' + url;
+
+            fetch(fetchUrl, {
+                method: 'POST'
+            }).then((res) => {
+                return res.json();
+            }).then((respuesta) => {
+                respuesta.codigo //1 o 0
+                respuesta.mensaje //mensaje de error o success
+                if (respuesta.codigo == 0) {
+                    mensajeConfirmacion("Estudiante dado de alta!", respuesta.mensaje).then(() => {
+                        // rediraccinar a otro jsp.
+                        window.location = baseURL + 'index.jsp';
+                    })
+                } else {
+                    mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                        if (respuesta.elemento != null)
+                            document.getElementById(respuesta.elemento).focus();
+                    })
+                }
+            }).catch((err) => {
+                console.error(' paso algo: ', err);
+            });
+        } else {
+            fetchUrl = 'crearUsuario?nickName=' + nick +
+                '&nombre=' + nombre +
+                '&apellido=' + apellido +
+                '&correo=' + correo +
+                '&password=' + passwd +
+                '&fechaN=' + fechan +
+                '&tipoUser=' + tipoUser +
+                '&imagen=' + url +
+                '&institutos=' + instituto;
+            fetch(fetchUrl, {
+                method: 'POST'
+            }).then((res) => {
+                return res.json();
+            }).then((respuesta) => {
+                respuesta.codigo //1 o 0
+                respuesta.mensaje //mensaje de error o success
+                if (respuesta.codigo == 0) {
+                    mensajeConfirmacion("Docente dado de alta!", respuesta.mensaje).then(() => {
+                        // rediraccinar a otro jsp.
+                        window.location = baseURL + 'index.jsp';
+                    })
+                } else {
+                    mensajeError("Error en alta", respuesta.mensaje).then(() => {
+                        if (respuesta.elemento != null)
+                            document.getElementById(respuesta.elemento).focus();
+                    })
+                }
+            }).catch((err) => {
+                console.error(' paso algo: ', err);
+            });
+        }
     }
+
+
 }
 
 function crearEdicion() {

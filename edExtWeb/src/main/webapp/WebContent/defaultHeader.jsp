@@ -44,7 +44,7 @@
             <a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i class="material-icons right">arrow_drop_down</i></a>
+            <a href="consultaUsuario.jsp">Usuarios</a>
           </li>
           <li>
             <a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a>
@@ -93,15 +93,8 @@
             </div>
           </li>
           <li>
-            <a class="collapsible-header">Usuarios<i class="material-icons right">arrow_drop_down</i></a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="altaUsuario.jsp">Alta Usuario</a></li>
-                <li><a href="consultaUsuario.jsp">Buscar</a></li>
-                <li><a href="consultaUsuario.jsp">Seguir Usuario</a></li>
-              </ul>
-            </div>
-          </li>
+            <a href="consultaUsuario.jsp">Usuarios</a>
+        </li>
         </ul>
       </li>
     </ul>
@@ -119,11 +112,6 @@
     <ul id="dropdownEdicion" class="dropdown-content">
       <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
-    </ul>
-    <!-- Dropdown Usuario -->
-    <ul id="dropdownUsuario" class="dropdown-content">
-      <li><a href="altaUsuario.jsp">Alta</a></li>
-      <li><a href="consultaUsuario.jsp">Ver Usuarios</a></li>
     </ul>
   </li>
 </ul>

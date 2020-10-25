@@ -14,7 +14,7 @@
       <div class="row">
         <form class="col s12">
           <div class="card-panel">
-            <h4 class="header2"> <span style="color: #81054b">></span>Alta de Usuario</h4>
+            <h4 class="header2"> <span style="color: #81054b">></span>Registro de Usuario</h4>
             <div class="row">
               <div class="input-field col s6">
                 <input type="text" name="nickName" id="nickName">
@@ -51,11 +51,11 @@
               <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
                 <input id="password" type="password" class="validate">
-                <label for="password">Contraseña</label>
+                <label for="password">Contrase&ntilde;a</label>
               </div>
               <div class="input-field col s6">
                 <input id="passwordValidacion" type="password" class="validate">
-                <label for="passwordValidacion">Repita contraseña</label>
+                <label for="passwordValidacion">Repita contrase&ntilde;a</label>
               </div>
             </div>
             <div class="row">
