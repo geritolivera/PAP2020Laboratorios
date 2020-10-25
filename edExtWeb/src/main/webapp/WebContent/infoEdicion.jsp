@@ -95,7 +95,7 @@
                     </div>
                     <div class="collection" name="docentes" id="docentes">
                         <c:forEach var="docs" items="${docentes}">
-                            <a href="" class="collection-item">${docs}</a>
+                            <a class="collection-item">${docs}</a>
                         </c:forEach>
                     </div>
                 </div>

@@ -101,7 +101,8 @@
         $('#tipo').formSelect();
         getInstitutos()
         $('.datepicker').datepicker();
-        $("#lblInstituto").show();
+        $('#institutosSelect').hide();
+        $("#lblInstituto").hide();
 
       });
       $("#tipo").change(function () {

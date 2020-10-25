@@ -109,9 +109,13 @@ function usuario() {
     const instituto = document.querySelector("#institutos").value;
     const url = document.querySelector("#imagen").value;
     let fetchUrl;
-
-    if (passwd2 != passwd) {
-        mensajeError("Error en alta", "Las contrase&ntilde;as deben coincidir!").then(() => {
+    
+    if(fechan === ""){
+    	mensajeError("Error en alta", "No puede haber campos vacios").then(() => {
+            document.getElementById(respuesta.elemento).focus();
+        })
+    } else if (passwd2 != passwd) {
+        mensajeError("Error en alta", "Las passwords deben coincidir!").then(() => {
             document.getElementById(respuesta.elemento).focus();
         })
     } else if (passwd.length < 8) {

@@ -40,10 +40,12 @@ public class crearUsuario extends HttpServlet {
         String passwd = request.getParameter("password");
         String imagen = request.getParameter("imagen");
         //cambia la string a un date
+        
         long fN = Date.parse(request.getParameter( "fechaN"));
         Date fechaNac = new Date(fN);
         Date todayDate = Calendar.getInstance().getTime();
-
+        
+        
         DTResponse respuesta = new DTResponse();
         String tipoUser = request.getParameter("tipoUser");
         String instituto = request.getParameter("institutos");
