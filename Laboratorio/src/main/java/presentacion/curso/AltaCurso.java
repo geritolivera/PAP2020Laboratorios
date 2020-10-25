@@ -302,7 +302,7 @@ public class AltaCurso extends JInternalFrame {
 				try {
 					if (!instituto.isEmpty()) {
 						if (!nombreCurso.isEmpty()) {
-							this.iconC.AltaCurso(nombreCurso, descripcion, meses, duracion, cantCreditos, dateChooser, url, instituto, previas, categoriasSeleccionadas);
+							this.iconC.AltaCurso(nombreCurso, descripcion, meses, duracion, cantCreditos, dateChooser, url, instituto, previas, categoriasSeleccionadas, "");
 							JOptionPane.showMessageDialog(this, "El Curso se ha creado con exito", "Alta Curso", JOptionPane.INFORMATION_MESSAGE);
 							inicializarComboBoxInstituto();
 							limpiarFormulario();

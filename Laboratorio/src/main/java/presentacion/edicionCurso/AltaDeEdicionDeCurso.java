@@ -226,6 +226,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		Date dateF = this.dateFin.getDate();
 		String cupo = this.tfCupo.getText();
 		String curso = this.listCursos.getSelectedValue();
+		String url = "";
 		Date fechPubli = Calendar.getInstance().getTime();
 		ArrayList<String> docentes = new ArrayList<>();
 		if (!listaDocentes.getSelectedValuesList().isEmpty()) {
@@ -234,7 +235,7 @@ public class AltaDeEdicionDeCurso extends JInternalFrame {
 		}
 		if (checkFormulario()) {
 			try {
-				this.iconC.nuevosDatosEdicion(nomEd, dateI, dateF, Integer.parseInt(cupo), fechPubli, curso, docentes);
+				this.iconC.nuevosDatosEdicion(nomEd, dateI, dateF, Integer.parseInt(cupo), fechPubli, curso, docentes, url);
 				JOptionPane.showMessageDialog(this, "Edicion de curso " + nomEd + " se da de alta con exito ", "Alta Edicion de Curso", JOptionPane.INFORMATION_MESSAGE);
 				limpiarFormulario();
 				setVisible(false);

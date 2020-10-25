@@ -56,7 +56,9 @@ public class manejadorUsuario {
 	public List<Usuario> getUsuarios() {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		return em.createQuery("select u from Usuario u", Usuario.class).getResultList();
+		@SuppressWarnings("unchecked")
+		List<Usuario> retorno =	em.createQuery("select u from Usuario u", Usuario.class).getResultList();
+		return retorno;
 	}
 
 

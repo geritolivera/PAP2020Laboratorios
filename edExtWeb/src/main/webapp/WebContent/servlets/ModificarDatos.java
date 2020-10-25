@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -49,6 +50,7 @@ public class ModificarDatos extends HttpServlet {
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+		HttpSession session = request.getSession(false);
 		String nickname  = request.getParameter("nickname");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
@@ -60,6 +62,9 @@ public class ModificarDatos extends HttpServlet {
 		DTResponse respuesta = new DTResponse();
 		try {
 			icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
+			session.setAttribute("nombre", nombre);
+			session.setAttribute("apellido", apellido);
+			session.setAttribute("fechaNac", fechaNaci);
 			respuesta.setCodigo(0);
 			respuesta.setMensaje("El usuario " + nickname + " se ha modificado correctamente en el sistema.");
 			request.setAttribute("mensaje", "El usuario " + nickname + " se ha modificado correctamente en el sistema.");

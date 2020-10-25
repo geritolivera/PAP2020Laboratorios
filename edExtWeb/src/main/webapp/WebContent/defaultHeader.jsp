@@ -12,7 +12,6 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="resources/styles/styleTable.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
   <title>edExt</title>
 </head>
@@ -132,11 +131,6 @@
 
 
 <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
-  });
 
   // Or with jQuery
 

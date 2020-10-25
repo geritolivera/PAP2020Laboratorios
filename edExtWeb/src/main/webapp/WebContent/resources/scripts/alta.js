@@ -1,10 +1,12 @@
 var baseURL = 'http://localhost:8081/edExtWeb/';
 function crearPrograma(){
+    debugger
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
     const fechaF = document.querySelector("#fechaFin").value;
     const desc = document.querySelector("#desc").value;
-    const url = "/resources/images/img2.jpg";
+    const url = document.querySelector("#url").value;
+    console.log (url)
     const fetchUrl = 'altaProgramaFormacion?nombre=' + nombre +
         '&desc=' + desc +
         '&fechaI=' + fechaI +
@@ -47,7 +49,7 @@ function crearCurso() {
     const creditos =  document.querySelector("#creditos").value;
     const url =  document.querySelector("#url").value;
     const instituto =  document.querySelector("#institutos").value;
-
+    const imagen = document.querySelector("#imagen").value;
 
     cursosprevios = Array.from(previas.selectedOptions).map( previa => previa.value);
     console.log( "previas: " , cursosprevios);
@@ -65,7 +67,8 @@ function crearCurso() {
         '&url=' + url +
         '&instituto=' + instituto +
         '&previas=' + cursosprevios +
-        '&categorias=' + categoria;
+        '&categorias=' + categoria +
+        '&imagen=' + imagen;
 
     fetch(fetchUrl, {
         method: 'POST',
@@ -101,8 +104,8 @@ function usuario() {
     const fechan = document.querySelector("#fechaNacimiento").value;
     const tipoUser = document.querySelector("#tipo").value;
     const instituto = document.querySelector("#institutos").value;
+    const url = document.querySelector("#imagen").value;
     let fetchUrl;
- 
     if(tipoUser == 'estudiante') {
         fetchUrl = 'crearUsuario?nickName=' + nick +
             '&nombre=' + nombre +
@@ -110,7 +113,8 @@ function usuario() {
             '&correo=' + correo +
             '&password=' + passwd +
             '&fechaN=' + fechan +
-            '&tipoUser=' + tipoUser;
+            '&tipoUser=' + tipoUser +
+            '&imagen='+ url;
 
         fetch(fetchUrl, {
             method: 'POST'
@@ -141,6 +145,7 @@ function usuario() {
             '&password=' + passwd +
             '&fechaN=' + fechan +
             '&tipoUser=' + tipoUser +
+            '&imagen='+ url +
             '&institutos=' + instituto;
         fetch(fetchUrl, {
             method: 'POST'
@@ -166,37 +171,6 @@ function usuario() {
     }
 }
 
-function inscribirUsuario(edicion) {
-    debugger;
-    //const edicion = document.querySelector("#nombre").value;
-
-    const fetchUrl = 'inscripcionUE?edicion=' + edicion;
-    fetch(fetchUrl, {
-        method: 'POST'
-    }).then((res) => {
-        return res.json();
-        console.log(`que me devolviste papei `, res);
-    }).then((respuesta) => {
-        console.log(`respuesta: `, respuesta);
-        respuesta.codigo //1 o 0
-        respuesta.mensaje //mensaje de error o success
-        if (respuesta.codigo == 0) {
-            mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
-                // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
-            })
-        } else {
-            mensajeError("Error en alta", respuesta.mensaje).then(() => {
-                if(respuesta.elemento != null)
-                    document.getElementById(respuesta.elemento).focus();
-                }
-            )
-        }
-    }).catch((err) => {
-        console.error(' paso algo: ', err);
-    });
-}
-
 function crearEdicion() {
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
@@ -206,6 +180,7 @@ function crearEdicion() {
     const doc = document.querySelector("#docentes").value;
     docen = Array.from(docentes.selectedOptions).map( doc => doc.value);
     const cupo = document.querySelector("#cupo").value;
+    const url = document.querySelector("#url").value;
 
     const fetchUrl = 'altaEdicion?nombre=' + nombre +
         '&fechaI=' + fechaI +
@@ -213,7 +188,8 @@ function crearEdicion() {
         '&instituto=' + instituto +
         '&cursos=' + cursos +
         '&docentes=' + docen +
-        '&cupo=' + cupo;
+        '&cupo=' + cupo +
+        '&imagen=' + url;
 
     fetch(fetchUrl, {
         method: 'POST'
@@ -256,10 +232,10 @@ function inscribirUsuario(nombreEdi) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                //window.location = baseURL+ 'index.jsp';
             })
         } else {
-            mensajeError("Error en alta", respuesta.mensaje).then(() => {
+            mensajeError("Error al inscribir usuario", respuesta.mensaje).then(() => {
                 if(respuesta.elemento != null)
                     document.getElementById(respuesta.elemento).focus();
                 }
@@ -287,7 +263,7 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'consultaProgramaFormacion?programa='+ nomPrograma;
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {

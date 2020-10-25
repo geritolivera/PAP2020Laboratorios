@@ -48,9 +48,6 @@ public class agregarCursoPrograma extends HttpServlet {
 				
 		String nomCurso = request.getParameter("curso");
 		String nomPrograma = request.getParameter("programa");
-		
-		System.out.println(nomCurso);
-		System.out.println(nomPrograma);
 
 		DTResponse respuesta = new DTResponse();
 

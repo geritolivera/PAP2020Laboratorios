@@ -46,7 +46,9 @@ public class InscripcionED {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+	public String getNickUsuario() {
+		return estudiante.getNick();
+	}
 	public String getNombreUsuario() {
 		return estudiante.getNombre();
 	}

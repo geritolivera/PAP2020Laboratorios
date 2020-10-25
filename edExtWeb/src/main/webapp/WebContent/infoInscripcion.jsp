@@ -27,7 +27,6 @@
 	                    <table id="tablaInscripciones" class="table table-bordered table-striped table-hover">
 	                        <thead>
 	                            <tr>
-	                            
 	                            	<th></th>
 	                                <th>Edicion</th>
 	                                <th>Estudiante</th>
@@ -43,7 +42,6 @@
 	                    </table>
                     </form>
                 </div>
-                	<button type="submit" name="submit" class="btn-large waves-effect waves-light cyan darken-1">Confirmar</button>
             </div>
         </div>
             

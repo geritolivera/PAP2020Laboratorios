@@ -125,8 +125,8 @@
  		            respuesta.codigo //1 o 0
  		            respuesta.mensaje //mensaje de error o success
  		            if (respuesta.codigo == 0) {
- 		                mensajeConfirmacion("Curso dado de alta!", respuesta.mensaje).then(() => {
- 		                    // rediraccinar a otro jsp.
+ 		                mensajeConfirmacion("El usuario ha sido modificado!", respuesta.mensaje).then(() => {
+
  		                    window.location = baseURL + 'miPerfil.jsp';
  		                })
  		            } else {

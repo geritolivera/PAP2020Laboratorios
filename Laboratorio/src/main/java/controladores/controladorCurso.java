@@ -18,7 +18,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
 	@Override
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas,  ArrayList<String> cats) throws CursoExcepcion, InstitutoExcepcion{
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas,  ArrayList<String> cats, String imagen) throws CursoExcepcion, InstitutoExcepcion{
 		manejadorCurso mc = manejadorCurso.getInstancia();
 		manejadorCategoria mcat = manejadorCategoria.getInstancia();
 		manejadorInstituto mI = manejadorInstituto.getInstancia();
@@ -45,6 +45,7 @@ public class controladorCurso implements IcontroladorCurso{
 						cursoNuevo.agregarCategoria(c);
 					}
 				}
+				cursoNuevo.setImagenUrl(imagen);
 				mc.agregarCurso(cursoNuevo);
 				I.agregarCurso(cursoNuevo);
 				//persiste el nuevo docente agregado al instituto
@@ -98,6 +99,7 @@ public class controladorCurso implements IcontroladorCurso{
 		List<ProgramaFormacion> programas = new ArrayList<>();
 		List<Curso> previas = new ArrayList<>();
 		List<Categoria> categorias = new ArrayList<>();
+		System.out.println("mCur.existeCurso(nomCurso) = " + mCur.existeCurso(nomCurso));
 		if(mCur.existeCurso(nomCurso)) {
 			Curso c = mCur.buscarCurso(nomCurso);
 			DTCurso dtc = new DTCurso(c);
@@ -137,7 +139,7 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//6 - Alta de Edicion de Curso
 	@Override
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion{
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes, String url) throws EdicionExcepcion{
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorCurso mCur = manejadorCurso.getInstancia();
@@ -150,6 +152,7 @@ public class controladorCurso implements IcontroladorCurso{
 			if(mCur.existeCurso(nomCurso)) {
 				Curso curso = mCur.buscarCurso(nomCurso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
+				edi.setImagenURL(url);
 				//se fija que haya docentes para ingresar
 				if(!docentes.isEmpty()) {
 					for(String s: docentes) {
@@ -280,7 +283,6 @@ public class controladorCurso implements IcontroladorCurso{
 					yaInscripto = true;
 			}
 			if (!yaInscripto) {
-				System.out.println("LLEGA");
 				if (mPro.existePrograma(nomPrograma)) {
 					if (user instanceof Estudiante) {
 						ProgramaFormacion p = mPro.buscarPrograma(nomPrograma);
@@ -302,10 +304,11 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
 	@Override
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual) throws ProgramaFormacionExcepcion{
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual, String url) throws ProgramaFormacionExcepcion{
 		manejadorPrograma mpf = manejadorPrograma.getInstancia();
 		mpf.existePrograma(nombre);
 		ProgramaFormacion nuevoProg = new ProgramaFormacion(nombre, descripcion, fechaI, fechaF, fActual);
+		nuevoProg.setImagenURL(url);
 		mpf.agregarPrograma(nuevoProg);
 
 	}
@@ -423,13 +426,14 @@ public class controladorCurso implements IcontroladorCurso{
 	@Override //Listados para comboBoxes
 	public ArrayList<String> listarCursosAux(String nombreInstituto){
 		manejadorCurso mC = manejadorCurso.getInstancia();
-		List<Curso> cursos =(List<Curso>) mC.getCursos();
-		ArrayList<String>cursosRet = new ArrayList<>();
+		List<Curso> cursos = mC.getCursos();
+		ArrayList<String> cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
 			if((c.getInstituto().getNombre()!= null)&&(c.getInstituto().getNombre().equals(nombreInstituto))) {
 				cursosRet.add(c.getNombre());
 			}
 		}
+		System.out.println("cursosRet = " + cursosRet);
 		return cursosRet;
 	}
 
@@ -513,4 +517,32 @@ public class controladorCurso implements IcontroladorCurso{
 		}
 		return categorias;
 	}
+
+	@Override
+	public ArrayList<DTCurso> listaDTCurso(){
+		manejadorCurso mc = manejadorCurso.getInstancia();
+		List<Curso> cursos = mc.getCursos();
+		ArrayList<DTCurso> retorno = new ArrayList<>();
+		for (Curso c:cursos) {
+			DTCurso dtc = new DTCurso(c);
+			retorno.add(dtc);
+		}
+		return retorno;
+
+	}
+
+	@Override
+	public ArrayList<DTProgramaFormacion> listaDTPrograma(){
+		manejadorPrograma mp = manejadorPrograma.getInstancia();
+		List<ProgramaFormacion> programas = mp.getProgramas();
+		ArrayList<DTProgramaFormacion> retorno = new ArrayList<>();
+		for (ProgramaFormacion p:programas) {
+			DTProgramaFormacion dtpf = new DTProgramaFormacion(p);
+			retorno.add(dtpf);
+		}
+		return retorno;
+
+	}
+
+
 }

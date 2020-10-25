@@ -14,7 +14,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//4 - Alta de Curso
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas, ArrayList<String> categorias) throws CursoExcepcion, InstitutoExcepcion;
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas, ArrayList<String> categorias, String imagen) throws CursoExcepcion, InstitutoExcepcion;
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
@@ -24,7 +24,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//6 - Alta de Edicion de Curso
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes) throws EdicionExcepcion, CursoExcepcion;
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes, String url) throws EdicionExcepcion, CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
@@ -41,7 +41,7 @@ public interface IcontroladorCurso {
 
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//9 - Crear Programa de Formacion
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA) throws ProgramaFormacionExcepcion;
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fechaA, String url) throws ProgramaFormacionExcepcion;
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//10 - Agregar Curso a Programa de Formacion
@@ -69,5 +69,8 @@ public interface IcontroladorCurso {
 	public ArrayList<String> listarCategorias();
 
 	public ArrayList<String> getCategoriasPrograma(String programa);
-	
+
+    ArrayList<DTCurso> listaDTCurso();
+
+	ArrayList<DTProgramaFormacion> listaDTPrograma();
 }

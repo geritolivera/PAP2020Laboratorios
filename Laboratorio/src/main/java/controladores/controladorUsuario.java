@@ -23,7 +23,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Alta de Usuario
 	@Override
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password) throws UsuarioExcepcion {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password, String url) throws UsuarioExcepcion {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
 		manejadorInstituto mIns = manejadorInstituto.getInstancia();
 		if (!mUsu.existeUsuarioNick(nickname)) {
@@ -31,6 +31,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 				//si la string instituto no tiene nada
 				if (instituto == null) {
 					Estudiante est = new Estudiante(nickname, nombre, apellido, correo, fechaNac, password);
+					est.setImagenUrl(url);
 					mUsu.agregarUsuario(est);
 
 				} else {
@@ -38,6 +39,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
 						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac, password);
+						doc.setImagenUrl(url);
 						Instituto ins = mIns.buscarInstituto(instituto);
 						//aniade tambien el docente al instituto
 						doc.setInstituto(ins);
@@ -130,6 +132,8 @@ public class controladorUsuario implements IcontroladorUsuario {
 			em.persist(u);
 			em.getTransaction().commit();
 		}
+		else
+			throw new UsuarioExcepcion("No existe el usuario " + nickname + "en el sistema.");
 	}
 
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -266,6 +270,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		}
     }
 
+	@Override
     public ArrayList<String> listarSeguidores(String nickname){
     	ArrayList<String> seguidores = new ArrayList<String>();
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -280,6 +285,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return seguidores;
     }
 	
+    @Override
     public ArrayList<String> listarSeguidos(String nickname){
     	ArrayList<String> sigue = new ArrayList<String>();
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
@@ -294,6 +300,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return sigue;
     }
     
+    @Override
     public boolean validarSigue(String nickname, String nicknameSigue) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
 
@@ -312,6 +319,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return false;
     }
     
+    @Override
     public boolean validarSeguidor(String nickname, String nicknameSguidor) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSguidor)) {
@@ -326,6 +334,7 @@ public class controladorUsuario implements IcontroladorUsuario {
 		return false;
     }
     
+    @Override
     public boolean inscriptoPF(String nickname, String nomPrograma) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
@@ -338,6 +347,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
+    @Override
     public String inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
@@ -350,26 +360,35 @@ public class controladorUsuario implements IcontroladorUsuario {
     	return inscripto;
     }
     
-    public List<DTInscripcionED> listarInscripcionesED(){
+    @Override
+    public List<DTInscripcionED> listarInscripcionesED(String nomEdicion){
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	List<DTInscripcionED> listIns = new ArrayList<>();
     	for(InscripcionED i: inscripciones) {
-    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
-	    		DTInscripcionED dti = new DTInscripcionED(i);
+    		if(!nomEdicion.equals("undefined")) {
+	    		if(i.getNombreEdicion().equals(nomEdicion)) {
+	    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
+		    		DTInscripcionED dti = new DTInscripcionED(i);
+		    		listIns.add(dti);
+	    		}
+    		}
+    		else {
+    			DTInscripcionED dti = new DTInscripcionED(i);
 	    		listIns.add(dti);
-    		//}
+    		}
     	}
     	return listIns;
     }
     
+    @Override
     public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario) {
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	Conexion con = Conexion.getInstancia();
     	EntityManager em = con.getEntityManager();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	for(InscripcionED i: inscripciones) {
-    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNombreUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
+    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNickUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
 	    		if(cambio.equals("aceptar"))
 	    			i.setEstado(InscripcionEnum.ACEPTADO);
 	    		else

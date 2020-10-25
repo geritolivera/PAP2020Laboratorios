@@ -37,10 +37,11 @@ public class manejadorCurso {
 		return this.buscarCurso(nombre) instanceof Curso;
 	}
 	
-	public List getCursos(){
+	public List<Curso> getCursos(){
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		List c = em.createQuery("SELECT c FROM Curso c ").getResultList();
+		@SuppressWarnings("unchecked")
+		List<Curso> c = em.createQuery("SELECT c FROM Curso c ").getResultList();
 		return c;
 	}
 }

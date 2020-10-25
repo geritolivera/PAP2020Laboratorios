@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -21,24 +21,24 @@
         <img src="resources/images/img1.jpg" alt="">
         <div class="caption center-align ">
           <h2 >Bienvenido a edEXT</h2>
-          <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti�n de cursos
-relacionados con la extensi�n universitaria</h5>
-          <a href="" class="btn btn-large rojo">Unete</a>
+          <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos
+relacionados con la extensión universitaria</h5>
+          <a href="" class="btn btn-large rojo">&#218;nete</a>
         </div>
       </li>
       <li>
         <img src="resources/images/img2.jpg" alt="">
         <div class="caption left-align">
-          <h2>Gestion de Cursos</h2>
-          <h4 class="light grey-text text-lighten-3 hide-on-small-only">Adquiere informacion sobre los Cursos registrados! </h4>
+          <h2>Gesti&#243;n de Cursos</h2>
+          <h4 class="light grey-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Cursos registrados! </h4>
           <a href="consultaCurso.jsp" class="btn btn-large rojo">Ver Cursos</a>
         </div>
       </li>
       <li>
         <img src="resources/images/img3.jpg"  alt="">
         <div class="caption right-align -text">
-          <h2>Gestion de Programas</h2>
-          <h4 class="light white-text text-lighten-3 hide-on-small-only">Adquiere informacion sobre los Programas registrados!</h4>
+          <h2>Gesti&#243;n de Programas</h2>
+          <h4 class="light white-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Programas registrados!</h4>
           <a href="consultaPrograma.jsp" class="btn btn-large rojo">Ver Programas</a>
         </div>
       </li>
@@ -77,7 +77,7 @@ relacionados con la extensi�n universitaria</h5>
           <div class="card-panel">
             <i class="material-icons large red-text">collections_bookmark</i>
             <h4>Programas</h4>
-            <p>Mejora tu organizaci�n.</p>
+            <p>Mejora tu organizaci&#243;n.</p>
           </div>
         </div>
         <div class="col s12 m4">

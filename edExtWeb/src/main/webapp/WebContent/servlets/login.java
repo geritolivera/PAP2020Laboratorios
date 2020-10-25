@@ -61,6 +61,7 @@ public class login extends HttpServlet {
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
                     session.setAttribute("fechaNac", dtu.getFechaNac());
+                    session.setAttribute("imagen", dtu.getImage());
                     ArrayList<String> prog = new ArrayList<String>();
                     for (DTProgramaFormacion pro : (((DTEstudiante) dtu).getProgramas())) {
                         prog.add(pro.getNombre());
@@ -93,6 +94,8 @@ public class login extends HttpServlet {
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
                     session.setAttribute("fechaNac", dtu.getFechaNac());
+                    session.setAttribute("imagen", dtu.getImage());
+                    System.out.println("dtu.getImage() = " + dtu.getImage());
                     ArrayList<String> seguido = dtu.getSeguidos();
                     ArrayList<String> seguidor = dtu.getSeguidores();
                     session.setAttribute("seguidos", seguido);
@@ -131,12 +134,6 @@ public class login extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().append(userStr);
 
-//            RequestDispatcher rd;
-//            rd = request.getRequestDispatcher("/iniciarSesion.jsp");
-//            rd.forward(request, response);
-//            System.out.println("nickname no es valido = " + nickname);
-//            // el usuario no existe
-//            //parse = "altaUsuario.jsp";
             e.printStackTrace();
         }
     }

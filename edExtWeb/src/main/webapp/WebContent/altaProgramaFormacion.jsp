@@ -20,6 +20,11 @@
                                 <input type="text" name="nombre" id="nombre">
                                 <label for="nombre">Nombre del Programa</label>
                             </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">image</i>
+                                <input type="text" id="url">
+                                <label for="url">Imagen del programa</label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="input-field s6 col">
@@ -56,6 +61,15 @@
  	$(document).ready(function () {
     	$('.datepicker').datepicker();
     });
+
+ 	$('#url').change(function (){
+        document.getElementById('download')
+        var link = document.createElement('a');
+        link.href = document.querySelector("#url").value;
+        link.download = document.querySelector("#url").value;
+        document.body.appendChild(link);
+
+        document.body.removeChild(link);
+    });
  </script>
-<script src="resources/scripts/alta.js"> </script>
 <script src="resources/scripts/alta.js"> </script>

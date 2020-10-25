@@ -19,7 +19,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//1 - Alta Usuario
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto,String password) throws UsuarioExcepcion;
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto,String password, String url) throws UsuarioExcepcion;
 	
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -78,7 +78,7 @@ public interface IcontroladorUsuario {
     public boolean inscriptoPF(String nickname, String nomPrograma);
     public String inscriptoED(String nickname, String nomEdicion);
     
-    public List<DTInscripcionED> listarInscripcionesED();
+    public List<DTInscripcionED> listarInscripcionesED(String nomEdicion);
     public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario);
     
 }
