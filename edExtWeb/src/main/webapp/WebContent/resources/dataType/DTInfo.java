@@ -6,23 +6,26 @@ import java.util.ArrayList;
 
 public class DTInfo {
 
-    private ArrayList<DTCurso> cursos;
-    private ArrayList<DTProgramaFormacion> programas;
+    private ArrayList<DTCursoNeed> cursos;
+    private ArrayList<DTProgramaNeed> programas;
 
-    public ArrayList<DTCurso> getCursos() {
+
+    public ArrayList<DTCursoNeed> getCursos() {
         return cursos;
     }
 
-    public void setCursos(ArrayList<DTCurso> cursos) {
+    public void setCursos(ArrayList<DTCursoNeed> cursos) {
         this.cursos = cursos;
     }
 
-    public ArrayList<DTProgramaFormacion> getProgramas() {
+    public ArrayList<DTProgramaNeed> getProgramas() {
         return programas;
     }
 
-    public void setProgramas(ArrayList<DTProgramaFormacion> programas) {
+    public void setProgramas(ArrayList<DTProgramaNeed> programas) {
         this.programas = programas;
     }
+
+
 
 }

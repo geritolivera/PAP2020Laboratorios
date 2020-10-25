@@ -189,6 +189,11 @@ function toggleEstudiantes() {
 }
 
 
+function toggleAceptados() {
+	$("#containerEstudiantesAceptados").toggle();
+}
+
+
 $(document).ready(function () {
 	$('#datatable').dataTable({
 		"oLanguage": {
