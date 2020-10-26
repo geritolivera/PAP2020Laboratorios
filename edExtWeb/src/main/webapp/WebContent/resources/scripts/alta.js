@@ -362,9 +362,10 @@ function confirmarInscripcion(edicion, usuario, action) {
     console.log("la edicion es= " + edicion);
     console.log("el usuario es= " + usuario);
     console.log("la action es= " + action);
-    const fetchUrl = 'inscripcionConfirmar?edicion=' + edicion +
+    const fetchUrl = baseurl + 'inscripcionConfirmar?edicion=' + edicion +
         '&usuario=' + usuario +
         '&action=' + action;
+
     fetch(fetchUrl, {
         method: 'POST'
     }).then((res) => {
@@ -374,14 +375,12 @@ function confirmarInscripcion(edicion, usuario, action) {
         respuesta.mensaje //mensaje de error o success
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Inscripcion cambiada!", respuesta.mensaje).then(() => {
-
-                window.location = baseURL+ 'index.jsp';
+                //window.location = baseURL+ 'index.jsp';
             })
         } else {
-            mensajeError("Error al cambiar inscripcion", respuesta.mensaje).then(() => {
-                if(respuesta.elemento != null)
-                    document.getElementById(respuesta.elemento).focus();
-                }
+            mensajeError("Inscripcion cambiada!", respuesta.mensaje).then(() => {
+                //
+            }
             )
         }
     }).catch((err) => {

@@ -240,7 +240,9 @@
         </div>
     </div>
 </div>
-</div>
+
+<%@ include file="footer.jsp" %>
+
 
 
 <script type="text/javascript">
@@ -361,7 +363,6 @@
         })
     }
 </script>
-
 <script type="text/javascript">
 
     $(document).ready( function(){
@@ -373,9 +374,3 @@
 
 <script src="resources/scripts/alta.js"> </script>
 <script src="resources/scripts/listas.js"> </script>
-
-
-</body>
-
-<%@ include file="footer.jsp" %>
-</html>

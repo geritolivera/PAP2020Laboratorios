@@ -8,11 +8,7 @@
 <%}%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter" %>
-<%
-    ArrayList<String> institutos = (ArrayList<String>) request.getAttribute("institutos");
-    ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
-    ArrayList<String> previas = (ArrayList<String>) request.getAttribute("previas");
-%>
+
 
 <div class="main">
     <br><br>
@@ -94,8 +90,8 @@
 <script>
     $(document).ready(function () {
         getPrevias();
-        getInstitutos();
-        getCategorias();
+        getInstitutosAlta();
+        getCategoriasAlta();
 
 
 

@@ -17,6 +17,7 @@ function getInstitutos(){
                 institutoHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
             });
             $('#institutos').formSelect();
+            $('#categorias').formSelect();
         }else{
             console.log('no hay institutos');
         }
@@ -38,7 +39,59 @@ function getCategorias(){
             categorias.forEach((item, index) => {
                 categoriasHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
             });
+            $('#institutos').formSelect();
             $('#categorias').formSelect();
+        }else{
+            console.log('no hay categorias');
+        }
+    });
+}
+
+
+
+function getInstitutosAlta(){
+
+    var url = baseURL +`GetListas`
+
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
+        return res.json();
+    }).then((institutos) => {
+        var institutoHtml = document.getElementById("institutos");
+        institutoHtml.innerHTML = `<option value="" disabled selected>Seleccione un instituto</option>`;
+        if (institutos.length > 0){
+            institutos.forEach((item, index) => {
+                console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
+                institutoHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+            });
+            $('#institutos').formSelect();
+            $('#categorias').formSelect();
+            $('#previas').formSelect();
+        }else{
+            console.log('no hay institutos');
+        }
+    });
+}
+
+
+function getCategoriasAlta(){
+    var url = baseURL +`GetCategorias`
+
+    fetch(url, {
+        method: 'GET',
+    }).then((res)=>{
+        return res.json();
+    }).then((categorias) => {
+        var categoriasHtml = document.getElementById("categorias");
+        categoriasHtml.innerHTML = `<option value="" disabled>Seleccione las categorias</option>`;
+        if (categorias.length > 0){
+            categorias.forEach((item, index) => {
+                categoriasHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+            });
+            $('#institutos').formSelect();
+            $('#categorias').formSelect();
+            $('#previas').formSelect();
         }else{
             console.log('no hay categorias');
         }
@@ -59,6 +112,8 @@ function getPrevias(){
             previas.forEach((item, index) => {
                 previasHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
             });
+            $('#institutos').formSelect();
+            $('#categorias').formSelect();
             $('#previas').formSelect();
         }else{
             console.log('no hay previas');

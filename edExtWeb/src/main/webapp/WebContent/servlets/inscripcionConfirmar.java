@@ -39,12 +39,25 @@ public class inscripcionConfirmar extends HttpServlet {
 		String edicion = request.getParameter("edicion");
 		String usuario = request.getParameter("usuario");
 		String action = request.getParameter("action");
-		
+		DTResponse respuesta = new DTResponse();
 		//int index = Integer.parseInt(indReq);
 		System.out.println("edicion: " + edicion);
 		System.out.println("usuario: " + usuario);
 		System.out.println("action: " + action);
-		
-		iconu.cambiarInscripcion(action, edicion, usuario);
+		if(action.equals("aceptar")) {
+			iconu.cambiarInscripcion(action, edicion, usuario);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("La inscripcion ha sido aceptada");
+		}else{
+			iconu.cambiarInscripcion(action, edicion, usuario);
+			respuesta.setCodigo(1);
+			respuesta.setMensaje("La inscripcion ha sido rechazada");
+
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String respuestaStr = mapper.writeValueAsString(respuesta);
+		response.setContentType("application/json");
+		response.getWriter().append(respuestaStr);
+
 	}
 }
