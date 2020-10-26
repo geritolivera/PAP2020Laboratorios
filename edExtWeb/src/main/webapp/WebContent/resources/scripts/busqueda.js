@@ -30,9 +30,10 @@ $(document).ready( function() {
 
             data: dataSet,
             columns: [
+                { "title": "Tipo"},
                 { "title": "Nombre"},
                 { "title": "Descripcion"},
-                { "title": "Tipo"}
+                { "title": "Link"}
             ],
             "oLanguage": {
                 "sSearch": "",

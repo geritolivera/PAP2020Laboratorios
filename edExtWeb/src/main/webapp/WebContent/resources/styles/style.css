@@ -37,11 +37,11 @@ li.active:hover .collapsible-header{
 .main{
   margin: auto;
   flex: 1 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
 .container{
-    width: 95%;
+    width: 90%;
     vertical-align: middle;
 }
 

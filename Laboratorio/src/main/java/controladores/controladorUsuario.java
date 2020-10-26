@@ -303,19 +303,15 @@ public class controladorUsuario implements IcontroladorUsuario {
     @Override
     public boolean validarSigue(String nickname, String nicknameSigue) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
-
-		System.out.println("nick log= " + nickname + " sigue a :"+ nicknameSigue);
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSigue)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			List<Usuario> usuariosSigue = currentUser.getSigue();
-			System.out.println( nickname + " usuariosSigue  = " + Arrays.toString(usuariosSigue.toArray()));
 			for(Usuario u : usuariosSigue) {
 				if(u.getNick().equals(nicknameSigue)) {
 					return true;
 				}
 			}
 		}
-		System.out.println("dice que uno no existe");
 		return false;
     }
     

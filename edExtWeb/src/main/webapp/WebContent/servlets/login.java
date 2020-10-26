@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import clases.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import datatypes.*;
+import exepciones.EdicionExcepcion;
 import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
@@ -66,11 +67,13 @@ public class login extends HttpServlet {
                     for (DTProgramaFormacion pro : (((DTEstudiante) dtu).getProgramas())) {
                         prog.add(pro.getNombre());
                     }
-                    session.setAttribute("programasNombres", prog);
+                    System.out.println("prog = " + prog);
+                    session.setAttribute("programasNombre", prog);
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DTEdicionCurso edi : (((DTEstudiante) dtu).getEdiciones())) {
+                    for (DTEdicionCurso edi : (((DTEstudiante) dtu).getEdicionesAprobado())) {
                         edis.add(edi.getNombre());
                     }
+                    System.out.println("edis = " + edis);
                     session.setAttribute("edicionesNombres", edis);
                     ArrayList<String> seguido = dtu.getSeguidos();
                     ArrayList<String> seguidor = dtu.getSeguidores();
@@ -126,7 +129,7 @@ public class login extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().append(userStr);
             }
-        }catch (UsuarioExcepcion e) {
+        }catch (UsuarioExcepcion | EdicionExcepcion e) {
             respuesta.setCodigo(1);
             respuesta.setMensaje("El nickname ingresado " + nickname + "no existe.");
             ObjectMapper mapper = new ObjectMapper();

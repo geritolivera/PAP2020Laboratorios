@@ -45,7 +45,7 @@ public class DTEdicionCurso {
 		manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
 		List<InscripcionED> inscripciones = mIns.getInscripciones();
 		for(InscripcionED i: inscripciones) {
-			if(i.getNombreEdicion().equals(this.nombre))
+			if(i.getEdicion().getNombre().equals(this.nombre))
 				cont++;
 		}
 		this.cupo = edicion.getCupo() - cont;

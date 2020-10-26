@@ -27,9 +27,9 @@
         <ul class="right hide-on-med-and-down">
 
           <li class="rojo-rita">
-            <form action="Busqueda" method="post" id="formBusqueda" >
-              <div class="input-field">
-                <i class="material-icons prefix" id="searchIcon" style="top: 0;">search</i>
+            <form  id="formBusqueda" >
+              <div class="input-field col s12" >
+                <i class="material-icons prefix" id="searchIcon" style="top: 0;" type="button" onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">search</i>
                 <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
               </div>
             </form>

@@ -25,7 +25,7 @@ function getInstitutos(){
 
 
 function getCategorias(){
-    url = baseURL +`GetCategorias`
+    var url = baseURL +`GetCategorias`
 
     fetch(url, {
         method: 'GET',
@@ -46,7 +46,7 @@ function getCategorias(){
 }
 
 function getPrevias(){
-    url = baseURL +`GetPrevias`
+    var url = baseURL +`GetPrevias`
 
     fetch(url, {
         method: 'GET',
@@ -69,7 +69,8 @@ function getPrevias(){
 
 function getCursos(){
 
-    url = baseURL +`GetCursos`
+    var url = baseURL +`GetCursos`
+
     fetch(url, {
         method: 'GET',
     }).then((res)=>{
@@ -362,7 +363,7 @@ function collectionUsuarios(){
         usuariosHtml.innerHTML = '';
         if (usuarios.length > 0){
             usuarios.forEach((item, index) => {
-                usuariosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaUsuario?nickname=${item}" class="secondary-content"><i class="material-icons">send</i></a></div></li>`;
+                usuariosHtml.innerHTML += `<li class="collection-item"><div>${item}<a href="consultaUsuario?nickname=${item}" class="secondary-content"><i class="material-icons" type="button">send</i></a></div></li>`;
             });
         }else{
             usuariosHtml.innerHTML += `<li class="collection-item">No existen usuarios.</li>`;
@@ -381,18 +382,6 @@ function collectionSeguidores(){
     }).then(res => res.json()
     ).then(seguidores => {
         console.log("seguidores:", seguidores);
-        var seguidoresHtml = document.getElementById("seguidor");
-        seguidoresHtml.innerHTML = '<li class="collection-header">\n' +
-            '    <h10>Seguidores</h10>\n' +
-            '</li>';
-        if (seguidores.length > 0){
-            seguidores.forEach((item, index) => {
-                seguidoresHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="seguirUsuario('${item}')"><i class="material-icons" type="button">person_add</i></a></div></li>`;
-            });
-        }else{
-            seguidoresHtml.innerHTML += `<li class="collection-item">No tiene seguidores aun.</li>`;
-            console.log('no hay seguidores');
-        }
     }).catch(error => console.log(' 1) eerr ', error));
     //obtenerDocentesPorInstituto(instituto);
 }
@@ -406,18 +395,7 @@ function collectionSeguidos(){
     }).then(res => res.json()
     ).then(seguidos => {
         console.log("seguidos:", seguidos);
-        var seguidosHtml = document.getElementById("seguido");
-        seguidosHtml.innerHTML ='<li class="collection-header">\n' +
-                                '    <h10>Seguidos</h10>\n' +
-                                '</li>';
-        if (seguidos.length > 0){
-            seguidos.forEach((item, index) => {
-                seguidosHtml.innerHTML += `<li class="collection-item"><div>${item}<a class="secondary-content" type="button" onclick="dejarSeguirUsuario('${item}')"><i class="material-icons" type="button">delete_forever</i></a></div></li>`;
-            });
-        }else{
-            seguidosHtml.innerHTML += `<li class="collection-item">No sigue a nadie aun.</li>`;
 
-        }
     }).catch(error => console.log(' 1) eerr ', error));
 }
 

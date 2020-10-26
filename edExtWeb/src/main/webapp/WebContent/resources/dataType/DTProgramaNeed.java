@@ -4,37 +4,48 @@ import java.util.ArrayList;
 
 public class DTProgramaNeed {
 
-    private static String tipo = "Programa";
-    private String nombre;
-    private String descripcion;
+    private static String atipo = "Programa";
+    private String bnombre;
+    private String cdescripcion;
+    private String dlink = "";
 
 
     public DTProgramaNeed(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.bnombre = nombre;
+        this.cdescripcion = descripcion;
     }
 
     public DTProgramaNeed() {}
 
     public String getTipo() {
-        return tipo;
+        return atipo;
     }
 
     public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        return bnombre;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return cdescripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.cdescripcion = descripcion;
     }
+
+    public void setNombre(String nombre) {
+        this.bnombre = nombre;
+        setLink(nombre);
+    }
+
+    public void setLink(String nom){
+        this.dlink ="<a href=\"consultaProgramaFormacion?programa="+ nom + "\" class=\"content\"><i class=\"material-icons\">pageview</i></a>";
+    }
+
+    public String getLink() {
+        return dlink;
+    }
+
 
 
 }

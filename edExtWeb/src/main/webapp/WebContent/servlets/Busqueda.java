@@ -56,7 +56,6 @@ public class Busqueda extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         String infoStr = mapper.writeValueAsString(di);
-        System.out.println("La info generada es: " + infoStr);
         response.setContentType("application/json");
         response.getWriter().append(infoStr);
 

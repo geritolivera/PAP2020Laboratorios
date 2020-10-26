@@ -306,7 +306,7 @@ function inscribirUsuarioProg(nombreProg) {
 
 function seguirUsuario(nickname) {
     console.log(nickname);
-    const fetchUrl = 'seguirUsuario?nicknameSeguir=' + nickname;
+    const fetchUrl = baseURL + 'seguirUsuario?nicknameSeguir=' + nickname;
     fetch(fetchUrl, {
         method: 'POST'
     }).then((res) => {
@@ -317,7 +317,7 @@ function seguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario seguido!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'miPerfil.jsp';
             })
         } else {
             mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
@@ -332,7 +332,7 @@ function seguirUsuario(nickname) {
 
 function dejarSeguirUsuario(nickname) {
     console.log("quiere dejar de seguir a =" + nickname);
-    const fetchUrl = 'dejarSeguirUsuario?nicknameDejarSeguir=' + nickname;
+    const fetchUrl = baseURL+'dejarSeguirUsuario?nicknameDejarSeguir=' + nickname;
     fetch(fetchUrl, {
         method: 'POST'
     }).then((res) => {
@@ -343,7 +343,7 @@ function dejarSeguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario dejado de seguir!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'miPerfil.jsp';
             })
         } else {
             mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {

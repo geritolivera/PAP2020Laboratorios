@@ -20,9 +20,10 @@
                 <table id="datatable">
                     <thead>
                     <tr>
+                        <th>Tipo</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
-                        <th>Tipo</th>
+                        <th>Link</th>
                     </tr>
                     </thead>
                     <tbody id="datatablebody">

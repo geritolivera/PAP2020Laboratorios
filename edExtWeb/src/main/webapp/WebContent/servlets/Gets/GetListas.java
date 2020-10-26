@@ -3,6 +3,7 @@ package main.webapp.WebContent.servlets.Gets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +23,6 @@ public class GetListas extends HttpServlet {
 		IcontroladorCurso icon = fabrica.getIcontroladorCurso();
 		String[] institutos = icon.listarInstitutos();
 
-		//HttpSession session = request.getSession();
-
 		try {
 			institutos = icon.listarInstitutos();
 			request.setAttribute("institutos", institutos);
@@ -39,6 +38,6 @@ public class GetListas extends HttpServlet {
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doGet(request, response);
+		doGet(request, response);
 	}
 }
