@@ -91,7 +91,6 @@
     });
     $("#institutos").change( function() {
         obtenerCursosPorInstituto(document.querySelector("#institutos").value);
-        obtenerDocentesPorInstituto(document.querySelector("#institutos").value)
     });
     $('#url').change(function (){
         document.getElementById('download')

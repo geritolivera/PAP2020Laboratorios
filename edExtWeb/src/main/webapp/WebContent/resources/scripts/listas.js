@@ -167,6 +167,7 @@ function obtenerCursosPorInstituto(instituto){
             var cursosHtml = document.getElementById("curso");
 
             cursosHtml.innerHTML = `<option value="" disabled selected>Seleccione el curso</option>`;
+            obtenerDocentesPorInstituto(instituto)
             if (cursos.length > 0){
                 cursos.forEach((item, index) => {
                     cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
@@ -207,107 +208,7 @@ function obtenerCursosPorInstituto(instituto){
 
 
          }).catch(error => console.log(' 2) eerr ', error));
-  }
-function obtenerDatosUsuario(nickname){
-    var url = baseURL + `consultaUsuario?nickname=${nickname}`
-
-    fetch(url, {
-        method: 'GET'
-    }).then( (res) => {
-        return res.json();
-    }).then(dtu => {
-
-        JSON.stringify(dtu);
-        console.log(dtu)
-        var usuarioHtml = document.getElementById("detallesUE");
-        var seleccionadoHtml = document.getElementById("nicknameSelected");
-        seleccionadoHtml.innerHTML = dtu.nick;
-        var fechaN = new Date(dtu.fechaNac).toLocaleDateString();
-
-
-        usuarioHtml.innerHTML=`<li class="collection-item">
-                                 <div class="row">
-                                    <div class="col s5 grey-text darken-1"><i class="mdi-action-wallet-travel"></i>Nickname</div>
-                                    <div class="col s7 grey-text text-darken-4 right-align" id="nicknamee">` + dtu.nick +`</div>
-                                 </div>
-                               </li>`;
-        usuarioHtml.innerHTML+=`<li class="collection-item">
-                                    <div class="row">
-                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Nombre</div>
-                                        <div class="col s7 grey-text text-darken-4 right-align" id="nombree">`+dtu.nombre+`</div>
-                                    </div>
-                                </li>`;
-        usuarioHtml.innerHTML+=`<li class="collection-item">
-                                    <div class="row">
-                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Apellido</div>
-                                        <div class="col s7 grey-text text-darken-4 right-align" id="apellidoe">`+ dtu.apellido +`</div>
-                                    </div>
-                                </li>`;
-        usuarioHtml.innerHTML+=`<li class="collection-item">
-                                    <div class="row">
-                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Correo</div>
-                                        <div class="col s7 grey-text text-darken-4 right-align" id="correoe">` + dtu.correo +`</div>
-                                    </div>
-                                </li>`;
-        usuarioHtml.innerHTML+=`<li class="collection-item">
-                                    <div class="row">
-                                        <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i>Fecha de Nacimiento</div>
-                                        <div class="col s7 grey-text text-darken-4 right-align" id="fechaNace">` + fechaN +`</div>
-                                    </div>
-                                </li>`;
-    }).catch(error => console.log(' 1) eerr ', error));
-}
-
-function listaEdicionesUsuario(nickname){
-    var url = baseURL + `GetCursoUsu?nickname=${nickname}`
-
-
-    fetch(url, {
-        method: 'GET',
-    }).then( (res) => {
-            return res.json();
-    }).then(cursos => {
-            console.log("cursos:", cursos);
-            var cursosHtml = document.getElementById("listaCursos");
-            cursosHtml.innerHTML =`<option value="" disabled selected>Seleccione la edicion</option>`;
-            if (cursos.length > 0){
-                cursos.forEach((item, index) => {
-                    console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
-                    cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
-                });
-                $('#listaCursos').formSelect();
-            }else{
-                console.log('no hay tipos de recursos');
-            }
-
-
-        }).catch(error => console.log(' 1) eerr ', error));
-}
-
-
-function listaEdicionesUsuarioEstudiante(nickname){
-    var url = baseURL + `GetEdicionesUsu?nickname=${nickname}`
-
-    fetch(url, {
-        method: 'GET',
-    }).then( (res) => {
-        return res.json();
-    }).then(ediciones => {
-        console.log("ediciones:", ediciones);
-        var edicionesHtml = document.getElementById("edicionese");
-        edicionesHtml.innerHTML =  `<li></li>`;
-        if (ediciones.length > 0){
-            ediciones.forEach((item, index) => {
-                console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
-                edicionesHtml.innerHTML += `<li class="collection-item">
-                                                <div>${item}<a href="consultaEdicionCurso?edicion=${item}" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                            </li>`;
-            });
-        }else{
-            console.log('no hay tipos de recursos');
-        }
-    }).catch(error => console.log(' 1) eerr ', error));
-}
+ }
 
 
 function collectionCursosPorInstituto(instituto){
