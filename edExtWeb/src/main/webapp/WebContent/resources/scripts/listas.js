@@ -163,8 +163,7 @@ function obtenerCursosPorInstituto(instituto){
         method: 'GET',
     }).then( (res) => {
         return res.json();
-    })
-        .then(cursos => {
+    }).then(cursos => {
             console.log("cursos:", cursos);
             var cursosHtml = document.getElementById("curso");
 
@@ -179,6 +178,31 @@ function obtenerCursosPorInstituto(instituto){
                 console.log('no hay cursos');
             }
         }).catch(error => console.log(' 1) eerr ', error));
+
+    url = baseURL +`GetDocInst?instituto=${instituto}`
+
+    fetch(url, {
+        method: 'GET',
+    }).then( (response) => {
+        return response.json();
+    })
+        .then(docentes => {
+            console.log("docentes:", docentes);
+            var docentesHtml = document.getElementById("docentes");
+
+            if (docentes.length > 0){
+                docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
+                docentes.forEach((item, index) => {
+                    console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
+                    docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+                });
+                $('#docentes').formSelect();
+            }else{
+                docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
+            }
+
+
+        }).catch(error => console.log(' 2) eerr ', error));
 
 
 }

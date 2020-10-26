@@ -107,8 +107,8 @@ function usuario() {
     const url = document.querySelector("#imagen").value;
     let fetchUrl;
 
-    if(fechan === ""){
-    	mensajeError("Error en alta", "No puede haber campos vacios").then(() => {
+    if (fechan === "") {
+        mensajeError("Error en alta", "No puede haber campos vacios").then(() => {
             document.getElementById(respuesta.elemento).focus();
         })
     } else if (passwd2 != passwd) {
@@ -184,6 +184,7 @@ function usuario() {
             });
         }
     }
+}
 
 function inscribirUsuario(edicion) {
     debugger;
