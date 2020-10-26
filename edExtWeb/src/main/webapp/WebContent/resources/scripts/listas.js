@@ -488,7 +488,7 @@ function tableInscripciones(edicion){
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
                                                         <td> ${item.fecha}</td>
-                                                        <th> ${item.prioridad} </th>
+                                                        <th>` + index + `</th>
                                                     </tr>`;
                 }
             });

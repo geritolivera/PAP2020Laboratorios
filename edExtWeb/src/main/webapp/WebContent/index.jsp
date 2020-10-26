@@ -11,7 +11,6 @@
   <%@include file="headerEstVis.jsp"%>
   <%}%>
   <title>edExt</title>
-
 </head>
 
 <body>
@@ -23,8 +22,10 @@
         <div class="caption center-align ">
           <h2 >Bienvenido a edEXT</h2>
           <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos
-relacionados con la extensión universitaria</h5>
-          <a href="" class="btn btn-large rojo">&#218;nete</a>
+relacionados con la extensiï¿½n universitaria</h5>
+          <% if (session.getAttribute("nickname")==null){ %>
+            <a href="altaUsuario.jsp" class="btn btn-large rojo">&#218;nete</a>
+          <% }%>
         </div>
       </li>
       <li>

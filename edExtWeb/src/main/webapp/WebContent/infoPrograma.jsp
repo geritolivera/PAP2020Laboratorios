@@ -68,7 +68,7 @@
                         </div>
                         <ul class="collection" name="categoriass" id="categoriass">
                                 <c:forEach var="cat" items="${categoriass}">
-                                    <a href="" class="collection-item">${cat}</a>
+                                    <a class="collection-item">${cat}</a>
                                 </c:forEach>
                         </ul>
                     </div>

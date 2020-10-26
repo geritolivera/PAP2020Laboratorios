@@ -28,7 +28,7 @@ public class GetPrevias extends HttpServlet {
         System.out.println("previas = " + previas);
 
         try {
-        	session.setAttribute("previas", previas);
+        	request.setAttribute("previas", previas);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

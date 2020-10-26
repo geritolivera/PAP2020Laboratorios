@@ -28,7 +28,7 @@ public class GetCategorias extends HttpServlet {
         ArrayList<String> categorias = icon.listarCategorias();
 
         try {
-        	session.setAttribute("categorias", categorias);
+        	request.setAttribute("categorias", categorias);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

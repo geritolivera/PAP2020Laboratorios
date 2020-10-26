@@ -1,4 +1,4 @@
-package main.webapp.WebContent.servlets;
+package main.webapp.WebContent.servlets.consultas;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
