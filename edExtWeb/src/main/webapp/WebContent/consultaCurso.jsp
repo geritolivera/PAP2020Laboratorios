@@ -8,12 +8,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
 
-
-
+<link rel="stylesheet" href="resources/styles/style.css">
 <div class="main">
 	<br><br>
 	<div class="container">
 		<div class="row">
+			<h4 class="header2"> <span style="color: #81054b">></span>Consulta de Curso</h4>
 			<div class="input-field col s6">
 				<div>
 					<label>Instituto</label>

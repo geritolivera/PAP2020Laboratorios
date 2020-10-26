@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @WebServlet("/GetCursoInst")
 public class GetCursoInst extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,6 @@ public class GetCursoInst extends HttpServlet {
 
             String recursosStr = mapper.writeValueAsString(cursos);
             System.out.println("	Los recursos que guardo son: " + recursosStr);
-
             response.setContentType("application/json");
             response.getWriter().append(recursosStr);
 

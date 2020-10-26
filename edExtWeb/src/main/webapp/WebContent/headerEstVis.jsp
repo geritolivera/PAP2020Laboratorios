@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="resources/images/icon_big_edext_1.png">
     <link rel="stylesheet" href="resources/styles/style.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">

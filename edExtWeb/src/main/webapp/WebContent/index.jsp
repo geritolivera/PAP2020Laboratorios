@@ -5,15 +5,19 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="resources/images/intento3.png" sizes="35px;35px">
   <% if (session.getAttribute("tipoUser")=="docente"){ %>
   <%@include file="defaultHeader.jsp"%>
   <%}else{ %>
   <%@include file="headerEstVis.jsp"%>
   <%}%>
+
   <title>edExt</title>
 </head>
 
 <body>
+<div class="main">
   <!-- Section: Slider -->
   <section class="slider">
     <ul class="slides">
@@ -22,7 +26,7 @@
         <div class="caption center-align ">
           <h2 >Bienvenido a edEXT</h2>
           <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos
-relacionados con la extensi�n universitaria</h5>
+relacionados con la extensi&#243;n universitaria</h5>
           <% if (session.getAttribute("nickname")==null){ %>
             <a href="altaUsuario.jsp" class="btn btn-large rojo">&#218;nete</a>
           <% }%>
@@ -105,14 +109,12 @@ relacionados con la extensi�n universitaria</h5>
   </section>
 
 
- 
-  <%@include file="footer.jsp" %>
+
+</div>
+<%@include file="footer.jsp" %>
   <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
 	    var elems = document.querySelectorAll('.parallax');
 	    var instances = M.Parallax.init(elems);
 	  });
   </script>
-</body>
-
-</html>

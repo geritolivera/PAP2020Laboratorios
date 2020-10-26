@@ -98,7 +98,7 @@ function getCategoriasAlta(){
     });
 }
 
-function getPrevias(){
+function getPreviasAlta(){
     var url = baseURL +`GetPrevias`
 
     fetch(url, {
@@ -155,7 +155,6 @@ var READY_STATE_COMPLETE    = 4;
 var STATUS_OK               = 200;
 
 function obtenerCursosPorInstituto(instituto){
-    // Parametro:
 
     var url = baseURL + `GetCursoInst?instituto=${instituto}`
 
@@ -173,66 +172,42 @@ function obtenerCursosPorInstituto(instituto){
                     cursosHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
                 });
                 $('#curso').formSelect();
+                $('#docentes').formSelect();
             }else{
                 cursosHtml.innerHTML = `<option value="" disabled selected>No existen cursos para este Instituto</option>`;
                 console.log('no hay cursos');
             }
         }).catch(error => console.log(' 1) eerr ', error));
 
-    url = baseURL +`GetDocInst?instituto=${instituto}`
-
-    fetch(url, {
-        method: 'GET',
-    }).then( (response) => {
-        return response.json();
-    })
-        .then(docentes => {
-            console.log("docentes:", docentes);
-            var docentesHtml = document.getElementById("docentes");
-
-            if (docentes.length > 0){
-                docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
-                docentes.forEach((item, index) => {
-                    console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
-                    docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
-                });
-                $('#docentes').formSelect();
-            }else{
-                docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
-            }
-
-
-        }).catch(error => console.log(' 2) eerr ', error));
-
-
 }
 
-function obtenerDocentesPorInstituto(instituto){
-    debugger;
-    var url = baseURL +`GetDocInst?instituto=${instituto}`
-    fetch(url, {
-        method: 'GET',
-    }).then( (response) => {
-        return response.json();
-    })
-        .then(docentes => {
-            console.log("docentes:", docentes);
-            var docentesHtml = document.getElementById("docentes");
+ function obtenerDocentesPorInstituto(instituto){
 
-            if (docentes.length > 0){
-                docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
-                docentes.forEach((item, index) => {
-                    console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
-                    docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
-                });
-                $('#docentes').formSelect();
-            }else{
-                docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
-            }
+    var url = baseURL + 'GetDocInst?instituto=' + instituto;
+     fetch(url, {
+         method: 'GET',
+     }).then( (response) => {
+         return response.json();
+     })
+         .then(docentes => {
+             console.log("docentes:", docentes);
+             var docentesHtml = document.getElementById("docentes");
+
+             if (docentes.length > 0){
+                 docentesHtml.innerHTML = `<option value="" disabled>Seleccione los docentes</option>`;
+                 docentes.forEach((item, index) => {
+                     console.log(" Re item: " + JSON.stringify(item) + " index: " + index);
+                     docentesHtml.innerHTML += `<option value="${item}"> ${item}</option>`;
+                 });
+                 $('#curso').formSelect();
+                 $('#docentes').formSelect();
+             }else{
+                 docentesHtml.innerHTML = `<option value="" disabled>No existen docentes en este instituto</option>`;;
+             }
 
 
-        }).catch(error => console.log(' 2) eerr ', error));
-}
+         }).catch(error => console.log(' 2) eerr ', error));
+  }
 function obtenerDatosUsuario(nickname){
     var url = baseURL + `consultaUsuario?nickname=${nickname}`
 
@@ -460,7 +435,9 @@ function collectionSeguidores(){
         method: 'GET',
     }).then(res => res.json()
     ).then(seguidores => {
-        console.log("seguidores:", seguidores);
+
+        console.log("seguidos:", usuarios);
+
     }).catch(error => console.log(' 1) eerr ', error));
     //obtenerDocentesPorInstituto(instituto);
 }

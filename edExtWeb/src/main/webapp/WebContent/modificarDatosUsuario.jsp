@@ -7,7 +7,8 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%}%>
- 
+
+<link rel="stylesheet" href="resources/styles/style.css">
  <%
   HttpSession ses = request.getSession();
   String nickname = (String) ses.getAttribute("nickname");

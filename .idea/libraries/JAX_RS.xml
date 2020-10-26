@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JAX-RS" type="JAX-RS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Laboratorio/target/Laboratorio-0.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

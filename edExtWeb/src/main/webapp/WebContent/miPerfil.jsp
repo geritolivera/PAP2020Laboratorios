@@ -25,6 +25,7 @@
     <%}else{ %>
     <%@include file="headerEstVis.jsp"%>
     <%}%>
+    <link rel="stylesheet" href="resources/styles/style.css">
 </head>
 
 <body>
@@ -117,7 +118,7 @@
                         <%} %>
                     </ul>
                 </div>
-                <div class="card-content ">
+                <div class="card-content " style="padding: 30px">
                     <!-- DATOS USUARIO -->
                     <div id="test1">
                         <div class="row">
@@ -151,7 +152,7 @@
                                 <h10>Seguidos</h10>
                                     <% if(seguidos != null){ %>
                                 <c:forEach var="ed" items="${seguidos}">
-                            <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="dejarSeguirUsuario(${ed})">delete_forever</i></span></a>
+                            <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="dejarSeguirUsuario('${ed}')">delete_forever</i></span></a>
                             </c:forEach>
                             <%}else{%>
                             <li class="collection-item">No sigue a nadie aun.</li>
@@ -163,7 +164,7 @@
                                 <h10>Seguidores</h10>
                                     <% if(seguidos != null){ %>
                                 <c:forEach var="ed" items="${seguidores}">
-                            <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="seguirUsuario(${ed})">person_add</i></span></a>
+                            <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="seguirUsuario('${ed}')">person_add</i></span></a>
                             </c:forEach>
                             <%}else{%>
                             <li class="collection-item">No sigue a nadie aun.</li>
@@ -284,7 +285,7 @@
 
             progHtml.innerHTML = `<div class="card-image">
                                         <img src="`+ progSelected.imagenURL +`" width="702.281" height="345.953">
-                                        <span class="card-title">progSelected.nombre</span>
+                                        <span class="card-title">`+ progSelected.nombre +`</span>
                                       </div>`;
             progHtml.innerHTML +=`<div class="card-content">`;
             progHtml.innerHTML +=   `<div class="row">`;

@@ -89,11 +89,9 @@
 <script src="resources/scripts/alta.js"> </script>
 <script>
     $(document).ready(function () {
-        getPrevias();
+        getPreviasAlta();
         getInstitutosAlta();
         getCategoriasAlta();
-
-
 
     });
     $('#imagen').change(function (){
