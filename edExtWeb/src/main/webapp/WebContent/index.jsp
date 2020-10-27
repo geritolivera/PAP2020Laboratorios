@@ -83,7 +83,7 @@ relacionados con la extensi&#243;n universitaria</h5>
   </section>
 
   <!-- Section: Search -->
-  <section id="search" class="section section-search rojo center scrollspy">
+  <section id="search" class="section section-search center scrollspy">
     <div class="container">
       <div class="row">
         <div class="col s12">
