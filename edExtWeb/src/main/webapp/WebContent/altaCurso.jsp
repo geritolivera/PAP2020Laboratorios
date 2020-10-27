@@ -58,7 +58,7 @@
                         <div class="input-field col s6">
                             <i class="material-icons prefix">image</i>
                             <input type="text" id="imagen">
-                            <label for="imagen">Imagen de la edicion</label>
+                            <label for="imagen">Imagen del curso</label>
                         </div>
                     </div>
                     <div class="row">

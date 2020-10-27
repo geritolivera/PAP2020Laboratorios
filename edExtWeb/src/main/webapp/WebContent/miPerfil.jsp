@@ -60,7 +60,7 @@
                     <ul class="collapsible">
                         <%if (tipo.equals("estudiante")){%>
                         <li>
-                            <div class="collapsible-header  yellow darken-4">
+                            <div class="collapsible-header rosado white-text">
                                 <i class="material-icons">account_circle</i>Mi Perfil
                             </div>
                             <div class="collapsible-body">
@@ -81,19 +81,11 @@
                 </div>
                 <%}else if(tipo.equals("docente")){%>
                 <li>
-                    <div class="collapsible-header  yellow darken-4"><i class="material-icons">account_circle</i>Mi
+                    <div class="collapsible-header rosado white-text"><i class="material-icons">account_circle</i>Mi
                         Perfil
                     </div>
                     <div class="collapsible-body">
                         <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header lime"><i class="material-icons">book</i>Ediciones</div>
-                    <div class="collapsible-body">
-                        <div class="row">
-                            <p><a href="<%//listarAceptadosEdicionesdecurso.jsp%>">Ver Resultados</a></p>
-                        </div>
                     </div>
                 </li>
             </div>
@@ -239,6 +231,8 @@
         </div>
 
     </div>
+</div>
+</div>
 </div>
 </div>
 </div>
