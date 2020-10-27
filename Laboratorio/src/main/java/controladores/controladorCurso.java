@@ -109,22 +109,22 @@ public class controladorCurso implements IcontroladorCurso{
 			previas = c.getPrevias();
 			categorias = c.getCategorias();
 			//son listas, no requieren informacion de las ediciones o programas
-			if(!ediciones.isEmpty()) {
+			if(!ediciones.isEmpty() && ediciones != null) {
 				for (EdicionCurso e : ediciones) {
 					dtc.agregarEdicion(e.getNombre());
 				}
 			}
-			if(!programas.isEmpty()) {
+			if(!programas.isEmpty() && programas != null ) {
 				for (ProgramaFormacion p : programas) {
 					dtc.agregarPrograma(p.getNombre());
 				}
 			}
-			if (!previas.isEmpty()) {
+			if (!previas.isEmpty() && previas != null) {
 				for (Curso cur : previas) {
 					dtc.agregarPrevia(cur.getNombre());
 				}
 			}
-			if(!categorias.isEmpty()) {
+			if(!categorias.isEmpty() && categorias != null) {
 				for (Categoria cat : categorias) {
 					dtc.agregarCat(cat.getNombre());
 				}

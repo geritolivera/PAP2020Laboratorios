@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="input-field col s6">
-                            <select name="instituto" id="institutos">
+                            <select name="institutos" id="institutos">
                             </select>
                             <label>Instituto</label>
                         </div>
@@ -92,6 +92,9 @@
         getPreviasAlta();
         getInstitutosAlta();
         getCategoriasAlta();
+        $('#institutos').formSelect();
+        $('#categorias').formSelect();
+        $('#previas').formSelect();
 
     });
     $('#imagen').change(function (){
