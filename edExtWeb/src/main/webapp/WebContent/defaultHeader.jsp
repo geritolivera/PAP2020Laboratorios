@@ -27,11 +27,9 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
 
-          <li class="rojo-rita">
-          <li>
-            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
-          </li>
-          </li>
+         <li>
+          <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+         </li>
           <li>
             <a class="dropdown-trigger" data-target="dropdownPrograma" href='#'>Programas<i class="material-icons right">arrow_drop_down</i></a>
           </li>

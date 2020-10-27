@@ -2,7 +2,7 @@ var baseURL = 'http://localhost:8081/edExtWeb/';
 
 var url = baseURL + `Busqueda`;
 
-$(document).ready( function() {
+$(document).ready(function () {
     fetch(url, {
         method: 'POST',
     }).then((res) => {
@@ -14,13 +14,13 @@ $(document).ready( function() {
 
         di.cursos.forEach((item, index) => {
             console.log(' curso:: ', item);
-            dataSet.push( Object.values(item) )
+            dataSet.push(Object.values(item))
         });
 
         console.log(' dataset:: ', dataSet);
         di.programas.forEach((item, index) => {
             console.log(' programa:: ', item);
-            dataSet.push( Object.values(item) )
+            dataSet.push(Object.values(item))
         });
 
         console.log('2dataset:: ', dataSet);
@@ -30,13 +30,15 @@ $(document).ready( function() {
 
             data: dataSet,
             columns: [
-                { "title": "Tipo"},
-                { "title": "Nombre"},
-                { "title": "Descripcion"},
-                { "title": "Link"}
+                { "title": "Tipo" },
+                { "title": "Nombre" },
+                { "title": "Descripcion" },
+                { "title": "Link" }
             ],
             "oLanguage": {
                 "sSearch": "",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "No hay registros en la base de datos",
                 "sSearchPlaceholder": "Buscar...",
                 "sInfo": "_START_ -_END_ of _TOTAL_",
                 "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
@@ -56,13 +58,13 @@ $(document).ready( function() {
                     extend: 'print',
                     className: '',
                     title: '',
-//  autoPrint: false,
+                    //  autoPrint: false,
                     customize: function (win) {
                         $(win.document.body)
                             .css('font-size', '10pt')
                             .prepend(
                                 '<h4>Title Test</h4>',
-//  Background table picture in print version is here
+                                //  Background table picture in print version is here
                                 '<img src="http://i.imgur.com/w931ov4.png" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);" />'
                             );
 
@@ -76,9 +78,9 @@ $(document).ready( function() {
         });
     });
 });
-(function(window, document, undefined) {
+(function (window, document, undefined) {
 
-    var factory = function($, DataTable) {
+    var factory = function ($, DataTable) {
 
         "use strict";
 
@@ -87,7 +89,7 @@ $(document).ready( function() {
         /* Set the defaults for DataTables initialisation */
         $.extend(true, DataTable.defaults, {
             dom: "<'hiddensearch'f'>" +
-                "tr"+
+                "tr" +
                 "<'table-footer'Blip'>",
             renderer: 'material'
         });
@@ -99,15 +101,15 @@ $(document).ready( function() {
         });
 
         /* Bootstrap paging button renderer */
-        DataTable.ext.renderer.pageButton.material = function(settings, host, idx, buttons, page, pages) {
+        DataTable.ext.renderer.pageButton.material = function (settings, host, idx, buttons, page, pages) {
             var api = new DataTable.Api(settings);
             var classes = settings.oClasses;
             var lang = settings.oLanguage.oPaginate;
             var btnDisplay, btnClass, counter = 0;
 
-            var attach = function(container, buttons) {
+            var attach = function (container, buttons) {
                 var i, ien, node, button;
-                var clickHandler = function(e) {
+                var clickHandler = function (e) {
                     e.preventDefault();
                     if (!$(e.currentTarget).hasClass('disabled')) {
                         api.page(e.data.action).draw(false);
@@ -158,19 +160,19 @@ $(document).ready( function() {
                                     settings.sTableId + '_' + button : null
                             })
                                 .append($('<a>', {
-                                        'href': '#',
-                                        'aria-controls': settings.sTableId,
-                                        'data-dt-idx': counter,
-                                        'tabindex': settings.iTabIndex
-                                    })
-                                        .html(btnDisplay)
+                                    'href': '#',
+                                    'aria-controls': settings.sTableId,
+                                    'data-dt-idx': counter,
+                                    'tabindex': settings.iTabIndex
+                                })
+                                    .html(btnDisplay)
                                 )
                                 .appendTo(container);
 
                             settings.oApi._fnBindAction(
                                 node, {
-                                    action: button
-                                }, clickHandler
+                                action: button
+                            }, clickHandler
                             );
 
                             counter++;
@@ -189,7 +191,7 @@ $(document).ready( function() {
                 // accessibility. So we want to restore focus once the draw has
                 // completed
                 activeEl = $(document.activeElement).data('dt-idx');
-            } catch (e) {}
+            } catch (e) { }
 
             attach(
                 $(host).empty().html('<ul class="material-pagination"/>').children('ul'),

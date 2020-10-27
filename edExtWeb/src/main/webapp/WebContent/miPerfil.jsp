@@ -14,21 +14,14 @@
 <%@ page import="datatypes.DTEstudiante" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Mi Perfil</title>
-    <% if (session.getAttribute("tipoUser")=="docente"){ %>
-    <%@include file="defaultHeader.jsp"%>
-    <%}else{ %>
-    <%@include file="headerEstVis.jsp"%>
-    <%}%>
-    <link rel="stylesheet" href="resources/styles/style.css">
-</head>
 
-<body>
+<% if (session.getAttribute("tipoUser")=="docente"){ %>
+<%@include file="defaultHeader.jsp"%>
+<%}else{ %>
+<%@include file="headerEstVis.jsp"%>
+<%}%>
+
 <!--GET-ATRIBUTOS USUARIO-->
     <%
     //ver la imagen\
@@ -67,11 +60,13 @@
                     <ul class="collapsible">
                             <%if (tipo.equals("estudiante")){%>
                         <li>
-                            <div class="collapsible-header  pink">
+                            <div class="collapsible-header rosado white-text">
                                 <i class="material-icons">account_circle</i>Mi Perfil
                             </div>
                             <div class="collapsible-body">
-                                <p><a href="modificarDatosUsuario.jsp" type="button" onclick="window.location = 'http://localhost:8080/edExtWeb/modificarDatosUsuario.jsp'">Modificar Datos</a></p>
+                                <p><a href="modificarDatosUsuario.jsp" type="button"
+                                        onclick="window.location = 'http://localhost:8080/edExtWeb/modificarDatosUsuario.jsp'">Modificar
+                                        Datos</a></p>
                             </div>
                         </li>
                         <li>
@@ -86,8 +81,8 @@
                 </div>
                 <%}else if(tipo.equals("docente")){%>
                 <li>
-                    <div class="collapsible-header  yellow darken-4"><i
-                            class="material-icons">account_circle</i>Mi Perfil
+                    <div class="collapsible-header rosado white-text"><i class="material-icons">account_circle</i>Mi
+                        Perfil
                     </div>
                     <div class="collapsible-body">
                         <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
@@ -232,6 +227,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <%@ include file="footer.jsp" %>

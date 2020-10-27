@@ -88,7 +88,7 @@
                     </ul>
                 </div>
             </div>
-             <!-- CARD DOCENTES-->
+            <!-- CARD DOCENTES-->
             <div class="col s12 m5">
                 <div class="card teal darken-4">
                     <div class="card-content white-text">
@@ -100,7 +100,7 @@
                         </c:forEach>
                     </div>
                 </div>
-            <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
+                <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
                 <div class="row center">
                     <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
                 </div>
@@ -200,5 +200,14 @@
                         tableInscripciones('${nombre}');
                         tableInscripcionesAceptados('${nombre}');
                     });
+                    function toggleEstudiantes() {
+                        $("#containerEstudiantes").toggle();
+                    }
+
+
+                    function toggleAceptados() {
+                        $("#containerEstudiantesAceptados").toggle();
+                    }
+
 
                 </script>
