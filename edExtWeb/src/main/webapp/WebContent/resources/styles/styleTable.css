@@ -5,6 +5,7 @@ div.material-table {
 div.material-table .hiddensearch {
   padding: 0 14px 0 24px;
   border-bottom: solid 1px #DDDDDD;
+  display: none;
 }
 
 div.material-table .hiddensearch input {
@@ -256,4 +257,7 @@ div.dt-button-info {
     float: none !important;
     text-align: center;
   }
+}
+.white-text{
+  color: black;
 }

@@ -30,7 +30,7 @@
           <li class="rojo-rita">
             <form  id="formBusqueda" >
               <div class="input-field col s12" >
-                <i class="material-icons prefix" id="searchIcon" style="top: 0;" type="button" onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">search</i>
+                <i class="waves-effect waves-light btn" id="searchIcon" style="top: 0;" type="button" onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">search</i>
                 <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
               </div>
             </form>

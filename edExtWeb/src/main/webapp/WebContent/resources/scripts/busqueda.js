@@ -94,8 +94,12 @@ $(document).ready( function() {
     var factory = function($, DataTable) {
 
         "use strict";
-        $('.hiddensearch').show();
-
+        $('.search-toggle').click(function () {
+            if ($('.hiddensearch').css('display') == 'none')
+                $('.hiddensearch').slideDown();
+            else
+                $('.hiddensearch').slideUp();
+        });
 
         /* Set the defaults for DataTables initialisation */
         $.extend(true, DataTable.defaults, {

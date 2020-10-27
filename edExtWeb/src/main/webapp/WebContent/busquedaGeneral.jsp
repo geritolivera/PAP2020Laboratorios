@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="resources/styles/styleTable.css">
 <div class="main">
     <br><br>
+    <div class="container">
     <div class="row">
         <div id="admin" class="col s12">
             <div class="card material-table">
@@ -34,7 +35,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 </div>
 
 

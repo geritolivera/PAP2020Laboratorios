@@ -27,12 +27,7 @@
             <div class="nav-wrapper">
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <form  id="formBusqueda" >
-                            <div class="input-field col s12" >
-                                <i class="material-icons prefix" id="searchIcon" style="top: 0;" type="button" onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">search</i>
-                                <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
-                            </div>
-                        </form>
+                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
                     </li>
                     <li>
                         <a href="consultaPrograma.jsp">Programas</a>

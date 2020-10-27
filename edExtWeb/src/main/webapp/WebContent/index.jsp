@@ -6,6 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="resources/styles/styleTable.css">
+  <link rel="stylesheet" href="resources/styles/style.css">
   <link rel="shortcut icon" href="resources/images/intento3.png" sizes="35px;35px">
   <% if (session.getAttribute("tipoUser")=="docente"){ %>
   <%@include file="defaultHeader.jsp"%>
@@ -51,23 +53,6 @@ relacionados con la extensi&#243;n universitaria</h5>
     </ul>
   </section>
 
-  <!-- Section: Search -->
-  <section id="search" class="section section-search  rojo white-text center scrollspy">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h3>Buscar Programas</h3>
-          <div class="input-field">
-            <form action="infoPrograma">
-              <input class="white grey-text autocomplete" placeholder="Progrmacion 1, matematica, etc..." type="text"
-                id="autocomplete-input">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Section: Icon Boxes -->
   <section class="section section-icons grey lighten-4 center">
     <div class="container">
@@ -96,6 +81,40 @@ relacionados con la extensi&#243;n universitaria</h5>
       </div>
     </div>
   </section>
+
+  <!-- Section: Search -->
+  <section id="search" class="section section-search rojo center scrollspy">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <div id="admin" class="col s12">
+            <div class="card material-table">
+              <div class="table-header">
+                <span class="table-title">Busqueda General</span>
+                <div class="actions">
+                  <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
+                </div>
+              </div>
+              <table id="datatable">
+                <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Nombre</th>
+                  <th>Descripcion</th>
+                  <th>Link</th>
+                </tr>
+                </thead>
+                <tbody id="datatablebody">
+                <tr>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Section: Follow -->
   <section class="section section-follow rojo darken-4 darken-2 white-text center">
     <div class="container">
@@ -118,3 +137,12 @@ relacionados con la extensi&#243;n universitaria</h5>
 	    var instances = M.Parallax.init(elems);
 	  });
   </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="resources/scripts/busqueda.js"></script>

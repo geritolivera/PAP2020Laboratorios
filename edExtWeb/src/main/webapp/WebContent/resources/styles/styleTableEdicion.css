@@ -94,7 +94,7 @@ div.material-table .table-footer label {
 div.material-table .table-footer .select-wrapper {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row
+  -webkit-flex-direction: row;
   /* works with row or column */
   
   flex-direction: row;
