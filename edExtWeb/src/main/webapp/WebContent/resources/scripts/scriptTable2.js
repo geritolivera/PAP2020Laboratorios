@@ -3,15 +3,6 @@
 	var factory = function ($, DataTable) {
 
 		"use strict";
-
-
-		$('.search-toggle').click(function () {
-			if ($('.hiddensearch').css('display') == 'none')
-				$('.hiddensearch').slideDown();
-			else
-				$('.hiddensearch').slideUp();
-		});
-
 		/* Set the defaults for DataTables initialisation */
 		$.extend(true, DataTable.defaults, {
 			dom: "<'hiddensearch'f'>" +

@@ -30,7 +30,7 @@
 
 <body>
 <!--GET-ATRIBUTOS USUARIO-->
-<%
+    <%
     //ver la imagen\
     HttpSession ses = request.getSession();
     String nickname = (String) ses.getAttribute("nickname");
@@ -67,7 +67,7 @@
                     <ul class="collapsible">
                             <%if (tipo.equals("estudiante")){%>
                         <li>
-                            <div class="collapsible-header  yellow darken-4">
+                            <div class="collapsible-header  pink">
                                 <i class="material-icons">account_circle</i>Mi Perfil
                             </div>
                             <div class="collapsible-body">
@@ -75,7 +75,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header lime"><i class="material-icons">book</i>Inscribirme</div>
+                            <div class="collapsible-header rosado"><i class="material-icons">book</i>Inscribirme</div>
                             <div class="collapsible-body">
                                 <div class="row">
                                     <p><a href="consultaEdicion.jsp">Inscribirme a Edicion de curso</a></p>
@@ -93,14 +93,6 @@
                         <p><a href="modificarDatosUsuario.jsp">Modificar Datos</a></p>
                     </div>
                 </li>
-                <li>
-                    <div class="collapsible-header lime"><i class="material-icons">book</i>Ediciones</div>
-                    <div class="collapsible-body">
-                        <div class="row">
-                            <p><a href="<%//listarAceptadosEdicionesdecurso.jsp%>">Ver Resultados</a></p>
-                        </div>
-                    </div>
-                </li>
             </div>
             <%}%>
             </ul>
@@ -112,7 +104,7 @@
                     <ul class="tabs tabs-fixed-width">
                         <li class="tab" class="active"><a href="#test1">Datos</a></li>
                         <li class="tab"><a href="#test2">Social</a></li>
-                        <li class="tab"><a href="#test3">Cursos</a></li>
+                        <li class="tab"><a href="#test3">Ediciones</a></li>
                         <%if(tipo.equals("estudiante")){ %>
                         <li class="tab"><a href="#test4">Programas</a></li>
                         <%} %>
@@ -153,8 +145,8 @@
                                     <% if(seguidos != null){ %>
                                 <c:forEach var="ed" items="${seguidos}">
                             <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="dejarSeguirUsuario('${ed}')">delete_forever</i></span></a>
-                            </c:forEach>
-                            <%}else{%>
+                                </c:forEach>
+                                    <%}else{%>
                             <li class="collection-item">No sigue a nadie aun.</li>
                             <%}%>
                             </li>
@@ -165,8 +157,8 @@
                                     <% if(seguidos != null){ %>
                                 <c:forEach var="ed" items="${seguidores}">
                             <li class="collection-item"><div>${ed}<a class="secondary-content"><span class="waves-effect waves-light btn-small" style="height: 27px;" ><i class="material-icons" type="button" onclick="seguirUsuario('${ed}')">person_add</i></span></a>
-                            </c:forEach>
-                            <%}else{%>
+                                </c:forEach>
+                                    <%}else{%>
                             <li class="collection-item">No sigue a nadie aun.</li>
                             <%}%>
                             </li>

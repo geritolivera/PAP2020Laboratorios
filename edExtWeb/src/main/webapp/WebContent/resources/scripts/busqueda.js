@@ -71,20 +71,7 @@ $(document).ready( function() {
                             .css('font-size', 'inherit',);
                     }
                 },
-                {
-                    text: '<span style="color:#4d4d4d; margin-right:15px">Excel<span>',
-                    extend: 'excelHtml5',
-                },
-                {
-                    text: '<span style="color:#4d4d4d; margin-right:15px">Csv<span>',
-                    extend: 'csvHtml5',
-                },
-                {
 
-                    text: '<span style="color:#4d4d4d; margin-right:15px">Copy<span>',
-                    extend: 'copyHtml5',
-
-                },
             ]
         });
     });
@@ -94,12 +81,8 @@ $(document).ready( function() {
     var factory = function($, DataTable) {
 
         "use strict";
-        $('.search-toggle').click(function () {
-            if ($('.hiddensearch').css('display') == 'none')
-                $('.hiddensearch').slideDown();
-            else
-                $('.hiddensearch').slideUp();
-        });
+
+
 
         /* Set the defaults for DataTables initialisation */
         $.extend(true, DataTable.defaults, {
@@ -223,7 +206,6 @@ $(document).ready( function() {
          * Required TableTools 2.1+
          */
         if (DataTable.TableTools) {
-            // Set the classes that TableTools uses to something suitable for Bootstrap
             $.extend(true, DataTable.TableTools.classes, {
                 "container": "DTTT btn-group",
                 "buttons": {
