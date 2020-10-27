@@ -98,14 +98,17 @@ public class controladorUsuario implements IcontroladorUsuario {
 				//tiene que sacar el DTEdicion desde las inscripciones
 				inscripcionesEDEst = ((Estudiante) u).getInscripcionesED();
 				for (InscripcionED i : inscripcionesEDEst) {
-					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
-					dte.agregarEdicion(dtee);
+					if(i.getEstado().equals(InscripcionEnum.ACEPTADO)) {
+						DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
+						dte.agregarEdicion(dtee);
+					}
 				}
 				inscripcionesPFEst = ((Estudiante) u).getInscripcionesPF();
 				for (InscripcionPF i: inscripcionesPFEst) {
 					DTProgramaFormacion dtpe = new DTProgramaFormacion(i.getPrograma());
 					dte.agregarPrograma(dtpe);
 				}
+
 				return dte;
 			}
 		} else
