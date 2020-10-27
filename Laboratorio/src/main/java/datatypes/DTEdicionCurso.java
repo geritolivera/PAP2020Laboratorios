@@ -3,6 +3,7 @@ package datatypes;
 import clases.Docente;
 import clases.EdicionCurso;
 import clases.InscripcionED;
+import clases.InscripcionEnum;
 import manejadores.manejadorInscripcionED;
 
 import java.util.Date;
@@ -45,7 +46,7 @@ public class DTEdicionCurso {
 		manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
 		List<InscripcionED> inscripciones = mIns.getInscripciones();
 		for(InscripcionED i: inscripciones) {
-			if(i.getEdicion().getNombre().equals(this.nombre))
+			if(i.getNombreEdicion().equals(this.nombre) && (i.getEstado() == InscripcionEnum.ACEPTADO || i.getEstado() == InscripcionEnum.PENDIENTE))
 				cont++;
 		}
 		this.cupo = edicion.getCupo() - cont;
