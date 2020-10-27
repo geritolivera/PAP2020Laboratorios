@@ -70,7 +70,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header rosado"><i class="material-icons">book</i>Inscribirme</div>
+                            <div class="collapsible-header rosado white-text"><i class="material-icons">book</i>Inscribirme</div>
                             <div class="collapsible-body">
                                 <div class="row">
                                     <p><a href="consultaEdicion.jsp">Inscribirme a Edicion de curso</a></p>
