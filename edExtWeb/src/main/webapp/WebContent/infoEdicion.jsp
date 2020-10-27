@@ -100,7 +100,7 @@
                         </c:forEach>
                     </div>
                 </div>
-                <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
+            <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
                 <div class="row center">
                     <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
                 </div>
@@ -194,20 +194,18 @@
 		<script src="resources/scripts/listas.js"> </script>
     <%@include  file="footer.jsp" %>
 
-                <script>
+    <script>
 
-                    $(document).ready(function () {
-                        tableInscripciones('${nombre}');
-                        tableInscripcionesAceptados('${nombre}');
-                    });
-                    function toggleEstudiantes() {
-                        $("#containerEstudiantes").toggle();
-                    }
+        $(document).ready(function () {
+            tableInscripciones('${nombre}');
+            tableInscripcionesAceptados('${nombre}');
+        });
+        
+        function toggleEstudiantes() {
+            $("#containerEstudiantes").toggle();
+        }
+        function toggleAceptados() {
+            $("#containerEstudiantesAceptados").toggle();
+        }
 
-
-                    function toggleAceptados() {
-                        $("#containerEstudiantesAceptados").toggle();
-                    }
-
-
-                </script>
+    </script>

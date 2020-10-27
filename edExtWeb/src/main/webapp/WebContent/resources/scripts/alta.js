@@ -24,7 +24,7 @@ function crearPrograma(){
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Programa dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'consultaProgramaFormacion?programa=' +nombre;
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -81,7 +81,7 @@ function crearCurso() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'consultaCurso?curso=' +nombre;
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -203,7 +203,7 @@ function inscribirUsuario(edicion) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location.reload();
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -249,7 +249,7 @@ function crearEdicion() {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Edicion dado de alta!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location = baseURL+ 'consultaEdicionCurso?edicion=' +nombre;
             })
         } else {
             mensajeError("Error en alta", respuesta.mensaje).then(() => {
@@ -278,7 +278,7 @@ function inscribirUsuario(nombreEdi) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto a edicion!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'index.jsp';
+                window.location.reload();
             })
         } else {
             mensajeError("Error al inscribir usuario", respuesta.mensaje).then(() => {
@@ -309,7 +309,7 @@ function agregarCursoPrograma(nomCurso, nomPrograma) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Curso agregado a programa!", respuesta.mensaje).then(() => {
                 // rediraccinar a otro jsp.
-                window.location = baseURL+ 'consultaProgramaFormacion?programa='+ nomPrograma;
+                window.location.reload();
             })
         } else {
             mensajeError("Error al agregar curso a programa", respuesta.mensaje).then(() => {
@@ -336,7 +336,7 @@ function inscribirUsuarioProg(nombreProg) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario inscripto al Programa!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL+ 'index.jsp';
+                window.location.reload();
             })
         } else {
             mensajeError("Error en inscripcion", respuesta.mensaje).then(() => {
@@ -363,7 +363,7 @@ function seguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario seguido!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL+ 'miPerfil.jsp';
+                window.location.reload();
             })
         } else {
             mensajeError("Error al seguir usuario", respuesta.mensaje).then(() => {
@@ -389,7 +389,7 @@ function dejarSeguirUsuario(nickname) {
         if (respuesta.codigo == 0) {
             mensajeConfirmacion("Usuario dejado de seguir!", respuesta.mensaje).then(() => {
 
-                window.location = baseURL+ 'miPerfil.jsp';
+                window.location.reload();
             })
         } else {
             mensajeError("Error al dejar de seguir usuario", respuesta.mensaje).then(() => {
