@@ -123,7 +123,7 @@ public class login extends HttpServlet {
                     }
             }else{
                 respuesta.setCodigo(1);
-                respuesta.setMensaje("Constrase;a incorrecta para" + nickname);
+                respuesta.setMensaje("Constraseña incorrecta para" + nickname);
                 ObjectMapper mapper = new ObjectMapper();
                 String userStr = mapper.writeValueAsString(respuesta);
                 response.setContentType("application/json");

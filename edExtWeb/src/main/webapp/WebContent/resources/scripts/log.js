@@ -29,7 +29,7 @@ function inicioSesion(){
                     window.location = baseURL+ 'index.jsp';
                 })
             } else {
-                mensajeError("Error al iniciar sesion", respuesta.mensaje).then(() => {
+                mensajeError("Error al iniciar sesion ", respuesta.mensaje).then(() => {
                     if(respuesta.elemento != null) {
                         document.getElementById(respuesta.elemento).focus();
                     }
