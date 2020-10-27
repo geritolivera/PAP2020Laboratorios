@@ -115,17 +115,6 @@ relacionados con la extensi&#243;n universitaria</h5>
       </div>
     </div>
   </section>
-  <!-- Section: Follow -->
-  <section class="section section-follow rojo darken-4 darken-2 white-text center">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h4></h4>
-          <p>Siguenos en redes sociales para enterarte de todas las novedades</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
 
