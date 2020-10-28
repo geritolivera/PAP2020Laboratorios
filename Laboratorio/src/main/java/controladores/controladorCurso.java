@@ -31,14 +31,14 @@ public class controladorCurso implements IcontroladorCurso{
 				Instituto I = mI.buscarInstituto(instituto);
 				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
 				//se fija si hay previas antes de ingresarlas
-				if (!previas.isEmpty()){
+				if (!previas.isEmpty() && previas != null){
 					for (String s : previas) {
 						//System.out.println(s);
 						Curso previa = mc.buscarCurso(s);
 						cursoNuevo.agregarPrevias(previa);
 					}
 				}
-				if (!cats.isEmpty()){
+				if (!cats.isEmpty() && cats != null){
 					for (String cat : cats) {
 						//System.out.println(s);
 						Categoria c = mcat.buscarCategoria(cat);
@@ -154,7 +154,7 @@ public class controladorCurso implements IcontroladorCurso{
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
 				edi.setImagenURL(url);
 				//se fija que haya docentes para ingresar
-				if(!docentes.isEmpty()) {
+				if(!docentes.isEmpty() && docentes != null) {
 					for(String s: docentes) {
 						Docente d = (Docente) mUsu.buscarUsuario(s);
 						if(!d.toString().isEmpty()) {
