@@ -28,7 +28,7 @@ public class manejadorInscripcionPF {
 	public List<InscripcionPF> getInscripcionesUsuario(String nickUsuario) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		return em.createQuery("select i from InscripcionPF i where i.estudiante_nick LIKE", InscripcionPF.class)
+		return em.createQuery("select i from InscripcionPF i where i.estudiante.nick = :userName", InscripcionPF.class)
 				.setParameter("userName", nickUsuario)
 				.getResultList();
 	}
@@ -36,18 +36,18 @@ public class manejadorInscripcionPF {
 	public List<InscripcionPF> getInscripcionesEstado(String nickUsuario, String estado) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		return em.createQuery("select i from InscripcionPF i where i.estudiante_nick LIKE :userName and i.estado LIKE :estadoIns", InscripcionPF.class)
+		return em.createQuery("select i from InscripcionPF i where i.estudiante.nick = :userName and i.estado = :estadoIns", InscripcionPF.class)
 				.setParameter("userName", nickUsuario)
 				.setParameter("estadoIns", estado)
 				.getResultList();
 	}
 	
-	public List<InscripcionPF> buscarInscripcion(String nickUsuario, String nomEdicion) {
+	public List<InscripcionPF> buscarInscripcionPF(String nickUsuario, String nomPrograma) {
 		Conexion con = Conexion.getInstancia();
 		EntityManager em = con.getEntityManager();
-		return em.createQuery("select i from InscripcionPF i where i.estudiante_nick LIKE :userName and i.edicion_nombre LIKE :nomEdicion", InscripcionPF.class)
+		return em.createQuery("select i from InscripcionPF i where i.estudiante.nick = :userName and i.programa.nombre = :nomProg", InscripcionPF.class)
 				.setParameter("userName", nickUsuario)
-				.setParameter("nomEdicion", nomEdicion)
+				.setParameter("nomProg", nomPrograma)
 				.getResultList();
 	}
 }

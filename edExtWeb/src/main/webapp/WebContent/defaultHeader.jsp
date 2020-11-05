@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" href="resources/images/icon_big_edext_1.png">
   <link rel="stylesheet" href="resources/styles/style.css">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -12,7 +13,6 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="resources/styles/styleTable.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
   <title>edExt</title>
 </head>
@@ -28,12 +28,9 @@
         <ul class="right hide-on-med-and-down">
 
           <li class="rojo-rita">
-            <form action="Busqueda" method="post" id="formBusqueda" >
-              <div class="input-field">
-                <i class="material-icons prefix" id="searchIcon" style="top: 0;">search</i>
-                <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
-              </div>
-            </form>
+          <li>
+            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+          </li>
           </li>
           <li>
             <a class="dropdown-trigger" data-target="dropdownPrograma" href='#'>Programas<i class="material-icons right">arrow_drop_down</i></a>
@@ -45,7 +42,7 @@
             <a class="dropdown-trigger" data-target="dropdownEdicion" href='#'>Ediciones<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           <li>
-            <a class="dropdown-trigger" data-target="dropdownUsuario" href='#'>Usuarios<i class="material-icons right">arrow_drop_down</i></a>
+            <a href="consultaUsuario.jsp">Usuarios</a>
           </li>
           <li>
             <a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a>
@@ -94,15 +91,8 @@
             </div>
           </li>
           <li>
-            <a class="collapsible-header">Usuarios<i class="material-icons right">arrow_drop_down</i></a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="altaUsuario.jsp">Alta Usuario</a></li>
-                <li><a href="consultaUsuario.jsp">Buscar</a></li>
-                <li><a href="consultaUsuario.jsp">Seguir Usuario</a></li>
-              </ul>
-            </div>
-          </li>
+            <a href="consultaUsuario.jsp">Usuarios</a>
+        </li>
         </ul>
       </li>
     </ul>
@@ -121,22 +111,12 @@
       <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
     </ul>
-    <!-- Dropdown Usuario -->
-    <ul id="dropdownUsuario" class="dropdown-content">
-      <li><a href="altaUsuario.jsp">Alta</a></li>
-      <li><a href="consultaUsuario.jsp">Ver Usuarios</a></li>
-    </ul>
   </li>
 </ul>
 
 
 
 <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
-  });
 
   // Or with jQuery
 

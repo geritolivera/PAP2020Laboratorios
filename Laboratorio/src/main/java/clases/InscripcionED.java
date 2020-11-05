@@ -46,7 +46,9 @@ public class InscripcionED {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+	public String getNickUsuario() {
+		return estudiante.getNick();
+	}
 	public String getNombreUsuario() {
 		return estudiante.getNombre();
 	}
@@ -73,5 +75,13 @@ public class InscripcionED {
 	}
 	public InscripcionEnum getEstado() {
 		return estado;
+	}
+	public String getEstadoString() {
+		if(this.estado == InscripcionEnum.PENDIENTE)
+			return "Pendiente";
+		else if(this.estado == InscripcionEnum.ACEPTADO)
+			return "Aceptado";
+		else 
+			return "Rechazado";
 	}
 }

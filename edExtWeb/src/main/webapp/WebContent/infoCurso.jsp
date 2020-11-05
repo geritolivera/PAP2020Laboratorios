@@ -7,6 +7,7 @@
 <%}%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%@page import="java.util.ArrayList"%>
+<link rel="stylesheet" href="resources/styles/style.css">
     <div class="main">
         <br><br>
 
@@ -17,7 +18,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="resources/images/asd.jpg">
+                            <img src="${imagenURL}" width="702.281" height="345.953">
                             <span class="card-title" id="nombre">${nombre}</span>
                         </div>
                         <div class="card-content">

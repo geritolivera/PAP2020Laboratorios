@@ -7,6 +7,7 @@
 <%}%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
+<link rel="stylesheet" href="resources/styles/style.css">
 <div class="main">
     <br><br>
 
@@ -15,10 +16,10 @@
     <div class="container" id="estudiante">
         <div class="row">
             <!-- CARD USUARIO ESTUDIANTE-->
-            <div class="col s12 m7">
+            <div class="col s12 m5">
                 <div class="card">
                     <div class="card-image">
-                        <img src="resources/images/images.png">
+                        <img src="${imagenURL}">
                         <span class="card-title" id="nicknameSelected"></span>
                         <%
                             Boolean userLog = (Boolean) request.getAttribute("userLog");
@@ -84,8 +85,7 @@
 
                 </ul>
             </div>
-
-        <div class="col s12 m5">
+            <div class="col s12 m5">
             <div class="card teal darken-4">
                 <div class="card-content white-text">
                     <span class="card-title">Ediciones</span>
@@ -101,7 +101,7 @@
             String tipo = (String) request.getAttribute("tipo");
             if(tipo.equals("estudiante")){
         %>
-        <div class="col s12 m5">
+            <div class="col s12 m5">
             <div class="card teal darken-4">
                 <div class="card-content white-text">
                     <span class="card-title">Programas</span>
@@ -114,8 +114,7 @@
             </div>
         </div>
         <%}%>
-
-        <div class="col s12 m5">
+            <div class="col s12 m5">
             <div class="card teal darken-4">
                 <div class="card-content white-text">
                     <span class="card-title">Seguidores</span>
@@ -128,7 +127,7 @@
             </div>
         </div>
 
-        <div class="col s12 m5">
+            <div class="col s12 m5">
             <div class="card teal darken-4">
                 <div class="card-content white-text">
                     <span class="card-title">Seguidos</span>
@@ -146,6 +145,3 @@
 </div>
 <%@include  file="footer.jsp" %>
 <script src="resources/scripts/alta.js"> </script>
-</body>
-
-</html>

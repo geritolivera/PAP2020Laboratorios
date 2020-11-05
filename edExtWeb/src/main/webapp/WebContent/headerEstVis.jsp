@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="resources/images/icon_big_edext_1.png">
     <link rel="stylesheet" href="resources/styles/style.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -20,18 +21,13 @@
 <body>
 <div class="navbar-fixed">
     <nav class="rojo">
+        <a href="index.jsp" class="brand-logo">edExt</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index.jsp" class="brand-logo">edExt</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li class="rojo-rita">
-                        <form action="Busqueda" method="post" id="formBusqueda">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix" id="searchIcon" style="top: 0;">search</i>
-                                <input type="text" id="busqueda" class="autocomplete white-text" placeholder="Buscar">
-                            </div>
-                        </form>
+                    <li>
+                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
                     </li>
                     <li>
                         <a href="consultaPrograma.jsp">Programas</a>
@@ -41,6 +37,9 @@
                     </li>
                     <li>
                         <a href="consultaEdicion.jsp">Ediciones</a>
+                    </li>
+                    <li>
+                        <a href="consultaUsuario.jsp">Usuarios</a>
                     </li>
                     <% if (session.getAttribute("nombreUser")!=null) {%>
                     <li><a href="miPerfil.jsp"><i class="material-icons left">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
@@ -78,7 +77,6 @@
     <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
     <%}%>
 </ul>
-
 <script src="resources/scripts/log.js"></script>
 <script src="resources/scripts/alta.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="edExtWeb:ear exploded2">
+    <output-path>$PROJECT_DIR$/out/artifacts/edExtWeb_ear_exploded2</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="edExtWeb/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

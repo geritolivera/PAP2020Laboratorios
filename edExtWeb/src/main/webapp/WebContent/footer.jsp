@@ -6,6 +6,7 @@
     <script src="resources/scripts/script.js"> </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <p>Siguenos en redes sociales para enterarte de todas las novedades</p>
     <p class="flow-text">edExt &copy; 2020</p>
     <script>
         $(".dropdown-trigger").dropdown({

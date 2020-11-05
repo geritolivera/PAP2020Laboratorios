@@ -7,7 +7,7 @@
 <%}%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
-
+<link rel="stylesheet" href="resources/styles/style.css">
     <div class="main">
         <br><br>
 
@@ -17,7 +17,7 @@
                 <div class="col s12 m7">
                     <div class="card">
                         <div class="card-image">
-                            <img src="resources/images/asd.jpg">
+                            <img src="${imagenURL}">
                             <span class="card-title" id="tituloPrograma">${tituloPrograma}</span>
                             <%
                             	Boolean userLog = (Boolean) request.getAttribute("userLog");
@@ -68,7 +68,7 @@
                         </div>
                         <ul class="collection" name="categoriass" id="categoriass">
                                 <c:forEach var="cat" items="${categoriass}">
-                                    <a href="" class="collection-item">${cat}</a>
+                                    <a class="collection-item">${cat}</a>
                                 </c:forEach>
                         </ul>
                     </div>
