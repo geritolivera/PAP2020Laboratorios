@@ -3,6 +3,7 @@ package main.webapp.WebContent.servlets.Gets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,6 @@ public class GetListas extends HttpServlet {
 		fabrica fabrica = interfaces.fabrica.getInstancia();
 		IcontroladorCurso icon = fabrica.getIcontroladorCurso();
 		String[] institutos = icon.listarInstitutos();
-
-		//HttpSession session = request.getSession();
 
 		try {
 			institutos = icon.listarInstitutos();

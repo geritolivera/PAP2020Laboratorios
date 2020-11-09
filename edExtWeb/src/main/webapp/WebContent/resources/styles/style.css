@@ -37,11 +37,11 @@ li.active:hover .collapsible-header{
 .main{
   margin: auto;
   flex: 1 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
 .container{
-    width: 95%;
+    width: 80%;
     vertical-align: middle;
 }
 
@@ -58,6 +58,17 @@ li.active:hover .collapsible-header{
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    color: #fff;
+    background-color: #660801 !important;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
 }
 
  /* label focus color */
@@ -132,12 +143,41 @@ li.active:hover .collapsible-header{
   background-color: #81054b !important;
 }
 
-
 nav .brand-logo {
   position: absolute;
   color: #fff;
   display: inline-block;
   font-size: 3rem;
   margin-left: 30px;
-  font-variant: unicase;
+  font-variant: inherit;
+}
+
+.card .card-content .card-title {
+    display: block;
+    line-height: 32px;
+    font-variant: inherit;
+}
+
+
+.card .card-content {
+    padding: 10px;
+    text-align: inherit;
+}
+
+.teal.darken-4 {
+    background-color: #660801 !important;
+}
+
+.collection .collection-item {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: large;
+}
+
+
+.header2{
+    font-variant: inherit;
 }

@@ -7,7 +7,7 @@
 <%}%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
-
+<link rel="stylesheet" href="resources/styles/style.css">
     <div class="main">
         <br><br>
 
@@ -68,7 +68,7 @@
                         </div>
                         <ul class="collection" name="categoriass" id="categoriass">
                                 <c:forEach var="cat" items="${categoriass}">
-                                    <a href="" class="collection-item">${cat}</a>
+                                    <a class="collection-item">${cat}</a>
                                 </c:forEach>
                         </ul>
                     </div>

@@ -1,6 +1,13 @@
 package datatypes;
 
+import clases.InscripcionED;
+import clases.InscripcionEnum;
 import clases.Usuario;
+import exepciones.EdicionExcepcion;
+import interfaces.IcontroladorCurso;
+import interfaces.fabrica;
+import manejadores.manejadorEdicion;
+import manejadores.manejadorInscripcionED;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +51,21 @@ public class DTEstudiante extends DTUsuario{
 		this.setCorreo(correo);
 		this.setFechaNac(fechaNac);
 	}
+
+	public ArrayList<DTEdicionCurso> getEdicionesAprobado() throws EdicionExcepcion {
+		manejadorInscripcionED mi = manejadorInscripcionED.getInstancia();
+		List<InscripcionED> inscrip = mi.getInscripcionesUsuario(this.getNick());
+		ArrayList<DTEdicionCurso> retorno = new ArrayList<>();
+		fabrica fab = fabrica.getInstancia();
+		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		for (InscripcionED ins:inscrip) {
+			if(ins.getEstado().equals(InscripcionEnum.ACEPTADO)){
+				retorno.add(icon.verInfoEdicion(ins.getNombreEdicion()));
+			}
+
+		}
+		return retorno;
+	};
 
 	public void agregarEdicion(DTEdicionCurso edicion) {
 		ediciones.add(edicion);

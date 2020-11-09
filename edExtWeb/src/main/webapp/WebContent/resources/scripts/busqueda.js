@@ -2,55 +2,86 @@ var baseURL = 'http://localhost:8081/edExtWeb/';
 
 var url = baseURL + `Busqueda`;
 
-const busqueda = () => {
+$(document).ready( function() {
     fetch(url, {
         method: 'POST',
     }).then((res) => {
         return res.json();
-    }).then((dti) => renderTable(dti));
-};
+    }).then((di) => {
+        console.log(JSON.stringify(di))
+        console.log(di)
+        var dataSet = []
+
+        di.cursos.forEach((item, index) => {
+            console.log(' curso:: ', item);
+            dataSet.push( Object.values(item) )
+        });
+
+        console.log(' dataset:: ', dataSet);
+        di.programas.forEach((item, index) => {
+            console.log(' programa:: ', item);
+            dataSet.push( Object.values(item) )
+        });
+
+        console.log('2dataset:: ', dataSet);
+
+        $('#datatable').dataTable({
 
 
-const renderTable = (data) => {
+            data: dataSet,
+            columns: [
+                { "title": "Tipo"},
+                { "title": "Nombre"},
+                { "title": "Descripcion"},
+                { "title": "Link"}
+            ],
+            "oLanguage": {
+                "sSearch": "",
+                "sSearchPlaceholder": "Buscar...",
+                "sInfo": "_START_ -_END_ of _TOTAL_",
+                "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">All</option>' +
+                    '</select></div>'
+            },
+            bAutoWidth: false,
 
-    const table = document.querySelector('#datatablebody');
-    table.innerHTML = "";
+            buttons: [
+                {
+                    text: '<span style="color:#4d4d4d; margin-right:15px">Print<span>',
+                    extend: 'print',
+                    className: '',
+                    title: '',
+//  autoPrint: false,
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<h4>Title Test</h4>',
+//  Background table picture in print version is here
+                                '<img src="http://i.imgur.com/w931ov4.png" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);" />'
+                            );
 
-    data.cursos.forEach((e) => {
-        console.log(e);
-        const element = `
-    <tr>
-      <td>Curso</td>
-      <td>${e.nombre}</td>
-      <td>${e.descripcion}</td>
-      <td> link </td>
-    </tr>
-    `;
-        table.innerHTML += element;
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit',);
+                    }
+                },
+
+            ]
+        });
     });
-
-    data.programas.forEach((e) => {
-        console.log(e);
-        const element = `
-    <tr>
-      <td>Programa</td>
-      <td>${e.nombre}</td>
-      <td>${e.descripcion}</td>
-      <td> link </td>
-    </tr>
-    `;
-        table.innerHTML += element;
-    });
-
-}
-
-
+});
 (function(window, document, undefined) {
 
     var factory = function($, DataTable) {
 
         "use strict";
-        $('.hiddensearch').show();
+
 
 
         /* Set the defaults for DataTables initialisation */
@@ -175,7 +206,6 @@ const renderTable = (data) => {
          * Required TableTools 2.1+
          */
         if (DataTable.TableTools) {
-            // Set the classes that TableTools uses to something suitable for Bootstrap
             $.extend(true, DataTable.TableTools.classes, {
                 "container": "DTTT btn-group",
                 "buttons": {
@@ -221,4 +251,3 @@ const renderTable = (data) => {
     }
 
 })(window, document);
-

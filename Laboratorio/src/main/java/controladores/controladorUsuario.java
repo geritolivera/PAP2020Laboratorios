@@ -98,8 +98,10 @@ public class controladorUsuario implements IcontroladorUsuario {
 				//tiene que sacar el DTEdicion desde las inscripciones
 				inscripcionesEDEst = ((Estudiante) u).getInscripcionesED();
 				for (InscripcionED i : inscripcionesEDEst) {
-					DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
-					dte.agregarEdicion(dtee);
+					if(i.getEstado().equals(InscripcionEnum.ACEPTADO)) {
+						DTEdicionCurso dtee = new DTEdicionCurso(i.getEdicion());
+						dte.agregarEdicion(dtee);
+					}
 				}
 				inscripcionesPFEst = ((Estudiante) u).getInscripcionesPF();
 				for (InscripcionPF i: inscripcionesPFEst) {
@@ -132,6 +134,8 @@ public class controladorUsuario implements IcontroladorUsuario {
 			em.persist(u);
 			em.getTransaction().commit();
 		}
+		else
+			throw new UsuarioExcepcion("No existe el usuario " + nickname + "en el sistema.");
 	}
 
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -301,19 +305,15 @@ public class controladorUsuario implements IcontroladorUsuario {
     @Override
     public boolean validarSigue(String nickname, String nicknameSigue) {
     	manejadorUsuario mU = manejadorUsuario.getInstancia();
-
-		System.out.println("nick log= " + nickname + " sigue a :"+ nicknameSigue);
 		if(mU.existeUsuarioNick(nickname) && mU.existeUsuarioNick(nicknameSigue)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			List<Usuario> usuariosSigue = currentUser.getSigue();
-			System.out.println( nickname + " usuariosSigue  = " + Arrays.toString(usuariosSigue.toArray()));
 			for(Usuario u : usuariosSigue) {
 				if(u.getNick().equals(nicknameSigue)) {
 					return true;
 				}
 			}
 		}
-		System.out.println("dice que uno no existe");
 		return false;
     }
     
@@ -346,26 +346,35 @@ public class controladorUsuario implements IcontroladorUsuario {
     }
     
     @Override
-    public boolean inscriptoED(String nickname, String nomEdicion) {
+    public String inscriptoED(String nickname, String nomEdicion) {
     	manejadorUsuario mUsu = manejadorUsuario.getInstancia();
     	Usuario user = mUsu.buscarUsuario(nickname);
     	List<InscripcionED> inscripciones = ((Estudiante)user).getInscripcionesED();
-    	Boolean inscripto = false;
+    	String inscripto = "No";
     	for(InscripcionED i: inscripciones) {
     		if(i.getNombreEdicion().equals(nomEdicion))
-    			inscripto = true;
+    			inscripto = i.getEstadoString();
     	}
     	return inscripto;
     }
     
     @Override
-    public List<DTInscripcionED> listarInscripcionesED(){
+    public List<DTInscripcionED> listarInscripcionesED(String nomEdicion){
     	manejadorInscripcionED mIns = manejadorInscripcionED.getInstancia();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	List<DTInscripcionED> listIns = new ArrayList<>();
     	for(InscripcionED i: inscripciones) {
-    		DTInscripcionED dti = new DTInscripcionED(i);
-    		listIns.add(dti);
+    		if(!nomEdicion.equals("undefined")) {
+	    		if(i.getNombreEdicion().equals(nomEdicion)) {
+	    		//if(i.getEstado() == InscripcionEnum.PENDIENTE) {
+		    		DTInscripcionED dti = new DTInscripcionED(i);
+		    		listIns.add(dti);
+	    		}
+    		}
+    		else {
+    			DTInscripcionED dti = new DTInscripcionED(i);
+	    		listIns.add(dti);
+    		}
     	}
     	return listIns;
     }
@@ -377,7 +386,7 @@ public class controladorUsuario implements IcontroladorUsuario {
     	EntityManager em = con.getEntityManager();
     	List<InscripcionED> inscripciones = mIns.getInscripciones();
     	for(InscripcionED i: inscripciones) {
-    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNombreUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
+    		if(nomEdicion.equals(i.getNombreEdicion()) && nomUsuario.equals(i.getNickUsuario()) && i.getEstado() == InscripcionEnum.PENDIENTE) {
 	    		if(cambio.equals("aceptar"))
 	    			i.setEstado(InscripcionEnum.ACEPTADO);
 	    		else

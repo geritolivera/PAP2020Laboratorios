@@ -27,7 +27,9 @@ public class GetInscripcionesED extends HttpServlet {
         //HttpSession session = request.getSession();
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
-        List<DTInscripcionED> inscripciones = iconu.listarInscripcionesED();
+        String edicion = request.getParameter("edicion");
+        System.out.println("edicion: " + edicion);
+        List<DTInscripcionED> inscripciones = iconu.listarInscripcionesED(edicion);
         try {
             request.setAttribute("dti", inscripciones);
         } catch (Exception e) {

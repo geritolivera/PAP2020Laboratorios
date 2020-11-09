@@ -7,6 +7,7 @@
 <%}%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
+<link rel="stylesheet" href="resources/styles/style.css">
 <div class="main">
     <br><br>
 
@@ -126,7 +127,7 @@
             </div>
         </div>
 
-        <div class="col s12 m5">
+            <div class="col s12 m5">
             <div class="card teal darken-4">
                 <div class="card-content white-text">
                     <span class="card-title">Seguidos</span>

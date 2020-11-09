@@ -61,10 +61,12 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaF", fechaF);
 			request.setAttribute("fechaPub", fechaPub);
 			request.setAttribute("imagen", dte.getImagenURL());
+			String cupo = "Si";
+			if(dte.getCupo() <= 0)
+				cupo = "No";
+			request.setAttribute("haycupo", cupo);
 			String vigente = "No";
-			Boolean esVigente = false;
 			if (dte.getFechaF().after(today)) {
-				esVigente = true;
 				vigente= "Si";
 			}
 			request.setAttribute("vigencia", vigente);
@@ -81,16 +83,18 @@ public class consultaEdicionCurso extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			String inscripto = "No";
 			request.setAttribute("docentes", listDoc);
 			Boolean userLog = false;
 			if(session.getAttribute("nombreUser") != null) {
 				userLog = true;
 				String nickLog = (String) session.getAttribute("nombreUser");
 				if(session.getAttribute("tipoUser").equals("estudiante")) {
-					Boolean inscripto = iconu.inscriptoED(nickLog, edicion);
+					inscripto = iconu.inscriptoED(nickLog, edicion);
 					request.setAttribute("inscripto", inscripto);
 				}
 			}
+			System.out.println("inscripto= " + inscripto);
 			request.setAttribute("userLog", userLog);
 		} catch (EdicionExcepcion e) {
 			//no existe edicion
@@ -100,6 +104,9 @@ public class consultaEdicionCurso extends HttpServlet {
 		request.getRequestDispatcher("/infoEdicion.jsp").forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}

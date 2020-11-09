@@ -34,6 +34,9 @@ public class dejarSeguirUsuario extends HttpServlet {
 		String dejarSeguirNickname = request.getParameter("nicknameDejarSeguir");
 		System.out.println(nickUsuario + " quiere dejar de seguir a " + dejarSeguirNickname);
 		System.out.println(nickUsuario + "sigue a " + dejarSeguirNickname+  " ?: " + iconU.validarSigue(nickUsuario, dejarSeguirNickname));
+
+		System.out.println("iconU.validarSigue(nickUsuario, dejarSeguirNickname) = " + iconU.validarSigue(nickUsuario, dejarSeguirNickname));
+
 		if(iconU.validarSigue(nickUsuario, dejarSeguirNickname)) {
 			iconU.dejarDeSeguir(nickUsuario, dejarSeguirNickname);
 			try {

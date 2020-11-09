@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.IcontroladorCurso;
 import interfaces.fabrica;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
 @WebServlet("/GetPrevias")
 public class GetPrevias extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         fabrica fabrica = interfaces.fabrica.getInstancia();
         IcontroladorCurso icon = fabrica.getIcontroladorCurso();
-        //HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         ArrayList<String> previas = icon.listarCursos();
         System.out.println("previas = " + previas);
 

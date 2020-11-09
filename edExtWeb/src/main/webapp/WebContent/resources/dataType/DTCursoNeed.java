@@ -1,43 +1,47 @@
 package main.webapp.WebContent.resources.dataType;
 
-import datatypes.DTCurso;
-import datatypes.DTProgramaFormacion;
-
-import java.util.ArrayList;
-
 public class DTCursoNeed {
 
-    private static String tipo = "Curso";
-    private ArrayList<String> nombre;
-    private ArrayList<String> descripcion;
+    private static String atipo = "Curso";
+    private String bnombre;
+    private String cdescripcion;
+    private String dlink = "";
 
     public DTCursoNeed() {
     }
 
-    public DTCursoNeed(ArrayList<String> nombre, ArrayList<String> descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+    public DTCursoNeed(String nombre, String descripcion) {
+        this.bnombre = nombre;
+        this.cdescripcion = descripcion;
     }
 
 
     public String getTipo() {
-        return tipo;
+        return atipo;
     }
 
-    public ArrayList<String> getNombre() {
-        return nombre;
+    public String getNombre() {
+        return bnombre;
     }
 
-    public void setNombre(ArrayList<String> nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) {
+        this.bnombre = nombre;
+        setLink(nombre);
+    }
+    public void setLink(String nom){
+        this.dlink ="<a href=\"consultaCurso?curso="+ nom + "\" class=\"content\"><i class=\"material-icons\">pageview</i></a>";
     }
 
-    public ArrayList<String> getDescripcion() {
-        return descripcion;
+    public String getLink() {
+        return dlink;
     }
 
-    public void setDescripcion(ArrayList<String> descripcion) {
-        this.descripcion = descripcion;
+    public String getDescripcion() {
+        return cdescripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.cdescripcion = descripcion;
     }
 
 

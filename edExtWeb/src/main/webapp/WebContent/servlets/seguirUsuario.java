@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class seguirUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +33,7 @@ public class seguirUsuario extends HttpServlet {
 		System.out.println("nickUsuario = " + nickUsuario);
 		String aSeguirNickname = request.getParameter("nicknameSeguir");
 		System.out.println("aSeguirNickname = " + aSeguirNickname);
+
 
 		if(iconU.validarSigue(nickUsuario, aSeguirNickname)){
 			respuesta.setCodigo(1);

@@ -3,12 +3,7 @@ package clases;
 import manejadores.manejadorUsuario;
 
 import java.util.*;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.*;
 
 
 @Entity
@@ -24,7 +19,8 @@ public abstract class Usuario {
 	private String imagenUrl;
 
 	//lista de usuarios a los que sigue
-	@OneToMany
+
+	@ManyToMany
 	private List<Usuario> sigue = new ArrayList<>();
 
 	public Usuario() {

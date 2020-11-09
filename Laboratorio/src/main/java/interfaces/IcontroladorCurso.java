@@ -70,7 +70,7 @@ public interface IcontroladorCurso {
 
 	public ArrayList<String> getCategoriasPrograma(String programa);
 
-    ArrayList<DTCurso> listaDTCurso();
+    public ArrayList<DTCurso> listaDTCurso();
 
-	ArrayList<DTProgramaFormacion> listaDTPrograma();
+	public ArrayList<DTProgramaFormacion> listaDTPrograma();
 }

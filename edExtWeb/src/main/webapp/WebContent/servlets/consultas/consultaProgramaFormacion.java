@@ -44,6 +44,7 @@ public class consultaProgramaFormacion extends HttpServlet {
 			ArrayList<String> cursos = dtp.getCursos();
 			ArrayList<String> categorias = dtp.getCategorias();
 			url = dtp.getImagenURL();
+			System.out.println("url = " + url);
 			request.setAttribute("tituloPrograma", dtp.getNombre());
 			request.setAttribute("desc", dtp.getDescripcion());
 			request.setAttribute("fechaInicio", fechaInicio);
