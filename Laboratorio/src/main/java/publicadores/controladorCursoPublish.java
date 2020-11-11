@@ -32,8 +32,9 @@ public class controladorCursoPublish {
 		icon = fab.getIcontroladorCurso();
 		try {
 			configuracion = new WebServiceConfiguracion();
+			System.out.println("Empece configuracion");
 		} catch (Exception ex) {
-			
+			System.out.println("No pude empezar configuracion");
 		}
 	}
 	
@@ -54,12 +55,18 @@ public class controladorCursoPublish {
 	
 	//METODOS NORMALES
 	
-	//TODO 
-	//esperando respuesta del profe acerca de las listas
 	@WebMethod
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, ArrayList<String> previas,  ArrayList<String> cats, String imagen) {
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas,  String[] cats, String imagen) {
+		ArrayList<String> listPrevias = new ArrayList<>();
+		for(int i = 0; i < previas.length; i++) {
+			listPrevias.add(previas[i]);
+		}
+		ArrayList<String> listCategorias = new ArrayList<>();
+		for(int i = 0; i < cats.length; i++) {
+			listCategorias.add(cats[i]);
+		}
 		try {
-			icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, previas, cats, imagen);
+			icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, listPrevias, listCategorias, imagen);
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
 		} catch (InstitutoExcepcion e) {
@@ -76,12 +83,14 @@ public class controladorCursoPublish {
 		}
 	}
 	
-	//TODO
-	//esperando respuesta del profe acerca de las listas
 	@WebMethod
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, ArrayList<String> docentes, String url) {
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, String[] docentes, String url) {
+		ArrayList<String> listDocentes = new ArrayList<>();
+		for(int i = 0; i < docentes.length; i++) {
+			listDocentes.add(docentes[i]);
+		}
 		try {
-			icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, fechaPub, nomCurso, docentes, url);
+			icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, fechaPub, nomCurso, listDocentes, url);
 		} catch (EdicionExcepcion e) {
 			e.printStackTrace();
 		} catch (CursoExcepcion e) {
