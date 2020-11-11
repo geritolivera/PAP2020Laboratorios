@@ -62,14 +62,16 @@ public class controladorUsuario implements IcontroladorUsuario {
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
 
-	public ArrayList<String> listarUsuarios() {
+	public String[] listarUsuarios() {
 		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
-		List<Usuario> usuarios =(List<Usuario>) mUsu.getUsuarios();
-		ArrayList<String> listUsers = new ArrayList<>();
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		String[] ret = new String[usuarios.size()];
+		int i = 0;
 		for (Usuario u : usuarios) {
-			listUsers.add(u.getNick());
+			ret[i] = u.getNick();
+			i++;
 		}
-		return listUsers;
+		return ret;
 	}
 
 	@Override
@@ -274,30 +276,35 @@ public class controladorUsuario implements IcontroladorUsuario {
     }
 
 	@Override
-    public ArrayList<String> listarSeguidores(String nickname){
-    	ArrayList<String> seguidores = new ArrayList<String>();
+    public String[] listarSeguidores(String nickname){
+    	String[] seguidores = null;
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
 		if(mU.existeUsuarioNick(nickname)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			List<Usuario> usuariosSeguidores = currentUser.getSeguidores();
+			seguidores = new String[usuariosSeguidores.size()];
+			int i = 0;
 			for(Usuario u : usuariosSeguidores) {
-				DTUsuario dtU = new DTUsuario(u);
-				seguidores.add(dtU.getNick());
+				seguidores[i] = u.getNick();
+				i++;
 			}
 		}
 		return seguidores;
     }
 	
     @Override
-    public ArrayList<String> listarSeguidos(String nickname){
-    	ArrayList<String> sigue = new ArrayList<String>();
+    public String[] listarSeguidos(String nickname){
+    	///ArrayList<String> sigue = new ArrayList<String>();
+    	String[] sigue = null;
 		manejadorUsuario mU = manejadorUsuario.getInstancia();
 		if(mU.existeUsuarioNick(nickname)) {
 			Usuario currentUser = mU.buscarUsuarioNickname(nickname);
 			List<Usuario> usuariosSigue = currentUser.getSigue();
+			sigue = new String[usuariosSigue.size()];
+			int i = 0;
 			for(Usuario u : usuariosSigue) {
-				DTUsuario dtU = new DTUsuario(u);
-				sigue.add(dtU.getNick());
+				sigue[i] = u.getNick();
+				i++;
 			}
 		}
 		return sigue;

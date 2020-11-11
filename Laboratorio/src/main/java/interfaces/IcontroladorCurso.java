@@ -18,8 +18,8 @@ public interface IcontroladorCurso {
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
-	public ArrayList<String> listarCursosInst(String nombreInstituto) throws InstitutoExcepcion;
-	public ArrayList<String> listarCursosCat(String nombreCategoria) throws CategoriaExcepcion;
+	public String[] listarCursosInst(String nombreInstituto) throws InstitutoExcepcion;
+	public String[] listarCursosCat(String nombreCategoria) throws CategoriaExcepcion;
 	public DTCurso verInfo(String nomCurso) throws CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -28,7 +28,7 @@ public interface IcontroladorCurso {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
-	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion;
+	public String[] listarEdiciones(String nomCurso) throws CursoExcepcion;
 	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion;
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -45,8 +45,8 @@ public interface IcontroladorCurso {
 		
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//10 - Agregar Curso a Programa de Formacion
-	public ArrayList<String> listarProgramas();
-	public ArrayList<String> listarCursos();
+	public String[] listarProgramas();
+	public String[] listarCursos();
 	public void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion;
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
@@ -58,19 +58,19 @@ public interface IcontroladorCurso {
 	//Funciones aux para comboBox de Edicion de cursos
 
 	public String[] listarInstitutos();
-	public ArrayList<String> listarCursosAux(String nombreInstiuto);
-	public ArrayList<String> listarDocentesInstituto(String nomInstituto);
+	public String[] listarCursosAux(String nombreInstiuto);
+	public String[] listarDocentesInstituto(String nomInstituto);
 
-	public ArrayList<String> listarEdicionesAux(String nombreCurso);
-	public ArrayList<String> listarDocentesAux(String nomEdicion);
+	public String[] listarEdicionesAux(String nombreCurso);
+	public String[] listarDocentesAux(String nomEdicion);
 
-	public ArrayList<String> listarEstudiantes();
+	public String[] listarEstudiantes();
 	
-	public ArrayList<String> listarCategorias();
+	public String[] listarCategorias();
 
 	public ArrayList<String> getCategoriasPrograma(String programa);
 
-    public ArrayList<DTCurso> listaDTCurso();
+    public DTCurso[] listaDTCurso();
 
-	public ArrayList<DTProgramaFormacion> listaDTPrograma();
+	public DTProgramaFormacion[] listaDTPrograma();
 }

@@ -24,7 +24,7 @@ public interface IcontroladorUsuario {
 	
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//2 - Consulta de Usuario
-	public ArrayList<String> listarUsuarios();
+	public String[] listarUsuarios();
 	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion;
 	
 	
@@ -64,10 +64,10 @@ public interface IcontroladorUsuario {
     public void comenzarSeguir(String nickname, String nicknameSeguir);
     
     //Lista los seguidores de un user
-    public ArrayList<String> listarSeguidores(String nickname);
+    public String[] listarSeguidores(String nickname);
     
     //Lista los seguidos de un user
-    public ArrayList<String> listarSeguidos(String nickname);
+    public String[] listarSeguidos(String nickname);
     
     //Si un user sigue a otro
     public boolean validarSigue(String nickname, String nicknameSigue);
