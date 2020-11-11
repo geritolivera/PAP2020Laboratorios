@@ -167,7 +167,14 @@ public class controladorCursoPublish {
 	@WebMethod
 	public String[] listarCursosCat(String nomCategoria) {
 		try {
-			return icon.listarCursosCat(nomCategoria);
+			ArrayList<String> retorno = icon.listarCursosCat(nomCategoria);
+			String[] ret = new String[retorno.size()];
+			int i = 0;
+			for(String s: retorno) {
+				ret[i] = s;
+				i++;
+			}
+			return ret;
 		} catch (CategoriaExcepcion e) {
 			e.printStackTrace();
 			return null;
@@ -177,7 +184,14 @@ public class controladorCursoPublish {
 	@WebMethod
 	public String[] listarEdiciones(String nomCurso) {
 		try {
-			return icon.listarEdiciones(nomCurso);
+			ArrayList<String> retorno = icon.listarEdiciones(nomCurso);
+			String[] ret = new String[retorno.size()];
+			int i = 0;
+			for(String s: retorno) {
+				ret[i] = s;
+				i++;
+			}
+			return ret;
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
 			return null;
@@ -186,12 +200,26 @@ public class controladorCursoPublish {
 	
 	@WebMethod
 	public String[] listarProgramas() {
-		return icon.listarProgramas();
+		ArrayList<String> retorno = icon.listarProgramas();
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
 	public String[] listarCursos() {
-		return icon.listarCursos();
+		ArrayList<String> retorno = icon.listarCursos();
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
@@ -208,7 +236,14 @@ public class controladorCursoPublish {
 	
 	@WebMethod
 	public String[] listarCursosAux(String nombreInstituto) {
-		return icon.listarCursosAux(nombreInstituto);
+		ArrayList<String> retorno = icon.listarCursosAux(nombreInstituto);
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	//listarEdicionesAux no se deberia usar porque esta repetida
@@ -216,7 +251,14 @@ public class controladorCursoPublish {
 	//no se si se usa
 	@WebMethod
 	public String[] listarDocentesInstituto(String nomInstituto) {
-		return icon.listarDocentesInstituto(nomInstituto);
+		ArrayList<String> retorno = icon.listarDocentesInstituto(nomInstituto);
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
@@ -227,31 +269,66 @@ public class controladorCursoPublish {
 	//no se si se usa
 	@WebMethod
 	public String[] listarDocentesAux(String nomEdicion) {
-		return icon.listarDocentesAux(nomEdicion);
+		ArrayList<String> retorno = icon.listarDocentesAux(nomEdicion);
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	//no se si se usa
 	@WebMethod
 	public String[] listarEstudiantes() {
-		return icon.listarEstudiantes();
+		ArrayList<String> retorno = icon.listarEstudiantes();
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	//no se si se usa
 	@WebMethod
 	public String[] listarCategorias() {
-		return icon.listarCategorias();
+		ArrayList<String> retorno = icon.listarCategorias();
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	//no se si se usa
 	@WebMethod
 	public DTCurso[] listaDTCurso() {
-		return icon.listaDTCurso();
+		ArrayList<DTCurso> retorno = icon.listaDTCurso();
+		DTCurso[] ret = new DTCurso[retorno.size()];
+		int i = 0;
+		for(DTCurso s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	//no se si se usa
 	@WebMethod
 	public DTProgramaFormacion[] listaDTPrograma() {
-		return icon.listaDTPrograma();
+		ArrayList<DTProgramaFormacion> retorno = icon.listaDTPrograma();
+		DTProgramaFormacion[] ret = new DTProgramaFormacion[retorno.size()];
+		int i = 0;
+		for(DTProgramaFormacion s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	
@@ -260,3 +337,4 @@ public class controladorCursoPublish {
 	
 
 }
+

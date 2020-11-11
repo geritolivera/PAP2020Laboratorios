@@ -61,38 +61,32 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//5 - Consulta de Curso
 	@Override
-	public String[] listarCursosInst(String nombreInstituto) throws InstitutoExcepcion{
-		manejadorInstituto mInst = manejadorInstituto.getInstancia();
-		String[] ret = null;
+	public ArrayList<String> listarCursosInst(String nombreInstituto) throws InstitutoExcepcion{
+		manejadorInstituto mInst = manejadorInstituto.getInstancia(); 
 		if(mInst.existeInstituto(nombreInstituto)) {
 			Instituto inst = mInst.buscarInstituto(nombreInstituto);
 			List<Curso> cursos = inst.getCursos();
-			ret = new String[cursos.size()];
-			int i = 0;
+			ArrayList<String> listCursos = new ArrayList<String>();
 			for(Curso c:cursos) {
-				ret[i] = c.getNombre();
-				i++;
+				listCursos.add(c.getNombre());
 			}
-			return ret;
+			return listCursos;
 		}
 		else
 			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
 	}
 	
 	@Override
-	public String[] listarCursosCat(String nombreCategoria) throws CategoriaExcepcion{
-		manejadorCategoria mCat = manejadorCategoria.getInstancia();
-		String[] ret = null;
+	public ArrayList<String> listarCursosCat(String nombreCategoria) throws CategoriaExcepcion{
+		manejadorCategoria mCat = manejadorCategoria.getInstancia(); 
 		if(mCat.existeCategoria(nombreCategoria)) {
 			Categoria cat = mCat.buscarCategoria(nombreCategoria);
 			List<Curso> cursos = cat.getCursos();
-			ret = new String[cursos.size()];
-			int i = 0;
+			ArrayList<String> listCursos = new ArrayList<String>();
 			for(Curso c:cursos) {
-				ret[i] = c.getNombre();
-				i++;
+				listCursos.add(c.getNombre());
 			}
-			return ret;
+			return listCursos;
 		}
 		else
 			throw new CategoriaExcepcion("El instituto " + nombreCategoria + " no existe.");
@@ -182,19 +176,16 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//7 - Consulta de Edicion de Curso
 	@Override
-	public String[] listarEdiciones(String nomCurso) throws CursoExcepcion{
+	public ArrayList<String> listarEdiciones(String nomCurso) throws CursoExcepcion{
 		manejadorCurso mCur = manejadorCurso.getInstancia();
-		String[] ret = null;
 		if(mCur.existeCurso(nomCurso)) {
 			Curso cur = mCur.buscarCurso(nomCurso);
 			List<EdicionCurso> ediciones = cur.getEdiciones();
-			ret = new String[ediciones.size()];
-			int i = 0;
+			ArrayList<String> listEdiciones = new ArrayList<>();
 			for (EdicionCurso e:ediciones) {
-				ret[i] = e.getNombre();
-				i++;
+				listEdiciones.add(e.getNombre());
 			}
-			return ret;	
+			return listEdiciones;	
 		}
 		else
 			throw new CursoExcepcion("El curso " + nomCurso + " no existe.");
@@ -325,31 +316,31 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//10 - Agregar Curso a Programa de Formacion
 	@Override
-	public String[] listarProgramas(){
+	public ArrayList<String> listarProgramas(){
 		manejadorPrograma mPro = manejadorPrograma.getInstancia();
-		String[] ret = null;
 		List<ProgramaFormacion> programas = mPro.getProgramas();
-		ret = new String[programas.size()];
-		int i = 0;
+		ArrayList<String> listProgramas = new ArrayList<String>();
 		for(ProgramaFormacion p: programas) {
-			ret[i] = p.getNombre();
-			i++;
+			listProgramas.add(p.getNombre());
 		}
-		return ret;
+		return listProgramas;
 	}
 	
 	@Override
-	public String[] listarCursos(){
+	public ArrayList<String> listarCursos(){
 		manejadorCurso mCur = manejadorCurso.getInstancia();
-		String[] ret = null;
 		List<Curso> cursos = mCur.getCursos();
-		ret = new String[cursos.size()];
-		int i = 0;
+		ArrayList<String> listCursos = new ArrayList<>();
 		for(Curso c: cursos) {
-			ret[i] = c.getNombre();
-			i++;
+			listCursos.add(c.getNombre());
 		}
-		return ret;
+		if (listCursos.size()>0)
+			return listCursos;
+		else {
+			listCursos.add("Sin resultados");
+			return listCursos;
+		}
+
 	}
 	
 	@Override
@@ -433,51 +424,46 @@ public class controladorCurso implements IcontroladorCurso{
 	/*-------------------------------------------------------------------------------------------------------------*/
 	//Funciones Auxiliares
 	@Override //Listados para comboBoxes
-	public String[] listarCursosAux(String nombreInstituto){
+	public ArrayList<String> listarCursosAux(String nombreInstituto){
 		manejadorCurso mC = manejadorCurso.getInstancia();
 		List<Curso> cursos = mC.getCursos();
-		String[] ret = new String[cursos.size()];
-		int i = 0;
+		ArrayList<String> cursosRet = new ArrayList<>();
 		for(Curso c : cursos) {
 			if((c.getInstituto().getNombre()!= null)&&(c.getInstituto().getNombre().equals(nombreInstituto))) {
-				ret[i] = c.getNombre();
-				i++;
+				cursosRet.add(c.getNombre());
 			}
 		}
-		return ret;
+		System.out.println("cursosRet = " + cursosRet);
+		return cursosRet;
 	}
 
 	@Override
-	public String[] listarEdicionesAux(String nomCurso) {
+	public ArrayList<String> listarEdicionesAux(String nomCurso) {
 		manejadorEdicion mE = manejadorEdicion.getInstancia();
-		List<EdicionCurso> ediciones = mE.getEdiciones();
-		String[] ret = new String[ediciones.size()];
-		int i = 0;
+		List<EdicionCurso> ediciones =(List<EdicionCurso>) mE.getEdiciones();
+		ArrayList<String> ediciones_ret = new ArrayList<String>();
 		for (EdicionCurso e:ediciones) {
 			if(e.getCurso().getNombre().equals(nomCurso))
-			ret[i] = e.getNombre();
-			i++;
+			ediciones_ret.add(e.getNombre());
 		}
-		return ret;
+		return ediciones_ret;
 	}
 
 	@Override
-	public String[] listarDocentesInstituto(String nomInstituto) {
+	public ArrayList<String> listarDocentesInstituto(String nomInstituto) {
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		List<Usuario> listaUsuario = (List<Usuario>) mu.getUsuarios();
-		String[] ret = new String[listaUsuario.size()];
-		int i = 0;
+		ArrayList<String> docentes = new ArrayList<String>();
 		for(Usuario u : listaUsuario) {
 			if(u instanceof Docente) {
 				if(((Docente) u).getInstituto() != null) {
 					if(((Docente) u).getInstituto().getNombre().equals(nomInstituto)) {
-						ret[i] = u.getNick();
-						i++;
+						docentes.add(u.getNick());
 					}
 				}
 			}
 		}
-		return ret;
+		return docentes;
 	}
 
 	@Override
@@ -496,74 +482,65 @@ public class controladorCurso implements IcontroladorCurso{
 	}
 
 	@Override
-	public String[] listarDocentesAux(String nomEdicion) {
+	public ArrayList<String> listarDocentesAux(String nomEdicion) {
 		manejadorEdicion mEdi = manejadorEdicion.getInstancia();
 		EdicionCurso e = mEdi.buscarEdicion(nomEdicion);
 		List<Docente> docentes = e.getDocentes();
-		String[] ret = new String[docentes.size()];
-		int i = 0;
+		ArrayList<String> listDoc = new ArrayList<String>();
 		for(Docente d:docentes) {
-			ret[i] = d.getNick();
-			i++;
+			listDoc.add(d.getNombre());
 		}
-		return ret;
+		return listDoc;
 	}
 	
 	@Override //Lista todos los Estudiantes
-	public String[] listarEstudiantes(){
+	public ArrayList<String> listarEstudiantes(){
 		manejadorUsuario mu = manejadorUsuario.getInstancia();
 		List<Usuario> listaUsuario = (List<Usuario>) mu.getUsuarios();
-		String[] ret = new String[listaUsuario.size()];
-		int i = 0;
+		ArrayList<String> estudiantes = new ArrayList<String>();
 		for(Usuario u : listaUsuario) {
 			if(u instanceof Estudiante) {
-				ret[i] = ((Estudiante) u).getNick();
-				i++;
+				String nombreE = ((Estudiante) u).getNick();
+				estudiantes.add(nombreE);
 			}
 		}
-		return ret;
+		return estudiantes;
 	}
 	
 	@Override
-	public String[] listarCategorias(){
+	public ArrayList<String> listarCategorias(){
 		manejadorCategoria mc = manejadorCategoria.getInstancia();
 		List<Categoria> listaCategoria = mc.getCategorias();
-		String[] ret = new String[listaCategoria.size()];
-		int i = 0;
+		ArrayList<String> categorias = new ArrayList<String>();
 		for(Categoria c : listaCategoria) {
-			ret[i] = c.getNombre();
-			i++;
+			categorias.add(c.getNombre());
 		}
-		return ret;
+		return categorias;
 	}
 
 	@Override
-	public DTCurso[] listaDTCurso(){
+	public ArrayList<DTCurso> listaDTCurso(){
 		manejadorCurso mc = manejadorCurso.getInstancia();
 		List<Curso> cursos = mc.getCursos();
-		DTCurso[] ret = new DTCurso[cursos.size()];
-		int i = 0;
+		ArrayList<DTCurso> retorno = new ArrayList<>();
 		for (Curso c:cursos) {
 			DTCurso dtc = new DTCurso(c);
-			ret[i] = dtc;
-			i++;
+			retorno.add(dtc);
 		}
-		return ret;
+		return retorno;
 
 	}
 
 	@Override
-	public DTProgramaFormacion[] listaDTPrograma(){
+	public ArrayList<DTProgramaFormacion> listaDTPrograma(){
 		manejadorPrograma mp = manejadorPrograma.getInstancia();
 		List<ProgramaFormacion> programas = mp.getProgramas();
-		DTProgramaFormacion[] ret = new DTProgramaFormacion[programas.size()];
-		int i = 0;
+		ArrayList<DTProgramaFormacion> retorno = new ArrayList<>();
 		for (ProgramaFormacion p:programas) {
 			DTProgramaFormacion dtpf = new DTProgramaFormacion(p);
-			ret[i] = dtpf;
-			i++;
+			retorno.add(dtpf);
 		}
-		return ret;
+		return retorno;
 
 	}
 

@@ -1,5 +1,6 @@
 package publicadores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -147,7 +148,14 @@ public class controladorUsuarioPublish {
 	
 	@WebMethod
 	public String[] listarUsuarios() {
-		return icon.listarUsuarios();
+		ArrayList<String> retorno = icon.listarUsuarios();
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
@@ -174,12 +182,26 @@ public class controladorUsuarioPublish {
 	
 	@WebMethod
 	public String[] listarSeguidores(String nickname) {
-		return icon.listarSeguidores(nickname);
+		ArrayList<String> retorno = icon.listarSeguidores(nickname);
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
 	public String[] listarSeguidos(String nickname) {
-		return icon.listarSeguidos(nickname);
+		ArrayList<String> retorno = icon.listarSeguidos(nickname);
+		String[] ret = new String[retorno.size()];
+		int i = 0;
+		for(String s: retorno) {
+			ret[i] = s;
+			i++;
+		}
+		return ret;
 	}
 	
 	@WebMethod
