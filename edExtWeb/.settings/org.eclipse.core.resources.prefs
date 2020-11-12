@@ -1,8 +1,7 @@
 eclipse.preferences.version=1
-encoding//src/publicadores/ControladorCursoPublish.java=UTF-8
-encoding//src/publicadores/ControladorCursoPublishPortBindingStub.java=UTF-8
-encoding//src/publicadores/ControladorCursoPublishService.java=UTF-8
-encoding//src/publicadores/ControladorCursoPublishServiceLocator.java=UTF-8
-encoding//src/publicadores/DtCurso.java=UTF-8
-encoding//src/publicadores/DtEdicionCurso.java=UTF-8
-encoding//src/publicadores/DtProgramaFormacion.java=UTF-8
+encoding//src/publicadores/ControladorUsuarioPublish.java=UTF-8
+encoding//src/publicadores/ControladorUsuarioPublishPortBindingStub.java=UTF-8
+encoding//src/publicadores/ControladorUsuarioPublishService.java=UTF-8
+encoding//src/publicadores/ControladorUsuarioPublishServiceLocator.java=UTF-8
+encoding//src/publicadores/DtInscripcionED.java=UTF-8
+encoding//src/publicadores/DtUsuario.java=UTF-8

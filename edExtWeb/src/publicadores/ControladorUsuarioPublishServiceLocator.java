@@ -1,5 +1,5 @@
 /**
- * ControladorCursoPublishServiceLocator.java
+ * ControladorUsuarioPublishServiceLocator.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,53 +7,53 @@
 
 package publicadores;
 
-public class ControladorCursoPublishServiceLocator extends org.apache.axis.client.Service implements publicadores.ControladorCursoPublishService {
+public class ControladorUsuarioPublishServiceLocator extends org.apache.axis.client.Service implements publicadores.ControladorUsuarioPublishService {
 
-    public ControladorCursoPublishServiceLocator() {
+    public ControladorUsuarioPublishServiceLocator() {
     }
 
 
-    public ControladorCursoPublishServiceLocator(org.apache.axis.EngineConfiguration config) {
+    public ControladorUsuarioPublishServiceLocator(org.apache.axis.EngineConfiguration config) {
         super(config);
     }
 
-    public ControladorCursoPublishServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
+    public ControladorUsuarioPublishServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
         super(wsdlLoc, sName);
     }
 
-    // Use to get a proxy class for controladorCursoPublishPort
-    private java.lang.String controladorCursoPublishPort_address = "http://127.0.0.1:1900/controlador";
+    // Use to get a proxy class for controladorUsuarioPublishPort
+    private java.lang.String controladorUsuarioPublishPort_address = "http://localhost:9001/controlador";
 
-    public java.lang.String getcontroladorCursoPublishPortAddress() {
-        return controladorCursoPublishPort_address;
+    public java.lang.String getcontroladorUsuarioPublishPortAddress() {
+        return controladorUsuarioPublishPort_address;
     }
 
     // The WSDD service name defaults to the port name.
-    private java.lang.String controladorCursoPublishPortWSDDServiceName = "controladorCursoPublishPort";
+    private java.lang.String controladorUsuarioPublishPortWSDDServiceName = "controladorUsuarioPublishPort";
 
-    public java.lang.String getcontroladorCursoPublishPortWSDDServiceName() {
-        return controladorCursoPublishPortWSDDServiceName;
+    public java.lang.String getcontroladorUsuarioPublishPortWSDDServiceName() {
+        return controladorUsuarioPublishPortWSDDServiceName;
     }
 
-    public void setcontroladorCursoPublishPortWSDDServiceName(java.lang.String name) {
-        controladorCursoPublishPortWSDDServiceName = name;
+    public void setcontroladorUsuarioPublishPortWSDDServiceName(java.lang.String name) {
+        controladorUsuarioPublishPortWSDDServiceName = name;
     }
 
-    public publicadores.ControladorCursoPublish getcontroladorCursoPublishPort() throws javax.xml.rpc.ServiceException {
+    public publicadores.ControladorUsuarioPublish getcontroladorUsuarioPublishPort() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
-            endpoint = new java.net.URL(controladorCursoPublishPort_address);
+            endpoint = new java.net.URL(controladorUsuarioPublishPort_address);
         }
         catch (java.net.MalformedURLException e) {
             throw new javax.xml.rpc.ServiceException(e);
         }
-        return getcontroladorCursoPublishPort(endpoint);
+        return getcontroladorUsuarioPublishPort(endpoint);
     }
 
-    public publicadores.ControladorCursoPublish getcontroladorCursoPublishPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public publicadores.ControladorUsuarioPublish getcontroladorUsuarioPublishPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            publicadores.ControladorCursoPublishPortBindingStub _stub = new publicadores.ControladorCursoPublishPortBindingStub(portAddress, this);
-            _stub.setPortName(getcontroladorCursoPublishPortWSDDServiceName());
+            publicadores.ControladorUsuarioPublishPortBindingStub _stub = new publicadores.ControladorUsuarioPublishPortBindingStub(portAddress, this);
+            _stub.setPortName(getcontroladorUsuarioPublishPortWSDDServiceName());
             return _stub;
         }
         catch (org.apache.axis.AxisFault e) {
@@ -61,8 +61,8 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
         }
     }
 
-    public void setcontroladorCursoPublishPortEndpointAddress(java.lang.String address) {
-        controladorCursoPublishPort_address = address;
+    public void setcontroladorUsuarioPublishPortEndpointAddress(java.lang.String address) {
+        controladorUsuarioPublishPort_address = address;
     }
 
     /**
@@ -72,9 +72,9 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (publicadores.ControladorCursoPublish.class.isAssignableFrom(serviceEndpointInterface)) {
-                publicadores.ControladorCursoPublishPortBindingStub _stub = new publicadores.ControladorCursoPublishPortBindingStub(new java.net.URL(controladorCursoPublishPort_address), this);
-                _stub.setPortName(getcontroladorCursoPublishPortWSDDServiceName());
+            if (publicadores.ControladorUsuarioPublish.class.isAssignableFrom(serviceEndpointInterface)) {
+                publicadores.ControladorUsuarioPublishPortBindingStub _stub = new publicadores.ControladorUsuarioPublishPortBindingStub(new java.net.URL(controladorUsuarioPublishPort_address), this);
+                _stub.setPortName(getcontroladorUsuarioPublishPortWSDDServiceName());
                 return _stub;
             }
         }
@@ -94,8 +94,8 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
             return getPort(serviceEndpointInterface);
         }
         java.lang.String inputPortName = portName.getLocalPart();
-        if ("controladorCursoPublishPort".equals(inputPortName)) {
-            return getcontroladorCursoPublishPort();
+        if ("controladorUsuarioPublishPort".equals(inputPortName)) {
+            return getcontroladorUsuarioPublishPort();
         }
         else  {
             java.rmi.Remote _stub = getPort(serviceEndpointInterface);
@@ -105,7 +105,7 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://publicadores/", "controladorCursoPublishService");
+        return new javax.xml.namespace.QName("http://publicadores/", "controladorUsuarioPublishService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://publicadores/", "controladorCursoPublishPort"));
+            ports.add(new javax.xml.namespace.QName("http://publicadores/", "controladorUsuarioPublishPort"));
         }
         return ports.iterator();
     }
@@ -123,8 +123,8 @@ public class ControladorCursoPublishServiceLocator extends org.apache.axis.clien
     */
     public void setEndpointAddress(java.lang.String portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
         
-if ("controladorCursoPublishPort".equals(portName)) {
-            setcontroladorCursoPublishPortEndpointAddress(address);
+if ("controladorUsuarioPublishPort".equals(portName)) {
+            setcontroladorUsuarioPublishPortEndpointAddress(address);
         }
         else 
 { // Unknown Port Name
