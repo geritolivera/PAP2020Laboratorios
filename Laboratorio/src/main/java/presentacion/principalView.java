@@ -6,6 +6,7 @@ import interfaces.fabrica;
 import presentacion.edicionCurso.AltaDeEdicionDeCurso;
 import presentacion.edicionCurso.ConsultaDeEdicionDeCurso;
 import presentacion.edicionCurso.InscripcionEdicionCurso;
+import publicadores.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +63,11 @@ public class principalView {
 	 */	
 	public principalView() {
 		initialize();
+		
+		controladorCursoPublish ccp = new controladorCursoPublish();
+		controladorUsuarioPublish cup = new controladorUsuarioPublish();
+		ccp.publicar();
+		cup.publicar();
 		
 		fabrica fab = fabrica.getInstancia();
 		IcontroladorCurso iconC = fab.getIcontroladorCurso();
