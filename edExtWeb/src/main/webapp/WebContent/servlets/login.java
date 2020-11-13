@@ -24,6 +24,8 @@ import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 
+import static javax.swing.text.html.HTML.Tag.U;
+
 
 @WebServlet("/login")
 public class login extends HttpServlet {
@@ -123,7 +125,7 @@ public class login extends HttpServlet {
                     }
             }else{
                 respuesta.setCodigo(1);
-                respuesta.setMensaje("Constraseña incorrecta para" + nickname);
+                respuesta.setMensaje("Constraseña incorrecta para  " + nickname);
                 ObjectMapper mapper = new ObjectMapper();
                 String userStr = mapper.writeValueAsString(respuesta);
                 response.setContentType("application/json");

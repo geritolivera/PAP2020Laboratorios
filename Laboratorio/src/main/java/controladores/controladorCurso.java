@@ -106,7 +106,9 @@ public class controladorCurso implements IcontroladorCurso{
 			System.out.println("dtc.toString() = " + dtc.toString());
 			ediciones = c.getEdiciones();
 			programas = c.getProgramas();
-			previas = c.getPrevias();
+			if(!previas.isEmpty()) {
+				previas = c.getPrevias();
+			}
 			categorias = c.getCategorias();
 			//son listas, no requieren informacion de las ediciones o programas
 			if(!ediciones.isEmpty() && ediciones != null) {
