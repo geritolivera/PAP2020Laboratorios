@@ -39,15 +39,6 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Laboratorio/target/Laboratorio-0.0.1-SNAPSHOT.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" exported="" name="materialize" level="application" />
     <orderEntry type="library" exported="" name="jquery-2.1.1" level="application" />
     <orderEntry type="library" name="jszip" level="application" />
@@ -57,7 +48,12 @@
     <orderEntry type="library" name="dataTables.buttons" level="application" />
     <orderEntry type="library" name="select.dataTables" level="application" />
     <orderEntry type="library" name="sweetalert2" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
+    <orderEntry type="library" name="dataTables.checkboxes" level="application" />
+    <orderEntry type="library" name="dataTables.fixedColumns" level="application" />
+    <orderEntry type="library" name="dataTables.select" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jquery-3.5.1" level="application" />
+    <orderEntry type="library" name="sweetalert" level="application" />
     <orderEntry type="module" module-name="Laboratorio" />
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.6" level="project" />
@@ -74,7 +70,6 @@
     <orderEntry type="library" name="Maven: org.jboss:jandex:2.0.5.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.3.4" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
@@ -85,12 +80,37 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
-    <orderEntry type="library" exported="" name="JAX-RS" level="project" />
-    <orderEntry type="library" name="dataTables.checkboxes" level="application" />
-    <orderEntry type="library" name="dataTables.fixedColumns" level="application" />
-    <orderEntry type="library" name="dataTables.select" level="application" />
-    <orderEntry type="library" name="jquery" level="application" />
-    <orderEntry type="library" name="jquery-3.5.1" level="application" />
-    <orderEntry type="library" name="sweetalert" level="application" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.ws:jaxws-api:2.2.11" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.soap:javax.xml.soap-api:1.3.5" level="project" />
+    <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.2-b03" level="project" />
+    <orderEntry type="library" name="Maven: javax.jws:jsr181-api:1.0-MR1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.org.apache.xml.internal:resolver:20050927" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:jaxws-rt:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:policy:2.7.2" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.gmbal:gmbal-api-only:3.1.0-b001" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.external:management-api:3.0.0-b012" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.stream.buffer:streambuffer:1.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.mimepull:mimepull:1.9.7" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.ha:ha-api:3.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.messaging.saaj:saaj-impl:1.4.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.woodstox:woodstox-core-asl:4.4.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:jaxws-tools:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-xjc:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-jxc:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:jaxws-eclipselink-plugin:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.persistence:eclipselink:2.6.4" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.persistence:javax.persistence:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.persistence:commonj.sdo:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish:javax.json:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.ws:sdo-eclipselink-plugin:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: commonj.sdo:commonj.sdo:2.1.1.v201112051852" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml:jaxrpc-api:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.axis:axis:1.4" level="project" />
   </component>
 </module>

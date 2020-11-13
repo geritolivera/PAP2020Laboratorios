@@ -1,11 +1,6 @@
 package clases;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +16,7 @@ public class ProgramaFormacion {
 	private Date fechaA;
 	private String imagenURL;
 	@ManyToMany (mappedBy="programas")
-	@Column(nullable = true)
+	@JoinColumn(nullable = true)
 	private List<Estudiante> estudiantes = new ArrayList<>();
 	@ManyToMany (mappedBy= "programas")
 	private List<Curso> cursos = new ArrayList<>();

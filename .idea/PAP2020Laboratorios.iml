@@ -8,7 +8,6 @@
           <factory-entry name="PAP2020Laboratorios" />
         </datasource-mapping>
         <naming-strategy-map />
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/edExtWeb/src/main/webapp/WebContent/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>
