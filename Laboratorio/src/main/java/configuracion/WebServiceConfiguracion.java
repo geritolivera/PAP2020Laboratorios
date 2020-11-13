@@ -8,7 +8,7 @@ public class WebServiceConfiguracion {
 	//esto es mejor que hagamos todos un folder identico 
 	//asi no lo tenemos que cambiar una y otra vez cada push
 	//TODO
-	private String path = System.getProperty("user.home") + "\\properties.txt";
+	private String path = System.getProperty("user.home") + "/properties.txt";
     private HashMap<String, String> configs;
     
     public WebServiceConfiguracion() throws Exception {
@@ -20,10 +20,12 @@ public class WebServiceConfiguracion {
         try {
             while((properties = reader.readLine()) != null){
                 if(properties.startsWith("#")) {
+                    System.out.println("properties = " + properties);
                     String[] div = properties.split("=");
                     configs.put(div[0], div[1]);
                 }
             }
+
         } catch(Exception e) {
             //throw new ErrorEnFileException();
         }

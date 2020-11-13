@@ -42,8 +42,8 @@ public class controladorCursoPublish {
 	//TODO
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/nicolas");
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/nicolas", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT")+ "/" , this);
 	}
 	
 	@WebMethod(exclude = true)
