@@ -13,16 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 
-import clases.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import datatypes.*;
-import exepciones.EdicionExcepcion;
-import interfaces.IcontroladorCurso;
-import interfaces.fabrica;
-import interfaces.IcontroladorUsuario;
-import exepciones.UsuarioExcepcion;
 import main.webapp.WebContent.resources.dataType.DTResponse;
+import publicadores.*;
 
 import static javax.swing.text.html.HTML.Tag.U;
 
@@ -39,9 +35,9 @@ public class login extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        fabrica fab = fabrica.getInstancia();
-        IcontroladorUsuario icon = fab.getIcontroladorUsuario();
-        IcontroladorCurso iconc = fab.getIcontroladorCurso();
+        ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+        ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
+
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         DTResponse respuesta = new DTResponse();
@@ -53,9 +49,11 @@ public class login extends HttpServlet {
         System.out.println("nickname = " + nickname);
         System.out.println("password = " + password);
         try {
-            if(icon.validarUsuario(nickname, password)) {
-                DTUsuario dtu = icon.verInfoUsuario(nickname);
-                if (dtu instanceof DTEstudiante) {
+            ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+            ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
+            if(port2.validarUsuario(nickname, password)) {
+                DtUsuario dtu = port2.verInfoUsuario(nickname);
+                if (dtu instanceof DtEstudiante) {
                     tipoUser = "estudiante";
                     session.setAttribute("nombreUser", nickname);
                     session.setAttribute("tipoUser", tipoUser);
@@ -66,19 +64,19 @@ public class login extends HttpServlet {
                     session.setAttribute("fechaNac", dtu.getFechaNac());
                     session.setAttribute("imagen", dtu.getImage());
                     ArrayList<String> prog = new ArrayList<String>();
-                    for (DTProgramaFormacion pro : (((DTEstudiante) dtu).getProgramas())) {
+                    for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
                         prog.add(pro.getNombre());
                     }
                     System.out.println("prog = " + prog);
                     session.setAttribute("programasNombre", prog);
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DTEdicionCurso edi : (((DTEstudiante) dtu).getEdicionesAprobado())) {
+                    for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
                         edis.add(edi.getNombre());
                     }
                     System.out.println("edis = " + edis);
                     session.setAttribute("edicionesNombres", edis);
-                    ArrayList<String> seguido = dtu.getSeguidos();
-                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    String[] seguido = dtu.getSeguidos();
+                    String[] seguidor = dtu.getSeguidores();
                     session.setAttribute("seguidos", seguido);
                     session.setAttribute("seguidores", seguidor);
                     respuesta.setCodigo(0);
@@ -87,9 +85,7 @@ public class login extends HttpServlet {
                     String userStr = mapper.writeValueAsString(respuesta);
                     response.setContentType("application/json");
                     response.getWriter().append(userStr);
-//                    RequestDispatcher rd;
-//                    rd = request.getRequestDispatcher("/index.jsp");
-//                    rd.forward(request, response);
+
                 } else {
                     tipoUser = "docente";
                     session.setAttribute("nombreUser", nickname);
@@ -101,12 +97,12 @@ public class login extends HttpServlet {
                     session.setAttribute("fechaNac", dtu.getFechaNac());
                     session.setAttribute("imagen", dtu.getImage());
                     System.out.println("dtu.getImage() = " + dtu.getImage());
-                    ArrayList<String> seguido = dtu.getSeguidos();
-                    ArrayList<String> seguidor = dtu.getSeguidores();
+                    String[] seguido = dtu.getSeguidos();
+                    String[] seguidor = dtu.getSeguidores();
                     session.setAttribute("seguidos", seguido);
                     session.setAttribute("seguidores", seguidor);
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DTEdicionCurso edi : (((DTDocente) dtu).getEdiciones())) {
+                    for (DtEdicionCurso edi : (((DtDocente) dtu).getEdiciones())) {
                         edis.add(edi.getNombre());
                     }
                     System.out.println("edis = " + edis);
@@ -118,10 +114,6 @@ public class login extends HttpServlet {
                     String userStr = mapper.writeValueAsString(respuesta);
                     response.setContentType("application/json");
                     response.getWriter().append(userStr);
-                    //parse = "altaProgramaFormacion.jsp";
-//                    RequestDispatcher rd;
-//                    rd = request.getRequestDispatcher("/index.jsp");
-//                    rd.forward(request, response);
                     }
             }else{
                 respuesta.setCodigo(1);
@@ -131,14 +123,13 @@ public class login extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().append(userStr);
             }
-        }catch (UsuarioExcepcion | EdicionExcepcion e) {
+        }catch (UsuarioExcepcion | EdicionExcepcion | ServiceException e) {
             respuesta.setCodigo(1);
             respuesta.setMensaje("El nickname ingresado " + nickname + "no existe.");
             ObjectMapper mapper = new ObjectMapper();
             String userStr = mapper.writeValueAsString(respuesta);
             response.setContentType("application/json");
             response.getWriter().append(userStr);
-
             e.printStackTrace();
         }
     }

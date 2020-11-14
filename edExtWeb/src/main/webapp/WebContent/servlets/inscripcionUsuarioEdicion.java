@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.lang.Exception;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -17,14 +18,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import clases.EdicionCurso;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import datatypes.DTEdicionCurso;
-import datatypes.DTEstudiante;
-import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
-import interfaces.IcontroladorCurso;
+
 import main.webapp.WebContent.resources.dataType.DTResponse;
+import publicadores.*;
 
 
 @WebServlet("/inscripcionUE")
@@ -34,23 +31,25 @@ public class inscripcionUsuarioEdicion extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
+		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+		ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
+
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fecha);
 		String nickUsuario = (String) session.getAttribute("nombreUser");
 		String nomEdicion = request.getParameter("edicion");
 		DTResponse respuesta = new DTResponse();
 
-		System.out.println("nom edicion: " + nomEdicion);
-		System.out.println("nickUsuario: " + nickUsuario);
 
 		try {
-			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
+			ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
+			port.inscribirEstudianteEdicion(nomEdicion, nickUsuario, cal);
 			ArrayList<String> ediciones = new ArrayList<>();
-			List<DTEdicionCurso> edis = ((DTEstudiante)iconu.verInfoUsuario(nickUsuario)).getEdiciones();
-			for (DTEdicionCurso dec:edis) {
+			DtEdicionCurso[] edis = ((DtEstudiante)port2.verInfoUsuario(nickUsuario)).getEdiciones();
+			for (DtEdicionCurso dec:edis) {
 				ediciones.add(dec.getNombre());
 			}
 			session.setAttribute("edicionesNombres", ediciones);
