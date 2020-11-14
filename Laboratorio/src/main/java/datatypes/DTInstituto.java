@@ -1,7 +1,11 @@
 package datatypes;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 import clases.Instituto;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTInstituto {
 	private String nombre;
 	

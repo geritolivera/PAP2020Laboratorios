@@ -1,12 +1,15 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 
 import java.util.Date;
 
@@ -15,6 +18,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
 import interfaces.IcontroladorCurso;
 import main.webapp.WebContent.resources.dataType.DTResponse;
+import publicadores.ControladorCursoPublish;
+import publicadores.ControladorCursoPublishService;
+import publicadores.ControladorCursoPublishServiceLocator;
+import publicadores.CursoExcepcion;
+import publicadores.ProgramaFormacionExcepcion;
 
 /**
  * Servlet implementation class inscripcionPrograma
@@ -43,8 +51,8 @@ public class agregarCursoPrograma extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		//fabrica fab = fabrica.getInstancia();
+		//IcontroladorCurso icon = fab.getIcontroladorCurso();
 				
 		String nomCurso = request.getParameter("curso");
 		String nomPrograma = request.getParameter("programa");
@@ -52,7 +60,7 @@ public class agregarCursoPrograma extends HttpServlet {
 		DTResponse respuesta = new DTResponse();
 
 		try {
-			icon.agregarCursoPrograma(nomCurso, nomPrograma);
+			agregarCursoPrograma(nomCurso, nomPrograma);
 			respuesta.setCodigo(0);
 			respuesta.setMensaje("El curso " + nomCurso + " fue agregado al programa " + nomPrograma + " correctamente");
 			request.setAttribute("mensaje", "El curso " + nomCurso + " fue agregado al programa " + nomPrograma + " correctamente");
@@ -69,6 +77,27 @@ public class agregarCursoPrograma extends HttpServlet {
 
 		response.setContentType("application/json");
 		response.getWriter().append(inscriStr);
+	}
+	
+	public void agregarCursoPrograma(String nomCurso, String nomPrograma) throws ProgramaFormacionExcepcion, CursoExcepcion{
+		ControladorCursoPublishService ccp = new ControladorCursoPublishServiceLocator();
+		try {
+			ControladorCursoPublish port = ccp.getcontroladorCursoPublishPort();
+			try {
+				port.agregarCursoPrograma(nomCurso, nomPrograma);
+			} catch (CursoExcepcion e1) {
+				System.out.println("CursoExcepcion");
+				e1.printStackTrace();
+			} catch (ProgramaFormacionExcepcion e1) {
+				System.out.println("ProgramaFormacionExcepcion");
+				e1.printStackTrace();
+			} catch (RemoteException e1) {
+				System.out.println("RemoteExcepcion");
+				e1.printStackTrace();
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

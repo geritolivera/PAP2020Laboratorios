@@ -42,8 +42,8 @@ public class controladorCursoPublish {
 	//TODO
 	@WebMethod(exclude = true)
 	public void publicar() {
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/");
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT")+ "/" , this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorCurso");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT")+ "/controladorCurso" , this);
 	}
 	
 	@WebMethod(exclude = true)
@@ -56,7 +56,7 @@ public class controladorCursoPublish {
 	//METODOS NORMALES
 	
 	@WebMethod
-	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas,  String[] cats, String imagen) {
+	public void AltaCurso(String nombre, String descripcion, String duracion, int cantHoras, int creditos, Date fechaR, String url, String instituto, String[] previas,  String[] cats, String imagen) throws CursoExcepcion, InstitutoExcepcion{
 		ArrayList<String> listPrevias = new ArrayList<>();
 		for(int i = 0; i < previas.length; i++) {
 			listPrevias.add(previas[i]);
@@ -69,22 +69,25 @@ public class controladorCursoPublish {
 			icon.AltaCurso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, instituto, listPrevias, listCategorias, imagen);
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
+			throw new CursoExcepcion("El curso " + nombre + " ya existe en el sistema");
 		} catch (InstitutoExcepcion e) {
 			e.printStackTrace();
+			throw new InstitutoExcepcion("El instituto " + instituto + " no existe en el sistema");
 		}
 	}
 	
 	@WebMethod
-	public void verInfo(String nomCurso) {
+	public void verInfo(String nomCurso) throws CursoExcepcion{
 		try {
 			icon.verInfo(nomCurso);
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
+			throw new CursoExcepcion("El curso " + nomCurso + " no existe en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, String[] docentes, String url) {
+	public void nuevosDatosEdicion(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, String nomCurso, String[] docentes, String url) throws CursoExcepcion, EdicionExcepcion{
 		ArrayList<String> listDocentes = new ArrayList<>();
 		for(int i = 0; i < docentes.length; i++) {
 			listDocentes.add(docentes[i]);
@@ -93,76 +96,83 @@ public class controladorCursoPublish {
 			icon.nuevosDatosEdicion(nombre, fechaI, fechaF, cupo, fechaPub, nomCurso, listDocentes, url);
 		} catch (EdicionExcepcion e) {
 			e.printStackTrace();
+			throw new EdicionExcepcion("La edicion de curso " + nombre + " ya existe en el sistema.");
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
+			throw new CursoExcepcion("El curso " + nomCurso + " ya existe en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public DTEdicionCurso verInfoEdicion(String nomEdicion) {
+	public DTEdicionCurso verInfoEdicion(String nomEdicion) throws EdicionExcepcion{
 		try {
 			return icon.verInfoEdicion(nomEdicion);
 		} catch (EdicionExcepcion e) {
 			e.printStackTrace();
-			return null;
+			throw new EdicionExcepcion("La edicion de curso " + nomEdicion + " no existe en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public DTEdicionCurso mostrarEdicionVigente(String nomCurso) {
+	public DTEdicionCurso mostrarEdicionVigente(String nomEdicion) throws EdicionExcepcion{
 		try {
-			return icon.mostrarEdicionVigente(nomCurso);
+			return icon.mostrarEdicionVigente(nomEdicion);
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
-			return null;
+			throw new EdicionExcepcion("La edicion de curso " + nomEdicion + " no existe en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) {
+	public void inscribirEstudianteEdicion(String nomEdicion, String nickUsuario, Date fecha) throws Exception{
 		try {
 			icon.inscribirEstudianteEdicion(nomEdicion, nickUsuario, fecha);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception("Algo salio mal");
 		}
 	}
 	
 	@WebMethod
-	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Date fecha){
+	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Date fecha) throws Exception{
 		try {
 			icon.inscribirEstudiantePrograma(nomPrograma, nickUsuario, fecha);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception("Algo salio mal");
 		}
 	}
 	
 	@WebMethod
-	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual, String url){
+	public void crearProgramaFormacion(String nombre, String descripcion, Date fechaI, Date fechaF, Date fActual, String url) throws ProgramaFormacionExcepcion{
 		try {
 			icon.crearProgramaFormacion(nombre, descripcion, fechaI, fechaF, fActual, url);
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();
+			throw new ProgramaFormacionExcepcion("El programa " + nombre + " ya existe en el sistema");
 		}
 	}
 	
 	@WebMethod
-	public void agregarCursoPrograma(String nomCur, String nomP) {
+	public void agregarCursoPrograma(String nomCur, String nomP) throws ProgramaFormacionExcepcion, CursoExcepcion{
 		try {
 			icon.agregarCursoPrograma(nomCur, nomP);
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();
+			throw new ProgramaFormacionExcepcion("El programa " + nomP + " no existe en el sistema");
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
+			throw new CursoExcepcion("El curso " + nomCur + " no existe en el sistema");
 		}
 	}
 	
 	@WebMethod
-	public DTProgramaFormacion verInfoPrograma(String nombreProg) {
+	public DTProgramaFormacion verInfoPrograma(String nombreProg) throws ProgramaFormacionExcepcion{
 		try {
 			return icon.verInfoPrograma(nombreProg);
 		} catch (ProgramaFormacionExcepcion e) {
 			e.printStackTrace();
-			return null;
+			throw new ProgramaFormacionExcepcion("El programa " + nombreProg + " no existe en el sistema");
 		}
 	}
 	

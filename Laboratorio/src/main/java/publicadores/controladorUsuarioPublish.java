@@ -40,8 +40,8 @@ public class controladorUsuarioPublish {
 	//TODO
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador", this);
-		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controlador");
+		endpoint = Endpoint.publish("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario", this);
+		System.out.println("http://" + configuracion.getConfigOf("#WS_IP") + ":" + configuracion.getConfigOf("#WS_PORT") + "/controladorUsuario");
 	}
 	
 	@WebMethod(exclude = true)
@@ -54,39 +54,53 @@ public class controladorUsuarioPublish {
 	//METODOS NORMALES
 	
 	@WebMethod
-	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password, String url) {
+	public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password, String url) throws UsuarioExcepcion{
 		try {
 			icon.AltaUsuario(nickname, nombre, apellido, correo, fechaNac, instituto, password, url);
 		} catch (UsuarioExcepcion e) {
 			e.printStackTrace();
+			throw new UsuarioExcepcion("El usuario " + nickname + " ya esta en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public DTUsuario verInfoUsuario(String nickname) {
+	public DTUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
 		try {
 			return icon.verInfoUsuario(nickname);
 		} catch (UsuarioExcepcion e) {
 			e.printStackTrace();
-			return null;
+			throw new UsuarioExcepcion("El usuario " + nickname + " no existe en el sistema.");
 		}
 	}
 	
 	@WebMethod
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci){
+	public DTDocente docente() {
+		return null;
+	}
+	
+	@WebMethod
+	public DTEstudiante estudiante() {
+		return null;
+	}
+	
+	
+	@WebMethod
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
 		try {
 			icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
 		} catch (UsuarioExcepcion e) {
 			e.printStackTrace();
+			throw new UsuarioExcepcion("El usuario " + nickname + " no existe en el sistema."); 
 		}
 	}
 	
 	@WebMethod
-	public void AltaInstituto(String nombre) {
+	public void AltaInstituto(String nombre) throws InstitutoExcepcion {
 		try {
 			icon.AltaInstituto(nombre);
 		} catch (InstitutoExcepcion e) {
 			e.printStackTrace();
+			throw new InstitutoExcepcion("El instituto " + nombre + " ya existe en el sistema.");
 		}
 	}
 	
@@ -100,12 +114,12 @@ public class controladorUsuarioPublish {
 	}
 	
 	@WebMethod
-	public boolean validarUsuario(String nickname, String password) {
+	public boolean validarUsuario(String nickname, String password) throws UsuarioExcepcion{
 		try {
 			return icon.validarUsuario(nickname, password);
 		} catch (UsuarioExcepcion e) {
 			e.printStackTrace();
-			return false;
+			throw new UsuarioExcepcion("El usuario " + nickname + " no pudo se cambiado.");
 		}
 	}
 	

@@ -2,11 +2,15 @@ package datatypes;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 import java.util.ArrayList;
 
 import clases.Curso;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTCurso {
 	private String nombre;
 	private String descripcion;

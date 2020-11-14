@@ -8,22 +8,50 @@
 package publicadores;
 
 public class DtInscripcionED  implements java.io.Serializable {
+    private java.lang.String usuario;
+
     private java.lang.String edicion;
 
-    private float prioridad;
+    private java.lang.String estado;
 
-    private java.lang.String usuario;
+    private java.lang.String fechaIns;
+
+    private float prioridad;
 
     public DtInscripcionED() {
     }
 
     public DtInscripcionED(
+           java.lang.String usuario,
            java.lang.String edicion,
-           float prioridad,
-           java.lang.String usuario) {
-           this.edicion = edicion;
-           this.prioridad = prioridad;
+           java.lang.String estado,
+           java.lang.String fechaIns,
+           float prioridad) {
            this.usuario = usuario;
+           this.edicion = edicion;
+           this.estado = estado;
+           this.fechaIns = fechaIns;
+           this.prioridad = prioridad;
+    }
+
+
+    /**
+     * Gets the usuario value for this DtInscripcionED.
+     * 
+     * @return usuario
+     */
+    public java.lang.String getUsuario() {
+        return usuario;
+    }
+
+
+    /**
+     * Sets the usuario value for this DtInscripcionED.
+     * 
+     * @param usuario
+     */
+    public void setUsuario(java.lang.String usuario) {
+        this.usuario = usuario;
     }
 
 
@@ -48,6 +76,46 @@ public class DtInscripcionED  implements java.io.Serializable {
 
 
     /**
+     * Gets the estado value for this DtInscripcionED.
+     * 
+     * @return estado
+     */
+    public java.lang.String getEstado() {
+        return estado;
+    }
+
+
+    /**
+     * Sets the estado value for this DtInscripcionED.
+     * 
+     * @param estado
+     */
+    public void setEstado(java.lang.String estado) {
+        this.estado = estado;
+    }
+
+
+    /**
+     * Gets the fechaIns value for this DtInscripcionED.
+     * 
+     * @return fechaIns
+     */
+    public java.lang.String getFechaIns() {
+        return fechaIns;
+    }
+
+
+    /**
+     * Sets the fechaIns value for this DtInscripcionED.
+     * 
+     * @param fechaIns
+     */
+    public void setFechaIns(java.lang.String fechaIns) {
+        this.fechaIns = fechaIns;
+    }
+
+
+    /**
      * Gets the prioridad value for this DtInscripcionED.
      * 
      * @return prioridad
@@ -66,26 +134,6 @@ public class DtInscripcionED  implements java.io.Serializable {
         this.prioridad = prioridad;
     }
 
-
-    /**
-     * Gets the usuario value for this DtInscripcionED.
-     * 
-     * @return usuario
-     */
-    public java.lang.String getUsuario() {
-        return usuario;
-    }
-
-
-    /**
-     * Sets the usuario value for this DtInscripcionED.
-     * 
-     * @param usuario
-     */
-    public void setUsuario(java.lang.String usuario) {
-        this.usuario = usuario;
-    }
-
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof DtInscripcionED)) return false;
@@ -98,13 +146,19 @@ public class DtInscripcionED  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
+            ((this.usuario==null && other.getUsuario()==null) || 
+             (this.usuario!=null &&
+              this.usuario.equals(other.getUsuario()))) &&
             ((this.edicion==null && other.getEdicion()==null) || 
              (this.edicion!=null &&
               this.edicion.equals(other.getEdicion()))) &&
-            this.prioridad == other.getPrioridad() &&
-            ((this.usuario==null && other.getUsuario()==null) || 
-             (this.usuario!=null &&
-              this.usuario.equals(other.getUsuario())));
+            ((this.estado==null && other.getEstado()==null) || 
+             (this.estado!=null &&
+              this.estado.equals(other.getEstado()))) &&
+            ((this.fechaIns==null && other.getFechaIns()==null) || 
+             (this.fechaIns!=null &&
+              this.fechaIns.equals(other.getFechaIns()))) &&
+            this.prioridad == other.getPrioridad();
         __equalsCalc = null;
         return _equals;
     }
@@ -116,13 +170,19 @@ public class DtInscripcionED  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        if (getEdicion() != null) {
-            _hashCode += getEdicion().hashCode();
-        }
-        _hashCode += new Float(getPrioridad()).hashCode();
         if (getUsuario() != null) {
             _hashCode += getUsuario().hashCode();
         }
+        if (getEdicion() != null) {
+            _hashCode += getEdicion().hashCode();
+        }
+        if (getEstado() != null) {
+            _hashCode += getEstado().hashCode();
+        }
+        if (getFechaIns() != null) {
+            _hashCode += getFechaIns().hashCode();
+        }
+        _hashCode += new Float(getPrioridad()).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -134,8 +194,29 @@ public class DtInscripcionED  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://publicadores/", "dtInscripcionED"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("usuario");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "usuario"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("edicion");
         elemField.setXmlName(new javax.xml.namespace.QName("", "edicion"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("estado");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "estado"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("fechaIns");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "fechaIns"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
@@ -144,13 +225,6 @@ public class DtInscripcionED  implements java.io.Serializable {
         elemField.setFieldName("prioridad");
         elemField.setXmlName(new javax.xml.namespace.QName("", "prioridad"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "float"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("usuario");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "usuario"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }
