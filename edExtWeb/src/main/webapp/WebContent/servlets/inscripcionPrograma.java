@@ -38,17 +38,7 @@ public class inscripcionPrograma extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
-		ControladorUsuarioPublish port2;
-		try {
-			port2 = cup.getcontroladorUsuarioPublishPort();
-		} catch (ServiceException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
