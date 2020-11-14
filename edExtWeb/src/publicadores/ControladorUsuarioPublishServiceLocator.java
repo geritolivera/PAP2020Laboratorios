@@ -22,7 +22,7 @@ public class ControladorUsuarioPublishServiceLocator extends org.apache.axis.cli
     }
 
     // Use to get a proxy class for controladorUsuarioPublishPort
-    private java.lang.String controladorUsuarioPublishPort_address = "http://localhost:9001/controlador";
+    private java.lang.String controladorUsuarioPublishPort_address = "http://127.0.0.1:9001/controladorUsuario";
 
     public java.lang.String getcontroladorUsuarioPublishPortAddress() {
         return controladorUsuarioPublishPort_address;

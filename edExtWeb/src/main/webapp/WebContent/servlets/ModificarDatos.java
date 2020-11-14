@@ -88,7 +88,7 @@ public class ModificarDatos extends HttpServlet {
 		response.getWriter().append(usuarioStr);
 	}
 	
-	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) {
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) throws UsuarioExcepcion{
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		Calendar cal = Calendar.getInstance();
     	cal.setTime(fechaNaci);
@@ -96,9 +96,12 @@ public class ModificarDatos extends HttpServlet {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			try {
 				port.nuevosDatos(nickname, nombre, apellido, cal);
-			} catch (RemoteException e) {
+			} catch (publicadores.UsuarioExcepcion e1) {
+				System.out.println("UsuarioExcepcion");
+				e1.printStackTrace();
+			} catch (RemoteException e1) {
 				System.out.println("RemoteExcepcion");
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
 		} catch (ServiceException e) {
 			System.out.println("ServiceExcepcion");

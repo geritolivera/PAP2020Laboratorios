@@ -49,7 +49,6 @@ public class seguirUsuario extends HttpServlet {
 			comenzarSeguir(nickUsuario, aSeguirNickname);
 			try {
 				DtUsuario usu = verInfoUsuario(nickUsuario);
-				//TODO rehacer publicador para obtener otras funciones
 				session.setAttribute("seguidos", usu.getSeguidos());
 			} catch (UsuarioExcepcion usuarioExcepcion) {
 				usuarioExcepcion.printStackTrace();
@@ -98,12 +97,16 @@ public class seguirUsuario extends HttpServlet {
 		}
 	}
 	
-	public DtUsuario verInfoUsuario(String nickname) {
+	public DtUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			try {
 				return port.verInfoUsuario(nickname);
+			} catch (publicadores.UsuarioExcepcion e) {
+				System.out.println("UsuarioExcepcion");
+				e.printStackTrace();
+				return null;
 			} catch (RemoteException e) {
 				System.out.println("RemoteExcepcion");
 				e.printStackTrace();
@@ -115,7 +118,5 @@ public class seguirUsuario extends HttpServlet {
 			return null;
 		}
 	}
-	
-	
 
 }

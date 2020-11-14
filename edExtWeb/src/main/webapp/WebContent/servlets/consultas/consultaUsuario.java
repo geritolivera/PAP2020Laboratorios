@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets.consultas;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -8,12 +9,22 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.xml.rpc.ServiceException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Enumeration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interfaces.fabrica;
+import publicadores.ControladorUsuarioPublish;
+import publicadores.ControladorUsuarioPublishService;
+import publicadores.ControladorUsuarioPublishServiceLocator;
+import publicadores.DtDocente;
+import publicadores.DtEdicionCurso;
+import publicadores.DtEstudiante;
+import publicadores.DtProgramaFormacion;
+import publicadores.DtUsuario;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
 import datatypes.DTEdicionCurso;
@@ -30,14 +41,14 @@ public class consultaUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+		//fabrica fab = fabrica.getInstancia();
+		//IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//recibe programa desde jsp
 		String nickname = request.getParameter("nickname");
 		System.out.println("nickname = " + nickname);
 		try {
-			DTUsuario dtu = icon.verInfoUsuario(nickname);
+			DtUsuario dtu = verInfoUsuario(nickname);
 			String fechaNac = format.format(dtu.getFechaNac());
 			request.setAttribute("nickname", nickname);
 			request.setAttribute("nombre", dtu.getNombre());
@@ -46,23 +57,27 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("fechaNac", fechaNac);
 			request.setAttribute("imagenURL", dtu.getImage());
 			request.setAttribute("seguidores", dtu.getSeguidores());
-			ArrayList<String> seguidos = dtu.getSeguidos();
+			ArrayList<String> seguidos = new ArrayList<>();
+			String[] ret = dtu.getSeguidos();
+			for(int i = 0; i<ret.length; i++) {
+				seguidos.add(ret[i]);
+			}
 			request.setAttribute("seguidos", seguidos);
 			ArrayList<String> ediciones = new ArrayList<>();
 			ArrayList<String> programas = new ArrayList<>();
 			String tipo;
-			if(dtu instanceof DTDocente) {
-				List<DTEdicionCurso> listEdiciones = ((DTDocente)dtu).getEdiciones();
-				for(DTEdicionCurso e: listEdiciones)
+			if(dtu instanceof DtDocente) {
+				DtEdicionCurso[] retDE = ((DtDocente)dtu).getEdiciones();
+				for(DtEdicionCurso e: retDE)
 					ediciones.add(e.getNombre());
 				tipo = "docente";
 			}
 			else {
-				List<DTEdicionCurso> listEdiciones = ((DTEstudiante)dtu).getEdiciones();
-				for(DTEdicionCurso e: listEdiciones)
+				DtEdicionCurso[] retEE = ((DtEstudiante)dtu).getEdiciones();
+				for(DtEdicionCurso e: retEE)
 					ediciones.add(e.getNombre());
-				List<DTProgramaFormacion> listProgramas = ((DTEstudiante)dtu).getProgramas();
-				for(DTProgramaFormacion p: listProgramas)
+				DtProgramaFormacion[] retEP = ((DtEstudiante)dtu).getProgramas();
+				for(DtProgramaFormacion p: retEP)
 					programas.add(p.getNombre());
 				tipo = "estudiante";
 			}
@@ -104,5 +119,25 @@ public class consultaUsuario extends HttpServlet {
 		this.doGet(request, response);
 	}
 	
-	public 
+	public DtUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
+		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
+		try {
+			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
+			try {
+				return port.verInfoUsuario(nickname);
+			} catch (publicadores.UsuarioExcepcion e) {
+				System.out.println("UsuarioExcepcion");
+				e.printStackTrace();
+				return null;
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+				return null;
+			}
+		} catch (ServiceException e) {
+			System.out.println("ServiceExcepcion");
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

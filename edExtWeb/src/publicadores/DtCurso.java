@@ -8,118 +8,82 @@
 package publicadores;
 
 public class DtCurso  implements java.io.Serializable {
-    private int cantHoras;
-
-    private java.lang.String[] categorias;
-
-    private int creditos;
+    private java.lang.String nombre;
 
     private java.lang.String descripcion;
 
     private java.lang.String duracion;
 
+    private int cantHoras;
+
+    private int creditos;
+
     private java.util.Calendar fechaR;
 
-    private java.lang.String imagenURL;
+    private java.lang.String url;
 
     private java.lang.String instituto;
 
-    private java.lang.String nombre;
+    private java.lang.String imagenURL;
 
-    private java.lang.String url;
+    private java.lang.String[] ediciones;
+
+    private java.lang.String[] programas;
+
+    private java.lang.String[] previas;
+
+    private java.lang.String[] categorias;
 
     public DtCurso() {
     }
 
     public DtCurso(
-           int cantHoras,
-           java.lang.String[] categorias,
-           int creditos,
+           java.lang.String nombre,
            java.lang.String descripcion,
            java.lang.String duracion,
+           int cantHoras,
+           int creditos,
            java.util.Calendar fechaR,
-           java.lang.String imagenURL,
+           java.lang.String url,
            java.lang.String instituto,
-           java.lang.String nombre,
-           java.lang.String url) {
-           this.cantHoras = cantHoras;
-           this.categorias = categorias;
-           this.creditos = creditos;
+           java.lang.String imagenURL,
+           java.lang.String[] ediciones,
+           java.lang.String[] programas,
+           java.lang.String[] previas,
+           java.lang.String[] categorias) {
+           this.nombre = nombre;
            this.descripcion = descripcion;
            this.duracion = duracion;
+           this.cantHoras = cantHoras;
+           this.creditos = creditos;
            this.fechaR = fechaR;
-           this.imagenURL = imagenURL;
-           this.instituto = instituto;
-           this.nombre = nombre;
            this.url = url;
+           this.instituto = instituto;
+           this.imagenURL = imagenURL;
+           this.ediciones = ediciones;
+           this.programas = programas;
+           this.previas = previas;
+           this.categorias = categorias;
     }
 
 
     /**
-     * Gets the cantHoras value for this DtCurso.
+     * Gets the nombre value for this DtCurso.
      * 
-     * @return cantHoras
+     * @return nombre
      */
-    public int getCantHoras() {
-        return cantHoras;
+    public java.lang.String getNombre() {
+        return nombre;
     }
 
 
     /**
-     * Sets the cantHoras value for this DtCurso.
+     * Sets the nombre value for this DtCurso.
      * 
-     * @param cantHoras
+     * @param nombre
      */
-    public void setCantHoras(int cantHoras) {
-        this.cantHoras = cantHoras;
-    }
-
-
-    /**
-     * Gets the categorias value for this DtCurso.
-     * 
-     * @return categorias
-     */
-    public java.lang.String[] getCategorias() {
-        return categorias;
-    }
-
-
-    /**
-     * Sets the categorias value for this DtCurso.
-     * 
-     * @param categorias
-     */
-    public void setCategorias(java.lang.String[] categorias) {
-        this.categorias = categorias;
-    }
-
-    public java.lang.String getCategorias(int i) {
-        return this.categorias[i];
-    }
-
-    public void setCategorias(int i, java.lang.String _value) {
-        this.categorias[i] = _value;
-    }
-
-
-    /**
-     * Gets the creditos value for this DtCurso.
-     * 
-     * @return creditos
-     */
-    public int getCreditos() {
-        return creditos;
-    }
-
-
-    /**
-     * Sets the creditos value for this DtCurso.
-     * 
-     * @param creditos
-     */
-    public void setCreditos(int creditos) {
-        this.creditos = creditos;
+    public void setNombre(java.lang.String nombre) {
+        this.nombre = nombre;
     }
 
 
@@ -164,6 +128,46 @@ public class DtCurso  implements java.io.Serializable {
 
 
     /**
+     * Gets the cantHoras value for this DtCurso.
+     * 
+     * @return cantHoras
+     */
+    public int getCantHoras() {
+        return cantHoras;
+    }
+
+
+    /**
+     * Sets the cantHoras value for this DtCurso.
+     * 
+     * @param cantHoras
+     */
+    public void setCantHoras(int cantHoras) {
+        this.cantHoras = cantHoras;
+    }
+
+
+    /**
+     * Gets the creditos value for this DtCurso.
+     * 
+     * @return creditos
+     */
+    public int getCreditos() {
+        return creditos;
+    }
+
+
+    /**
+     * Sets the creditos value for this DtCurso.
+     * 
+     * @param creditos
+     */
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+
+    /**
      * Gets the fechaR value for this DtCurso.
      * 
      * @return fechaR
@@ -184,22 +188,22 @@ public class DtCurso  implements java.io.Serializable {
 
 
     /**
-     * Gets the imagenURL value for this DtCurso.
+     * Gets the url value for this DtCurso.
      * 
-     * @return imagenURL
+     * @return url
      */
-    public java.lang.String getImagenURL() {
-        return imagenURL;
+    public java.lang.String getUrl() {
+        return url;
     }
 
 
     /**
-     * Sets the imagenURL value for this DtCurso.
+     * Sets the url value for this DtCurso.
      * 
-     * @param imagenURL
+     * @param url
      */
-    public void setImagenURL(java.lang.String imagenURL) {
-        this.imagenURL = imagenURL;
+    public void setUrl(java.lang.String url) {
+        this.url = url;
     }
 
 
@@ -224,42 +228,134 @@ public class DtCurso  implements java.io.Serializable {
 
 
     /**
-     * Gets the nombre value for this DtCurso.
+     * Gets the imagenURL value for this DtCurso.
      * 
-     * @return nombre
+     * @return imagenURL
      */
-    public java.lang.String getNombre() {
-        return nombre;
+    public java.lang.String getImagenURL() {
+        return imagenURL;
     }
 
 
     /**
-     * Sets the nombre value for this DtCurso.
+     * Sets the imagenURL value for this DtCurso.
      * 
-     * @param nombre
+     * @param imagenURL
      */
-    public void setNombre(java.lang.String nombre) {
-        this.nombre = nombre;
+    public void setImagenURL(java.lang.String imagenURL) {
+        this.imagenURL = imagenURL;
     }
 
 
     /**
-     * Gets the url value for this DtCurso.
+     * Gets the ediciones value for this DtCurso.
      * 
-     * @return url
+     * @return ediciones
      */
-    public java.lang.String getUrl() {
-        return url;
+    public java.lang.String[] getEdiciones() {
+        return ediciones;
     }
 
 
     /**
-     * Sets the url value for this DtCurso.
+     * Sets the ediciones value for this DtCurso.
      * 
-     * @param url
+     * @param ediciones
      */
-    public void setUrl(java.lang.String url) {
-        this.url = url;
+    public void setEdiciones(java.lang.String[] ediciones) {
+        this.ediciones = ediciones;
+    }
+
+    public java.lang.String getEdiciones(int i) {
+        return this.ediciones[i];
+    }
+
+    public void setEdiciones(int i, java.lang.String _value) {
+        this.ediciones[i] = _value;
+    }
+
+
+    /**
+     * Gets the programas value for this DtCurso.
+     * 
+     * @return programas
+     */
+    public java.lang.String[] getProgramas() {
+        return programas;
+    }
+
+
+    /**
+     * Sets the programas value for this DtCurso.
+     * 
+     * @param programas
+     */
+    public void setProgramas(java.lang.String[] programas) {
+        this.programas = programas;
+    }
+
+    public java.lang.String getProgramas(int i) {
+        return this.programas[i];
+    }
+
+    public void setProgramas(int i, java.lang.String _value) {
+        this.programas[i] = _value;
+    }
+
+
+    /**
+     * Gets the previas value for this DtCurso.
+     * 
+     * @return previas
+     */
+    public java.lang.String[] getPrevias() {
+        return previas;
+    }
+
+
+    /**
+     * Sets the previas value for this DtCurso.
+     * 
+     * @param previas
+     */
+    public void setPrevias(java.lang.String[] previas) {
+        this.previas = previas;
+    }
+
+    public java.lang.String getPrevias(int i) {
+        return this.previas[i];
+    }
+
+    public void setPrevias(int i, java.lang.String _value) {
+        this.previas[i] = _value;
+    }
+
+
+    /**
+     * Gets the categorias value for this DtCurso.
+     * 
+     * @return categorias
+     */
+    public java.lang.String[] getCategorias() {
+        return categorias;
+    }
+
+
+    /**
+     * Sets the categorias value for this DtCurso.
+     * 
+     * @param categorias
+     */
+    public void setCategorias(java.lang.String[] categorias) {
+        this.categorias = categorias;
+    }
+
+    public java.lang.String getCategorias(int i) {
+        return this.categorias[i];
+    }
+
+    public void setCategorias(int i, java.lang.String _value) {
+        this.categorias[i] = _value;
     }
 
     private java.lang.Object __equalsCalc = null;
@@ -274,32 +370,41 @@ public class DtCurso  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.cantHoras == other.getCantHoras() &&
-            ((this.categorias==null && other.getCategorias()==null) || 
-             (this.categorias!=null &&
-              java.util.Arrays.equals(this.categorias, other.getCategorias()))) &&
-            this.creditos == other.getCreditos() &&
+            ((this.nombre==null && other.getNombre()==null) || 
+             (this.nombre!=null &&
+              this.nombre.equals(other.getNombre()))) &&
             ((this.descripcion==null && other.getDescripcion()==null) || 
              (this.descripcion!=null &&
               this.descripcion.equals(other.getDescripcion()))) &&
             ((this.duracion==null && other.getDuracion()==null) || 
              (this.duracion!=null &&
               this.duracion.equals(other.getDuracion()))) &&
+            this.cantHoras == other.getCantHoras() &&
+            this.creditos == other.getCreditos() &&
             ((this.fechaR==null && other.getFechaR()==null) || 
              (this.fechaR!=null &&
               this.fechaR.equals(other.getFechaR()))) &&
-            ((this.imagenURL==null && other.getImagenURL()==null) || 
-             (this.imagenURL!=null &&
-              this.imagenURL.equals(other.getImagenURL()))) &&
+            ((this.url==null && other.getUrl()==null) || 
+             (this.url!=null &&
+              this.url.equals(other.getUrl()))) &&
             ((this.instituto==null && other.getInstituto()==null) || 
              (this.instituto!=null &&
               this.instituto.equals(other.getInstituto()))) &&
-            ((this.nombre==null && other.getNombre()==null) || 
-             (this.nombre!=null &&
-              this.nombre.equals(other.getNombre()))) &&
-            ((this.url==null && other.getUrl()==null) || 
-             (this.url!=null &&
-              this.url.equals(other.getUrl())));
+            ((this.imagenURL==null && other.getImagenURL()==null) || 
+             (this.imagenURL!=null &&
+              this.imagenURL.equals(other.getImagenURL()))) &&
+            ((this.ediciones==null && other.getEdiciones()==null) || 
+             (this.ediciones!=null &&
+              java.util.Arrays.equals(this.ediciones, other.getEdiciones()))) &&
+            ((this.programas==null && other.getProgramas()==null) || 
+             (this.programas!=null &&
+              java.util.Arrays.equals(this.programas, other.getProgramas()))) &&
+            ((this.previas==null && other.getPrevias()==null) || 
+             (this.previas!=null &&
+              java.util.Arrays.equals(this.previas, other.getPrevias()))) &&
+            ((this.categorias==null && other.getCategorias()==null) || 
+             (this.categorias!=null &&
+              java.util.Arrays.equals(this.categorias, other.getCategorias())));
         __equalsCalc = null;
         return _equals;
     }
@@ -311,7 +416,62 @@ public class DtCurso  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
+        if (getNombre() != null) {
+            _hashCode += getNombre().hashCode();
+        }
+        if (getDescripcion() != null) {
+            _hashCode += getDescripcion().hashCode();
+        }
+        if (getDuracion() != null) {
+            _hashCode += getDuracion().hashCode();
+        }
         _hashCode += getCantHoras();
+        _hashCode += getCreditos();
+        if (getFechaR() != null) {
+            _hashCode += getFechaR().hashCode();
+        }
+        if (getUrl() != null) {
+            _hashCode += getUrl().hashCode();
+        }
+        if (getInstituto() != null) {
+            _hashCode += getInstituto().hashCode();
+        }
+        if (getImagenURL() != null) {
+            _hashCode += getImagenURL().hashCode();
+        }
+        if (getEdiciones() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getEdiciones());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getEdiciones(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
+        }
+        if (getProgramas() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getProgramas());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getProgramas(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
+        }
+        if (getPrevias() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getPrevias());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getPrevias(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
+        }
         if (getCategorias() != null) {
             for (int i=0;
                  i<java.lang.reflect.Array.getLength(getCategorias());
@@ -322,28 +482,6 @@ public class DtCurso  implements java.io.Serializable {
                     _hashCode += obj.hashCode();
                 }
             }
-        }
-        _hashCode += getCreditos();
-        if (getDescripcion() != null) {
-            _hashCode += getDescripcion().hashCode();
-        }
-        if (getDuracion() != null) {
-            _hashCode += getDuracion().hashCode();
-        }
-        if (getFechaR() != null) {
-            _hashCode += getFechaR().hashCode();
-        }
-        if (getImagenURL() != null) {
-            _hashCode += getImagenURL().hashCode();
-        }
-        if (getInstituto() != null) {
-            _hashCode += getInstituto().hashCode();
-        }
-        if (getNombre() != null) {
-            _hashCode += getNombre().hashCode();
-        }
-        if (getUrl() != null) {
-            _hashCode += getUrl().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -356,23 +494,10 @@ public class DtCurso  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://publicadores/", "dtCurso"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("cantHoras");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "cantHoras"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("categorias");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "categorias"));
+        elemField.setFieldName("nombre");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "nombre"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
-        elemField.setNillable(true);
-        elemField.setMaxOccursUnbounded(true);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("creditos");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "creditos"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -390,6 +515,18 @@ public class DtCurso  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("cantHoras");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "cantHoras"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("creditos");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "creditos"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fechaR");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fechaR"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
@@ -397,8 +534,8 @@ public class DtCurso  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("imagenURL");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "imagenURL"));
+        elemField.setFieldName("url");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "url"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
@@ -411,18 +548,43 @@ public class DtCurso  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("nombre");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "nombre"));
+        elemField.setFieldName("imagenURL");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "imagenURL"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("url");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "url"));
+        elemField.setFieldName("ediciones");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "ediciones"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
-        elemField.setNillable(false);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("programas");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "programas"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("previas");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "previas"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("categorias");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "categorias"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
     }
 

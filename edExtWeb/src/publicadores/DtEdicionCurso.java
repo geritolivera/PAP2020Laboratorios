@@ -8,74 +8,62 @@
 package publicadores;
 
 public class DtEdicionCurso  implements java.io.Serializable {
-    private int cupo;
-
-    private java.util.Calendar fechaF;
+    private java.lang.String nombre;
 
     private java.util.Calendar fechaI;
 
+    private java.util.Calendar fechaF;
+
+    private int cupo;
+
     private java.util.Calendar fechaPub;
+
+    private java.lang.String curso;
 
     private java.lang.String imagenURL;
 
-    private java.lang.String nombre;
+    private java.lang.String[] docentes;
 
     public DtEdicionCurso() {
     }
 
     public DtEdicionCurso(
-           int cupo,
-           java.util.Calendar fechaF,
+           java.lang.String nombre,
            java.util.Calendar fechaI,
+           java.util.Calendar fechaF,
+           int cupo,
            java.util.Calendar fechaPub,
+           java.lang.String curso,
            java.lang.String imagenURL,
-           java.lang.String nombre) {
-           this.cupo = cupo;
-           this.fechaF = fechaF;
-           this.fechaI = fechaI;
-           this.fechaPub = fechaPub;
-           this.imagenURL = imagenURL;
+           java.lang.String[] docentes) {
            this.nombre = nombre;
+           this.fechaI = fechaI;
+           this.fechaF = fechaF;
+           this.cupo = cupo;
+           this.fechaPub = fechaPub;
+           this.curso = curso;
+           this.imagenURL = imagenURL;
+           this.docentes = docentes;
     }
 
 
     /**
-     * Gets the cupo value for this DtEdicionCurso.
+     * Gets the nombre value for this DtEdicionCurso.
      * 
-     * @return cupo
+     * @return nombre
      */
-    public int getCupo() {
-        return cupo;
+    public java.lang.String getNombre() {
+        return nombre;
     }
 
 
     /**
-     * Sets the cupo value for this DtEdicionCurso.
+     * Sets the nombre value for this DtEdicionCurso.
      * 
-     * @param cupo
+     * @param nombre
      */
-    public void setCupo(int cupo) {
-        this.cupo = cupo;
-    }
-
-
-    /**
-     * Gets the fechaF value for this DtEdicionCurso.
-     * 
-     * @return fechaF
-     */
-    public java.util.Calendar getFechaF() {
-        return fechaF;
-    }
-
-
-    /**
-     * Sets the fechaF value for this DtEdicionCurso.
-     * 
-     * @param fechaF
-     */
-    public void setFechaF(java.util.Calendar fechaF) {
-        this.fechaF = fechaF;
+    public void setNombre(java.lang.String nombre) {
+        this.nombre = nombre;
     }
 
 
@@ -100,6 +88,46 @@ public class DtEdicionCurso  implements java.io.Serializable {
 
 
     /**
+     * Gets the fechaF value for this DtEdicionCurso.
+     * 
+     * @return fechaF
+     */
+    public java.util.Calendar getFechaF() {
+        return fechaF;
+    }
+
+
+    /**
+     * Sets the fechaF value for this DtEdicionCurso.
+     * 
+     * @param fechaF
+     */
+    public void setFechaF(java.util.Calendar fechaF) {
+        this.fechaF = fechaF;
+    }
+
+
+    /**
+     * Gets the cupo value for this DtEdicionCurso.
+     * 
+     * @return cupo
+     */
+    public int getCupo() {
+        return cupo;
+    }
+
+
+    /**
+     * Sets the cupo value for this DtEdicionCurso.
+     * 
+     * @param cupo
+     */
+    public void setCupo(int cupo) {
+        this.cupo = cupo;
+    }
+
+
+    /**
      * Gets the fechaPub value for this DtEdicionCurso.
      * 
      * @return fechaPub
@@ -116,6 +144,26 @@ public class DtEdicionCurso  implements java.io.Serializable {
      */
     public void setFechaPub(java.util.Calendar fechaPub) {
         this.fechaPub = fechaPub;
+    }
+
+
+    /**
+     * Gets the curso value for this DtEdicionCurso.
+     * 
+     * @return curso
+     */
+    public java.lang.String getCurso() {
+        return curso;
+    }
+
+
+    /**
+     * Sets the curso value for this DtEdicionCurso.
+     * 
+     * @param curso
+     */
+    public void setCurso(java.lang.String curso) {
+        this.curso = curso;
     }
 
 
@@ -140,22 +188,30 @@ public class DtEdicionCurso  implements java.io.Serializable {
 
 
     /**
-     * Gets the nombre value for this DtEdicionCurso.
+     * Gets the docentes value for this DtEdicionCurso.
      * 
-     * @return nombre
+     * @return docentes
      */
-    public java.lang.String getNombre() {
-        return nombre;
+    public java.lang.String[] getDocentes() {
+        return docentes;
     }
 
 
     /**
-     * Sets the nombre value for this DtEdicionCurso.
+     * Sets the docentes value for this DtEdicionCurso.
      * 
-     * @param nombre
+     * @param docentes
      */
-    public void setNombre(java.lang.String nombre) {
-        this.nombre = nombre;
+    public void setDocentes(java.lang.String[] docentes) {
+        this.docentes = docentes;
+    }
+
+    public java.lang.String getDocentes(int i) {
+        return this.docentes[i];
+    }
+
+    public void setDocentes(int i, java.lang.String _value) {
+        this.docentes[i] = _value;
     }
 
     private java.lang.Object __equalsCalc = null;
@@ -170,22 +226,28 @@ public class DtEdicionCurso  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            this.cupo == other.getCupo() &&
-            ((this.fechaF==null && other.getFechaF()==null) || 
-             (this.fechaF!=null &&
-              this.fechaF.equals(other.getFechaF()))) &&
+            ((this.nombre==null && other.getNombre()==null) || 
+             (this.nombre!=null &&
+              this.nombre.equals(other.getNombre()))) &&
             ((this.fechaI==null && other.getFechaI()==null) || 
              (this.fechaI!=null &&
               this.fechaI.equals(other.getFechaI()))) &&
+            ((this.fechaF==null && other.getFechaF()==null) || 
+             (this.fechaF!=null &&
+              this.fechaF.equals(other.getFechaF()))) &&
+            this.cupo == other.getCupo() &&
             ((this.fechaPub==null && other.getFechaPub()==null) || 
              (this.fechaPub!=null &&
               this.fechaPub.equals(other.getFechaPub()))) &&
+            ((this.curso==null && other.getCurso()==null) || 
+             (this.curso!=null &&
+              this.curso.equals(other.getCurso()))) &&
             ((this.imagenURL==null && other.getImagenURL()==null) || 
              (this.imagenURL!=null &&
               this.imagenURL.equals(other.getImagenURL()))) &&
-            ((this.nombre==null && other.getNombre()==null) || 
-             (this.nombre!=null &&
-              this.nombre.equals(other.getNombre())));
+            ((this.docentes==null && other.getDocentes()==null) || 
+             (this.docentes!=null &&
+              java.util.Arrays.equals(this.docentes, other.getDocentes())));
         __equalsCalc = null;
         return _equals;
     }
@@ -197,21 +259,35 @@ public class DtEdicionCurso  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        _hashCode += getCupo();
-        if (getFechaF() != null) {
-            _hashCode += getFechaF().hashCode();
+        if (getNombre() != null) {
+            _hashCode += getNombre().hashCode();
         }
         if (getFechaI() != null) {
             _hashCode += getFechaI().hashCode();
         }
+        if (getFechaF() != null) {
+            _hashCode += getFechaF().hashCode();
+        }
+        _hashCode += getCupo();
         if (getFechaPub() != null) {
             _hashCode += getFechaPub().hashCode();
+        }
+        if (getCurso() != null) {
+            _hashCode += getCurso().hashCode();
         }
         if (getImagenURL() != null) {
             _hashCode += getImagenURL().hashCode();
         }
-        if (getNombre() != null) {
-            _hashCode += getNombre().hashCode();
+        if (getDocentes() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getDocentes());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getDocentes(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -224,15 +300,9 @@ public class DtEdicionCurso  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://publicadores/", "dtEdicionCurso"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("cupo");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "cupo"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("fechaF");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "fechaF"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setFieldName("nombre");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "nombre"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
@@ -244,9 +314,29 @@ public class DtEdicionCurso  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("fechaF");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "fechaF"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("cupo");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "cupo"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fechaPub");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fechaPub"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("curso");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "curso"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
@@ -258,11 +348,12 @@ public class DtEdicionCurso  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("nombre");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "nombre"));
+        elemField.setFieldName("docentes");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "docentes"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
-        elemField.setNillable(false);
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
     }
 

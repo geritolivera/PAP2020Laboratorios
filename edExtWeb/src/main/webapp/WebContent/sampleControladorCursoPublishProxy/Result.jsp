@@ -63,15 +63,20 @@ if(getControladorCursoPublish10mtemp == null){
 break;
 case 13:
         gotMethod = true;
-        java.lang.String[] listarCursos13mtemp = sampleControladorCursoPublishProxyid.listarCursos();
-if(listarCursos13mtemp == null){
+        String arg0_1id=  request.getParameter("arg016");
+            java.lang.String arg0_1idTemp = null;
+        if(!arg0_1id.equals("")){
+         arg0_1idTemp  = arg0_1id;
+        }
+        java.lang.String[] listarDocentesInstituto13mtemp = sampleControladorCursoPublishProxyid.listarDocentesInstituto(arg0_1idTemp);
+if(listarDocentesInstituto13mtemp == null){
 %>
-<%=listarCursos13mtemp %>
+<%=listarDocentesInstituto13mtemp %>
 <%
 }else{
         String tempreturnp14 = null;
-        if(listarCursos13mtemp != null){
-        java.util.List listreturnp14= java.util.Arrays.asList(listarCursos13mtemp);
+        if(listarDocentesInstituto13mtemp != null){
+        java.util.List listreturnp14= java.util.Arrays.asList(listarDocentesInstituto13mtemp);
         tempreturnp14 = listreturnp14.toString();
         }
         %>
@@ -79,149 +84,82 @@ if(listarCursos13mtemp == null){
         <%
 }
 break;
-case 16:
+case 18:
         gotMethod = true;
-        String arg0_1id=  request.getParameter("arg019");
-            java.lang.String arg0_1idTemp = null;
-        if(!arg0_1id.equals("")){
-         arg0_1idTemp  = arg0_1id;
-        }
-        java.lang.String[] listarCursosAux16mtemp = sampleControladorCursoPublishProxyid.listarCursosAux(arg0_1idTemp);
-if(listarCursosAux16mtemp == null){
-%>
-<%=listarCursosAux16mtemp %>
-<%
-}else{
-        String tempreturnp17 = null;
-        if(listarCursosAux16mtemp != null){
-        java.util.List listreturnp17= java.util.Arrays.asList(listarCursosAux16mtemp);
-        tempreturnp17 = listreturnp17.toString();
-        }
-        %>
-        <%=tempreturnp17%>
-        <%
-}
-break;
-case 21:
-        gotMethod = true;
-        java.lang.String[] listarCategorias21mtemp = sampleControladorCursoPublishProxyid.listarCategorias();
-if(listarCategorias21mtemp == null){
-%>
-<%=listarCategorias21mtemp %>
-<%
-}else{
-        String tempreturnp22 = null;
-        if(listarCategorias21mtemp != null){
-        java.util.List listreturnp22= java.util.Arrays.asList(listarCategorias21mtemp);
-        tempreturnp22 = listreturnp22.toString();
-        }
-        %>
-        <%=tempreturnp22%>
-        <%
-}
-break;
-case 24:
-        gotMethod = true;
-        java.lang.String[] listarInstitutos24mtemp = sampleControladorCursoPublishProxyid.listarInstitutos();
-if(listarInstitutos24mtemp == null){
-%>
-<%=listarInstitutos24mtemp %>
-<%
-}else{
-        String tempreturnp25 = null;
-        if(listarInstitutos24mtemp != null){
-        java.util.List listreturnp25= java.util.Arrays.asList(listarInstitutos24mtemp);
-        tempreturnp25 = listreturnp25.toString();
-        }
-        %>
-        <%=tempreturnp25%>
-        <%
-}
-break;
-case 27:
-        gotMethod = true;
-        String arg0_2id=  request.getParameter("arg030");
+        String arg0_2id=  request.getParameter("arg021");
             java.lang.String arg0_2idTemp = null;
         if(!arg0_2id.equals("")){
          arg0_2idTemp  = arg0_2id;
         }
-        java.lang.String[] listarCursosInst27mtemp = sampleControladorCursoPublishProxyid.listarCursosInst(arg0_2idTemp);
-if(listarCursosInst27mtemp == null){
-%>
-<%=listarCursosInst27mtemp %>
-<%
-}else{
-        String tempreturnp28 = null;
-        if(listarCursosInst27mtemp != null){
-        java.util.List listreturnp28= java.util.Arrays.asList(listarCursosInst27mtemp);
-        tempreturnp28 = listreturnp28.toString();
+        String arg1_3id=  request.getParameter("arg123");
+            java.lang.String arg1_3idTemp = null;
+        if(!arg1_3id.equals("")){
+         arg1_3idTemp  = arg1_3id;
         }
-        %>
-        <%=tempreturnp28%>
-        <%
-}
+        String arg2_4id=  request.getParameter("arg225");
+            java.util.Calendar arg2_4idTemp = null;
+        if(!arg2_4id.equals("")){
+        java.text.DateFormat dateFormatarg225 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg225  = dateFormatarg225.parse(arg2_4id);
+         arg2_4idTemp = new java.util.GregorianCalendar();
+        arg2_4idTemp.setTime(dateTemparg225);
+        }
+        sampleControladorCursoPublishProxyid.inscribirEstudianteEdicion(arg0_2idTemp,arg1_3idTemp,arg2_4idTemp);
 break;
-case 32:
+case 27:
         gotMethod = true;
-        String arg0_3id=  request.getParameter("arg035");
-            java.lang.String arg0_3idTemp = null;
-        if(!arg0_3id.equals("")){
-         arg0_3idTemp  = arg0_3id;
-        }
-        sampleControladorCursoPublishProxyid.verInfo(arg0_3idTemp);
-break;
-case 37:
-        gotMethod = true;
-        String arg0_4id=  request.getParameter("arg040");
-            java.lang.String arg0_4idTemp = null;
-        if(!arg0_4id.equals("")){
-         arg0_4idTemp  = arg0_4id;
-        }
-        java.lang.String[] listarDocentesAux37mtemp = sampleControladorCursoPublishProxyid.listarDocentesAux(arg0_4idTemp);
-if(listarDocentesAux37mtemp == null){
-%>
-<%=listarDocentesAux37mtemp %>
-<%
-}else{
-        String tempreturnp38 = null;
-        if(listarDocentesAux37mtemp != null){
-        java.util.List listreturnp38= java.util.Arrays.asList(listarDocentesAux37mtemp);
-        tempreturnp38 = listreturnp38.toString();
-        }
-        %>
-        <%=tempreturnp38%>
-        <%
-}
-break;
-case 42:
-        gotMethod = true;
-        java.lang.String[] listarEstudiantes42mtemp = sampleControladorCursoPublishProxyid.listarEstudiantes();
-if(listarEstudiantes42mtemp == null){
-%>
-<%=listarEstudiantes42mtemp %>
-<%
-}else{
-        String tempreturnp43 = null;
-        if(listarEstudiantes42mtemp != null){
-        java.util.List listreturnp43= java.util.Arrays.asList(listarEstudiantes42mtemp);
-        tempreturnp43 = listreturnp43.toString();
-        }
-        %>
-        <%=tempreturnp43%>
-        <%
-}
-break;
-case 45:
-        gotMethod = true;
-        String arg0_5id=  request.getParameter("arg060");
+        String arg0_5id=  request.getParameter("arg030");
             java.lang.String arg0_5idTemp = null;
         if(!arg0_5id.equals("")){
          arg0_5idTemp  = arg0_5id;
         }
-        publicadores.DtEdicionCurso verInfoEdicion45mtemp = sampleControladorCursoPublishProxyid.verInfoEdicion(arg0_5idTemp);
-if(verInfoEdicion45mtemp == null){
+        String arg1_6id=  request.getParameter("arg132");
+            java.lang.String arg1_6idTemp = null;
+        if(!arg1_6id.equals("")){
+         arg1_6idTemp  = arg1_6id;
+        }
+        String arg2_7id=  request.getParameter("arg234");
+            java.util.Calendar arg2_7idTemp = null;
+        if(!arg2_7id.equals("")){
+        java.text.DateFormat dateFormatarg234 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg234  = dateFormatarg234.parse(arg2_7id);
+         arg2_7idTemp = new java.util.GregorianCalendar();
+        arg2_7idTemp.setTime(dateTemparg234);
+        }
+        String arg3_8id=  request.getParameter("arg336");
+            java.util.Calendar arg3_8idTemp = null;
+        if(!arg3_8id.equals("")){
+        java.text.DateFormat dateFormatarg336 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg336  = dateFormatarg336.parse(arg3_8id);
+         arg3_8idTemp = new java.util.GregorianCalendar();
+        arg3_8idTemp.setTime(dateTemparg336);
+        }
+        String arg4_9id=  request.getParameter("arg438");
+            java.util.Calendar arg4_9idTemp = null;
+        if(!arg4_9id.equals("")){
+        java.text.DateFormat dateFormatarg438 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg438  = dateFormatarg438.parse(arg4_9id);
+         arg4_9idTemp = new java.util.GregorianCalendar();
+        arg4_9idTemp.setTime(dateTemparg438);
+        }
+        String arg5_10id=  request.getParameter("arg540");
+            java.lang.String arg5_10idTemp = null;
+        if(!arg5_10id.equals("")){
+         arg5_10idTemp  = arg5_10id;
+        }
+        sampleControladorCursoPublishProxyid.crearProgramaFormacion(arg0_5idTemp,arg1_6idTemp,arg2_7idTemp,arg3_8idTemp,arg4_9idTemp,arg5_10idTemp);
+break;
+case 42:
+        gotMethod = true;
+        String arg0_11id=  request.getParameter("arg059");
+            java.lang.String arg0_11idTemp = null;
+        if(!arg0_11id.equals("")){
+         arg0_11idTemp  = arg0_11id;
+        }
+        publicadores.DtEdicionCurso mostrarEdicionVigente42mtemp = sampleControladorCursoPublishProxyid.mostrarEdicionVigente(arg0_11idTemp);
+if(mostrarEdicionVigente42mtemp == null){
 %>
-<%=verInfoEdicion45mtemp %>
+<%=mostrarEdicionVigente42mtemp %>
 <%
 }else{
 %>
@@ -230,16 +168,14 @@ if(verInfoEdicion45mtemp == null){
 <TD COLSPAN="3" ALIGN="LEFT">returnp:</TD>
 <TR>
 <TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaPub:</TD>
+<TD COLSPAN="2" ALIGN="LEFT">imagenURL:</TD>
 <TD>
 <%
-if(verInfoEdicion45mtemp != null){
-java.util.Calendar typefechaPub48 = verInfoEdicion45mtemp.getFechaPub();
-        java.text.DateFormat dateFormatfechaPub48 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaPub48 = typefechaPub48.getTime();
-        String tempResultfechaPub48 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaPub48.format(datefechaPub48));
+if(mostrarEdicionVigente42mtemp != null){
+java.lang.String typeimagenURL45 = mostrarEdicionVigente42mtemp.getImagenURL();
+        String tempResultimagenURL45 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimagenURL45));
         %>
-        <%= tempResultfechaPub48 %>
+        <%= tempResultimagenURL45 %>
         <%
 }%>
 </TD>
@@ -248,13 +184,13 @@ java.util.Calendar typefechaPub48 = verInfoEdicion45mtemp.getFechaPub();
 <TD COLSPAN="2" ALIGN="LEFT">fechaI:</TD>
 <TD>
 <%
-if(verInfoEdicion45mtemp != null){
-java.util.Calendar typefechaI50 = verInfoEdicion45mtemp.getFechaI();
-        java.text.DateFormat dateFormatfechaI50 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaI50 = typefechaI50.getTime();
-        String tempResultfechaI50 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI50.format(datefechaI50));
+if(mostrarEdicionVigente42mtemp != null){
+java.util.Calendar typefechaI47 = mostrarEdicionVigente42mtemp.getFechaI();
+        java.text.DateFormat dateFormatfechaI47 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaI47 = typefechaI47.getTime();
+        String tempResultfechaI47 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI47.format(datefechaI47));
         %>
-        <%= tempResultfechaI50 %>
+        <%= tempResultfechaI47 %>
         <%
 }%>
 </TD>
@@ -263,26 +199,13 @@ java.util.Calendar typefechaI50 = verInfoEdicion45mtemp.getFechaI();
 <TD COLSPAN="2" ALIGN="LEFT">fechaF:</TD>
 <TD>
 <%
-if(verInfoEdicion45mtemp != null){
-java.util.Calendar typefechaF52 = verInfoEdicion45mtemp.getFechaF();
-        java.text.DateFormat dateFormatfechaF52 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaF52 = typefechaF52.getTime();
-        String tempResultfechaF52 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF52.format(datefechaF52));
+if(mostrarEdicionVigente42mtemp != null){
+java.util.Calendar typefechaF49 = mostrarEdicionVigente42mtemp.getFechaF();
+        java.text.DateFormat dateFormatfechaF49 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaF49 = typefechaF49.getTime();
+        String tempResultfechaF49 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF49.format(datefechaF49));
         %>
-        <%= tempResultfechaF52 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">imagenURL:</TD>
-<TD>
-<%
-if(verInfoEdicion45mtemp != null){
-java.lang.String typeimagenURL54 = verInfoEdicion45mtemp.getImagenURL();
-        String tempResultimagenURL54 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimagenURL54));
-        %>
-        <%= tempResultimagenURL54 %>
+        <%= tempResultfechaF49 %>
         <%
 }%>
 </TD>
@@ -291,116 +214,36 @@ java.lang.String typeimagenURL54 = verInfoEdicion45mtemp.getImagenURL();
 <TD COLSPAN="2" ALIGN="LEFT">cupo:</TD>
 <TD>
 <%
-if(verInfoEdicion45mtemp != null){
+if(mostrarEdicionVigente42mtemp != null){
 %>
-<%=verInfoEdicion45mtemp.getCupo()
+<%=mostrarEdicionVigente42mtemp.getCupo()
 %><%}%>
 </TD>
 <TR>
 <TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">nombre:</TD>
+<TD COLSPAN="2" ALIGN="LEFT">curso:</TD>
 <TD>
 <%
-if(verInfoEdicion45mtemp != null){
-java.lang.String typenombre58 = verInfoEdicion45mtemp.getNombre();
-        String tempResultnombre58 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre58));
+if(mostrarEdicionVigente42mtemp != null){
+java.lang.String typecurso53 = mostrarEdicionVigente42mtemp.getCurso();
+        String tempResultcurso53 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typecurso53));
         %>
-        <%= tempResultnombre58 %>
-        <%
-}%>
-</TD>
-</TABLE>
-<%
-}
-break;
-case 62:
-        gotMethod = true;
-        java.lang.String[] listarProgramas62mtemp = sampleControladorCursoPublishProxyid.listarProgramas();
-if(listarProgramas62mtemp == null){
-%>
-<%=listarProgramas62mtemp %>
-<%
-}else{
-        String tempreturnp63 = null;
-        if(listarProgramas62mtemp != null){
-        java.util.List listreturnp63= java.util.Arrays.asList(listarProgramas62mtemp);
-        tempreturnp63 = listreturnp63.toString();
-        }
-        %>
-        <%=tempreturnp63%>
-        <%
-}
-break;
-case 65:
-        gotMethod = true;
-        String arg0_6id=  request.getParameter("arg080");
-            java.lang.String arg0_6idTemp = null;
-        if(!arg0_6id.equals("")){
-         arg0_6idTemp  = arg0_6id;
-        }
-        publicadores.DtProgramaFormacion verInfoPrograma65mtemp = sampleControladorCursoPublishProxyid.verInfoPrograma(arg0_6idTemp);
-if(verInfoPrograma65mtemp == null){
-%>
-<%=verInfoPrograma65mtemp %>
-<%
-}else{
-%>
-<TABLE>
-<TR>
-<TD COLSPAN="3" ALIGN="LEFT">returnp:</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaI:</TD>
-<TD>
-<%
-if(verInfoPrograma65mtemp != null){
-java.util.Calendar typefechaI68 = verInfoPrograma65mtemp.getFechaI();
-        java.text.DateFormat dateFormatfechaI68 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaI68 = typefechaI68.getTime();
-        String tempResultfechaI68 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI68.format(datefechaI68));
-        %>
-        <%= tempResultfechaI68 %>
+        <%= tempResultcurso53 %>
         <%
 }%>
 </TD>
 <TR>
 <TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">descripcion:</TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaPub:</TD>
 <TD>
 <%
-if(verInfoPrograma65mtemp != null){
-java.lang.String typedescripcion70 = verInfoPrograma65mtemp.getDescripcion();
-        String tempResultdescripcion70 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescripcion70));
+if(mostrarEdicionVigente42mtemp != null){
+java.util.Calendar typefechaPub55 = mostrarEdicionVigente42mtemp.getFechaPub();
+        java.text.DateFormat dateFormatfechaPub55 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaPub55 = typefechaPub55.getTime();
+        String tempResultfechaPub55 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaPub55.format(datefechaPub55));
         %>
-        <%= tempResultdescripcion70 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaF:</TD>
-<TD>
-<%
-if(verInfoPrograma65mtemp != null){
-java.util.Calendar typefechaF72 = verInfoPrograma65mtemp.getFechaF();
-        java.text.DateFormat dateFormatfechaF72 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaF72 = typefechaF72.getTime();
-        String tempResultfechaF72 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF72.format(datefechaF72));
-        %>
-        <%= tempResultfechaF72 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">imagenURL:</TD>
-<TD>
-<%
-if(verInfoPrograma65mtemp != null){
-java.lang.String typeimagenURL74 = verInfoPrograma65mtemp.getImagenURL();
-        String tempResultimagenURL74 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimagenURL74));
-        %>
-        <%= tempResultimagenURL74 %>
+        <%= tempResultfechaPub55 %>
         <%
 }%>
 </TD>
@@ -409,26 +252,11 @@ java.lang.String typeimagenURL74 = verInfoPrograma65mtemp.getImagenURL();
 <TD COLSPAN="2" ALIGN="LEFT">nombre:</TD>
 <TD>
 <%
-if(verInfoPrograma65mtemp != null){
-java.lang.String typenombre76 = verInfoPrograma65mtemp.getNombre();
-        String tempResultnombre76 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre76));
+if(mostrarEdicionVigente42mtemp != null){
+java.lang.String typenombre57 = mostrarEdicionVigente42mtemp.getNombre();
+        String tempResultnombre57 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre57));
         %>
-        <%= tempResultnombre76 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaA:</TD>
-<TD>
-<%
-if(verInfoPrograma65mtemp != null){
-java.util.Calendar typefechaA78 = verInfoPrograma65mtemp.getFechaA();
-        java.text.DateFormat dateFormatfechaA78 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaA78 = typefechaA78.getTime();
-        String tempResultfechaA78 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaA78.format(datefechaA78));
-        %>
-        <%= tempResultfechaA78 %>
+        <%= tempResultnombre57 %>
         <%
 }%>
 </TD>
@@ -436,36 +264,136 @@ java.util.Calendar typefechaA78 = verInfoPrograma65mtemp.getFechaA();
 <%
 }
 break;
-case 82:
+case 61:
         gotMethod = true;
-        String arg0_7id=  request.getParameter("arg085");
-            java.lang.String arg0_7idTemp = null;
-        if(!arg0_7id.equals("")){
-         arg0_7idTemp  = arg0_7id;
+        String arg0_12id=  request.getParameter("arg064");
+            java.lang.String arg0_12idTemp = null;
+        if(!arg0_12id.equals("")){
+         arg0_12idTemp  = arg0_12id;
         }
-        String arg1_8id=  request.getParameter("arg187");
-            java.lang.String arg1_8idTemp = null;
-        if(!arg1_8id.equals("")){
-         arg1_8idTemp  = arg1_8id;
+        String arg1_13id=  request.getParameter("arg166");
+            java.lang.String arg1_13idTemp = null;
+        if(!arg1_13id.equals("")){
+         arg1_13idTemp  = arg1_13id;
         }
-        sampleControladorCursoPublishProxyid.agregarCursoPrograma(arg0_7idTemp,arg1_8idTemp);
+        sampleControladorCursoPublishProxyid.agregarCursoPrograma(arg0_12idTemp,arg1_13idTemp);
+break;
+case 68:
+        gotMethod = true;
+        String arg0_14id=  request.getParameter("arg071");
+            java.lang.String arg0_14idTemp = null;
+        if(!arg0_14id.equals("")){
+         arg0_14idTemp  = arg0_14id;
+        }
+        java.lang.String[] getCategoriasPrograma68mtemp = sampleControladorCursoPublishProxyid.getCategoriasPrograma(arg0_14idTemp);
+if(getCategoriasPrograma68mtemp == null){
+%>
+<%=getCategoriasPrograma68mtemp %>
+<%
+}else{
+        String tempreturnp69 = null;
+        if(getCategoriasPrograma68mtemp != null){
+        java.util.List listreturnp69= java.util.Arrays.asList(getCategoriasPrograma68mtemp);
+        tempreturnp69 = listreturnp69.toString();
+        }
+        %>
+        <%=tempreturnp69%>
+        <%
+}
+break;
+case 73:
+        gotMethod = true;
+        String arg0_15id=  request.getParameter("arg076");
+            java.lang.String arg0_15idTemp = null;
+        if(!arg0_15id.equals("")){
+         arg0_15idTemp  = arg0_15id;
+        }
+        java.lang.String[] listarCursosAux73mtemp = sampleControladorCursoPublishProxyid.listarCursosAux(arg0_15idTemp);
+if(listarCursosAux73mtemp == null){
+%>
+<%=listarCursosAux73mtemp %>
+<%
+}else{
+        String tempreturnp74 = null;
+        if(listarCursosAux73mtemp != null){
+        java.util.List listreturnp74= java.util.Arrays.asList(listarCursosAux73mtemp);
+        tempreturnp74 = listreturnp74.toString();
+        }
+        %>
+        <%=tempreturnp74%>
+        <%
+}
+break;
+case 78:
+        gotMethod = true;
+        String arg0_16id=  request.getParameter("arg081");
+            java.lang.String arg0_16idTemp = null;
+        if(!arg0_16id.equals("")){
+         arg0_16idTemp  = arg0_16id;
+        }
+        java.lang.String[] listarCursosInst78mtemp = sampleControladorCursoPublishProxyid.listarCursosInst(arg0_16idTemp);
+if(listarCursosInst78mtemp == null){
+%>
+<%=listarCursosInst78mtemp %>
+<%
+}else{
+        String tempreturnp79 = null;
+        if(listarCursosInst78mtemp != null){
+        java.util.List listreturnp79= java.util.Arrays.asList(listarCursosInst78mtemp);
+        tempreturnp79 = listreturnp79.toString();
+        }
+        %>
+        <%=tempreturnp79%>
+        <%
+}
+break;
+case 83:
+        gotMethod = true;
+        java.lang.String[] listarCursos83mtemp = sampleControladorCursoPublishProxyid.listarCursos();
+if(listarCursos83mtemp == null){
+%>
+<%=listarCursos83mtemp %>
+<%
+}else{
+        String tempreturnp84 = null;
+        if(listarCursos83mtemp != null){
+        java.util.List listreturnp84= java.util.Arrays.asList(listarCursos83mtemp);
+        tempreturnp84 = listreturnp84.toString();
+        }
+        %>
+        <%=tempreturnp84%>
+        <%
+}
+break;
+case 86:
+        gotMethod = true;
+        java.lang.String[] listarCategorias86mtemp = sampleControladorCursoPublishProxyid.listarCategorias();
+if(listarCategorias86mtemp == null){
+%>
+<%=listarCategorias86mtemp %>
+<%
+}else{
+        String tempreturnp87 = null;
+        if(listarCategorias86mtemp != null){
+        java.util.List listreturnp87= java.util.Arrays.asList(listarCategorias86mtemp);
+        tempreturnp87 = listreturnp87.toString();
+        }
+        %>
+        <%=tempreturnp87%>
+        <%
+}
 break;
 case 89:
         gotMethod = true;
-        String arg0_9id=  request.getParameter("arg092");
-            java.lang.String arg0_9idTemp = null;
-        if(!arg0_9id.equals("")){
-         arg0_9idTemp  = arg0_9id;
-        }
-        java.lang.String[] getCategoriasPrograma89mtemp = sampleControladorCursoPublishProxyid.getCategoriasPrograma(arg0_9idTemp);
-if(getCategoriasPrograma89mtemp == null){
+        java.lang.String[] listarInstitutos89mtemp = sampleControladorCursoPublishProxyid.listarInstitutos();
+if(listarInstitutos89mtemp == null){
 %>
-<%=getCategoriasPrograma89mtemp %>
+<%=listarInstitutos89mtemp %>
 <%
 }else{
         String tempreturnp90 = null;
-        if(getCategoriasPrograma89mtemp != null){
-        java.util.List listreturnp90= java.util.Arrays.asList(getCategoriasPrograma89mtemp);
+        if(listarInstitutos89mtemp != null){
+        java.util.List listreturnp90= java.util.Arrays.asList(listarInstitutos89mtemp);
         tempreturnp90 = listreturnp90.toString();
         }
         %>
@@ -473,40 +401,67 @@ if(getCategoriasPrograma89mtemp == null){
         <%
 }
 break;
-case 94:
+case 92:
         gotMethod = true;
-        String arg0_10id=  request.getParameter("arg097");
-            java.lang.String arg0_10idTemp = null;
-        if(!arg0_10id.equals("")){
-         arg0_10idTemp  = arg0_10id;
+        String arg0_17id=  request.getParameter("arg095");
+            java.lang.String arg0_17idTemp = null;
+        if(!arg0_17id.equals("")){
+         arg0_17idTemp  = arg0_17id;
         }
-        java.lang.String[] listarDocentesInstituto94mtemp = sampleControladorCursoPublishProxyid.listarDocentesInstituto(arg0_10idTemp);
-if(listarDocentesInstituto94mtemp == null){
+        sampleControladorCursoPublishProxyid.verInfo(arg0_17idTemp);
+break;
+case 97:
+        gotMethod = true;
+        String arg0_18id=  request.getParameter("arg0100");
+            java.lang.String arg0_18idTemp = null;
+        if(!arg0_18id.equals("")){
+         arg0_18idTemp  = arg0_18id;
+        }
+        java.lang.String[] listarDocentesAux97mtemp = sampleControladorCursoPublishProxyid.listarDocentesAux(arg0_18idTemp);
+if(listarDocentesAux97mtemp == null){
 %>
-<%=listarDocentesInstituto94mtemp %>
+<%=listarDocentesAux97mtemp %>
 <%
 }else{
-        String tempreturnp95 = null;
-        if(listarDocentesInstituto94mtemp != null){
-        java.util.List listreturnp95= java.util.Arrays.asList(listarDocentesInstituto94mtemp);
-        tempreturnp95 = listreturnp95.toString();
+        String tempreturnp98 = null;
+        if(listarDocentesAux97mtemp != null){
+        java.util.List listreturnp98= java.util.Arrays.asList(listarDocentesAux97mtemp);
+        tempreturnp98 = listreturnp98.toString();
         }
         %>
-        <%=tempreturnp95%>
+        <%=tempreturnp98%>
         <%
 }
 break;
-case 99:
+case 102:
         gotMethod = true;
-        String arg0_11id=  request.getParameter("arg0114");
-            java.lang.String arg0_11idTemp = null;
-        if(!arg0_11id.equals("")){
-         arg0_11idTemp  = arg0_11id;
-        }
-        publicadores.DtEdicionCurso mostrarEdicionVigente99mtemp = sampleControladorCursoPublishProxyid.mostrarEdicionVigente(arg0_11idTemp);
-if(mostrarEdicionVigente99mtemp == null){
+        java.lang.String[] listarEstudiantes102mtemp = sampleControladorCursoPublishProxyid.listarEstudiantes();
+if(listarEstudiantes102mtemp == null){
 %>
-<%=mostrarEdicionVigente99mtemp %>
+<%=listarEstudiantes102mtemp %>
+<%
+}else{
+        String tempreturnp103 = null;
+        if(listarEstudiantes102mtemp != null){
+        java.util.List listreturnp103= java.util.Arrays.asList(listarEstudiantes102mtemp);
+        tempreturnp103 = listreturnp103.toString();
+        }
+        %>
+        <%=tempreturnp103%>
+        <%
+}
+break;
+case 105:
+        gotMethod = true;
+        String arg0_19id=  request.getParameter("arg0122");
+            java.lang.String arg0_19idTemp = null;
+        if(!arg0_19id.equals("")){
+         arg0_19idTemp  = arg0_19id;
+        }
+        publicadores.DtEdicionCurso verInfoEdicion105mtemp = sampleControladorCursoPublishProxyid.verInfoEdicion(arg0_19idTemp);
+if(verInfoEdicion105mtemp == null){
+%>
+<%=verInfoEdicion105mtemp %>
 <%
 }else{
 %>
@@ -515,56 +470,11 @@ if(mostrarEdicionVigente99mtemp == null){
 <TD COLSPAN="3" ALIGN="LEFT">returnp:</TD>
 <TR>
 <TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaPub:</TD>
-<TD>
-<%
-if(mostrarEdicionVigente99mtemp != null){
-java.util.Calendar typefechaPub102 = mostrarEdicionVigente99mtemp.getFechaPub();
-        java.text.DateFormat dateFormatfechaPub102 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaPub102 = typefechaPub102.getTime();
-        String tempResultfechaPub102 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaPub102.format(datefechaPub102));
-        %>
-        <%= tempResultfechaPub102 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaI:</TD>
-<TD>
-<%
-if(mostrarEdicionVigente99mtemp != null){
-java.util.Calendar typefechaI104 = mostrarEdicionVigente99mtemp.getFechaI();
-        java.text.DateFormat dateFormatfechaI104 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaI104 = typefechaI104.getTime();
-        String tempResultfechaI104 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI104.format(datefechaI104));
-        %>
-        <%= tempResultfechaI104 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
-<TD COLSPAN="2" ALIGN="LEFT">fechaF:</TD>
-<TD>
-<%
-if(mostrarEdicionVigente99mtemp != null){
-java.util.Calendar typefechaF106 = mostrarEdicionVigente99mtemp.getFechaF();
-        java.text.DateFormat dateFormatfechaF106 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaF106 = typefechaF106.getTime();
-        String tempResultfechaF106 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF106.format(datefechaF106));
-        %>
-        <%= tempResultfechaF106 %>
-        <%
-}%>
-</TD>
-<TR>
-<TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">imagenURL:</TD>
 <TD>
 <%
-if(mostrarEdicionVigente99mtemp != null){
-java.lang.String typeimagenURL108 = mostrarEdicionVigente99mtemp.getImagenURL();
+if(verInfoEdicion105mtemp != null){
+java.lang.String typeimagenURL108 = verInfoEdicion105mtemp.getImagenURL();
         String tempResultimagenURL108 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimagenURL108));
         %>
         <%= tempResultimagenURL108 %>
@@ -573,24 +483,82 @@ java.lang.String typeimagenURL108 = mostrarEdicionVigente99mtemp.getImagenURL();
 </TD>
 <TR>
 <TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaI:</TD>
+<TD>
+<%
+if(verInfoEdicion105mtemp != null){
+java.util.Calendar typefechaI110 = verInfoEdicion105mtemp.getFechaI();
+        java.text.DateFormat dateFormatfechaI110 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaI110 = typefechaI110.getTime();
+        String tempResultfechaI110 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI110.format(datefechaI110));
+        %>
+        <%= tempResultfechaI110 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaF:</TD>
+<TD>
+<%
+if(verInfoEdicion105mtemp != null){
+java.util.Calendar typefechaF112 = verInfoEdicion105mtemp.getFechaF();
+        java.text.DateFormat dateFormatfechaF112 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaF112 = typefechaF112.getTime();
+        String tempResultfechaF112 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF112.format(datefechaF112));
+        %>
+        <%= tempResultfechaF112 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">cupo:</TD>
 <TD>
 <%
-if(mostrarEdicionVigente99mtemp != null){
+if(verInfoEdicion105mtemp != null){
 %>
-<%=mostrarEdicionVigente99mtemp.getCupo()
+<%=verInfoEdicion105mtemp.getCupo()
 %><%}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">curso:</TD>
+<TD>
+<%
+if(verInfoEdicion105mtemp != null){
+java.lang.String typecurso116 = verInfoEdicion105mtemp.getCurso();
+        String tempResultcurso116 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typecurso116));
+        %>
+        <%= tempResultcurso116 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaPub:</TD>
+<TD>
+<%
+if(verInfoEdicion105mtemp != null){
+java.util.Calendar typefechaPub118 = verInfoEdicion105mtemp.getFechaPub();
+        java.text.DateFormat dateFormatfechaPub118 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaPub118 = typefechaPub118.getTime();
+        String tempResultfechaPub118 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaPub118.format(datefechaPub118));
+        %>
+        <%= tempResultfechaPub118 %>
+        <%
+}%>
 </TD>
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">nombre:</TD>
 <TD>
 <%
-if(mostrarEdicionVigente99mtemp != null){
-java.lang.String typenombre112 = mostrarEdicionVigente99mtemp.getNombre();
-        String tempResultnombre112 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre112));
+if(verInfoEdicion105mtemp != null){
+java.lang.String typenombre120 = verInfoEdicion105mtemp.getNombre();
+        String tempResultnombre120 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre120));
         %>
-        <%= tempResultnombre112 %>
+        <%= tempResultnombre120 %>
         <%
 }%>
 </TD>
@@ -598,146 +566,167 @@ java.lang.String typenombre112 = mostrarEdicionVigente99mtemp.getNombre();
 <%
 }
 break;
-case 116:
+case 124:
         gotMethod = true;
-        String arg0_12id=  request.getParameter("arg0119");
-            java.lang.String arg0_12idTemp = null;
-        if(!arg0_12id.equals("")){
-         arg0_12idTemp  = arg0_12id;
+        java.lang.String[] listarProgramas124mtemp = sampleControladorCursoPublishProxyid.listarProgramas();
+if(listarProgramas124mtemp == null){
+%>
+<%=listarProgramas124mtemp %>
+<%
+}else{
+        String tempreturnp125 = null;
+        if(listarProgramas124mtemp != null){
+        java.util.List listreturnp125= java.util.Arrays.asList(listarProgramas124mtemp);
+        tempreturnp125 = listreturnp125.toString();
         }
-        String arg1_13id=  request.getParameter("arg1121");
-            java.lang.String arg1_13idTemp = null;
-        if(!arg1_13id.equals("")){
-         arg1_13idTemp  = arg1_13id;
-        }
-        String arg2_14id=  request.getParameter("arg2123");
-            java.util.Calendar arg2_14idTemp = null;
-        if(!arg2_14id.equals("")){
-        java.text.DateFormat dateFormatarg2123 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg2123  = dateFormatarg2123.parse(arg2_14id);
-         arg2_14idTemp = new java.util.GregorianCalendar();
-        arg2_14idTemp.setTime(dateTemparg2123);
-        }
-        sampleControladorCursoPublishProxyid.inscribirEstudianteEdicion(arg0_12idTemp,arg1_13idTemp,arg2_14idTemp);
+        %>
+        <%=tempreturnp125%>
+        <%
+}
 break;
-case 125:
+case 127:
         gotMethod = true;
-        String arg0_15id=  request.getParameter("arg0128");
-            java.lang.String arg0_15idTemp = null;
-        if(!arg0_15id.equals("")){
-         arg0_15idTemp  = arg0_15id;
+        String arg0_20id=  request.getParameter("arg0142");
+            java.lang.String arg0_20idTemp = null;
+        if(!arg0_20id.equals("")){
+         arg0_20idTemp  = arg0_20id;
         }
-        String arg1_16id=  request.getParameter("arg1130");
-            java.lang.String arg1_16idTemp = null;
-        if(!arg1_16id.equals("")){
-         arg1_16idTemp  = arg1_16id;
-        }
-        String arg2_17id=  request.getParameter("arg2132");
-            java.util.Calendar arg2_17idTemp = null;
-        if(!arg2_17id.equals("")){
-        java.text.DateFormat dateFormatarg2132 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg2132  = dateFormatarg2132.parse(arg2_17id);
-         arg2_17idTemp = new java.util.GregorianCalendar();
-        arg2_17idTemp.setTime(dateTemparg2132);
-        }
-        String arg3_18id=  request.getParameter("arg3134");
-            java.util.Calendar arg3_18idTemp = null;
-        if(!arg3_18id.equals("")){
-        java.text.DateFormat dateFormatarg3134 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg3134  = dateFormatarg3134.parse(arg3_18id);
-         arg3_18idTemp = new java.util.GregorianCalendar();
-        arg3_18idTemp.setTime(dateTemparg3134);
-        }
-        String arg4_19id=  request.getParameter("arg4136");
-            java.util.Calendar arg4_19idTemp = null;
-        if(!arg4_19id.equals("")){
-        java.text.DateFormat dateFormatarg4136 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg4136  = dateFormatarg4136.parse(arg4_19id);
-         arg4_19idTemp = new java.util.GregorianCalendar();
-        arg4_19idTemp.setTime(dateTemparg4136);
-        }
-        String arg5_20id=  request.getParameter("arg5138");
-            java.lang.String arg5_20idTemp = null;
-        if(!arg5_20id.equals("")){
-         arg5_20idTemp  = arg5_20id;
-        }
-        sampleControladorCursoPublishProxyid.crearProgramaFormacion(arg0_15idTemp,arg1_16idTemp,arg2_17idTemp,arg3_18idTemp,arg4_19idTemp,arg5_20idTemp);
+        publicadores.DtProgramaFormacion verInfoPrograma127mtemp = sampleControladorCursoPublishProxyid.verInfoPrograma(arg0_20idTemp);
+if(verInfoPrograma127mtemp == null){
+%>
+<%=verInfoPrograma127mtemp %>
+<%
+}else{
+%>
+<TABLE>
+<TR>
+<TD COLSPAN="3" ALIGN="LEFT">returnp:</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">imagenURL:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.lang.String typeimagenURL130 = verInfoPrograma127mtemp.getImagenURL();
+        String tempResultimagenURL130 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimagenURL130));
+        %>
+        <%= tempResultimagenURL130 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">descripcion:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.lang.String typedescripcion132 = verInfoPrograma127mtemp.getDescripcion();
+        String tempResultdescripcion132 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescripcion132));
+        %>
+        <%= tempResultdescripcion132 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaI:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.util.Calendar typefechaI134 = verInfoPrograma127mtemp.getFechaI();
+        java.text.DateFormat dateFormatfechaI134 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaI134 = typefechaI134.getTime();
+        String tempResultfechaI134 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaI134.format(datefechaI134));
+        %>
+        <%= tempResultfechaI134 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaF:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.util.Calendar typefechaF136 = verInfoPrograma127mtemp.getFechaF();
+        java.text.DateFormat dateFormatfechaF136 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaF136 = typefechaF136.getTime();
+        String tempResultfechaF136 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaF136.format(datefechaF136));
+        %>
+        <%= tempResultfechaF136 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">fechaA:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.util.Calendar typefechaA138 = verInfoPrograma127mtemp.getFechaA();
+        java.text.DateFormat dateFormatfechaA138 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaA138 = typefechaA138.getTime();
+        String tempResultfechaA138 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaA138.format(datefechaA138));
+        %>
+        <%= tempResultfechaA138 %>
+        <%
+}%>
+</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">nombre:</TD>
+<TD>
+<%
+if(verInfoPrograma127mtemp != null){
+java.lang.String typenombre140 = verInfoPrograma127mtemp.getNombre();
+        String tempResultnombre140 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre140));
+        %>
+        <%= tempResultnombre140 %>
+        <%
+}%>
+</TD>
+</TABLE>
+<%
+}
 break;
-case 140:
+case 144:
         gotMethod = true;
-        String arg0_21id=  request.getParameter("arg0143");
+        String arg0_21id=  request.getParameter("arg0147");
             java.lang.String arg0_21idTemp = null;
         if(!arg0_21id.equals("")){
          arg0_21idTemp  = arg0_21id;
         }
-        java.lang.String[] listarEdiciones140mtemp = sampleControladorCursoPublishProxyid.listarEdiciones(arg0_21idTemp);
-if(listarEdiciones140mtemp == null){
-%>
-<%=listarEdiciones140mtemp %>
-<%
-}else{
-        String tempreturnp141 = null;
-        if(listarEdiciones140mtemp != null){
-        java.util.List listreturnp141= java.util.Arrays.asList(listarEdiciones140mtemp);
-        tempreturnp141 = listreturnp141.toString();
+        String arg1_22id=  request.getParameter("arg1149");
+            java.lang.String arg1_22idTemp = null;
+        if(!arg1_22id.equals("")){
+         arg1_22idTemp  = arg1_22id;
         }
-        %>
-        <%=tempreturnp141%>
-        <%
-}
-break;
-case 145:
-        gotMethod = true;
-        String arg0_22id=  request.getParameter("arg0148");
-            java.lang.String arg0_22idTemp = null;
-        if(!arg0_22id.equals("")){
-         arg0_22idTemp  = arg0_22id;
+        String arg2_23id=  request.getParameter("arg2151");
+            java.util.Calendar arg2_23idTemp = null;
+        if(!arg2_23id.equals("")){
+        java.text.DateFormat dateFormatarg2151 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg2151  = dateFormatarg2151.parse(arg2_23id);
+         arg2_23idTemp = new java.util.GregorianCalendar();
+        arg2_23idTemp.setTime(dateTemparg2151);
         }
-        java.lang.String[] listarCursosCat145mtemp = sampleControladorCursoPublishProxyid.listarCursosCat(arg0_22idTemp);
-if(listarCursosCat145mtemp == null){
-%>
-<%=listarCursosCat145mtemp %>
-<%
-}else{
-        String tempreturnp146 = null;
-        if(listarCursosCat145mtemp != null){
-        java.util.List listreturnp146= java.util.Arrays.asList(listarCursosCat145mtemp);
-        tempreturnp146 = listreturnp146.toString();
-        }
-        %>
-        <%=tempreturnp146%>
-        <%
-}
-break;
-case 150:
-        gotMethod = true;
-        publicadores.DtCurso[] listaDTCurso150mtemp = sampleControladorCursoPublishProxyid.listaDTCurso();
-if(listaDTCurso150mtemp == null){
-%>
-<%=listaDTCurso150mtemp %>
-<%
-}else{
-        String tempreturnp151 = null;
-        if(listaDTCurso150mtemp != null){
-        java.util.List listreturnp151= java.util.Arrays.asList(listaDTCurso150mtemp);
-        tempreturnp151 = listreturnp151.toString();
-        }
-        %>
-        <%=tempreturnp151%>
-        <%
-}
+        sampleControladorCursoPublishProxyid.inscribirEstudiantePrograma(arg0_21idTemp,arg1_22idTemp,arg2_23idTemp);
 break;
 case 153:
         gotMethod = true;
-        publicadores.DtProgramaFormacion[] listaDTPrograma153mtemp = sampleControladorCursoPublishProxyid.listaDTPrograma();
-if(listaDTPrograma153mtemp == null){
+        String arg0_24id=  request.getParameter("arg0156");
+            java.lang.String arg0_24idTemp = null;
+        if(!arg0_24id.equals("")){
+         arg0_24idTemp  = arg0_24id;
+        }
+        java.lang.String[] listarEdiciones153mtemp = sampleControladorCursoPublishProxyid.listarEdiciones(arg0_24idTemp);
+if(listarEdiciones153mtemp == null){
 %>
-<%=listaDTPrograma153mtemp %>
+<%=listarEdiciones153mtemp %>
 <%
 }else{
         String tempreturnp154 = null;
-        if(listaDTPrograma153mtemp != null){
-        java.util.List listreturnp154= java.util.Arrays.asList(listaDTPrograma153mtemp);
+        if(listarEdiciones153mtemp != null){
+        java.util.List listreturnp154= java.util.Arrays.asList(listarEdiciones153mtemp);
         tempreturnp154 = listreturnp154.toString();
         }
         %>
@@ -745,27 +734,64 @@ if(listaDTPrograma153mtemp == null){
         <%
 }
 break;
-case 156:
+case 158:
         gotMethod = true;
-        String arg0_23id=  request.getParameter("arg0159");
-            java.lang.String arg0_23idTemp = null;
-        if(!arg0_23id.equals("")){
-         arg0_23idTemp  = arg0_23id;
+        publicadores.DtCurso[] listaDTCurso158mtemp = sampleControladorCursoPublishProxyid.listaDTCurso();
+if(listaDTCurso158mtemp == null){
+%>
+<%=listaDTCurso158mtemp %>
+<%
+}else{
+        String tempreturnp159 = null;
+        if(listaDTCurso158mtemp != null){
+        java.util.List listreturnp159= java.util.Arrays.asList(listaDTCurso158mtemp);
+        tempreturnp159 = listreturnp159.toString();
         }
-        String arg1_24id=  request.getParameter("arg1161");
-            java.lang.String arg1_24idTemp = null;
-        if(!arg1_24id.equals("")){
-         arg1_24idTemp  = arg1_24id;
+        %>
+        <%=tempreturnp159%>
+        <%
+}
+break;
+case 161:
+        gotMethod = true;
+        publicadores.DtProgramaFormacion[] listaDTPrograma161mtemp = sampleControladorCursoPublishProxyid.listaDTPrograma();
+if(listaDTPrograma161mtemp == null){
+%>
+<%=listaDTPrograma161mtemp %>
+<%
+}else{
+        String tempreturnp162 = null;
+        if(listaDTPrograma161mtemp != null){
+        java.util.List listreturnp162= java.util.Arrays.asList(listaDTPrograma161mtemp);
+        tempreturnp162 = listreturnp162.toString();
         }
-        String arg2_25id=  request.getParameter("arg2163");
-            java.util.Calendar arg2_25idTemp = null;
-        if(!arg2_25id.equals("")){
-        java.text.DateFormat dateFormatarg2163 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg2163  = dateFormatarg2163.parse(arg2_25id);
-         arg2_25idTemp = new java.util.GregorianCalendar();
-        arg2_25idTemp.setTime(dateTemparg2163);
+        %>
+        <%=tempreturnp162%>
+        <%
+}
+break;
+case 164:
+        gotMethod = true;
+        String arg0_25id=  request.getParameter("arg0167");
+            java.lang.String arg0_25idTemp = null;
+        if(!arg0_25id.equals("")){
+         arg0_25idTemp  = arg0_25id;
         }
-        sampleControladorCursoPublishProxyid.inscribirEstudiantePrograma(arg0_23idTemp,arg1_24idTemp,arg2_25idTemp);
+        java.lang.String[] listarCursosCat164mtemp = sampleControladorCursoPublishProxyid.listarCursosCat(arg0_25idTemp);
+if(listarCursosCat164mtemp == null){
+%>
+<%=listarCursosCat164mtemp %>
+<%
+}else{
+        String tempreturnp165 = null;
+        if(listarCursosCat164mtemp != null){
+        java.util.List listreturnp165= java.util.Arrays.asList(listarCursosCat164mtemp);
+        tempreturnp165 = listreturnp165.toString();
+        }
+        %>
+        <%=tempreturnp165%>
+        <%
+}
 break;
 }
 } catch (Exception e) { 

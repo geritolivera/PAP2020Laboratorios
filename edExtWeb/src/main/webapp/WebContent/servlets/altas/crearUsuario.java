@@ -101,10 +101,14 @@ public class crearUsuario extends HttpServlet {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			try {
 				port.altaUsuario(nickname, nombre, apellido, correo, cal, instituto, password, url);
-			} catch (RemoteException e) {
+			} catch (publicadores.UsuarioExcepcion e1) {
+				System.out.println("UsuarioExcepcion");
+				e1.printStackTrace();
+			} catch (RemoteException e1) {
 				System.out.println("RemoteExcepcion");
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
+
 		} catch (ServiceException e) {
 			System.out.println("ServiceExcepcion");
 			e.printStackTrace();
