@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.fabrica;
-import interfaces.IcontroladorUsuario;
-import exepciones.UsuarioExcepcion;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 
 @WebServlet("/logout")

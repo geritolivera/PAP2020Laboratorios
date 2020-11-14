@@ -9,13 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import java.util.ArrayList;
-
-import datatypes.*;
-import exepciones.CursoExcepcion;
-import interfaces.fabrica;
-import interfaces.*;
+import javax.xml.rpc.ServiceException;
+import publicadores.*;
 
 
 @WebServlet("/consultaCurso")
@@ -23,22 +18,26 @@ public class consultaCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session = request.getSession();
-
+		String curso = request.getParameter("curso");
+		HttpSession session = request.getSession(false);
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
+		String url = "";
+		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+		ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
 		//recibe consulta en forma de Instituto o Categoria
 		
-		String curso = request.getParameter("curso");
-		System.out.println("curso = |" + curso);
-		DTCurso dtc = new DTCurso();
+		DtCurso dtc = new DtCurso();
 
 		try {
-			dtc = icon.verInfo(curso);
+			ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
+			dtc = port.verInfo(curso);
 			//previas y categorias no se precisan
 			String fechaR = format.format(dtc.getFechaR());
-			ArrayList<String> ediciones = dtc.getEdiciones();
-			ArrayList<String> programas = dtc.getProgramas();
-			ArrayList<String> previas = dtc.getPrevias();
-			ArrayList<String> categorias = dtc.getCategorias();
+			String[] ediciones = dtc.getEdiciones();
+			String[] programas = dtc.getProgramas();
+			String[] previas = dtc.getPrevias();
+			String[] categorias = dtc.getCategorias();
 			request.setAttribute("nombre", dtc.getNombre());
 			request.setAttribute("descripcion", dtc.getDescripcion());
 			request.setAttribute("duracion", dtc.getDuracion());
@@ -53,6 +52,8 @@ public class consultaCurso extends HttpServlet {
 			request.setAttribute("categorias", categorias);
 		} catch (CursoExcepcion e) {
 			//curso no existe
+			e.printStackTrace();
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 

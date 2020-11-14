@@ -46,12 +46,7 @@ public class GetCursos extends HttpServlet {
 		try {
 			ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
 			try {
-				String[] ret = new String[port.listarCursos().size()];
-				ArrayList<DtCurso> cursos = port.listarCursos();
-				int i=0;
-				for (DtCurso cur:cursos) {
-					ret[i] = cur.getNombre();
-				}
+				String[] ret = port.listarCursos();
 				return ret;
 			} catch (RemoteException e) {
 				System.out.println("RemoteExcepcion");
