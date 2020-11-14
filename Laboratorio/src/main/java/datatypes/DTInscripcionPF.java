@@ -6,6 +6,10 @@ import clases.InscripcionEnum;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTInscripcionPF {
 	private String usuario;
 	private String programa;

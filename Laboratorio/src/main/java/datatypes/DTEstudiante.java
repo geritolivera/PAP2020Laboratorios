@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTEstudiante extends DTUsuario{
 	private List<DTEdicionCurso> ediciones = new ArrayList<>();
 	private List<DTProgramaFormacion> programas = new ArrayList<>();

@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets.altas;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -10,13 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.rpc.ServiceException;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import main.webapp.WebContent.resources.dataType.DTResponse;
-
+import publicadores.ControladorUsuarioPublish;
+import publicadores.ControladorUsuarioPublishService;
+import publicadores.ControladorUsuarioPublishServiceLocator;
 import interfaces.fabrica;
 import interfaces.IcontroladorUsuario;
 import exepciones.UsuarioExcepcion;
@@ -69,10 +73,11 @@ public class crearUsuario extends HttpServlet {
             request.setAttribute("mensaje", "Debe ingresar un tipo de Usuario");
         } else {
             try {
-                icon.AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd, imagen);
+                AltaUsuario(nick, nombre, apellido, correo, fechaNac, instituto, passwd, imagen);
                 respuesta.setCodigo(0);
                 respuesta.setMensaje("El usuario " + nick + " se ha ingresado correctamente en el sistema.");
                 request.setAttribute("mensaje", "El usuario " + nick + " se ha ingresado correctamente en el sistema.");
+                //TODO hay que cambiar la excepcion en el publicador y rehacer los publicadores web
             } catch (UsuarioExcepcion e) {
                 respuesta.setCodigo(1);
                 respuesta.setMensaje(e.getMessage());
@@ -85,7 +90,24 @@ public class crearUsuario extends HttpServlet {
         String usuarioStr = mapper.writeValueAsString(respuesta);
         response.setContentType("application/json");
         response.getWriter().append(usuarioStr);
-
-
+    }
+    
+    public void AltaUsuario(String nickname, String nombre, String apellido, String correo, Date fechaNac, String instituto, String password, String url) {
+    	ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
+    	//se tiene que cambiar date a calendar
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTime(fechaNac);
+		try {
+			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
+			try {
+				port.altaUsuario(nickname, nombre, apellido, correo, cal, instituto, password, url);
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+			}
+		} catch (ServiceException e) {
+			System.out.println("ServiceExcepcion");
+			e.printStackTrace();
+		}
     }
 }

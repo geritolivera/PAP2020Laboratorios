@@ -1,8 +1,10 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -11,12 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exepciones.UsuarioExcepcion;
 import interfaces.fabrica;
 import main.webapp.WebContent.resources.dataType.DTResponse;
+import publicadores.ControladorUsuarioPublish;
+import publicadores.ControladorUsuarioPublishService;
+import publicadores.ControladorUsuarioPublishServiceLocator;
 import interfaces.IcontroladorUsuario;
 
 /**
@@ -48,8 +54,8 @@ public class ModificarDatos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("entro aca");
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+		//fabrica fab = fabrica.getInstancia();
+		//IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		HttpSession session = request.getSession(false);
 		String nickname  = request.getParameter("nickname");
 		String nombre = request.getParameter("nombre");
@@ -61,7 +67,8 @@ public class ModificarDatos extends HttpServlet {
 		System.out.println(nickname);
 		DTResponse respuesta = new DTResponse();
 		try {
-			icon.nuevosDatos(nickname, nombre, apellido, fechaNaci);
+			//TODO poner excepcion en publicador
+			nuevosDatos(nickname, nombre, apellido, fechaNaci);
 			session.setAttribute("nombre", nombre);
 			session.setAttribute("apellido", apellido);
 			session.setAttribute("fechaNac", fechaNaci);
@@ -79,6 +86,24 @@ public class ModificarDatos extends HttpServlet {
 		String usuarioStr = mapper.writeValueAsString(respuesta);
 		response.setContentType("application/json");
 		response.getWriter().append(usuarioStr);
+	}
+	
+	public void nuevosDatos(String nickname, String nombre, String apellido, Date fechaNaci) {
+		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
+		Calendar cal = Calendar.getInstance();
+    	cal.setTime(fechaNaci);
+		try {
+			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
+			try {
+				port.nuevosDatos(nickname, nombre, apellido, cal);
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+			}
+		} catch (ServiceException e) {
+			System.out.println("ServiceExcepcion");
+			e.printStackTrace();
+		}
 	}
 
 }

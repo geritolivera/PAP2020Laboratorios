@@ -1,10 +1,15 @@
 package datatypes;
 
 import java.util.Date;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 import java.util.ArrayList;
 
 import clases.Usuario;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuario {
 
 	private String nick;
