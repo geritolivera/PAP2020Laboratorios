@@ -1,8 +1,10 @@
 package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.IcontroladorCurso;
-import interfaces.fabrica;
+import publicadores.ControladorCursoPublish;
+import publicadores.ControladorCursoPublishService;
+import publicadores.ControladorCursoPublishServiceLocator;
+import publicadores.DtCurso;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 @WebServlet("/GetPrevias")
@@ -21,12 +25,9 @@ public class GetPrevias extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         HttpSession session = request.getSession();
-        ArrayList<String> previas = icon.listarCursos();
+        String[] previas = listarPrevias();
         System.out.println("previas = " + previas);
-
         try {
         	request.setAttribute("previas", previas);
         } catch (Exception e) {
@@ -37,5 +38,28 @@ public class GetPrevias extends HttpServlet {
         String previaStr = mapper.writeValueAsString(previas);
         response.setContentType("application/json");
         response.getWriter().append(previaStr);
+    }
+    public String[] listarPrevias(){
+        ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+        try {
+            ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+            try {
+                String[] ret = new String[port.listarCursos().size()];
+                ArrayList<DtCurso> cursos = port.listarCursos();
+                int i=0;
+                for (DtCurso cur:cursos) {
+                    ret[i] = cur.getNombre();
+                }
+                return ret;
+            } catch (RemoteException e) {
+                System.out.println("RemoteExcepcion");
+                e.printStackTrace();
+                return null;
+            }
+        } catch (ServiceException e) {
+            System.out.println("ServiceExcepcion");
+            e.printStackTrace();
+            return null;
+        }
     }
 }

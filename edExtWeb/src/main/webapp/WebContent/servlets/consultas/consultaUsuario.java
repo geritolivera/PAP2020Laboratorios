@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Enumeration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.fabrica;
+
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
 import publicadores.ControladorUsuarioPublishServiceLocator;
@@ -25,17 +25,8 @@ import publicadores.DtEdicionCurso;
 import publicadores.DtEstudiante;
 import publicadores.DtProgramaFormacion;
 import publicadores.DtUsuario;
-import interfaces.IcontroladorUsuario;
-import exepciones.UsuarioExcepcion;
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
-import datatypes.DTUsuario;
-import datatypes.DTDocente;
-import datatypes.DTEstudiante;
 
-/**
- * Servlet implementation class consultaProgramaFormacion
- */
+
 @WebServlet("/consultaUsuario")
 public class consultaUsuario extends HttpServlet {
 
@@ -106,8 +97,7 @@ public class consultaUsuario extends HttpServlet {
 			System.out.println("ediciones de  " + nickname + ":" + ediciones);
 			System.out.println("programas de  " + nickname + ":" + programas);
 
-		} catch (UsuarioExcepcion e) {
-
+		} catch (Exception e) {
 			System.out.println("SE RE LIMO");
 			e.printStackTrace();
 		}
@@ -119,7 +109,7 @@ public class consultaUsuario extends HttpServlet {
 		this.doGet(request, response);
 	}
 	
-	public DtUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
+	public DtUsuario verInfoUsuario(String nickname) {
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();

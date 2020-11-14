@@ -23,9 +23,7 @@ public class consultaCurso extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session = request.getSession();
-		
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
+
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//recibe consulta en forma de Instituto o Categoria
 		

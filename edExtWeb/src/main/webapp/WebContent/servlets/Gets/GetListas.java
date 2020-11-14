@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.IcontroladorCurso;
-import interfaces.fabrica;
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
 import publicadores.ControladorUsuarioPublishServiceLocator;
@@ -24,8 +22,6 @@ import publicadores.ControladorUsuarioPublishServiceLocator;
 public class GetListas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//fabrica fabrica = interfaces.fabrica.getInstancia();
-		//IcontroladorCurso icon = fabrica.getIcontroladorCurso();
 		String[] institutos = null;
 		
 		try {

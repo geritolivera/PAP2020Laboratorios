@@ -1,9 +1,6 @@
 package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.IcontroladorCurso;
-import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
 import publicadores.ControladorUsuarioPublishServiceLocator;
@@ -27,9 +24,6 @@ public class GetUsuarios extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //fabrica fabrica = interfaces.fabrica.getInstancia();
-        //IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
         ArrayList<String> usuarios = new ArrayList<>();
         String[] ret = listarUsuarios();
         for(int i = 0; i<ret.length; i++) {
@@ -46,7 +40,7 @@ public class GetUsuarios extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().append(usuarioStr);
     }
-    
+
     public String[] listarUsuarios() {
     	ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {

@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets.consultas;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -8,14 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.xml.rpc.ServiceException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-
-import interfaces.fabrica;
-import interfaces.IcontroladorCurso;
-import interfaces.IcontroladorUsuario;
-import exepciones.ProgramaFormacionExcepcion;
-import datatypes.DTProgramaFormacion;
+import publicadores.*;
 
 /**
  * Servlet implementation class consultaProgramaFormacion
@@ -25,48 +22,57 @@ public class consultaProgramaFormacion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(false);
-		
-
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
-		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
-		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		//recibe programa desde jsp
 		String programa = request.getParameter("programa");
-		System.out.println("programa = " + programa);
+		HttpSession session = request.getSession(false);
+		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		String url = "";
+		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+		ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
 		try {
-			DTProgramaFormacion dtp = icon.verInfoPrograma(programa);
-			String fechaInicio = format.format(dtp.getFechaI());
-			String fechaFin = format.format(dtp.getFechaF());
-			String fechaA = format.format(dtp.getFechaA());
-			ArrayList<String> cursos = dtp.getCursos();
-			ArrayList<String> categorias = dtp.getCategorias();
-			url = dtp.getImagenURL();
-			System.out.println("url = " + url);
-			request.setAttribute("tituloPrograma", dtp.getNombre());
-			request.setAttribute("desc", dtp.getDescripcion());
-			request.setAttribute("fechaInicio", fechaInicio);
-			request.setAttribute("fechaFin", fechaFin);
-			request.setAttribute("fechaA", fechaA);
-			request.setAttribute("cursos", cursos);
-			request.setAttribute("categoriass", categorias);
-			request.setAttribute("imagenURL", url);
-			Boolean userLog = false;
-			if(session.getAttribute("nombreUser") != null) {
-				userLog = true;
-				String nickLog = (String) session.getAttribute("nombreUser");
-				if(session.getAttribute("tipoUser").equals("estudiante")) {
-					Boolean inscripto = iconu.inscriptoPF(nickLog, programa);
-					request.setAttribute("inscripto", inscripto);
+			ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
+			try {
+				DtProgramaFormacion prog = port.verInfoPrograma(programa);
+				String fechaInicio = format.format(prog.getFechaI());
+				String fechaFin = format.format(prog.getFechaF());
+				String fechaA = format.format(prog.getFechaA());
+				String[] cursos = prog.getCursos();
+				String[] categorias = prog.getCategorias();
+				url = prog.getImagenURL();
+				request.setAttribute("tituloPrograma", prog.getNombre());
+				request.setAttribute("desc", prog.getDescripcion());
+				request.setAttribute("fechaInicio", fechaInicio);
+				request.setAttribute("fechaFin", fechaFin);
+				request.setAttribute("fechaA", fechaA);
+				request.setAttribute("cursos", cursos);
+				request.setAttribute("categoriass", categorias);
+				request.setAttribute("imagenURL", url);
+				Boolean userLog = false;
+				if(session.getAttribute("nombreUser") != null) {
+					userLog = true;
+					String nickLog = (String) session.getAttribute("nombreUser");
+					if(session.getAttribute("tipoUser").equals("estudiante")) {
+						Boolean inscripto = port2.inscriptoPF(nickLog, programa);
+						request.setAttribute("inscripto", inscripto);
+					}
 				}
-			}
-			request.setAttribute("userLog", userLog);
+				request.setAttribute("userLog", userLog);
 
-		} catch (ProgramaFormacionExcepcion e) {
+			} catch (publicadores.ProgramaFormacionExcepcion e) {
+				System.out.println("ProgramaFormacion");
+				e.printStackTrace();
+
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+
+			}
+		} catch (ServiceException e) {
+			System.out.println("ServiceExcepcion");
 			e.printStackTrace();
+
 		}
+
 		request.getRequestDispatcher("/infoPrograma.jsp").forward(request, response);
 
 	}

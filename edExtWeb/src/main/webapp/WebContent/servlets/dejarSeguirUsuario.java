@@ -10,12 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import exepciones.UsuarioExcepcion;
-import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
 import main.webapp.WebContent.resources.dataType.DTResponse;
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
@@ -25,7 +20,7 @@ import publicadores.DtUsuario;
 
 @WebServlet("/dejarSeguirUsuario")
 public class dejarSeguirUsuario extends HttpServlet {
-
+	DTResponse respuesta = new DTResponse();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -33,27 +28,14 @@ public class dejarSeguirUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		DTResponse respuesta = new DTResponse();
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorUsuario iconU = fab.getIcontroladorUsuario();
-		
+
 		HttpSession session = request.getSession();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
 		String dejarSeguirNickname = request.getParameter("nicknameDejarSeguir");
-		System.out.println(nickUsuario + " quiere dejar de seguir a " + dejarSeguirNickname);
-		System.out.println(nickUsuario + "sigue a " + dejarSeguirNickname+  " ?: " + iconU.validarSigue(nickUsuario, dejarSeguirNickname));
-
-		System.out.println("iconU.validarSigue(nickUsuario, dejarSeguirNickname) = " + iconU.validarSigue(nickUsuario, dejarSeguirNickname));
 
 		if(validarSigue(nickUsuario, dejarSeguirNickname)) {
 			dejarDeSeguir(nickUsuario, dejarSeguirNickname);
-			try {
-				session.setAttribute("seguidos", verInfoUsuario(nickUsuario).getSeguidos());
-			} catch (UsuarioExcepcion usuarioExcepcion) {
-				usuarioExcepcion.printStackTrace();
-			}
-			respuesta.setCodigo(0);
-			respuesta.setMensaje("El usuario " + nickUsuario + " ha dejado de seguir a " + dejarSeguirNickname + ".");
-			request.setAttribute("mensaje", "El usuario " + nickUsuario + " ha dejado de seguir a " + dejarSeguirNickname + ".");
+			session.setAttribute("seguidos", verInfoUsuario(nickUsuario).getSeguidos());
 		}else{
 			respuesta.setCodigo(1);
 			respuesta.setMensaje("El usuario " + nickUsuario + " no sigue a " + dejarSeguirNickname + ".");
@@ -88,6 +70,9 @@ public class dejarSeguirUsuario extends HttpServlet {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			try {
 				port.dejarDeSeguir(nickname, dejarSeguirNickname);
+				respuesta.setCodigo(0);
+				respuesta.setMensaje("El usuario " + nickname + " ha dejado de seguir a " + dejarSeguirNickname + ".");
+
 			} catch (RemoteException e) {
 				System.out.println("RemoteExcepcion");
 				e.printStackTrace();
@@ -98,7 +83,7 @@ public class dejarSeguirUsuario extends HttpServlet {
 		}
 	}
 	
-	public DtUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
+	public DtUsuario verInfoUsuario(String nickname){
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();

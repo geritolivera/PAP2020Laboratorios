@@ -1,9 +1,10 @@
 package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import exepciones.InstitutoExcepcion;
-import interfaces.IcontroladorCurso;
-import interfaces.fabrica;
+import publicadores.ControladorCursoPublish;
+import publicadores.ControladorCursoPublishService;
+import publicadores.ControladorCursoPublishServiceLocator;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 @WebServlet("/GetCursoInst")
@@ -22,27 +25,42 @@ public class GetCursoInst extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorCurso icon = fabrica.getIcontroladorCurso();
         HttpSession session = request.getSession();
+        String inst = request.getParameter("instituto");
 
+
+        ArrayList<String> cur = new ArrayList<>();
+        String[] cursos = getCurInstitutos(inst);
+        for (int i = 0; i < cursos.length; i++) {
+            cur.add(cursos[i]);
+        }
         try {
-            String inst =  request.getParameter("instituto");
-            java.util.ArrayList<String> cursos = new ArrayList<>();
-            cursos = icon.listarCursosAux(inst);
             System.out.println("cursos = " + cursos);
-            System.out.println("inst = " + inst);
-            request.setAttribute("cursos", cursos);
-
-            String recursosStr = mapper.writeValueAsString(cursos);
-            System.out.println("	Los recursos que guardo son: " + recursosStr);
-            response.setContentType("application/json");
-            response.getWriter().append(recursosStr);
-
+            request.setAttribute("cursos", cur);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String cursosStr = mapper.writeValueAsString(cur);
+        response.setContentType("application/json");
+        response.getWriter().append(cursosStr);
+    }
+
+    public String[] getCurInstitutos(String inst) {
+        ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
+        try {
+            ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+            try {
+                return port.listarCursosInst(inst);
+            } catch (RemoteException e) {
+                System.out.println("RemoteExcepcion");
+                e.printStackTrace();
+                return null;
+            }
+        } catch (ServiceException e) {
+            System.out.println("ServiceExcepcion");
+            e.printStackTrace();
+            return null;
         }
     }
 }

@@ -1,17 +1,16 @@
 package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import datatypes.DTEdicionCurso;
-import datatypes.DTProgramaFormacion;
-import interfaces.IcontroladorCurso;
-import interfaces.fabrica;
+import publicadores.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 @WebServlet("/GetDatosPrograma")
 public class GetDatosPrograma extends HttpServlet {
@@ -20,23 +19,31 @@ public class GetDatosPrograma extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String prg = request.getParameter("nombre");
+        DtProgramaFormacion ret = getPrograma(prg);
         ObjectMapper mapper = new ObjectMapper();
-        fabrica fabrica = interfaces.fabrica.getInstancia();
-        IcontroladorCurso icon = fabrica.getIcontroladorCurso();
+        String edicionStr = mapper.writeValueAsString(ret);
+        response.setContentType("application/json");
+        response.getWriter().append(edicionStr);
+    }
 
+    public DtProgramaFormacion getPrograma(String nomPrg) {
+        ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
         try {
-            String prog =  request.getParameter("nombre");
-            DTProgramaFormacion dtp = icon.verInfoPrograma(prog);
-            request.setAttribute("progSelected", dtp);
-            String recursosStr = mapper.writeValueAsString(dtp);
-            System.out.println("	Los recursos que guardo son: " + recursosStr);
-
-            response.setContentType("application/json");
-            response.getWriter().append(recursosStr);
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+            ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
+            try {
+                return port.verInfoPrograma(nomPrg);
+            } catch (RemoteException e) {
+                System.out.println("RemoteExcepcion");
+                e.printStackTrace();
+                return null;
+            }
+        } catch (ServiceException e) {
+            System.out.println("ServiceExcepcion");
             e.printStackTrace();
+            return null;
         }
+
     }
 }

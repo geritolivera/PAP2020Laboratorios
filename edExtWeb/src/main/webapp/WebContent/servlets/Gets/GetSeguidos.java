@@ -1,14 +1,10 @@
 package main.webapp.WebContent.servlets.Gets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
 import publicadores.ControladorUsuarioPublishServiceLocator;
 import publicadores.DtUsuario;
-import datatypes.DTUsuario;
-import exepciones.UsuarioExcepcion;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +27,6 @@ public class GetSeguidos extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        //fabrica fabrica = interfaces.fabrica.getInstancia();
-        //IcontroladorUsuario icon = fabrica.getIcontroladorUsuario();
         HttpSession session = request.getSession();
 
         try {
@@ -57,7 +51,7 @@ public class GetSeguidos extends HttpServlet {
         }
     }
     
-    public DtUsuario verInfoUsuario(String nickname) throws UsuarioExcepcion{
+    public DtUsuario verInfoUsuario(String nickname){
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();

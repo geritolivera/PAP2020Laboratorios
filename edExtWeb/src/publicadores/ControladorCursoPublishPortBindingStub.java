@@ -7,6 +7,8 @@
 
 package publicadores;
 
+import java.util.ArrayList;
+
 public class ControladorCursoPublishPortBindingStub extends org.apache.axis.client.Stub implements publicadores.ControladorCursoPublish {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
@@ -938,7 +940,7 @@ public class ControladorCursoPublishPortBindingStub extends org.apache.axis.clie
 }
     }
 
-    public java.lang.String[] listarCursos() throws java.rmi.RemoteException {
+    public ArrayList<DtCurso> listarCursos() throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -962,9 +964,9 @@ public class ControladorCursoPublishPortBindingStub extends org.apache.axis.clie
         else {
             extractAttachments(_call);
             try {
-                return (java.lang.String[]) _resp;
+                return (ArrayList<DtCurso>) _resp;
             } catch (java.lang.Exception _exception) {
-                return (java.lang.String[]) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String[].class);
+                return (ArrayList<DtCurso>) org.apache.axis.utils.JavaUtils.convert(_resp, String[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -1223,7 +1225,7 @@ public class ControladorCursoPublishPortBindingStub extends org.apache.axis.clie
 }
     }
 
-    public java.lang.String[] listarProgramas() throws java.rmi.RemoteException {
+    public ArrayList<DtProgramaFormacion> listarProgramas() throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1247,9 +1249,9 @@ public class ControladorCursoPublishPortBindingStub extends org.apache.axis.clie
         else {
             extractAttachments(_call);
             try {
-                return (java.lang.String[]) _resp;
+                return (ArrayList<DtProgramaFormacion>) _resp;
             } catch (java.lang.Exception _exception) {
-                return (java.lang.String[]) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String[].class);
+                return (ArrayList<DtProgramaFormacion>) org.apache.axis.utils.JavaUtils.convert(_resp, String[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

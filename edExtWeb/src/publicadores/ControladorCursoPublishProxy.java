@@ -1,5 +1,7 @@
 package publicadores;
 
+import java.util.ArrayList;
+
 public class ControladorCursoPublishProxy implements publicadores.ControladorCursoPublish {
   private String _endpoint = null;
   private publicadores.ControladorCursoPublish controladorCursoPublish = null;
@@ -98,7 +100,7 @@ public class ControladorCursoPublishProxy implements publicadores.ControladorCur
     return controladorCursoPublish.listarCursosInst(arg0);
   }
   
-  public java.lang.String[] listarCursos() throws java.rmi.RemoteException{
+  public ArrayList<DtCurso> listarCursos() throws java.rmi.RemoteException{
     if (controladorCursoPublish == null)
       _initControladorCursoPublishProxy();
     return controladorCursoPublish.listarCursos();
@@ -146,7 +148,7 @@ public class ControladorCursoPublishProxy implements publicadores.ControladorCur
     return controladorCursoPublish.verInfoEdicion(arg0);
   }
   
-  public java.lang.String[] listarProgramas() throws java.rmi.RemoteException{
+  public ArrayList<DtProgramaFormacion> listarProgramas() throws java.rmi.RemoteException{
     if (controladorCursoPublish == null)
       _initControladorCursoPublishProxy();
     return controladorCursoPublish.listarProgramas();
