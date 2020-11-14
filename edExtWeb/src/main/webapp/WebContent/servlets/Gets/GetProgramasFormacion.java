@@ -22,8 +22,8 @@ public class GetProgramasFormacion extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<DtProgramaFormacion> programaForm = new ArrayList<>();
-        DtProgramaFormacion[] ret = getProgramForm();
+        ArrayList<String> programaForm = new ArrayList<>();
+        String[] ret = getProgramForm();
         for(int i = 0; i<ret.length; i++) {
             programaForm.add(ret[i]);
         }
@@ -39,12 +39,12 @@ public class GetProgramasFormacion extends HttpServlet {
         response.getWriter().append(usuarioStr);
     }
 
-    public DtProgramaFormacion[] getProgramForm() {
+    public String[] getProgramForm() {
         ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
         try {
             ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
             try {
-                return port.listaDTPrograma();
+                return port.listarProgramas();
             } catch (RemoteException e) {
                 System.out.println("RemoteExcepcion");
                 e.printStackTrace();
