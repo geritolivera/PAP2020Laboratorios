@@ -75,7 +75,8 @@ public class controladorCurso implements IcontroladorCurso{
 		else
 			throw new InstitutoExcepcion("El instituto " + nombreInstituto + " no existe.");
 	}
-	
+
+
 	@Override
 	public ArrayList<String> listarCursosCat(String nombreCategoria) throws CategoriaExcepcion{
 		manejadorCategoria mCat = manejadorCategoria.getInstancia(); 

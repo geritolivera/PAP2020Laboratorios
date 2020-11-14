@@ -1,7 +1,5 @@
 package main.webapp.WebContent.resources.dataType;
 
-import datatypes.*;
-
 import java.util.ArrayList;
 
 public class DTInfo {
