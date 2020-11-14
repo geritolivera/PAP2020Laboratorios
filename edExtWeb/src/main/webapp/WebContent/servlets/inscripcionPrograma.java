@@ -1,26 +1,31 @@
 package main.webapp.WebContent.servlets;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.rpc.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import clases.ProgramaFormacion;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import datatypes.DTEstudiante;
-import datatypes.DTProgramaFormacion;
-import datatypes.DTUsuario;
-import interfaces.IcontroladorUsuario;
-import interfaces.fabrica;
-import interfaces.IcontroladorCurso;
 import main.webapp.WebContent.resources.dataType.DTResponse;
+import publicadores.ControladorCursoPublish;
+import publicadores.ControladorCursoPublishService;
+import publicadores.ControladorCursoPublishServiceLocator;
+import publicadores.ControladorUsuarioPublish;
+import publicadores.ControladorUsuarioPublishService;
+import publicadores.ControladorUsuarioPublishServiceLocator;
+import publicadores.DtEstudiante;
+import publicadores.DtProgramaFormacion;
+import publicadores.DtUsuario;
 
 /**
  * Servlet implementation class inscripcionPrograma
@@ -33,27 +38,34 @@ public class inscripcionPrograma extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		fabrica fab = fabrica.getInstancia();
-		IcontroladorCurso icon = fab.getIcontroladorCurso();
+		
+		
+		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
+		ControladorUsuarioPublish port2;
+		try {
+			port2 = cup.getcontroladorUsuarioPublishPort();
+		} catch (ServiceException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		HttpSession session = request.getSession();
 		Date fecha = Calendar.getInstance().getTime();
 		String nickUsuario = (String) session.getAttribute("nombreUser");
-		IcontroladorUsuario iconu = fab.getIcontroladorUsuario();
 		String nomPrograma = request.getParameter("programa");
 		System.out.println("nomPrograma = " + nomPrograma);
 		System.out.println("nickUsuario = " + nickUsuario);
-
-
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fecha);
 		DTResponse respuesta = new DTResponse();
 
 		try {
-			icon.inscribirEstudiantePrograma(nomPrograma, nickUsuario, fecha);
-			DTEstudiante usu =  new DTEstudiante();
-			usu = (DTEstudiante) iconu.verInfoUsuario(nickUsuario);
+			inscribirEstudiantePrograma(nomPrograma, nickUsuario, cal);
+			DtEstudiante usu = (DtEstudiante) verInfoUsuario(nickUsuario);
 			respuesta.setCodigo(0);
 			ArrayList<String> programas = new ArrayList<>();
-			for (DTProgramaFormacion pf:usu.getProgramas()){
+			for (DtProgramaFormacion pf:usu.getProgramas()){
 				programas.add(pf.getNombre());
 
 			}
@@ -73,6 +85,47 @@ public class inscripcionPrograma extends HttpServlet {
 
 		response.setContentType("application/json");
 		response.getWriter().append(inscriStr);
+	}
+	
+	public void inscribirEstudiantePrograma(String nomPrograma, String nickUsuario, Calendar cal) {
+		ControladorCursoPublishService ccp = new ControladorCursoPublishServiceLocator();
+		try {
+			ControladorCursoPublish port = ccp.getcontroladorCursoPublishPort();
+			try {
+				port.inscribirEstudiantePrograma(nomPrograma, nickUsuario, cal);
+			} catch (publicadores.Exception e) {
+				System.out.println("ExceptionExcepcion");
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+			}
+		} catch (ServiceException e2) {
+			System.out.println("ServiceExcepcion");
+			e2.printStackTrace();
+		}
+	}
+	
+	public DtUsuario verInfoUsuario(String nickname) {
+		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
+		try {
+			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
+			try {
+				return port.verInfoUsuario(nickname);
+			} catch (publicadores.UsuarioExcepcion e) {
+				System.out.println("UsuarioExcepcion");
+				e.printStackTrace();
+				return null;
+			} catch (RemoteException e) {
+				System.out.println("RemoteExcepcion");
+				e.printStackTrace();
+				return null;
+			}
+		} catch (ServiceException e) {
+			System.out.println("ServiceExcepcion");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
