@@ -28,7 +28,6 @@ public class GetCursoInst extends HttpServlet {
         HttpSession session = request.getSession();
         String inst = request.getParameter("instituto");
 
-
         ArrayList<String> cur = new ArrayList<>();
         String[] cursos = getCurInstitutos(inst);
         for (int i = 0; i < cursos.length; i++) {
@@ -36,12 +35,12 @@ public class GetCursoInst extends HttpServlet {
         }
         try {
             System.out.println("cursos = " + cursos);
-            request.setAttribute("cursos", cur);
+            request.setAttribute("curso", cursos);
         } catch (Exception e) {
             e.printStackTrace();
         }
         ObjectMapper mapper = new ObjectMapper();
-        String cursosStr = mapper.writeValueAsString(cur);
+        String cursosStr = mapper.writeValueAsString(cursos);
         response.setContentType("application/json");
         response.getWriter().append(cursosStr);
     }
@@ -51,7 +50,7 @@ public class GetCursoInst extends HttpServlet {
         try {
             ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
             try {
-                return port.listarCursosInst(inst);
+                return port.listarCursosAux(inst);
             } catch (RemoteException e) {
                 System.out.println("RemoteExcepcion");
                 e.printStackTrace();

@@ -214,8 +214,7 @@ function obtenerCursosPorInstituto(instituto){
 function collectionCursosPorInstituto(instituto){
     // Parametro:
     //debugger;
-    var url = baseURL + `GetCursoInst?instituto=${instituto}`
-
+    var url = baseURL + `GetCursoInst?instituto=` + instituto;
     fetch(url, {
         method: 'GET',
     }).then(res => res.json()

@@ -2,6 +2,8 @@ package main.webapp.WebContent.servlets.consultas;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,21 +21,20 @@ public class consultaCurso extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session = request.getSession();
 		String curso = request.getParameter("curso");
-		HttpSession session = request.getSession(false);
+		System.out.println("curso = " + curso);
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		String url = "";
 		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
-		ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
 		//recibe consulta en forma de Instituto o Categoria
-		
-		DtCurso dtc = new DtCurso();
-
 		try {
+			System.out.println("entra aca");
 			ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
-			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
-			dtc = port.verInfo(curso);
-			//previas y categorias no se precisan
-			String fechaR = format.format(dtc.getFechaR());
+			DtCurso dtc = port.verInfo(curso);
+			System.out.println(dtc.getFechaR().toString());
+			Calendar fechaR = dtc.getFechaR();
+			String Fr = format.format(fechaR.getTime());
+			System.out.println("Fr = " + Fr);
+
 			String[] ediciones = dtc.getEdiciones();
 			String[] programas = dtc.getProgramas();
 			String[] previas = dtc.getPrevias();
@@ -43,25 +44,24 @@ public class consultaCurso extends HttpServlet {
 			request.setAttribute("duracion", dtc.getDuracion());
 			request.setAttribute("cantHoras", dtc.getCantHoras());
 			request.setAttribute("creditos", dtc.getCreditos());
-			request.setAttribute("fechaR", fechaR);
+			request.setAttribute("fechaR", Fr);
 			request.setAttribute("url", dtc.getUrl());
 			request.setAttribute("imagenURL", dtc.getImagenURL());
 			request.setAttribute("ediciones", ediciones);
 			request.setAttribute("programas", programas);
 			request.setAttribute("previas", previas);
 			request.setAttribute("categorias", categorias);
+			request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
 		} catch (CursoExcepcion e) {
-			//curso no existe
+			System.out.println("e.getMessage() = " + e.getMessage());
+			System.out.println("Se rompe aca curso ex");
 			e.printStackTrace();
 		} catch (ServiceException e) {
+			System.out.println("e.getMessage() = " + e.getMessage());
+			System.out.println("Se rompe aca service ex");
 			e.printStackTrace();
 		}
 
-		if (dtc!= null) {
-			request.getRequestDispatcher("/infoCurso.jsp").forward(request, response);
-		}else{
-			System.out.println("dtc (si null algo paso atras) = " + dtc );
-		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
