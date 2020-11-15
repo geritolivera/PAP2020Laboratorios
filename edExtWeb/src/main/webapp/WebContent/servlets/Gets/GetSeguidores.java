@@ -33,11 +33,7 @@ public class GetSeguidores extends HttpServlet {
         try {
             String nick = (String) session.getAttribute("nickname");
             DtUsuario dtu = verInfoUsuario(nick);
-            String[] ret = dtu.getSeguidos();
-            ArrayList<String> seguidores = new ArrayList<>();
-            for(int i = 0; i<ret.length; i++) {
-            	seguidores.add(ret[i]);
-            }
+            String[] seguidores = dtu.getSeguidos();
             System.out.println("seguidores= " + seguidores);
             request.setAttribute("seguidores", seguidores);
 
