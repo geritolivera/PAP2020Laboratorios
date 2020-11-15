@@ -15,10 +15,8 @@
   String nombre = (String) ses.getAttribute("nombre");
   String correo = (String) ses.getAttribute("correo");
   String apellido = (String) ses.getAttribute("apellido");
-  Date fechaN = (Date) ses.getAttribute("fechaNac");
+  String fechaNac = (String) ses.getAttribute("fechaNac");
 
-  SimpleDateFormat fechaNa = new SimpleDateFormat("yyyy/MM/dd");
-  String fechaNac = fechaNa.format(fechaN);
 
  %>
 	<div class="main"> 

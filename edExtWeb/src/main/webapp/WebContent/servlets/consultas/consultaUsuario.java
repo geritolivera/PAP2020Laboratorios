@@ -47,8 +47,22 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("correo", dtu.getCorreo());
 			request.setAttribute("fechaNac", fechaNac);
 			request.setAttribute("imagenURL", dtu.getImage());
-			request.setAttribute("seguidores", dtu.getSeguidores());
-			request.setAttribute("seguidos", dtu.getSeguidos());
+			ArrayList<String> seguidores = new ArrayList<String>();
+			String[] retSeg = dtu.getSeguidores();
+			if(retSeg != null) {
+				for (String se : retSeg) {
+					seguidores.add(se);
+				}
+			}
+			request.setAttribute("seguidores", seguidores);
+			ArrayList<String> seguidos = new ArrayList<String>();
+			String[] retSe = dtu.getSeguidos();
+			if(retSe != null) {
+				for (String se : retSe) {
+					seguidos.add(se);
+				}
+			}
+			request.setAttribute("seguidos", seguidos);
 			String tipo;
 			if(dtu instanceof DtDocente) {
 				ArrayList<String> ediciones = new ArrayList<String>();
