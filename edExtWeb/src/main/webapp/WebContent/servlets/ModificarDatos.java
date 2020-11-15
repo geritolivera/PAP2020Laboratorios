@@ -38,14 +38,17 @@ public class ModificarDatos extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		System.out.println(request.getParameter( "fechaNacimiento"));
-		long fN = Date.parse(request.getParameter( "fechaNacimiento"));
+		String fN = request.getParameter( "fechaNacimiento");
 		Date fechaNaci = new Date(fN);
+		String FN = format.format(fechaNaci);
+		session.setAttribute("fechaNac", FN);
 		System.out.println(fechaNaci);
 		System.out.println(nickname);
 		nuevosDatos(nickname, nombre, apellido, fechaNaci);
 		session.setAttribute("nombre", nombre);
 		session.setAttribute("apellido", apellido);
-		session.setAttribute("fechaNac", fechaNaci);
+		session.setAttribute("fechaNac", FN);
+
 
 		ObjectMapper mapper = new ObjectMapper();
 		String usuarioStr = mapper.writeValueAsString(respuesta);
