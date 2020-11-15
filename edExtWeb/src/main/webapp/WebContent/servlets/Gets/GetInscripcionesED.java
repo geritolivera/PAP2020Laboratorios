@@ -28,17 +28,9 @@ public class GetInscripcionesED extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //HttpSession session = request.getSession();
-//        fabrica fabrica = interfaces.fabrica.getInstancia();
-//        IcontroladorUsuario iconu = fabrica.getIcontroladorUsuario();
         String edicion = request.getParameter("edicion");
         System.out.println("edicion: " + edicion);
-        DtInscripcionED[] ret = listarInscripcionesED(edicion);
-        List<DtInscripcionED> inscripciones = new ArrayList<>();
-        for(int i = 0; i<ret.length; i++) {
-        	inscripciones.add(ret[i]);
-        }
+        DtInscripcionED[] inscripciones  = listarInscripcionesED(edicion);
         try {
             request.setAttribute("dti", inscripciones);
         } catch (Exception e) {
@@ -49,7 +41,7 @@ public class GetInscripcionesED extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().append(inscripcionesStr);
     }
-    
+
     public DtInscripcionED[] listarInscripcionesED(String nomEdicion) {
     	ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		try {

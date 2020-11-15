@@ -365,7 +365,7 @@ function tableInscripciones(edicion){
     ).then(dti => {
         JSON.stringify(dti);
         var inscripcionesHtml = document.getElementById("detallesIns");
-        //console.log("inscripciones:", dti);
+        console.log("inscripciones:", dti);
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
@@ -377,7 +377,7 @@ function tableInscripciones(edicion){
                                                         <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
-                                                        <td> ${item.fecha}</td>
+                                                        <td> ${item.fechaIns}</td>
                                                         <th> ${item.prioridad} </th>
                                                 </tr>`;
                 }
@@ -388,7 +388,7 @@ function tableInscripciones(edicion){
                                                         <td> ${item.edicion} <input type="hidden" name="edicion" value="${item.edicion}"/></td>
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
-                                                        <td> ${item.fecha}</td>
+                                                        <td> ${item.fechaIns}</td>
                                                         <th>${item.prioridad} </th>
                                                     </tr>`;
                 }
@@ -416,7 +416,7 @@ function tableInscripcionesAjax(){
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                data[index] = [index, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
+                data[index] = [index, item.edicion, item.usuario, item.estado, item.fechaIns, 0.5];
             })
             $(document).ready(function() {
                 var tabla = $('#tablaInscripciones').DataTable( {
@@ -426,7 +426,7 @@ function tableInscripcionesAjax(){
                         { title: "Edicion" },
                         { title: "Usuario" },
                         { title: "Estado" },
-                        { title: "Fecha" },
+                        { title: "fechaIns" },
                         { title: "Prioridad" }
                     ]
                 });
@@ -454,7 +454,7 @@ function tableInscripcionesCheckbox(){
         inscripcionesHtml.innerHTML = '';
         if (dti.length > 0){
             dti.forEach((item, index) => {
-                data[index] = [cont, item.edicion, item.usuario, item.estado, item.fecha, 0.5];
+                data[index] = [cont, item.edicion, item.usuario, item.estado, item.fechaIns, 0.5];
                 cont++;
             })
             $(document).ready(function() {
@@ -466,7 +466,7 @@ function tableInscripcionesCheckbox(){
                         { title: "Edicion" },
                         { title: "Usuario" },
                         { title: "Estado" },
-                        { title: "Fecha" },
+                        { title: "fechaIns" },
                         { title: "Prioridad" },
                     ],
                     'columnDefs': [
@@ -524,7 +524,7 @@ function tableInscripcionesAceptados(edicion){
                                                         <td> ${item.edicion}</td>
                                                         <td> ${item.usuario} </td>
                                                         <td> ${item.estado} </td>
-                                                        <td> ${item.fecha}</td>
+                                                        <td> ${item.fechaIns}</td>
                                                         <th> ${item.prioridad} </th>
                                                 </tr>`;
                 console.log("inscripcionesAceptados:", inscripcionesHtml.innerHTML);

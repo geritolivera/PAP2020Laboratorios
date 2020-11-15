@@ -26,8 +26,6 @@ public class GetSeguidores extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        //fabrica fabrica = interfaces.fabrica.getInstancia();
-        //IcontroladorUsuario icon = fabrica.getIcontroladorUsuario();
         HttpSession session = request.getSession();
 
         try {

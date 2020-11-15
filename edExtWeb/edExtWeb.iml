@@ -106,5 +106,9 @@
     <orderEntry type="library" name="dataTables.buttons" level="application" />
     <orderEntry type="library" name="jszip" level="application" />
     <orderEntry type="library" name="sweetalert2" level="application" />
+    <orderEntry type="library" name="jquery-3.5.1" level="application" />
+    <orderEntry type="library" name="dataTables.fixedColumns" level="application" />
+    <orderEntry type="library" name="dataTables.select" level="application" />
+    <orderEntry type="library" name="dataTables.checkboxes" level="application" />
   </component>
 </module>

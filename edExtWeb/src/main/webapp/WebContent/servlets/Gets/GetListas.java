@@ -21,9 +21,7 @@ import publicadores.ControladorUsuarioPublishServiceLocator;
 @WebServlet("/GetListas")
 public class GetListas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		String[] institutos = null;
-		
 		try {
 			institutos = listarInstitutos();
 			request.setAttribute("institutos", institutos);
