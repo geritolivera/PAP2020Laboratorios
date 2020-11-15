@@ -12,6 +12,7 @@ import javax.servlet.http.*;
 import javax.xml.rpc.ServiceException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Enumeration;
 
@@ -32,15 +33,14 @@ public class consultaUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		//fabrica fab = fabrica.getInstancia();
-		//IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-		//recibe programa desde jsp
 		String nickname = request.getParameter("nickname");
 		System.out.println("nickname = " + nickname);
 		try {
 			DtUsuario dtu = verInfoUsuario(nickname);
-			String fechaNac = format.format(dtu.getFechaNac());
+			Calendar fechaFin = dtu.getFechaNac();
+			String fechaNac = format.format(fechaFin.getTime());
 			request.setAttribute("nickname", nickname);
 			request.setAttribute("nombre", dtu.getNombre());
 			request.setAttribute("apellido", dtu.getApellido());
@@ -48,44 +48,52 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("fechaNac", fechaNac);
 			request.setAttribute("imagenURL", dtu.getImage());
 			request.setAttribute("seguidores", dtu.getSeguidores());
-			ArrayList<String> seguidos = new ArrayList<>();
-			String[] ret = dtu.getSeguidos();
-			for(int i = 0; i<ret.length; i++) {
-				seguidos.add(ret[i]);
-			}
-			request.setAttribute("seguidos", seguidos);
-			ArrayList<String> ediciones = new ArrayList<>();
-			ArrayList<String> programas = new ArrayList<>();
+			request.setAttribute("seguidos", dtu.getSeguidos());
 			String tipo;
 			if(dtu instanceof DtDocente) {
-				DtEdicionCurso[] retDE = ((DtDocente)dtu).getEdiciones();
-				for(DtEdicionCurso e: retDE)
-					ediciones.add(e.getNombre());
+				ArrayList<String> ediciones = new ArrayList<String>();
+				DtEdicionCurso[] retDE = ((DtDocente) dtu).getEdiciones();
+				if(retDE != null) {
+					for (DtEdicionCurso dtEdicionCurso : retDE) {
+						ediciones.add(dtEdicionCurso.getNombre());
+					}
+				}
+				request.setAttribute("ediciones", ediciones);
 				tipo = "docente";
+				request.setAttribute("tipo", tipo);
 			}
-			else {
-				DtEdicionCurso[] retEE = ((DtEstudiante)dtu).getEdiciones();
-				for(DtEdicionCurso e: retEE)
-					ediciones.add(e.getNombre());
-				DtProgramaFormacion[] retEP = ((DtEstudiante)dtu).getProgramas();
-				for(DtProgramaFormacion p: retEP)
-					programas.add(p.getNombre());
+			if(dtu instanceof DtEstudiante){
+				ArrayList<String> ediciones = new ArrayList<String>();
+				DtEdicionCurso[] retDE = ((DtEstudiante) dtu).getEdiciones();
+				if(retDE != null){
+					for (DtEdicionCurso dtEdicionCurso : retDE) {
+						ediciones.add(dtEdicionCurso.getNombre());
+					}
+				}
+				request.setAttribute("ediciones", ediciones);
+				ArrayList<String> programas = new ArrayList<String>();
+				DtProgramaFormacion[] retPR = ((DtEstudiante) dtu).getProgramas();
+				if(retPR!=null) {
+					for (DtProgramaFormacion dtProgramaFormacion : retPR) {
+						programas.add(dtProgramaFormacion.getNombre());
+					}
+				}
+				request.setAttribute("programas", programas);
 				tipo = "estudiante";
+				request.setAttribute("tipo", tipo);
 			}
-			request.setAttribute("ediciones", ediciones);
-			request.setAttribute("programas", programas);
-			request.setAttribute("tipo", tipo);
-			Boolean userLog = false; //hay un usuario logueado?
-			Boolean yaSeguido = false; //el usuario ya sigue al consultado?
-			Boolean igualdad = false; //el nickname del usuario logueado es igual al del consultado?
+
+			boolean userLog = false; //hay un usuario logueado?
+			boolean yaSeguido = false; //el usuario ya sigue al consultado?
+			boolean igualdad = false; //el nickname del usuario logueado es igual al del consultado?
 			if(session.getAttribute("nombreUser") != null) {
 				userLog = true;
 				String nickLog = (String) session.getAttribute("nombreUser"); //nick del user logueado
 				if(nickLog.equals(nickname)) //si el usuario se esta consultando a si mismo
 					igualdad = true;
 				else {
-					for(String u: seguidos){
-						if(nickname.equals(u))
+					for(int i=0; i < dtu.getSeguidos().length; i++){
+						if(nickname.equals(dtu.getNick()))
 							yaSeguido = true;
 					}
 				}
@@ -93,15 +101,12 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("userLog", userLog);
 			request.setAttribute("yaSeguido", yaSeguido);
 			request.setAttribute("igualdad", igualdad);
-
-			System.out.println("ediciones de  " + nickname + ":" + ediciones);
-			System.out.println("programas de  " + nickname + ":" + programas);
+			request.getRequestDispatcher("/infoUsuarioNUEVO.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			System.out.println("SE RE LIMO");
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/infoUsuarioNUEVO.jsp").forward(request, response);
 
 	}
 
