@@ -52,7 +52,7 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaI", fI);
 			request.setAttribute("fechaF", fF);
 			request.setAttribute("fechaPub", fPub);
-			request.setAttribute("imagen", dte.getImagenURL());
+			request.setAttribute("imagenURL", dte.getImagenURL());
 			System.out.println("IMAGEN DE EDICION: " + dte.getImagenURL());
 			String cupo = "Si";
 			if(dte.getCupo() <= 0)
