@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="resources/images/icon_big_edext_1.png">
     <link rel="stylesheet" href="resources/styles/style.css">
     <!-- Compiled and minified CSS -->

@@ -95,7 +95,7 @@ relacionados con la extensi&#243;n universitaria</h5>
                   <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
                 </div>
               </div>
-              <table id="datatable">
+              <table id="datatable" class="responsive-table">
                 <thead>
                 <tr>
                   <th>Tipo</th>
