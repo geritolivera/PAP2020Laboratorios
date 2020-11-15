@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Laboratorio/Laboratorio.iml" filepath="$PROJECT_DIR$/Laboratorio/Laboratorio.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/PAP2020Laboratorios.iml" filepath="$PROJECT_DIR$/.idea/PAP2020Laboratorios.iml" />
       <module fileurl="file://$PROJECT_DIR$/edExtWeb/edExtWeb.iml" filepath="$PROJECT_DIR$/edExtWeb/edExtWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/edExtWeb-mobile/edExtWeb-mobile.iml" filepath="$PROJECT_DIR$/edExtWeb-mobile/edExtWeb-mobile.iml" />
     </modules>
   </component>
 </project>

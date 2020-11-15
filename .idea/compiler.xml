@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Laboratorio" />
         <module name="edExtWeb" />
+        <module name="edExtWeb-mobile" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="edExtWeb" target="1.8" />
+      <module name="edExtWeb-mobile" target="1.8" />
       <module name="Laboratorio" target="1.8" />
     </bytecodeTargetLevel>
   </component>

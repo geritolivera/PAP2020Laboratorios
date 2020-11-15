@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="edExtWeb-mobile:war">
+    <output-path>$PROJECT_DIR$/edExtWeb-mobile/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>edExtWeb-mobile</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="edExtWeb-mobile-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="edExtWeb-mobile:war exploded" />
+    </root>
+  </artifact>
+</component>
