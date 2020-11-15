@@ -26,6 +26,7 @@ public class consultaEdicionCurso extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 
+
 		Date today = Calendar.getInstance().getTime();
 		DtEdicionCurso dte = null;
 		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
@@ -35,15 +36,18 @@ public class consultaEdicionCurso extends HttpServlet {
 			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
 			dte = port.verInfoEdicion(edicion);
 			//previas y categorias no se precisan
-			String fechaI = format.format(dte.getFechaI());
-			String fechaF = format.format(dte.getFechaF());
-			String fechaPub = format.format(dte.getFechaPub());
+			Calendar fechaInicio = dte.getFechaI();
+			String fI = format.format(fechaInicio.getTime());
+			Calendar fechaFin = dte.getFechaF();
+			String fF = format.format(fechaFin.getTime());
+			Calendar fechaPub = dte.getFechaPub();
+			String fPub = format.format(fechaPub.getTime());
 			String[] docentes = dte.getDocentes();
 			request.setAttribute("nombre", dte.getNombre());
 			request.setAttribute("cupo", dte.getCupo());
-			request.setAttribute("fechaI", fechaI);
-			request.setAttribute("fechaF", fechaF);
-			request.setAttribute("fechaPub", fechaPub);
+			request.setAttribute("fechaI", fI);
+			request.setAttribute("fechaF", fF);
+			request.setAttribute("fechaPub", fPub);
 			request.setAttribute("imagen", dte.getImagenURL());
 			String cupo = "Si";
 			if(dte.getCupo() <= 0)

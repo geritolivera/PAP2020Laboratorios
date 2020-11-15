@@ -4,18 +4,12 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.xml.rpc.ServiceException;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Enumeration;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
@@ -32,8 +26,6 @@ public class consultaUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		//fabrica fab = fabrica.getInstancia();
-		//IcontroladorUsuario icon = fab.getIcontroladorUsuario();
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 		//recibe programa desde jsp
 		String nickname = request.getParameter("nickname");
@@ -48,28 +40,24 @@ public class consultaUsuario extends HttpServlet {
 			request.setAttribute("fechaNac", fechaNac);
 			request.setAttribute("imagenURL", dtu.getImage());
 			request.setAttribute("seguidores", dtu.getSeguidores());
-			ArrayList<String> seguidos = new ArrayList<>();
-			String[] ret = dtu.getSeguidos();
-			for(int i = 0; i<ret.length; i++) {
-				seguidos.add(ret[i]);
-			}
+			String[] seguidos = dtu.getSeguidos();
 			request.setAttribute("seguidos", seguidos);
 			ArrayList<String> ediciones = new ArrayList<>();
 			ArrayList<String> programas = new ArrayList<>();
 			String tipo;
 			if(dtu instanceof DtDocente) {
 				DtEdicionCurso[] retDE = ((DtDocente)dtu).getEdiciones();
-				for(DtEdicionCurso e: retDE)
-					ediciones.add(e.getNombre());
+				for(int i = 0; i<retDE.length; i++)
+					ediciones.add(retDE[i].getNombre());
 				tipo = "docente";
 			}
 			else {
 				DtEdicionCurso[] retEE = ((DtEstudiante)dtu).getEdiciones();
-				for(DtEdicionCurso e: retEE)
-					ediciones.add(e.getNombre());
+				for(int i = 0; i<retEE.length; i++)
+					ediciones.add(retEE[i].getNombre());
 				DtProgramaFormacion[] retEP = ((DtEstudiante)dtu).getProgramas();
-				for(DtProgramaFormacion p: retEP)
-					programas.add(p.getNombre());
+				for(int i = 0; i<retEP.length; i++)
+					programas.add(retEP[i].getNombre());
 				tipo = "estudiante";
 			}
 			request.setAttribute("ediciones", ediciones);

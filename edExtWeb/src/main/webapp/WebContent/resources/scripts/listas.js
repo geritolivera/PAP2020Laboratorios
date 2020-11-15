@@ -1,4 +1,4 @@
-var baseURL = 'http://localhost:8081_war/edExtWeb/';
+var baseURL = 'http://localhost:8081/edExtWeb/';
 
 function getInstitutos(){
 
