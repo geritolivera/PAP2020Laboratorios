@@ -19,7 +19,7 @@
             <div class="col s12 m7">
                 <div class="card">
                     <div class="card-image">
-                        <img src="resources/images/img2.jpg">
+                        <img src="${imagenURL}" width="702.281" height="345.953">
                         <span class="card-title" id="nombre">${nombre}</span>
                         <!-- -Aca se pone el a si es vigente -->
                         <%

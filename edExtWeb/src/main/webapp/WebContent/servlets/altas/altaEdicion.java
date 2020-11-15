@@ -43,7 +43,7 @@ public class altaEdicion extends HttpServlet {
 
         String[] docentes = request.getParameter("docentes").split(",");
         Integer cupo = Integer.parseInt(request.getParameter("cupo"));
-        String imagen = request.getParameter("url");
+        String imagen = request.getParameter("imagen");
 
         System.out.println(nombre);
         System.out.println(instituto);
