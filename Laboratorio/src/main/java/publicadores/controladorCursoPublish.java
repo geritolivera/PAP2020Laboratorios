@@ -77,9 +77,9 @@ public class controladorCursoPublish {
 	}
 	
 	@WebMethod
-	public void verInfo(String nomCurso) throws CursoExcepcion{
+	public DTCurso verInfo(String nomCurso) throws CursoExcepcion{
 		try {
-			icon.verInfo(nomCurso);
+			return icon.verInfo(nomCurso);
 		} catch (CursoExcepcion e) {
 			e.printStackTrace();
 			throw new CursoExcepcion("El curso " + nomCurso + " no existe en el sistema.");
