@@ -92,9 +92,11 @@ public class consultaUsuario extends HttpServlet {
 				if(nickLog.equals(nickname)) //si el usuario se esta consultando a si mismo
 					igualdad = true;
 				else {
-					for(int i=0; i < dtu.getSeguidos().length; i++){
-						if(nickname.equals(dtu.getNick()))
-							yaSeguido = true;
+					if(dtu.getSeguidores() != null) {
+						for (String s: dtu.getSeguidores()) {
+							if (nickLog.equals(s))
+								yaSeguido = true;
+						}
 					}
 				}
 			}
