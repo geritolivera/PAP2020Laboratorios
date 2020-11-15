@@ -21,14 +21,14 @@
 
 <body>
 <div class="navbar-fixed">
-    <nav class="rojo">
+    <nav class="rojo draggable">
         <a href="index.jsp" class="brand-logo">edExt</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="container">
             <div class="nav-wrapper">
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb-mobile/busquedaGeneral.jsp';">Buscar</a>
                     </li>
                     <li>
                         <a href="consultaPrograma.jsp">Programas</a>

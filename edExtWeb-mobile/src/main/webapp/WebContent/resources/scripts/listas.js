@@ -306,7 +306,7 @@ function collectionProgramas(){
 
 function collectionUsuarios(){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetUsuarios`
     fetch(url, {
         method: 'GET',
@@ -505,7 +505,7 @@ function tableInscripcionesCheckbox(){
 
 function tableInscripcionesAceptados(edicion){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetInscripcionesED?edicion=` + edicion;
     fetch(url, {
         method: 'GET',

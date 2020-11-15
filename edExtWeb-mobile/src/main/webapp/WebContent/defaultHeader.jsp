@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="resources/images/intento2.png">
   <link rel="stylesheet" href="resources/styles/style.css">
   <!-- Compiled and minified CSS -->
@@ -29,7 +30,7 @@
 
           <li class="rojo-rita">
           <li>
-            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb-mobile/busquedaGeneral.jsp';">Buscar</a>
           </li>
           </li>
           <li>
@@ -57,7 +58,7 @@
   </nav>
 
 </div>
-<ul class="sidenav" id="mobile-demo">
+<ul class="sidenav" id="mobile-demo" style="width: 48%">
   <li class="rojo"><a href="miPerfil.jsp" class="white-text"><i class="material-icons white-text">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
@@ -111,6 +112,9 @@
       <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
     </ul>
+	<% if (session.getAttribute("nombreUser")!=null) {%>
+    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
+    <%}%>
   </li>
 </ul>
 
