@@ -95,6 +95,7 @@ function crearCurso() {
 }
 
 function usuario() {
+    debugger;
     const nick = document.querySelector("#nickName").value;
     const nombre = document.querySelector("#nombre").value;
     const apellido = document.querySelector("#apellido").value;
@@ -121,6 +122,7 @@ function usuario() {
         })
     } else {
         if (tipoUser == 'estudiante') {
+            debugger;
             fetchUrl = 'crearUsuario?nickName=' + nick +
                 '&nombre=' + nombre +
                 '&apellido=' + apellido +
@@ -152,6 +154,7 @@ function usuario() {
                 console.error(' paso algo: ', err);
             });
         } else {
+            debugger;
             fetchUrl = 'crearUsuario?nickName=' + nick +
                 '&nombre=' + nombre +
                 '&apellido=' + apellido +
@@ -218,6 +221,7 @@ function inscribirUsuario(edicion) {
 }
 
 function crearEdicion() {
+    debugger;
     const nombre = document.querySelector("#nombre").value;
     const fechaI = document.querySelector("#fechaInicio").value;
     const fechaF = document.querySelector("#fechaFin").value;

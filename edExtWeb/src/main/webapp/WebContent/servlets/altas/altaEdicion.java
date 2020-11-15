@@ -45,6 +45,9 @@ public class altaEdicion extends HttpServlet {
         Integer cupo = Integer.parseInt(request.getParameter("cupo"));
         String imagen = request.getParameter("url");
 
+        System.out.println(nombre);
+        System.out.println(instituto);
+        System.out.println(imagen);
 
         try {
             ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();

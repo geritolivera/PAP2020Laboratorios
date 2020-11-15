@@ -1,6 +1,7 @@
 package main.webapp.WebContent.servlets.consultas;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,6 @@ public class consultaEdicionCurso extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
 
-
 		Date today = Calendar.getInstance().getTime();
 		DtEdicionCurso dte = null;
 		ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
@@ -36,10 +36,14 @@ public class consultaEdicionCurso extends HttpServlet {
 			ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
 			dte = port.verInfoEdicion(edicion);
 			//previas y categorias no se precisan
+			//fecha inicio
 			Calendar fechaInicio = dte.getFechaI();
 			String fI = format.format(fechaInicio.getTime());
+			//fecha fin
 			Calendar fechaFin = dte.getFechaF();
 			String fF = format.format(fechaFin.getTime());
+			Date dateF = format.parse(fF);
+			//fecha publicacion
 			Calendar fechaPub = dte.getFechaPub();
 			String fPub = format.format(fechaPub.getTime());
 			String[] docentes = dte.getDocentes();
@@ -49,12 +53,14 @@ public class consultaEdicionCurso extends HttpServlet {
 			request.setAttribute("fechaF", fF);
 			request.setAttribute("fechaPub", fPub);
 			request.setAttribute("imagen", dte.getImagenURL());
+			System.out.println("IMAGEN DE EDICION: " + dte.getImagenURL());
 			String cupo = "Si";
 			if(dte.getCupo() <= 0)
 				cupo = "No";
 			request.setAttribute("haycupo", cupo);
 			String vigente = "No";
-			if (dte.getFechaF().after(today)) {
+			if (dateF.after(today)) {
+				System.out.println("LA EDICION ES VIGENTE");
 				vigente= "Si";
 			}
 			request.setAttribute("vigencia", vigente);
@@ -82,7 +88,7 @@ public class consultaEdicionCurso extends HttpServlet {
 			}
 			System.out.println("inscripto= " + inscripto);
 			request.setAttribute("userLog", userLog);
-		} catch (EdicionExcepcion | ServiceException e) {
+		} catch (EdicionExcepcion | ServiceException | ParseException e) {
 			//no existe edicion
 			e.printStackTrace();
 		}
