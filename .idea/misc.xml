@@ -2,12 +2,14 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/edExtWeb" />
+    <file type="web" url="file://$PROJECT_DIR$/edExtWeb-mobile" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/edExtWeb/pom.xml" />
         <option value="$PROJECT_DIR$/Laboratorio/pom.xml" />
+        <option value="$PROJECT_DIR$/edExtWeb-mobile/pom.xml" />
       </list>
     </option>
   </component>

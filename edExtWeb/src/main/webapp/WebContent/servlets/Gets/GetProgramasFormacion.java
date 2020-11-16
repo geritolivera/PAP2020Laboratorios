@@ -22,11 +22,7 @@ public class GetProgramasFormacion extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<String> programaForm = new ArrayList<>();
-        String[] ret = getProgramForm();
-        for(int i = 0; i<ret.length; i++) {
-            programaForm.add(ret[i]);
-        }
+        String[] programaForm = getProgramForm();
         try {
             System.out.println("progForm = " + programaForm);
             request.setAttribute("programa", programaForm);

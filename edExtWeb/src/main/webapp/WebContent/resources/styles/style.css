@@ -6,6 +6,11 @@
    color: #fff;
    font-size: 1.0625em;
 }
+
+.sidenav{
+    width: 190px;
+}
+
 .nav ul a {
 display: flex;
 }

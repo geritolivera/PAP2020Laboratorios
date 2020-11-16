@@ -154,8 +154,7 @@ public class controladorCurso implements IcontroladorCurso{
 		else {
 			if(mCur.existeCurso(nomCurso)) {
 				Curso curso = mCur.buscarCurso(nomCurso);
-				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso);
-				edi.setImagenURL(url);
+				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso, url);
 				//se fija que haya docentes para ingresar
 				if(!docentes.isEmpty() && docentes != null) {
 					for(String s: docentes) {

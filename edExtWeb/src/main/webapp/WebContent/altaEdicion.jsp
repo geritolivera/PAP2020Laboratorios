@@ -81,6 +81,7 @@
 </div>
 <%@include  file="footer.jsp" %>
 <script src="resources/scripts/listas.js"> </script>
+<script src="resources/scripts/listas.js"> </script>
 <script>
     $(document).ready(function () {
         getInstitutos();
@@ -101,5 +102,3 @@
         document.body.removeChild(link);
     });
 </script>
-<script src="resources/scripts/listas.js"> </script>
-<script src="resources/scripts/alta.js"> </script>

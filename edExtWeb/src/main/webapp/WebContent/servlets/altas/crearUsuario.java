@@ -29,8 +29,7 @@ public class crearUsuario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        //todo lo que se obtiene del frontend va en comillas
+		System.out.println("Entra en crearUsuario");
 		DTResponse respuesta = new DTResponse();
         //datos del usuario
 		String nickname = request.getParameter("nickName");
@@ -40,6 +39,15 @@ public class crearUsuario extends HttpServlet {
 		String password = request.getParameter("password");
 		String url = request.getParameter("imagen");
 		String tipoUser =request.getParameter("tipoUser");
+
+		System.out.println(nickname);
+		System.out.println(nombre);
+		System.out.println(apellido);
+		System.out.println(correo);
+		System.out.println(password);
+		System.out.println(url);
+		System.out.println(tipoUser);
+
 		String instituto = null;
 		if (!request.getParameter("tipoUser").equals("docente")){
 			instituto = request.getParameter("institutos");
@@ -48,11 +56,11 @@ public class crearUsuario extends HttpServlet {
 		//cambia la string a un date
 		long fN = Date.parse(request.getParameter( "fechaN"));
 		Date fechaNac = new Date(fN);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fechaNac);
 		Date todayDate = Calendar.getInstance().getTime();
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(fechaNac);
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			try {
@@ -77,9 +85,9 @@ public class crearUsuario extends HttpServlet {
 					respuesta.setMensaje("Debe ingresar un tipo de Usuario");
 					request.setAttribute("mensaje", "Debe ingresar un tipo de Usuario");
 				} else {
-					port.altaUsuario(nickname, nombre, apellido, correo, cal, instituto, password, url);
 					respuesta.setCodigo(0);
 					respuesta.setMensaje("El usuario " + nickname + " se ha ingresado correctamente en el sistema.");
+					port.altaUsuario(nickname, nombre, apellido, correo, cal, instituto, password, url);
 					request.setAttribute("mensaje", "El usuario " + nickname + " se ha ingresado correctamente en el sistema.");
 				}
 			} catch (publicadores.UsuarioExcepcion e1) {

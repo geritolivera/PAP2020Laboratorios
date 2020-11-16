@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -36,7 +37,7 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
         ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
-
+        SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         DTResponse respuesta = new DTResponse();
@@ -60,7 +61,9 @@ public class login extends HttpServlet {
                     session.setAttribute("nombre", dtu.getNombre());
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
-                    session.setAttribute("fechaNac", dtu.getFechaNac());
+                    Calendar fechaN = dtu.getFechaNac();
+                    String FN = format.format(fechaN.getTime());
+                    session.setAttribute("fechaNac", FN);
                     session.setAttribute("imagen", dtu.getImage());
                     ArrayList<String> prog = new ArrayList<String>();
                     for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
@@ -93,7 +96,9 @@ public class login extends HttpServlet {
                     session.setAttribute("nombre", dtu.getNombre());
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
-                    session.setAttribute("fechaNac", dtu.getFechaNac());
+                    Calendar fechaN = dtu.getFechaNac();
+                    String FN = format.format(fechaN.getTime());
+                    session.setAttribute("fechaNac", FN);
                     session.setAttribute("imagen", dtu.getImage());
                     System.out.println("dtu.getImage() = " + dtu.getImage());
                     String[] seguido = dtu.getSeguidos();

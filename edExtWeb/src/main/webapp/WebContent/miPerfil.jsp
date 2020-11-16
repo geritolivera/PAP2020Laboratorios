@@ -4,14 +4,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
-<%@ page import="datatypes.DTEdicionCurso" %>
-<%@ page import="interfaces.fabrica" %>
-<%@ page import="interfaces.IcontroladorUsuario" %>
-
-<%@ page import="controladores.controladorCurso" %>
-<%@ page import="datatypes.DTUsuario" %>
-<%@ page import="org.apache.taglibs.standard.tei.DeclareTEI" %>
-<%@ page import="datatypes.DTEstudiante" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 
@@ -35,19 +27,16 @@
     String nombre = (String) ses.getAttribute("nombre");
     String apellido = (String) ses.getAttribute("apellido");
     String correo = (String) ses.getAttribute("correo");
-    Date fechaN = (Date) ses.getAttribute("fechaNac");
-    ArrayList<String> seguidos = (ArrayList<String>) ses.getAttribute("seguidos");
-    ArrayList<String> seguidores = (ArrayList<String>) ses.getAttribute("seguidores");
-    SimpleDateFormat fechaNa = new SimpleDateFormat("yyyy/MM/dd");
-    String fechaNac = fechaNa.format(fechaN);
+    String fechaNac = (String) ses.getAttribute("fechaNac");
+    String[] seguidos = (String[]) ses.getAttribute("seguidos");
+    String[] seguidores = (String[]) ses.getAttribute("seguidores");
 
     String tipo = (String) ses.getAttribute("tipoUser");
     if(tipo.equals("estudiante")) {
         System.out.println("tipo = " + tipo);
         ArrayList<String> programas = (ArrayList<String>) ses.getAttribute("programas");
     }
-    fabrica fab = fabrica.getInstancia();
-    IcontroladorUsuario icon = fab.getIcontroladorUsuario();
+
     String selectedEdi = new String();
 %>
 <div class="main">

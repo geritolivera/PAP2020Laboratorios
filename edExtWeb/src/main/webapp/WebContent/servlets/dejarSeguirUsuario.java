@@ -35,6 +35,8 @@ public class dejarSeguirUsuario extends HttpServlet {
 
 		if(validarSigue(nickUsuario, dejarSeguirNickname)) {
 			dejarDeSeguir(nickUsuario, dejarSeguirNickname);
+			respuesta.setCodigo(0);
+			respuesta.setMensaje("El usuario " + nickUsuario + " dejo de seguir al usuario " + dejarSeguirNickname + ".");
 			session.setAttribute("seguidos", verInfoUsuario(nickUsuario).getSeguidos());
 		}else{
 			respuesta.setCodigo(1);

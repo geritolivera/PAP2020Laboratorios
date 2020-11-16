@@ -100,7 +100,7 @@
                         </c:forEach>
                     </div>
                 </div>
-            <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){ %>
+            <% if(userLog && tipoUser.equals("docente")&& vigencia.equals("Si")){%>
                 <div class="row center">
                     <button onclick="toggleEstudiantes()" class="btn pink darken-4">Agregar Estudiantes +</button>
                 </div>
@@ -189,7 +189,6 @@
         <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
-        <script src="resources/scripts/scriptTableAceptados.js"></script>
 		<script src="resources/scripts/alta.js"> </script>		
 		<script src="resources/scripts/listas.js"> </script>
     <%@include  file="footer.jsp" %>

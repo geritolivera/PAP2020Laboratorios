@@ -33,7 +33,7 @@ public class EdicionCurso {
 		super();
 	}
 
-	public EdicionCurso(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso) {
+	public EdicionCurso(String nombre, Date fechaI, Date fechaF, int cupo, Date fechaPub, Curso curso, String imagenURL) {
 		super();
 		this.nombre = nombre;
 		this.fechaI = fechaI;
@@ -41,6 +41,7 @@ public class EdicionCurso {
 		this.cupo = cupo;
 		this.fechaPub = fechaPub;
 		this.curso = curso;
+		this.imagenURL = imagenURL;
 	}
 	public String getNombre() {
 		return nombre;
