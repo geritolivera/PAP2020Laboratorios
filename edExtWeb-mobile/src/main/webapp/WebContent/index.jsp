@@ -77,48 +77,49 @@ relacionados con la extensi&#243;n universitaria</h5>
         <div class="col s12">
           <div id="admin" class="col s12">
             <div class="card material-table hide-on-med-and-down">
-              <div class="table-header">
-                  <span class="table-title">Busqueda General</span>
-                  <div class="actions">
-                      <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                  </div>
-              </div>
-              <table id="datatable" style="width:100%">
-                  <thead>
-                  <tr>
+                <div class="table-header">
+                    <span class="table-title">Busqueda General</span>
+                    <div class="actions">
+                        <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
+                    </div>
+                </div>
+                <table id="datatable">
+                    <thead>
+                    <tr>
                       <th>Link</th>
                       <th>Nombre</th>
                       <th>Descripcion</th>
                       <th>Tipo</th>
-                  </tr>
-                  </thead>
-                  <tbody id="datatablebody">
-                  <tr>
-                  </tr>
-                  </tbody>
-              </table>
-          </div>
-          
-           <div class="card material-table hide-on-large-only">
-              <div class="table-header">
-                  <span class="table-title">Busqueda General</span>
-                  <div class="actions">
-                      <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                  </div>
-              </div>
-              <table id="datatableMobile" style="width:100%">
-                  <thead>
-                  <tr>
+                    </tr>
+                    </thead>
+                    <tbody id="datatablebody">
+                    <tr>
+                    </tr>
+                    </tbody>
+                  </table>
+            </div>
+            
+             <div class="card material-table hide-on-large-only">
+                <div class="table-header">
+                    <span class="table-title">Busqueda General</span>
+                    <div class="actions">
+                        <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
+                    </div>
+                </div>
+                <table id="datatable-mobile">
+                    <thead>
+                    <tr>
                       <th>Link</th>
                       <th>Nombre</th>
-                  </tr>
-                  </thead>
-                  <tbody id="datatablebody">
-                  <tr>
-                  </tr>
-                  </tbody>
-              </table>
-          </div>
+                    </tr>
+                    </thead>
+                    <tbody id="datatablebody">
+                    <tr>
+                    </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
       </div>
           </div>
         </div>

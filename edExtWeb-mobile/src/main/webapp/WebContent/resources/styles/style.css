@@ -34,8 +34,8 @@ li.active:hover .collapsible-header{
   color:white;
 }
 
-.sidenav li>a {
-  padding: 0 15px; 
+.sidenav li>a:not(.hijo){
+  padding: 0 16px !important; 
 }
 
 .main{

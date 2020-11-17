@@ -19,20 +19,20 @@
                         <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
                     </div>
                 </div>
-                <table id="datatable" style="width:100%">
+                <table id="datatable">
                     <thead>
                     <tr>
-                        <th>Link</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Tipo</th>
+                      <th>Link</th>
+                      <th>Nombre</th>
+                      <th>Descripcion</th>
+                      <th>Tipo</th>
                     </tr>
                     </thead>
                     <tbody id="datatablebody">
                     <tr>
                     </tr>
                     </tbody>
-                </table>
+                  </table>
             </div>
             
              <div class="card material-table hide-on-large-only">
@@ -42,18 +42,18 @@
                         <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
                     </div>
                 </div>
-                <table id="datatableMobile" style="width:100%">
+                <table id="datatable-mobile">
                     <thead>
                     <tr>
-                        <th>Link</th>
-                        <th>Nombre</th>
+                      <th>Link</th>
+                      <th>Nombre</th>
                     </tr>
                     </thead>
                     <tbody id="datatablebody">
                     <tr>
                     </tr>
                     </tbody>
-                </table>
+                  </table>
             </div>
         </div>
     </div>
@@ -68,8 +68,9 @@
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="resources/scripts/busqueda.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="resources/scripts/busqueda.js"></script>
+
 
 
 <%@ include file="footer.jsp"%>

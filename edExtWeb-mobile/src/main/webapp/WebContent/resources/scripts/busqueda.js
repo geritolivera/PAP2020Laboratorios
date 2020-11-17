@@ -2,12 +2,6 @@ var baseURL = 'http://localhost:8081/edExtWeb-mobile/';
 
 var url = baseURL + `Busqueda`;
 
-
-$.extend( $.fn.dataTable.defaults, {
-    responsive: true
-} );
- 
-
 $(document).ready( function() {
     fetch(url, {
         method: 'POST',
@@ -33,10 +27,10 @@ $(document).ready( function() {
 
         $('#datatable').dataTable({
 
-			responsive: true,
+
             data: dataSet,
             columns: [
-				{ "title": "Link"},
+                { "title": "Link"},
                 { "title": "Nombre"},
                 { "title": "Descripcion"},
                 { "title": "Tipo"}
@@ -54,7 +48,7 @@ $(document).ready( function() {
                     '<option value="-1">All</option>' +
                     '</select></div>'
             },
-            bAutoWidth: false,		   
+            bAutoWidth: false,
 
             buttons: [
                 {
@@ -81,13 +75,14 @@ $(document).ready( function() {
             ]
         });
 
-        $('#datatableMobile').dataTable({
+        
+        $('#datatable-mobile').dataTable({
 
-			responsive: true,
+
             data: dataSet,
             columns: [
-				{ "title": "Link"},
-                { "title": "Nombre"},
+                { "title": "Link"},
+                { "title": "Nombre"}
             ],
             "oLanguage": {
                 "sSearch": "",
@@ -102,13 +97,14 @@ $(document).ready( function() {
                     '<option value="-1">All</option>' +
                     '</select></div>'
             },
-            bAutoWidth: true,
-            "sPaginationType" : "full_numbers", 
-       	    "bPaginate": false,
-   		    "bInfo": false,   		   
+            bAutoWidth: false,
 
             buttons: [
                 {
+                    text: '<span style="color:#4d4d4d; margin-right:15px">Print<span>',
+                    extend: 'print',
+                    className: '',
+                    title: '',
 //  autoPrint: false,
                     customize: function (win) {
                         $(win.document.body)
@@ -304,5 +300,3 @@ $(document).ready( function() {
     }
 
 })(window, document);
-
-
