@@ -74,8 +74,9 @@
     <li>
         <a href="consultaUsuario.jsp">Usuarios</a>
     </li>
+    <li><a type="button" href="busquedaGeneral.jsp"><i class="material-icons left">search</i>Buscar</a></li>
     <% if (session.getAttribute("nombreUser")!=null) {%>
-    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
+    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i>Logout</a></li>
     <%}%>
 </ul>
 <script src="resources/scripts/log.js"></script>

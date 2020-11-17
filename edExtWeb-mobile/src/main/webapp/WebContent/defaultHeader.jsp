@@ -112,8 +112,9 @@
       <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
     </ul>
+    <li><a type="button" href="busquedaGeneral.jsp" ><i class="material-icons left">search</i>Buscar</a></li>
 	<% if (session.getAttribute("nombreUser")!=null) {%>
-    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
+    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i>Logout</a></li>
     <%}%>
   </li>
 </ul>
