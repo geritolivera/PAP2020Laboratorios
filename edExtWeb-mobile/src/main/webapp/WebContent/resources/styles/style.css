@@ -148,7 +148,7 @@ li.active:hover .collapsible-header{
   background-color: #ee545b !important;
 }
 
-nav .brand-logo {
+nav #brand-logo-large {
   position: absolute;
   color: #fff;
   display: inline-block;

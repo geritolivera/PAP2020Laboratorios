@@ -22,7 +22,8 @@
 <body>
 <div class="navbar-fixed">
     <nav class="rojo draggable">
-        <a href="index.jsp" class="brand-logo">edExt</a>
+        <a href="index.jsp" class="brand-logo hide-on-med-and-down" id="brand-logo-large">edExt</a>
+        <a href="index.jsp" class="brand-logo hide-on-large-only" id="brand-logo-mobile">edExt</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="container">
             <div class="nav-wrapper">
