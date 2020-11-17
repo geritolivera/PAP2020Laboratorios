@@ -187,7 +187,7 @@ function usuario() {
 }
 
 function inscribirUsuario(edicion) {
-    debugger;
+    //debugger;
     //const edicion = document.querySelector("#nombre").value;
 
     const fetchUrl = 'inscripcionUE?edicion=' + edicion;
@@ -404,7 +404,7 @@ function dejarSeguirUsuario(nickname) {
 }
 
 function confirmarInscripcion(edicion, usuario, action) {
-    debugger;
+    //debugger;
     console.log("la edicion es= " + edicion);
     console.log("el usuario es= " + usuario);
     console.log("la action es= " + action);

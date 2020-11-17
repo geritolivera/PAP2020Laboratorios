@@ -12,7 +12,7 @@
   <section class="slider">
     <ul class="slides">
       <li>
-        <img src="resources/images/img1.jpg" alt="">
+        <img class="responsive-img" src="resources/images/img1.jpg" alt="">
         <div class="caption center-align ">
           <h2 >Bienvenido a edEXT</h2>
           <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos
@@ -23,7 +23,7 @@ relacionados con la extensi&#243;n universitaria</h5>
         </div>
       </li>
       <li>
-        <img src="resources/images/img2.jpg" alt="">
+        <img class="responsive-img" src="resources/images/img2.jpg" alt="">
         <div class="caption left-align">
           <h2>Gesti&#243;n de Cursos</h2>
           <h4 class="light grey-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Cursos registrados! </h4>
@@ -31,7 +31,7 @@ relacionados con la extensi&#243;n universitaria</h5>
         </div>
       </li>
       <li>
-        <img src="resources/images/img3.jpg"  alt="">
+        <img class="responsive-img" src="resources/images/img3.jpg"  alt="">
         <div class="caption right-align -text">
           <h2>Gesti&#243;n de Programas</h2>
           <h4 class="light white-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Programas registrados!</h4>
@@ -76,28 +76,50 @@ relacionados con la extensi&#243;n universitaria</h5>
       <div class="row">
         <div class="col s12">
           <div id="admin" class="col s12">
-            <div class="card material-table">
+            <div class="card material-table hide-on-med-and-down">
               <div class="table-header">
-                <span class="table-title">Busqueda General</span>
-                <div class="actions">
-                  <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                </div>
+                  <span class="table-title">Busqueda General</span>
+                  <div class="actions">
+                      <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
+                  </div>
               </div>
-              <table id="datatable" class="responsive-table">
-                <thead>
-                <tr>
-                  <th>Tipo</th>
-                  <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Link</th>
-                </tr>
-                </thead>
-                <tbody id="datatablebody">
-                <tr>
-                </tr>
-                </tbody>
+              <table id="datatable" style="width:100%">
+                  <thead>
+                  <tr>
+                      <th>Link</th>
+                      <th>Nombre</th>
+                      <th>Descripcion</th>
+                      <th>Tipo</th>
+                  </tr>
+                  </thead>
+                  <tbody id="datatablebody">
+                  <tr>
+                  </tr>
+                  </tbody>
               </table>
-            </div>
+          </div>
+          
+           <div class="card material-table hide-on-large-only">
+              <div class="table-header">
+                  <span class="table-title">Busqueda General</span>
+                  <div class="actions">
+                      <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
+                  </div>
+              </div>
+              <table id="datatableMobile" style="width:100%">
+                  <thead>
+                  <tr>
+                      <th>Link</th>
+                      <th>Nombre</th>
+                  </tr>
+                  </thead>
+                  <tbody id="datatablebody">
+                  <tr>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
           </div>
         </div>
       </div>

@@ -329,7 +329,7 @@ function collectionUsuarios(){
 
 function collectionSeguidores(){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetSeguidores`
     fetch(url, {
         method: 'GET',
@@ -344,7 +344,7 @@ function collectionSeguidores(){
 
 function collectionSeguidos(){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetSeguidos`
     fetch(url, {
         method: 'GET',
@@ -404,7 +404,7 @@ function tableInscripciones(edicion){
 
 function tableInscripcionesAjax(){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetInscripcionesED`
     fetch(url, {
         method: 'GET',
@@ -440,13 +440,13 @@ function tableInscripcionesAjax(){
 
 function tableInscripcionesCheckbox(){
     // Parametro:
-    debugger;
+    //debugger;
     var url = baseURL + `GetInscripcionesED`
     fetch(url, {
         method: 'GET',
     }).then(res => res.json()
     ).then(dti => {
-        debugger;
+        //debugger;
         var inscripcionesHtml = document.getElementById("detallesIns");
         console.log("inscripciones:", dti);
         data = [];
@@ -458,7 +458,7 @@ function tableInscripcionesCheckbox(){
                 cont++;
             })
             $(document).ready(function() {
-                debugger;
+                //debugger;
                 var tabla = $('#tablaInscripciones').DataTable( {
                     data: data,
                     columns: [
