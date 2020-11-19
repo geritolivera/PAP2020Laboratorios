@@ -17,8 +17,9 @@
             <h4 class="header2"> <span style="color: #81054b">></span>Registro de Usuario</h4>
             <div class="row">
               <div class="input-field col s6">
-                <input type="text" name="nickName" id="nickName">
+                <input type="text" name="nickName" id="nickName" onblur="checkNick()" onfocus="checkNick()" onchange="checkNick()" class="validate">
                 <label for="nickName">NickName</label>
+                <span class="helper-text" data-error="Nick ya Tomado!" data-success="Valido!"></span>
               </div>
               <div class="input-field col s6">
                 <select name="tipo" id="tipo">
@@ -43,8 +44,9 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
-                <input id="email" type="email" class="validate">
+                <input id="email" type="email"  onblur="checkMail()" onfocus="checkMail()" onchange="checkMail()" class="validate">
                 <label for="email">Email</label>
+                <span class="helper-text" data-error="Correo ya registrado!" data-success="Valido!"></span>
               </div>
             </div>
             <div class="row">
@@ -90,6 +92,9 @@
   </div>
 <%@include  file="footer.jsp" %>
  <script>
+      document.getElementById("nickName").addEventListener("keyup", checkNick);
+      document.getElementById("email").addEventListener("keyup", checkMail);
+
       document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.datepicker');
         var options = {

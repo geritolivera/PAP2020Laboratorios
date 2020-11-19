@@ -74,6 +74,9 @@ public class principalView {
 		IcontroladorUsuario iusu = fab.getIcontroladorUsuario();
 		IcontroladorCurso icurso = fab.getIcontroladorCurso();
 		
+		boolean lpm = iusu.ValidarCorreo("docente@gmail.com");
+		System.out.println(lpm);
+		
 		Dimension escritorioTam = frame.getSize();
 		Dimension jIternalFrameSize;
 		

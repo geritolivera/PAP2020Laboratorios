@@ -80,5 +80,11 @@ public interface IcontroladorUsuario {
     
     public List<DTInscripcionED> listarInscripcionesED(String nomEdicion);
     public void cambiarInscripcion(String cambio, String nomEdicion, String nomUsuario);
+
+
+	public boolean ValidarNickname(String nick);
+
+
+	public boolean ValidarCorreo(String c);
     
 }
