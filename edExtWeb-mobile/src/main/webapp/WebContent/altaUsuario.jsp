@@ -14,13 +14,13 @@
       <div class="row">
         <form class="col s12">
           <div class="card-panel">
-            <h4 class="header2"> <span style="color: #81054b">></span>Registro de Usuario</h4>
+            <h5 class="header2"> <span style="color: #81054b">></span>Registro de Usuario</h5>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input type="text" name="nickName" id="nickName">
                 <label for="nickName">NickName</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <select name="tipo" id="tipo">
                   <option value="" disabled selected>Seleccione uno</option>
                   <option value="estudiante">Estudiante</option>
@@ -30,41 +30,41 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <i class="material-icons prefix">account_circle</i>
                 <input id="nombre" type="text" class="validate">
                 <label for="nombre">Nombre</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input id="apellido" type="text" class="validate">
                 <label for="apellido">Apellido</label>
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s12 m6">
                 <i class="material-icons prefix">email</i>
                 <input id="email" type="email" class="validate">
                 <label for="email">Email</label>
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <i class="material-icons prefix">lock</i>
                 <input id="password" type="password" class="validate">
                 <label for="password">Contrase&ntilde;a</label>
               </div>
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <input id="passwordValidacion" type="password" class="validate">
                 <label for="passwordValidacion">Repita contrase&ntilde;a</label>
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                 <i class="material-icons prefix">date_range</i>
                 <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="datepicker">
                 <label for="fechaNacimiento">Fecha de Nacimiento</label>
               </div>
-              <div class="input-field col s6" id="institutosSelect" >
+              <div class="input-field col s12 m6" id="institutosSelect" >
                 <select  name="institutos" id="institutos">
                   <option value="" disabled>Seleccione uno</option>
                   </select>
@@ -72,7 +72,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12 m6">
                   <i class="material-icons prefix">image</i>
                   <input type="text" id="imagen">
                   <label for="imagen">Imagen del usuario</label>

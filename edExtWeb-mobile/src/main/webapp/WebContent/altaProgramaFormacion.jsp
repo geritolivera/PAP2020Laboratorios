@@ -13,26 +13,26 @@
             <div class="row">
                 <form class="col s12 ">
                     <div class="card-panel">
-                        <h4 class="header2"> <span style="color: #81054b">></span>Alta de Programa de Formacion</h4>
+                        <h5 class="header2"> <span style="color: #81054b">></span>Alta de Programa de Formacion</h5>
 
                         <div class="row">
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <input type="text" name="nombre" id="nombre">
                                 <label for="nombre">Nombre del Programa</label>
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s12 m6">
                                 <i class="material-icons prefix">image</i>
                                 <input type="text" id="url">
                                 <label for="url">Imagen del programa</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field s6 col">
+                            <div class="input-field s12 m6 col">
                                 <i class="material-icons prefix">date_range</i>
                                 <input type="text" name="fechaInicio" id="fechaInicio" class="datepicker">
                                 <label for="fechaInicio">Fecha de Inicio</label>
                             </div>
-                            <div class="input-field s6 col">
+                            <div class="input-field s12 m6 col">
                                 <i class="material-icons prefix">date_range</i>
                                 <input type="text" name="fechaFin" id="fechaFin" class="datepicker">
                                 <label for="fechaFin">Fecha de Fin</label>

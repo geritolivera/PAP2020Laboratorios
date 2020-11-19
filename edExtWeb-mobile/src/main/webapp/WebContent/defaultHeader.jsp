@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="resources/images/intento2.png">
   <link rel="stylesheet" href="resources/styles/style.css">
   <!-- Compiled and minified CSS -->
@@ -23,13 +24,14 @@
   <nav class="rojo">
 <%--    <div class="container">--%>
       <div class="nav-wrapper">
-        <a href="index.jsp" class="brand-logo">edExt</a>
+        <a href="index.jsp" class="brand-logo hide-on-med-and-down" id="brand-logo-large">edExt</a>
+        <a href="index.jsp" class="brand-logo hide-on-large-only" id="brand-logo-mobile">edExt</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
 
           <li class="rojo-rita">
           <li>
-            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+            <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb-mobile/busquedaGeneral.jsp';">Buscar</a>
           </li>
           </li>
           <li>
@@ -57,7 +59,7 @@
   </nav>
 
 </div>
-<ul class="sidenav" id="mobile-demo">
+<ul class="sidenav" id="mobile-demo" style="width: 48%">
   <li class="rojo"><a href="miPerfil.jsp" class="white-text"><i class="material-icons white-text">account_circle</i><%= session.getAttribute("nombreUser") %></a></li>
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
@@ -67,8 +69,8 @@
             <a class="collapsible-header">Programas<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaProgramaFormacion.jsp">Alta Programa</a></li>
-                <li><a href="consultaPrograma.jsp">Buscar</a></li>
+                <li><a href="altaProgramaFormacion.jsp" class="hijo">Alta Programa</a></li>
+                <li><a href="consultaPrograma.jsp" class="hijo">Buscar</a></li>
               </ul>
             </div>
           </li>
@@ -76,8 +78,8 @@
             <a class="collapsible-header">Cursos<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaCurso.jsp">Alta Cursos</a></li>
-                <li><a href="consultaCurso.jsp">Buscar Cursos</a></li>
+                <li><a href="altaCurso.jsp" class="hijo">Alta Cursos</a></li>
+                <li><a href="consultaCurso.jsp" class="hijo">Buscar Cursos</a></li>
               </ul>
             </div>
           </li>
@@ -85,8 +87,8 @@
             <a class="collapsible-header">Edicion<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaEdicion.jsp">Agregar Edicion</a></li>
-                <li><a href="consultaEdicion.jsp">Buscar Edicion</a></li>
+                <li><a href="altaEdicion.jsp" class="hijo">Agregar Edicion</a></li>
+                <li><a href="consultaEdicion.jsp" class="hijo">Buscar Edicion</a></li>
               </ul>
             </div>
           </li>
@@ -111,6 +113,10 @@
       <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
     </ul>
+    <li><a type="button" href="busquedaGeneral.jsp" ><i class="material-icons left ind">search</i>Buscar</a></li>
+	<% if (session.getAttribute("nombreUser")!=null) {%>
+    <li><a type="button" onclick="logout()"><i class="material-icons left ind">exit_to_app</i>Logout</a></li>
+    <%}%>
   </li>
 </ul>
 
