@@ -194,7 +194,7 @@ function checkNick() {
     const nick = document.querySelector("#nickName").value;
     let fetchUrl;
 
-    fetchUrl = 'ValidarNickname?nickName=' + nick;
+    fetchUrl = baseURL + 'ValidarNickname?nickName=' + nick;
     fetch(fetchUrl, {
         method: 'POST'
     }).then((res) => {
@@ -218,7 +218,7 @@ function checkMail() {
     const email = document.querySelector("#email").value;
     let fetchUrl;
 
-    fetchUrl = 'ValidarCorreo?email=' + email;
+    fetchUrl = baseURL + 'ValidarCorreo?email=' + email;
     fetch(fetchUrl, {
         method: 'POST'
     }).then((res) => {

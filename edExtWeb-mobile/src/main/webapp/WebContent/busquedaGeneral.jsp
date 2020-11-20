@@ -22,10 +22,6 @@
                 <table id="datatable">
                     <thead>
                     <tr>
-                      <th>Link</th>
-                      <th>Nombre</th>
-                      <th>Descripcion</th>
-                      <th>Tipo</th>
                     </tr>
                     </thead>
                     <tbody id="datatablebody">
@@ -49,32 +45,11 @@
                       <th>Nombre</th>
                     </tr>
                     </thead>
-                    <tbody id="datatablebody">
+                    <tbody id="datatablebody-mobile">
                     <tr>
                     </tr>
                     </tbody>
                   </table>
-            </div>
-
-             <div class="card material-table hide-on-large-only">
-                <div class="table-header">
-                    <span class="table-title">Busqueda General</span>
-                    <div class="actions">
-                        <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                    </div>
-                </div>
-                <table id="datatable-mobile">
-                    <thead>
-                    <tr>
-                        <th>Link</th>
-                        <th>Nombre</th>
-                    </tr>
-                    </thead>
-                    <tbody id="datatablebody">
-                    <tr>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

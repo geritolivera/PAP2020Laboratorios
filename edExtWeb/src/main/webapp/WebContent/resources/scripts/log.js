@@ -26,7 +26,7 @@ function inicioSesion(){
             respuesta.mensaje //mensaje de error o success
             if (respuesta.codigo == 0) {
                 mensajeConfirmacion("Bienvenido!", respuesta.mensaje).then(() => {
-                    window.location.reload();
+                    window.location = baseurl + "index.jsp";
                 })
             } else {
                 mensajeError("Error al iniciar sesion ", respuesta.mensaje).then(() => {

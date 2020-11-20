@@ -69,7 +69,6 @@
             <a class="collapsible-header">Programas<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaProgramaFormacion.jsp" class="hijo">Alta Programa</a></li>
                 <li><a href="consultaPrograma.jsp" class="hijo">Buscar</a></li>
               </ul>
             </div>
@@ -78,7 +77,6 @@
             <a class="collapsible-header">Cursos<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaCurso.jsp" class="hijo">Alta Cursos</a></li>
                 <li><a href="consultaCurso.jsp" class="hijo">Buscar Cursos</a></li>
               </ul>
             </div>
@@ -87,7 +85,6 @@
             <a class="collapsible-header">Edicion<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="altaEdicion.jsp" class="hijo">Agregar Edicion</a></li>
                 <li><a href="consultaEdicion.jsp" class="hijo">Buscar Edicion</a></li>
               </ul>
             </div>
@@ -100,17 +97,14 @@
     </ul>
     <!-- Dropdown Programa -->
     <ul id="dropdownPrograma" class="dropdown-content">
-      <li><a href="altaProgramaFormacion.jsp">Alta</a></li>
       <li><a href="consultaPrograma.jsp">Ver Programas</a></li>
     </ul>
     <!-- Dropdown Curso -->
     <ul id="dropdownCurso" class="dropdown-content">
-      <li><a href="altaCurso.jsp">Alta</a></li>
       <li><a href="consultaCurso.jsp">Ver Cursos</a></li>
     </ul>
     <!-- Dropdown Edicion -->
     <ul id="dropdownEdicion" class="dropdown-content">
-      <li><a href="altaEdicion.jsp">Alta</a></li>
       <li><a href="consultaEdicion.jsp">Ver Ediciones</a></li>
     </ul>
     <li><a type="button" href="busquedaGeneral.jsp" ><i class="material-icons left ind">search</i>Buscar</a></li>

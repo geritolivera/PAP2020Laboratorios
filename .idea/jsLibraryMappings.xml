@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/edExtWeb" libraries="{buttons.html5, buttons.print, dataTables.buttons, dataTables.checkboxes, dataTables.fixedColumns, dataTables.select, jquery, jquery-2.1.1, jquery-3.5.1, jquery.dataTables, jszip, materialize, select.dataTables, sweetalert, sweetalert2}" />
+    <file url="file://$PROJECT_DIR$/edExtWeb" libraries="{buttons.html5, buttons.print, dataTables.buttons, dataTables.checkboxes, dataTables.fixedColumns, dataTables.select, jquery, jquery-2.1.1, jquery-3.5.1, jquery.dataTables, jszip, materialize, responsive.dataTables, select.dataTables, sweetalert}" />
+    <file url="file://$PROJECT_DIR$/edExtWeb-mobile" libraries="{buttons.html5, buttons.print, dataTables.buttons, dataTables.checkboxes, dataTables.fixedColumns, dataTables.responsive, dataTables.select, jquery, jquery-2.1.1, jquery-3.5.1, jquery.dataTables, jszip, materialize, responsive.dataTables, select.dataTables, sweetalert}" />
   </component>
 </project>

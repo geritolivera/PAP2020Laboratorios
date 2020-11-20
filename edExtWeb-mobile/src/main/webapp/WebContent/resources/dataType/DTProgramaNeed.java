@@ -1,49 +1,50 @@
 package main.webapp.WebContent.resources.dataType;
 
-import java.util.ArrayList;
 
 public class DTProgramaNeed {
 
-    private static String atipo = "Programa";
-    private String bnombre;
-    private String cdescripcion;
-    private String dlink = "";
+    private static String dTipo = "Programa";
+    private String cNombre;
+    private String bDescripcion;
+    private String aLink = "";
 
 
-    public DTProgramaNeed(String nombre, String descripcion) {
-        this.bnombre = nombre;
-        this.cdescripcion = descripcion;
+    public DTProgramaNeed() {
     }
 
-    public DTProgramaNeed() {}
+    public DTProgramaNeed(String nombre, String descripcion) {
+        this.setNombre(nombre);
+        this.bDescripcion = descripcion;
+        this.setLink(nombre);
+    }
 
     public String getTipo() {
-        return atipo;
+        return dTipo;
     }
 
     public String getNombre() {
-        return bnombre;
+        return cNombre;
     }
 
     public String getDescripcion() {
-        return cdescripcion;
+        return bDescripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.cdescripcion = descripcion;
+        this.bDescripcion = descripcion;
     }
 
     public void setNombre(String nombre) {
-        this.bnombre = nombre;
-        setLink(nombre);
+        this.cNombre = nombre;
+
     }
 
     public void setLink(String nom){
-        this.dlink ="<a href=\"consultaProgramaFormacion?programa="+ nom + "\" class=\"content\"><i class=\"material-icons\">pageview</i></a>";
+        this.aLink ="<a href=\"consultaProgramaFormacion?programa="+ nom + "\" class=\"content\"><i class=\"material-icons\">link</i></a>";
     }
 
     public String getLink() {
-        return dlink;
+        return aLink;
     }
 
 
