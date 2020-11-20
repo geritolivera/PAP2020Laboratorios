@@ -40,7 +40,14 @@ public class controladorUsuario implements IcontroladorUsuario {
 						Conexion con = Conexion.getInstancia();
 						EntityManager em = con.getEntityManager();
 						Docente doc = new Docente(nickname, nombre, apellido, correo, fechaNac, password);
-						doc.setImagenUrl(url);
+						if(url.isEmpty()) {
+							doc.setImagenUrl("resources/images/estud.jpg");
+							System.out.println("No hay imagen para el usuario");
+						}
+						else {
+							doc.setImagenUrl(url);
+							System.out.println("Hay imagen");
+						}
 						Instituto ins = mIns.buscarInstituto(instituto);
 						//aniade tambien el docente al instituto
 						doc.setInstituto(ins);

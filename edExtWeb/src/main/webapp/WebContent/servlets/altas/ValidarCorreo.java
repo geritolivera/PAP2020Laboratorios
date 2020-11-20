@@ -43,7 +43,6 @@ public class ValidarCorreo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String correo = request.getParameter("email");
-		System.out.println(correo);
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		DTResponse respuesta = new DTResponse();
 		
@@ -51,7 +50,6 @@ public class ValidarCorreo extends HttpServlet {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 			
 			boolean valido = port.validarCorreo(correo);
-			System.out.println(valido);
 			if (!valido){
 				respuesta.setCodigo(0);
 				respuesta.setMensaje("Valido!");

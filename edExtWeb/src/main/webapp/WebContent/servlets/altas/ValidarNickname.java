@@ -24,34 +24,33 @@ public class ValidarNickname extends HttpServlet {
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nickname = request.getParameter("nickName");
-		System.out.println(nickname);
+		//System.out.println(nickname);
 		ControladorUsuarioPublishService cup = new ControladorUsuarioPublishServiceLocator();
 		DTResponse respuesta = new DTResponse();
 		
 		if (!nickname.equals("")) {
 		
-		try {
-			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
-			
-			boolean valido = port.validarNick(nickname);
-			System.out.println(valido);
-			if (valido){
-				respuesta.setCodigo(0);
-				respuesta.setMensaje("Valido!");
-			}else {
-				respuesta.setCodigo(1);
-				respuesta.setMensaje("Nickname ya tomado!");
-			}
-		
-		} catch (ServiceException e) {
-			System.out.println("ServiceExcepcion");
-			e.printStackTrace();
-		}
+			try {
+				ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
 
-		ObjectMapper mapper = new ObjectMapper();
-        String usuarioStr = mapper.writeValueAsString(respuesta);
-        response.setContentType("application/json");
-        response.getWriter().append(usuarioStr);
+				boolean valido = port.validarNick(nickname);
+				if (valido){
+					respuesta.setCodigo(0);
+					respuesta.setMensaje("Valido!");
+				}else {
+					respuesta.setCodigo(1);
+					respuesta.setMensaje("Nickname ya tomado!");
+				}
+
+			} catch (ServiceException e) {
+				System.out.println("ServiceExcepcion");
+				e.printStackTrace();
+			}
+
+			ObjectMapper mapper = new ObjectMapper();
+			String usuarioStr = mapper.writeValueAsString(respuesta);
+			response.setContentType("application/json");
+			response.getWriter().append(usuarioStr);
 		}
 	}
 

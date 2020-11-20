@@ -122,6 +122,7 @@ function usuario() {
         })
     } else {
         if (tipoUser == 'estudiante') {
+            console.log("ESTUDIANTE");
             debugger;
             fetchUrl = 'crearUsuario?nickName=' + nick +
                 '&nombre=' + nombre +
@@ -154,6 +155,7 @@ function usuario() {
                 console.error(' paso algo: ', err);
             });
         } else {
+            console.log("DOCENTE");
             debugger;
             fetchUrl = 'crearUsuario?nickName=' + nick +
                 '&nombre=' + nombre +

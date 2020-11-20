@@ -29,7 +29,6 @@ public class crearUsuario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Entra en crearUsuario");
 		DTResponse respuesta = new DTResponse();
         //datos del usuario
 		String nickname = request.getParameter("nickName");
@@ -39,6 +38,7 @@ public class crearUsuario extends HttpServlet {
 		String password = request.getParameter("password");
 		String url = request.getParameter("imagen");
 		String tipoUser =request.getParameter("tipoUser");
+		String instituto = request.getParameter("institutos");
 
 		System.out.println(nickname);
 		System.out.println(nombre);
@@ -47,11 +47,7 @@ public class crearUsuario extends HttpServlet {
 		System.out.println(password);
 		System.out.println(url);
 		System.out.println(tipoUser);
-
-		String instituto = null;
-		if (!request.getParameter("tipoUser").equals("docente")){
-			instituto = request.getParameter("institutos");
-		}
+		System.out.println(instituto);
 
 		//cambia la string a un date
 		long fN = Date.parse(request.getParameter( "fechaN"));
@@ -63,6 +59,7 @@ public class crearUsuario extends HttpServlet {
 
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
+			System.out.println("ENTRO AL CONTROLADOR");
 			try {
 				if(nickname.equals("") || nombre.equals("") || apellido.equals("") || correo.equals("") || password.equals("")) {
 					respuesta.setCodigo(1);
@@ -104,7 +101,6 @@ public class crearUsuario extends HttpServlet {
 			System.out.println("ServiceExcepcion");
 			e.printStackTrace();
 		}
-
 		ObjectMapper mapper = new ObjectMapper();
         String usuarioStr = mapper.writeValueAsString(respuesta);
         response.setContentType("application/json");
