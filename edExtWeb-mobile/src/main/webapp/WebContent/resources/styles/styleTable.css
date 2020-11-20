@@ -31,7 +31,6 @@ div.material-table .table-header {
   align-items: center;
   display: flex;
   -webkit-display: flex;
-  border-bottom: solid 1px #DDDDDD;
 }
 
 div.material-table .table-header .actions {
@@ -151,7 +150,6 @@ div.material-table table tr td {
   padding: 0 0 0 56px;
   height: 48px;
   font-size: 13px;
-  border-bottom: solid 1px #DDDDDD;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -168,6 +166,7 @@ div.material-table table tr td a i {
 
 div.material-table table tr {
   font-size: 12px;
+  text-align: center;
 }
 
 div.material-table table th {

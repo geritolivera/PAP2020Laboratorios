@@ -26,7 +26,7 @@
       	<div class="row">
 			<form class="col s8 offset-s2 center-align" id="formModUser" >
           	<div class="card-panel">
-            	<h4 class="header2"> <span style="color: #81054b">></span>Modificar Datos de Usuario</h4>
+            	<h5 class="header2"> <span style="color: #81054b">></span>Modificar Datos de Usuario</h5>
             	<div class="row">
               		<div class="input-field col s11">
                 		<i class="material-icons prefix">account_circle</i>

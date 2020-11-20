@@ -44,30 +44,6 @@ public class ControladorUsuarioPublishProxy implements publicadores.ControladorU
     return controladorUsuarioPublish;
   }
   
-  public void altaUsuario(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, java.util.Calendar arg4, java.lang.String arg5, java.lang.String arg6, java.lang.String arg7) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    controladorUsuarioPublish.altaUsuario(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-  }
-  
-  public void altaCategoria(java.lang.String arg0) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    controladorUsuarioPublish.altaCategoria(arg0);
-  }
-  
-  public void altaInstituto(java.lang.String arg0) throws java.rmi.RemoteException, publicadores.InstitutoExcepcion{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    controladorUsuarioPublish.altaInstituto(arg0);
-  }
-  
-  public publicadores.DtUsuario[] listarDTUsuarios() throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.listarDTUsuarios();
-  }
-  
   public publicadores.DtUsuario verInfoUsuario(java.lang.String arg0) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
@@ -80,10 +56,28 @@ public class ControladorUsuarioPublishProxy implements publicadores.ControladorU
     return controladorUsuarioPublish.listarUsuarios();
   }
   
+  public publicadores.DtUsuario[] listarDTUsuarios() throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.listarDTUsuarios();
+  }
+  
   public void nuevosDatos(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.util.Calendar arg3) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
     controladorUsuarioPublish.nuevosDatos(arg0, arg1, arg2, arg3);
+  }
+  
+  public boolean validarCorreo(java.lang.String arg0) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.validarCorreo(arg0);
+  }
+  
+  public void altaUsuario(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, java.util.Calendar arg4, java.lang.String arg5, java.lang.String arg6, java.lang.String arg7) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    controladorUsuarioPublish.altaUsuario(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
   }
   
   public java.lang.String[] listarInstituto() throws java.rmi.RemoteException{
@@ -92,58 +86,22 @@ public class ControladorUsuarioPublishProxy implements publicadores.ControladorU
     return controladorUsuarioPublish.listarInstituto();
   }
   
-  public publicadores.DtInscripcionED[] listarInscripcionesED(java.lang.String arg0) throws java.rmi.RemoteException{
+  public void altaInstituto(java.lang.String arg0) throws java.rmi.RemoteException, publicadores.InstitutoExcepcion{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.listarInscripcionesED(arg0);
+    controladorUsuarioPublish.altaInstituto(arg0);
   }
   
-  public java.lang.String[] listarEstudiantesAux() throws java.rmi.RemoteException{
+  public void altaCategoria(java.lang.String arg0) throws java.rmi.RemoteException{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.listarEstudiantesAux();
+    controladorUsuarioPublish.altaCategoria(arg0);
   }
   
   public java.lang.String[] listarSeguidores(java.lang.String arg0) throws java.rmi.RemoteException{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
     return controladorUsuarioPublish.listarSeguidores(arg0);
-  }
-  
-  public boolean validarSeguidor(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.validarSeguidor(arg0, arg1);
-  }
-  
-  public boolean validarSigue(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.validarSigue(arg0, arg1);
-  }
-  
-  public java.lang.String[] listarSeguidos(java.lang.String arg0) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.listarSeguidos(arg0);
-  }
-  
-  public void cambiarInscripcion(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    controladorUsuarioPublish.cambiarInscripcion(arg0, arg1, arg2);
-  }
-  
-  public boolean validarUsuario(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.validarUsuario(arg0, arg1);
-  }
-  
-  public void dejarDeSeguir(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
-    if (controladorUsuarioPublish == null)
-      _initControladorUsuarioPublishProxy();
-    controladorUsuarioPublish.dejarDeSeguir(arg0, arg1);
   }
   
   public java.lang.String inscriptoED(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
@@ -158,10 +116,40 @@ public class ControladorUsuarioPublishProxy implements publicadores.ControladorU
     return controladorUsuarioPublish.inscriptoPF(arg0, arg1);
   }
   
-  public publicadores.DtEstudiante estudiante() throws java.rmi.RemoteException{
+  public boolean validarUsuario(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, publicadores.UsuarioExcepcion{
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
-    return controladorUsuarioPublish.estudiante();
+    return controladorUsuarioPublish.validarUsuario(arg0, arg1);
+  }
+  
+  public void dejarDeSeguir(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    controladorUsuarioPublish.dejarDeSeguir(arg0, arg1);
+  }
+  
+  public java.lang.String[] listarSeguidos(java.lang.String arg0) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.listarSeguidos(arg0);
+  }
+  
+  public boolean validarSeguidor(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.validarSeguidor(arg0, arg1);
+  }
+  
+  public boolean validarSigue(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.validarSigue(arg0, arg1);
+  }
+  
+  public void cambiarInscripcion(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    controladorUsuarioPublish.cambiarInscripcion(arg0, arg1, arg2);
   }
   
   public publicadores.DtDocente docente() throws java.rmi.RemoteException{
@@ -174,6 +162,30 @@ public class ControladorUsuarioPublishProxy implements publicadores.ControladorU
     if (controladorUsuarioPublish == null)
       _initControladorUsuarioPublishProxy();
     controladorUsuarioPublish.comenazarSeguir(arg0, arg1);
+  }
+  
+  public boolean validarNick(java.lang.String arg0) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.validarNick(arg0);
+  }
+  
+  public publicadores.DtEstudiante estudiante() throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.estudiante();
+  }
+  
+  public java.lang.String[] listarEstudiantesAux() throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.listarEstudiantesAux();
+  }
+  
+  public publicadores.DtInscripcionED[] listarInscripcionesED(java.lang.String arg0) throws java.rmi.RemoteException{
+    if (controladorUsuarioPublish == null)
+      _initControladorUsuarioPublishProxy();
+    return controladorUsuarioPublish.listarInscripcionesED(arg0);
   }
   
   

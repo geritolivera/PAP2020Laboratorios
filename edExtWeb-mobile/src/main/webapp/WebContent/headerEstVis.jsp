@@ -21,14 +21,15 @@
 
 <body>
 <div class="navbar-fixed">
-    <nav class="rojo">
-        <a href="index.jsp" class="brand-logo">edExt</a>
+    <nav class="rojo draggable">
+        <a href="index.jsp" class="brand-logo hide-on-med-and-down" id="brand-logo-large">edExt</a>
+        <a href="index.jsp" class="brand-logo hide-on-large-only" id="brand-logo-mobile">edExt</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="container">
             <div class="nav-wrapper">
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb/busquedaGeneral.jsp';">Buscar</a>
+                        <a class="waves-effect waves-light btn" id="searchIcon"  onclick="window.location = 'http://localhost:8081/edExtWeb-mobile/busquedaGeneral.jsp';">Buscar</a>
                     </li>
                     <li>
                         <a href="consultaPrograma.jsp">Programas</a>
@@ -74,8 +75,9 @@
     <li>
         <a href="consultaUsuario.jsp">Usuarios</a>
     </li>
+    <li><a type="button" href="busquedaGeneral.jsp"><i class="material-icons left">search</i>Buscar</a></li>
     <% if (session.getAttribute("nombreUser")!=null) {%>
-    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i></a></li>
+    <li><a type="button" onclick="logout()"><i class="material-icons left">exit_to_app</i>Logout</a></li>
     <%}%>
 </ul>
 <script src="resources/scripts/log.js"></script>

@@ -29,21 +29,27 @@ public class Busqueda extends HttpServlet {
             ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
             DtCurso[] cursosArray = port.listaDTCurso();
             DtProgramaFormacion[] programasArray = port.listaDTPrograma();
-            ArrayList<DTCursoNeed> cursoNeeds = new ArrayList<>();
-            ArrayList<DTProgramaNeed> programasNeeds = new ArrayList<>();
+            DTCursoNeed[] cursoNeeds = new DTCursoNeed[cursosArray.length];
+            DTProgramaNeed[] programasNeeds = new DTProgramaNeed[programasArray.length];
+            Integer i=0;
             for (DtCurso c : cursosArray) {
                 DTCursoNeed dc = new DTCursoNeed();
                 dc.setNombre(c.getNombre());
                 dc.setDescripcion(c.getDescripcion());
-                cursoNeeds.add(dc);
+                dc.setLink(c.getNombre());
+                cursoNeeds[i] = dc;
+                i++;
             }
-
+            i=0;
             for (DtProgramaFormacion pf : programasArray) {
                 DTProgramaNeed dp = new DTProgramaNeed();
                 dp.setNombre(pf.getNombre());
                 dp.setDescripcion(pf.getDescripcion());
-                programasNeeds.add(dp);
+                dp.setLink(pf.getNombre());
+                programasNeeds[i] = dp;
+                i++;
             }
+
 
             DTInfo di = new DTInfo();
             di.setCursos(cursoNeeds);

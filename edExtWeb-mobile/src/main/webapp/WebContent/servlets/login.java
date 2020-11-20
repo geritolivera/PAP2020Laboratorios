@@ -86,34 +86,15 @@ public class login extends HttpServlet {
                     response.getWriter().append(userStr);
 
                 } else {
-                    tipoUser = "docente";
-                    session.setAttribute("nombreUser", nickname);
-                    session.setAttribute("tipoUser", tipoUser);
-                    session.setAttribute("nickname", dtu.getNick());
-                    session.setAttribute("nombre", dtu.getNombre());
-                    session.setAttribute("apellido", dtu.getApellido());
-                    session.setAttribute("correo", dtu.getCorreo());
-                    session.setAttribute("fechaNac", dtu.getFechaNac());
-                    session.setAttribute("imagen", dtu.getImage());
-                    System.out.println("dtu.getImage() = " + dtu.getImage());
-                    String[] seguido = dtu.getSeguidos();
-                    String[] seguidor = dtu.getSeguidores();
-                    session.setAttribute("seguidos", seguido);
-                    session.setAttribute("seguidores", seguidor);
-                    ArrayList<String> edis = new ArrayList<String>();
-                    for (DtEdicionCurso edi : (((DtDocente) dtu).getEdiciones())) {
-                        edis.add(edi.getNombre());
+                    if (dtu instanceof DtDocente) {
+                        respuesta.setCodigo(1);
+                        respuesta.setMensaje("El usuario que intenta ingresar es docente " + nickname);
+                        ObjectMapper mapper = new ObjectMapper();
+                        String userStr = mapper.writeValueAsString(respuesta);
+                        response.setContentType("application/json");
+                        response.getWriter().append(userStr);
                     }
-                    System.out.println("edis = " + edis);
-                    session.setAttribute("ediciones", edis);
-
-                    respuesta.setCodigo(0);
-                    respuesta.setMensaje(nickname);
-                    ObjectMapper mapper = new ObjectMapper();
-                    String userStr = mapper.writeValueAsString(respuesta);
-                    response.setContentType("application/json");
-                    response.getWriter().append(userStr);
-                    }
+                }
             }else{
                 respuesta.setCodigo(1);
                 respuesta.setMensaje("Constraseña incorrecta para  " + nickname);

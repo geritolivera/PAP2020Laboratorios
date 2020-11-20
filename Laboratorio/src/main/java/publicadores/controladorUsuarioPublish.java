@@ -233,4 +233,15 @@ public class controladorUsuarioPublish {
 	//existeCorreoUsuario se usa para el controlador
 	//por lo que no es necesario publicarla
 
+	
+	@WebMethod
+	public boolean ValidarCorreo(String c) {
+		return icon.ValidarCorreo(c);
+	}
+	
+
+	@WebMethod
+	public boolean ValidarNick(String nick) {
+		return icon.ValidarNickname(nick);
+	}
 }

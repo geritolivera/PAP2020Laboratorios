@@ -189,6 +189,56 @@ function usuario() {
     }
 }
 
+function checkNick() {
+    console.log("entro aca")
+    const nick = document.querySelector("#nickName").value;
+    let fetchUrl;
+
+    fetchUrl = baseURL + 'ValidarNickname?nickName=' + nick;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            document.getElementById("nickName").classList.remove("valid");
+            document.getElementById("nickName").classList.add("invalid");
+        } else {
+            document.getElementById("nickName").classList.remove("invalid");
+            document.getElementById("nickName").classList.add("valid");
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+function checkMail() {
+    const email = document.querySelector("#email").value;
+    let fetchUrl;
+
+    fetchUrl = baseURL + 'ValidarCorreo?email=' + email;
+    fetch(fetchUrl, {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((respuesta) => {
+        respuesta.codigo //1 o 0
+        respuesta.mensaje //mensaje de error o success
+        if (respuesta.codigo == 0) {
+            document.getElementById("email").classList.remove("valid");
+            document.getElementById("email").classList.add("invalid");
+        } else {
+            document.getElementById("email").classList.remove("invalid");
+            document.getElementById("email").classList.add("valid");
+        }
+    }).catch((err) => {
+        console.error(' paso algo: ', err);
+    });
+}
+
+
 function inscribirUsuario(edicion) {
     debugger;
     //const edicion = document.querySelector("#nombre").value;

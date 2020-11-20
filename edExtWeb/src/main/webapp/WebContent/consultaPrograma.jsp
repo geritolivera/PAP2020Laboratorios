@@ -12,7 +12,7 @@
         <br><br>
         <div class="container">
             <div class="row">
-                <h4 class="header2"> <span style="color: #81054b">></span>Seleccione uno de los programas...</h4>
+                <h5 class="header2"> <span style="color: #81054b">></span>Seleccione uno de los programas...</h5>
 	            <!-- CARD CONSULTA PROGRAMA-->
                 <div>
 					<div class="col s12">

@@ -53,34 +53,48 @@ public class login extends HttpServlet {
             ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
             if(port2.validarUsuario(nickname, password)) {
                 DtUsuario dtu = port2.verInfoUsuario(nickname);
+                session.setAttribute("nombreUser", nickname);
+                session.setAttribute("tipoUser", tipoUser);
+                session.setAttribute("nickname", dtu.getNick());
+                session.setAttribute("nombre", dtu.getNombre());
+                session.setAttribute("apellido", dtu.getApellido());
+                session.setAttribute("correo", dtu.getCorreo());
+                Calendar fechaN = dtu.getFechaNac();
+                String FN = format.format(fechaN.getTime());
+                session.setAttribute("fechaNac", FN);
+                if(dtu.getSeguidos().length > 0) {
+                    String[] seguido = dtu.getSeguidos();
+                    session.setAttribute("seguidos", seguido);
+                }
+                if(dtu.getSeguidores().length >0 ) {
+                    String[] seguidor = dtu.getSeguidores();
+                    session.setAttribute("seguidores", seguidor);
+                }
+
                 if (dtu instanceof DtEstudiante) {
                     tipoUser = "estudiante";
-                    session.setAttribute("nombreUser", nickname);
                     session.setAttribute("tipoUser", tipoUser);
-                    session.setAttribute("nickname", dtu.getNick());
-                    session.setAttribute("nombre", dtu.getNombre());
-                    session.setAttribute("apellido", dtu.getApellido());
-                    session.setAttribute("correo", dtu.getCorreo());
-                    Calendar fechaN = dtu.getFechaNac();
-                    String FN = format.format(fechaN.getTime());
-                    session.setAttribute("fechaNac", FN);
-                    session.setAttribute("imagen", dtu.getImage());
+                    if(dtu.getImage().isEmpty()){
+                        session.setAttribute("imagen", "resources/images/estud.jpg");
+                    }else {
+                        session.setAttribute("imagen", dtu.getImage());
+                    }
                     ArrayList<String> prog = new ArrayList<String>();
-                    for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
-                        prog.add(pro.getNombre());
+                    if((((DtEstudiante) dtu).getProgramas()).length > 0) {
+                        for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
+                            prog.add(pro.getNombre());
+                        }
                     }
                     System.out.println("prog = " + prog);
                     session.setAttribute("programasNombre", prog);
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
-                        edis.add(edi.getNombre());
+                    if((((DtEstudiante) dtu).getEdiciones()).length > 0) {
+                        for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
+                            edis.add(edi.getNombre());
+                        }
                     }
                     System.out.println("edis = " + edis);
                     session.setAttribute("edicionesNombres", edis);
-                    String[] seguido = dtu.getSeguidos();
-                    String[] seguidor = dtu.getSeguidores();
-                    session.setAttribute("seguidos", seguido);
-                    session.setAttribute("seguidores", seguidor);
                     respuesta.setCodigo(0);
                     respuesta.setMensaje(nickname);
                     ObjectMapper mapper = new ObjectMapper();
@@ -90,24 +104,17 @@ public class login extends HttpServlet {
 
                 } else {
                     tipoUser = "docente";
-                    session.setAttribute("nombreUser", nickname);
                     session.setAttribute("tipoUser", tipoUser);
-                    session.setAttribute("nickname", dtu.getNick());
-                    session.setAttribute("nombre", dtu.getNombre());
-                    session.setAttribute("apellido", dtu.getApellido());
-                    session.setAttribute("correo", dtu.getCorreo());
-                    Calendar fechaN = dtu.getFechaNac();
-                    String FN = format.format(fechaN.getTime());
-                    session.setAttribute("fechaNac", FN);
-                    session.setAttribute("imagen", dtu.getImage());
-                    System.out.println("dtu.getImage() = " + dtu.getImage());
-                    String[] seguido = dtu.getSeguidos();
-                    String[] seguidor = dtu.getSeguidores();
-                    session.setAttribute("seguidos", seguido);
-                    session.setAttribute("seguidores", seguidor);
+                    if(dtu.getImage().isEmpty()){
+                        session.setAttribute("imagen", "resources/images/docente.jpg");
+                    }else {
+                        session.setAttribute("imagen", dtu.getImage());
+                    }
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DtEdicionCurso edi : (((DtDocente) dtu).getEdiciones())) {
-                        edis.add(edi.getNombre());
+                    if (((DtDocente) dtu).getEdiciones().length > 0) {
+                        for (DtEdicionCurso edi : (((DtDocente) dtu).getEdiciones())) {
+                            edis.add(edi.getNombre());
+                        }
                     }
                     System.out.println("edis = " + edis);
                     session.setAttribute("ediciones", edis);

@@ -17,29 +17,29 @@
         <div class="row">
             <form class="col s12" > <%-- action="altaCurso" method="post">--%>
                 <div class="card-panel">
-                    <h4 class="header2"> <span style="color: #81054b">></span>Alta de Curso</h4>
+                    <h5 class="header2"> <span style="color: #81054b">></span>Alta de Curso</h5>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <input type="text" name="nombre" id="nombre">
                             <label for="nombre">Nombre de Curso</label>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <select name="institutos" id="institutos">
                             </select>
                             <label>Instituto</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s4">
+                        <div class="input-field col s12 m4">
                             <input id="duracion" name="duracion" type="number" class="validate" value="0">
                             <label for="duracion">Duracion</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s12 m4">
                             <input id="cantHoras" name="cantHoras" type="number" class="validate" value="0">
                             <label for="cantHoras">Cantidad de Horas</label>
                         </div>
-                        <div class="input-field col s4">
+                        <div class="input-field col s12 m4">
                             <input id="creditos" name="creditos" type="number" class="validate" value="0">
                             <label for="creditos">Creditos</label>
                         </div>
@@ -51,23 +51,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <input id="url" type="text" name="url" class="validate">
                             <label for="url">URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">image</i>
                             <input type="text" id="imagen">
                             <label for="imagen">Imagen del curso</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <select multiple name="previas" id="previas">
                             </select>
                             <label>Previas</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12 m6">
                             <select multiple name="categorias" id="categorias">
                             </select>
                             <label>Categorias</label>
