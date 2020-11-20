@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -62,11 +63,11 @@ public class login extends HttpServlet {
                 Calendar fechaN = dtu.getFechaNac();
                 String FN = format.format(fechaN.getTime());
                 session.setAttribute("fechaNac", FN);
-                if(dtu.getSeguidos().length > 0) {
-                    String[] seguido = dtu.getSeguidos();
-                    session.setAttribute("seguidos", seguido);
+                if(dtu.getSeguidos() != null) {
+                        String[] seguido = dtu.getSeguidos();
+                        session.setAttribute("seguidos", seguido);
                 }
-                if(dtu.getSeguidores().length >0 ) {
+                if(dtu.getSeguidos() != null) {
                     String[] seguidor = dtu.getSeguidores();
                     session.setAttribute("seguidores", seguidor);
                 }
@@ -80,7 +81,7 @@ public class login extends HttpServlet {
                         session.setAttribute("imagen", dtu.getImage());
                     }
                     ArrayList<String> prog = new ArrayList<String>();
-                    if((((DtEstudiante) dtu).getProgramas()).length > 0) {
+                    if((((DtEstudiante) dtu).getProgramas()) != null) {
                         for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
                             prog.add(pro.getNombre());
                         }
@@ -88,7 +89,7 @@ public class login extends HttpServlet {
                     System.out.println("prog = " + prog);
                     session.setAttribute("programasNombre", prog);
                     ArrayList<String> edis = new ArrayList<String>();
-                    if((((DtEstudiante) dtu).getEdiciones()).length > 0) {
+                    if((((DtEstudiante) dtu).getEdiciones())!= null) {
                         for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
                             edis.add(edi.getNombre());
                         }
@@ -111,7 +112,7 @@ public class login extends HttpServlet {
                         session.setAttribute("imagen", dtu.getImage());
                     }
                     ArrayList<String> edis = new ArrayList<String>();
-                    if (((DtDocente) dtu).getEdiciones().length > 0) {
+                    if (((DtDocente) dtu).getEdiciones() != null) {
                         for (DtEdicionCurso edi : (((DtDocente) dtu).getEdiciones())) {
                             edis.add(edi.getNombre());
                         }
