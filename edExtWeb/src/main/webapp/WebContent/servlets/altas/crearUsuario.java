@@ -59,7 +59,6 @@ public class crearUsuario extends HttpServlet {
 
 		try {
 			ControladorUsuarioPublish port = cup.getcontroladorUsuarioPublishPort();
-			System.out.println("ENTRO AL CONTROLADOR");
 			try {
 				if(nickname.equals("") || nombre.equals("") || apellido.equals("") || correo.equals("") || password.equals("")) {
 					respuesta.setCodigo(1);
