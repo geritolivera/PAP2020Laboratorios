@@ -47,7 +47,6 @@
     <orderEntry type="library" exported="" name="buttons.print" level="application" />
     <orderEntry type="library" exported="" name="dataTables.buttons" level="application" />
     <orderEntry type="library" exported="" name="select.dataTables" level="application" />
-    <orderEntry type="library" exported="" name="sweetalert2" level="application" />
     <orderEntry type="library" exported="" name="dataTables.checkboxes" level="application" />
     <orderEntry type="library" exported="" name="dataTables.fixedColumns" level="application" />
     <orderEntry type="library" exported="" name="dataTables.select" level="application" />
@@ -64,7 +63,6 @@
     <orderEntry type="library" exported="" name="buttons.print" level="application" />
     <orderEntry type="library" exported="" name="dataTables.buttons" level="application" />
     <orderEntry type="library" exported="" name="jszip" level="application" />
-    <orderEntry type="library" exported="" name="sweetalert2" level="application" />
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.2.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.0" level="project" />
@@ -121,5 +119,6 @@
     <orderEntry type="library" name="jquery-2.1.1" level="application" />
     <orderEntry type="library" name="select.dataTables" level="application" />
     <orderEntry type="library" name="responsive.dataTables" level="application" />
+    <orderEntry type="library" name="sweetalert2" level="application" />
   </component>
 </module>

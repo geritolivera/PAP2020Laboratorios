@@ -2,46 +2,47 @@ package main.webapp.WebContent.resources.dataType;
 
 public class DTCursoNeed {
 
-    private static String atipo = "Curso";
-    private String bnombre;
-    private String cdescripcion;
-    private String dlink = "";
+    private static String dTipo = "Curso";
+    private String cNombre;
+    private String bDescripcion;
+    private String aLink = "";
 
     public DTCursoNeed() {
     }
 
     public DTCursoNeed(String nombre, String descripcion) {
-        this.bnombre = nombre;
-        this.cdescripcion = descripcion;
+        this.setNombre(nombre);
+        this.bDescripcion = descripcion;
+        this.setLink(nombre);
     }
 
 
     public String getTipo() {
-        return atipo;
+        return dTipo;
     }
 
     public String getNombre() {
-        return bnombre;
+        return cNombre;
     }
 
     public void setNombre(String nombre) {
-        this.bnombre = nombre;
+        this.cNombre = nombre;
         setLink(nombre);
     }
     public void setLink(String nom){
-        this.dlink ="<a href=\"consultaCurso?curso="+ nom + "\" class=\"content\"><i class=\"material-icons\">pageview</i></a>";
+        this.aLink ="<a href=\"consultaCurso?curso="+ nom + "\" class=\"content\"><i class=\"material-icons\">link</i></a>";
     }
 
     public String getLink() {
-        return dlink;
+        return aLink;
     }
 
     public String getDescripcion() {
-        return cdescripcion;
+        return bDescripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.cdescripcion = descripcion;
+        this.bDescripcion = descripcion;
     }
 
 
