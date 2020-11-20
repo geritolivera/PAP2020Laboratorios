@@ -26,13 +26,12 @@ $(document).ready( function() {
 
         $('#datatable').dataTable({
 
-
             data: dataSet,
             columns: [
-                { "title": "Link" },
+                { "title": "Tipo"},
                 { "title": "Nombre"},
                 { "title": "Descripcion"},
-                { "title": "Tipo"}
+                { "title": "Link"}
             ],
             "oLanguage": {
                 "sSearch": "",
