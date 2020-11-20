@@ -80,8 +80,7 @@ $(document).ready( function() {
             data: dataSet,
             columns: [
                 { "title": "Link"},
-                { "title": "Nombre"},
-                { "title": "Tipo"}
+                { "title": "Nombre"}
             ],
             "oLanguage": {
                 "sSearch": "",

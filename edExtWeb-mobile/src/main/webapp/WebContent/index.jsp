@@ -77,39 +77,6 @@
         </div>
     </section>
 
-    <!-- Section: Search -->
-    <section id="search" class="section section-search center scrollspy">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <div id="admin" class="col s12">
-                        <div class="card material-table hide-on-med-and-down">
-                            <div class="table-header">
-                                <span class="table-title">Busqueda General</span>
-                                <div class="actions">
-                                    <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                                </div>
-                            </div>
-                            <table id="datatable">
-                                <thead>
-                                <tr>
-                                    <th>Link</th>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Tipo</th>
-                                </tr>
-                                </thead>
-                                <tbody id="datatablebody">
-                                <tr>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </div>
 <%@include file="footer.jsp" %>
