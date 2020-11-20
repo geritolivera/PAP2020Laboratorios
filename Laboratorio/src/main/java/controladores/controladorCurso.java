@@ -31,7 +31,7 @@ public class controladorCurso implements IcontroladorCurso{
 				Instituto I = mI.buscarInstituto(instituto);
 				Curso cursoNuevo = new Curso(nombre, descripcion, duracion, cantHoras, creditos, fechaR, url, I);
 				if(url.isEmpty())
-					cursoNuevo.setImagenUrl("resources/images/estud.jpg");
+					cursoNuevo.setImagenUrl("resources/images/img1.jpg");
 				//se fija si hay previas antes de ingresarlas
 				if (!previas.isEmpty() && previas != null){
 					for (String s : previas) {
@@ -158,7 +158,7 @@ public class controladorCurso implements IcontroladorCurso{
 				Curso curso = mCur.buscarCurso(nomCurso);
 				EdicionCurso edi = new EdicionCurso(nombre, fechaI, fechaF, cupo, fechaPub, curso, url);
 				if(url.isEmpty())
-					edi.setImagenURL("resources/images/estud.jpg");
+					edi.setImagenURL("resources/images/img2.jpg");
 
 				//se fija que haya docentes para ingresar
 				if(!docentes.isEmpty() && docentes != null) {
