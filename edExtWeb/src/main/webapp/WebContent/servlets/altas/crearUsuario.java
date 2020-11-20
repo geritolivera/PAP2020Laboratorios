@@ -39,19 +39,7 @@ public class crearUsuario extends HttpServlet {
 		String password = request.getParameter("password");
 		String url = request.getParameter("imagen");
 		String tipoUser =request.getParameter("tipoUser");
-
-		System.out.println(nickname);
-		System.out.println(nombre);
-		System.out.println(apellido);
-		System.out.println(correo);
-		System.out.println(password);
-		System.out.println(url);
-		System.out.println(tipoUser);
-
-		String instituto = null;
-		if (!request.getParameter("tipoUser").equals("docente")){
-			instituto = request.getParameter("institutos");
-		}
+		String instituto = request.getParameter("instituto");
 
 		//cambia la string a un date
 		long fN = Date.parse(request.getParameter( "fechaN"));

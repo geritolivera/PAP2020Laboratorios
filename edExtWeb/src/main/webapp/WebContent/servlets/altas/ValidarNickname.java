@@ -15,13 +15,9 @@ import publicadores.ControladorUsuarioPublish;
 import publicadores.ControladorUsuarioPublishService;
 import publicadores.ControladorUsuarioPublishServiceLocator;
 
-/**
- * Servlet implementation class ValidarNickname
- */
 @WebServlet("/ValidarNickname")
 public class ValidarNickname extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nickname = request.getParameter("nickName");
 		System.out.println(nickname);
