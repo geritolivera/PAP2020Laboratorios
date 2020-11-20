@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -56,7 +57,27 @@ public class controladorUsuario implements IcontroladorUsuario {
 		} else
 			throw new UsuarioExcepcion("El Nickname '" + nickname + "' ya existe en el sistema");
 	}
-
+	
+	@Override 
+	public boolean ValidarNickname(String nick) {
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		return mUsu.existeUsuarioNick(nick);
+	}
+	
+	@Override 
+	public boolean ValidarCorreo(String c) {
+		manejadorUsuario mUsu = manejadorUsuario.getInstancia();
+		/*
+		 * boolean valido= false; if (mUsu.buscarUsuarioCorreo(c)==null) valido=true;
+		 * return valido;
+		 */
+		List<Usuario> usuarios = mUsu.getUsuarios();
+		for (Usuario usuario : usuarios) {
+			if (usuario.getCorreo().contentEquals(c))
+				return false;
+		}
+		return true;
+	}
 
 
 	/*-------------------------------------------------------------------------------------------------------------*/

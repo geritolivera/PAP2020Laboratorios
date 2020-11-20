@@ -68,93 +68,41 @@ case 13:
         if(!arg0_1id.equals("")){
          arg0_1idTemp  = arg0_1id;
         }
-        String arg1_2id=  request.getParameter("arg118");
-            java.lang.String arg1_2idTemp = null;
-        if(!arg1_2id.equals("")){
-         arg1_2idTemp  = arg1_2id;
-        }
-        String arg2_3id=  request.getParameter("arg220");
-            java.lang.String arg2_3idTemp = null;
-        if(!arg2_3id.equals("")){
-         arg2_3idTemp  = arg2_3id;
-        }
-        String arg3_4id=  request.getParameter("arg322");
-            java.lang.String arg3_4idTemp = null;
-        if(!arg3_4id.equals("")){
-         arg3_4idTemp  = arg3_4id;
-        }
-        String arg4_5id=  request.getParameter("arg424");
-            java.util.Calendar arg4_5idTemp = null;
-        if(!arg4_5id.equals("")){
-        java.text.DateFormat dateFormatarg424 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg424  = dateFormatarg424.parse(arg4_5id);
-         arg4_5idTemp = new java.util.GregorianCalendar();
-        arg4_5idTemp.setTime(dateTemparg424);
-        }
-        String arg5_6id=  request.getParameter("arg526");
-            java.lang.String arg5_6idTemp = null;
-        if(!arg5_6id.equals("")){
-         arg5_6idTemp  = arg5_6id;
-        }
-        String arg6_7id=  request.getParameter("arg628");
-            java.lang.String arg6_7idTemp = null;
-        if(!arg6_7id.equals("")){
-         arg6_7idTemp  = arg6_7id;
-        }
-        String arg7_8id=  request.getParameter("arg730");
-            java.lang.String arg7_8idTemp = null;
-        if(!arg7_8id.equals("")){
-         arg7_8idTemp  = arg7_8id;
-        }
-        sampleControladorUsuarioPublishProxyid.altaUsuario(arg0_1idTemp,arg1_2idTemp,arg2_3idTemp,arg3_4idTemp,arg4_5idTemp,arg5_6idTemp,arg6_7idTemp,arg7_8idTemp);
+        boolean validarCorreo13mtemp = sampleControladorUsuarioPublishProxyid.validarCorreo(arg0_1idTemp);
+        String tempResultreturnp14 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarCorreo13mtemp));
+        %>
+        <%= tempResultreturnp14 %>
+        <%
 break;
-case 32:
+case 18:
         gotMethod = true;
-        String arg0_9id=  request.getParameter("arg035");
-            java.lang.String arg0_9idTemp = null;
-        if(!arg0_9id.equals("")){
-         arg0_9idTemp  = arg0_9id;
-        }
-        sampleControladorUsuarioPublishProxyid.altaCategoria(arg0_9idTemp);
-break;
-case 37:
-        gotMethod = true;
-        String arg0_10id=  request.getParameter("arg040");
-            java.lang.String arg0_10idTemp = null;
-        if(!arg0_10id.equals("")){
-         arg0_10idTemp  = arg0_10id;
-        }
-        sampleControladorUsuarioPublishProxyid.altaInstituto(arg0_10idTemp);
-break;
-case 42:
-        gotMethod = true;
-        publicadores.DtUsuario[] listarDTUsuarios42mtemp = sampleControladorUsuarioPublishProxyid.listarDTUsuarios();
-if(listarDTUsuarios42mtemp == null){
+        publicadores.DtUsuario[] listarDTUsuarios18mtemp = sampleControladorUsuarioPublishProxyid.listarDTUsuarios();
+if(listarDTUsuarios18mtemp == null){
 %>
-<%=listarDTUsuarios42mtemp %>
+<%=listarDTUsuarios18mtemp %>
 <%
 }else{
-        String tempreturnp43 = null;
-        if(listarDTUsuarios42mtemp != null){
-        java.util.List listreturnp43= java.util.Arrays.asList(listarDTUsuarios42mtemp);
-        tempreturnp43 = listreturnp43.toString();
+        String tempreturnp19 = null;
+        if(listarDTUsuarios18mtemp != null){
+        java.util.List listreturnp19= java.util.Arrays.asList(listarDTUsuarios18mtemp);
+        tempreturnp19 = listreturnp19.toString();
         }
         %>
-        <%=tempreturnp43%>
+        <%=tempreturnp19%>
         <%
 }
 break;
-case 45:
+case 21:
         gotMethod = true;
-        String arg0_11id=  request.getParameter("arg062");
-            java.lang.String arg0_11idTemp = null;
-        if(!arg0_11id.equals("")){
-         arg0_11idTemp  = arg0_11id;
+        String arg0_2id=  request.getParameter("arg038");
+            java.lang.String arg0_2idTemp = null;
+        if(!arg0_2id.equals("")){
+         arg0_2idTemp  = arg0_2id;
         }
-        publicadores.DtUsuario verInfoUsuario45mtemp = sampleControladorUsuarioPublishProxyid.verInfoUsuario(arg0_11idTemp);
-if(verInfoUsuario45mtemp == null){
+        publicadores.DtUsuario verInfoUsuario21mtemp = sampleControladorUsuarioPublishProxyid.verInfoUsuario(arg0_2idTemp);
+if(verInfoUsuario21mtemp == null){
 %>
-<%=verInfoUsuario45mtemp %>
+<%=verInfoUsuario21mtemp %>
 <%
 }else{
 %>
@@ -166,11 +114,11 @@ if(verInfoUsuario45mtemp == null){
 <TD COLSPAN="2" ALIGN="LEFT">nick:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typenick48 = verInfoUsuario45mtemp.getNick();
-        String tempResultnick48 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenick48));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typenick24 = verInfoUsuario21mtemp.getNick();
+        String tempResultnick24 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenick24));
         %>
-        <%= tempResultnick48 %>
+        <%= tempResultnick24 %>
         <%
 }%>
 </TD>
@@ -179,11 +127,11 @@ java.lang.String typenick48 = verInfoUsuario45mtemp.getNick();
 <TD COLSPAN="2" ALIGN="LEFT">image:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typeimage50 = verInfoUsuario45mtemp.getImage();
-        String tempResultimage50 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimage50));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typeimage26 = verInfoUsuario21mtemp.getImage();
+        String tempResultimage26 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeimage26));
         %>
-        <%= tempResultimage50 %>
+        <%= tempResultimage26 %>
         <%
 }%>
 </TD>
@@ -192,13 +140,13 @@ java.lang.String typeimage50 = verInfoUsuario45mtemp.getImage();
 <TD COLSPAN="2" ALIGN="LEFT">fechaNac:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.util.Calendar typefechaNac52 = verInfoUsuario45mtemp.getFechaNac();
-        java.text.DateFormat dateFormatfechaNac52 = java.text.DateFormat.getDateInstance();
-        java.util.Date datefechaNac52 = typefechaNac52.getTime();
-        String tempResultfechaNac52 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaNac52.format(datefechaNac52));
+if(verInfoUsuario21mtemp != null){
+java.util.Calendar typefechaNac28 = verInfoUsuario21mtemp.getFechaNac();
+        java.text.DateFormat dateFormatfechaNac28 = java.text.DateFormat.getDateInstance();
+        java.util.Date datefechaNac28 = typefechaNac28.getTime();
+        String tempResultfechaNac28 = org.eclipse.jst.ws.util.JspUtils.markup(dateFormatfechaNac28.format(datefechaNac28));
         %>
-        <%= tempResultfechaNac52 %>
+        <%= tempResultfechaNac28 %>
         <%
 }%>
 </TD>
@@ -207,11 +155,11 @@ java.util.Calendar typefechaNac52 = verInfoUsuario45mtemp.getFechaNac();
 <TD COLSPAN="2" ALIGN="LEFT">correo:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typecorreo54 = verInfoUsuario45mtemp.getCorreo();
-        String tempResultcorreo54 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typecorreo54));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typecorreo30 = verInfoUsuario21mtemp.getCorreo();
+        String tempResultcorreo30 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typecorreo30));
         %>
-        <%= tempResultcorreo54 %>
+        <%= tempResultcorreo30 %>
         <%
 }%>
 </TD>
@@ -220,11 +168,11 @@ java.lang.String typecorreo54 = verInfoUsuario45mtemp.getCorreo();
 <TD COLSPAN="2" ALIGN="LEFT">password:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typepassword56 = verInfoUsuario45mtemp.getPassword();
-        String tempResultpassword56 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typepassword56));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typepassword32 = verInfoUsuario21mtemp.getPassword();
+        String tempResultpassword32 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typepassword32));
         %>
-        <%= tempResultpassword56 %>
+        <%= tempResultpassword32 %>
         <%
 }%>
 </TD>
@@ -233,11 +181,11 @@ java.lang.String typepassword56 = verInfoUsuario45mtemp.getPassword();
 <TD COLSPAN="2" ALIGN="LEFT">nombre:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typenombre58 = verInfoUsuario45mtemp.getNombre();
-        String tempResultnombre58 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre58));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typenombre34 = verInfoUsuario21mtemp.getNombre();
+        String tempResultnombre34 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typenombre34));
         %>
-        <%= tempResultnombre58 %>
+        <%= tempResultnombre34 %>
         <%
 }%>
 </TD>
@@ -246,11 +194,11 @@ java.lang.String typenombre58 = verInfoUsuario45mtemp.getNombre();
 <TD COLSPAN="2" ALIGN="LEFT">apellido:</TD>
 <TD>
 <%
-if(verInfoUsuario45mtemp != null){
-java.lang.String typeapellido60 = verInfoUsuario45mtemp.getApellido();
-        String tempResultapellido60 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeapellido60));
+if(verInfoUsuario21mtemp != null){
+java.lang.String typeapellido36 = verInfoUsuario21mtemp.getApellido();
+        String tempResultapellido36 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeapellido36));
         %>
-        <%= tempResultapellido60 %>
+        <%= tempResultapellido36 %>
         <%
 }%>
 </TD>
@@ -258,68 +206,124 @@ java.lang.String typeapellido60 = verInfoUsuario45mtemp.getApellido();
 <%
 }
 break;
-case 64:
+case 40:
         gotMethod = true;
-        java.lang.String[] listarUsuarios64mtemp = sampleControladorUsuarioPublishProxyid.listarUsuarios();
-if(listarUsuarios64mtemp == null){
+        String arg0_3id=  request.getParameter("arg043");
+            java.lang.String arg0_3idTemp = null;
+        if(!arg0_3id.equals("")){
+         arg0_3idTemp  = arg0_3id;
+        }
+        String arg1_4id=  request.getParameter("arg145");
+            java.lang.String arg1_4idTemp = null;
+        if(!arg1_4id.equals("")){
+         arg1_4idTemp  = arg1_4id;
+        }
+        String arg2_5id=  request.getParameter("arg247");
+            java.lang.String arg2_5idTemp = null;
+        if(!arg2_5id.equals("")){
+         arg2_5idTemp  = arg2_5id;
+        }
+        String arg3_6id=  request.getParameter("arg349");
+            java.util.Calendar arg3_6idTemp = null;
+        if(!arg3_6id.equals("")){
+        java.text.DateFormat dateFormatarg349 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg349  = dateFormatarg349.parse(arg3_6id);
+         arg3_6idTemp = new java.util.GregorianCalendar();
+        arg3_6idTemp.setTime(dateTemparg349);
+        }
+        sampleControladorUsuarioPublishProxyid.nuevosDatos(arg0_3idTemp,arg1_4idTemp,arg2_5idTemp,arg3_6idTemp);
+break;
+case 51:
+        gotMethod = true;
+        java.lang.String[] listarUsuarios51mtemp = sampleControladorUsuarioPublishProxyid.listarUsuarios();
+if(listarUsuarios51mtemp == null){
 %>
-<%=listarUsuarios64mtemp %>
+<%=listarUsuarios51mtemp %>
 <%
 }else{
-        String tempreturnp65 = null;
-        if(listarUsuarios64mtemp != null){
-        java.util.List listreturnp65= java.util.Arrays.asList(listarUsuarios64mtemp);
-        tempreturnp65 = listreturnp65.toString();
+        String tempreturnp52 = null;
+        if(listarUsuarios51mtemp != null){
+        java.util.List listreturnp52= java.util.Arrays.asList(listarUsuarios51mtemp);
+        tempreturnp52 = listreturnp52.toString();
         }
         %>
-        <%=tempreturnp65%>
+        <%=tempreturnp52%>
         <%
 }
 break;
-case 67:
+case 54:
         gotMethod = true;
-        String arg0_12id=  request.getParameter("arg070");
-            java.lang.String arg0_12idTemp = null;
-        if(!arg0_12id.equals("")){
-         arg0_12idTemp  = arg0_12id;
-        }
-        String arg1_13id=  request.getParameter("arg172");
-            java.lang.String arg1_13idTemp = null;
-        if(!arg1_13id.equals("")){
-         arg1_13idTemp  = arg1_13id;
-        }
-        String arg2_14id=  request.getParameter("arg274");
-            java.lang.String arg2_14idTemp = null;
-        if(!arg2_14id.equals("")){
-         arg2_14idTemp  = arg2_14id;
-        }
-        String arg3_15id=  request.getParameter("arg376");
-            java.util.Calendar arg3_15idTemp = null;
-        if(!arg3_15id.equals("")){
-        java.text.DateFormat dateFormatarg376 = java.text.DateFormat.getDateInstance();
-        java.util.Date dateTemparg376  = dateFormatarg376.parse(arg3_15id);
-         arg3_15idTemp = new java.util.GregorianCalendar();
-        arg3_15idTemp.setTime(dateTemparg376);
-        }
-        sampleControladorUsuarioPublishProxyid.nuevosDatos(arg0_12idTemp,arg1_13idTemp,arg2_14idTemp,arg3_15idTemp);
-break;
-case 78:
-        gotMethod = true;
-        java.lang.String[] listarInstituto78mtemp = sampleControladorUsuarioPublishProxyid.listarInstituto();
-if(listarInstituto78mtemp == null){
+        java.lang.String[] listarInstituto54mtemp = sampleControladorUsuarioPublishProxyid.listarInstituto();
+if(listarInstituto54mtemp == null){
 %>
-<%=listarInstituto78mtemp %>
+<%=listarInstituto54mtemp %>
 <%
 }else{
-        String tempreturnp79 = null;
-        if(listarInstituto78mtemp != null){
-        java.util.List listreturnp79= java.util.Arrays.asList(listarInstituto78mtemp);
-        tempreturnp79 = listreturnp79.toString();
+        String tempreturnp55 = null;
+        if(listarInstituto54mtemp != null){
+        java.util.List listreturnp55= java.util.Arrays.asList(listarInstituto54mtemp);
+        tempreturnp55 = listreturnp55.toString();
         }
         %>
-        <%=tempreturnp79%>
+        <%=tempreturnp55%>
         <%
 }
+break;
+case 57:
+        gotMethod = true;
+        String arg0_7id=  request.getParameter("arg060");
+            java.lang.String arg0_7idTemp = null;
+        if(!arg0_7id.equals("")){
+         arg0_7idTemp  = arg0_7id;
+        }
+        String arg1_8id=  request.getParameter("arg162");
+            java.lang.String arg1_8idTemp = null;
+        if(!arg1_8id.equals("")){
+         arg1_8idTemp  = arg1_8id;
+        }
+        String arg2_9id=  request.getParameter("arg264");
+            java.lang.String arg2_9idTemp = null;
+        if(!arg2_9id.equals("")){
+         arg2_9idTemp  = arg2_9id;
+        }
+        String arg3_10id=  request.getParameter("arg366");
+            java.lang.String arg3_10idTemp = null;
+        if(!arg3_10id.equals("")){
+         arg3_10idTemp  = arg3_10id;
+        }
+        String arg4_11id=  request.getParameter("arg468");
+            java.util.Calendar arg4_11idTemp = null;
+        if(!arg4_11id.equals("")){
+        java.text.DateFormat dateFormatarg468 = java.text.DateFormat.getDateInstance();
+        java.util.Date dateTemparg468  = dateFormatarg468.parse(arg4_11id);
+         arg4_11idTemp = new java.util.GregorianCalendar();
+        arg4_11idTemp.setTime(dateTemparg468);
+        }
+        String arg5_12id=  request.getParameter("arg570");
+            java.lang.String arg5_12idTemp = null;
+        if(!arg5_12id.equals("")){
+         arg5_12idTemp  = arg5_12id;
+        }
+        String arg6_13id=  request.getParameter("arg672");
+            java.lang.String arg6_13idTemp = null;
+        if(!arg6_13id.equals("")){
+         arg6_13idTemp  = arg6_13id;
+        }
+        String arg7_14id=  request.getParameter("arg774");
+            java.lang.String arg7_14idTemp = null;
+        if(!arg7_14id.equals("")){
+         arg7_14idTemp  = arg7_14id;
+        }
+        sampleControladorUsuarioPublishProxyid.altaUsuario(arg0_7idTemp,arg1_8idTemp,arg2_9idTemp,arg3_10idTemp,arg4_11idTemp,arg5_12idTemp,arg6_13idTemp,arg7_14idTemp);
+break;
+case 76:
+        gotMethod = true;
+        String arg0_15id=  request.getParameter("arg079");
+            java.lang.String arg0_15idTemp = null;
+        if(!arg0_15id.equals("")){
+         arg0_15idTemp  = arg0_15id;
+        }
+        sampleControladorUsuarioPublishProxyid.altaInstituto(arg0_15idTemp);
 break;
 case 81:
         gotMethod = true;
@@ -328,21 +332,7 @@ case 81:
         if(!arg0_16id.equals("")){
          arg0_16idTemp  = arg0_16id;
         }
-        publicadores.DtInscripcionED[] listarInscripcionesED81mtemp = sampleControladorUsuarioPublishProxyid.listarInscripcionesED(arg0_16idTemp);
-if(listarInscripcionesED81mtemp == null){
-%>
-<%=listarInscripcionesED81mtemp %>
-<%
-}else{
-        String tempreturnp82 = null;
-        if(listarInscripcionesED81mtemp != null){
-        java.util.List listreturnp82= java.util.Arrays.asList(listarInscripcionesED81mtemp);
-        tempreturnp82 = listreturnp82.toString();
-        }
-        %>
-        <%=tempreturnp82%>
-        <%
-}
+        sampleControladorUsuarioPublishProxyid.altaCategoria(arg0_16idTemp);
 break;
 case 86:
         gotMethod = true;
@@ -369,15 +359,15 @@ case 89:
         if(!arg0_17id.equals("")){
          arg0_17idTemp  = arg0_17id;
         }
-        java.lang.String[] listarSeguidores89mtemp = sampleControladorUsuarioPublishProxyid.listarSeguidores(arg0_17idTemp);
-if(listarSeguidores89mtemp == null){
+        publicadores.DtInscripcionED[] listarInscripcionesED89mtemp = sampleControladorUsuarioPublishProxyid.listarInscripcionesED(arg0_17idTemp);
+if(listarInscripcionesED89mtemp == null){
 %>
-<%=listarSeguidores89mtemp %>
+<%=listarInscripcionesED89mtemp %>
 <%
 }else{
         String tempreturnp90 = null;
-        if(listarSeguidores89mtemp != null){
-        java.util.List listreturnp90= java.util.Arrays.asList(listarSeguidores89mtemp);
+        if(listarInscripcionesED89mtemp != null){
+        java.util.List listreturnp90= java.util.Arrays.asList(listarInscripcionesED89mtemp);
         tempreturnp90 = listreturnp90.toString();
         }
         %>
@@ -392,57 +382,59 @@ case 94:
         if(!arg0_18id.equals("")){
          arg0_18idTemp  = arg0_18id;
         }
-        String arg1_19id=  request.getParameter("arg199");
-            java.lang.String arg1_19idTemp = null;
-        if(!arg1_19id.equals("")){
-         arg1_19idTemp  = arg1_19id;
-        }
-        boolean validarSeguidor94mtemp = sampleControladorUsuarioPublishProxyid.validarSeguidor(arg0_18idTemp,arg1_19idTemp);
-        String tempResultreturnp95 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarSeguidor94mtemp));
-        %>
-        <%= tempResultreturnp95 %>
-        <%
-break;
-case 101:
-        gotMethod = true;
-        String arg0_20id=  request.getParameter("arg0104");
-            java.lang.String arg0_20idTemp = null;
-        if(!arg0_20id.equals("")){
-         arg0_20idTemp  = arg0_20id;
-        }
-        String arg1_21id=  request.getParameter("arg1106");
-            java.lang.String arg1_21idTemp = null;
-        if(!arg1_21id.equals("")){
-         arg1_21idTemp  = arg1_21id;
-        }
-        boolean validarSigue101mtemp = sampleControladorUsuarioPublishProxyid.validarSigue(arg0_20idTemp,arg1_21idTemp);
-        String tempResultreturnp102 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarSigue101mtemp));
-        %>
-        <%= tempResultreturnp102 %>
-        <%
-break;
-case 108:
-        gotMethod = true;
-        String arg0_22id=  request.getParameter("arg0111");
-            java.lang.String arg0_22idTemp = null;
-        if(!arg0_22id.equals("")){
-         arg0_22idTemp  = arg0_22id;
-        }
-        java.lang.String[] listarSeguidos108mtemp = sampleControladorUsuarioPublishProxyid.listarSeguidos(arg0_22idTemp);
-if(listarSeguidos108mtemp == null){
+        java.lang.String[] listarSeguidos94mtemp = sampleControladorUsuarioPublishProxyid.listarSeguidos(arg0_18idTemp);
+if(listarSeguidos94mtemp == null){
 %>
-<%=listarSeguidos108mtemp %>
+<%=listarSeguidos94mtemp %>
 <%
 }else{
-        String tempreturnp109 = null;
-        if(listarSeguidos108mtemp != null){
-        java.util.List listreturnp109= java.util.Arrays.asList(listarSeguidos108mtemp);
-        tempreturnp109 = listreturnp109.toString();
+        String tempreturnp95 = null;
+        if(listarSeguidos94mtemp != null){
+        java.util.List listreturnp95= java.util.Arrays.asList(listarSeguidos94mtemp);
+        tempreturnp95 = listreturnp95.toString();
         }
         %>
-        <%=tempreturnp109%>
+        <%=tempreturnp95%>
         <%
 }
+break;
+case 99:
+        gotMethod = true;
+        String arg0_19id=  request.getParameter("arg0102");
+            java.lang.String arg0_19idTemp = null;
+        if(!arg0_19id.equals("")){
+         arg0_19idTemp  = arg0_19id;
+        }
+        String arg1_20id=  request.getParameter("arg1104");
+            java.lang.String arg1_20idTemp = null;
+        if(!arg1_20id.equals("")){
+         arg1_20idTemp  = arg1_20id;
+        }
+        java.lang.String inscriptoED99mtemp = sampleControladorUsuarioPublishProxyid.inscriptoED(arg0_19idTemp,arg1_20idTemp);
+if(inscriptoED99mtemp == null){
+%>
+<%=inscriptoED99mtemp %>
+<%
+}else{
+        String tempResultreturnp100 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(inscriptoED99mtemp));
+        %>
+        <%= tempResultreturnp100 %>
+        <%
+}
+break;
+case 106:
+        gotMethod = true;
+        String arg0_21id=  request.getParameter("arg0109");
+            java.lang.String arg0_21idTemp = null;
+        if(!arg0_21id.equals("")){
+         arg0_21idTemp  = arg0_21id;
+        }
+        String arg1_22id=  request.getParameter("arg1111");
+            java.lang.String arg1_22idTemp = null;
+        if(!arg1_22id.equals("")){
+         arg1_22idTemp  = arg1_22id;
+        }
+        sampleControladorUsuarioPublishProxyid.dejarDeSeguir(arg0_21idTemp,arg1_22idTemp);
 break;
 case 113:
         gotMethod = true;
@@ -451,135 +443,169 @@ case 113:
         if(!arg0_23id.equals("")){
          arg0_23idTemp  = arg0_23id;
         }
-        String arg1_24id=  request.getParameter("arg1118");
-            java.lang.String arg1_24idTemp = null;
-        if(!arg1_24id.equals("")){
-         arg1_24idTemp  = arg1_24id;
+        java.lang.String[] listarSeguidores113mtemp = sampleControladorUsuarioPublishProxyid.listarSeguidores(arg0_23idTemp);
+if(listarSeguidores113mtemp == null){
+%>
+<%=listarSeguidores113mtemp %>
+<%
+}else{
+        String tempreturnp114 = null;
+        if(listarSeguidores113mtemp != null){
+        java.util.List listreturnp114= java.util.Arrays.asList(listarSeguidores113mtemp);
+        tempreturnp114 = listreturnp114.toString();
         }
-        String arg2_25id=  request.getParameter("arg2120");
-            java.lang.String arg2_25idTemp = null;
-        if(!arg2_25id.equals("")){
-         arg2_25idTemp  = arg2_25id;
-        }
-        sampleControladorUsuarioPublishProxyid.cambiarInscripcion(arg0_23idTemp,arg1_24idTemp,arg2_25idTemp);
+        %>
+        <%=tempreturnp114%>
+        <%
+}
 break;
-case 122:
+case 118:
         gotMethod = true;
-        String arg0_26id=  request.getParameter("arg0125");
+        String arg0_24id=  request.getParameter("arg0121");
+            java.lang.String arg0_24idTemp = null;
+        if(!arg0_24id.equals("")){
+         arg0_24idTemp  = arg0_24id;
+        }
+        String arg1_25id=  request.getParameter("arg1123");
+            java.lang.String arg1_25idTemp = null;
+        if(!arg1_25id.equals("")){
+         arg1_25idTemp  = arg1_25id;
+        }
+        boolean validarUsuario118mtemp = sampleControladorUsuarioPublishProxyid.validarUsuario(arg0_24idTemp,arg1_25idTemp);
+        String tempResultreturnp119 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarUsuario118mtemp));
+        %>
+        <%= tempResultreturnp119 %>
+        <%
+break;
+case 125:
+        gotMethod = true;
+        String arg0_26id=  request.getParameter("arg0128");
             java.lang.String arg0_26idTemp = null;
         if(!arg0_26id.equals("")){
          arg0_26idTemp  = arg0_26id;
         }
-        String arg1_27id=  request.getParameter("arg1127");
+        String arg1_27id=  request.getParameter("arg1130");
             java.lang.String arg1_27idTemp = null;
         if(!arg1_27id.equals("")){
          arg1_27idTemp  = arg1_27id;
         }
-        boolean validarUsuario122mtemp = sampleControladorUsuarioPublishProxyid.validarUsuario(arg0_26idTemp,arg1_27idTemp);
-        String tempResultreturnp123 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarUsuario122mtemp));
+        boolean validarSigue125mtemp = sampleControladorUsuarioPublishProxyid.validarSigue(arg0_26idTemp,arg1_27idTemp);
+        String tempResultreturnp126 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarSigue125mtemp));
         %>
-        <%= tempResultreturnp123 %>
+        <%= tempResultreturnp126 %>
         <%
 break;
-case 129:
+case 132:
         gotMethod = true;
-        String arg0_28id=  request.getParameter("arg0132");
+        String arg0_28id=  request.getParameter("arg0135");
             java.lang.String arg0_28idTemp = null;
         if(!arg0_28id.equals("")){
          arg0_28idTemp  = arg0_28id;
         }
-        String arg1_29id=  request.getParameter("arg1134");
+        String arg1_29id=  request.getParameter("arg1137");
             java.lang.String arg1_29idTemp = null;
         if(!arg1_29id.equals("")){
          arg1_29idTemp  = arg1_29id;
         }
-        sampleControladorUsuarioPublishProxyid.dejarDeSeguir(arg0_28idTemp,arg1_29idTemp);
+        boolean validarSeguidor132mtemp = sampleControladorUsuarioPublishProxyid.validarSeguidor(arg0_28idTemp,arg1_29idTemp);
+        String tempResultreturnp133 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarSeguidor132mtemp));
+        %>
+        <%= tempResultreturnp133 %>
+        <%
 break;
-case 136:
+case 139:
         gotMethod = true;
-        String arg0_30id=  request.getParameter("arg0139");
+        String arg0_30id=  request.getParameter("arg0142");
             java.lang.String arg0_30idTemp = null;
         if(!arg0_30id.equals("")){
          arg0_30idTemp  = arg0_30id;
         }
-        String arg1_31id=  request.getParameter("arg1141");
+        String arg1_31id=  request.getParameter("arg1144");
             java.lang.String arg1_31idTemp = null;
         if(!arg1_31id.equals("")){
          arg1_31idTemp  = arg1_31id;
         }
-        java.lang.String inscriptoED136mtemp = sampleControladorUsuarioPublishProxyid.inscriptoED(arg0_30idTemp,arg1_31idTemp);
-if(inscriptoED136mtemp == null){
-%>
-<%=inscriptoED136mtemp %>
-<%
-}else{
-        String tempResultreturnp137 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(inscriptoED136mtemp));
+        boolean inscriptoPF139mtemp = sampleControladorUsuarioPublishProxyid.inscriptoPF(arg0_30idTemp,arg1_31idTemp);
+        String tempResultreturnp140 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(inscriptoPF139mtemp));
         %>
-        <%= tempResultreturnp137 %>
+        <%= tempResultreturnp140 %>
         <%
-}
 break;
-case 143:
+case 146:
         gotMethod = true;
-        String arg0_32id=  request.getParameter("arg0146");
+        String arg0_32id=  request.getParameter("arg0149");
             java.lang.String arg0_32idTemp = null;
         if(!arg0_32id.equals("")){
          arg0_32idTemp  = arg0_32id;
         }
-        String arg1_33id=  request.getParameter("arg1148");
+        String arg1_33id=  request.getParameter("arg1151");
             java.lang.String arg1_33idTemp = null;
         if(!arg1_33id.equals("")){
          arg1_33idTemp  = arg1_33id;
         }
-        boolean inscriptoPF143mtemp = sampleControladorUsuarioPublishProxyid.inscriptoPF(arg0_32idTemp,arg1_33idTemp);
-        String tempResultreturnp144 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(inscriptoPF143mtemp));
-        %>
-        <%= tempResultreturnp144 %>
-        <%
+        String arg2_34id=  request.getParameter("arg2153");
+            java.lang.String arg2_34idTemp = null;
+        if(!arg2_34id.equals("")){
+         arg2_34idTemp  = arg2_34id;
+        }
+        sampleControladorUsuarioPublishProxyid.cambiarInscripcion(arg0_32idTemp,arg1_33idTemp,arg2_34idTemp);
 break;
-case 150:
+case 155:
         gotMethod = true;
-        publicadores.DtEstudiante estudiante150mtemp = sampleControladorUsuarioPublishProxyid.estudiante();
-if(estudiante150mtemp == null){
+        publicadores.DtEstudiante estudiante155mtemp = sampleControladorUsuarioPublishProxyid.estudiante();
+if(estudiante155mtemp == null){
 %>
-<%=estudiante150mtemp %>
+<%=estudiante155mtemp %>
 <%
 }else{
-        if(estudiante150mtemp!= null){
-        String tempreturnp151 = estudiante150mtemp.toString();
+        if(estudiante155mtemp!= null){
+        String tempreturnp156 = estudiante155mtemp.toString();
         %>
-        <%=tempreturnp151%>
+        <%=tempreturnp156%>
         <%
         }}
 break;
-case 153:
+case 158:
         gotMethod = true;
-        publicadores.DtDocente docente153mtemp = sampleControladorUsuarioPublishProxyid.docente();
-if(docente153mtemp == null){
+        String arg0_35id=  request.getParameter("arg0161");
+            java.lang.String arg0_35idTemp = null;
+        if(!arg0_35id.equals("")){
+         arg0_35idTemp  = arg0_35id;
+        }
+        boolean validarNick158mtemp = sampleControladorUsuarioPublishProxyid.validarNick(arg0_35idTemp);
+        String tempResultreturnp159 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(validarNick158mtemp));
+        %>
+        <%= tempResultreturnp159 %>
+        <%
+break;
+case 163:
+        gotMethod = true;
+        String arg0_36id=  request.getParameter("arg0166");
+            java.lang.String arg0_36idTemp = null;
+        if(!arg0_36id.equals("")){
+         arg0_36idTemp  = arg0_36id;
+        }
+        String arg1_37id=  request.getParameter("arg1168");
+            java.lang.String arg1_37idTemp = null;
+        if(!arg1_37id.equals("")){
+         arg1_37idTemp  = arg1_37id;
+        }
+        sampleControladorUsuarioPublishProxyid.comenazarSeguir(arg0_36idTemp,arg1_37idTemp);
+break;
+case 170:
+        gotMethod = true;
+        publicadores.DtDocente docente170mtemp = sampleControladorUsuarioPublishProxyid.docente();
+if(docente170mtemp == null){
 %>
-<%=docente153mtemp %>
+<%=docente170mtemp %>
 <%
 }else{
-        if(docente153mtemp!= null){
-        String tempreturnp154 = docente153mtemp.toString();
+        if(docente170mtemp!= null){
+        String tempreturnp171 = docente170mtemp.toString();
         %>
-        <%=tempreturnp154%>
+        <%=tempreturnp171%>
         <%
         }}
-break;
-case 156:
-        gotMethod = true;
-        String arg0_34id=  request.getParameter("arg0159");
-            java.lang.String arg0_34idTemp = null;
-        if(!arg0_34id.equals("")){
-         arg0_34idTemp  = arg0_34id;
-        }
-        String arg1_35id=  request.getParameter("arg1161");
-            java.lang.String arg1_35idTemp = null;
-        if(!arg1_35id.equals("")){
-         arg1_35idTemp  = arg1_35id;
-        }
-        sampleControladorUsuarioPublishProxyid.comenazarSeguir(arg0_34idTemp,arg1_35idTemp);
 break;
 }
 } catch (Exception e) { 
