@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -36,7 +37,7 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ControladorCursoPublishService cup = new ControladorCursoPublishServiceLocator();
         ControladorUsuarioPublishService cup2 = new ControladorUsuarioPublishServiceLocator();
-
+        SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         DTResponse respuesta = new DTResponse();
@@ -45,8 +46,6 @@ public class login extends HttpServlet {
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String tipoUser = "";
-        System.out.println("nickname = " + nickname);
-        System.out.println("password = " + password);
         try {
             ControladorCursoPublish port = cup.getcontroladorCursoPublishPort();
             ControladorUsuarioPublish port2 = cup2.getcontroladorUsuarioPublishPort();
@@ -60,24 +59,38 @@ public class login extends HttpServlet {
                     session.setAttribute("nombre", dtu.getNombre());
                     session.setAttribute("apellido", dtu.getApellido());
                     session.setAttribute("correo", dtu.getCorreo());
-                    session.setAttribute("fechaNac", dtu.getFechaNac());
-                    session.setAttribute("imagen", dtu.getImage());
+                    Calendar fechaN = dtu.getFechaNac();
+                    String FN = format.format(fechaN.getTime());
+                    session.setAttribute("fechaNac", FN);
+                    if(dtu.getSeguidos() != null) {
+                        String[] seguido = dtu.getSeguidos();
+                        session.setAttribute("seguidos", seguido);
+                    }
+                    if(dtu.getSeguidos() != null) {
+                        String[] seguidor = dtu.getSeguidores();
+                        session.setAttribute("seguidores", seguidor);
+                    }
+                    if(dtu.getImage().isEmpty()){
+                        session.setAttribute("imagen", "resources/images/estud.jpg");
+                    }else {
+                        session.setAttribute("imagen", dtu.getImage());
+                    }
                     ArrayList<String> prog = new ArrayList<String>();
-                    for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
-                        prog.add(pro.getNombre());
+                    if((((DtEstudiante) dtu).getProgramas()) != null) {
+                        for (DtProgramaFormacion pro : (((DtEstudiante) dtu).getProgramas())) {
+                            prog.add(pro.getNombre());
+                        }
                     }
                     System.out.println("prog = " + prog);
                     session.setAttribute("programasNombre", prog);
                     ArrayList<String> edis = new ArrayList<String>();
-                    for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
-                        edis.add(edi.getNombre());
+                    if((((DtEstudiante) dtu).getEdiciones())!= null) {
+                        for (DtEdicionCurso edi : (((DtEstudiante) dtu).getEdiciones())) {
+                            edis.add(edi.getNombre());
+                        }
                     }
                     System.out.println("edis = " + edis);
                     session.setAttribute("edicionesNombres", edis);
-                    String[] seguido = dtu.getSeguidos();
-                    String[] seguidor = dtu.getSeguidores();
-                    session.setAttribute("seguidos", seguido);
-                    session.setAttribute("seguidores", seguidor);
                     respuesta.setCodigo(0);
                     respuesta.setMensaje(nickname);
                     ObjectMapper mapper = new ObjectMapper();

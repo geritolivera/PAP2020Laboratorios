@@ -9,34 +9,44 @@
 
 <div class="main">
     <!-- Section: Slider -->
-    <section class="slider">
-        <ul class="slides">
-            <li>
-                <img class="responsive-img" src="resources/images/img1.jpg" alt="">
-                <div class="caption center-align ">
-                    <h2 >Bienvenido a edEXT</h2>
-                    <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos
-                        relacionados con la extensi&#243;n universitaria</h5>
-                </div>
-            </li>
-            <li>
-                <img class="responsive-img" src="resources/images/img2.jpg" alt="">
-                <div class="caption left-align">
-                    <h2>Gesti&#243;n de Cursos</h2>
-                    <h4 class="light grey-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Cursos registrados! </h4>
-                    <a href="consultaCurso.jsp" class="btn btn-large rojo">Ver Cursos</a>
-                </div>
-            </li>
-            <li>
-                <img class="responsive-img" src="resources/images/img3.jpg"  alt="">
-                <div class="caption right-align -text">
-                    <h2>Gesti&#243;n de Programas</h2>
-                    <h4 class="light white-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Programas registrados!</h4>
-                    <a href="consultaPrograma.jsp" class="btn btn-large rojo">Ver Programas</a>
-                </div>
-            </li>
-        </ul>
-    </section>
+<!--     <section class="slider"> -->
+<!--         <ul class="slides"> -->
+<!--             <li> -->
+<!--                 <img class="responsive-img" src="resources/images/img1.jpg" alt=""> -->
+<!--                 <div class="caption center-align "> -->
+<!--                     <h2 >Bienvenido a edEXT</h2> -->
+<!--                     <h5 class="light white-text text-lighten-3 hide-on-small-only">La plataforma educativa y social que ofrece un servicio de gesti&#243;n de cursos -->
+<!--                         relacionados con la extensi&#243;n universitaria</h5> -->
+<!--                 </div> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--                 <img class="responsive-img" src="resources/images/img2.jpg" alt=""> -->
+<!--                 <div class="caption left-align"> -->
+<!--                     <h2>Gesti&#243;n de Cursos</h2> -->
+<!--                     <h4 class="light grey-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Cursos registrados! </h4> -->
+<!--                     <a href="consultaCurso.jsp" class="btn btn-large rojo">Ver Cursos</a> -->
+<!--                 </div> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--                 <img class="responsive-img" src="resources/images/img3.jpg"  alt=""> -->
+<!--                 <div class="caption right-align -text"> -->
+<!--                     <h2>Gesti&#243;n de Programas</h2> -->
+<!--                     <h4 class="light white-text text-lighten-3 hide-on-small-only">Adquiere informaci&#243;n sobre los Programas registrados!</h4> -->
+<!--                     <a href="consultaPrograma.jsp" class="btn btn-large rojo">Ver Programas</a> -->
+<!--                 </div> -->
+<!--             </li> -->
+<!--         </ul> -->
+<!--     </section> -->
+	
+	<div class="carousel carousel-slider">
+    	<div class="carousel-fixed-item center">
+      		<h2 >Bienvenido a edEXT!</h2>
+    	</div>
+    <a class="carousel-item" href="#one!"><img src="resources/images/img1.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="resources/images/img2.jpg"></a>
+    <a class="carousel-item" href="#three!"><img src="resources/images/img3.jpg"></a>
+ 	</div>
+
 
     <!-- Section: Icon Boxes -->
     <section class="section section-icons grey lighten-4 center">
@@ -67,39 +77,6 @@
         </div>
     </section>
 
-    <!-- Section: Search -->
-    <section id="search" class="section section-search center scrollspy">
-        <div class="container">
-            <div class="row">
-                <div class="col s12">
-                    <div id="admin" class="col s12">
-                        <div class="card material-table hide-on-med-and-down">
-                            <div class="table-header">
-                                <span class="table-title">Busqueda General</span>
-                                <div class="actions">
-                                    <a href="#" class="search-toggle btn-flat nopadding" name="input"><i class="material-icons prefix">search</i></a>
-                                </div>
-                            </div>
-                            <table id="datatable">
-                                <thead>
-                                <tr>
-                                    <th>Link</th>
-                                    <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Tipo</th>
-                                </tr>
-                                </thead>
-                                <tbody id="datatablebody">
-                                <tr>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </div>
 <%@include file="footer.jsp" %>
@@ -107,6 +84,10 @@
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.parallax');
         var instances = M.Parallax.init(elems);
+    });
+    
+    $('.carousel.carousel-slider').carousel({
+        indicators: true
     });
 </script>
 

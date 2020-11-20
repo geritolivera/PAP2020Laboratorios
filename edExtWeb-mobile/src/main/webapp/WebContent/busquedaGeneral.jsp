@@ -22,6 +22,10 @@
                 <table id="datatable">
                     <thead>
                     <tr>
+                        <th>Link</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Descripcion</th>
                     </tr>
                     </thead>
                     <tbody id="datatablebody">
